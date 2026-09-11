@@ -9,7 +9,7 @@ pub mod storage;
 pub mod workflow;
 
 pub use catalog::{Artifact, Catalog, CustomNode, Package, WorkflowDefinition};
-pub use comfy::{ComfyInstance, ComfyManager};
+pub use comfy::{ComfyInstance, ComfyManager, ComfySource};
 pub use config::AppConfig;
 pub use download::{DownloadManager, DownloadOptions, InstallOutcome};
 pub use inventory::{ArtifactStatus, Inventory};

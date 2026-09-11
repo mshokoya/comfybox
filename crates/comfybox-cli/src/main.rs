@@ -1,11 +1,11 @@
 mod dashboard;
 
 use anyhow::{bail, Context, Result};
-use clap::{Args, Parser, Subcommand};
+use clap::{Args, Parser, Subcommand, ValueEnum};
 use comfybox_core::{
     auth::{self, HfTokenSource},
     catalog::Catalog,
-    comfy::{configured_instance, ComfyManager, StartOptions},
+    comfy::{configured_instance, ComfyManager, ComfySource, StartOptions},
     config::AppConfig,
     download::{DownloadManager, DownloadOptions},
     inventory::{ArtifactStatus, Inventory},
@@ -47,7 +47,12 @@ struct Cli {
 enum CommandTop {
     Doctor,
     Locate { #[arg(long)] path: Option<PathBuf> },
-    Install { #[arg(short='d', long)] destination: Option<PathBuf> },
+    Install {
+        #[arg(short='d', long)]
+        destination: Option<PathBuf>,
+        #[arg(long, value_enum)]
+        source: Option<ComfySourceArg>,
+    },
     PythonDeps,
     Uninstall { #[arg(long)] yes: bool },
     Start { #[arg(long, default_value="127.0.0.1")] host: String, #[arg(long, default_value_t=8188)] port: u16 },
@@ -66,6 +71,21 @@ enum ModelCommand {
     Install(ModelInstallArgs),
     Remove { id: String, #[arg(long)] with_deps: bool, #[arg(long)] yes: bool },
     Discover { query: String, #[arg(long, default_value_t=30)] limit: usize },
+}
+
+#[derive(Clone, Copy, Debug, ValueEnum)]
+enum ComfySourceArg {
+    Github,
+    Gitee,
+}
+
+impl From<ComfySourceArg> for ComfySource {
+    fn from(value: ComfySourceArg) -> Self {
+        match value {
+            ComfySourceArg::Github => Self::GitHub,
+            ComfySourceArg::Gitee => Self::Gitee,
+        }
+    }
 }
 
 #[derive(Args, Debug)]
@@ -149,7 +169,7 @@ async fn run(cmd: CommandTop, cfg: &mut AppConfig, cat: &Catalog) -> Result<()> 
     match cmd {
         CommandTop::Doctor => doctor(cfg, cat).await,
         CommandTop::Locate { path } => locate(cfg, path),
-        CommandTop::Install { destination } => install_comfy(cfg, destination).await,
+        CommandTop::Install { destination, source } => install_comfy(cfg, destination, source).await,
         CommandTop::PythonDeps => { let i = configured_instance(cfg)?; let py = ComfyManager::install_python_deps(&i).await?; println!("{} {}", style("✓ Python deps installed:").green(), py.display()); Ok(()) }
         CommandTop::Uninstall { yes } => uninstall_comfy(cfg, yes),
         CommandTop::Start { host, port } => { let i=configured_instance(cfg)?; let mut s=ManagedState::load()?; let pid=ComfyManager::start(&i, StartOptions{host:&host,port}, &mut s).await?; println!("{} PID {pid}; http://{host}:{port}", style("✓ ComfyUI started").green()); Ok(()) }
@@ -189,12 +209,26 @@ fn locate(cfg: &mut AppConfig, path: Option<PathBuf>) -> Result<()> {
     println!("{} {}",style("✓ configured").green(),cfg.comfy_path.as_ref().unwrap().display()); Ok(())
 }
 
-async fn install_comfy(cfg:&mut AppConfig,destination:Option<PathBuf>)->Result<()> {
+async fn install_comfy(cfg:&mut AppConfig,destination:Option<PathBuf>,source:Option<ComfySourceArg>)->Result<()> {
+    let source = choose_comfy_source(source)?;
+    println!("source: {} — {}", source.name(), source.url());
     let parent = match destination { Some(p)=>p, None=>{
         if let Some(d)=storage::recommend_storage()? { println!("recommended: {} ({:.1} GiB free)",d.mount_point.display(),gib(d.available_bytes)); browse_directory(d.mount_point)? }
         else { browse_directory(std::env::current_dir()?)? }
     }};
-    let i=ComfyManager::install(&parent).await?; cfg.comfy_path=Some(i.root.clone()); cfg.save()?; println!("{} {}",style("✓ installed ComfyUI").green(),i.root.display()); Ok(())
+    let i=ComfyManager::install(&parent,source).await?; cfg.comfy_path=Some(i.root.clone()); cfg.save()?; println!("{} {}",style("✓ installed ComfyUI").green(),i.root.display()); Ok(())
+}
+
+fn choose_comfy_source(source: Option<ComfySourceArg>) -> Result<ComfySource> {
+    if let Some(source) = source {
+        return Ok(source.into());
+    }
+    let gitee = "China mirror (Gitee) — faster and more reliable inside China";
+    let github = "Official ComfyUI repository (GitHub)";
+    match Select::new("Download ComfyUI from", vec![gitee, github]).prompt()? {
+        selected if selected == gitee => Ok(ComfySource::Gitee),
+        _ => Ok(ComfySource::GitHub),
+    }
 }
 
 fn uninstall_comfy(cfg:&mut AppConfig,yes:bool)->Result<()> {
@@ -324,7 +358,7 @@ fn bundled_workflow(id:&str)->Result<&'static str>{match id{
 fn print_workflow_inspection(r:&comfybox_core::workflow::WorkflowInspection){println!("artifacts: {:?}",r.artifact_ids);println!("custom nodes: {:?}",r.custom_node_ids);println!("unresolved models: {:?}",r.unresolved_model_filenames)}
 
 async fn install_custom_node(root:&Path,cat:&Catalog,id:&str)->Result<()> {
-    let node=cat.custom_node(id).with_context(||format!("unknown custom node {id}"))?;let base=root.join("custom_nodes");fs::create_dir_all(&base)?;let target=base.join(&node.folder_name);if target.exists(){return Ok(())}let tmpbase=base.join(".comfybox-tmp");fs::create_dir_all(&tmpbase)?;let tmp=tmpbase.join(format!("{}-{}",node.id,uuid_like()));let st=Command::new("git").arg("clone").arg("--depth").arg("1").arg(&node.git_url).arg(&tmp).status().await?;if !st.success(){let _=fs::remove_dir_all(&tmp);bail!("git clone failed for {}",node.name)}fs::rename(&tmp,&target)?;let _=fs::remove_dir(&tmpbase);Ok(())
+    let node=cat.custom_node(id).with_context(||format!("unknown custom node {id}"))?;let base=root.join("custom_nodes");fs::create_dir_all(&base)?;let target=base.join(&node.folder_name);if target.exists(){return Ok(())}let tmpbase=base.join(".comfybox-tmp");fs::create_dir_all(&tmpbase)?;let tmp=tmpbase.join(format!("{}-{}",node.id,uuid_like()));if let Err(error)=ComfyManager::clone_repository(&node.git_url,&tmp).await{let _=fs::remove_dir_all(&tmp);return Err(error).with_context(||format!("git clone failed for {}",node.name))}fs::rename(&tmp,&target)?;let _=fs::remove_dir(&tmpbase);Ok(())
 }
 
 async fn discover_hf(query:&str,limit:usize)->Result<()> {let url=format!("https://huggingface.co/api/models?search={}&limit={}",urlencoding::encode(query),limit);let v:Value=reqwest::get(url).await?.error_for_status()?.json().await?;if let Some(items)=v.as_array(){for x in items{if let Some(id)=x.get("id").and_then(Value::as_str){println!("{id}")}}}Ok(())}
@@ -400,7 +434,7 @@ async fn execute_dashboard_action(
 ) -> Result<()> {
     match action {
         dashboard::DashboardAction::Quit => Ok(()),
-        dashboard::DashboardAction::InstallComfyUi => install_comfy(cfg, None).await,
+        dashboard::DashboardAction::InstallComfyUi => install_comfy(cfg, None, None).await,
         dashboard::DashboardAction::LocateComfyUi => {
             println!("Searching for ComfyUI installations…");
             locate(cfg, None)

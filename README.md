@@ -87,6 +87,8 @@ comfybox locate --path /autodl-fs/data/minimax-h3/ComfyUI
 # install ComfyUI
 comfybox install
 comfybox install -d /autodl-fs/data/minimax-h3
+comfybox install -d /autodl-fs/data --source gitee
+comfybox install -d /data --source github
 comfybox python-deps
 
 # models
@@ -129,6 +131,12 @@ comfybox uninstall
 ```
 
 ## AutoDL / Hugging Face mirror
+
+Interactive ComfyUI installation asks whether to clone the official GitHub
+repository or the `https://gitee.com/mirrors/comfyui` China mirror before it
+selects a destination or creates temporary download directories. For unattended
+installs, use `--source gitee` or `--source github`. Failed clones are cleaned and
+retried, with HTTP/1.1 used after the first failure.
 
 ```bash
 export HF_ENDPOINT=https://hf-mirror.com
@@ -221,3 +229,39 @@ The workspace is validated with `cargo check`, strict Clippy, and its test suite
 ## License
 
 MIT. Upstream models and custom nodes retain their own licenses.
+
+
+## Download & install
+
+</br>
+
+Use this one-liner to download it, make it executable, and install it globally as comfybox:
+```bash
+curl -fL --retry 5 --retry-delay 3 \
+  -o /tmp/comfybox \
+  "https://github.com/mshokoya/comfybox/releases/download/x86_64-unknown-linux-gnu/comfybox" \
+  && chmod +x /tmp/comfybox \
+  && sudo install -m 0755 /tmp/comfybox /usr/local/bin/comfybox \
+  && rm -f /tmp/comfybox \
+  && comfybox --version
+```
+
+</br>
+
+If you're logged in as root on AutoDL, you don't need sudo:
+```bash
+curl -fL --retry 5 --retry-delay 3 \
+  -o /tmp/comfybox \
+  "https://github.com/mshokoya/comfybox/releases/download/x86_64-unknown-linux-gnu/comfybox" \
+  && chmod +x /tmp/comfybox \
+  && install -m 0755 /tmp/comfybox /usr/local/bin/comfybox \
+  && rm -f /tmp/comfybox
+```
+
+</br>
+
+Then you can run:
+
+```bash
+    comfybox
+```
