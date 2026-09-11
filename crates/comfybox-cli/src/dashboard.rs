@@ -27,7 +27,7 @@ use std::{
     io::{self, IsTerminal},
     path::{Path, PathBuf},
     process::Command,
-    time::Duration,
+    time::{Duration, Instant},
 };
 
 const ACCENT: Color = Color::Rgb(116, 192, 252);
@@ -129,6 +129,7 @@ struct Dashboard<'a> {
     download_detail: bool,
     comfy_running: bool,
     state: ManagedState,
+    last_server_check: Instant,
 }
 
 pub fn run(
@@ -163,6 +164,7 @@ pub fn run(
         download_detail: false,
         comfy_running,
         state,
+        last_server_check: Instant::now(),
     };
 
     let mut needs_draw = true;
@@ -173,6 +175,12 @@ pub fn run(
         if let Some(path) = app.state.comfy_log.as_deref()
             && app.queue.tail_comfyui_log(Path::new(path))
         {
+            needs_draw = true;
+        }
+        if app.last_server_check.elapsed() >= Duration::from_secs(1) {
+            app.state = ManagedState::load().unwrap_or_default();
+            app.comfy_running = detect_comfy_running(app.cfg, &app.state);
+            app.last_server_check = Instant::now();
             needs_draw = true;
         }
         if needs_draw {
@@ -352,6 +360,9 @@ impl Dashboard<'_> {
             .and_then(find_python)
             .map(|path| path.display().to_string())
             .unwrap_or_else(|| "Not detected".into());
+        let dependencies = self
+            .valid_comfy_root()
+            .is_some_and(crate::download_queue::python_dependencies_ready);
         let token = if let Some(credential) = hf_credential() {
             Span::styled(
                 format!("present · {}", credential.source().label()),
@@ -369,6 +380,17 @@ impl Dashboard<'_> {
         let lines = vec![
             Line::from(vec![label("Path"), Span::raw(path)]),
             Line::from(vec![label("Python"), Span::raw(python)]),
+            Line::from(vec![
+                label("Dependencies"),
+                state_span(
+                    if dependencies {
+                        "ready"
+                    } else {
+                        "not installed"
+                    },
+                    dependencies,
+                ),
+            ]),
             Line::from(vec![label("HF token"), token]),
             Line::from(vec![label("Endpoint"), Span::raw(endpoint)]),
         ];
@@ -427,6 +449,15 @@ impl Dashboard<'_> {
             lines.push(Line::from(
                 "  Public downloads work; press t to save a token for gated repositories.",
             ));
+        }
+        if let Some(root) = self.valid_comfy_root()
+            && !crate::download_queue::python_dependencies_ready(root)
+        {
+            lines.push(warning_line(
+                "ComfyUI Python dependencies are not ready.",
+                YELLOW,
+            ));
+            lines.push(Line::from("  Press p to install them in the background; server start/stop is locked until complete."));
         }
         if let Some(root) = self.valid_comfy_root() {
             let inventory = Inventory {
@@ -581,10 +612,31 @@ impl Dashboard<'_> {
         let jobs = self.queue.snapshots();
         self.download_index = self.download_index.min(jobs.len().saturating_sub(1));
         if self.download_detail {
-            let text = jobs
+            let mut text = jobs
                 .get(self.download_index)
                 .map(job_details)
                 .unwrap_or_else(|| Text::from("No download selected."));
+            if jobs
+                .get(self.download_index)
+                .is_some_and(|job| job.artifact_id == "python-dependencies")
+            {
+                text.lines.push(Line::from(""));
+                text.lines.push(Line::from(Span::styled(
+                    "Live process output",
+                    Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+                )));
+                text.lines.extend(
+                    self.queue
+                        .logs()
+                        .rev()
+                        .filter(|line| line.contains("[PYTHON]"))
+                        .take(8)
+                        .collect::<Vec<_>>()
+                        .into_iter()
+                        .rev()
+                        .map(|line| Line::from(line.to_owned())),
+                );
+            }
             frame.render_widget(card(" Download details · b/Esc background ", text), area);
             return;
         }
@@ -752,6 +804,17 @@ impl Dashboard<'_> {
                 ),
             ]),
             Line::from(vec![
+                label("Py deps"),
+                state_span(
+                    if root.is_some_and(crate::download_queue::python_dependencies_ready) {
+                        "ready"
+                    } else {
+                        "not installed"
+                    },
+                    root.is_some_and(crate::download_queue::python_dependencies_ready),
+                ),
+            ]),
+            Line::from(vec![
                 label("HF_TOKEN"),
                 state_span(&token_status, credential.is_some()),
             ]),
@@ -852,13 +915,24 @@ impl Dashboard<'_> {
             KeyCode::Down | KeyCode::Char('j') => self.move_selection(1),
             KeyCode::Up | KeyCode::Char('k') => self.move_selection(-1),
             KeyCode::Char('s') if self.valid_comfy_root().is_some() => {
-                return Some(DashboardAction::ToggleServer);
+                if self
+                    .valid_comfy_root()
+                    .is_some_and(crate::download_queue::python_dependencies_ready)
+                {
+                    return Some(DashboardAction::ToggleServer);
+                }
+                self.queue
+                    .record("server action blocked: install Python dependencies first");
             }
             KeyCode::Char('l') => return Some(DashboardAction::LocateComfyUi),
             KeyCode::Char('i') => return Some(DashboardAction::InstallComfyUi),
             KeyCode::Char('t') => return Some(DashboardAction::SetHfToken),
-            KeyCode::Char('p') if self.valid_comfy_root().is_some() => {
-                return Some(DashboardAction::InstallPythonDeps);
+            KeyCode::Char('p') => {
+                if self.valid_comfy_root().is_some() {
+                    return Some(DashboardAction::InstallPythonDeps);
+                }
+                self.queue
+                    .record("Python dependency install blocked: install or locate ComfyUI first");
             }
             KeyCode::Char('x') if Section::ALL[self.section] == Section::Downloads => {
                 let _ = self.queue.stop(self.download_index);

@@ -136,6 +136,7 @@ impl ComfyManager {
                 fs::remove_dir_all(target)?;
             }
             let mut command = Command::new("git");
+            command.kill_on_drop(true);
             if attempt > 1 {
                 command.arg("-c").arg("http.version=HTTP/1.1");
             }

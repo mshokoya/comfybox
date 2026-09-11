@@ -15,7 +15,12 @@ use std::{
     sync::Arc,
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
-use tokio::{sync::mpsc, task::AbortHandle};
+use tokio::{
+    io::{AsyncBufReadExt, BufReader},
+    process::Command,
+    sync::mpsc,
+    task::AbortHandle,
+};
 
 const MAX_LOG_LINES: usize = 1_000;
 
@@ -67,6 +72,13 @@ struct Job {
     abort: Option<AbortHandle>,
 }
 
+struct Operation {
+    root: PathBuf,
+    status: JobStatus,
+    error: Option<String>,
+    abort: Option<AbortHandle>,
+}
+
 #[derive(Serialize, Deserialize)]
 struct PersistedJob {
     artifact_id: String,
@@ -88,10 +100,12 @@ enum QueueEvent {
         result: std::result::Result<(), String>,
     },
     Log(String),
+    OperationFinished(std::result::Result<(), String>),
 }
 
 pub struct DownloadQueue {
     jobs: Vec<Job>,
+    python_deps: Option<Operation>,
     logs: VecDeque<String>,
     sender: mpsc::UnboundedSender<QueueEvent>,
     receiver: mpsc::UnboundedReceiver<QueueEvent>,
@@ -158,6 +172,7 @@ impl DownloadQueue {
             .unwrap_or_default();
         Ok(Self {
             jobs,
+            python_deps: None,
             logs,
             sender,
             receiver,
@@ -243,6 +258,20 @@ impl DownloadQueue {
         }
     }
 
+    pub fn enqueue_python_deps(&mut self, root: &Path) -> Result<()> {
+        if !root.join("main.py").is_file() || !root.join("requirements.txt").is_file() {
+            anyhow::bail!("install or locate ComfyUI before installing Python dependencies");
+        }
+        self.python_deps = Some(Operation {
+            root: root.to_path_buf(),
+            status: JobStatus::Queued,
+            error: None,
+            abort: None,
+        });
+        self.log("queued ComfyUI Python dependencies".into());
+        Ok(())
+    }
+
     pub fn tick(&mut self, max_concurrent: usize) -> bool {
         let mut changed = false;
         let mut persist_needed = false;
@@ -250,6 +279,22 @@ impl DownloadQueue {
             changed = true;
             match event {
                 QueueEvent::Log(message) => self.log(message),
+                QueueEvent::OperationFinished(result) => {
+                    if let Some(operation) = &mut self.python_deps {
+                        operation.abort = None;
+                        match result {
+                            Ok(()) => {
+                                operation.status = JobStatus::Completed;
+                                self.log("completed ComfyUI Python dependencies".into());
+                            }
+                            Err(error) => {
+                                operation.status = JobStatus::Failed;
+                                operation.error = Some(error.clone());
+                                self.log(format!("failed ComfyUI Python dependencies: {error}"));
+                            }
+                        }
+                    }
+                }
                 QueueEvent::Progress {
                     artifact_id,
                     progress,
@@ -321,6 +366,14 @@ impl DownloadQueue {
             changed = true;
             persist_needed = true;
         }
+        if self
+            .python_deps
+            .as_ref()
+            .is_some_and(|operation| operation.status == JobStatus::Queued)
+        {
+            self.start_python_deps();
+            changed = true;
+        }
         if persist_needed {
             let _ = self.save();
         }
@@ -328,6 +381,16 @@ impl DownloadQueue {
     }
 
     pub fn stop(&mut self, index: usize) -> Result<()> {
+        if index >= self.jobs.len() {
+            if let Some(operation) = &mut self.python_deps {
+                if let Some(abort) = operation.abort.take() {
+                    abort.abort();
+                }
+                operation.status = JobStatus::Paused;
+                self.log("paused ComfyUI Python dependencies".into());
+            }
+            return Ok(());
+        }
         let Some(job) = self.jobs.get_mut(index) else {
             return Ok(());
         };
@@ -345,6 +408,15 @@ impl DownloadQueue {
     }
 
     pub fn resume(&mut self, index: usize) -> Result<()> {
+        if index >= self.jobs.len() {
+            if let Some(operation) = &mut self.python_deps
+                && operation.status == JobStatus::Paused
+            {
+                operation.status = JobStatus::Queued;
+                operation.error = None;
+            }
+            return Ok(());
+        }
         let Some(job) = self.jobs.get_mut(index) else {
             return Ok(());
         };
@@ -359,6 +431,15 @@ impl DownloadQueue {
     }
 
     pub fn retry(&mut self, index: usize) -> Result<()> {
+        if index >= self.jobs.len() {
+            if let Some(operation) = &mut self.python_deps
+                && operation.status == JobStatus::Failed
+            {
+                operation.status = JobStatus::Queued;
+                operation.error = None;
+            }
+            return Ok(());
+        }
         let Some(job) = self.jobs.get_mut(index) else {
             return Ok(());
         };
@@ -373,7 +454,8 @@ impl DownloadQueue {
     }
 
     pub fn snapshots(&self) -> Vec<JobSnapshot> {
-        self.jobs
+        let mut snapshots = self
+            .jobs
             .iter()
             .map(|job| JobSnapshot {
                 artifact_id: job.artifact.id.clone(),
@@ -386,7 +468,21 @@ impl DownloadQueue {
                 error: job.error.clone(),
                 endpoint: job.options.hf_endpoint.clone(),
             })
-            .collect()
+            .collect::<Vec<_>>();
+        if let Some(operation) = &self.python_deps {
+            snapshots.push(JobSnapshot {
+                artifact_id: "python-dependencies".into(),
+                name: "ComfyUI Python dependencies".into(),
+                relative_path: operation.root.join(".venv").display().to_string(),
+                status: operation.status,
+                downloaded_bytes: 0,
+                total_bytes: None,
+                bytes_per_second: 0.0,
+                error: operation.error.clone(),
+                endpoint: None,
+            });
+        }
+        snapshots
     }
 
     pub fn logs(&self) -> impl DoubleEndedIterator<Item = &str> {
@@ -394,7 +490,7 @@ impl DownloadQueue {
     }
 
     pub fn len(&self) -> usize {
-        self.jobs.len()
+        self.jobs.len() + usize::from(self.python_deps.is_some())
     }
 
     pub fn update_chunk_parallelism(&mut self, parallelism: usize) {
@@ -492,6 +588,25 @@ impl DownloadQueue {
         self.jobs[index].abort = Some(handle.abort_handle());
     }
 
+    fn start_python_deps(&mut self) {
+        let Some(operation) = &mut self.python_deps else {
+            return;
+        };
+        let root = operation.root.clone();
+        let sender = self.sender.clone();
+        operation.status = JobStatus::Downloading;
+        self.log("started ComfyUI Python dependencies".into());
+        let handle = tokio::spawn(async move {
+            let result = install_python_dependencies(&root, &sender)
+                .await
+                .map_err(|error| format!("{error:#}"));
+            let _ = sender.send(QueueEvent::OperationFinished(result));
+        });
+        if let Some(operation) = &mut self.python_deps {
+            operation.abort = Some(handle.abort_handle());
+        }
+    }
+
     fn log(&mut self, message: String) {
         let line = format!("[{}] {message}", timestamp());
         self.push_log_line(line.clone());
@@ -554,6 +669,112 @@ async fn install_custom_node(root: PathBuf, node: CustomNode) -> Result<()> {
     Ok(())
 }
 
+async fn install_python_dependencies(
+    root: &Path,
+    sender: &mpsc::UnboundedSender<QueueEvent>,
+) -> Result<()> {
+    let requirements = root.join("requirements.txt");
+    if !requirements.is_file() {
+        anyhow::bail!("requirements.txt not found in {}", root.display());
+    }
+    let venv = root.join(".venv");
+    let python = if cfg!(windows) {
+        venv.join("Scripts/python.exe")
+    } else {
+        venv.join("bin/python")
+    };
+    if !python.is_file() {
+        let system_python = if cfg!(windows) { "python" } else { "python3" };
+        run_logged(
+            Command::new(system_python).arg("-m").arg("venv").arg(&venv),
+            sender,
+        )
+        .await?;
+    }
+    let wheelhouse = root
+        .join(".comfybox-tmp")
+        .join(format!("pip-{}", uuid::Uuid::new_v4()));
+    tokio::fs::create_dir_all(&wheelhouse).await?;
+    let download = run_logged(
+        Command::new(&python)
+            .arg("-m")
+            .arg("pip")
+            .arg("download")
+            .arg("-r")
+            .arg(&requirements)
+            .arg("-d")
+            .arg(&wheelhouse),
+        sender,
+    )
+    .await;
+    if let Err(error) = download {
+        let _ = tokio::fs::remove_dir_all(&wheelhouse).await;
+        return Err(error);
+    }
+    let install = run_logged(
+        Command::new(&python)
+            .arg("-m")
+            .arg("pip")
+            .arg("install")
+            .arg("--no-index")
+            .arg("--find-links")
+            .arg(&wheelhouse)
+            .arg("-r")
+            .arg(&requirements),
+        sender,
+    )
+    .await;
+    let _ = tokio::fs::remove_dir_all(&wheelhouse).await;
+    install?;
+    let marker_dir = root.join(".comfybox");
+    tokio::fs::create_dir_all(&marker_dir).await?;
+    let requirements_bytes = tokio::fs::read(&requirements).await?;
+    use sha2::{Digest, Sha256};
+    tokio::fs::write(
+        marker_dir.join("python-deps.sha256"),
+        hex::encode(Sha256::digest(requirements_bytes)),
+    )
+    .await?;
+    Ok(())
+}
+
+async fn run_logged(
+    command: &mut Command,
+    sender: &mpsc::UnboundedSender<QueueEvent>,
+) -> Result<()> {
+    command
+        .kill_on_drop(true)
+        .stdout(std::process::Stdio::piped())
+        .stderr(std::process::Stdio::piped());
+    let mut child = command.spawn()?;
+    let mut stdout = BufReader::new(child.stdout.take().context("capture process stdout")?).lines();
+    let mut stderr = BufReader::new(child.stderr.take().context("capture process stderr")?).lines();
+    let mut stdout_done = false;
+    let mut stderr_done = false;
+    while !stdout_done || !stderr_done {
+        tokio::select! {
+            line = stdout.next_line(), if !stdout_done => match line? { Some(line) => { let _ = sender.send(QueueEvent::Log(format!("[PYTHON] {line}"))); }, None => stdout_done = true },
+            line = stderr.next_line(), if !stderr_done => match line? { Some(line) => { let _ = sender.send(QueueEvent::Log(format!("[PYTHON] {line}"))); }, None => stderr_done = true },
+        }
+    }
+    let status = child.wait().await?;
+    if !status.success() {
+        anyhow::bail!("process exited with {status}");
+    }
+    Ok(())
+}
+
+pub fn python_dependencies_ready(root: &Path) -> bool {
+    let requirements = match fs::read(root.join("requirements.txt")) {
+        Ok(value) => value,
+        Err(_) => return false,
+    };
+    use sha2::{Digest, Sha256};
+    let expected = hex::encode(Sha256::digest(requirements));
+    fs::read_to_string(root.join(".comfybox/python-deps.sha256"))
+        .is_ok_and(|value| value.trim() == expected)
+}
+
 impl Drop for DownloadQueue {
     fn drop(&mut self) {
         for job in &mut self.jobs {
@@ -561,6 +782,12 @@ impl Drop for DownloadQueue {
                 abort.abort();
                 job.status = JobStatus::Paused;
             }
+        }
+        if let Some(operation) = &mut self.python_deps
+            && let Some(abort) = operation.abort.take()
+        {
+            abort.abort();
+            operation.status = JobStatus::Paused;
         }
         let _ = self.save();
     }

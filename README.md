@@ -92,6 +92,14 @@ the terminal with a source prompt. Workflow files are installed immediately, whi
 their model artifacts and custom-node repositories download in the background and
 report lifecycle messages in Logs.
 
+Python dependency installation is available only after a valid ComfyUI directory
+has been installed or located. It runs as a background job, streams pip output to
+Logs and its focused Downloads detail window, and records the hash of
+`requirements.txt` on success. If that file changes, dependencies return to “not
+installed” until the job succeeds again. Server start/stop controls are gated on
+this readiness state. Quitting the dashboard does not stop an already-running
+ComfyUI server.
+
 ## Common commands
 
 ```bash

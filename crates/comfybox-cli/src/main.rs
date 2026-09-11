@@ -290,6 +290,11 @@ async fn run(cmd: CommandTop, cfg: &mut AppConfig, cat: &Catalog) -> Result<()> 
         CommandTop::Uninstall { yes } => uninstall_comfy(cfg, yes),
         CommandTop::Start { host, port } => {
             let i = configured_instance(cfg)?;
+            if !download_queue::python_dependencies_ready(&i.root) {
+                bail!(
+                    "Python dependencies are not installed or requirements.txt changed; run `comfybox python-deps`"
+                );
+            }
             let mut s = ManagedState::load()?;
             let pid = ComfyManager::start(&i, StartOptions { host: &host, port }, &mut s).await?;
             println!(
@@ -1033,6 +1038,7 @@ async fn interactive(cfg: &mut AppConfig, cat: &Catalog) -> Result<()> {
             action,
             dashboard::DashboardAction::InstallPackage(_)
                 | dashboard::DashboardAction::InstallWorkflow(_)
+                | dashboard::DashboardAction::InstallPythonDeps
         );
         if let Err(error) = execute_dashboard_action(action, cfg, cat, &mut queue).await {
             queue.record(format!("action failed: {action_label}: {error:#}"));
@@ -1064,17 +1070,16 @@ async fn execute_dashboard_action(
         }
         dashboard::DashboardAction::InstallPythonDeps => {
             let instance = configured_instance(cfg)?;
-            let python = ComfyManager::install_python_deps(&instance).await?;
-            println!(
-                "{} {}",
-                style("✓ Python deps installed:").green(),
-                python.display()
-            );
-            Ok(())
+            queue.enqueue_python_deps(&instance.root)
         }
         dashboard::DashboardAction::SetHfToken => save_hf_token(false, false),
         dashboard::DashboardAction::ToggleServer => {
             let instance = configured_instance(cfg)?;
+            if !download_queue::python_dependencies_ready(&instance.root) {
+                bail!(
+                    "install the ComfyUI Python dependencies before starting or stopping the server"
+                );
+            }
             let mut state = ManagedState::load()?;
             if ComfyManager::status(&instance, &mut state)? {
                 ComfyManager::stop(&instance, &mut state)?;
