@@ -170,6 +170,11 @@ pub fn run(
         if app.queue.tick(app.cfg.max_concurrent_downloads) {
             needs_draw = true;
         }
+        if let Some(path) = app.state.comfy_log.as_deref()
+            && app.queue.tail_comfyui_log(Path::new(path))
+        {
+            needs_draw = true;
+        }
         if needs_draw {
             terminal.draw(|frame| app.render(frame))?;
             needs_draw = false;

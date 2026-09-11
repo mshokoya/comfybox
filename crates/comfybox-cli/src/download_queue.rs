@@ -1,7 +1,8 @@
 use anyhow::{Context, Result};
 use comfybox_core::{
     auth,
-    catalog::{Artifact, Catalog},
+    catalog::{Artifact, Catalog, CustomNode},
+    comfy::ComfyManager,
     config::{AppConfig, atomic_write_json},
     download::{DownloadManager, DownloadOptions, DownloadProgress},
 };
@@ -9,7 +10,7 @@ use serde::{Deserialize, Serialize};
 use std::{
     collections::VecDeque,
     fs,
-    io::Write,
+    io::{Read, Seek, SeekFrom, Write},
     path::{Path, PathBuf},
     sync::Arc,
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
@@ -86,6 +87,7 @@ enum QueueEvent {
         artifact_id: String,
         result: std::result::Result<(), String>,
     },
+    Log(String),
 }
 
 pub struct DownloadQueue {
@@ -95,6 +97,9 @@ pub struct DownloadQueue {
     receiver: mpsc::UnboundedReceiver<QueueEvent>,
     state_path: PathBuf,
     log_path: PathBuf,
+    server_log_path: Option<PathBuf>,
+    server_log_offset: u64,
+    server_log_partial: String,
 }
 
 impl DownloadQueue {
@@ -158,6 +163,9 @@ impl DownloadQueue {
             receiver,
             state_path,
             log_path,
+            server_log_path: None,
+            server_log_offset: 0,
+            server_log_partial: String::new(),
         })
     }
 
@@ -214,12 +222,34 @@ impl DownloadQueue {
         Ok(added)
     }
 
+    pub fn enqueue_custom_nodes(
+        &mut self,
+        root: &Path,
+        nodes: impl IntoIterator<Item = CustomNode>,
+    ) {
+        for node in nodes {
+            let root = root.to_path_buf();
+            let sender = self.sender.clone();
+            self.log(format!("queued custom-node download {}", node.name));
+            tokio::spawn(async move {
+                let name = node.name.clone();
+                let result = install_custom_node(root, node).await;
+                let message = match result {
+                    Ok(()) => format!("completed custom-node download {name}"),
+                    Err(error) => format!("failed custom-node download {name}: {error:#}"),
+                };
+                let _ = sender.send(QueueEvent::Log(message));
+            });
+        }
+    }
+
     pub fn tick(&mut self, max_concurrent: usize) -> bool {
         let mut changed = false;
         let mut persist_needed = false;
         while let Ok(event) = self.receiver.try_recv() {
             changed = true;
             match event {
+                QueueEvent::Log(message) => self.log(message),
                 QueueEvent::Progress {
                     artifact_id,
                     progress,
@@ -383,6 +413,50 @@ impl DownloadQueue {
         self.log(message.into());
     }
 
+    pub fn tail_comfyui_log(&mut self, path: &Path) -> bool {
+        let Ok(metadata) = fs::metadata(path) else {
+            return false;
+        };
+        let changed_file = self.server_log_path.as_deref() != Some(path);
+        if changed_file {
+            self.server_log_path = Some(path.to_path_buf());
+            self.server_log_offset = metadata.len().saturating_sub(64 * 1024);
+            self.server_log_partial.clear();
+        } else if metadata.len() < self.server_log_offset {
+            self.server_log_offset = 0;
+            self.server_log_partial.clear();
+        }
+        if metadata.len() == self.server_log_offset {
+            return false;
+        }
+        let Ok(mut file) = fs::File::open(path) else {
+            return false;
+        };
+        if file.seek(SeekFrom::Start(self.server_log_offset)).is_err() {
+            return false;
+        }
+        let mut bytes = Vec::new();
+        if file.read_to_end(&mut bytes).is_err() {
+            return false;
+        }
+        self.server_log_offset += bytes.len() as u64;
+        let mut text = std::mem::take(&mut self.server_log_partial);
+        text.push_str(&String::from_utf8_lossy(&bytes));
+        let complete = text.ends_with('\n');
+        let mut lines = text.split('\n').map(str::to_owned).collect::<Vec<_>>();
+        if !complete {
+            self.server_log_partial = lines.pop().unwrap_or_default();
+        } else {
+            lines.pop();
+        }
+        let mut changed = false;
+        for line in lines.into_iter().filter(|line| !line.is_empty()) {
+            self.push_log_line(format!("[COMFYUI] {line}"));
+            changed = true;
+        }
+        changed
+    }
+
     fn start(&mut self, index: usize) {
         let artifact = self.jobs[index].artifact.clone();
         let root = self.jobs[index].root.clone();
@@ -420,10 +494,7 @@ impl DownloadQueue {
 
     fn log(&mut self, message: String) {
         let line = format!("[{}] {message}", timestamp());
-        if self.logs.len() == MAX_LOG_LINES {
-            self.logs.pop_front();
-        }
-        self.logs.push_back(line.clone());
+        self.push_log_line(line.clone());
         if let Some(parent) = self.log_path.parent() {
             let _ = fs::create_dir_all(parent);
         }
@@ -434,6 +505,13 @@ impl DownloadQueue {
         {
             let _ = writeln!(file, "{line}");
         }
+    }
+
+    fn push_log_line(&mut self, line: String) {
+        if self.logs.len() == MAX_LOG_LINES {
+            self.logs.pop_front();
+        }
+        self.logs.push_back(line);
     }
 
     fn save(&self) -> Result<()> {
@@ -455,6 +533,25 @@ impl DownloadQueue {
             .collect::<Vec<_>>();
         atomic_write_json(&self.state_path, &jobs)
     }
+}
+
+async fn install_custom_node(root: PathBuf, node: CustomNode) -> Result<()> {
+    let base = root.join("custom_nodes");
+    tokio::fs::create_dir_all(&base).await?;
+    let target = base.join(&node.folder_name);
+    if target.exists() {
+        return Ok(());
+    }
+    let temporary_base = base.join(".comfybox-tmp");
+    tokio::fs::create_dir_all(&temporary_base).await?;
+    let temporary = temporary_base.join(format!("{}-{}", node.id, uuid::Uuid::new_v4()));
+    if let Err(error) = ComfyManager::clone_repository(&node.git_url, &temporary).await {
+        let _ = tokio::fs::remove_dir_all(&temporary).await;
+        return Err(error).with_context(|| format!("git clone failed for {}", node.name));
+    }
+    tokio::fs::rename(&temporary, &target).await?;
+    let _ = tokio::fs::remove_dir(&temporary_base).await;
+    Ok(())
 }
 
 impl Drop for DownloadQueue {

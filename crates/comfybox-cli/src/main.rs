@@ -502,6 +502,20 @@ fn download_options(cfg: &AppConfig, force: bool) -> Result<DownloadOptions> {
     })
 }
 
+fn dashboard_download_options(cfg: &AppConfig, force: bool) -> Result<DownloadOptions> {
+    Ok(DownloadOptions {
+        parallelism: cfg.download_parallelism,
+        chunk_size_bytes: cfg.chunk_size_bytes,
+        force,
+        hf_endpoint: cfg
+            .hf_endpoint
+            .clone()
+            .or_else(|| std::env::var("HF_ENDPOINT").ok()),
+        hf_token: auth::hf_token()?,
+        progress: None,
+    })
+}
+
 fn uninstall_comfy(cfg: &mut AppConfig, yes: bool) -> Result<()> {
     let i = configured_instance(cfg)?;
     let confirmed = yes
@@ -1108,6 +1122,12 @@ async fn execute_dashboard_action(
                     artifact_ids.extend(group.artifact_ids.iter().cloned());
                 }
             }
+            let mut custom_node_ids = package.custom_node_ids.clone();
+            for group in &package.optional_groups {
+                if optional.contains(&group.id) {
+                    custom_node_ids.extend(group.custom_node_ids.iter().cloned());
+                }
+            }
             let artifacts = artifact_ids
                 .iter()
                 .map(|artifact_id| {
@@ -1116,17 +1136,23 @@ async fn execute_dashboard_action(
                         .with_context(|| format!("unknown artifact {artifact_id}"))
                 })
                 .collect::<Result<Vec<_>>>()?;
-            for node_id in &package.custom_node_ids {
-                install_custom_node(&instance.root, cat, node_id).await?;
-            }
-            let options = download_options(cfg, false)?;
+            let nodes = custom_node_ids
+                .iter()
+                .map(|node_id| {
+                    cat.custom_node(node_id)
+                        .cloned()
+                        .with_context(|| format!("unknown custom node {node_id}"))
+                })
+                .collect::<Result<Vec<_>>>()?;
+            let options = dashboard_download_options(cfg, false)?;
             queue.enqueue(&instance.root, artifacts, &options)?;
+            queue.enqueue_custom_nodes(&instance.root, nodes);
             let mut state = ManagedState::load()?;
             state.packages.insert(
                 id,
                 ManagedInstall {
                     artifact_ids: artifact_ids.into_iter().collect(),
-                    custom_node_ids: package.custom_node_ids.iter().cloned().collect(),
+                    custom_node_ids: custom_node_ids.into_iter().collect(),
                 },
             );
             state.save()
@@ -1142,9 +1168,15 @@ async fn execute_dashboard_action(
                 dest.join(Path::new(&workflow.file).file_name().unwrap_or_default()),
                 bundled_workflow(&id)?,
             )?;
-            for node_id in &workflow.custom_node_ids {
-                install_custom_node(&instance.root, cat, node_id).await?;
-            }
+            let nodes = workflow
+                .custom_node_ids
+                .iter()
+                .map(|node_id| {
+                    cat.custom_node(node_id)
+                        .cloned()
+                        .with_context(|| format!("unknown custom node {node_id}"))
+                })
+                .collect::<Result<Vec<_>>>()?;
             let artifacts = workflow
                 .artifact_ids
                 .iter()
@@ -1154,8 +1186,9 @@ async fn execute_dashboard_action(
                         .with_context(|| format!("unknown artifact {artifact_id}"))
                 })
                 .collect::<Result<Vec<_>>>()?;
-            let options = download_options(cfg, false)?;
+            let options = dashboard_download_options(cfg, false)?;
             queue.enqueue(&instance.root, artifacts, &options)?;
+            queue.enqueue_custom_nodes(&instance.root, nodes);
             let mut state = ManagedState::load()?;
             state.workflows.insert(
                 id,

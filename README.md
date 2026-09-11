@@ -67,7 +67,7 @@ subcommand is supplied and provides seven views:
 - **Models** — installable model packages and their required model, text encoder, VAE, LoRA and custom-node dependencies.
 - **Workflows** — bundled workflows with aggregate dependency health and one-key installation.
 - **Downloads** — live download manager with queued/active/paused/failed jobs, byte progress, speed, ETA, stop and resumable restart controls.
-- **Logs** — persistent lifecycle and error logs; high-frequency byte-progress events are intentionally filtered out.
+- **Logs** — persistent lifecycle/error logs plus a live incremental tail of the managed ComfyUI server log; high-frequency download byte events are intentionally filtered out.
 - **Settings** — tune concurrent files and parallel chunks per file while downloads are running.
 - **System** — configured paths, Python/Git availability, `HF_TOKEN`, disk space and managed state.
 
@@ -87,6 +87,10 @@ The queue is saved under the ComfyBox config directory. Closing ComfyBox pauses
 in-process transfers; unfinished jobs return as paused on the next launch and can
 resume from verified HTTP ranges. “Background” means the transfer continues while
 you use another dashboard tab—it is not a detached operating-system service.
+Dashboard installs use the saved `hf_endpoint`/`HF_ENDPOINT` without interrupting
+the terminal with a source prompt. Workflow files are installed immediately, while
+their model artifacts and custom-node repositories download in the background and
+report lifecycle messages in Logs.
 
 ## Common commands
 
