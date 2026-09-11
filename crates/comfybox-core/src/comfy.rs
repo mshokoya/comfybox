@@ -247,6 +247,7 @@ impl ComfyManager {
             .arg(opts.host)
             .arg("--port")
             .arg(opts.port.to_string())
+            .arg("--enable-manager")
             .stdout(Stdio::from(stdout))
             .stderr(Stdio::from(stderr))
             .spawn()?;

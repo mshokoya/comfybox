@@ -100,6 +100,10 @@ installed” until the job succeeds again. Server start/stop controls are gated 
 this readiness state. Quitting the dashboard does not stop an already-running
 ComfyUI server.
 
+The dependency job also installs or upgrades the prerelease `comfyui-manager`
+package in ComfyUI's virtual environment. Managed server launches include
+`--enable-manager`, allowing ComfyUI to offer installation of workflow node packs.
+
 ## Common commands
 
 ```bash

@@ -726,13 +726,27 @@ async fn install_python_dependencies(
     .await;
     let _ = tokio::fs::remove_dir_all(&wheelhouse).await;
     install?;
+    let _ = sender.send(QueueEvent::Log(
+        "[PYTHON] Installing/upgrading ComfyUI Node Manager".into(),
+    ));
+    run_logged(
+        Command::new(&python)
+            .arg("-m")
+            .arg("pip")
+            .arg("install")
+            .arg("-U")
+            .arg("--pre")
+            .arg("comfyui-manager"),
+        sender,
+    )
+    .await?;
     let marker_dir = root.join(".comfybox");
     tokio::fs::create_dir_all(&marker_dir).await?;
     let requirements_bytes = tokio::fs::read(&requirements).await?;
     use sha2::{Digest, Sha256};
     tokio::fs::write(
         marker_dir.join("python-deps.sha256"),
-        hex::encode(Sha256::digest(requirements_bytes)),
+        format!("v2:{}", hex::encode(Sha256::digest(requirements_bytes))),
     )
     .await?;
     Ok(())
@@ -770,7 +784,7 @@ pub fn python_dependencies_ready(root: &Path) -> bool {
         Err(_) => return false,
     };
     use sha2::{Digest, Sha256};
-    let expected = hex::encode(Sha256::digest(requirements));
+    let expected = format!("v2:{}", hex::encode(Sha256::digest(requirements)));
     fs::read_to_string(root.join(".comfybox/python-deps.sha256"))
         .is_ok_and(|value| value.trim() == expected)
 }
