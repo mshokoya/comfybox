@@ -1,5 +1,6 @@
 use crate::catalog::Artifact;
 use anyhow::{Context, Result, bail};
+use bytes::BytesMut;
 use futures::{StreamExt, stream::FuturesUnordered};
 use reqwest::{
     Client,
@@ -12,7 +13,10 @@ use std::{
     fs as stdfs,
     io::Read,
     path::{Path, PathBuf},
-    sync::Arc,
+    sync::{
+        Arc,
+        atomic::{AtomicU64, Ordering},
+    },
 };
 use sysinfo::Disks;
 use tokio::{
@@ -21,13 +25,20 @@ use tokio::{
     sync::Semaphore,
 };
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct DownloadOptions {
     pub parallelism: usize,
     pub chunk_size_bytes: u64,
     pub force: bool,
     pub hf_endpoint: Option<String>,
     pub hf_token: Option<String>,
+    pub progress: Option<Arc<dyn Fn(DownloadProgress) + Send + Sync>>,
+}
+
+#[derive(Debug, Clone, Copy)]
+pub struct DownloadProgress {
+    pub downloaded_bytes: u64,
+    pub total_bytes: u64,
 }
 
 impl Default for DownloadOptions {
@@ -38,6 +49,7 @@ impl Default for DownloadOptions {
             force: false,
             hf_endpoint: None,
             hf_token: None,
+            progress: None,
         }
     }
 }
@@ -155,6 +167,7 @@ impl DownloadManager {
                     .sum::<u64>()
             })
             .unwrap_or(0);
+        report_progress(opts, already_downloaded, expected);
         let missing = expected.saturating_sub(already_downloaded);
         ensure_free_space(
             final_path.parent().unwrap_or(comfy_root),
@@ -235,6 +248,7 @@ impl DownloadManager {
             let chunk = chunk?;
             file.write_all(&chunk).await?;
             written += chunk.len() as u64;
+            report_progress(opts, written, expected);
             if written > expected {
                 bail!("remote sent more data than expected");
             }
@@ -271,6 +285,12 @@ impl DownloadManager {
         let file = Arc::new(tokio::sync::Mutex::new(file));
         let completed: BTreeSet<(u64, u64)> =
             state.completed.iter().map(|r| (r.start, r.end)).collect();
+        let initially_downloaded = state
+            .completed
+            .iter()
+            .map(|range| range.end.saturating_sub(range.start) + 1)
+            .sum::<u64>();
+        let live_downloaded = Arc::new(AtomicU64::new(initially_downloaded));
         let chunk = opts.chunk_size_bytes.max(1024 * 1024);
         let mut missing = Vec::new();
         let mut start = 0u64;
@@ -288,6 +308,8 @@ impl DownloadManager {
             let client = self.client.clone();
             let url = url.to_owned();
             let token = opts.hf_token.clone();
+            let live_downloaded = Arc::clone(&live_downloaded);
+            let progress = opts.progress.clone();
             tasks.push(tokio::spawn(async move {
                 let _permit = permit;
                 let want = end - start + 1;
@@ -302,18 +324,33 @@ impl DownloadManager {
                     }
                     match req.send().await {
                         Ok(res) if res.status() == reqwest::StatusCode::PARTIAL_CONTENT => {
-                            match res.bytes().await {
-                                Ok(bytes) if bytes.len() as u64 == want => {
-                                    return Ok::<_, anyhow::Error>((start, end, bytes));
+                            let mut stream = res.bytes_stream();
+                            let mut bytes = BytesMut::with_capacity(want as usize);
+                            let mut attempt_bytes = 0u64;
+                            let mut unreported = 0u64;
+                            let mut stream_error = None;
+                            while let Some(item) = stream.next().await {
+                                match item {
+                                    Ok(part) => {
+                                        let count = part.len() as u64;
+                                        attempt_bytes += count;
+                                        unreported += count;
+                                        bytes.extend_from_slice(&part);
+                                        let total = live_downloaded.fetch_add(count, Ordering::Relaxed) + count;
+                                        if unreported >= 512 * 1024 || attempt_bytes == want {
+                                            if let Some(callback) = &progress { callback(DownloadProgress { downloaded_bytes: total.min(expected), total_bytes: expected }); }
+                                            unreported = 0;
+                                        }
+                                    }
+                                    Err(error) => { stream_error = Some(error); break; }
                                 }
-                                Ok(bytes) => {
-                                    last_error = Some(anyhow::anyhow!(
-                                        "range {start}-{end} returned {} bytes, expected {want}",
-                                        bytes.len()
-                                    ))
-                                }
-                                Err(e) => last_error = Some(e.into()),
                             }
+                            if attempt_bytes == want && stream_error.is_none() {
+                                return Ok::<_, anyhow::Error>((start, end, bytes.freeze()));
+                            }
+                            live_downloaded.fetch_sub(attempt_bytes, Ordering::Relaxed);
+                            if let Some(callback) = &progress { callback(DownloadProgress { downloaded_bytes: live_downloaded.load(Ordering::Relaxed), total_bytes: expected }); }
+                            last_error = Some(stream_error.map(anyhow::Error::from).unwrap_or_else(|| anyhow::anyhow!("range {start}-{end} returned {attempt_bytes} bytes, expected {want}")));
                         }
                         Ok(res)
                             if matches!(
@@ -443,6 +480,15 @@ fn rewrite_hf_url(url: &str, endpoint: Option<&str>) -> String {
         return format!("{}{}", endpoint.trim_end_matches('/'), rest);
     }
     url.to_owned()
+}
+
+fn report_progress(opts: &DownloadOptions, downloaded_bytes: u64, total_bytes: u64) {
+    if let Some(callback) = &opts.progress {
+        callback(DownloadProgress {
+            downloaded_bytes,
+            total_bytes,
+        });
+    }
 }
 
 fn http_status_error(

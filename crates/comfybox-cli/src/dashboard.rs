@@ -1,7 +1,8 @@
+use crate::download_queue::{DownloadQueue, JobStatus};
 use anyhow::{Context, Result};
 use comfybox_core::{
     auth,
-    catalog::{Artifact, Catalog, Package, WorkflowDefinition},
+    catalog::{Catalog, Package, WorkflowDefinition},
     comfy::ComfyManager,
     config::AppConfig,
     inventory::{ArtifactStatus, Inventory},
@@ -46,7 +47,6 @@ pub enum DashboardAction {
     ToggleServer,
     InstallPackage(String),
     InstallWorkflow(String),
-    InstallArtifact { id: String, force: bool },
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -55,15 +55,19 @@ enum Section {
     Models,
     Workflows,
     Downloads,
+    Logs,
+    Settings,
     System,
 }
 
 impl Section {
-    const ALL: [Self; 5] = [
+    const ALL: [Self; 7] = [
         Self::Overview,
         Self::Models,
         Self::Workflows,
         Self::Downloads,
+        Self::Logs,
+        Self::Settings,
         Self::System,
     ];
 
@@ -73,6 +77,8 @@ impl Section {
             Self::Models => "Models",
             Self::Workflows => "Workflows",
             Self::Downloads => "Downloads",
+            Self::Logs => "Logs",
+            Self::Settings => "Settings",
             Self::System => "System",
         }
     }
@@ -113,17 +119,23 @@ impl Health {
 }
 
 struct Dashboard<'a> {
-    cfg: &'a AppConfig,
+    cfg: &'a mut AppConfig,
     catalog: &'a Catalog,
+    queue: &'a mut DownloadQueue,
     section: usize,
     model_index: usize,
     workflow_index: usize,
     download_index: usize,
+    download_detail: bool,
     comfy_running: bool,
     state: ManagedState,
 }
 
-pub fn run(cfg: &AppConfig, catalog: &Catalog) -> Result<DashboardAction> {
+pub fn run(
+    cfg: &mut AppConfig,
+    catalog: &Catalog,
+    queue: &mut DownloadQueue,
+) -> Result<DashboardAction> {
     if !io::stdout().is_terminal() || !io::stdin().is_terminal() {
         anyhow::bail!(
             "the dashboard requires an interactive terminal; use a subcommand for non-interactive runs"
@@ -143,16 +155,21 @@ pub fn run(cfg: &AppConfig, catalog: &Catalog) -> Result<DashboardAction> {
     let mut app = Dashboard {
         cfg,
         catalog,
+        queue,
         section: 0,
         model_index: 0,
         workflow_index: 0,
         download_index: 0,
+        download_detail: false,
         comfy_running,
         state,
     };
 
     let mut needs_draw = true;
     loop {
+        if app.queue.tick(app.cfg.max_concurrent_downloads) {
+            needs_draw = true;
+        }
         if needs_draw {
             terminal.draw(|frame| app.render(frame))?;
             needs_draw = false;
@@ -216,6 +233,8 @@ impl Dashboard<'_> {
             Section::Models => self.render_models(frame, vertical[2]),
             Section::Workflows => self.render_workflows(frame, vertical[2]),
             Section::Downloads => self.render_downloads(frame, vertical[2]),
+            Section::Logs => self.render_logs(frame, vertical[2]),
+            Section::Settings => self.render_settings(frame, vertical[2]),
             Section::System => self.render_system(frame, vertical[2]),
         }
         self.render_footer(frame, vertical[3]);
@@ -271,7 +290,22 @@ impl Dashboard<'_> {
     fn render_tabs(&self, frame: &mut Frame<'_>, area: Rect) {
         let titles = Section::ALL
             .iter()
-            .map(|section| Line::from(format!(" {} ", section.title())))
+            .map(|section| {
+                let title = if area.width < 100 {
+                    match section {
+                        Section::Overview => "Home",
+                        Section::Models => "Models",
+                        Section::Workflows => "Flows",
+                        Section::Downloads => "DL",
+                        Section::Logs => "Logs",
+                        Section::Settings => "Set",
+                        Section::System => "Sys",
+                    }
+                } else {
+                    section.title()
+                };
+                Line::from(format!(" {title} "))
+            })
             .collect::<Vec<_>>();
         frame.render_widget(
             Tabs::new(titles)
@@ -539,20 +573,36 @@ impl Dashboard<'_> {
     }
 
     fn render_downloads(&mut self, frame: &mut Frame<'_>, area: Rect) {
+        let jobs = self.queue.snapshots();
+        self.download_index = self.download_index.min(jobs.len().saturating_sub(1));
+        if self.download_detail {
+            let text = jobs
+                .get(self.download_index)
+                .map(job_details)
+                .unwrap_or_else(|| Text::from("No download selected."));
+            frame.render_widget(card(" Download details · b/Esc background ", text), area);
+            return;
+        }
         let columns = content_columns(area);
-        self.download_index = self
-            .download_index
-            .min(self.catalog.artifacts.len().saturating_sub(1));
-        let artifacts = self.sorted_artifacts();
-        let items = artifacts
+        let items = jobs
             .iter()
-            .map(|artifact| {
-                let (health, detail) = self.artifact_health_detail(artifact);
+            .map(|job| {
+                let progress = job
+                    .total_bytes
+                    .map(|total| {
+                        format!(
+                            "{:5.1}%  {} / {}",
+                            job.downloaded_bytes as f64 * 100.0 / total.max(1) as f64,
+                            bytes_label(job.downloaded_bytes),
+                            bytes_label(total)
+                        )
+                    })
+                    .unwrap_or_else(|| bytes_label(job.downloaded_bytes));
                 ListItem::new(Line::from(vec![
-                    status_badge(health),
+                    job_badge(job.status),
                     Span::raw(" "),
-                    Span::styled(artifact.name.clone(), Style::default().fg(Color::White)),
-                    Span::styled(format!("  {detail}"), Style::default().fg(MUTED)),
+                    Span::styled(job.name.clone(), Style::default().fg(Color::White)),
+                    Span::styled(format!("  {progress}"), Style::default().fg(MUTED)),
                 ]))
             })
             .collect::<Vec<_>>();
@@ -563,7 +613,7 @@ impl Dashboard<'_> {
                 .highlight_style(Style::default().bg(PANEL).add_modifier(Modifier::BOLD))
                 .block(
                     Block::default()
-                        .title(" Artifact downloads ")
+                        .title(" Download manager ")
                         .borders(Borders::ALL)
                         .border_style(Style::default().fg(PANEL)),
                 ),
@@ -571,42 +621,81 @@ impl Dashboard<'_> {
             &mut state,
         );
         if columns.len() > 1 {
-            let details = artifacts
+            let details = jobs
                 .get(self.download_index)
-                .map(|artifact| {
-                    let (health, detail) = self.artifact_health_detail(artifact);
-                    let hint = match health {
-                        Health::Paused => "Enter retries; verified ranges resume where supported.",
-                        Health::Broken => "Press f to force a safe replacement.",
-                        Health::Blocked => "Press t to save an HF token, then retry.",
-                        Health::Missing => "Enter starts this download.",
-                        Health::Ready => "The artifact is installed.",
-                        Health::Discovery => "",
-                    };
-                    Text::from(vec![
-                        Line::from(Span::styled(
-                            &artifact.name,
-                            Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
-                        )),
-                        Line::from(format!("State: {} — {detail}", health.label())),
-                        Line::from(format!("Target: {}", artifact.relative_path)),
-                        Line::from(format!(
-                            "Integrity: {}",
-                            if artifact.sha256.is_some() {
-                                "SHA-256 pinned"
-                            } else if artifact.size_bytes.is_some() {
-                                "size pinned"
-                            } else {
-                                "remote size"
-                            }
-                        )),
-                        Line::from(""),
-                        Line::from(hint),
-                    ])
-                })
-                .unwrap_or_default();
-            frame.render_widget(card(" Recovery ", details), columns[1]);
+                .map(job_details)
+                .unwrap_or_else(|| {
+                    Text::from(
+                        "No downloads yet.\nInstall a model package or workflow to add jobs.",
+                    )
+                });
+            frame.render_widget(card(" Progress and recovery ", details), columns[1]);
         }
+    }
+
+    fn render_logs(&self, frame: &mut Frame<'_>, area: Rect) {
+        let visible = area.height.saturating_sub(2) as usize;
+        let lines = self
+            .queue
+            .logs()
+            .rev()
+            .take(visible)
+            .collect::<Vec<_>>()
+            .into_iter()
+            .rev()
+            .map(|line| Line::from(line.to_owned()))
+            .collect::<Vec<_>>();
+        frame.render_widget(
+            Paragraph::new(lines).wrap(Wrap { trim: false }).block(
+                Block::default()
+                    .title(" Application log · progress events filtered ")
+                    .borders(Borders::ALL)
+                    .border_style(Style::default().fg(PANEL)),
+            ),
+            area,
+        );
+    }
+
+    fn render_settings(&self, frame: &mut Frame<'_>, area: Rect) {
+        let active = self
+            .queue
+            .snapshots()
+            .iter()
+            .filter(|job| job.status == JobStatus::Downloading)
+            .count();
+        let lines = vec![
+            Line::from(vec![
+                label("Files"),
+                Span::styled(
+                    self.cfg.max_concurrent_downloads.to_string(),
+                    Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+                ),
+                Span::raw("  −/+ change"),
+            ]),
+            Line::from(vec![
+                label("Chunks/file"),
+                Span::styled(
+                    self.cfg.download_parallelism.to_string(),
+                    Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+                ),
+                Span::raw("  [/ ] change"),
+            ]),
+            Line::from(vec![
+                label("Chunk size"),
+                Span::raw(format!(
+                    "{:.0} MiB",
+                    self.cfg.chunk_size_bytes as f64 / 1_048_576.0
+                )),
+            ]),
+            Line::from(vec![label("Active now"), Span::raw(active.to_string())]),
+            Line::from(""),
+            Line::from("Increasing the file limit starts queued downloads immediately."),
+            Line::from(
+                "Lowering it never kills active transfers; they finish, and new jobs wait until the active count is below the new limit.",
+            ),
+            Line::from("Settings are saved for future runs."),
+        ];
+        frame.render_widget(card(" Download settings ", Text::from(lines)), area);
     }
 
     fn render_system(&self, frame: &mut Frame<'_>, area: Rect) {
@@ -711,15 +800,17 @@ impl Dashboard<'_> {
                         .into()
                 }
                 Section::Downloads => {
-                    " ←/→ tabs  ↑/↓ select  Enter retry  f repair  t token  r refresh  q quit "
+                    " ←/→ tabs  ↑/↓ select  Enter watch  x pause  c continue  r retry  q quit "
                         .into()
                 }
+                Section::Settings => " ←/→ tabs  −/+ files  [/] chunks  q quit ".into(),
                 _ => " ←/→ tabs  s server  l locate  i install  t token  r refresh  q quit ".into(),
             }
         } else {
             let section_hint = match Section::ALL[self.section] {
                 Section::Models | Section::Workflows => " Enter install ",
-                Section::Downloads => " Enter resume/install  f repair ",
+                Section::Downloads => " Enter watch  x pause  c continue  r retry  b background ",
+                Section::Settings => " −/+ files  [/] chunks ",
                 _ => "",
             };
             format!(
@@ -736,6 +827,10 @@ impl Dashboard<'_> {
 
     fn handle_key(&mut self, key: KeyEvent) -> Option<DashboardAction> {
         match key.code {
+            KeyCode::Esc if self.download_detail => self.download_detail = false,
+            KeyCode::Char('b') if Section::ALL[self.section] == Section::Downloads => {
+                self.download_detail = false
+            }
             KeyCode::Char('q') | KeyCode::Esc => return Some(DashboardAction::Quit),
             KeyCode::Char('c') if key.modifiers.contains(KeyModifiers::CONTROL) => {
                 return Some(DashboardAction::Quit);
@@ -744,7 +839,7 @@ impl Dashboard<'_> {
             KeyCode::Left | KeyCode::BackTab => {
                 self.section = (self.section + Section::ALL.len() - 1) % Section::ALL.len()
             }
-            KeyCode::Char('1'..='5') => {
+            KeyCode::Char('1'..='7') => {
                 if let KeyCode::Char(value) = key.code {
                     self.section = value.to_digit(10).unwrap_or(1) as usize - 1;
                 }
@@ -760,14 +855,47 @@ impl Dashboard<'_> {
             KeyCode::Char('p') if self.valid_comfy_root().is_some() => {
                 return Some(DashboardAction::InstallPythonDeps);
             }
+            KeyCode::Char('x') if Section::ALL[self.section] == Section::Downloads => {
+                let _ = self.queue.stop(self.download_index);
+            }
+            KeyCode::Char('c') if Section::ALL[self.section] == Section::Downloads => {
+                let _ = self.queue.resume(self.download_index);
+            }
+            KeyCode::Char('r') if Section::ALL[self.section] == Section::Downloads => {
+                let _ = self.queue.retry(self.download_index);
+            }
+            KeyCode::Char('+') | KeyCode::Char('=')
+                if Section::ALL[self.section] == Section::Settings =>
+            {
+                self.cfg.max_concurrent_downloads = (self.cfg.max_concurrent_downloads + 1).min(32);
+                let _ = self.cfg.save();
+            }
+            KeyCode::Char('-') if Section::ALL[self.section] == Section::Settings => {
+                self.cfg.max_concurrent_downloads =
+                    self.cfg.max_concurrent_downloads.saturating_sub(1).max(1);
+                let _ = self.cfg.save();
+            }
+            KeyCode::Char(']') if Section::ALL[self.section] == Section::Settings => {
+                self.cfg.download_parallelism = (self.cfg.download_parallelism + 1).min(32);
+                self.queue
+                    .update_chunk_parallelism(self.cfg.download_parallelism);
+                let _ = self.cfg.save();
+            }
+            KeyCode::Char('[') if Section::ALL[self.section] == Section::Settings => {
+                self.cfg.download_parallelism =
+                    self.cfg.download_parallelism.saturating_sub(1).max(1);
+                self.queue
+                    .update_chunk_parallelism(self.cfg.download_parallelism);
+                let _ = self.cfg.save();
+            }
             KeyCode::Char('r') => {
                 self.state = ManagedState::load().unwrap_or_default();
                 self.comfy_running = detect_comfy_running(self.cfg, &self.state);
             }
-            KeyCode::Enter => return self.selected_action(false),
-            KeyCode::Char('f') if Section::ALL[self.section] == Section::Downloads => {
-                return self.selected_action(true);
+            KeyCode::Enter if Section::ALL[self.section] == Section::Downloads => {
+                self.download_detail = true
             }
+            KeyCode::Enter => return self.selected_action(),
             _ => {}
         }
         None
@@ -777,7 +905,7 @@ impl Dashboard<'_> {
         let (index, len) = match Section::ALL[self.section] {
             Section::Models => (&mut self.model_index, self.catalog.packages.len()),
             Section::Workflows => (&mut self.workflow_index, self.catalog.workflows.len()),
-            Section::Downloads => (&mut self.download_index, self.catalog.artifacts.len()),
+            Section::Downloads => (&mut self.download_index, self.queue.len()),
             _ => return,
         };
         if len == 0 {
@@ -787,7 +915,7 @@ impl Dashboard<'_> {
         }
     }
 
-    fn selected_action(&self, force: bool) -> Option<DashboardAction> {
+    fn selected_action(&self) -> Option<DashboardAction> {
         self.valid_comfy_root()?;
         match Section::ALL[self.section] {
             Section::Models => {
@@ -805,24 +933,7 @@ impl Dashboard<'_> {
                 (self.workflow_health(workflow) != Health::Blocked)
                     .then(|| DashboardAction::InstallWorkflow(workflow.id.clone()))
             }
-            Section::Downloads => {
-                let artifact = self.sorted_artifacts().get(self.download_index).copied()?;
-                if self.artifact_health_detail(artifact).0 == Health::Blocked {
-                    return None;
-                }
-                if matches!(
-                    self.artifact_status(artifact),
-                    Some(ArtifactStatus::Installed)
-                ) && !force
-                {
-                    None
-                } else {
-                    Some(DashboardAction::InstallArtifact {
-                        id: artifact.id.clone(),
-                        force,
-                    })
-                }
-            }
+            Section::Downloads => None,
             _ => None,
         }
     }
@@ -832,54 +943,6 @@ impl Dashboard<'_> {
             .comfy_path
             .as_deref()
             .filter(|path| ComfyManager::is_comfy_root(path))
-    }
-
-    fn artifact_status(&self, artifact: &Artifact) -> Option<ArtifactStatus> {
-        let root = self.valid_comfy_root()?;
-        Some(
-            Inventory {
-                comfy_root: root,
-                catalog: self.catalog,
-            }
-            .status(artifact),
-        )
-    }
-
-    fn artifact_health_detail(&self, artifact: &Artifact) -> (Health, String) {
-        match self.artifact_status(artifact) {
-            Some(ArtifactStatus::Installed) => (Health::Ready, size_label(artifact.size_bytes)),
-            Some(ArtifactStatus::SizeMismatch { actual, expected }) => (
-                Health::Broken,
-                format!(
-                    "{:.1} GiB found · {:.1} expected",
-                    gib(actual),
-                    gib(expected)
-                ),
-            ),
-            _ if artifact.gated && !has_hf_token() => (
-                Health::Blocked,
-                "gated repository · HF_TOKEN missing".into(),
-            ),
-            Some(ArtifactStatus::Missing) | None => {
-                (Health::Missing, size_label(artifact.size_bytes))
-            }
-            Some(ArtifactStatus::Partial {
-                downloaded_bytes,
-                expected_bytes,
-            }) => {
-                let detail = if let Some(total) = expected_bytes {
-                    format!(
-                        "{:.1}% · {:.1}/{:.1} GiB",
-                        downloaded_bytes as f64 * 100.0 / total.max(1) as f64,
-                        gib(downloaded_bytes),
-                        gib(total)
-                    )
-                } else {
-                    format!("{:.1} GiB retained", gib(downloaded_bytes))
-                };
-                (Health::Paused, detail)
-            }
-        }
     }
 
     fn package_health(&self, package: &Package) -> Health {
@@ -957,18 +1020,85 @@ impl Dashboard<'_> {
         }
         Health::Ready
     }
+}
 
-    fn sorted_artifacts(&self) -> Vec<&Artifact> {
-        let mut artifacts = self.catalog.artifacts.iter().collect::<Vec<_>>();
-        artifacts.sort_by(|left, right| {
-            let left_health = self.artifact_health_detail(left).0;
-            let right_health = self.artifact_health_detail(right).0;
-            health_rank(left_health)
-                .cmp(&health_rank(right_health))
-                .then_with(|| left.name.cmp(&right.name))
-        });
-        artifacts
+fn job_badge(status: JobStatus) -> Span<'static> {
+    let color = match status {
+        JobStatus::Completed => GREEN,
+        JobStatus::Downloading => ACCENT,
+        JobStatus::Queued => MUTED,
+        JobStatus::Paused => YELLOW,
+        JobStatus::Failed => RED,
+    };
+    Span::styled(
+        format!("{:<8}", status.label()),
+        Style::default().fg(color).add_modifier(Modifier::BOLD),
+    )
+}
+
+fn job_details(job: &crate::download_queue::JobSnapshot) -> Text<'static> {
+    let progress = job
+        .total_bytes
+        .map(|total| {
+            format!(
+                "{:.1}% · {} / {}",
+                job.downloaded_bytes as f64 * 100.0 / total.max(1) as f64,
+                bytes_label(job.downloaded_bytes),
+                bytes_label(total)
+            )
+        })
+        .unwrap_or_else(|| bytes_label(job.downloaded_bytes));
+    let eta = job
+        .total_bytes
+        .filter(|_| job.bytes_per_second > 0.0)
+        .map(|total| {
+            Duration::from_secs_f64(
+                total.saturating_sub(job.downloaded_bytes) as f64 / job.bytes_per_second,
+            )
+            .as_secs()
+        })
+        .map(|seconds| format!("{}m {:02}s", seconds / 60, seconds % 60))
+        .unwrap_or_else(|| "—".into());
+    let mut lines = vec![
+        Line::from(Span::styled(
+            job.name.clone(),
+            Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+        )),
+        Line::from(format!("State: {}", job.status.label())),
+        Line::from(format!("Progress: {progress}")),
+        Line::from(format!(
+            "Speed: {}/s",
+            bytes_label(job.bytes_per_second as u64)
+        )),
+        Line::from(format!("ETA: {eta}")),
+        Line::from(format!("Target: {}", job.relative_path)),
+        Line::from(format!(
+            "Source: {}",
+            job.endpoint.as_deref().unwrap_or("https://huggingface.co")
+        )),
+        Line::from(format!("ID: {}", job.artifact_id)),
+        Line::from(""),
+        Line::from("x pauses; c continues a paused job; r retries a failed job."),
+        Line::from("Enter focuses this view; b returns the transfer to the background."),
+    ];
+    if let Some(error) = &job.error {
+        lines.push(Line::from(Span::styled(
+            format!("Error: {error}"),
+            Style::default().fg(RED),
+        )));
     }
+    Text::from(lines)
+}
+
+fn bytes_label(bytes: u64) -> String {
+    const UNITS: [&str; 5] = ["B", "KiB", "MiB", "GiB", "TiB"];
+    let mut value = bytes as f64;
+    let mut unit = 0;
+    while value >= 1024.0 && unit < UNITS.len() - 1 {
+        value /= 1024.0;
+        unit += 1;
+    }
+    format!("{value:.1} {}", UNITS[unit])
 }
 
 fn card<'a>(title: &'a str, text: Text<'a>) -> Paragraph<'a> {
@@ -1048,12 +1178,6 @@ fn worse_health(left: Health, right: Health) -> Health {
     }
 }
 
-fn size_label(bytes: Option<u64>) -> String {
-    bytes
-        .map(|value| format!("{:.1} GiB", gib(value)))
-        .unwrap_or_else(|| "remote size".into())
-}
-
 fn hf_credential() -> Option<auth::HfCredential> {
     auth::resolve_hf_token().ok().flatten()
 }
@@ -1129,11 +1253,5 @@ mod tests {
         assert!(health_rank(Health::Broken) < health_rank(Health::Paused));
         assert!(health_rank(Health::Paused) < health_rank(Health::Missing));
         assert!(health_rank(Health::Missing) < health_rank(Health::Ready));
-    }
-
-    #[test]
-    fn sizes_are_human_readable() {
-        assert_eq!(size_label(Some(1_073_741_824)), "1.0 GiB");
-        assert_eq!(size_label(None), "remote size");
     }
 }
