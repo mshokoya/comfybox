@@ -138,7 +138,17 @@ selects a destination or creates temporary download directories. For unattended
 installs, use `--source gitee` or `--source github`. Failed clones are cleaned and
 retried, with HTTP/1.1 used after the first failure.
 
+Before an interactive model, workflow-dependency, or individual-artifact install,
+ComfyBox asks whether all Hugging Face requests in that install plan should use
+the China mirror (`https://hf-mirror.com`) or official Hugging Face. The selected
+endpoint is applied to metadata checks, sequential and ranged downloads, retries,
+and resumed chunks. Non-Hugging-Face URLs are left unchanged.
+
+For non-interactive runs, configure the endpoint once or export it:
+
 ```bash
+comfybox config set-hf-endpoint https://hf-mirror.com
+# or
 export HF_ENDPOINT=https://hf-mirror.com
 comfybox models install minimax-h3-bf16
 ```
@@ -164,8 +174,8 @@ parent shell's environment, so ComfyBox deliberately does not edit shell startup
 files; the saved credential is global to future ComfyBox runs instead.
 
 The dashboard explicitly reports a missing token. Public repositories remain
-usable; artifacts marked as gated are shown as `TOKEN` and cannot be started until
-the app is relaunched with `HF_TOKEN` set. HTTP 401/403 failures distinguish a
+usable; artifacts marked as gated are shown as `TOKEN` until a token is available.
+HTTP 401/403 failures distinguish a
 missing token from an invalid token or unaccepted repository terms.
 
 ## Resumable model downloads
@@ -230,10 +240,23 @@ The workspace is validated with `cargo check`, strict Clippy, and its test suite
 
 MIT. Upstream models and custom nodes retain their own licenses.
 
+## Create Linux Binary
+
+build ComfyBox:
+```bash
+    cd /Users/msho/Downloads/comfybox-rust
+
+    cargo zigbuild \
+    --release \
+    --target x86_64-unknown-linux-gnu.2.17
+```
+
+The Linux binary will be:
+```bash
+    target/x86_64-unknown-linux-gnu/release/comfybox
+```
 
 ## Download & install
-
-</br>
 
 Use this one-liner to download it, make it executable, and install it globally as comfybox:
 ```bash
@@ -246,8 +269,6 @@ curl -fL --retry 5 --retry-delay 3 \
   && comfybox --version
 ```
 
-</br>
-
 If you're logged in as root on AutoDL, you don't need sudo:
 ```bash
 curl -fL --retry 5 --retry-delay 3 \
@@ -257,8 +278,6 @@ curl -fL --retry 5 --retry-delay 3 \
   && install -m 0755 /tmp/comfybox /usr/local/bin/comfybox \
   && rm -f /tmp/comfybox
 ```
-
-</br>
 
 Then you can run:
 

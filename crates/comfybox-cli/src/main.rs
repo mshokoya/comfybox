@@ -16,7 +16,7 @@ use comfybox_core::{
 use console::style;
 use inquire::{Confirm, MultiSelect, Password, PasswordDisplayMode, Select};
 use serde_json::Value;
-use std::{collections::BTreeSet, fs, io::Read, path::{Path, PathBuf}};
+use std::{collections::BTreeSet, fs, io::{IsTerminal, Read}, path::{Path, PathBuf}};
 use tokio::process::Command;
 
 const BUILTIN_CATALOG: &str = include_str!("../../../assets/catalog/builtin.toml");
@@ -231,6 +231,35 @@ fn choose_comfy_source(source: Option<ComfySourceArg>) -> Result<ComfySource> {
     }
 }
 
+fn download_options(cfg: &AppConfig, force: bool) -> Result<DownloadOptions> {
+    let mut endpoint = cfg
+        .hf_endpoint
+        .clone()
+        .or_else(|| std::env::var("HF_ENDPOINT").ok());
+    if std::io::stdin().is_terminal() && std::io::stdout().is_terminal() {
+        let mirror = "China mirror — https://hf-mirror.com";
+        let official = "Official Hugging Face — https://huggingface.co";
+        let selected = Select::new("Download Hugging Face models and dependencies from", vec![mirror, official])
+            .prompt()?;
+        endpoint = Some(if selected == mirror {
+            "https://hf-mirror.com"
+        } else {
+            "https://huggingface.co"
+        }.to_owned());
+    }
+    println!(
+        "Hugging Face endpoint: {}",
+        endpoint.as_deref().unwrap_or("https://huggingface.co")
+    );
+    Ok(DownloadOptions {
+        parallelism: cfg.download_parallelism,
+        chunk_size_bytes: cfg.chunk_size_bytes,
+        force,
+        hf_endpoint: endpoint,
+        hf_token: auth::hf_token()?,
+    })
+}
+
 fn uninstall_comfy(cfg:&mut AppConfig,yes:bool)->Result<()> {
     let i=configured_instance(cfg)?;
     let confirmed=yes || Confirm::new(&format!("Delete {} and everything inside it?",i.root.display())).with_default(false).prompt()?;
@@ -256,7 +285,7 @@ async fn install_package(root:&Path,cfg:&AppConfig,cat:&Catalog,id:&str,with_dep
     ids.sort(); ids.dedup();
     println!("{}",style(format!("Install plan: {}",p.name)).bold());
     let inv=Inventory{comfy_root:root,catalog:cat}; for id in &ids { let a=cat.artifact(id).unwrap(); println!("  {} {:<42} {}",status_mark(&inv.status(a)),a.name,a.relative_path); }
-    let dm=DownloadManager::new()?; let opts=DownloadOptions{parallelism:cfg.download_parallelism,chunk_size_bytes:cfg.chunk_size_bytes,force,hf_endpoint:cfg.hf_endpoint.clone().or_else(||std::env::var("HF_ENDPOINT").ok()),hf_token:auth::hf_token()?};
+    let dm=DownloadManager::new()?; let opts=download_options(cfg,force)?;
     let mut installed=BTreeSet::new(); for id in &ids { let a=cat.artifact(id).unwrap(); println!("{} {}",style("→").cyan(),a.name); dm.install_artifact(root,a,&opts).await?; installed.insert(id.clone()); }
     let mut node_ids: BTreeSet<String> = p.custom_node_ids.iter().cloned().collect();
     for gid in optional {
@@ -317,7 +346,7 @@ async fn workflows(cmd:WorkflowCommand,cfg:&AppConfig,cat:&Catalog)->Result<()> 
     match cmd {
         WorkflowCommand::List=>{for w in &cat.workflows{println!("{:<28} {}",w.id,w.name)}Ok(())},
         WorkflowCommand::Inspect{id,file}=>{let p=resolve_workflow_path(id.as_deref(),file,cat)?;let r=inspect_workflow(&p,cat)?;print_workflow_inspection(&r);Ok(())},
-        WorkflowCommand::InstallDeps{id,file,force}=>{let p=resolve_workflow_path(id.as_deref(),file,cat)?;let r=inspect_workflow(&p,cat)?;if !r.unresolved_model_filenames.is_empty(){println!("{} unresolved: {:?}",style("warning:").yellow(),r.unresolved_model_filenames)}let dm=DownloadManager::new()?;let opts=DownloadOptions{parallelism:cfg.download_parallelism,chunk_size_bytes:cfg.chunk_size_bytes,force,hf_endpoint:cfg.hf_endpoint.clone().or_else(||std::env::var("HF_ENDPOINT").ok()),hf_token:auth::hf_token()?};for aid in &r.artifact_ids{dm.install_artifact(&i.root,cat.artifact(aid).unwrap(),&opts).await?;}for nid in &r.custom_node_ids{install_custom_node(&i.root,cat,nid).await?;}Ok(())},
+        WorkflowCommand::InstallDeps{id,file,force}=>{let p=resolve_workflow_path(id.as_deref(),file,cat)?;let r=inspect_workflow(&p,cat)?;if !r.unresolved_model_filenames.is_empty(){println!("{} unresolved: {:?}",style("warning:").yellow(),r.unresolved_model_filenames)}let dm=DownloadManager::new()?;let opts=download_options(cfg,force)?;for aid in &r.artifact_ids{dm.install_artifact(&i.root,cat.artifact(aid).unwrap(),&opts).await?;}for nid in &r.custom_node_ids{install_custom_node(&i.root,cat,nid).await?;}Ok(())},
         WorkflowCommand::RemoveDeps{id,file,yes}=>{let p=resolve_workflow_path(id.as_deref(),file,cat)?;let r=inspect_workflow(&p,cat)?;let confirmed=yes||Confirm::new("Remove unshared known workflow dependencies?").with_default(false).prompt()?;if !confirmed{return Ok(())}let state=ManagedState::load()?;for aid in r.artifact_ids{if state.artifact_referenced_elsewhere(&aid,None,None){println!("keep shared {aid}");continue}
         if let Some(a)=cat.artifact(&aid){let f=i.root.join(&a.relative_path);if f.exists(){fs::remove_file(f)?;}}}Ok(())},
         WorkflowCommand::Install{id,with_deps,force}=>{let w=cat.workflow(&id).with_context(||format!("unknown workflow {id}"))?;let dest=i.root.join("user/default/workflows");fs::create_dir_all(&dest)?;let target=dest.join(Path::new(&w.file).file_name().unwrap_or_default());fs::write(&target,bundled_workflow(&id)?)?;println!("{} {}",style("✓ workflow installed").green(),target.display());if with_deps{install_named_workflow_deps(&i.root, &id, cfg, cat, force).await?;}Ok(())}
@@ -327,7 +356,7 @@ async fn workflows(cmd:WorkflowCommand,cfg:&AppConfig,cat:&Catalog)->Result<()> 
 async fn install_named_workflow_deps(root:&Path,id:&str,cfg:&AppConfig,cat:&Catalog,force:bool)->Result<()> {
     let w=cat.workflow(id).with_context(||format!("unknown workflow {id}"))?;
     let dm=DownloadManager::new()?;
-    let opts=DownloadOptions{parallelism:cfg.download_parallelism,chunk_size_bytes:cfg.chunk_size_bytes,force,hf_endpoint:cfg.hf_endpoint.clone().or_else(||std::env::var("HF_ENDPOINT").ok()),hf_token:auth::hf_token()?};
+    let opts=download_options(cfg,force)?;
     for aid in &w.artifact_ids { dm.install_artifact(root,cat.artifact(aid).with_context(||format!("unknown artifact {aid}"))?,&opts).await?; }
     for nid in &w.custom_node_ids { install_custom_node(root,cat,nid).await?; }
     let mut state=ManagedState::load()?;
@@ -489,13 +518,7 @@ async fn execute_dashboard_action(
             let instance = configured_instance(cfg)?;
             let artifact = cat.artifact(&id).with_context(|| format!("unknown artifact {id}"))?;
             let manager = DownloadManager::new()?;
-            let options = DownloadOptions {
-                parallelism: cfg.download_parallelism,
-                chunk_size_bytes: cfg.chunk_size_bytes,
-                force,
-                hf_endpoint: cfg.hf_endpoint.clone().or_else(|| std::env::var("HF_ENDPOINT").ok()),
-                hf_token: auth::hf_token()?,
-            };
+            let options = download_options(cfg, force)?;
             println!("{} {}", style("→").cyan(), artifact.name);
             manager.install_artifact(&instance.root, artifact, &options).await?;
             println!("{} {}", style("✓ installed").green(), artifact.name);
