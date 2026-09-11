@@ -1,0 +1,11 @@
+[[artifacts]]
+id = "my.model"
+name = "My Model"
+url = "https://example.invalid/my-model.safetensors"
+relative_path = "models/diffusion_models/my-model.safetensors"
+
+[[packages]]
+id = "my-model"
+name = "My Model"
+family = "Private"
+primary_artifact_ids = ["my.model"]

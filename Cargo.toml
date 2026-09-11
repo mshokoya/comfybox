@@ -1,0 +1,41 @@
+[workspace]
+members = ["crates/comfybox-core", "crates/comfybox-cli"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+rust-version = "1.85"
+
+[workspace.dependencies]
+anyhow = "1"
+async-trait = "0.1"
+bytes = "1"
+clap = { version = "4.5", features = ["derive"] }
+console = "0.15"
+crossterm = "0.28"
+directories = "6"
+futures = "0.3"
+hex = "0.4"
+indicatif = "0.17"
+inquire = "0.7"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "http2", "json", "stream"] }
+ratatui = "0.29"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+sysinfo = "0.33"
+thiserror = "2"
+tokio = { version = "1", features = ["fs", "io-util", "macros", "process", "rt-multi-thread", "signal", "sync", "time"] }
+toml = "0.8"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+walkdir = "2"
+urlencoding = "2"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true

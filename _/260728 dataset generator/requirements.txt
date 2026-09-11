@@ -1,0 +1,15 @@
+https://github.com/rgthree/rgthree-comfy
+
+https://github.com/city96/ComfyUI-GGUF
+
+https://github.com/kijai/ComfyUI-KJNodes
+
+https://github.com/kijai/ComfyUI-Florence2
+
+https://github.com/yolain/ComfyUI-Easy-Use
+
+https://github.com/cubiq/ComfyUI_FaceAnalysis
+
+https://github.com/geroldmeisinger/ComfyUI-outputlists-combiner
+
+https://github.com/lbouaraba/comfyui-krea2edit
