@@ -276,7 +276,9 @@ impl ComfyManager {
             return Ok(false);
         };
         if !process_looks_like_comfy(proc_, &instance.root) {
-            return Ok(false);
+            bail!(
+                "managed PID {pid_u32} exists but could not be verified as this ComfyUI process; refusing to start a duplicate"
+            )
         }
         Ok(true)
     }
@@ -326,7 +328,25 @@ fn process_looks_like_comfy(p: &sysinfo::Process, root: &Path) -> bool {
         .map(|x| x.to_string_lossy())
         .collect::<Vec<_>>()
         .join(" ");
-    cmd.contains("main.py") && (cmd.contains("ComfyUI") || p.cwd() == Some(root))
+    if !cmd.contains("main.py") {
+        return false;
+    }
+    let absolute_main = root.join("main.py").to_string_lossy().into_owned();
+    if cmd.contains(&absolute_main) {
+        return true;
+    }
+    p.cwd()
+        .is_some_and(|cwd| paths_refer_to_same_location(cwd, root))
+}
+
+fn paths_refer_to_same_location(left: &Path, right: &Path) -> bool {
+    if left == right {
+        return true;
+    }
+    match (fs::canonicalize(left), fs::canonicalize(right)) {
+        (Ok(left), Ok(right)) => left == right,
+        _ => false,
+    }
 }
 
 pub fn configured_instance(cfg: &AppConfig) -> Result<ComfyInstance> {
@@ -344,4 +364,15 @@ pub fn configured_instance(cfg: &AppConfig) -> Result<ComfyInstance> {
         python: find_python(&root),
         root,
     })
+}
+
+#[cfg(test)]
+mod process_tests {
+    use super::paths_refer_to_same_location;
+
+    #[test]
+    fn identical_paths_match_without_canonicalization() {
+        let path = std::path::Path::new("/nonexistent/comfyui");
+        assert!(paths_refer_to_same_location(path, path));
+    }
 }
