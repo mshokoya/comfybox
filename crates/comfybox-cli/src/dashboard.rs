@@ -749,8 +749,8 @@ impl Dashboard<'_> {
             Line::from(vec![
                 label("Python index"),
                 Span::styled(
-                    if self.cfg.pypi_index_url.contains("tuna.tsinghua.edu.cn") {
-                        "China mirror (Tsinghua)"
+                    if self.cfg.pypi_index_url.contains("mirrors.aliyun.com") {
+                        "China mirror (Alibaba Cloud)"
                     } else {
                         "Official PyPI"
                     },

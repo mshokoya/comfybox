@@ -483,7 +483,7 @@ impl DownloadQueue {
                 total_bytes: None,
                 bytes_per_second: 0.0,
                 error: operation.error.clone(),
-                endpoint: None,
+                endpoint: Some(operation.pip_index_url.clone()),
             });
         }
         snapshots
@@ -836,7 +836,7 @@ async fn install_python_dependencies(
     use sha2::{Digest, Sha256};
     tokio::fs::write(
         marker_dir.join("python-deps.sha256"),
-        format!("v6:{}", hex::encode(Sha256::digest(requirements_bytes))),
+        format!("v7:{}", hex::encode(Sha256::digest(requirements_bytes))),
     )
     .await?;
     Ok(())
@@ -900,7 +900,70 @@ async fn ensure_known_node_runtime(
         .args(packages)
         .env_remove("PIP_INDEX_URL");
     run_logged(&mut install, sender).await?;
+    ensure_known_linux_runtime(folder_name, sender).await?;
     run_logged(Command::new(python).arg("-c").arg(import), sender).await
+}
+
+async fn ensure_known_linux_runtime(
+    folder_name: &str,
+    sender: &mpsc::UnboundedSender<QueueEvent>,
+) -> Result<()> {
+    if !cfg!(target_os = "linux")
+        || normalized_node_name(folder_name) != "comfyuioutputlistscombiner"
+        || linux_has_libegl()
+    {
+        return Ok(());
+    }
+    let _ = sender.send(QueueEvent::Log(
+        "[SYSTEM] libEGL.so.1 is missing; installing Debian/Ubuntu package libegl1".into(),
+    ));
+    let mut install = Command::new("apt-get");
+    install
+        .args(["install", "-y", "libegl1"])
+        .env("DEBIAN_FRONTEND", "noninteractive");
+    if run_logged(&mut install, sender).await.is_err() {
+        let _ = sender.send(QueueEvent::Log(
+            "[SYSTEM] Refreshing apt package metadata before retrying libegl1".into(),
+        ));
+        let mut update = Command::new("apt-get");
+        update
+            .arg("update")
+            .env("DEBIAN_FRONTEND", "noninteractive");
+        run_logged(&mut update, sender).await.with_context(
+            || "libEGL.so.1 is missing and apt metadata refresh failed; install `libegl1` manually",
+        )?;
+        let mut retry = Command::new("apt-get");
+        retry
+            .args(["install", "-y", "libegl1"])
+            .env("DEBIAN_FRONTEND", "noninteractive");
+        run_logged(&mut retry, sender).await.with_context(
+            || "libEGL.so.1 is missing; install Debian/Ubuntu package `libegl1` manually",
+        )?;
+    }
+    if !linux_has_libegl() {
+        anyhow::bail!(
+            "installed libegl1 but libEGL.so.1 is still unavailable to the dynamic linker"
+        );
+    }
+    Ok(())
+}
+
+fn linux_has_libegl() -> bool {
+    [
+        "/usr/lib/x86_64-linux-gnu/libEGL.so.1",
+        "/lib/x86_64-linux-gnu/libEGL.so.1",
+        "/usr/lib/aarch64-linux-gnu/libEGL.so.1",
+        "/lib/aarch64-linux-gnu/libEGL.so.1",
+    ]
+    .iter()
+    .any(|path| Path::new(path).exists())
+        || std::process::Command::new("ldconfig")
+            .arg("-p")
+            .output()
+            .is_ok_and(|output| {
+                output.status.success()
+                    && String::from_utf8_lossy(&output.stdout).contains("libEGL.so.1")
+            })
 }
 
 fn known_node_runtime_spec(folder_name: &str) -> Option<(&'static [&'static str], &'static str)> {
@@ -953,7 +1016,7 @@ pub fn python_dependencies_ready(root: &Path) -> bool {
         Err(_) => return false,
     };
     use sha2::{Digest, Sha256};
-    let expected = format!("v6:{}", hex::encode(Sha256::digest(requirements)));
+    let expected = format!("v7:{}", hex::encode(Sha256::digest(requirements)));
     if !fs::read_to_string(root.join(".comfybox/python-deps.sha256"))
         .is_ok_and(|value| value.trim() == expected)
     {

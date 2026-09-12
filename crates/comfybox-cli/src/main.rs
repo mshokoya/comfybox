@@ -55,7 +55,7 @@ const MINIMAX_H3_CHARACTER_SWAP_WORKFLOW: &str =
 const QWEN_2511_FACE_SWAP_WORKFLOW: &str =
     include_str!("../../../assets/workflows/qwen-edit-2511-face-swap.json");
 const PYPI_OFFICIAL: &str = "https://pypi.org/simple";
-const PYPI_TSINGHUA: &str = "https://pypi.tuna.tsinghua.edu.cn/simple";
+const PYPI_ALIBABA: &str = "https://mirrors.aliyun.com/pypi/simple/";
 
 #[derive(Parser, Debug)]
 #[command(
@@ -1058,9 +1058,9 @@ async fn interactive(cfg: &mut AppConfig, cat: &Catalog) -> Result<()> {
 }
 
 fn prompt_pypi_source(current: &str) -> Result<&'static str> {
-    let china = "China mirror (Tsinghua) — faster inside China";
+    let china = "China mirror (Alibaba Cloud) — faster inside China";
     let official = "Official PyPI — pypi.org";
-    let choices = if current == PYPI_TSINGHUA {
+    let choices = if current == PYPI_ALIBABA {
         vec![china, official]
     } else {
         vec![official, china]
@@ -1069,7 +1069,7 @@ fn prompt_pypi_source(current: &str) -> Result<&'static str> {
         .with_help_message("Saved for ComfyBox, pip, ComfyUI, and Node Manager installs")
         .prompt()?;
     Ok(if selected == china {
-        PYPI_TSINGHUA
+        PYPI_ALIBABA
     } else {
         PYPI_OFFICIAL
     })

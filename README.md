@@ -110,7 +110,7 @@ Known workflow-critical runtimes are also verified by importing them with the
 ComfyUI interpreter: `insightface`, `cv2`, and `skia`. Folder matching ignores
 case, hyphens, and underscores so Node Manager folder naming cannot bypass these
 checks.
-Pressing `p` asks whether pip should use official PyPI or the Tsinghua China
+Pressing `p` asks whether pip should use official PyPI or the Alibaba Cloud China
 mirror. The selected URL is applied to the whole background dependency job and
 saved with `pip config set global.index-url` for later installs in that environment.
 The Settings tab shows the active Python index; press `y` there to switch it at
@@ -121,6 +121,8 @@ build. Readiness verifies the same `from insightface.app import FaceAnalysis` im
 used by the node. Custom-node requirement
 failures are isolated and reported individually so one broken pack does not prevent
 the remaining packs, including OutputLists and `skia-python`, from being repaired.
+On Debian/Ubuntu Linux, OutputLists also checks for `libEGL.so.1` and installs the
+`libegl1` system package in the background when required by `skia-python`.
 
 ## Common commands
 
