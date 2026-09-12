@@ -349,6 +349,7 @@ fn pid_looks_like_comfy_from_commands(pid: u32, root: &Path) -> bool {
     let proc_cwd = PathBuf::from(format!("/proc/{pid}/cwd"));
     fs::read_link(proc_cwd).is_ok_and(|cwd| paths_refer_to_same_location(&cwd, root))
         || args.contains(&root.join("main.py").to_string_lossy().into_owned())
+        || command_uses_comfy_python(&args, root)
 }
 
 fn find_python(root: &Path) -> Option<PathBuf> {
@@ -377,8 +378,23 @@ fn process_looks_like_comfy(p: &sysinfo::Process, root: &Path) -> bool {
     if cmd.contains(&absolute_main) {
         return true;
     }
-    p.cwd()
-        .is_some_and(|cwd| paths_refer_to_same_location(cwd, root))
+    command_uses_comfy_python(&cmd, root)
+        || p.cwd()
+            .is_some_and(|cwd| paths_refer_to_same_location(cwd, root))
+}
+
+fn command_uses_comfy_python(command: &str, root: &Path) -> bool {
+    let candidates = if cfg!(windows) {
+        [
+            root.join(".venv/Scripts/python.exe"),
+            root.join("venv/Scripts/python.exe"),
+        ]
+    } else {
+        [root.join(".venv/bin/python"), root.join("venv/bin/python")]
+    };
+    candidates
+        .iter()
+        .any(|python| command.contains(&python.to_string_lossy().into_owned()))
 }
 
 fn paths_refer_to_same_location(left: &Path, right: &Path) -> bool {
@@ -410,11 +426,25 @@ pub fn configured_instance(cfg: &AppConfig) -> Result<ComfyInstance> {
 
 #[cfg(test)]
 mod process_tests {
-    use super::paths_refer_to_same_location;
+    use super::{command_uses_comfy_python, paths_refer_to_same_location};
 
     #[test]
     fn identical_paths_match_without_canonicalization() {
         let path = std::path::Path::new("/nonexistent/comfyui");
         assert!(paths_refer_to_same_location(path, path));
+    }
+
+    #[test]
+    fn relative_main_is_owned_when_it_uses_the_comfy_venv() {
+        let root = std::path::Path::new("/autodl-fs/data/ComfyUI");
+        let command = "/autodl-fs/data/ComfyUI/.venv/bin/python main.py --listen 127.0.0.1 --port 8188 --enable-manager";
+        assert!(command_uses_comfy_python(command, root));
+    }
+
+    #[test]
+    fn another_comfy_install_is_not_owned() {
+        let root = std::path::Path::new("/autodl-fs/data/ComfyUI");
+        let command = "/other/ComfyUI/.venv/bin/python main.py --port 8188";
+        assert!(!command_uses_comfy_python(command, root));
     }
 }

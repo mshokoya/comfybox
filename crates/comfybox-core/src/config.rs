@@ -10,6 +10,8 @@ use std::{
 pub struct AppConfig {
     pub comfy_path: Option<PathBuf>,
     pub hf_endpoint: Option<String>,
+    #[serde(default = "default_pypi_index_url")]
+    pub pypi_index_url: String,
     #[serde(default = "default_parallelism")]
     pub download_parallelism: usize,
     #[serde(default = "default_chunk_size")]
@@ -26,6 +28,9 @@ fn default_chunk_size() -> u64 {
 }
 fn default_concurrent_downloads() -> usize {
     2
+}
+fn default_pypi_index_url() -> String {
+    "https://pypi.org/simple".to_owned()
 }
 
 impl AppConfig {
@@ -55,6 +60,7 @@ impl AppConfig {
                 download_parallelism: default_parallelism(),
                 chunk_size_bytes: default_chunk_size(),
                 max_concurrent_downloads: default_concurrent_downloads(),
+                pypi_index_url: default_pypi_index_url(),
                 ..Default::default()
             });
         }
@@ -69,6 +75,9 @@ impl AppConfig {
         }
         if cfg.max_concurrent_downloads == 0 {
             cfg.max_concurrent_downloads = default_concurrent_downloads();
+        }
+        if cfg.pypi_index_url.is_empty() {
+            cfg.pypi_index_url = default_pypi_index_url();
         }
         Ok(cfg)
     }

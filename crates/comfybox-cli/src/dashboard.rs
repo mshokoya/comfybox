@@ -43,6 +43,7 @@ pub enum DashboardAction {
     InstallComfyUi,
     LocateComfyUi,
     InstallPythonDeps,
+    ConfigurePypi,
     SetHfToken,
     ToggleServer,
     InstallPackage(String),
@@ -745,6 +746,18 @@ impl Dashboard<'_> {
                 )),
             ]),
             Line::from(vec![label("Active now"), Span::raw(active.to_string())]),
+            Line::from(vec![
+                label("Python index"),
+                Span::styled(
+                    if self.cfg.pypi_index_url.contains("tuna.tsinghua.edu.cn") {
+                        "China mirror (Tsinghua)"
+                    } else {
+                        "Official PyPI"
+                    },
+                    Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+                ),
+                Span::raw("  y change"),
+            ]),
             Line::from(""),
             Line::from("Increasing the file limit starts queued downloads immediately."),
             Line::from(
@@ -871,14 +884,14 @@ impl Dashboard<'_> {
                     " ←/→ tabs  ↑/↓ select  Enter watch  x pause  c continue  r retry  q quit "
                         .into()
                 }
-                Section::Settings => " ←/→ tabs  −/+ files  [/] chunks  q quit ".into(),
+                Section::Settings => " ←/→ tabs  −/+ files  [/] chunks  y PyPI  q quit ".into(),
                 _ => " ←/→ tabs  s server  l locate  i install  t token  r refresh  q quit ".into(),
             }
         } else {
             let section_hint = match Section::ALL[self.section] {
                 Section::Models | Section::Workflows => " Enter install ",
                 Section::Downloads => " Enter watch  x pause  c continue  r retry  b background ",
-                Section::Settings => " −/+ files  [/] chunks ",
+                Section::Settings => " −/+ files  [/] chunks  y PyPI source ",
                 _ => "",
             };
             format!(
@@ -933,6 +946,9 @@ impl Dashboard<'_> {
                 }
                 self.queue
                     .record("Python dependency install blocked: install or locate ComfyUI first");
+            }
+            KeyCode::Char('y') if Section::ALL[self.section] == Section::Settings => {
+                return Some(DashboardAction::ConfigurePypi);
             }
             KeyCode::Char('x') if Section::ALL[self.section] == Section::Downloads => {
                 let _ = self.queue.stop(self.download_index);

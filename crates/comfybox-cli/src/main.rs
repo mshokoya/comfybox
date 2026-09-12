@@ -54,6 +54,8 @@ const MINIMAX_H3_CHARACTER_SWAP_WORKFLOW: &str =
     include_str!("../../../assets/workflows/minimax-h3-character-swap-bf16-24to60.json");
 const QWEN_2511_FACE_SWAP_WORKFLOW: &str =
     include_str!("../../../assets/workflows/qwen-edit-2511-face-swap.json");
+const PYPI_OFFICIAL: &str = "https://pypi.org/simple";
+const PYPI_TSINGHUA: &str = "https://pypi.tuna.tsinghua.edu.cn/simple";
 
 #[derive(Parser, Debug)]
 #[command(
@@ -1055,6 +1057,57 @@ async fn interactive(cfg: &mut AppConfig, cat: &Catalog) -> Result<()> {
     }
 }
 
+fn prompt_pypi_source(current: &str) -> Result<&'static str> {
+    let china = "China mirror (Tsinghua) — faster inside China";
+    let official = "Official PyPI — pypi.org";
+    let choices = if current == PYPI_TSINGHUA {
+        vec![china, official]
+    } else {
+        vec![official, china]
+    };
+    let selected = Select::new("Python package source", choices)
+        .with_help_message("Saved for ComfyBox, pip, ComfyUI, and Node Manager installs")
+        .prompt()?;
+    Ok(if selected == china {
+        PYPI_TSINGHUA
+    } else {
+        PYPI_OFFICIAL
+    })
+}
+
+async fn apply_pip_index_to_comfy(cfg: &AppConfig, pip_index_url: &str) -> Result<()> {
+    let Some(root) = cfg.comfy_path.as_deref() else {
+        return Ok(());
+    };
+    let python = if cfg!(windows) {
+        root.join(".venv/Scripts/python.exe")
+    } else {
+        root.join(".venv/bin/python")
+    };
+    if !python.is_file() {
+        return Ok(());
+    }
+    let output = Command::new(&python)
+        .args([
+            "-m",
+            "pip",
+            "config",
+            "set",
+            "global.index-url",
+            pip_index_url,
+        ])
+        .env("PIP_INDEX_URL", pip_index_url)
+        .output()
+        .await?;
+    if !output.status.success() {
+        bail!(
+            "pip configuration failed: {}",
+            String::from_utf8_lossy(&output.stderr).trim()
+        );
+    }
+    Ok(())
+}
+
 async fn execute_dashboard_action(
     action: dashboard::DashboardAction,
     cfg: &mut AppConfig,
@@ -1070,7 +1123,21 @@ async fn execute_dashboard_action(
         }
         dashboard::DashboardAction::InstallPythonDeps => {
             let instance = configured_instance(cfg)?;
-            queue.enqueue_python_deps(&instance.root)
+            let pip_index_url = prompt_pypi_source(&cfg.pypi_index_url)?;
+            cfg.pypi_index_url = pip_index_url.to_owned();
+            cfg.save()?;
+            queue.enqueue_python_deps(&instance.root, pip_index_url)
+        }
+        dashboard::DashboardAction::ConfigurePypi => {
+            let pip_index_url = prompt_pypi_source(&cfg.pypi_index_url)?;
+            cfg.pypi_index_url = pip_index_url.to_owned();
+            cfg.save()?;
+            apply_pip_index_to_comfy(cfg, pip_index_url).await?;
+            println!(
+                "{} {pip_index_url}",
+                style("✓ Python package source set to").green()
+            );
+            Ok(())
         }
         dashboard::DashboardAction::SetHfToken => save_hf_token(false, false),
         dashboard::DashboardAction::ToggleServer => {

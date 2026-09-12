@@ -74,6 +74,7 @@ struct Job {
 
 struct Operation {
     root: PathBuf,
+    pip_index_url: String,
     status: JobStatus,
     error: Option<String>,
     abort: Option<AbortHandle>,
@@ -258,17 +259,20 @@ impl DownloadQueue {
         }
     }
 
-    pub fn enqueue_python_deps(&mut self, root: &Path) -> Result<()> {
+    pub fn enqueue_python_deps(&mut self, root: &Path, pip_index_url: &str) -> Result<()> {
         if !root.join("main.py").is_file() || !root.join("requirements.txt").is_file() {
             anyhow::bail!("install or locate ComfyUI before installing Python dependencies");
         }
         self.python_deps = Some(Operation {
             root: root.to_path_buf(),
+            pip_index_url: pip_index_url.to_owned(),
             status: JobStatus::Queued,
             error: None,
             abort: None,
         });
-        self.log("queued ComfyUI Python dependencies".into());
+        self.log(format!(
+            "queued ComfyUI Python dependencies via {pip_index_url}"
+        ));
         Ok(())
     }
 
@@ -593,11 +597,12 @@ impl DownloadQueue {
             return;
         };
         let root = operation.root.clone();
+        let pip_index_url = operation.pip_index_url.clone();
         let sender = self.sender.clone();
         operation.status = JobStatus::Downloading;
         self.log("started ComfyUI Python dependencies".into());
         let handle = tokio::spawn(async move {
-            let result = install_python_dependencies(&root, &sender)
+            let result = install_python_dependencies(&root, &pip_index_url, &sender)
                 .await
                 .map_err(|error| format!("{error:#}"));
             let _ = sender.send(QueueEvent::OperationFinished(result));
@@ -671,30 +676,29 @@ async fn install_custom_node(
         let _ = tokio::fs::remove_dir(&temporary_base).await;
     }
     let requirements = target.join("requirements.txt");
+    let python = if cfg!(windows) {
+        root.join(".venv/Scripts/python.exe")
+    } else {
+        root.join(".venv/bin/python")
+    };
+    if !python.is_file() {
+        anyhow::bail!("ComfyUI virtual environment is missing; install Python dependencies first");
+    }
     if requirements.is_file() {
-        let python = if cfg!(windows) {
-            root.join(".venv/Scripts/python.exe")
-        } else {
-            root.join(".venv/bin/python")
-        };
-        if !python.is_file() {
-            anyhow::bail!(
-                "ComfyUI virtual environment is missing; install Python dependencies first"
-            );
-        }
         let _ = sender.send(QueueEvent::Log(format!(
             "[PYTHON] Installing requirements for {}",
             node.name
         )));
         install_custom_node_python_requirements(&python, &node.folder_name, &requirements, sender)
             .await?;
-        ensure_known_node_runtime(&python, &node.folder_name, sender).await?;
     }
+    ensure_known_node_runtime(&python, &node.folder_name, sender).await?;
     Ok(())
 }
 
 async fn install_python_dependencies(
     root: &Path,
+    pip_index_url: &str,
     sender: &mpsc::UnboundedSender<QueueEvent>,
 ) -> Result<()> {
     let requirements = root.join("requirements.txt");
@@ -715,6 +719,21 @@ async fn install_python_dependencies(
         )
         .await?;
     }
+    let _ = sender.send(QueueEvent::Log(format!(
+        "[PYTHON] Configuring pip index: {pip_index_url}"
+    )));
+    run_logged(
+        Command::new(&python)
+            .arg("-m")
+            .arg("pip")
+            .arg("config")
+            .arg("set")
+            .arg("global.index-url")
+            .arg(pip_index_url)
+            .env("PIP_INDEX_URL", pip_index_url),
+        sender,
+    )
+    .await?;
     let wheelhouse = root
         .join(".comfybox-tmp")
         .join(format!("pip-{}", uuid::Uuid::new_v4()));
@@ -727,7 +746,8 @@ async fn install_python_dependencies(
             .arg("-r")
             .arg(&requirements)
             .arg("-d")
-            .arg(&wheelhouse),
+            .arg(&wheelhouse)
+            .env("PIP_INDEX_URL", pip_index_url),
         sender,
     )
     .await;
@@ -760,38 +780,42 @@ async fn install_python_dependencies(
             .arg("install")
             .arg("-U")
             .arg("--pre")
-            .arg("comfyui-manager"),
+            .arg("comfyui-manager")
+            .env("PIP_INDEX_URL", pip_index_url),
         sender,
     )
     .await?;
     let custom_nodes = root.join("custom_nodes");
     if custom_nodes.is_dir() {
-        let mut node_requirements = fs::read_dir(&custom_nodes)?
-            .filter_map(|entry| {
-                entry
-                    .ok()
-                    .map(|entry| entry.path().join("requirements.txt"))
-            })
-            .filter(|path| path.is_file())
+        let mut node_folders = fs::read_dir(&custom_nodes)?
+            .filter_map(Result::ok)
+            .filter(|entry| entry.file_type().is_ok_and(|kind| kind.is_dir()))
+            .map(|entry| entry.path())
             .collect::<Vec<_>>();
-        node_requirements.sort();
+        node_folders.sort();
         let mut node_errors = Vec::new();
-        for requirements in node_requirements {
-            let node_name = requirements
-                .parent()
-                .and_then(Path::file_name)
+        for node_folder in node_folders {
+            let node_name = node_folder
+                .file_name()
                 .unwrap_or_default()
                 .to_string_lossy();
-            let _ = sender.send(QueueEvent::Log(format!(
-                "[PYTHON] Installing requirements for {node_name}"
-            )));
-            if let Err(error) =
-                install_custom_node_python_requirements(&python, &node_name, &requirements, sender)
-                    .await
-            {
-                let message = format!("{node_name}: {error:#}");
-                let _ = sender.send(QueueEvent::Log(format!("[PYTHON] FAILED {message}")));
-                node_errors.push(message);
+            let requirements = node_folder.join("requirements.txt");
+            if requirements.is_file() {
+                let _ = sender.send(QueueEvent::Log(format!(
+                    "[PYTHON] Installing requirements for {node_name}"
+                )));
+                if let Err(error) = install_custom_node_python_requirements(
+                    &python,
+                    &node_name,
+                    &requirements,
+                    sender,
+                )
+                .await
+                {
+                    let message = format!("{node_name}: {error:#}");
+                    let _ = sender.send(QueueEvent::Log(format!("[PYTHON] FAILED {message}")));
+                    node_errors.push(message);
+                }
             }
             if let Err(error) = ensure_known_node_runtime(&python, &node_name, sender).await {
                 let message = format!("{node_name} runtime verification: {error:#}");
@@ -812,7 +836,7 @@ async fn install_python_dependencies(
     use sha2::{Digest, Sha256};
     tokio::fs::write(
         marker_dir.join("python-deps.sha256"),
-        format!("v4:{}", hex::encode(Sha256::digest(requirements_bytes))),
+        format!("v6:{}", hex::encode(Sha256::digest(requirements_bytes))),
     )
     .await?;
     Ok(())
@@ -825,7 +849,11 @@ async fn install_custom_node_python_requirements(
     sender: &mpsc::UnboundedSender<QueueEvent>,
 ) -> Result<()> {
     let mut command = Command::new(python);
-    command.arg("-m").arg("pip").arg("install");
+    command
+        .arg("-m")
+        .arg("pip")
+        .arg("install")
+        .env_remove("PIP_INDEX_URL");
     if normalized_node_name(folder_name) == "comfyuifaceanalysis" {
         command.args(["onnxruntime", "insightface", "color_matcher"]);
     } else {
@@ -858,23 +886,39 @@ async fn ensure_known_node_runtime(
     folder_name: &str,
     sender: &mpsc::UnboundedSender<QueueEvent>,
 ) -> Result<()> {
-    let normalized = normalized_node_name(folder_name);
-    let (packages, import): (&[&str], &str) = match normalized.as_str() {
-        "comfyuifaceanalysis" => (
-            &["onnxruntime", "insightface", "color_matcher"],
-            "import insightface",
-        ),
-        "comfyuioutputlistscombiner" => (&["skia-python"], "import skia"),
-        "comfyuieasyuse" => (&["opencv-python-headless"], "import cv2"),
-        _ => return Ok(()),
+    let Some((packages, import)) = known_node_runtime_spec(folder_name) else {
+        return Ok(());
     };
     let _ = sender.send(QueueEvent::Log(format!(
         "[PYTHON] Verifying runtime for {folder_name}"
     )));
     let mut install = Command::new(python);
-    install.arg("-m").arg("pip").arg("install").args(packages);
+    install
+        .arg("-m")
+        .arg("pip")
+        .arg("install")
+        .args(packages)
+        .env_remove("PIP_INDEX_URL");
     run_logged(&mut install, sender).await?;
     run_logged(Command::new(python).arg("-c").arg(import), sender).await
+}
+
+fn known_node_runtime_spec(folder_name: &str) -> Option<(&'static [&'static str], &'static str)> {
+    match normalized_node_name(folder_name).as_str() {
+        "comfyuifaceanalysis" => Some((
+            &[
+                "setuptools",
+                "onnx",
+                "onnxruntime",
+                "insightface==0.7.3",
+                "color_matcher",
+            ],
+            "from insightface.app import FaceAnalysis",
+        )),
+        "comfyuioutputlistscombiner" => Some((&["skia-python"], "import skia")),
+        "comfyuieasyuse" => Some((&["opencv-python-headless"], "import cv2")),
+        _ => None,
+    }
 }
 
 async fn run_logged(
@@ -909,9 +953,34 @@ pub fn python_dependencies_ready(root: &Path) -> bool {
         Err(_) => return false,
     };
     use sha2::{Digest, Sha256};
-    let expected = format!("v4:{}", hex::encode(Sha256::digest(requirements)));
-    fs::read_to_string(root.join(".comfybox/python-deps.sha256"))
+    let expected = format!("v6:{}", hex::encode(Sha256::digest(requirements)));
+    if !fs::read_to_string(root.join(".comfybox/python-deps.sha256"))
         .is_ok_and(|value| value.trim() == expected)
+    {
+        return false;
+    }
+    let python = if cfg!(windows) {
+        root.join(".venv/Scripts/python.exe")
+    } else {
+        root.join(".venv/bin/python")
+    };
+    [
+        "ComfyUI_FaceAnalysis",
+        "ComfyUI-outputlists-combiner",
+        "ComfyUI-Easy-Use",
+    ]
+    .into_iter()
+    .filter(|folder| find_equivalent_node_folder(&root.join("custom_nodes"), folder).is_some())
+    .all(|folder| {
+        let (_, import) = known_node_runtime_spec(folder).expect("known runtime");
+        std::process::Command::new(&python)
+            .arg("-c")
+            .arg(import)
+            .stdout(std::process::Stdio::null())
+            .stderr(std::process::Stdio::null())
+            .status()
+            .is_ok_and(|status| status.success())
+    })
 }
 
 impl Drop for DownloadQueue {
