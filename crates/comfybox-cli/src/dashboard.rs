@@ -751,6 +751,12 @@ impl Dashboard<'_> {
                 Span::styled(
                     if self.cfg.pypi_index_url.contains("mirrors.aliyun.com") {
                         "China mirror (Alibaba Cloud)"
+                    } else if self
+                        .cfg
+                        .pypi_index_url
+                        .contains("pypi.tuna.tsinghua.edu.cn")
+                    {
+                        "China mirror (Tsinghua)"
                     } else {
                         "Official PyPI"
                     },

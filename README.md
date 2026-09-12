@@ -110,8 +110,8 @@ Known workflow-critical runtimes are also verified by importing them with the
 ComfyUI interpreter: `insightface`, `cv2`, and `skia`. Folder matching ignores
 case, hyphens, and underscores so Node Manager folder naming cannot bypass these
 checks.
-Pressing `p` asks whether pip should use official PyPI or the Alibaba Cloud China
-mirror. The selected URL is applied to the whole background dependency job and
+Pressing `p` asks whether pip should use official PyPI, Alibaba Cloud, or the
+Tsinghua University China mirror. The selected URL is applied to the whole background dependency job and
 saved with `pip config set global.index-url` for later installs in that environment.
 The Settings tab shows the active Python index; press `y` there to switch it at
 any time, including for packages subsequently installed by ComfyUI Node Manager.

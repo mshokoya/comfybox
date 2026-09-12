@@ -56,6 +56,7 @@ const QWEN_2511_FACE_SWAP_WORKFLOW: &str =
     include_str!("../../../assets/workflows/qwen-edit-2511-face-swap.json");
 const PYPI_OFFICIAL: &str = "https://pypi.org/simple";
 const PYPI_ALIBABA: &str = "https://mirrors.aliyun.com/pypi/simple/";
+const PYPI_TSINGHUA: &str = "https://pypi.tuna.tsinghua.edu.cn/simple";
 
 #[derive(Parser, Debug)]
 #[command(
@@ -1058,18 +1059,23 @@ async fn interactive(cfg: &mut AppConfig, cat: &Catalog) -> Result<()> {
 }
 
 fn prompt_pypi_source(current: &str) -> Result<&'static str> {
-    let china = "China mirror (Alibaba Cloud) — faster inside China";
+    let alibaba = "China mirror (Alibaba Cloud) — faster inside China";
+    let tsinghua = "China mirror (Tsinghua University)";
     let official = "Official PyPI — pypi.org";
     let choices = if current == PYPI_ALIBABA {
-        vec![china, official]
+        vec![alibaba, tsinghua, official]
+    } else if current == PYPI_TSINGHUA {
+        vec![tsinghua, alibaba, official]
     } else {
-        vec![official, china]
+        vec![official, alibaba, tsinghua]
     };
     let selected = Select::new("Python package source", choices)
         .with_help_message("Saved for ComfyBox, pip, ComfyUI, and Node Manager installs")
         .prompt()?;
-    Ok(if selected == china {
+    Ok(if selected == alibaba {
         PYPI_ALIBABA
+    } else if selected == tsinghua {
+        PYPI_TSINGHUA
     } else {
         PYPI_OFFICIAL
     })

@@ -469,6 +469,13 @@ primary_artifact_ids = ["krea2.turbo.bf16"]
 dependency_artifact_ids = ["krea2.qwen3vl4b.bf16", "qwen.image.vae"]
 
 [[packages]]
+id = "krea2-turbo-int8-convrot"
+name = "Krea 2 Turbo INT8 (ConvRot)"
+family = "Krea 2"
+primary_artifact_ids = ["krea2.turbo.int8-convrot"]
+dependency_artifact_ids = ["krea2.qwen3vl4b.fp8", "qwen.image.vae"]
+
+[[packages]]
 id = "krea2-edit"
 name = "Krea 2 Edit / Identity Edit"
 family = "Krea 2"

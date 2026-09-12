@@ -78,8 +78,6 @@ impl AppConfig {
         }
         if cfg.pypi_index_url.is_empty() {
             cfg.pypi_index_url = default_pypi_index_url();
-        } else if cfg.pypi_index_url.contains("pypi.tuna.tsinghua.edu.cn") {
-            cfg.pypi_index_url = "https://mirrors.aliyun.com/pypi/simple/".to_owned();
         }
         Ok(cfg)
     }
