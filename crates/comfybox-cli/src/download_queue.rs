@@ -869,7 +869,7 @@ fn normalized_node_name(name: &str) -> String {
         .collect()
 }
 
-fn find_equivalent_node_folder(base: &Path, expected: &str) -> Option<PathBuf> {
+pub(crate) fn find_equivalent_node_folder(base: &Path, expected: &str) -> Option<PathBuf> {
     let expected = normalized_node_name(expected);
     fs::read_dir(base)
         .ok()?

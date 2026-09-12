@@ -1115,7 +1115,12 @@ impl Dashboard<'_> {
             let Some(node) = self.catalog.custom_node(id) else {
                 return Health::Broken;
             };
-            if !root.join("custom_nodes").join(&node.folder_name).is_dir() {
+            if crate::download_queue::find_equivalent_node_folder(
+                &root.join("custom_nodes"),
+                &node.folder_name,
+            )
+            .is_none()
+            {
                 return Health::Missing;
             }
         }
