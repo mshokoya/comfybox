@@ -103,6 +103,9 @@ ComfyUI server.
 The dependency job also installs or upgrades the prerelease `comfyui-manager`
 package in ComfyUI's virtual environment. Managed server launches include
 `--enable-manager`, allowing ComfyUI to offer installation of workflow node packs.
+It also scans existing `custom_nodes/*/requirements.txt` files and installs those
+packages into the same virtual environment, repairing nodes that were cloned before
+dependency installation was introduced.
 
 ## Common commands
 

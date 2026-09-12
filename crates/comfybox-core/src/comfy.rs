@@ -224,8 +224,8 @@ impl ComfyManager {
         opts: StartOptions<'_>,
         state: &mut ManagedState,
     ) -> Result<u32> {
-        if state.comfy_pid.is_some() {
-            bail!("ComfyUI already has a managed PID; run status/stop first")
+        if Self::status(instance, state)? {
+            bail!("ComfyUI is already running; stop it before starting another instance")
         }
         let python = instance
             .python
@@ -266,25 +266,30 @@ impl ComfyManager {
     }
 
     pub fn status(instance: &ComfyInstance, state: &mut ManagedState) -> Result<bool> {
-        let Some(pid_u32) = state.comfy_pid else {
-            return Ok(false);
-        };
         let mut sys = System::new();
         sys.refresh_processes(ProcessesToUpdate::All, true);
-        let Some(proc_) = sys.process(Pid::from_u32(pid_u32)) else {
-            state.comfy_pid = None;
-            state.save()?;
-            return Ok(false);
-        };
-        if !process_looks_like_comfy(proc_, &instance.root) {
-            bail!(
-                "managed PID {pid_u32} exists but could not be verified as this ComfyUI process; refusing to start a duplicate"
-            )
+        if let Some(pid_u32) = state.comfy_pid
+            && sys
+                .process(Pid::from_u32(pid_u32))
+                .is_some_and(|process| process_looks_like_comfy(process, &instance.root))
+        {
+            return Ok(true);
         }
-        Ok(true)
+        if let Some(pid) = discover_comfy_pid(&instance.root) {
+            state.comfy_pid = Some(pid);
+            state.save()?;
+            return Ok(true);
+        }
+        if state.comfy_pid.take().is_some() {
+            state.save()?;
+        }
+        Ok(false)
     }
 
     pub fn stop(instance: &ComfyInstance, state: &mut ManagedState) -> Result<()> {
+        if !Self::status(instance, state)? {
+            bail!("no running ComfyUI process found")
+        }
         let Some(pid_u32) = state.comfy_pid else {
             bail!("no managed ComfyUI process")
         };
@@ -308,6 +313,35 @@ impl ComfyManager {
         state.save()?;
         Ok(())
     }
+}
+
+fn discover_comfy_pid(root: &Path) -> Option<u32> {
+    let output = std::process::Command::new("pgrep")
+        .args(["-af", "python.*main.py"])
+        .output()
+        .ok()?;
+    if !output.status.success() {
+        return None;
+    }
+    let listing = String::from_utf8_lossy(&output.stdout);
+    for line in listing.lines() {
+        let pid = line.split_whitespace().next()?.parse::<u32>().ok()?;
+        let ps = std::process::Command::new("ps")
+            .args(["-ww", "-o", "pid=,ppid=,args=", "-p", &pid.to_string()])
+            .output()
+            .ok()?;
+        let args = String::from_utf8_lossy(&ps.stdout);
+        if !args.contains("main.py") {
+            continue;
+        }
+        let proc_cwd = PathBuf::from(format!("/proc/{pid}/cwd"));
+        if fs::read_link(proc_cwd).is_ok_and(|cwd| paths_refer_to_same_location(&cwd, root))
+            || args.contains(&root.join("main.py").to_string_lossy().into_owned())
+        {
+            return Some(pid);
+        }
+    }
+    None
 }
 
 fn find_python(root: &Path) -> Option<PathBuf> {

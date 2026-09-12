@@ -248,7 +248,7 @@ impl DownloadQueue {
             self.log(format!("queued custom-node download {}", node.name));
             tokio::spawn(async move {
                 let name = node.name.clone();
-                let result = install_custom_node(root, node).await;
+                let result = install_custom_node(root, node, &sender).await;
                 let message = match result {
                     Ok(()) => format!("completed custom-node download {name}"),
                     Err(error) => format!("failed custom-node download {name}: {error:#}"),
@@ -650,22 +650,52 @@ impl DownloadQueue {
     }
 }
 
-async fn install_custom_node(root: PathBuf, node: CustomNode) -> Result<()> {
+async fn install_custom_node(
+    root: PathBuf,
+    node: CustomNode,
+    sender: &mpsc::UnboundedSender<QueueEvent>,
+) -> Result<()> {
     let base = root.join("custom_nodes");
     tokio::fs::create_dir_all(&base).await?;
     let target = base.join(&node.folder_name);
-    if target.exists() {
-        return Ok(());
+    if !target.exists() {
+        let temporary_base = base.join(".comfybox-tmp");
+        tokio::fs::create_dir_all(&temporary_base).await?;
+        let temporary = temporary_base.join(format!("{}-{}", node.id, uuid::Uuid::new_v4()));
+        if let Err(error) = ComfyManager::clone_repository(&node.git_url, &temporary).await {
+            let _ = tokio::fs::remove_dir_all(&temporary).await;
+            return Err(error).with_context(|| format!("git clone failed for {}", node.name));
+        }
+        tokio::fs::rename(&temporary, &target).await?;
+        let _ = tokio::fs::remove_dir(&temporary_base).await;
     }
-    let temporary_base = base.join(".comfybox-tmp");
-    tokio::fs::create_dir_all(&temporary_base).await?;
-    let temporary = temporary_base.join(format!("{}-{}", node.id, uuid::Uuid::new_v4()));
-    if let Err(error) = ComfyManager::clone_repository(&node.git_url, &temporary).await {
-        let _ = tokio::fs::remove_dir_all(&temporary).await;
-        return Err(error).with_context(|| format!("git clone failed for {}", node.name));
+    let requirements = target.join("requirements.txt");
+    if requirements.is_file() {
+        let python = if cfg!(windows) {
+            root.join(".venv/Scripts/python.exe")
+        } else {
+            root.join(".venv/bin/python")
+        };
+        if !python.is_file() {
+            anyhow::bail!(
+                "ComfyUI virtual environment is missing; install Python dependencies first"
+            );
+        }
+        let _ = sender.send(QueueEvent::Log(format!(
+            "[PYTHON] Installing requirements for {}",
+            node.name
+        )));
+        run_logged(
+            Command::new(python)
+                .arg("-m")
+                .arg("pip")
+                .arg("install")
+                .arg("-r")
+                .arg(requirements),
+            sender,
+        )
+        .await?;
     }
-    tokio::fs::rename(&temporary, &target).await?;
-    let _ = tokio::fs::remove_dir(&temporary_base).await;
     Ok(())
 }
 
@@ -740,6 +770,38 @@ async fn install_python_dependencies(
         sender,
     )
     .await?;
+    let custom_nodes = root.join("custom_nodes");
+    if custom_nodes.is_dir() {
+        let mut node_requirements = fs::read_dir(&custom_nodes)?
+            .filter_map(|entry| {
+                entry
+                    .ok()
+                    .map(|entry| entry.path().join("requirements.txt"))
+            })
+            .filter(|path| path.is_file())
+            .collect::<Vec<_>>();
+        node_requirements.sort();
+        for requirements in node_requirements {
+            let node_name = requirements
+                .parent()
+                .and_then(Path::file_name)
+                .unwrap_or_default()
+                .to_string_lossy();
+            let _ = sender.send(QueueEvent::Log(format!(
+                "[PYTHON] Installing requirements for {node_name}"
+            )));
+            run_logged(
+                Command::new(&python)
+                    .arg("-m")
+                    .arg("pip")
+                    .arg("install")
+                    .arg("-r")
+                    .arg(&requirements),
+                sender,
+            )
+            .await?;
+        }
+    }
     let marker_dir = root.join(".comfybox");
     tokio::fs::create_dir_all(&marker_dir).await?;
     let requirements_bytes = tokio::fs::read(&requirements).await?;
