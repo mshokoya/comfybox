@@ -300,7 +300,9 @@ impl ComfyManager {
             state.save()?;
             return Ok(());
         };
-        if !process_looks_like_comfy(proc_, &instance.root) {
+        if !process_looks_like_comfy(proc_, &instance.root)
+            && !pid_looks_like_comfy_from_commands(pid_u32, &instance.root)
+        {
             bail!("PID {pid_u32} no longer looks like this ComfyUI process; refusing to kill it")
         }
         let sent = proc_
@@ -326,22 +328,27 @@ fn discover_comfy_pid(root: &Path) -> Option<u32> {
     let listing = String::from_utf8_lossy(&output.stdout);
     for line in listing.lines() {
         let pid = line.split_whitespace().next()?.parse::<u32>().ok()?;
-        let ps = std::process::Command::new("ps")
-            .args(["-ww", "-o", "pid=,ppid=,args=", "-p", &pid.to_string()])
-            .output()
-            .ok()?;
-        let args = String::from_utf8_lossy(&ps.stdout);
-        if !args.contains("main.py") {
-            continue;
-        }
-        let proc_cwd = PathBuf::from(format!("/proc/{pid}/cwd"));
-        if fs::read_link(proc_cwd).is_ok_and(|cwd| paths_refer_to_same_location(&cwd, root))
-            || args.contains(&root.join("main.py").to_string_lossy().into_owned())
-        {
+        if pid_looks_like_comfy_from_commands(pid, root) {
             return Some(pid);
         }
     }
     None
+}
+
+fn pid_looks_like_comfy_from_commands(pid: u32, root: &Path) -> bool {
+    let Ok(ps) = std::process::Command::new("ps")
+        .args(["-ww", "-o", "pid=,ppid=,args=", "-p", &pid.to_string()])
+        .output()
+    else {
+        return false;
+    };
+    let args = String::from_utf8_lossy(&ps.stdout);
+    if !ps.status.success() || !args.contains("main.py") {
+        return false;
+    }
+    let proc_cwd = PathBuf::from(format!("/proc/{pid}/cwd"));
+    fs::read_link(proc_cwd).is_ok_and(|cwd| paths_refer_to_same_location(&cwd, root))
+        || args.contains(&root.join("main.py").to_string_lossy().into_owned())
 }
 
 fn find_python(root: &Path) -> Option<PathBuf> {
