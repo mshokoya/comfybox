@@ -657,7 +657,8 @@ async fn install_custom_node(
 ) -> Result<()> {
     let base = root.join("custom_nodes");
     tokio::fs::create_dir_all(&base).await?;
-    let target = base.join(&node.folder_name);
+    let target = find_equivalent_node_folder(&base, &node.folder_name)
+        .unwrap_or_else(|| base.join(&node.folder_name));
     if !target.exists() {
         let temporary_base = base.join(".comfybox-tmp");
         tokio::fs::create_dir_all(&temporary_base).await?;
@@ -685,16 +686,9 @@ async fn install_custom_node(
             "[PYTHON] Installing requirements for {}",
             node.name
         )));
-        run_logged(
-            Command::new(python)
-                .arg("-m")
-                .arg("pip")
-                .arg("install")
-                .arg("-r")
-                .arg(requirements),
-            sender,
-        )
-        .await?;
+        install_custom_node_python_requirements(&python, &node.folder_name, &requirements, sender)
+            .await?;
+        ensure_known_node_runtime(&python, &node.folder_name, sender).await?;
     }
     Ok(())
 }
@@ -781,6 +775,7 @@ async fn install_python_dependencies(
             .filter(|path| path.is_file())
             .collect::<Vec<_>>();
         node_requirements.sort();
+        let mut node_errors = Vec::new();
         for requirements in node_requirements {
             let node_name = requirements
                 .parent()
@@ -790,16 +785,25 @@ async fn install_python_dependencies(
             let _ = sender.send(QueueEvent::Log(format!(
                 "[PYTHON] Installing requirements for {node_name}"
             )));
-            run_logged(
-                Command::new(&python)
-                    .arg("-m")
-                    .arg("pip")
-                    .arg("install")
-                    .arg("-r")
-                    .arg(&requirements),
-                sender,
-            )
-            .await?;
+            if let Err(error) =
+                install_custom_node_python_requirements(&python, &node_name, &requirements, sender)
+                    .await
+            {
+                let message = format!("{node_name}: {error:#}");
+                let _ = sender.send(QueueEvent::Log(format!("[PYTHON] FAILED {message}")));
+                node_errors.push(message);
+            }
+            if let Err(error) = ensure_known_node_runtime(&python, &node_name, sender).await {
+                let message = format!("{node_name} runtime verification: {error:#}");
+                let _ = sender.send(QueueEvent::Log(format!("[PYTHON] FAILED {message}")));
+                node_errors.push(message);
+            }
+        }
+        if !node_errors.is_empty() {
+            anyhow::bail!(
+                "custom-node dependency failures: {}",
+                node_errors.join("; ")
+            );
         }
     }
     let marker_dir = root.join(".comfybox");
@@ -808,10 +812,69 @@ async fn install_python_dependencies(
     use sha2::{Digest, Sha256};
     tokio::fs::write(
         marker_dir.join("python-deps.sha256"),
-        format!("v2:{}", hex::encode(Sha256::digest(requirements_bytes))),
+        format!("v4:{}", hex::encode(Sha256::digest(requirements_bytes))),
     )
     .await?;
     Ok(())
+}
+
+async fn install_custom_node_python_requirements(
+    python: &Path,
+    folder_name: &str,
+    requirements: &Path,
+    sender: &mpsc::UnboundedSender<QueueEvent>,
+) -> Result<()> {
+    let mut command = Command::new(python);
+    command.arg("-m").arg("pip").arg("install");
+    if normalized_node_name(folder_name) == "comfyuifaceanalysis" {
+        command.args(["onnxruntime", "insightface", "color_matcher"]);
+    } else {
+        command.arg("-r").arg(requirements);
+    }
+    run_logged(&mut command, sender).await
+}
+
+fn normalized_node_name(name: &str) -> String {
+    name.chars()
+        .filter(|character| character.is_ascii_alphanumeric())
+        .flat_map(char::to_lowercase)
+        .collect()
+}
+
+fn find_equivalent_node_folder(base: &Path, expected: &str) -> Option<PathBuf> {
+    let expected = normalized_node_name(expected);
+    fs::read_dir(base)
+        .ok()?
+        .filter_map(Result::ok)
+        .find_map(|entry| {
+            entry.file_type().ok()?.is_dir().then_some(())?;
+            (normalized_node_name(&entry.file_name().to_string_lossy()) == expected)
+                .then(|| entry.path())
+        })
+}
+
+async fn ensure_known_node_runtime(
+    python: &Path,
+    folder_name: &str,
+    sender: &mpsc::UnboundedSender<QueueEvent>,
+) -> Result<()> {
+    let normalized = normalized_node_name(folder_name);
+    let (packages, import): (&[&str], &str) = match normalized.as_str() {
+        "comfyuifaceanalysis" => (
+            &["onnxruntime", "insightface", "color_matcher"],
+            "import insightface",
+        ),
+        "comfyuioutputlistscombiner" => (&["skia-python"], "import skia"),
+        "comfyuieasyuse" => (&["opencv-python-headless"], "import cv2"),
+        _ => return Ok(()),
+    };
+    let _ = sender.send(QueueEvent::Log(format!(
+        "[PYTHON] Verifying runtime for {folder_name}"
+    )));
+    let mut install = Command::new(python);
+    install.arg("-m").arg("pip").arg("install").args(packages);
+    run_logged(&mut install, sender).await?;
+    run_logged(Command::new(python).arg("-c").arg(import), sender).await
 }
 
 async fn run_logged(
@@ -846,7 +909,7 @@ pub fn python_dependencies_ready(root: &Path) -> bool {
         Err(_) => return false,
     };
     use sha2::{Digest, Sha256};
-    let expected = format!("v2:{}", hex::encode(Sha256::digest(requirements)));
+    let expected = format!("v4:{}", hex::encode(Sha256::digest(requirements)));
     fs::read_to_string(root.join(".comfybox/python-deps.sha256"))
         .is_ok_and(|value| value.trim() == expected)
 }

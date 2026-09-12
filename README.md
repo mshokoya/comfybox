@@ -106,6 +106,14 @@ package in ComfyUI's virtual environment. Managed server launches include
 It also scans existing `custom_nodes/*/requirements.txt` files and installs those
 packages into the same virtual environment, repairing nodes that were cloned before
 dependency installation was introduced.
+Known workflow-critical runtimes are also verified by importing them with the
+ComfyUI interpreter: `insightface`, `cv2`, and `skia`. Folder matching ignores
+case, hyphens, and underscores so Node Manager folder naming cannot bypass these
+checks.
+FaceAnalysis uses its supported InsightFace backend (`insightface`, `onnxruntime`,
+and `color_matcher`) instead of forcing a native dlib build. Custom-node requirement
+failures are isolated and reported individually so one broken pack does not prevent
+the remaining packs, including OutputLists and `skia-python`, from being repaired.
 
 ## Common commands
 
