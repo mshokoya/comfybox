@@ -1,0 +1,1086 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "revision": 0,
+  "last_node_id": 320,
+  "last_link_id": 42,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        600,
+        342
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 22
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            31,
+            38
+          ]
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 48,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        100,
+        130
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "title": "Positive",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "famegrid, (An iphone photo:1.3)(detailed skin texture:1.3) Describe the image to create"
+      ]
+    },
+    {
+      "id": 155,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1100,
+        130
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            41
+          ]
+        }
+      ],
+      "title": "Krea 2 filter bypass",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "krea-2/krea2filterbypass3.safetensors",
+        1
+      ]
+    },
+    {
+      "id": 210,
+      "type": "VAELoader",
+      "pos": [
+        100,
+        460
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "Wan2_1_VAE_fp32.safetensors"
+      ]
+    },
+    {
+      "id": 213,
+      "type": "SaveImage",
+      "pos": [
+        100,
+        648
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "famegrid_krea2_ultrareal2"
+      ]
+    },
+    {
+      "id": 232,
+      "type": "EmptyLatentImage",
+      "pos": [
+        100,
+        836
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            33
+          ]
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1440,
+        1920,
+        1
+      ]
+    },
+    {
+      "id": 265,
+      "type": "ClownsharKSampler_Beta",
+      "pos": [
+        2210,
+        130
+      ],
+      "size": [
+        270,
+        418
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "shape": 7,
+          "type": "MODEL",
+          "link": 30
+        },
+        {
+          "name": "positive",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 31
+        },
+        {
+          "name": "negative",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 32
+        },
+        {
+          "name": "latent_image",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 33
+        },
+        {
+          "name": "sigmas",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        },
+        {
+          "name": "guides",
+          "shape": 7,
+          "type": "GUIDES",
+          "link": null
+        },
+        {
+          "name": "options",
+          "shape": 7,
+          "type": "OPTIONS",
+          "link": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            40
+          ]
+        },
+        {
+          "name": "denoised",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "options",
+          "type": "OPTIONS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "RES4LYF",
+        "ver": "46de917234f9fef3f2ab411c41e07aa3c633f4f7",
+        "Node name for S&R": "ClownsharKSampler_Beta"
+      },
+      "widgets_values": [
+        0.5,
+        "multistep/res_2m",
+        "beta57",
+        6,
+        -1,
+        1,
+        5.5,
+        42,
+        "randomize",
+        "standard",
+        true
+      ]
+    },
+    {
+      "id": 271,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        100,
+        1072
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            34
+          ]
+        }
+      ],
+      "title": "Negative",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "cartoon, anime, illustration, painting, drawing, sketch, 3d render, cgi, video game, plastic skin, airbrushed, cartoon eyes, overly smooth skin, doll-like, waxy skin, freckles, blurry, out of focus, low resolution, low quality, jpeg artifacts, oversaturated, overexposed, underexposed, harsh shadows, deformed, disfigured, extra limbs, extra fingers, missing fingers, mutated hands, bad anatomy, asymmetrical eyes, cross-eyed, unnatural pose, stiff pose, mannequin, watermark, text, logo, signature, frame, border, duplicate, cloned face, symmetrical face, perfect symmetry, studio backdrop, plain background, overprocessed, HDR look, glossy filter, beauty filter, smooth skin filter, AI artifacts, uncanny valley"
+      ]
+    },
+    {
+      "id": 272,
+      "type": "CLIPTextEncode",
+      "pos": [
+        600,
+        672
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 35
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            32,
+            39
+          ]
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 274,
+      "type": "ClownsharKSampler_Beta",
+      "pos": [
+        2580,
+        130
+      ],
+      "size": [
+        270,
+        418
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "shape": 7,
+          "type": "MODEL",
+          "link": 37
+        },
+        {
+          "name": "positive",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 38
+        },
+        {
+          "name": "negative",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 39
+        },
+        {
+          "name": "latent_image",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 40
+        },
+        {
+          "name": "sigmas",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        },
+        {
+          "name": "guides",
+          "shape": 7,
+          "type": "GUIDES",
+          "link": null
+        },
+        {
+          "name": "options",
+          "shape": 7,
+          "type": "OPTIONS",
+          "link": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 36
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            23
+          ]
+        },
+        {
+          "name": "denoised",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "options",
+          "type": "OPTIONS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "RES4LYF",
+        "ver": "46de917234f9fef3f2ab411c41e07aa3c633f4f7",
+        "Node name for S&R": "ClownsharKSampler_Beta"
+      },
+      "widgets_values": [
+        0.5,
+        "multistep/deis_3m",
+        "bong_tangent",
+        2,
+        -1,
+        0.2,
+        5.5,
+        42,
+        "randomize",
+        "standard",
+        true
+      ]
+    },
+    {
+      "id": 282,
+      "type": "PrimitiveFloat",
+      "pos": [
+        100,
+        1402
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            29,
+            36
+          ]
+        }
+      ],
+      "title": "CFG",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveFloat"
+      },
+      "widgets_values": [
+        1
+      ]
+    },
+    {
+      "id": 316,
+      "type": "UNETLoader",
+      "pos": [
+        100,
+        1590
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "krea2_raw_bf16.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 317,
+      "type": "CLIPLoader",
+      "pos": [
+        100,
+        1802
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            22,
+            35
+          ]
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_4b_bf16.safetensors",
+        "krea2",
+        "default"
+      ]
+    },
+    {
+      "id": 154,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        630.8075211971876,
+        130
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            27
+          ]
+        }
+      ],
+      "title": "Krea 2 Turbo",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "krea/krea2_turbo_lora_rank_64_bf16.safetensors",
+        0.6
+      ]
+    },
+    {
+      "id": 128,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1613.5886018156289,
+        124.10825357884534
+      ],
+      "size": [
+        326.39243003105184,
+        87.89174642115466
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 41
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            30,
+            37
+          ]
+        }
+      ],
+      "title": "FameGrid UltraReal 2",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "krea-2/famegrid_ultrareal.safetensors",
+        1.35
+      ]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        2950,
+        130
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 23
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            42
+          ]
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 319,
+      "type": "SaveImage",
+      "pos": [
+        3245.445268816754,
+        152.79767851190775
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 42
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 318,
+      "type": "Note",
+      "pos": [
+        1065.310294169227,
+        322.1046510951731
+      ],
+      "size": [
+        495.9217569928046,
+        384.7581008505772
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "███████╗ █████╗ ███╗   ███╗███████╗ ██████╗ ██████╗ ██╗██████╗\n██╔════╝██╔══██╗████╗ ████║██╔════╝██╔════╝ ██╔══██╗██║██╔══██╗\n█████╗  ███████║██╔████╔██║█████╗  ██║  ███╗██████╔╝██║██║  ██║\n██╔══╝  ██╔══██║██║╚██╔╝██║██╔══╝  ██║   ██║██╔══██╗██║██║  ██║\n██║     ██║  ██║██║ ╚═╝ ██║███████╗╚██████╔╝██║  ██║██║██████╔╝\n╚═╝     ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═════╝\n                                                                \n\nUSE THIS MODEL + PRO VERSION ON FAMEGRID.AI\n\nFameGrid is a fully managed AI image-generation platform built for creating\nconsistent characters, professional photoshoots, branded content, and realistic\nvisuals at scale.\n\nTrain private FameGrid character models from your own photos, upload compatible\nSafeTensor models, generate with the FameGrid Pro V1 and Krea 2 pipelines, edit\nimages, upscale results, build complete photoshoots, and access everything through\nthe FameGrid API.\n\nFameGrid manages the underlying AI providers and infrastructure, so you do not\nneed separate API keys or accounts for every service.\n\nExplore FameGrid:\nhttps://famegrid.ai\n\n\nCREATOR STUDIO AI\n==================\n\nCreator Studio is an all-in-one AI production workspace for image generation,\nimage editing, video, audio, upscaling, character training, creative automation,\nreferences, reusable workflows, and production management. 40 Tools total. Yuse yoour own local comfy or state of the art API models.\n\nFameGrid connects directly with Creator Studio through its API, allowing your\nFameGrid Pro models and managed generation infrastructure to become part of a\nlarger end-to-end content-production workflow.\n\nExplore Creator Studio:\nhttps://ultramuse.art/creatorstudio/"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 320,
+      "type": "Note",
+      "pos": [
+        106.44278099195915,
+        -202.7828448311969
+      ],
+      "size": [
+        395.4223575621373,
+        280.69387912167116
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "HOW TO USE THIS WORKFLOW\n\n1. Enter your description in the “Positive” prompt node.\n\n2. Set the desired width and height in “Empty Latent Image.”\n   Keep both dimensions divisible by 16.\n\n3. Adjust the generation controls if needed:\n\n   • FameGrid UltraReal strength: 0.3-1.35 is the recommended starting point (with character lora 0.3-0.7).\n   • Reality Engine strength: 0 is the current FameGrid global setting.\n   • Phase 1: 6 steps for the primary generation.\n   • Phase 2: 2 steps at 0.20 denoise for light refinement.\n   • Change the Phase 1 seed to create a new variation.\n\n4. Click Queue Prompt to generate.\n\nPROMPTING TIPS\n\nStart with a clear central idea, then describe the subject, clothing, action,\nenvironment, lighting, camera angle, framing, and visual style. Do not overload\nthe prompt with unnecessary details—Krea 2 performs well when it has room to\ninterpret the concept.\n\nExample:\n\nA candid waist-up phone photo of a woman standing outside a neighborhood café,\nwearing a faded black leather jacket over a white shirt. Her body faces slightly\naway from the camera while she looks back toward it. Uneven late-afternoon\nsunlight, natural skin texture, imperfect off-center framing, ordinary city\nbackground, realistic unedited smartphone photography.\n\nCHARACTER MODELS\n\nThis version is configured for generation without a character model. To use a\nFameGrid character, add its model-only LoRA after FameGrid UltraReal and connect\nthe character LoRA output to both sampler model inputs.\n\nIMPORTANT\n\nThis workflow requires the Krea 2 model files, FameGrid UltraReal LoRA, supporting\nLoRAs, RES4LYF sampler nodes, and FameGrid finishing nodes used by the official\nFameGrid worker.\n\nGet fully managed generation, private character training, photoshoots, editing,\nupscaling, API access, and FameGrid Pro models at:\n\nhttps://famegrid.ai"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      21,
+      48,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      22,
+      317,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      23,
+      274,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      24,
+      210,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      26,
+      316,
+      0,
+      154,
+      0,
+      "MODEL"
+    ],
+    [
+      27,
+      154,
+      0,
+      155,
+      0,
+      "MODEL"
+    ],
+    [
+      29,
+      282,
+      0,
+      265,
+      7,
+      "FLOAT"
+    ],
+    [
+      30,
+      128,
+      0,
+      265,
+      0,
+      "MODEL"
+    ],
+    [
+      31,
+      6,
+      0,
+      265,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      32,
+      272,
+      0,
+      265,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      33,
+      232,
+      0,
+      265,
+      3,
+      "LATENT"
+    ],
+    [
+      34,
+      271,
+      0,
+      272,
+      1,
+      "STRING"
+    ],
+    [
+      35,
+      317,
+      0,
+      272,
+      0,
+      "CLIP"
+    ],
+    [
+      36,
+      282,
+      0,
+      274,
+      7,
+      "FLOAT"
+    ],
+    [
+      37,
+      128,
+      0,
+      274,
+      0,
+      "MODEL"
+    ],
+    [
+      38,
+      6,
+      0,
+      274,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      39,
+      272,
+      0,
+      274,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      40,
+      265,
+      0,
+      274,
+      3,
+      "LATENT"
+    ],
+    [
+      41,
+      155,
+      0,
+      128,
+      0,
+      "MODEL"
+    ],
+    [
+      42,
+      8,
+      0,
+      319,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "ds": {
+      "scale": 0.6096845605434206,
+      "offset": [
+        790.000651632059,
+        564.7602640359025
+      ]
+    },
+    "frontendVersion": "1.48.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

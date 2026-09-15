@@ -1,0 +1,2269 @@
+"models/diffusion_models/UltraRealistic_FineTune_Project_v4_Q8.gguf", https://huggingface.co/Akalabeth12/Text-to-Image/blob/main/FLUX/Ultra_Real_Fine_Tune_V40.gguf
+"models/diffusion_models/Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf", https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/tree/main/HighNoise
+"models/diffusion_models/Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf", https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/tree/main/LowNoise
+"models/diffusion_models/krea2_turbo_nvfp4.safetensors", https://huggingface.co/Abiray/Krea-2-Turbo-FP8-NVFP4/tree/main
+"models/diffusion_models/qwen-image-Q6_K.gguf", https://huggingface.co/city96/Qwen-Image-gguf/tree/main
+"models/diffusion_models/qwen/qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1.0.safetensors", https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/tree/main
+"models/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors", https://huggingface.co/theunlikely/Qwen-Image-Edit-2509/tree/main
+"models/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors", https://huggingface.co/art1455/Qwen2511/blob/main/qwen_image_edit_2511_fp8mixed.safetensors
+"models/diffusion_models/wan/Wan2_1-InfiniteTalk_Multi_Q8.gguf", https://huggingface.co/Kijai/WanVideo_comfy_GGUF/tree/main/InfiniteTalk
+"models/gapfiller/gapfiller_v1.pt", https://github.com/KernelPanicKitten/ComfyUI-GapFiller
+"models/loras/1GIRL_QWEN_V3.safetensors", https://huggingface.co/BauDevs/Lora_qwen_styles/blob/main/1GIRL_QWEN_V3.safetensors
+- "models/loras/Famegrid_Qwen_14_Finetune_RLSKN-000050.safetensors", https://huggingface.co/msho19/comfybox/blob/main/famegrid-qwen-std-v1.5-realskinfix.safetensors
+"models/loras/Insatgirlv2.3_low.safetensors", https://huggingface.co/msho19/comfybox/blob/main/instara-instagirl-v2.5-low-wan2.2.safetensors
+"models/loras/Instagirlv2.3_high.safetensors", https://huggingface.co/msho19/comfybox/blob/main/instara-Instagirl-v2.5-high-wan2.2.safetensors
+"models/loras/Instamodel_1.safetensors", https://huggingface.co/aufjsufjaujda3/wan/blob/main/Instamodel_1.safetensors
+"models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors", https://huggingface.co/lightx2v/Qwen-Image-Lightning/tree/main/Qwen-Image-Edit-2509
+"models/loras/Qwen-Image-Edit-Lightning-8steps-V1.0.safetensors", https://huggingface.co/lightx2v/Qwen-Image-Lightning/tree/main
+"models/loras/Qwen-Image-Edit-Unblur-Upscale_20.safetensors", https://huggingface.co/prithivMLmods/Qwen-Image-Edit-2511-Unblur-Upscale/tree/main
+"models/loras/Qwen-Image-Lightning-8steps-V2.0.safetensors", https://huggingface.co/lightx2v/Qwen-Image-Lightning/tree/main
+"models/loras/QwenEdit2511/custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32.safetensors", https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/tree/main
+"models/loras/VAE-approx/model.pt", https://huggingface.co/mirroring/civitai_mirror/tree/2af05cb49471f63d6111344e0c754cfbd733e4ac/models/VAE-approx
+"models/loras/Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors", https://huggingface.co/Kijai/WanVideo_comfy/blob/main/Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors
+"models/loras/flux/AprilDan/2000analogcore_v3.safetensors", https://huggingface.co/Thekingbalxd/FLUX.1-dev/blob/bf8d506e8be2eefad3ec39d534eb233c80272369/2000analogcore_v3.safetensors
+"models/loras/flux/MysticXXX-v4.safetensors", https://huggingface.co/model-hub-nd/test3/blob/main/MysticXXX-v4.safetensors
+"models/loras/flux/jun_loras/lenovo.safetensors", [https://huggingface.co/Danrisi/Lenovo_Qwen/blob/main/lenovo.safetensors, https://huggingface.co/msho19/comfybox/blob/main/danrisi-lenovo-krea2.safetensors]
+"models/loras/krea 2/Famegrid Krea 2 Standard Pass 1/Famegrid Standard Krea 2.safetensors", https://huggingface.co/msho19/comfybox/blob/main/famegrid-krea2-standard-v1.safetensors
+"models/loras/krea 2/Kurvy_Krea_2_V1.safetensors", https://huggingface.co/msho19/comfybox/blob/main/famegrid-kurvy-krea2.safetensors
+"models/loras/krea 2/famegrid_spicy.safetensors", https://huggingface.co/msho19/comfybox/blob/main/famegrid-krea2-spicy-v1.safetensors
+"models/loras/flux/may_loras/Samsung_v3.safetensors", danrisi-samsung-fluxklein9b.safetensors
+"models/loras/krea 2/krea2_raw_to_turbo_r256_comfy.safetensors",https://huggingface.co/Kutches/Kr3a/blob/main/krea2_raw_to_turbo_r256_comfy.safetensors
+"models/loras/krea 2/krea2_turbo_lora_rank_64_bf16.safetensors", https://huggingface.co/Comfy-Org/Krea-2/blob/main/loras/krea2_turbo_lora_rank_64_bf16.safetensors
+"models/loras/krea 2/krea2filterbypass3.safetensors", https://huggingface.co/uzumix/krea2filterbypass3.safetensors/blob/main/krea2filterbypass3.safetensors
+"models/loras/krea/krea-detail-enhancer-exp-v2.safetensors", https://huggingface.co/msho19/comfybox/blob/main/reverentelusarca-elusarcas-detail-enhancer-edit-v1-krea2.safetensors
+"models/loras/l3n0v0.safetensors", https://huggingface.co/msho19/comfybox/blob/main/danrisi-lenovo-krea2.safetensors
+"models/loras/qwen-edit-skin.safetensors", https://huggingface.co/tlennon-ie/qwen-edit-skin/tree/main
+"models/loras/samsungcam.safetensors", https://huggingface.co/Danrisi/Qwen-image_SamsungCam_UltraReal/blob/8763417bc74727177601cdba5b30c271b1c37d9a/Samsung.safetensors
+"models/loras/z-image base/famegrid2/2026-02-15_19-33-05-save-6860-70-0.safetensors", https://huggingface.co/msho19/comfybox/blob/main/2026-02-15_19-33-05-save-6860-70-0.safetensors
+"models/loras/z-image base/famegrid5/fmgrd42026-02-17_13-14-24-save-10780-20-0.safetensors", https://huggingface.co/msho19/comfybox/blob/main/fmgrd42026-02-17_13-14-24-save-10780-20-0.safetensors
+"models/loras/z-image/SonyAlpha_ZImage.safetensors", https://huggingface.co/cptsl/SonyAlphaA7/blob/main/SonyAlpha_ZImage.safetensors
+"models/loras/z-image/Subject_Plus_Z_Image_V1.safetensors", https://huggingface.co/msho19/comfybox/blob/main/famegrid-zit-subject-plus-standard.safetensors
+"models/loras/z-image/lenovo_z_000002500.safetensors", https://huggingface.co/msho19/comfybox/blob/main/danrisi-lenovo-krea2.safetensors
+"models/loras/z-image/nicegirls/nicegirls_8k.safetensors", https://huggingface.co/msho19/comfybox/blob/main/danrisi-ultrareal-nicegirls-zit.safetensors
+"models/loras/z-image/subjectplus_vibes_v1.safetensors", https://huggingface.co/msho19/comfybox/blob/main/famegrid-zit-subject-plus-vibes-v1.safetensors
+"models/text_encoders/clip_l.safetensors", [https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors, https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/blob/main/text_encoders/clip_l.safetensors]
+"models/text_encoders/qwen_3_4b.safetensors", https://huggingface.co/Comfy-Org/z_image_turbo/tree/main/split_files/text_encoders
+"models/text_encoders/t5/t5xxl_fp16.safetensors", https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/tree/main/text_encoders
+"models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors", https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/tree/main/split_files/text_encoders
+"models/upscale_models/4xNMKDSuperscale_4xNMKDSuperscale.pt", https://huggingface.co/shubhdotai/upscaler/blob/9b9bfba2a119bee0d175427cadb05283a3ed2fb1/4xNMKDSuperscale_4xNMKDSuperscale.pt
+"models/upscale_models/4xPurePhoto-RealPLSKR.pth", https://huggingface.co/mp3pintyo/upscale/blob/8c80d55cdc2cc831912ece1848429cd3be52f9e1/4xPurePhoto-RealPLSKR.pth
+"models/vae/Wan2_1_VAE_fp32.safetensors", https://huggingface.co/calcuis/wan-gguf/tree/2a7520ea1e79d3f1f3f454a938613235633e1cba
+"models/vae/wan_2.1_vae.safetensors", https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/tree/main/split_files/vae
+"models/vae/z-image.safetensors", https://huggingface.co/Comfy-Org/z_image_turbo/tree/main/split_files/vae
+"runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf", [https://huggingface.co/mradermacher/Qwen2.5-VL-7B-Instruct-abliterated-GGUF/tree/main, https://huggingface.co/wangkanai/qwen2.5-vl-7b-instruct/tree/main]
+"runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf", [https://huggingface.co/mradermacher/Qwen2.5-VL-7B-Instruct-abliterated-GGUF/tree/main, https://huggingface.co/wangkanai/qwen2.5-vl-7b-instruct/tree/main]
+"runtime_models/dw-ll_ucoco_384_bs5.torchscript.pt", https://huggingface.co/hr16/DWPose-TorchScript-BatchSize5/blob/main/dw-ll_ucoco_384_bs5.torchscript.pt
+"runtime_models/seedvr2_ema_3b_fp16.safetensors", https://huggingface.co/numz/SeedVR2_comfyUI/tree/main
+"runtime_models/yolox_l.torchscript.pt", https://huggingface.co/hr16/yolox-onnx/blob/main/yolox_l.torchscript.pt
+
+
+
+
+
+
+
+
+
+
+
+{
+  "schema_version": 2,
+  "generated_from": {
+    "repository": "https://huggingface.co/msho19/comfybox/tree/main",
+    "workflow_count": 43,
+    "generated_at": "2026-09-14"
+  },
+  "workflows": {
+    "Instara-1girl-stand-alone-V3-qwen-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/split_files/diffusion_models/qwen_image_bf16.safetensors",
+        "models/loras/1GIRL_QWEN_V3.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfy-image-saver",
+        "res4lyf"
+      ]
+    },
+    "Instara-1girl_samsung-by-danrisi-v3-qwen-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/split_files/diffusion_models/qwen_image_bf16.safetensors",
+        "models/loras/1GIRL_QWEN_V3.safetensors",
+        "models/loras/samsungcam.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfy-image-saver",
+        "res4lyf",
+        "rgthree-comfy"
+      ]
+    },
+    "comfybox-character-swap-bf16-24to60-minimaxh3-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/minimax_h3_ref2va_bf16.safetensors",
+        "models/gapfiller/gapfiller_v1.pt",
+        "models/text_encoders/qwen3vl_32b_minimax_h3_bf16.safetensors",
+        "models/vae/minimax_h3_audio_vae_fp32.safetensors",
+        "models/vae/minimax_h3_video_vae_fp16.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-gapfiller"
+      ]
+    },
+    "danrisi-ultrareal-flux1dev-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/z_image_turbo_bf16.safetensors",
+        "models/loras/z-image/lenovo_z_000002500.safetensors",
+        "models/loras/z-image/nicegirls/nicegirls_8k.safetensors",
+        "models/text_encoders/qwen_3_4b.safetensors",
+        "models/vae/z-image.safetensors"
+      ],
+      "custom_nodes": [
+        "controlaltai-nodes",
+        "res4lyf"
+      ]
+    },
+    "danrisi-ultrareal-fluxdev-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/UltraRealistic_FineTune_Project_v4_Q8.gguf",
+        "models/loras/flux/AprilDan/2000analogcore_v3.safetensors",
+        "models/loras/flux/MysticXXX-v4.safetensors",
+        "models/loras/flux/jun_loras/lenovo.safetensors",
+        "models/loras/flux/may_loras/GrainScape_UltraReal_v3.safetensors",
+        "models/loras/flux/may_loras/Samsung_v3.safetensors",
+        "models/text_encoders/clip_l.safetensors",
+        "models/text_encoders/t5/t5xxl_fp16.safetensors",
+        "models/upscale_models/4xNMKDSuperscale_4xNMKDSuperscale.pt",
+        "models/vae/FLUX1/ae.safetensors"
+      ],
+      "custom_nodes": [
+        "cg-use-everywhere",
+        "comfyui-gguf",
+        "comfyui-impact-pack",
+        "comfyui_controlaltai_nodes",
+        "comfyui_essentials",
+        "controlaltai-nodes",
+        "rgthree-comfy"
+      ]
+    },
+    "danrisi-ultrareal-nicegirls-zit-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/z_image_turbo_bf16.safetensors",
+        "models/loras/z-image/lenovo_z_000002500.safetensors",
+        "models/loras/z-image/nicegirls/nicegirls_8k.safetensors",
+        "models/text_encoders/qwen_3_4b.safetensors",
+        "models/vae/z-image.safetensors"
+      ],
+      "custom_nodes": [
+        "controlaltai-nodes",
+        "res4lyf"
+      ]
+    },
+    "deepwhiteai-multi-single-angle-batch-gen-qwenedit2511-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+        "models/loras/Qwen-Image-Edit-Lightning-8steps-V1.0.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": []
+    },
+    "falai-360multiangle-qwenedit2511-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+        "models/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+        "models/loras/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": []
+    },
+    "famegrid-krea2-natural-v1-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/krea2_raw_bf16.safetensors",
+        "models/loras/krea-2/famegrid_ultrareal.safetensors",
+        "models/loras/krea-2/krea2filterbypass3.safetensors",
+        "models/loras/krea/krea2_turbo_lora_rank_64_bf16.safetensors",
+        "models/text_encoders/qwen3vl_4b_bf16.safetensors",
+        "models/vae/Wan2_1_VAE_fp32.safetensors"
+      ],
+      "custom_nodes": [
+        "res4lyf"
+      ]
+    },
+    "famegrid-krea2-spicy-v1-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/krea2_raw_bf16.safetensors",
+        "models/loras/krea 2/famegrid_spicy.safetensors",
+        "models/loras/krea 2/krea2_turbo_lora_rank_64_bf16.safetensors",
+        "models/loras/krea 2/krea2filterbypass3.safetensors",
+        "models/text_encoders/qwen3vl_4b_bf16.safetensors",
+        "models/vae/Wan2_1_VAE_fp32.safetensors"
+      ],
+      "custom_nodes": [
+        "res4lyf"
+      ]
+    },
+    "famegrid-krea2-standard-v1-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/diffusion_models/krea2_raw_bf16.safetensors",
+        "models/diffusion_models/nvidia_pid/pid_qwenimage_1024_to_4096_4step_bf16.safetensors",
+        "models/loras/krea 2/Famegrid Krea 2 Standard Pass 1/Famegrid Standard Krea 2.safetensors",
+        "models/text_encoders/nvidia_pid/gemma_2_2b_it_elm_bf16.safetensors",
+        "models/text_encoders/qwen3vl_4b_bf16.safetensors",
+        "models/vae/Wan2_1_VAE_fp32.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-krea2t-enhancer"
+      ]
+    },
+    "famegrid-kurvy-krea2-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/krea2_raw_bf16.safetensors",
+        "models/loras/krea 2/Kurvy_Krea_2_V1.safetensors",
+        "models/loras/krea 2/krea2_raw_to_turbo_r256_comfy.safetensors",
+        "models/loras/krea 2/krea2filterbypass3.safetensors",
+        "models/text_encoders/qwen3vl_4b_bf16.safetensors",
+        "models/vae/Wan2_1_VAE_fp32.safetensors"
+      ],
+      "custom_nodes": [
+        "res4lyf"
+      ]
+    },
+    "famegrid-qwen-std-v1.5-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen-image-Q6_K.gguf",
+        "models/loras/Famegrid_Qwen_14_Finetune_RLSKN-000050.safetensors",
+        "models/loras/Qwen-Image-Lightning-8steps-V2.0.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors",
+        "runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf",
+        "runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf",
+        "runtime_models/seedvr2_ema_3b_fp16.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-aspect-ratio-crop-node",
+        "comfyui-custom-scripts",
+        "comfyui-gguf",
+        "comfyui-imageautotone",
+        "comfyui-inspire-pack",
+        "comfyui-levelpixel-advanced",
+        "comfyui-magickwand",
+        "rgthree-comfy",
+        "seedvr2_videoupscaler",
+        "was-ns"
+      ]
+    },
+    "famegrid-revolution-zib-zit-v1-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/z_image_bf16.safetensors",
+        "models/diffusion_models/z_image_turbo_bf16.safetensors",
+        "models/loras/VAE-approx/model.pt",
+        "models/loras/z-image base/famegrid2/2026-02-15_19-33-05-save-6860-70-0.safetensors",
+        "models/loras/z-image base/famegrid5/fmgrd42026-02-17_13-14-24-save-10780-20-0.safetensors",
+        "models/text_encoders/qwen_3_4b.safetensors",
+        "models/upscale_models/4xPurePhoto-RealPLSKR.pth",
+        "models/vae/zimagebase_ae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-easy-use",
+        "controlaltai-nodes",
+        "res4lyf",
+        "rgthree-comfy"
+      ]
+    },
+    "famegrid-zimage-spicy-v2-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/z_image_bf16.safetensors",
+        "models/diffusion_models/z_image_turbo_bf16.safetensors",
+        "models/loras/VAE-approx/model.pt",
+        "models/loras/famegrid-zimage-spicy-v2/famegrid-zimage-spicy-v2-fp32.safetensors",
+        "models/loras/z-image base/famegrid2/2026-02-15_19-33-05-save-6860-70-0.safetensors",
+        "models/text_encoders/qwen_3_4b.safetensors",
+        "models/upscale_models/4xPurePhoto-RealPLSKR.pth",
+        "models/vae/zimagebase_ae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-easy-use",
+        "controlaltai-nodes",
+        "res4lyf",
+        "rgthree-comfy"
+      ]
+    },
+    "famegrid-zit-subject-plus-standard-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/z_image_turbo_bf16.safetensors",
+        "models/loras/z-image/Subject_Plus_Z_Image_V1.safetensors",
+        "models/text_encoders/qwen_3_4b.safetensors",
+        "models/vae/flux ultra vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-aspect-ratio-crop-node",
+        "comfyui-custom-scripts",
+        "res4lyf"
+      ]
+    },
+    "famegrid-zit-subject-plus-vibes-v1-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/z_image_turbo_bf16.safetensors",
+        "models/loras/z-image/SonyAlpha_ZImage.safetensors",
+        "models/loras/z-image/subjectplus_vibes_v1.safetensors",
+        "models/text_encoders/qwen_3_4b.safetensors",
+        "models/vae/flux ultra vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-aspect-ratio-crop-node",
+        "comfyui-custom-scripts",
+        "comfyui_controlnet_aux",
+        "controlaltai-nodes",
+        "res4lyf"
+      ]
+    },
+    "instara-instagirl-v2.3-wan2.2-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+        "models/diffusion_models/Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+        "models/loras/Insatgirlv2.3_low.safetensors",
+        "models/loras/Instagirlv2.3_high.safetensors",
+        "models/loras/Instamodel_1.safetensors",
+        "models/loras/Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors",
+        "models/loras/l3n0v0.safetensors",
+        "models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "models/vae/wan_2.1_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfy-image-saver",
+        "comfyui-gguf",
+        "comfyui-kjnodes"
+      ]
+    },
+    "instara-instagirl-v2.3-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+        "models/diffusion_models/Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+        "models/loras/Insatgirlv2.3_low.safetensors",
+        "models/loras/Instagirlv2.3_high.safetensors",
+        "models/loras/Instamodel_1.safetensors",
+        "models/loras/Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors",
+        "models/loras/l3n0v0.safetensors",
+        "models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "models/vae/wan_2.1_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfy-image-saver",
+        "comfyui-gguf",
+        "comfyui-kjnodes"
+      ]
+    },
+    "reverentelusarca-elusarcas-detail-enhancer-edit-v1-krea2-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+        "models/diffusion_models/krea2_turbo_nvfp4.safetensors",
+        "models/loras/krea/krea-detail-enhancer-exp-v2.safetensors",
+        "models/loras/krea/krea2_turbo_lora_rank_64_bf16.safetensors",
+        "models/loras/krea/krea2filterbypass3.safetensors",
+        "models/text_encoders/qwen3vl_4b_bf16.safetensors",
+        "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors",
+        "models/vae/wan_2.1_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-workflow-encrypt",
+        "deno-custom-nodes",
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-360angle-vncc-qwenedit2511-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+        "models/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors",
+        "models/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+        "models/loras/next-scene_lora-v2-3000.safetensors",
+        "models/loras/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui_faceanalysis",
+        "rgthree-comfy",
+        "vnccs-utils"
+      ]
+    },
+    "the3minutenode-auto-caption-dataset-workflow.json": {
+      "artifacts": [],
+      "custom_nodes": [
+        "comfyui-florence2"
+      ]
+    },
+    "the3minutenode-basicangles-dataset-qwenedit2509-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+        "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+        "models/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+        "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+        "models/loras/next-scene_lora-v2-3000.safetensors",
+        "models/loras/qwen-edit-skin_1.1_000002750.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-easy-use",
+        "comfyui-outputlists_combiner",
+        "comfyui_faceanalysis",
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-bodyangles-dataset-flux2klein9b-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/flux-2-klein-9b-fp8.safetensors",
+        "models/diffusion_models/flux-2-klein-9b.safetensors",
+        "models/loras/exp/multiple-angles-flux-klein-9b.safetensors",
+        "models/text_encoders/qwen_3_8b_fp8mixed.safetensors",
+        "models/vae/flux2-vae.safetensors",
+        "models/vae/full_encoder_small_decoder.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-easy-use",
+        "comfyui-outputlists_combiner",
+        "comfyui_faceanalysis",
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-bodyangles-dataset-qwenedit2511-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+        "models/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+        "models/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors",
+        "models/loras/next-scene_lora-v2-3000.safetensors",
+        "models/loras/qwen-edit-skin_1.1_000002750.safetensors",
+        "models/loras/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-easy-use",
+        "comfyui-outputlists_combiner",
+        "comfyui_faceanalysis",
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-dg-auto-caption-workflow.json": {
+      "artifacts": [],
+      "custom_nodes": [
+        "comfyui-florence2"
+      ]
+    },
+    "the3minutenode-dg-dataset-generate-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/flux-2-klein-9b-fp8.safetensors",
+        "models/diffusion_models/flux-2-klein-9b.safetensors",
+        "models/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+        "models/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+        "models/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+        "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+        "models/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+        "models/diffusion_models/wan/Wan2_1-InfiniteTalk_Multi_Q8.gguf",
+        "models/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+        "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+        "models/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors",
+        "models/loras/exp/multiple-angles-flux-klein-9b.safetensors",
+        "models/loras/krea2/krea2_identity_edit_v1_2.safetensors",
+        "models/loras/next-scene_lora-v2-3000.safetensors",
+        "models/loras/qwen-edit-skin_1.1_000002750.safetensors",
+        "models/loras/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+        "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/text_encoders/qwen_3_8b_fp8mixed.safetensors",
+        "models/vae/flux2-vae.safetensors",
+        "models/vae/full_encoder_small_decoder.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-easy-use",
+        "comfyui-gguf",
+        "comfyui-krea2edit",
+        "comfyui-outputlists_combiner",
+        "comfyui_faceanalysis",
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-dg-generate-krea2-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+        "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-dg-post-production-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/flux-2-klein-9b-fp8.safetensors",
+        "models/diffusion_models/flux-2-klein-9b.safetensors",
+        "models/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+        "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+        "models/text_encoders/qwen_3_8b_fp8mixed.safetensors",
+        "models/vae/flux2-vae.safetensors",
+        "models/vae/full_encoder_small_decoder.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-face-dataset-qwenedit2509-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+        "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+        "models/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+        "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+        "models/loras/next-scene_lora-v2-3000.safetensors",
+        "models/loras/qwen-edit-skin_1.1_000002750.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-easy-use",
+        "comfyui-outputlists_combiner",
+        "comfyui_faceanalysis",
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-face-swap-flux2-klein-face-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/F2K/flux-2-klein-9b-int8-ConvRot-comfyui.safetensors",
+        "models/loras/Flux2Klein/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors",
+        "models/text_encoders/qwen_3_4b.safetensors",
+        "models/text_encoders/qwen_3_8b_fp8mixed_abliterated.safetensors",
+        "models/vae/flux2-vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-inpaint-cropandstitch",
+        "comfyui-kjnodes",
+        "comfyui-workflow-encrypt",
+        "comfyui_comfyroll_customnodes"
+      ]
+    },
+    "the3minutenode-face-swap-krea2-qwen2511-flux2-klein-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/F2K/flux-2-klein-9b-int8-ConvRot-comfyui.safetensors",
+        "models/diffusion_models/Krea2/krea-2-turbo-fp8.safetensors",
+        "models/diffusion_models/Qwen/qwen_image_edit_2511_int8_convrot.safetensors",
+        "models/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+        "models/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+        "models/loras/Flux2Klein/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors",
+        "models/loras/Krea2/Details/KreaAmateur_V2.safetensors",
+        "models/loras/Krea2/bfs_head_swap_v1.1_krea2.safetensors",
+        "models/loras/Qwen-Image-Lightning-4steps-V1.0.safetensors",
+        "models/loras/QwenEdit2511/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+        "models/loras/QwenEdit2511/Qwen-Image-Edit-F2P.safetensors",
+        "models/loras/QwenEdit2511/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors",
+        "models/loras/QwenEdit2511/custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32.safetensors",
+        "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_int8_convrot.safetensors",
+        "models/text_encoders/qwen_3_4b.safetensors",
+        "models/text_encoders/qwen_3_8b_fp8mixed_abliterated.safetensors",
+        "models/upscale_models/4x-ClearRealityV1.pth",
+        "models/vae/flux2-vae.safetensors",
+        "models/vae/qwen_image_vae.safetensors",
+        "runtime_models/dw-ll_ucoco_384_bs5.torchscript.pt",
+        "runtime_models/yolox_l.torchscript.pt"
+      ],
+      "custom_nodes": [
+        "comfyui-inpaint-cropandstitch",
+        "comfyui-kjnodes",
+        "comfyui-krea2edit",
+        "comfyui-workflow-encrypt",
+        "comfyui_comfyroll_customnodes",
+        "comfyui_controlnet_aux",
+        "comfyui_layerstyle",
+        "masquerade-nodes-comfyui"
+      ]
+    },
+    "the3minutenode-face-swap-krea2-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/Krea2/krea-2-turbo-fp8.safetensors",
+        "models/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+        "models/loras/Krea2/Details/KreaAmateur_V2.safetensors",
+        "models/loras/Krea2/bfs_head_swap_v1.1_krea2.safetensors",
+        "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-kjnodes",
+        "comfyui-krea2edit",
+        "comfyui-workflow-encrypt",
+        "comfyui_comfyroll_customnodes"
+      ]
+    },
+    "the3minutenode-face-swap-qwenedit2511-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/Qwen/qwen_image_edit_2511_int8_convrot.safetensors",
+        "models/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+        "models/loras/Qwen-Image-Lightning-4steps-V1.0.safetensors",
+        "models/loras/QwenEdit2511/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+        "models/loras/QwenEdit2511/Qwen-Image-Edit-F2P.safetensors",
+        "models/loras/QwenEdit2511/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors",
+        "models/loras/QwenEdit2511/custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_int8_convrot.safetensors",
+        "models/upscale_models/4x-ClearRealityV1.pth",
+        "models/vae/qwen_image_vae.safetensors",
+        "runtime_models/dw-ll_ucoco_384_bs5.torchscript.pt",
+        "runtime_models/yolox_l.torchscript.pt"
+      ],
+      "custom_nodes": [
+        "comfyui-kjnodes",
+        "comfyui-workflow-encrypt",
+        "comfyui_comfyroll_customnodes",
+        "comfyui_controlnet_aux",
+        "comfyui_layerstyle",
+        "masquerade-nodes-comfyui"
+      ]
+    },
+    "the3minutenode-generate-krea2-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+        "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-lifestyle-dataset-krea2-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+        "models/loras/krea2/krea2_identity_edit_v1_2.safetensors",
+        "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-easy-use",
+        "comfyui-krea2edit",
+        "comfyui-outputlists_combiner",
+        "comfyui_faceanalysis",
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-lifestyle-dataset-qwenedit2509-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+        "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+        "models/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+        "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+        "models/loras/next-scene_lora-v2-3000.safetensors",
+        "models/loras/qwen-edit-skin_1.1_000002750.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-easy-use",
+        "comfyui-outputlists_combiner",
+        "comfyui_faceanalysis",
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-multiangle-qwenedit2509-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+        "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+        "models/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+        "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+        "models/loras/next-scene_lora-v2-3000.safetensors",
+        "models/loras/qwen-edit-skin_1.1_000002750.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-multiangles-detail-qwenedit2509-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+        "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+        "models/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+        "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+        "models/loras/Qwen-Image-Edit-Unblur-Upscale_20.safetensors",
+        "models/loras/next-scene_lora-v2-3000.safetensors",
+        "models/loras/qwen-edit-skin.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-post-production-dataset-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/flux-2-klein-9b-fp8.safetensors",
+        "models/diffusion_models/flux-2-klein-9b.safetensors",
+        "models/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+        "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+        "models/text_encoders/qwen_3_8b_fp8mixed.safetensors",
+        "models/vae/flux2-vae.safetensors",
+        "models/vae/full_encoder_small_decoder.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "rgthree-comfy"
+      ]
+    },
+    "the3minutenode-prompt-enhancer-gemma4-workflow.json": {
+      "artifacts": [
+        "models/text_encoders/gemma4_e4b_it_fp8_scaled.safetensors"
+      ],
+      "custom_nodes": []
+    },
+    "the3minutenode-refrence-minimaxh3-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/minimax_h3_ref2va_bf16.safetensors",
+        "models/text_encoders/qwen3vl_32b_minimax_h3_bf16.safetensors",
+        "models/vae/minimax_h3_audio_vae_fp32.safetensors",
+        "models/vae/minimax_h3_video_vae_fp16.safetensors"
+      ],
+      "custom_nodes": []
+    },
+    "ukr8b3g201-360multiangle-qwenedit2511-workflow.json": {
+      "artifacts": [
+        "models/diffusion_models/qwen/qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1.0.safetensors",
+        "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+        "models/loras/Qwen/2511/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+        "models/loras/Qwen/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+        "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "models/vae/qwen_image_vae.safetensors"
+      ],
+      "custom_nodes": [
+        "comfyui-qwenmultiangle",
+        "rgthree-comfy"
+      ]
+    }
+  },
+  "artifacts": {
+    "flux_2_klein_9b_int8_convrot_comfyui": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/F2K/flux-2-klein-9b-int8-ConvRot-comfyui.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Sakujo/FLUX.2-Klein-9B-INT8-ConvRot/resolve/main/flux-2-klein-9b-int8-ConvRot-comfyui.safetensors",
+          null
+        ]
+      ]
+    },
+    "krea_2_turbo_fp8": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Krea2/krea-2-turbo-fp8.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_edit_2511_int8_convrot": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Qwen/qwen_image_edit_2511_int8_convrot.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+          null
+        ]
+      ]
+    },
+    "ultrarealistic_finetune_project_v4_q8": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/UltraRealistic_FineTune_Project_v4_Q8.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "wan2_2_t2v_a14b_highnoise_q8_0": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "wan2_2_t2v_a14b_lownoise_q8_0": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "krea2_raw_bf16": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/diffusion_models/krea2_raw_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "flux_2_klein_9b_fp8": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/flux-2-klein-9b-fp8.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/black-forest-labs/FLUX.2-klein-9b-fp8/resolve/main/flux-2-klein-9b-fp8.safetensors",
+          null
+        ]
+      ]
+    },
+    "flux_2_klein_9b": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/flux-2-klein-9b.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/black-forest-labs/FLUX.2-klein-9B/resolve/main/flux-2-klein-9b.safetensors",
+          null
+        ]
+      ]
+    },
+    "models_diffusion_models_krea2_raw_bf16": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_raw_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "krea2_turbo_fp8_scaled": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+          null
+        ]
+      ]
+    },
+    "krea2_turbo_int8_convrot": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+          null
+        ]
+      ]
+    },
+    "krea2_turbo_nvfp4": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_turbo_nvfp4.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "minimax_h3_ref2va_bf16": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_ref2va_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "pid_qwenimage_1024_to_4096_4step_bf16": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/nvidia_pid/pid_qwenimage_1024_to_4096_4step_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/msho19/comfybox/resolve/main/pid_qwenimage_1024_to_4096_4step_bf16.safetensors",
+          "2.72 GB"
+        ]
+      ]
+    },
+    "qwen_image_q6_k": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen-image-Q6_K.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1_0": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen/qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1.0.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen_image_edit_2509_fp8_e4m3fn": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen_image_edit_2509_fp8mixed": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_edit_2511_bf16": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_edit_2511_fp8mixed": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "models_diffusion_models_qwen_image_edit_2511_int8_convrot": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_bf16": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/split_files/diffusion_models/qwen_image_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "wan2_1_infinitetalk_multi_q8": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan/Wan2_1-InfiniteTalk_Multi_Q8.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "z_image_bf16": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/z_image_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/diffusion_models/z_image_bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "z_image_turbo_bf16": {
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/z_image_turbo_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "gapfiller_v1": {
+      "type": "runtime-model",
+      "relative_path": "models/gapfiller/gapfiller_v1.pt",
+      "loader": "GapFillerRetime",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "1girl_qwen_v3": {
+      "type": "loras",
+      "relative_path": "models/loras/1GIRL_QWEN_V3.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "famegrid_qwen_14_finetune_rlskn_000050": {
+      "type": "loras",
+      "relative_path": "models/loras/Famegrid_Qwen_14_Finetune_RLSKN-000050.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "bfs_head_v1_flux_klein_9b_step3500_rank128": {
+      "type": "loras",
+      "relative_path": "models/loras/Flux2Klein/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors",
+          null
+        ]
+      ]
+    },
+    "insatgirlv2_3_low": {
+      "type": "loras",
+      "relative_path": "models/loras/Insatgirlv2.3_low.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "instagirlv2_3_high": {
+      "type": "loras",
+      "relative_path": "models/loras/Instagirlv2.3_high.safetensors",
+      "loader": "LoraLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "instamodel_1": {
+      "type": "loras",
+      "relative_path": "models/loras/Instamodel_1.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "kreaamateur_v2": {
+      "type": "loras",
+      "relative_path": "models/loras/Krea2/Details/KreaAmateur_V2.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://civitai.com/api/download/models/3276982",
+          null
+        ]
+      ]
+    },
+    "bfs_head_swap_v1_1_krea2": {
+      "type": "loras",
+      "relative_path": "models/loras/Krea2/bfs_head_swap_v1.1_krea2.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1.1_krea2.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_edit_2509_multiple_angles": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_edit_2509_lightning_4steps_v1_0_bf16": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen_image_edit_2509_lightning_4steps_v1_0_fp32": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_edit_2511_lightning_4steps_v1_0_bf16": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_edit_2511_lightning_4steps_v1_0_fp32": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_edit_lightning_8steps_v1_0": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-Lightning-8steps-V1.0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen_image_edit_unblur_upscale_20": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-Unblur-Upscale_20.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen_image_lightning_4steps_v1_0": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Lightning-4steps-V1.0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Lightning-4steps-V1.0.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_lightning_8steps_v2_0": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Lightning-8steps-V2.0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen_image_edit_2511_multiple_angles_lora": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen/2511/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA/resolve/main/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+          null
+        ]
+      ]
+    },
+    "models_loras_qwen_qwen_image_edit_2511_lightning_4steps_v1_0_bf16": {
+      "type": "loras",
+      "relative_path": "models/loras/Qwen/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "models_loras_qwenedit2511_qwen_image_edit_2511_lightning_4steps_v1_0_bf16": {
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_edit_f2p": {
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/Qwen-Image-Edit-F2P.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/landon2022/F2P/resolve/main/Qwen-Image-Edit-F2P.safetensors",
+          null
+        ]
+      ]
+    },
+    "bfs_head_v5_2511_merged_version_rank_16_fp16": {
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors",
+          null
+        ]
+      ]
+    },
+    "custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32": {
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "model": {
+      "type": "loras",
+      "relative_path": "models/loras/VAE-approx/model.pt",
+      "loader": "easy loraNames",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "wan21_t2v_14b_lightx2v_cfg_step_distill_lora_rank32": {
+      "type": "loras",
+      "relative_path": "models/loras/Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "multiple_angles_flux_klein_9b": {
+      "type": "loras",
+      "relative_path": "models/loras/exp/multiple-angles-flux-klein-9b.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Alexali/multiple-angles-flux2K/resolve/main/multiple-angles-flux-klein-9b.safetensors",
+          null
+        ]
+      ]
+    },
+    "famegrid_zimage_spicy_v2_fp32": {
+      "type": "loras",
+      "relative_path": "models/loras/famegrid-zimage-spicy-v2/famegrid-zimage-spicy-v2-fp32.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-zimage-spicy-v2-fp32.safetensors",
+          "1.52 GB"
+        ]
+      ]
+    },
+    "2000analogcore_v3": {
+      "type": "loras",
+      "relative_path": "models/loras/flux/AprilDan/2000analogcore_v3.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "mysticxxx_v4": {
+      "type": "loras",
+      "relative_path": "models/loras/flux/MysticXXX-v4.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "lenovo": {
+      "type": "loras",
+      "relative_path": "models/loras/flux/jun_loras/lenovo.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "grainscape_ultrareal_v3": {
+      "type": "loras",
+      "relative_path": "models/loras/flux/may_loras/GrainScape_UltraReal_v3.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "samsung_v3": {
+      "type": "loras",
+      "relative_path": "models/loras/flux/may_loras/Samsung_v3.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "famegrid_standard_krea_2": {
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/Famegrid Krea 2 Standard Pass 1/Famegrid Standard Krea 2.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "kurvy_krea_2_v1": {
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/Kurvy_Krea_2_V1.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "famegrid_spicy": {
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/famegrid_spicy.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "krea2_raw_to_turbo_r256_comfy": {
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/krea2_raw_to_turbo_r256_comfy.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "krea2_turbo_lora_rank_64_bf16": {
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/krea2_turbo_lora_rank_64_bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "krea2filterbypass3": {
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/krea2filterbypass3.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "famegrid_ultrareal": {
+      "type": "loras",
+      "relative_path": "models/loras/krea-2/famegrid_ultrareal.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "models_loras_krea_2_krea2filterbypass3": {
+      "type": "loras",
+      "relative_path": "models/loras/krea-2/krea2filterbypass3.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "krea_detail_enhancer_exp_v2": {
+      "type": "loras",
+      "relative_path": "models/loras/krea/krea-detail-enhancer-exp-v2.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "models_loras_krea_krea2_turbo_lora_rank_64_bf16": {
+      "type": "loras",
+      "relative_path": "models/loras/krea/krea2_turbo_lora_rank_64_bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "models_loras_krea_krea2filterbypass3": {
+      "type": "loras",
+      "relative_path": "models/loras/krea/krea2filterbypass3.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "krea2_identity_edit_v1_2": {
+      "type": "loras",
+      "relative_path": "models/loras/krea2/krea2_identity_edit_v1_2.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2.safetensors",
+          null
+        ]
+      ]
+    },
+    "l3n0v0": {
+      "type": "loras",
+      "relative_path": "models/loras/l3n0v0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "next_scene_lora_v2_3000": {
+      "type": "loras",
+      "relative_path": "models/loras/next-scene_lora-v2-3000.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509/resolve/main/next-scene_lora-v2-3000.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_edit_skin": {
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen_edit_skin_1_1_000002750": {
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_1.1_000002750.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002750.safetensors",
+          null
+        ]
+      ]
+    },
+    "models_loras_qwen_image_edit_2511_multiple_angles_lora": {
+      "type": "loras",
+      "relative_path": "models/loras/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA/resolve/main/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+          null
+        ]
+      ]
+    },
+    "samsungcam": {
+      "type": "loras",
+      "relative_path": "models/loras/samsungcam.safetensors",
+      "loader": "Lora Loader Stack (rgthree)",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "2026_02_15_19_33_05_save_6860_70_0": {
+      "type": "loras",
+      "relative_path": "models/loras/z-image base/famegrid2/2026-02-15_19-33-05-save-6860-70-0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "fmgrd42026_02_17_13_14_24_save_10780_20_0": {
+      "type": "loras",
+      "relative_path": "models/loras/z-image base/famegrid5/fmgrd42026-02-17_13-14-24-save-10780-20-0.safetensors",
+      "loader": "easy loraNames",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "sonyalpha_zimage": {
+      "type": "loras",
+      "relative_path": "models/loras/z-image/SonyAlpha_ZImage.safetensors",
+      "loader": "LoraLoader|pysssss",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "subject_plus_z_image_v1": {
+      "type": "loras",
+      "relative_path": "models/loras/z-image/Subject_Plus_Z_Image_V1.safetensors",
+      "loader": "LoraLoader|pysssss",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "lenovo_z_000002500": {
+      "type": "loras",
+      "relative_path": "models/loras/z-image/lenovo_z_000002500.safetensors",
+      "loader": "LoraLoaderZImage",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "nicegirls_8k": {
+      "type": "loras",
+      "relative_path": "models/loras/z-image/nicegirls/nicegirls_8k.safetensors",
+      "loader": "LoraLoaderZImage",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "subjectplus_vibes_v1": {
+      "type": "loras",
+      "relative_path": "models/loras/z-image/subjectplus_vibes_v1.safetensors",
+      "loader": "LoraLoader|pysssss",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "clip_l": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/clip_l.safetensors",
+      "loader": "DualCLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "gemma4_e4b_it_fp8_scaled": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/gemma4_e4b_it_fp8_scaled.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e4b_it_fp8_scaled.safetensors",
+          null
+        ]
+      ]
+    },
+    "gemma_2_2b_it_elm_bf16": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/nvidia_pid/gemma_2_2b_it_elm_bf16.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/msho19/comfybox/resolve/main/gemma_2_2b_it_elm_bf16.safetensors",
+          "5.23 GB"
+        ]
+      ]
+    },
+    "qwen3vl_32b_minimax_h3_bf16": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/qwen3vl_32b_minimax_h3_bf16.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_bf16.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen3vl_4b_bf16": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/qwen3vl_4b_bf16.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/msho19/comfybox/resolve/main/qwen3vl_4b_bf16.safetensors",
+          "8.88 GB"
+        ]
+      ]
+    },
+    "qwen3vl_4b_fp8_scaled": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_2_5_vl_7b": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/qwen_2.5_vl_7b.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_2_5_vl_7b_fp8_scaled": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_2_5_vl_7b_int8_convrot": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/qwen_2.5_vl_7b_int8_convrot.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/supermind/int8_convrot_models/resolve/main/text_encoders/qwen_2.5_vl_7b_int8_convrot.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_3_4b": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/qwen_3_4b.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen_3_8b_fp8mixed": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/qwen_3_8b_fp8mixed.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/flux2-klein-9B/resolve/main/split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_3_8b_fp8mixed_abliterated": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/qwen_3_8b_fp8mixed_abliterated.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/edicamargo/qwen_3_8b_fp8mixed_abliterated/resolve/main/qwen_3_8b_fp8mixed_abliterated.safetensors",
+          null
+        ]
+      ]
+    },
+    "t5xxl_fp16": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/t5/t5xxl_fp16.safetensors",
+      "loader": "DualCLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "umt5_xxl_fp8_e4m3fn_scaled": {
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "loader": "CLIPLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "4x_clearrealityv1": {
+      "type": "upscale_models",
+      "relative_path": "models/upscale_models/4x-ClearRealityV1.pth",
+      "loader": "UpscaleModelLoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/SimonJoz/comfy/resolve/main/upscalers/4x-ClearRealityV1.pth",
+          null
+        ]
+      ]
+    },
+    "4xnmkdsuperscale_4xnmkdsuperscale": {
+      "type": "upscale_models",
+      "relative_path": "models/upscale_models/4xNMKDSuperscale_4xNMKDSuperscale.pt",
+      "loader": "UpscaleModelLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "4xpurephoto_realplskr": {
+      "type": "upscale_models",
+      "relative_path": "models/upscale_models/4xPurePhoto-RealPLSKR.pth",
+      "loader": "UpscaleModelLoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "ae": {
+      "type": "vae",
+      "relative_path": "models/vae/FLUX1/ae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors",
+          null
+        ]
+      ]
+    },
+    "wan2_1_vae_fp32": {
+      "type": "vae",
+      "relative_path": "models/vae/Wan2_1_VAE_fp32.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "flux_ultra_vae": {
+      "type": "vae",
+      "relative_path": "models/vae/flux ultra vae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "flux2_vae": {
+      "type": "vae",
+      "relative_path": "models/vae/flux2-vae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/vae/flux2-vae.safetensors",
+          null
+        ]
+      ]
+    },
+    "full_encoder_small_decoder": {
+      "type": "vae",
+      "relative_path": "models/vae/full_encoder_small_decoder.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/full_encoder_small_decoder.safetensors",
+          null
+        ]
+      ]
+    },
+    "minimax_h3_audio_vae_fp32": {
+      "type": "vae",
+      "relative_path": "models/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+          null
+        ]
+      ]
+    },
+    "minimax_h3_video_vae_fp16": {
+      "type": "vae",
+      "relative_path": "models/vae/minimax_h3_video_vae_fp16.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+          null
+        ]
+      ]
+    },
+    "qwen_image_vae": {
+      "type": "vae",
+      "relative_path": "models/vae/qwen_image_vae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [
+        [
+          "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors",
+          null
+        ]
+      ]
+    },
+    "wan_2_1_vae": {
+      "type": "vae",
+      "relative_path": "models/vae/wan_2.1_vae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "z_image": {
+      "type": "vae",
+      "relative_path": "models/vae/z-image.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "zimagebase_ae": {
+      "type": "vae",
+      "relative_path": "models/vae/zimagebase_ae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen2_5_vl_7b_instruct_abliterated_q5_k_m": {
+      "type": "runtime-model",
+      "relative_path": "runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf",
+      "loader": "MultimodalGeneratorAdvanced|LP",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "qwen2_5_vl_7b_instruct_abliterated_mmproj_q8_0": {
+      "type": "runtime-model",
+      "relative_path": "runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf",
+      "loader": "MultimodalGeneratorAdvanced|LP",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "dw_ll_ucoco_384_bs5_torchscript": {
+      "type": "runtime-model",
+      "relative_path": "runtime_models/dw-ll_ucoco_384_bs5.torchscript.pt",
+      "loader": "DWPreprocessor",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "seedvr2_ema_3b_fp16": {
+      "type": "runtime-model",
+      "relative_path": "runtime_models/seedvr2_ema_3b_fp16.safetensors",
+      "loader": "SeedVR2",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    },
+    "yolox_l_torchscript": {
+      "type": "runtime-model",
+      "relative_path": "runtime_models/yolox_l.torchscript.pt",
+      "loader": "DWPreprocessor",
+      "compatibility": "workflow-referenced",
+      "source": [],
+      "status": "source-unresolved"
+    }
+  },
+  "custom_nodes": [
+    {
+      "id": "cg-use-everywhere",
+      "aliases": [
+        "cg-use-everywhere"
+      ],
+      "repository": "https://github.com/chrisgoringe/cg-use-everywhere",
+      "commit_sha": null
+    },
+    {
+      "id": "comfy-image-saver",
+      "aliases": [
+        "comfy-image-saver"
+      ],
+      "repository": "https://github.com/giriss/comfy-image-saver",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-aspect-ratio-crop-node",
+      "aliases": [
+        "comfyui-aspect-ratio-crop-node"
+      ],
+      "repository": null,
+      "commit_sha": null,
+      "status": "registry-unresolved"
+    },
+    {
+      "id": "comfyui-custom-scripts",
+      "aliases": [
+        "comfyui-custom-scripts"
+      ],
+      "repository": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-easy-use",
+      "aliases": [
+        "comfyui-easy-use"
+      ],
+      "repository": "https://github.com/yolain/ComfyUI-Easy-Use",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-florence2",
+      "aliases": [
+        "comfyui-florence2"
+      ],
+      "repository": "https://github.com/kijai/ComfyUI-Florence2",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-gapfiller",
+      "aliases": [
+        "ComfyUI-GapFiller"
+      ],
+      "repository": "https://github.com/KernelPanicKitten/ComfyUI-GapFiller",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-gguf",
+      "aliases": [
+        "ComfyUI-GGUF",
+        "comfyui-gguf"
+      ],
+      "repository": "https://github.com/city96/ComfyUI-GGUF",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-imageautotone",
+      "aliases": [
+        "comfyui-imageautotone"
+      ],
+      "repository": "https://github.com/SparknightLLC/ComfyUI-ImageAutotone",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-impact-pack",
+      "aliases": [
+        "comfyui-impact-pack"
+      ],
+      "repository": "https://github.com/ltdrdata/ComfyUI-Impact-Pack",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-inpaint-cropandstitch",
+      "aliases": [
+        "comfyui-inpaint-cropandstitch"
+      ],
+      "repository": "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-inspire-pack",
+      "aliases": [
+        "comfyui-inspire-pack"
+      ],
+      "repository": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-kjnodes",
+      "aliases": [
+        "comfyui-kjnodes"
+      ],
+      "repository": "https://github.com/kijai/ComfyUI-KJNodes",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-krea2edit",
+      "aliases": [
+        "comfyui-krea2edit"
+      ],
+      "repository": "https://github.com/lbouaraba/comfyui-krea2edit",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-krea2t-enhancer",
+      "aliases": [
+        "ComfyUI-Krea2T-Enhancer"
+      ],
+      "repository": "https://github.com/capitan01R/ComfyUI-Krea2T-Enhancer",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-levelpixel-advanced",
+      "aliases": [
+        "comfyui-levelpixel-advanced"
+      ],
+      "repository": "https://github.com/LevelPixel/ComfyUI-LevelPixel-Advanced",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-magickwand",
+      "aliases": [
+        "comfyui-magickwand"
+      ],
+      "repository": "https://github.com/Fannovel16/ComfyUI-MagickWand",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-outputlists_combiner",
+      "aliases": [
+        "comfyui-outputlists_combiner"
+      ],
+      "repository": "https://github.com/geroldmeisinger/ComfyUI-outputlists-combiner",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-qwenmultiangle",
+      "aliases": [
+        "comfyui-qwenmultiangle"
+      ],
+      "repository": "https://github.com/jtydhr88/ComfyUI-qwenmultiangle",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui-workflow-encrypt",
+      "aliases": [
+        "comfyui-workflow-encrypt"
+      ],
+      "repository": "https://github.com/jtydhr88/ComfyUI-Workflow-Encrypt",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui_comfyroll_customnodes",
+      "aliases": [
+        "ComfyUI_Comfyroll_CustomNodes"
+      ],
+      "repository": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui_controlaltai_nodes",
+      "aliases": [
+        "comfyui_controlaltai_nodes"
+      ],
+      "repository": null,
+      "commit_sha": null,
+      "status": "registry-unresolved"
+    },
+    {
+      "id": "comfyui_controlnet_aux",
+      "aliases": [
+        "comfyui_controlnet_aux"
+      ],
+      "repository": "https://github.com/Fannovel16/comfyui_controlnet_aux",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui_essentials",
+      "aliases": [
+        "comfyui_essentials"
+      ],
+      "repository": "https://github.com/cubiq/ComfyUI_essentials",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui_faceanalysis",
+      "aliases": [
+        "comfyui_faceanalysis"
+      ],
+      "repository": "https://github.com/cubiq/ComfyUI_FaceAnalysis",
+      "commit_sha": null
+    },
+    {
+      "id": "comfyui_layerstyle",
+      "aliases": [
+        "comfyui_layerstyle"
+      ],
+      "repository": "https://github.com/chflame163/ComfyUI_LayerStyle",
+      "commit_sha": null
+    },
+    {
+      "id": "controlaltai-nodes",
+      "aliases": [
+        "controlaltai-nodes"
+      ],
+      "repository": "https://github.com/gseth/ControlAltAI-Nodes",
+      "commit_sha": null
+    },
+    {
+      "id": "deno-custom-nodes",
+      "aliases": [
+        "deno-custom-nodes"
+      ],
+      "repository": "https://github.com/Deno2026/comfyui-deno-custom-nodes",
+      "commit_sha": null
+    },
+    {
+      "id": "masquerade-nodes-comfyui",
+      "aliases": [
+        "masquerade-nodes-comfyui"
+      ],
+      "repository": "https://github.com/BadCafeCode/masquerade-nodes-comfyui",
+      "commit_sha": null
+    },
+    {
+      "id": "res4lyf",
+      "aliases": [
+        "RES4LYF",
+        "res4lyf"
+      ],
+      "repository": "https://github.com/ClownsharkBatwing/RES4LYF",
+      "commit_sha": null
+    },
+    {
+      "id": "rgthree-comfy",
+      "aliases": [
+        "rgthree-comfy"
+      ],
+      "repository": "https://github.com/rgthree/rgthree-comfy",
+      "commit_sha": null
+    },
+    {
+      "id": "seedvr2_videoupscaler",
+      "aliases": [
+        "seedvr2_videoupscaler"
+      ],
+      "repository": "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler",
+      "commit_sha": null
+    },
+    {
+      "id": "vnccs-utils",
+      "aliases": [
+        "vnccs-utils"
+      ],
+      "repository": "https://github.com/AHEKOT/ComfyUI_VNCCS_Utils",
+      "commit_sha": null
+    },
+    {
+      "id": "was-ns",
+      "aliases": [
+        "was-ns"
+      ],
+      "repository": "https://github.com/ltdrdata/was-node-suite-comfyui",
+      "commit_sha": null
+    }
+  ],
+  "python_dependencies": {
+    "environment": "ComfyUI/.venv",
+    "custom_node_requirements": "Install each pinned custom node requirements.txt; consolidate into requirements.lock after compatibility testing."
+  },
+  "system_dependencies": {
+    "linux": [
+      {
+        "id": "libegl",
+        "debian_package": "libegl1",
+        "required_by": [
+          "skia-python",
+          "ComfyUI-outputlists-combiner"
+        ],
+        "detect": "ldconfig -p contains libEGL.so.1",
+        "install_debian": "apt-get install -y libegl1"
+      },
+      {
+        "id": "ffmpeg",
+        "debian_package": "ffmpeg",
+        "required_by": [
+          "ComfyUI-VideoHelperSuite",
+          "video loading and saving"
+        ],
+        "detect": "ffmpeg -version",
+        "install_debian": "apt-get install -y ffmpeg"
+      }
+    ]
+  },
+  "unresolved_artifacts": [
+    "models/diffusion_models/UltraRealistic_FineTune_Project_v4_Q8.gguf",
+    "models/diffusion_models/Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+    "models/diffusion_models/Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+    "models/diffusion_models/krea2_turbo_nvfp4.safetensors",
+    "models/diffusion_models/qwen-image-Q6_K.gguf",
+    "models/diffusion_models/qwen/qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1.0.safetensors",
+    "models/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+    "models/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors",
+    "models/diffusion_models/wan/Wan2_1-InfiniteTalk_Multi_Q8.gguf",
+    "models/gapfiller/gapfiller_v1.pt",
+    "models/loras/1GIRL_QWEN_V3.safetensors",
+    "models/loras/Famegrid_Qwen_14_Finetune_RLSKN-000050.safetensors",
+    "models/loras/Insatgirlv2.3_low.safetensors",
+    "models/loras/Instagirlv2.3_high.safetensors",
+    "models/loras/Instamodel_1.safetensors",
+    "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+    "models/loras/Qwen-Image-Edit-Lightning-8steps-V1.0.safetensors",
+    "models/loras/Qwen-Image-Edit-Unblur-Upscale_20.safetensors",
+    "models/loras/Qwen-Image-Lightning-8steps-V2.0.safetensors",
+    "models/loras/QwenEdit2511/custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32.safetensors",
+    "models/loras/VAE-approx/model.pt",
+    "models/loras/Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors",
+    "models/loras/flux/AprilDan/2000analogcore_v3.safetensors",
+    "models/loras/flux/MysticXXX-v4.safetensors",
+    "models/loras/flux/jun_loras/lenovo.safetensors",
+    "models/loras/flux/may_loras/GrainScape_UltraReal_v3.safetensors",
+    "models/loras/flux/may_loras/Samsung_v3.safetensors",
+    "models/loras/krea 2/Famegrid Krea 2 Standard Pass 1/Famegrid Standard Krea 2.safetensors",
+    "models/loras/krea 2/Kurvy_Krea_2_V1.safetensors",
+    "models/loras/krea 2/famegrid_spicy.safetensors",
+    "models/loras/krea 2/krea2_raw_to_turbo_r256_comfy.safetensors",
+    "models/loras/krea 2/krea2_turbo_lora_rank_64_bf16.safetensors",
+    "models/loras/krea 2/krea2filterbypass3.safetensors",
+    "models/loras/krea-2/famegrid_ultrareal.safetensors",
+    "models/loras/krea-2/krea2filterbypass3.safetensors",
+    "models/loras/krea/krea-detail-enhancer-exp-v2.safetensors",
+    "models/loras/krea/krea2_turbo_lora_rank_64_bf16.safetensors",
+    "models/loras/krea/krea2filterbypass3.safetensors",
+    "models/loras/l3n0v0.safetensors",
+    "models/loras/qwen-edit-skin.safetensors",
+    "models/loras/samsungcam.safetensors",
+    "models/loras/z-image base/famegrid2/2026-02-15_19-33-05-save-6860-70-0.safetensors",
+    "models/loras/z-image base/famegrid5/fmgrd42026-02-17_13-14-24-save-10780-20-0.safetensors",
+    "models/loras/z-image/SonyAlpha_ZImage.safetensors",
+    "models/loras/z-image/Subject_Plus_Z_Image_V1.safetensors",
+    "models/loras/z-image/lenovo_z_000002500.safetensors",
+    "models/loras/z-image/nicegirls/nicegirls_8k.safetensors",
+    "models/loras/z-image/subjectplus_vibes_v1.safetensors",
+    "models/text_encoders/clip_l.safetensors",
+    "models/text_encoders/qwen_3_4b.safetensors",
+    "models/text_encoders/t5/t5xxl_fp16.safetensors",
+    "models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+    "models/upscale_models/4xNMKDSuperscale_4xNMKDSuperscale.pt",
+    "models/upscale_models/4xPurePhoto-RealPLSKR.pth",
+    "models/vae/Wan2_1_VAE_fp32.safetensors",
+    "models/vae/flux ultra vae.safetensors",
+    "models/vae/wan_2.1_vae.safetensors",
+    "models/vae/z-image.safetensors",
+    "models/vae/zimagebase_ae.safetensors",
+    "runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf",
+    "runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf",
+    "runtime_models/dw-ll_ucoco_384_bs5.torchscript.pt",
+    "runtime_models/seedvr2_ema_3b_fp16.safetensors",
+    "runtime_models/yolox_l.torchscript.pt"
+  ]
+}

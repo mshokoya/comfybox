@@ -1,8 +1,0 @@
-Turn the camera to a close-up.
-Rotate the camera 45 degrees to the right.
-Turn the camera to an aerial view.
-Rotate the camera 45 degrees to the left.
-Turn the camera to a wide-angle lens.
-Rotate the camera 90 degrees to the right.
-Turn the camera to a low-angle view.
-Rotate the camera 90 degrees to the left.

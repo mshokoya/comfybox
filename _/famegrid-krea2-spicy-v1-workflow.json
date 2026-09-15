@@ -1,0 +1,1066 @@
+{
+  "id": "1ef780d2-ab24-47ca-8b6f-bc8eb2573ce6",
+  "revision": 0,
+  "last_node_id": 340,
+  "last_link_id": 45,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        600,
+        342
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 24
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            34,
+            41
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        2950,
+        130
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 25
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "VAEDecode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 210,
+      "type": "VAELoader",
+      "pos": [
+        100,
+        460
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "VAELoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "Wan2_1_VAE_fp32.safetensors"
+      ]
+    },
+    {
+      "id": 213,
+      "type": "SaveImage",
+      "pos": [
+        3486.675390625,
+        130
+      ],
+      "size": [
+        270,
+        270
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "SaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "famegrid_v2"
+      ]
+    },
+    {
+      "id": 265,
+      "type": "ClownsharKSampler_Beta",
+      "pos": [
+        2210,
+        130
+      ],
+      "size": [
+        270,
+        418
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "shape": 7,
+          "type": "MODEL",
+          "link": 33
+        },
+        {
+          "name": "positive",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 34
+        },
+        {
+          "name": "negative",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 35
+        },
+        {
+          "name": "latent_image",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 36
+        },
+        {
+          "name": "sigmas",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        },
+        {
+          "name": "guides",
+          "shape": 7,
+          "type": "GUIDES",
+          "link": null
+        },
+        {
+          "name": "options",
+          "shape": 7,
+          "type": "OPTIONS",
+          "link": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 32
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            43
+          ]
+        },
+        {
+          "name": "denoised",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "options",
+          "type": "OPTIONS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "RES4LYF",
+        "ver": "46de917234f9fef3f2ab411c41e07aa3c633f4f7",
+        "Node name for S&R": "ClownsharKSampler_Beta",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        0.5,
+        "multistep/res_2m",
+        "beta57",
+        6,
+        -1,
+        1,
+        5.5,
+        110857715882672,
+        "randomize",
+        "standard",
+        true
+      ]
+    },
+    {
+      "id": 271,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        100,
+        884
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            37
+          ]
+        }
+      ],
+      "title": "Negative",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveStringMultiline",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "cartoon, anime, illustration, painting, drawing, sketch, 3d render, cgi, video game, plastic skin, airbrushed, cartoon eyes, overly smooth skin, doll-like, waxy skin, freckles, blurry, out of focus, low resolution, low quality, jpeg artifacts, oversaturated, overexposed, underexposed, harsh shadows, deformed, disfigured, extra limbs, extra fingers, missing fingers, mutated hands, bad anatomy, asymmetrical eyes, cross-eyed, unnatural pose, stiff pose, mannequin, watermark, text, logo, signature, frame, border, duplicate, cloned face, symmetrical face, perfect symmetry, studio backdrop, plain background, overprocessed, HDR look, glossy filter, beauty filter, smooth skin filter, AI artifacts, uncanny valley"
+      ]
+    },
+    {
+      "id": 272,
+      "type": "CLIPTextEncode",
+      "pos": [
+        600,
+        672
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 38
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 37
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            35,
+            42
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 274,
+      "type": "ClownsharKSampler_Beta",
+      "pos": [
+        2580,
+        130
+      ],
+      "size": [
+        270,
+        418
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "shape": 7,
+          "type": "MODEL",
+          "link": 40
+        },
+        {
+          "name": "positive",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 41
+        },
+        {
+          "name": "negative",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 42
+        },
+        {
+          "name": "latent_image",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 43
+        },
+        {
+          "name": "sigmas",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        },
+        {
+          "name": "guides",
+          "shape": 7,
+          "type": "GUIDES",
+          "link": null
+        },
+        {
+          "name": "options",
+          "shape": 7,
+          "type": "OPTIONS",
+          "link": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 39
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            25
+          ]
+        },
+        {
+          "name": "denoised",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "options",
+          "type": "OPTIONS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "RES4LYF",
+        "ver": "46de917234f9fef3f2ab411c41e07aa3c633f4f7",
+        "Node name for S&R": "ClownsharKSampler_Beta",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        0.5,
+        "multistep/deis_3m",
+        "bong_tangent",
+        2,
+        -1,
+        0.2,
+        5.5,
+        705966085882731,
+        "randomize",
+        "standard",
+        true
+      ]
+    },
+    {
+      "id": 282,
+      "type": "PrimitiveFloat",
+      "pos": [
+        100,
+        1214
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            32,
+            39
+          ]
+        }
+      ],
+      "title": "CFG",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveFloat",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        1
+      ]
+    },
+    {
+      "id": 316,
+      "type": "UNETLoader",
+      "pos": [
+        100,
+        1402
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "UNETLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "krea2_raw_bf16.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 317,
+      "type": "CLIPLoader",
+      "pos": [
+        100,
+        1614
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            24,
+            38
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "CLIPLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "qwen3vl_4b_bf16.safetensors",
+        "krea2",
+        "default"
+      ]
+    },
+    {
+      "id": 340,
+      "type": "FameGridColorFinish",
+      "pos": [
+        3190,
+        131.24447054832635
+      ],
+      "size": [
+        249.7564453125,
+        26
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 44
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            31
+          ]
+        }
+      ],
+      "title": "FameGrid color and detail finish",
+      "properties": {
+        "Node name for S&R": "FameGridColorFinish",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 154,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        600,
+        130
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            29
+          ]
+        }
+      ],
+      "title": "Krea 2 Turbo",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "krea 2\\krea2_turbo_lora_rank_64_bf16.safetensors",
+        0.6
+      ]
+    },
+    {
+      "id": 155,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1100,
+        130
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            45
+          ]
+        }
+      ],
+      "title": "Krea 2 filter bypass",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "krea 2\\krea2filterbypass3.safetensors",
+        1
+      ]
+    },
+    {
+      "id": 128,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1840,
+        130
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 45
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            33,
+            40
+          ]
+        }
+      ],
+      "title": "FameGrid Spicy · strength 1.0",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "krea 2\\famegrid_spicy.safetensors",
+        1
+      ]
+    },
+    {
+      "id": 48,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        100,
+        130
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "title": "Positive",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveStringMultiline",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "famegrid, Photorealistic vertical smartphone mirror selfie of a very beautiful White Eastern European woman in her early 20s with large breasts, big breasts, wide hips, narrow waist, big butt, cute face, curvy build, no tattoos, and seductive glam makeup; preserve facial identity, preserve body features and proportions. She has a chin-length red bob/lob haircut, detailed realistic skin texture with visible pores, natural fine facial texture, subtle under-eye texture, and natural tonal variation, not over-smoothed. She stands slightly right of center in a narrow practical bathroom, framed medium-full from the upper head to upper thighs, lower legs cropped at the bottom. Facing the mirror with a relaxed asymmetrical stance, shoulders subtly angled and hips gently leaned, she raises one arm to hold a glossy coral-red smartphone vertically at face height, close to the mirror, obscuring most of her upper face just off-center; clearly visible rear camera lenses and flash module. Her other arm hangs naturally at her side with a relaxed hand near her upper thigh. One visible eye, defined with bold winged eyeliner, gazes toward the phone screen through the mirror; her partly visible mouth is neutral to faintly pursed, conveying composed, self-aware, casually posed confidence and intimate unpretentious outfit-check energy. She wears a fitted dark forest-green sleeveless camisole tank with narrow pale shoulder straps visible beneath, naturally wrinkled across the midsection, loose medium-blue low-rise denim jeans, and a black leather belt with a dark metal buckle, with a delicate pendant necklace resting at the upper chest and a simple dark elastic wristband on the raised wrist. Large square muted gray-green marble-effect ceramic tiles with pale grout grid fill much of the left wall, including a blue rectangular wall switch plate at waist height; a cropped white-framed mirror cabinet or window fixture appears at upper left, while a plain cream-beige recessed-panel door with a small round metallic knob stands behind her on the right, with a partially cropped dark bathroom bin or fixture at lower left. Retain faint mirror smudges, tiny streaks, scattered specks, and imperfect glass reflections across the lower torso and jeans. Warm overhead household bathroom illumination, mildly direct and even, with subtle tile sheen, restrained glossy highlights on the coral phone case, and a mild cast shadow on the beige door; warm-neutral white balance with faint yellow indoor cast and cooler gray-green tile reflections. Standard smartphone rear camera through mirror, moderately wide mobile lens, straight-on face-height perspective with a slight downward tilt toward torso and jeans, slight edge stretching and raised-hand enlargement, deep depth of field, moderate flattened smartphone contrast, mild JPEG compression, slight digital noise, subtle uneven mobile HDR tone mapping, fine detail gently softened, controlled highlights and open shadows. Avoid saturated colors, natural colors only, no cinematic grading, no studio polish, no beauty retouching, no artificial bokeh, no text, captions, logos, watermarks, interface elements, or graphic overlays. Remove and do not render any text overlays, captions, subtitles, graphic overlays, logos, watermarks, badges, stickers, borders, frames, interface chrome, app controls, buttons, icons, counters, notification elements, or other UI elements from the inspiration image; reconstruct the underlying scene naturally where they appeared. Avoid saturated colors; natural colors only; photorealistic. Include detailed skin texture with visible pores, natural skin tone variation, and realistic surface detail. (An iPhone photo:1.3)(detailed skin texture:1.3)"
+      ]
+    },
+    {
+      "id": 232,
+      "type": "EmptyLatentImage",
+      "pos": [
+        100,
+        648
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            36
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "EmptyLatentImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        1200,
+        1600,
+        1
+      ]
+    }
+  ],
+  "links": [
+    [
+      23,
+      48,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      24,
+      317,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      25,
+      274,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      26,
+      210,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      28,
+      316,
+      0,
+      154,
+      0,
+      "MODEL"
+    ],
+    [
+      29,
+      154,
+      0,
+      155,
+      0,
+      "MODEL"
+    ],
+    [
+      31,
+      340,
+      0,
+      213,
+      0,
+      "IMAGE"
+    ],
+    [
+      32,
+      282,
+      0,
+      265,
+      7,
+      "FLOAT"
+    ],
+    [
+      33,
+      128,
+      0,
+      265,
+      0,
+      "MODEL"
+    ],
+    [
+      34,
+      6,
+      0,
+      265,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      35,
+      272,
+      0,
+      265,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      36,
+      232,
+      0,
+      265,
+      3,
+      "LATENT"
+    ],
+    [
+      37,
+      271,
+      0,
+      272,
+      1,
+      "STRING"
+    ],
+    [
+      38,
+      317,
+      0,
+      272,
+      0,
+      "CLIP"
+    ],
+    [
+      39,
+      282,
+      0,
+      274,
+      7,
+      "FLOAT"
+    ],
+    [
+      40,
+      128,
+      0,
+      274,
+      0,
+      "MODEL"
+    ],
+    [
+      41,
+      6,
+      0,
+      274,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      42,
+      272,
+      0,
+      274,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      43,
+      265,
+      0,
+      274,
+      3,
+      "LATENT"
+    ],
+    [
+      44,
+      8,
+      0,
+      340,
+      0,
+      "IMAGE"
+    ],
+    [
+      45,
+      155,
+      0,
+      128,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "ds": {
+      "scale": 0.803554572942589,
+      "offset": [
+        -2194.2785755773816,
+        132.1711715172943
+      ]
+    },
+    "links_added_by_ue": [],
+    "frontendVersion": "1.48.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

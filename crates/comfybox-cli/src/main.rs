@@ -26,34 +26,44 @@ use std::{
 use tokio::process::Command;
 
 const BUILTIN_CATALOG: &str = include_str!("../../../assets/catalog/builtin.toml");
-const MINIMAX_WORKFLOW: &str = include_str!("../../../assets/workflows/minimax-h3-reference.json");
-const DATASET_QWEN_2509_BASIC_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/dataset-qwen-edit-2509-basic-angles.json");
-const DATASET_QWEN_2509_FACE_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/dataset-qwen-edit-2509-face.json");
-const DATASET_QWEN_2509_LIFESTYLE_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/dataset-qwen-edit-2509-lifestyle.json");
-const DATASET_QWEN_2511_BODY_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/dataset-qwen-edit-2511-body-angles.json");
-const DATASET_FLUX2_KLEIN_BODY_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/dataset-flux2-klein-9b-body-angles.json");
+const MINIMAX_WORKFLOW: &str =
+    include_str!("../../../assets/workflows/the3minutenode-refrence-minimaxh3-workflow.json");
+const DATASET_QWEN_2509_BASIC_WORKFLOW: &str = include_str!(
+    "../../../assets/workflows/the3minutenode-basicangles-dataset-qwenedit2509-workflow.json"
+);
+const DATASET_QWEN_2509_FACE_WORKFLOW: &str = include_str!(
+    "../../../assets/workflows/the3minutenode-face-dataset-qwenedit2509-workflow.json"
+);
+const DATASET_QWEN_2509_LIFESTYLE_WORKFLOW: &str = include_str!(
+    "../../../assets/workflows/the3minutenode-lifestyle-dataset-qwenedit2509-workflow.json"
+);
+const DATASET_QWEN_2511_BODY_WORKFLOW: &str = include_str!(
+    "../../../assets/workflows/the3minutenode-bodyangles-dataset-qwenedit2511-workflow.json"
+);
+const DATASET_FLUX2_KLEIN_BODY_WORKFLOW: &str = include_str!(
+    "../../../assets/workflows/the3minutenode-bodyangles-dataset-flux2klein9b-workflow.json"
+);
 const DATASET_KREA2_LIFESTYLE_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/dataset-krea2-lifestyle.json");
+    include_str!("../../../assets/workflows/the3minutenode-lifestyle-dataset-krea2-workflow.json");
 const DATASET_POST_PRODUCTION_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/dataset-post-production.json");
+    include_str!("../../../assets/workflows/the3minutenode-post-production-dataset-workflow.json");
 const DATASET_AUTO_CAPTION_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/dataset-auto-caption.json");
-const KREA2_GENERATE_WORKFLOW: &str = include_str!("../../../assets/workflows/krea2-generate.json");
-const FACE_SWAP_COMPARISON_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/face-swap-krea2-qwen2511-flux2-klein.json");
-const FLUX2_KLEIN_FACE_SWAP_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/flux2-klein-face-swap.json");
+    include_str!("../../../assets/workflows/the3minutenode-auto-caption-dataset-workflow.json");
+const KREA2_GENERATE_WORKFLOW: &str =
+    include_str!("../../../assets/workflows/the3minutenode-generate-krea2-workflow.json");
+const FACE_SWAP_COMPARISON_WORKFLOW: &str = include_str!(
+    "../../../assets/workflows/the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow.json"
+);
+const FLUX2_KLEIN_FACE_SWAP_WORKFLOW: &str = include_str!(
+    "../../../assets/workflows/the3minutenode-face-swap-flux2-klein-face-workflow.json"
+);
 const KREA2_FACE_SWAP_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/krea2-face-swap.json");
-const MINIMAX_H3_CHARACTER_SWAP_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/minimax-h3-character-swap-bf16-24to60.json");
+    include_str!("../../../assets/workflows/the3minutenode-face-swap-krea2-workflow.json");
+const MINIMAX_H3_CHARACTER_SWAP_WORKFLOW: &str = include_str!(
+    "../../../assets/workflows/comfybox-character-swap-bf16-24to60-minimaxh3-workflow.json"
+);
 const QWEN_2511_FACE_SWAP_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/qwen-edit-2511-face-swap.json");
+    include_str!("../../../assets/workflows/the3minutenode-face-swap-qwenedit2511-workflow.json");
 const PYPI_OFFICIAL: &str = "https://pypi.org/simple";
 const PYPI_ALIBABA: &str = "https://mirrors.aliyun.com/pypi/simple/";
 const PYPI_TSINGHUA: &str = "https://pypi.tuna.tsinghua.edu.cn/simple";
@@ -900,21 +910,33 @@ fn resolve_workflow_path(
 }
 fn bundled_workflow(id: &str) -> Result<&'static str> {
     match id {
-        "minimax-h3-reference" => Ok(MINIMAX_WORKFLOW),
-        "dataset-qwen-edit-2509-basic-angles" => Ok(DATASET_QWEN_2509_BASIC_WORKFLOW),
-        "dataset-qwen-edit-2509-face" => Ok(DATASET_QWEN_2509_FACE_WORKFLOW),
-        "dataset-qwen-edit-2509-lifestyle" => Ok(DATASET_QWEN_2509_LIFESTYLE_WORKFLOW),
-        "dataset-qwen-edit-2511-body-angles" => Ok(DATASET_QWEN_2511_BODY_WORKFLOW),
-        "dataset-flux2-klein-9b-body-angles" => Ok(DATASET_FLUX2_KLEIN_BODY_WORKFLOW),
-        "dataset-krea2-lifestyle" => Ok(DATASET_KREA2_LIFESTYLE_WORKFLOW),
-        "dataset-post-production" => Ok(DATASET_POST_PRODUCTION_WORKFLOW),
-        "dataset-auto-caption" => Ok(DATASET_AUTO_CAPTION_WORKFLOW),
-        "krea2-generate" => Ok(KREA2_GENERATE_WORKFLOW),
-        "face-swap-krea2-qwen2511-flux2-klein" => Ok(FACE_SWAP_COMPARISON_WORKFLOW),
-        "flux2-klein-face-swap" => Ok(FLUX2_KLEIN_FACE_SWAP_WORKFLOW),
-        "krea2-face-swap" => Ok(KREA2_FACE_SWAP_WORKFLOW),
-        "minimax-h3-character-swap-bf16-24to60" => Ok(MINIMAX_H3_CHARACTER_SWAP_WORKFLOW),
-        "qwen-edit-2511-face-swap" => Ok(QWEN_2511_FACE_SWAP_WORKFLOW),
+        "the3minutenode-refrence-minimaxh3-workflow" => Ok(MINIMAX_WORKFLOW),
+        "the3minutenode-basicangles-dataset-qwenedit2509-workflow" => {
+            Ok(DATASET_QWEN_2509_BASIC_WORKFLOW)
+        }
+        "the3minutenode-face-dataset-qwenedit2509-workflow" => Ok(DATASET_QWEN_2509_FACE_WORKFLOW),
+        "the3minutenode-lifestyle-dataset-qwenedit2509-workflow" => {
+            Ok(DATASET_QWEN_2509_LIFESTYLE_WORKFLOW)
+        }
+        "the3minutenode-bodyangles-dataset-qwenedit2511-workflow" => {
+            Ok(DATASET_QWEN_2511_BODY_WORKFLOW)
+        }
+        "the3minutenode-bodyangles-dataset-flux2klein9b-workflow" => {
+            Ok(DATASET_FLUX2_KLEIN_BODY_WORKFLOW)
+        }
+        "the3minutenode-lifestyle-dataset-krea2-workflow" => Ok(DATASET_KREA2_LIFESTYLE_WORKFLOW),
+        "the3minutenode-post-production-dataset-workflow" => Ok(DATASET_POST_PRODUCTION_WORKFLOW),
+        "the3minutenode-auto-caption-dataset-workflow" => Ok(DATASET_AUTO_CAPTION_WORKFLOW),
+        "the3minutenode-generate-krea2-workflow" => Ok(KREA2_GENERATE_WORKFLOW),
+        "the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow" => {
+            Ok(FACE_SWAP_COMPARISON_WORKFLOW)
+        }
+        "the3minutenode-face-swap-flux2-klein-face-workflow" => Ok(FLUX2_KLEIN_FACE_SWAP_WORKFLOW),
+        "the3minutenode-face-swap-krea2-workflow" => Ok(KREA2_FACE_SWAP_WORKFLOW),
+        "comfybox-character-swap-bf16-24to60-minimaxh3-workflow" => {
+            Ok(MINIMAX_H3_CHARACTER_SWAP_WORKFLOW)
+        }
+        "the3minutenode-face-swap-qwenedit2511-workflow" => Ok(QWEN_2511_FACE_SWAP_WORKFLOW),
         _ => bail!("workflow {id} is cataloged but not bundled in this build"),
     }
 }

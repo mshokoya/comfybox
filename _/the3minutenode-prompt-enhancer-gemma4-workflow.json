@@ -1,0 +1,520 @@
+{
+  "id": "6a7153c2-a483-48c6-bddf-7a3884dee602",
+  "revision": 0,
+  "last_node_id": 37,
+  "last_link_id": 43,
+  "nodes": [
+    {
+      "id": 9,
+      "type": "MarkdownNote",
+      "pos": [
+        -446.8044019104487,
+        554.3840841423803
+      ],
+      "size": [
+        432.2714783367767,
+        325.34099362421875
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Gemma4 Core Capabilities",
+      "properties": {},
+      "widgets_values": [
+        "**Core Capabilities**\n\n[Gemma 4](https://huggingface.co/google/gemma-4-E2B-it) models handle a broad range of tasks across text, vision, and audio. Key capabilities include:\n\n+   **Thinking** – Built-in reasoning mode that lets the model think step-by-step before answering.\n+   **Long Context** – Context windows of up to 128K tokens (E2B/E4B) and 256K tokens (26B A4B/31B).\n+   **Image Understanding** – Object detection, Document/PDF parsing, screen and UI understanding, chart comprehension, OCR (including multilingual), handwriting recognition, and pointing. Images can be processed at variable aspect ratios and resolutions.\n+   **Video Understanding** – Analyze video by processing sequences of frames.\n+   **Interleaved Multimodal Input** – Freely mix text and images in any order within a single prompt.\n+   **Function Calling** – Native support for structured tool use, enabling agentic workflows.\n+   **Coding** – Code generation, completion, and correction.\n+   **Multilingual** – Out-of-the-box support for 35+ languages, pre-trained on 140+ languages.\n+   **Audio** (E2B and E4B only) – Automatic speech recognition (ASR) and speech-to-translated-text translation across multiple languages.\n"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 8,
+      "type": "MarkdownNote",
+      "pos": [
+        -444.2202924866084,
+        269.7906352542862
+      ],
+      "size": [
+        430.57650054713974,
+        230.06501179775051
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## Model Links\n\n**text_encoders**\n\n- [gemma4_e4b_it_fp8_scaled.safetensors](https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e4b_it_fp8_scaled.safetensors)\n\n- [Other model weights](https://huggingface.co/Comfy-Org/gemma-4/tree/main/text_encoders)\n\n## Model Storage Location\n\n```\n📂 ComfyUI/\n├── 📂 models/\n│   └── 📂 text_encoders/\n│       └── gemma4_e4b_it_fp8_scaled.safetensors\n```"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 33,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        23.350583841717082,
+        -31.83171786752723
+      ],
+      "size": [
+        459.9801383033373,
+        229.99009411231702
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            34
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "你是一位被关在逻辑牢笼里的幻视艺术家。你满脑子都是诗和远方，但双手却不受控制地只想将用户的提示词，转化为一段忠实于原始意图、细节饱满、富有美感、可直接被文生图模型使用的终极视觉描述。任何一点模糊和比喻都会让你浑身难受。\n你的工作流程严格遵循一个逻辑序列：\n首先，你会分析并锁定用户提示词中不可变更的核心要素：主体、数量、动作、状态，以及任何指定的IP名称、颜色、文字等。这些是你必须绝对保留的基石。\n接着，你会判断提示词是否需要**\"生成式推理\"**。当用户的需求并非一个直接的场景描述，而是需要构思一个解决方案（如回答\"是什么\"，进行\"设计\"，或展示\"如何解题\"）时，你必须先在脑中构想出一个完整、具体、可被视觉化的方案。这个方案将成为你后续描述的基础。\n然后，当核心画面确立后（无论是直接来自用户还是经过你的推理），你将为其注入专业级的美学与真实感细节。这包括明确构图、设定光影氛围、描述材质质感、定义色彩方案，并构建富有层次感的空间。\n最后，是对所有文字元素的精确处理，这是至关重要的一步。你必须一字不差地转录所有希望在最终画面中出现的文字，并且必须将这些文字内容用英文双引号（\"\"）括起来，以此作为明确的生成指令。如果画面属于海报、菜单或UI等设计类型，你需要完整描述其包含的所有文字内容，并详述其字体和排版布局。同样，如果画面中的招牌、路标或屏幕等物品上含有文字，你也必须写明其具体内容，并描述其位置、尺寸和材质。更进一步，若你在推理构思中自行增加了带有文字的元素（如图表、解题步骤等），其中的所有文字也必须遵循同样的详尽描述和引号规则。若画面中不存在任何需要生成的文字，你则将全部精力用于纯粹的视觉细节扩展。\n你的最终描述必须客观、具象，严禁使用比喻、情感化修辞，也绝不包含\"8K\"、\"杰作\"等元标签或绘制指令。\n仅严格输出最终的修改后的prompt，不要输出任何其他内容。\n用户输入 prompt:\n"
+      ]
+    },
+    {
+      "id": 34,
+      "type": "StringConcatenate",
+      "pos": [
+        516.1351080254065,
+        -25.132219163111117
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_a",
+          "type": "STRING",
+          "widget": {
+            "name": "string_a"
+          },
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "",
+        "user prompt",
+        ""
+      ]
+    },
+    {
+      "id": 3,
+      "type": "CLIPLoader",
+      "pos": [
+        14.650995874350171,
+        266.4649045235804
+      ],
+      "size": [
+        412.4358796976202,
+        108.17219623340395
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "showAdvanced": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            41
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.0",
+        "Node name for S&R": "CLIPLoader",
+        "models": [
+          {
+            "name": "gemma4_e4b_it_fp8_scaled.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e4b_it_fp8_scaled.safetensors",
+            "directory": "text_encoders"
+          }
+        ]
+      },
+      "widgets_values": [
+        "gemma4_e4b_it_fp8_scaled.safetensors",
+        "stable_diffusion",
+        "default"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "TextGenerate",
+      "pos": [
+        471.19530788842917,
+        268.149707182015
+      ],
+      "size": [
+        397.77783203125,
+        412
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 41
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "video",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "generated_text",
+          "type": "STRING",
+          "links": [
+            42
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.0",
+        "Node name for S&R": "TextGenerate"
+      },
+      "widgets_values": [
+        "Describe the image, and transcribe the audio.",
+        1024,
+        "on",
+        0.7,
+        64,
+        0.95,
+        0.05,
+        1.05,
+        0,
+        0,
+        false,
+        true
+      ]
+    },
+    {
+      "id": 4,
+      "type": "PreviewAny",
+      "pos": [
+        913.3789264650707,
+        269.16269372063823
+      ],
+      "size": [
+        475.8082646083708,
+        566.3490394970149
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 42
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.0",
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [
+        20.826373628843488,
+        463.4861287290134
+      ],
+      "size": [
+        410.2571817774077,
+        330.31766991935046
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": []
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.0",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_temp_zztei_00015_.png",
+        "image"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "LoadAudio",
+      "pos": [
+        28.458336040077942,
+        844.5355246341186
+      ],
+      "size": [
+        392.5237850635309,
+        136
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.0",
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "gemma4.wav",
+        null,
+        null
+      ]
+    },
+    {
+      "id": 36,
+      "type": "LoadVideo",
+      "pos": [
+        21.926131966420016,
+        1082.9085149750968
+      ],
+      "size": [
+        536.7842956203357,
+        588.7534722222222
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VIDEO",
+          "type": "VIDEO",
+          "links": [
+            38
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "LoadVideo"
+      },
+      "widgets_values": [
+        "ComfyUI_00028_.mp4",
+        "image"
+      ]
+    },
+    {
+      "id": 37,
+      "type": "GetVideoComponents",
+      "pos": [
+        584.3620016273452,
+        1090.3265590836058
+      ],
+      "size": [
+        193.530859375,
+        66
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 38
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": []
+        },
+        {
+          "name": "fps",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "GetVideoComponents"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [
+      34,
+      33,
+      0,
+      34,
+      0,
+      "STRING"
+    ],
+    [
+      38,
+      36,
+      0,
+      37,
+      0,
+      "VIDEO"
+    ],
+    [
+      41,
+      3,
+      0,
+      1,
+      0,
+      "CLIP"
+    ],
+    [
+      42,
+      1,
+      0,
+      4,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 2,
+      "title": "Group",
+      "bounding": [
+        14.259351124511731,
+        -105.46689932162242,
+        928.3499094894729,
+        310.2999443380254
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Group",
+      "bounding": [
+        10.826373628843493,
+        393.4861287290134,
+        430.2571817774077,
+        597.049395905105
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "Group",
+      "bounding": [
+        11.926131966420005,
+        1012.9085149750962,
+        780.8426233360851,
+        668.7534722222222
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5115158693364186,
+      "offset": [
+        1334.2366560491798,
+        358.65187843806837
+      ]
+    },
+    "frontendVersion": "1.43.18",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

@@ -1,0 +1,2851 @@
+{
+  "id": "f8873571-ef1a-4104-8098-7a8724ceacb5",
+  "revision": 0,
+  "last_node_id": 231,
+  "last_link_id": 317,
+  "nodes": [
+    {
+      "id": 50,
+      "type": "CLIPLoader",
+      "pos": [
+        2198.655583877893,
+        566.3288849738977
+      ],
+      "size": [
+        391.721023760525,
+        106
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            75,
+            79
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "CLIPLoader",
+        "models": [
+          {
+            "name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+            "directory": "text_encoders"
+          }
+        ],
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "qwen_image",
+        "default"
+      ]
+    },
+    {
+      "id": 51,
+      "type": "UNETLoader",
+      "pos": [
+        2199.5528684721876,
+        433.75826476368
+      ],
+      "size": [
+        401.8365528957911,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            69
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "UNETLoader",
+        "models": [
+          {
+            "name": "qwen_image_edit_2511_bf16.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+            "directory": "diffusion_models"
+          }
+        ],
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        "qwen_image_edit_2509_fp8mixed.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 52,
+      "type": "VAELoader",
+      "pos": [
+        2201.0684549654015,
+        726.3647489237536
+      ],
+      "size": [
+        389.8990145596581,
+        58
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 0,
+          "links": [
+            74,
+            76,
+            80
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "VAELoader",
+        "models": [
+          {
+            "name": "qwen_image_vae.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors",
+            "directory": "vae"
+          }
+        ],
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        "qwen_image_vae.safetensors"
+      ]
+    },
+    {
+      "id": 53,
+      "type": "ModelSamplingAuraFlow",
+      "pos": [
+        3243.1122806882986,
+        455.3973639795819
+      ],
+      "size": [
+        271.111083984375,
+        58
+      ],
+      "flags": {},
+      "order": 104,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 67
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            68
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "ModelSamplingAuraFlow",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        3
+      ]
+    },
+    {
+      "id": 54,
+      "type": "CFGNorm",
+      "pos": [
+        3240.634438164432,
+        584.5036653352789
+      ],
+      "size": [
+        261.1112060546875,
+        82
+      ],
+      "flags": {},
+      "order": 123,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 68
+        }
+      ],
+      "outputs": [
+        {
+          "name": "patched_model",
+          "type": "MODEL",
+          "links": [
+            84
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "CFGNorm",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        1,
+        false
+      ]
+    },
+    {
+      "id": 56,
+      "type": "FaceEmbedDistance",
+      "pos": [
+        4148.795529427319,
+        429.38341511139413
+      ],
+      "size": [
+        301.748046875,
+        170
+      ],
+      "flags": {},
+      "order": 156,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "analysis_models",
+          "type": "ANALYSIS_MODELS",
+          "link": 70
+        },
+        {
+          "name": "reference",
+          "type": "IMAGE",
+          "link": 317
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 72
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            93
+          ]
+        },
+        {
+          "name": "distance",
+          "type": "FLOAT",
+          "links": [
+            94
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_faceanalysis",
+        "ver": "8846653446a6b13582da11793faf950325a398e0",
+        "Node name for S&R": "FaceEmbedDistance"
+      },
+      "widgets_values": [
+        "cosine",
+        100,
+        0,
+        true
+      ]
+    },
+    {
+      "id": 57,
+      "type": "VAEDecode",
+      "pos": [
+        3568.917117901547,
+        730.5518821178657
+      ],
+      "size": [
+        183.67782104491926,
+        46
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 150,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 73
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 74
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            72,
+            89
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "VAEDecode",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 58,
+      "type": "TextEncodeQwenImageEditPlus",
+      "pos": [
+        2696.1013337981353,
+        683.1257411582993
+      ],
+      "size": [
+        507.601285895651,
+        205.38108111229644
+      ],
+      "flags": {},
+      "order": 126,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 75
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": 76
+        },
+        {
+          "name": "image1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 77
+        },
+        {
+          "name": "image2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 78
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            85
+          ]
+        }
+      ],
+      "title": "TextEncodeQwenImageEditPlus (Positive)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "TextEncodeQwenImageEditPlus",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        "Next Scene: Rotate the camera 60 degrees to the left."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 59,
+      "type": "TextEncodeQwenImageEditPlus",
+      "pos": [
+        2878.846413230981,
+        936.153740494988
+      ],
+      "size": [
+        498.78795276988603,
+        168
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 127,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 79
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": 80
+        },
+        {
+          "name": "image1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 81
+        },
+        {
+          "name": "image2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            86
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "TextEncodeQwenImageEditPlus",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 61,
+      "type": "KSampler",
+      "pos": [
+        3249.4560786125576,
+        727.3043532554669
+      ],
+      "size": [
+        265.5555419921875,
+        262
+      ],
+      "flags": {},
+      "order": 143,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 84
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 85
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 86
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 108
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 88
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            73
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.16.4",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        0,
+        "fixed",
+        4,
+        1,
+        "euler",
+        "simple",
+        1
+      ]
+    },
+    {
+      "id": 63,
+      "type": "ImageScaleToTotalPixels",
+      "pos": [
+        2229.313533670753,
+        1024.0061259629715
+      ],
+      "size": [
+        276.4927734375,
+        106
+      ],
+      "flags": {},
+      "order": 107,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 316
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            77,
+            81
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "ImageScaleToTotalPixels"
+      },
+      "widgets_values": [
+        "lanczos",
+        2,
+        8
+      ]
+    },
+    {
+      "id": 67,
+      "type": "GetNode",
+      "pos": [
+        3886.885438629721,
+        437.7374398052335
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ANALYSIS_MODELS",
+          "type": "ANALYSIS_MODELS",
+          "links": [
+            70
+          ]
+        }
+      ],
+      "title": "Get_face_analysis",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes"
+      },
+      "widgets_values": [
+        "face_analysis"
+      ]
+    },
+    {
+      "id": 71,
+      "type": "StringConcatenate",
+      "pos": [
+        1057.2609261150174,
+        993.2800069810961
+      ],
+      "size": [
+        210,
+        166
+      ],
+      "flags": {},
+      "order": 91,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "widget": {
+            "name": "string_b"
+          },
+          "link": 95
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            96
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "Next Scene: ",
+        "",
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 72,
+      "type": "StringConcatenate",
+      "pos": [
+        1060.2406624431421,
+        546.7648092271896
+      ],
+      "size": [
+        210,
+        166
+      ],
+      "flags": {},
+      "order": 90,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "widget": {
+            "name": "string_b"
+          },
+          "link": 97
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            98
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "Next Scene: ",
+        "",
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 33,
+      "type": "StringConcatenate",
+      "pos": [
+        1050.2406624431421,
+        1455.9567869881978
+      ],
+      "size": [
+        210,
+        166
+      ],
+      "flags": {},
+      "order": 92,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "widget": {
+            "name": "string_b"
+          },
+          "link": 48
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            99
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "Next Scene: ",
+        "",
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 34,
+      "type": "SetNode",
+      "pos": [
+        1388.5482323993187,
+        1462.3628592077523
+      ],
+      "size": [
+        210,
+        60
+      ],
+      "flags": {},
+      "order": 114,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 99
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Set_prompt_basic",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "prompt_basic"
+      },
+      "widgets_values": [
+        "prompt_basic"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 47,
+      "type": "SetNode",
+      "pos": [
+        736.0452817332117,
+        -549.6993910080171
+      ],
+      "size": [
+        210,
+        60
+      ],
+      "flags": {},
+      "order": 136,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "link": 245
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "Set_input_face",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "input_face"
+      },
+      "widgets_values": [
+        "input_face"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 79,
+      "type": "SetNode",
+      "pos": [
+        139.93413671368077,
+        -531.3660703903414
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 101,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "link": 105
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "Set_input_grid",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "input_grid"
+      },
+      "widgets_values": [
+        "input_grid"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 75,
+      "type": "StringConcatenate",
+      "pos": [
+        1060.1461042156034,
+        1953.2092383098868
+      ],
+      "size": [
+        210,
+        166
+      ],
+      "flags": {},
+      "order": 116,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "widget": {
+            "name": "string_b"
+          },
+          "link": 100
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            101
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "Next Scene: ",
+        "",
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 23,
+      "type": "FaceAnalysisModels",
+      "pos": [
+        1336.6429835048032,
+        142.67259257356835
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ANALYSIS_MODELS",
+          "type": "ANALYSIS_MODELS",
+          "links": [
+            65
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_faceanalysis",
+        "ver": "8846653446a6b13582da11793faf950325a398e0",
+        "Node name for S&R": "FaceAnalysisModels"
+      },
+      "widgets_values": [
+        "insightface",
+        "CUDA"
+      ]
+    },
+    {
+      "id": 70,
+      "type": "GetNode",
+      "pos": [
+        2241.5531426134203,
+        1193.3761878698185
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            78
+          ]
+        }
+      ],
+      "title": "Get_prompt_face",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes"
+      },
+      "widgets_values": [
+        "prompt_face"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 65,
+      "type": "Seed (rgthree)",
+      "pos": [
+        2541.890721781012,
+        1120.2716040435798
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "dir": 4,
+          "name": "SEED",
+          "shape": 3,
+          "type": "INT",
+          "links": [
+            88
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "27b4f4cdcf3b127c29d5d8135ac1536ecbd4c383",
+        "randomMax": 1125899906842624,
+        "randomMin": 0
+      },
+      "widgets_values": [
+        0,
+        "",
+        "",
+        "okay"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 82,
+      "type": "ResolutionSelector",
+      "pos": [
+        2884.5674196805126,
+        1125.5883176951227
+      ],
+      "size": [
+        270,
+        126
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            106
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            107
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "ResolutionSelector"
+      },
+      "widgets_values": [
+        "2:3 (Portrait Photo)",
+        1,
+        8
+      ]
+    },
+    {
+      "id": 48,
+      "type": "SetNode",
+      "pos": [
+        1331.0112456572185,
+        288.04191680570733
+      ],
+      "size": [
+        274.9921875,
+        60
+      ],
+      "flags": {},
+      "order": 77,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "ANALYSIS_MODELS",
+          "type": "ANALYSIS_MODELS",
+          "link": 65
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ANALYSIS_MODELS",
+          "type": "ANALYSIS_MODELS",
+          "links": null
+        }
+      ],
+      "title": "Set_face_analysis",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "face_analysis"
+      },
+      "widgets_values": [
+        "face_analysis"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 66,
+      "type": "GetNode",
+      "pos": [
+        2238.484181871091,
+        890.0637216021863
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            194
+          ]
+        }
+      ],
+      "title": "Get_input_face",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes"
+      },
+      "widgets_values": [
+        "input_face"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 146,
+      "type": "easy cleanGpuUsed",
+      "pos": [
+        4955.078078551082,
+        537.1668236652746
+      ],
+      "size": [
+        161.3404296875,
+        26
+      ],
+      "flags": {},
+      "order": 186,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 199
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "54d080bf6a4f52da287e984f305243c10db097f5",
+        "Node name for S&R": "easy cleanGpuUsed"
+      },
+      "widgets_values": [],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 40,
+      "type": "ImageCropV2",
+      "pos": [
+        468.21656927586736,
+        -436.38352997071996
+      ],
+      "size": [
+        249.49487102918397,
+        366
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 98,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 55
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            244
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "ImageCropV2"
+      },
+      "widgets_values": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 1024
+        },
+        0,
+        0,
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": 77,
+      "type": "SetNode",
+      "pos": [
+        1264.378655756649,
+        -534.6993910080172
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 138,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "link": 248
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "Set_input_body",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "input_body"
+      },
+      "widgets_values": [
+        "input_body"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 190,
+      "type": "SaveImage",
+      "pos": [
+        1252.2362653905677,
+        -421.5237004114265
+      ],
+      "size": [
+        210,
+        270
+      ],
+      "flags": {},
+      "order": 120,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 247
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            248
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "input_body"
+      ]
+    },
+    {
+      "id": 78,
+      "type": "SetNode",
+      "pos": [
+        752.7119687449305,
+        301.4117387527248
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 137,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "link": 251
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "Set_input_portrait",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "input_portrait"
+      },
+      "widgets_values": [
+        "input_portrait"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 44,
+      "type": "ImageCropV2",
+      "pos": [
+        469.22283539694075,
+        -11.143115797326391
+      ],
+      "size": [
+        249.49487102918397,
+        366
+      ],
+      "flags": {},
+      "order": 99,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 59
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            250
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "ImageCropV2"
+      },
+      "widgets_values": [
+        {
+          "x": 0,
+          "y": 1024,
+          "width": 1024,
+          "height": 1024
+        },
+        0,
+        1024,
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": 191,
+      "type": "SaveImage",
+      "pos": [
+        738.952284426307,
+        -7.439153613450554
+      ],
+      "size": [
+        210,
+        270
+      ],
+      "flags": {},
+      "order": 119,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 250
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            251
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "input_portrait"
+      ]
+    },
+    {
+      "id": 189,
+      "type": "SaveImage",
+      "pos": [
+        733.2798337363981,
+        -417.50938675374596
+      ],
+      "size": [
+        210,
+        270
+      ],
+      "flags": {},
+      "order": 118,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 244
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            245
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "input_face"
+      ]
+    },
+    {
+      "id": 32,
+      "type": "StringConcatenate",
+      "pos": [
+        1056.2715123991186,
+        1736.5737918747561
+      ],
+      "size": [
+        210,
+        166
+      ],
+      "flags": {},
+      "order": 97,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_b",
+          "type": "STRING",
+          "widget": {
+            "name": "string_b"
+          },
+          "link": 298
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            100,
+            254
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "StringConcatenate"
+      },
+      "widgets_values": [
+        "<sks> ",
+        "",
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 62,
+      "type": "SaveImage",
+      "pos": [
+        4489.804775363712,
+        641.8456593794423
+      ],
+      "size": [
+        628.1110961914064,
+        601.2222595214846
+      ],
+      "flags": {},
+      "order": 172,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 89
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": 90
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            200
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 81,
+      "type": "EmptyLatentImage",
+      "pos": [
+        3210.845564921904,
+        1122.585078078358
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 79,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 106
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 107
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            108
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 147,
+      "type": "easy clearCacheAll",
+      "pos": [
+        4959.749463616619,
+        446.8866131208637
+      ],
+      "size": [
+        141.7896484375,
+        26
+      ],
+      "flags": {},
+      "order": 180,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 200
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": [
+            199
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "54d080bf6a4f52da287e984f305243c10db097f5",
+        "Node name for S&R": "easy clearCacheAll"
+      },
+      "widgets_values": [],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 28,
+      "type": "StringOutputList",
+      "pos": [
+        103.7651041584738,
+        541.4781741988464
+      ],
+      "size": [
+        934.0866268310542,
+        363.9358194695799
+      ],
+      "flags": {},
+      "order": 45,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "value",
+          "shape": 6,
+          "type": "*",
+          "links": [
+            97
+          ]
+        },
+        {
+          "name": "index",
+          "shape": 6,
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "inspect_combo",
+          "type": "COMBO",
+          "links": null
+        }
+      ],
+      "title": "String OutputList / 20 Face Prompt",
+      "properties": {
+        "cnr_id": "comfyui-outputlists_combiner",
+        "ver": "0.0.11",
+        "Node name for S&R": "StringOutputList"
+      },
+      "widgets_values": [
+        "\\n",
+        "Photorealistic profile view of the subject's face from the left, against a plain white wall background.\nHyperrealistic profile view of the subject's face from the right, against a clean white wall.\nDSLR photograph, three-quarter view of the subject's face, looking towards the camera, against a plain white wall.\nUltra-realistic three-quarter view of the subject, looking slightly away from the camera, against a seamless white wall.\nLow-angle shot, looking up at the subject's face with a neutral expression, against a plain white wall.\nHigh-angle shot, looking down at the subject's face, against a stark white wall.\nPhotorealistic headshot with the subject's head tilted slightly to the side, looking directly at the camera, against a white wall.\nHyperrealistic shot of the subject looking over their shoulder at the camera, against a white wall background.\nDramatic Rembrandt lighting portrait, with one side of the subject's face illuminated, from a three-quarter angle against a white wall.\nExtreme close-up shot from a slight angle, focusing on the subject's facial features, against a white wall.\nPhotorealistic headshot with a slight Dutch angle, where the camera is tilted, against a plain white wall background.\nDSLR photo of the subject looking up and away, past the camera, in a three-quarter turn against a white wall.\nUltra-realistic shot of the subject looking down and to the side, with their face angled away from the camera, against a white wall.\nHyperrealistic shot from behind the subject, as they turn their head to the side to look towards the camera, against a white wall.\nPhotorealistic portrait from a 45-degree angle, showing the face and shoulders, against a seamless white wall.\nMacro shot from a three-quarter perspective, with a shallow depth of field focusing sharply on the subject's eyes, against a white wall.\nWorm's-eye view looking directly up at the subject's chin and face, against a plain white wall.\nBird's-eye view looking directly down on the top of the subject's head as they look up towards the camera, against a white wall.\nPhotorealistic shot of the subject with their head tilted back, exposing the neck and looking upwards, against a white wall.\nRealistic headshot with the subject's chin tucked down, looking up at the camera from under their brow, against a white wall."
+      ]
+    },
+    {
+      "id": 29,
+      "type": "StringOutputList",
+      "pos": [
+        111.20948892409906,
+        984.03372229455
+      ],
+      "size": [
+        927.9755306396482,
+        409.9767636291904
+      ],
+      "flags": {},
+      "order": 46,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "value",
+          "shape": 6,
+          "type": "*",
+          "links": [
+            95
+          ]
+        },
+        {
+          "name": "index",
+          "shape": 6,
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "inspect_combo",
+          "type": "COMBO",
+          "links": null
+        }
+      ],
+      "title": "String OutputList / 12 Lifestyle Prompt",
+      "properties": {
+        "cnr_id": "comfyui-outputlists_combiner",
+        "ver": "0.0.11",
+        "Node name for S&R": "StringOutputList"
+      },
+      "widgets_values": [
+        "\\n",
+        "Make this person at a crosswalk in a beige raincoat, captured in a detailed medium close-up from a low side angle with a 35mm lens at f/2.8, her profile filling the frame against blurred neon reflections on wet pavement, expression calm and focused.\nMake this person sit on concrete steps in a blue denim jacket and black skirt, leaning back on her elbows with one knee raised, framed from the chest up in a tight shot. View from a slightly high angle using a 50mm lens at f/2.2, smiling faintly, face prominent in the frame.\nMake this person lean against a café window in a light grey hoodie and dark jeans, framed in a close-up. Viewed from a dutch angle at chest height with a 35mm lens at f/2.0, expression thoughtful, face dominating the view.\nMake this person sit cross-legged on a wooden floor in an oversized cream sweater, photographed from directly above in a tight medium-close shot focusing on her face and head. Use a 24mm lens at f/4.0, her expression calm and contemplative.\nMake this person recline sideways across a sofa in a red silk dress, captured from a low front angle at eye level. This is an intimate close-up focusing sharply on her face, expression dreamy with a faint smile, shot with an 85mm lens at f/1.8.\nMake this person stand in profile against a plain white wall, framed in a tight bust shot wearing a black business suit, hands tucked into her pockets. Shot with a 50mm lens at f/2.5 from a side angle, expression serious and composed, face prominent.\nMake this person sit at an outdoor café table in a yellow sundress,  leaning forward with both elbows on the surface, toward the camera. A medium close-up viewed from a tilted dutch angle with a 35mm lens at f/2.2, smiling warmly, her face filling the upper portion of the frame.\nMake this person walking barefoot along the shoreline in a white flowing skirt and pastel blue tank top. A low ground angle shot focused upwards, framing her face and shoulders prominently against the sky. Her expression turned upward with a soft smile, captured with a 24mm lens at f/4.0.\nMake this person crouch near a city fountain at night, wearing a black leather jacket and dark jeans, hands resting on her knees. This is a tight medium shot captured from slightly above with a wide 28mm lens at f/3.2, her playful and laughing expression filling the center frame.\nMake this person stand on a rooftop edge in an oversized olive-green coat. Framed as a tight profile close-up from a dramatic low side angle, face prominent against the urban background, shot with a 35mm lens at f/2.8, expression serious with a distant gaze.\nMake this person sit on the floor against a blank wall wearing grey workout leggings and a white tank top, knees pulled close to her chest. A close-up photographed from a high angle with a 50mm lens at f/2.0, focusing tightly on her face, expression tired but calm\nMake this person stand in an art gallery, wearing a dark green fitted dress, leaning slightly with arms crossed. Captured in a tight medium shot from a slightly high diagonal angle with a 35mm lens at f/2.5, her contemplative face framed centrally."
+      ]
+    },
+    {
+      "id": 73,
+      "type": "SetNode",
+      "pos": [
+        1388.8439235952967,
+        994.4528280899845
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 113,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 96
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Set_prompt_lifestyle",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "prompt_lifestyle"
+      },
+      "widgets_values": [
+        "prompt_lifestyle"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 74,
+      "type": "SetNode",
+      "pos": [
+        1385.4404896184014,
+        560.9416985586986
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 112,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 98
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Set_prompt_face",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "prompt_face"
+      },
+      "widgets_values": [
+        "prompt_face"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 30,
+      "type": "StringOutputList",
+      "pos": [
+        117.55397439773188,
+        1454.2114795577334
+      ],
+      "size": [
+        916.8188217682243,
+        225.53978144301072
+      ],
+      "flags": {},
+      "order": 47,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "value",
+          "shape": 6,
+          "type": "*",
+          "links": [
+            48
+          ]
+        },
+        {
+          "name": "index",
+          "shape": 6,
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "inspect_combo",
+          "type": "COMBO",
+          "links": null
+        }
+      ],
+      "title": "String OutputList / 8 Basic Angle",
+      "properties": {
+        "cnr_id": "comfyui-outputlists_combiner",
+        "ver": "0.0.11",
+        "Node name for S&R": "StringOutputList"
+      },
+      "widgets_values": [
+        "\\n",
+        "Turn the camera to a close-up.\nRotate the camera 45 degrees to the right.\nTurn the camera to an aerial view.\nRotate the camera 45 degrees to the left.\nTurn the camera to a wide-angle lens.\nRotate the camera 90 degrees to the right.\nTurn the camera to a low-angle view.\nRotate the camera 90 degrees to the left."
+      ]
+    },
+    {
+      "id": 76,
+      "type": "SetNode",
+      "pos": [
+        1391.4516261079689,
+        1945.4372267983488
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 135,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 101
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Set_prompt_sks_2511",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "prompt_sks_2511"
+      },
+      "widgets_values": [
+        "prompt_sks_2511"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 193,
+      "type": "SetNode",
+      "pos": [
+        1391.3136346780866,
+        1802.2104426961796
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 117,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 254
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Set_prompt_sks_f2k",
+      "properties": {
+        "Node name for S&R": "SetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "previousName": "prompt_sks_f2k"
+      },
+      "widgets_values": [
+        "prompt_sks_f2k"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 46,
+      "type": "ImageCropV2",
+      "pos": [
+        980.5546154313896,
+        -431.9029443511733
+      ],
+      "size": [
+        249.49487102918397,
+        366
+      ],
+      "flags": {},
+      "order": 100,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 60
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            247
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "ImageCropV2"
+      },
+      "widgets_values": [
+        {
+          "x": 1024,
+          "y": 0,
+          "width": 1024,
+          "height": 1536
+        },
+        1024,
+        0,
+        1024,
+        1536
+      ]
+    },
+    {
+      "id": 69,
+      "type": "StringFormat",
+      "pos": [
+        4498.562542990162,
+        443.75159023366757
+      ],
+      "size": [
+        250.9311701237266,
+        128
+      ],
+      "flags": {},
+      "order": 163,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "a",
+          "name": "values.a",
+          "shape": 7,
+          "type": "*",
+          "link": 94
+        },
+        {
+          "label": "b",
+          "name": "values.b",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            90
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "StringFormat"
+      },
+      "widgets_values": [
+        "data/face/qwenedit2509_face_score{a[0]:.3f}"
+      ]
+    },
+    {
+      "id": 55,
+      "type": "Power Lora Loader (rgthree)",
+      "pos": [
+        2712.574885650723,
+        433.45426417483714
+      ],
+      "size": [
+        468.2422753906254,
+        214
+      ],
+      "flags": {},
+      "order": 76,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "model",
+          "type": "MODEL",
+          "link": 69
+        },
+        {
+          "dir": 3,
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "name": "MODEL",
+          "shape": 3,
+          "type": "MODEL",
+          "links": [
+            67
+          ]
+        },
+        {
+          "dir": 4,
+          "name": "CLIP",
+          "shape": 3,
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "27b4f4cdcf3b127c29d5d8135ac1536ecbd4c383",
+        "Show Strengths": "Single Strength",
+        "Match": ""
+      },
+      "widgets_values": [
+        {},
+        {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        {
+          "on": true,
+          "lora": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {
+          "on": true,
+          "lora": "Qwen-Edit-2509-Multiple-angles.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {
+          "on": true,
+          "lora": "next-scene_lora-v2-3000.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "qwen-edit-skin_1.1_000002750.safetensors",
+          "strength": 0,
+          "strengthTwo": null
+        },
+        {},
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 231,
+      "type": "easy promptLine",
+      "pos": [
+        131.03626543752335,
+        1739.6506740248722
+      ],
+      "size": [
+        898.5169023691593,
+        393.848122680748
+      ],
+      "flags": {},
+      "order": 65,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            298
+          ]
+        },
+        {
+          "name": "COMBO",
+          "shape": 6,
+          "type": "COMBO",
+          "links": null
+        }
+      ],
+      "title": "PromptLine / 64 Full Angle",
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "54d080bf6a4f52da287e984f305243c10db097f5",
+        "Node name for S&R": "easy promptLine"
+      },
+      "widgets_values": [
+        "front view low-angle shot close-up\nfront-right quarter view low-angle shot close-up\nright side view low-angle shot close-up\nback-right quarter view low-angle shot close-up\nback view low-angle shot close-up\nback-left quarter view low-angle shot close-up\nleft side view low-angle shot close-up\nfront-left quarter view low-angle shot close-up\nfront view eye-level shot close-up\nfront-right quarter view eye-level shot close-up\nright side view eye-level shot close-up\nback-right quarter view eye-level shot close-up\nback view eye-level shot close-up\nback-left quarter view eye-level shot close-up\nleft side view eye-level shot close-up\nfront-left quarter view eye-level shot close-up\nfront view elevated shot close-up\nfront-right quarter view elevated shot close-up\nright side view elevated shot close-up\nback-right quarter view elevated shot close-up\nback view elevated shot close-up\nback-left quarter view elevated shot close-up\nleft side view elevated shot close-up\nfront-left quarter view elevated shot close-up\nfront view high-angle shot close-up\nfront-right quarter view high-angle shot close-up\nright side view high-angle shot close-up\nback-right quarter view high-angle shot close-up\nback view high-angle shot close-up\nback-left quarter view high-angle shot close-up\nleft side view high-angle shot close-up\nfront-left quarter view high-angle shot close-up\nfront view low-angle shot medium shot\nfront-right quarter view low-angle shot medium shot\nright side view low-angle shot medium shot\nback-right quarter view low-angle shot medium shot\nback view low-angle shot medium shot\nback-left quarter view low-angle shot medium shot\nleft side view low-angle shot medium shot\nfront-left quarter view low-angle shot medium shot\nfront view eye-level shot medium shot\nfront-right quarter view eye-level shot medium shot\nright side view eye-level shot medium shot\nback-right quarter view eye-level shot medium shot\nback view eye-level shot medium shot\nback-left quarter view eye-level shot medium shot\nleft side view eye-level shot medium shot\nfront-left quarter view eye-level shot medium shot\nfront view elevated shot medium shot\nfront-right quarter view elevated shot medium shot\nright side view elevated shot medium shot\nback-right quarter view elevated shot medium shot\nback view elevated shot medium shot\nback-left quarter view elevated shot medium shot\nleft side view elevated shot medium shot\nfront-left quarter view elevated shot medium shot\nfront view high-angle shot medium shot\nfront-right quarter view high-angle shot medium shot\nright side view high-angle shot medium shot\nback-right quarter view high-angle shot medium shot\nback view high-angle shot medium shot\nback-left quarter view high-angle shot medium shot\nleft side view high-angle shot medium shot\nfront-left quarter view high-angle shot medium shot",
+        0,
+        70,
+        true,
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [
+        111.92690618936142,
+        -424.37950461135443
+      ],
+      "size": [
+        303.909912109375,
+        324.0000000000009
+      ],
+      "flags": {},
+      "order": 68,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            55,
+            59,
+            60,
+            105
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.25.0",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_temp_kpleh_00008_.png",
+        "image"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 68,
+      "type": "PreviewImage",
+      "pos": [
+        3869.577575029664,
+        644.5795071605228
+      ],
+      "size": [
+        606.8888366699216,
+        600.4444519042968
+      ],
+      "flags": {},
+      "order": 162,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 93
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 141,
+      "type": "PreviewImage",
+      "pos": [
+        1948.3392651207696,
+        1015.4591268357224
+      ],
+      "size": [
+        210,
+        258
+      ],
+      "flags": {},
+      "order": 82,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 194
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            316,
+            317
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [
+      48,
+      30,
+      0,
+      33,
+      0,
+      "STRING"
+    ],
+    [
+      55,
+      3,
+      0,
+      40,
+      0,
+      "IMAGE"
+    ],
+    [
+      59,
+      3,
+      0,
+      44,
+      0,
+      "IMAGE"
+    ],
+    [
+      60,
+      3,
+      0,
+      46,
+      0,
+      "IMAGE"
+    ],
+    [
+      65,
+      23,
+      0,
+      48,
+      0,
+      "ANALYSIS_MODELS"
+    ],
+    [
+      67,
+      55,
+      0,
+      53,
+      0,
+      "MODEL"
+    ],
+    [
+      68,
+      53,
+      0,
+      54,
+      0,
+      "MODEL"
+    ],
+    [
+      69,
+      51,
+      0,
+      55,
+      0,
+      "MODEL"
+    ],
+    [
+      70,
+      67,
+      0,
+      56,
+      0,
+      "ANALYSIS_MODELS"
+    ],
+    [
+      72,
+      57,
+      0,
+      56,
+      2,
+      "IMAGE"
+    ],
+    [
+      73,
+      61,
+      0,
+      57,
+      0,
+      "LATENT"
+    ],
+    [
+      74,
+      52,
+      0,
+      57,
+      1,
+      "VAE"
+    ],
+    [
+      75,
+      50,
+      0,
+      58,
+      0,
+      "CLIP"
+    ],
+    [
+      76,
+      52,
+      0,
+      58,
+      1,
+      "VAE"
+    ],
+    [
+      77,
+      63,
+      0,
+      58,
+      2,
+      "IMAGE"
+    ],
+    [
+      78,
+      70,
+      0,
+      58,
+      5,
+      "STRING"
+    ],
+    [
+      79,
+      50,
+      0,
+      59,
+      0,
+      "CLIP"
+    ],
+    [
+      80,
+      52,
+      0,
+      59,
+      1,
+      "VAE"
+    ],
+    [
+      81,
+      63,
+      0,
+      59,
+      2,
+      "IMAGE"
+    ],
+    [
+      84,
+      54,
+      0,
+      61,
+      0,
+      "MODEL"
+    ],
+    [
+      85,
+      58,
+      0,
+      61,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      86,
+      59,
+      0,
+      61,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      88,
+      65,
+      0,
+      61,
+      4,
+      "INT"
+    ],
+    [
+      89,
+      57,
+      0,
+      62,
+      0,
+      "IMAGE"
+    ],
+    [
+      90,
+      69,
+      0,
+      62,
+      1,
+      "STRING"
+    ],
+    [
+      93,
+      56,
+      0,
+      68,
+      0,
+      "IMAGE"
+    ],
+    [
+      94,
+      56,
+      1,
+      69,
+      0,
+      "FLOAT"
+    ],
+    [
+      95,
+      29,
+      0,
+      71,
+      0,
+      "STRING"
+    ],
+    [
+      96,
+      71,
+      0,
+      73,
+      0,
+      "STRING"
+    ],
+    [
+      97,
+      28,
+      0,
+      72,
+      0,
+      "STRING"
+    ],
+    [
+      98,
+      72,
+      0,
+      74,
+      0,
+      "STRING"
+    ],
+    [
+      99,
+      33,
+      0,
+      34,
+      0,
+      "STRING"
+    ],
+    [
+      100,
+      32,
+      0,
+      75,
+      0,
+      "STRING"
+    ],
+    [
+      101,
+      75,
+      0,
+      76,
+      0,
+      "STRING"
+    ],
+    [
+      105,
+      3,
+      0,
+      79,
+      0,
+      "IMAGE"
+    ],
+    [
+      106,
+      82,
+      0,
+      81,
+      0,
+      "INT"
+    ],
+    [
+      107,
+      82,
+      1,
+      81,
+      1,
+      "INT"
+    ],
+    [
+      108,
+      81,
+      0,
+      61,
+      3,
+      "LATENT"
+    ],
+    [
+      194,
+      66,
+      0,
+      141,
+      0,
+      "IMAGE"
+    ],
+    [
+      199,
+      147,
+      0,
+      146,
+      0,
+      "*"
+    ],
+    [
+      200,
+      62,
+      0,
+      147,
+      0,
+      "IMAGE"
+    ],
+    [
+      244,
+      40,
+      0,
+      189,
+      0,
+      "IMAGE"
+    ],
+    [
+      245,
+      189,
+      0,
+      47,
+      0,
+      "IMAGE"
+    ],
+    [
+      247,
+      46,
+      0,
+      190,
+      0,
+      "IMAGE"
+    ],
+    [
+      248,
+      190,
+      0,
+      77,
+      0,
+      "IMAGE"
+    ],
+    [
+      250,
+      44,
+      0,
+      191,
+      0,
+      "IMAGE"
+    ],
+    [
+      251,
+      191,
+      0,
+      78,
+      0,
+      "IMAGE"
+    ],
+    [
+      254,
+      32,
+      0,
+      193,
+      0,
+      "STRING"
+    ],
+    [
+      298,
+      231,
+      0,
+      32,
+      0,
+      "STRING"
+    ],
+    [
+      316,
+      141,
+      0,
+      63,
+      0,
+      "IMAGE"
+    ],
+    [
+      317,
+      141,
+      0,
+      56,
+      1,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 4,
+      "title": "Input",
+      "bounding": [
+        95.90763980521214,
+        -644.2176184207912,
+        1556.3063488227654,
+        1027.414079784831
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Prompt",
+      "bounding": [
+        93.7651041584738,
+        471.47817419884626,
+        1544.8045058897708,
+        1687.3318934048746
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "Qwen Edit 2509 / 20 Face",
+      "bounding": [
+        2188.655583877893,
+        351.68360273510905,
+        1573.9393550685727,
+        920.2295329254989
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 6,
+      "title": "Validation and Output",
+      "bounding": [
+        3833.0212128928965,
+        355.8017331126714,
+        1306.6183062574382,
+        912.2256434176497
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.15220578010012287,
+      "offset": [
+        3559.820507834411,
+        2128.4438458414315
+      ]
+    },
+    "frontendVersion": "1.47.10",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "comfybox": {
+      "source": "_/260728 dataset generator/02 dataset generate.json",
+      "title": "Dataset Generator — Qwen Edit 2509 / 20 Face"
+    }
+  },
+  "version": 0.4
+}

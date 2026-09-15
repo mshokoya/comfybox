@@ -581,104 +581,104 @@ family = "LTX"
 discover_query = "LTX video"
 
 [[workflows]]
-id = "minimax-h3-reference"
-name = "MiniMax H3 Reference-to-Video"
-file = "minimax-h3-reference.json"
+id = "the3minutenode-refrence-minimaxh3-workflow"
+name = "The3MinuteNode — MiniMax H3 Reference-to-Video"
+file = "the3minutenode-refrence-minimaxh3-workflow.json"
 artifact_ids = ["minimax.h3.ref2va.bf16", "minimax.h3.qwen3vl32b.bf16", "minimax.h3.video-vae.fp16", "minimax.h3.audio-vae.fp32"]
 
 [[workflows]]
-id = "dataset-qwen-edit-2509-basic-angles"
-name = "Dataset Generator — Qwen Edit 2509 / 8 Basic Angles"
-file = "dataset-qwen-edit-2509-basic-angles.json"
+id = "the3minutenode-basicangles-dataset-qwenedit2509-workflow"
+name = "The3MinuteNode — Qwen Edit 2509 / 8 Basic Angles Dataset"
+file = "the3minutenode-basicangles-dataset-qwenedit2509-workflow.json"
 artifact_ids = ["qwen.edit.2509.fp8mixed", "qwen.image.encoder.2.5vl7b.fp8", "qwen.image.vae", "qwen.edit.2509.lightning-4step", "qwen.edit.2509.multiple-angles", "qwen.edit.next-scene-v2"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-easy-use", "comfyui-face-analysis", "outputlists-combiner"]
 
 [[workflows]]
-id = "dataset-qwen-edit-2509-face"
-name = "Dataset Generator — Qwen Edit 2509 / 20 Face"
-file = "dataset-qwen-edit-2509-face.json"
+id = "the3minutenode-face-dataset-qwenedit2509-workflow"
+name = "The3MinuteNode — Qwen Edit 2509 / 20 Face Dataset"
+file = "the3minutenode-face-dataset-qwenedit2509-workflow.json"
 artifact_ids = ["qwen.edit.2509.fp8mixed", "qwen.image.encoder.2.5vl7b.fp8", "qwen.image.vae", "qwen.edit.2509.lightning-4step", "qwen.edit.2509.multiple-angles", "qwen.edit.next-scene-v2"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-easy-use", "comfyui-face-analysis", "outputlists-combiner"]
 
 [[workflows]]
-id = "dataset-qwen-edit-2509-lifestyle"
-name = "Dataset Generator — Qwen Edit 2509 / 12 Lifestyle"
-file = "dataset-qwen-edit-2509-lifestyle.json"
+id = "the3minutenode-lifestyle-dataset-qwenedit2509-workflow"
+name = "The3MinuteNode — Qwen Edit 2509 / 12 Lifestyle Dataset"
+file = "the3minutenode-lifestyle-dataset-qwenedit2509-workflow.json"
 artifact_ids = ["qwen.edit.2509.fp8mixed", "qwen.image.encoder.2.5vl7b.fp8", "qwen.image.vae", "qwen.edit.2509.lightning-4step", "qwen.edit.2509.multiple-angles", "qwen.edit.next-scene-v2"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-easy-use", "comfyui-face-analysis", "outputlists-combiner"]
 
 [[workflows]]
-id = "dataset-qwen-edit-2511-body-angles"
-name = "Dataset Generator — Qwen Edit 2511 / 64 Body Angles"
-file = "dataset-qwen-edit-2511-body-angles.json"
+id = "the3minutenode-bodyangles-dataset-qwenedit2511-workflow"
+name = "The3MinuteNode — Qwen Edit 2511 / 64 Body Angles Dataset"
+file = "the3minutenode-bodyangles-dataset-qwenedit2511-workflow.json"
 artifact_ids = ["qwen.edit.2511.int8-convrot", "qwen.image.encoder.2.5vl7b.fp8", "qwen.image.vae", "qwen.edit.2511.lightning-4step.fp32", "qwen.edit.2511.multiple-angles", "qwen.edit.next-scene-v2"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-easy-use", "comfyui-face-analysis", "outputlists-combiner"]
 
 [[workflows]]
-id = "dataset-flux2-klein-9b-body-angles"
-name = "Dataset Generator — FLUX.2 Klein 9B / 64 Body Angles"
-file = "dataset-flux2-klein-9b-body-angles.json"
+id = "the3minutenode-bodyangles-dataset-flux2klein9b-workflow"
+name = "The3MinuteNode — FLUX.2 Klein 9B / 64 Body Angles Dataset"
+file = "the3minutenode-bodyangles-dataset-flux2klein9b-workflow.json"
 artifact_ids = ["flux2.klein.9b", "flux2.qwen3.8b.fp8mixed", "flux2.vae", "flux2.klein.multiple-angles"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-easy-use", "comfyui-face-analysis", "outputlists-combiner"]
 
 [[workflows]]
-id = "dataset-krea2-lifestyle"
-name = "Dataset Generator — Krea 2 Lifestyle"
-file = "dataset-krea2-lifestyle.json"
+id = "the3minutenode-lifestyle-dataset-krea2-workflow"
+name = "The3MinuteNode — Krea 2 Lifestyle Dataset"
+file = "the3minutenode-lifestyle-dataset-krea2-workflow.json"
 artifact_ids = ["krea2.turbo.int8-convrot", "krea2.qwen3vl4b.fp8", "qwen.image.vae", "krea2.identity-edit.v1.2"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-easy-use", "comfyui-face-analysis", "outputlists-combiner", "comfyui-krea2edit"]
 
 [[workflows]]
-id = "dataset-post-production"
-name = "Dataset Generator — Post Production"
-file = "dataset-post-production.json"
+id = "the3minutenode-post-production-dataset-workflow"
+name = "The3MinuteNode — Post Production Dataset"
+file = "the3minutenode-post-production-dataset-workflow.json"
 artifact_ids = ["krea2.turbo.int8-convrot", "krea2.qwen3vl4b.fp8", "qwen.image.vae", "flux2.klein.9b", "flux2.qwen3.8b.fp8mixed", "flux2.vae"]
 custom_node_ids = ["rgthree-comfy"]
 
 [[workflows]]
-id = "dataset-auto-caption"
-name = "Dataset Generator — Florence 2 Auto Caption"
-file = "dataset-auto-caption.json"
+id = "the3minutenode-auto-caption-dataset-workflow"
+name = "The3MinuteNode — Florence 2 Auto Caption Dataset"
+file = "the3minutenode-auto-caption-dataset-workflow.json"
 custom_node_ids = ["rgthree-comfy", "comfyui-florence2"]
 
 [[workflows]]
-id = "krea2-generate"
-name = "Krea 2 Generate"
-file = "krea2-generate.json"
+id = "the3minutenode-generate-krea2-workflow"
+name = "The3MinuteNode — Krea 2 Generate"
+file = "the3minutenode-generate-krea2-workflow.json"
 artifact_ids = ["krea2.turbo.int8-convrot", "krea2.qwen3vl4b.fp8", "qwen.image.vae"]
 custom_node_ids = ["rgthree-comfy"]
 
 [[workflows]]
-id = "face-swap-krea2-qwen2511-flux2-klein"
-name = "Face Swap — Krea 2 vs Qwen 2511 vs FLUX.2 Klein"
-file = "face-swap-krea2-qwen2511-flux2-klein.json"
+id = "the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow"
+name = "The3MinuteNode — Face Swap / Krea 2 vs Qwen 2511 vs FLUX.2 Klein"
+file = "the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow.json"
 artifact_ids = ["krea2.turbo.fp8.face-swap", "krea2.qwen3vl4b.fp8", "qwen.image.vae", "bfs.krea2.head-swap.v1.1", "krea2.amateur.v2", "qwen.edit.2511.int8-convrot", "qwen.image.encoder.2.5vl7b.int8-convrot", "qwen.edit.2511.lightning-4step.bf16", "bfs.qwen2511.head-swap.v5", "qwen.edit.f2p", "upscale.clear-reality.4x", "flux2.klein.9b.int8-convrot", "flux2.qwen3.8b.fp8mixed-abliterated", "flux2.vae", "bfs.flux2-klein.9b.head-swap"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-easy-use", "comfyui-krea2edit", "comfyui-pixaroma", "comfyui-inpaint-cropandstitch", "comfyui-controlnet-aux", "comfyui-layerstyle", "comfyui-comfyroll", "masquerade-nodes-comfyui", "cg-use-everywhere"]
 
 [[workflows]]
-id = "flux2-klein-face-swap"
-name = "FLUX.2 Klein Face Swap"
-file = "flux2-klein-face-swap.json"
+id = "the3minutenode-face-swap-flux2-klein-face-workflow"
+name = "The3MinuteNode — FLUX.2 Klein Face Swap"
+file = "the3minutenode-face-swap-flux2-klein-face-workflow.json"
 artifact_ids = ["flux2.klein.9b.int8-convrot", "flux2.qwen3.8b.fp8mixed-abliterated", "flux2.vae", "bfs.flux2-klein.9b.head-swap"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-easy-use", "comfyui-pixaroma", "comfyui-inpaint-cropandstitch", "comfyui-comfyroll"]
 
 [[workflows]]
-id = "krea2-face-swap"
-name = "Krea 2 Face Swap"
-file = "krea2-face-swap.json"
+id = "the3minutenode-face-swap-krea2-workflow"
+name = "The3MinuteNode — Krea 2 Face Swap"
+file = "the3minutenode-face-swap-krea2-workflow.json"
 artifact_ids = ["krea2.turbo.fp8.face-swap", "krea2.qwen3vl4b.fp8", "qwen.image.vae", "bfs.krea2.head-swap.v1.1", "krea2.amateur.v2"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-krea2edit", "comfyui-pixaroma", "comfyui-comfyroll"]
 
 [[workflows]]
-id = "minimax-h3-character-swap-bf16-24to60"
-name = "MiniMax H3 Character Swap BF16 24-to-60"
-file = "minimax-h3-character-swap-bf16-24to60.json"
+id = "comfybox-character-swap-bf16-24to60-minimaxh3-workflow"
+name = "ComfyBox — MiniMax H3 Character Swap BF16 24-to-60"
+file = "comfybox-character-swap-bf16-24to60-minimaxh3-workflow.json"
 artifact_ids = ["minimax.h3.ref2va.bf16", "minimax.h3.qwen3vl32b.bf16", "minimax.h3.video-vae.fp16", "minimax.h3.audio-vae.fp32"]
 custom_node_ids = ["comfyui-gapfiller", "comfyui-videohelpersuite"]
 
 [[workflows]]
-id = "qwen-edit-2511-face-swap"
-name = "Qwen Image Edit 2511 Face Swap"
-file = "qwen-edit-2511-face-swap.json"
+id = "the3minutenode-face-swap-qwenedit2511-workflow"
+name = "The3MinuteNode — Qwen Image Edit 2511 Face Swap"
+file = "the3minutenode-face-swap-qwenedit2511-workflow.json"
 artifact_ids = ["qwen.edit.2511.int8-convrot", "qwen.image.encoder.2.5vl7b.int8-convrot", "qwen.image.vae", "qwen.edit.2511.lightning-4step.bf16", "bfs.qwen2511.head-swap.v5", "qwen.edit.f2p", "upscale.clear-reality.4x"]
 custom_node_ids = ["rgthree-comfy", "comfyui-kjnodes", "comfyui-easy-use", "comfyui-pixaroma", "comfyui-inpaint-cropandstitch", "comfyui-controlnet-aux", "comfyui-layerstyle", "comfyui-comfyroll", "masquerade-nodes-comfyui", "cg-use-everywhere"]

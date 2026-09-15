@@ -154,11 +154,11 @@ comfybox models discover "Wan Animate"
 
 # workflows
 comfybox workflow list
-comfybox workflow inspect minimax-h3-reference
+comfybox workflow inspect the3minutenode-refrence-minimaxh3-workflow
 comfybox workflow inspect --file ./workflow.json
 comfybox workflow install-deps --file ./workflow.json
 comfybox workflow remove-deps --file ./workflow.json
-comfybox workflow install minimax-h3-reference --with-deps
+comfybox workflow install the3minutenode-refrence-minimaxh3-workflow --with-deps
 
 # ComfyUI lifecycle
 comfybox start

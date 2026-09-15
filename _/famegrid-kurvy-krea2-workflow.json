@@ -1,0 +1,1544 @@
+{
+  "id": "1ef780d2-ab24-47ca-8b6f-bc8eb2573ce6",
+  "revision": 0,
+  "last_node_id": 354,
+  "last_link_id": 74,
+  "nodes": [
+    {
+      "id": 271,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        100,
+        884
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            37
+          ]
+        }
+      ],
+      "title": "Negative",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "cartoon, anime, illustration, painting, drawing, sketch, 3d render, cgi, video game, plastic skin, airbrushed, cartoon eyes, overly smooth skin, doll-like, waxy skin, freckles, blurry, out of focus, low resolution, low quality, jpeg artifacts, oversaturated, overexposed, underexposed, harsh shadows, deformed, disfigured, extra limbs, extra fingers, missing fingers, mutated hands, bad anatomy, asymmetrical eyes, cross-eyed, unnatural pose, stiff pose, mannequin, watermark, text, logo, signature, frame, border, duplicate, cloned face, symmetrical face, perfect symmetry, studio backdrop, plain background, overprocessed, HDR look, glossy filter, beauty filter, smooth skin filter, AI artifacts, uncanny valley"
+      ]
+    },
+    {
+      "id": 272,
+      "type": "CLIPTextEncode",
+      "pos": [
+        600,
+        672
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 38
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 37
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            42,
+            54
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 317,
+      "type": "CLIPLoader",
+      "pos": [
+        100,
+        1614
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            24,
+            38
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "qwen3vl_4b_bf16.safetensors",
+        "krea2",
+        "default"
+      ]
+    },
+    {
+      "id": 232,
+      "type": "EmptyLatentImage",
+      "pos": [
+        100,
+        648
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            64
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        1200,
+        1600,
+        1
+      ]
+    },
+    {
+      "id": 210,
+      "type": "VAELoader",
+      "pos": [
+        100,
+        460
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "Wan2_1_VAE_fp32.safetensors"
+      ]
+    },
+    {
+      "id": 282,
+      "type": "PrimitiveFloat",
+      "pos": [
+        100,
+        1214
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            32,
+            39
+          ]
+        }
+      ],
+      "title": "CFG",
+      "properties": {
+        "Node name for S&R": "PrimitiveFloat",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        1
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        600,
+        342
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 24
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            41,
+            61
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 48,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        120.98522926461916,
+        168.65662847019797
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": 72
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "title": "Positive",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 344,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        1397.3458971453606,
+        492.1441666873197
+      ],
+      "size": [
+        204.134765625,
+        26
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 54
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            60
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        2950,
+        130
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 63
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 316,
+      "type": "UNETLoader",
+      "pos": [
+        100,
+        1402
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "krea2_raw_bf16.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 265,
+      "type": "ClownsharKSampler_Beta",
+      "pos": [
+        2195.5875874494573,
+        136.55109661388298
+      ],
+      "size": [
+        270,
+        418
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "shape": 7,
+          "type": "MODEL",
+          "link": 62
+        },
+        {
+          "name": "positive",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 61
+        },
+        {
+          "name": "negative",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 60
+        },
+        {
+          "name": "latent_image",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 64
+        },
+        {
+          "name": "sigmas",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        },
+        {
+          "name": "guides",
+          "shape": 7,
+          "type": "GUIDES",
+          "link": null
+        },
+        {
+          "name": "options",
+          "shape": 7,
+          "type": "OPTIONS",
+          "link": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 32
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            66
+          ]
+        },
+        {
+          "name": "denoised",
+          "type": "LATENT",
+          "links": []
+        },
+        {
+          "name": "options",
+          "type": "OPTIONS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ClownsharKSampler_Beta",
+        "cnr_id": "RES4LYF",
+        "ver": "46de917234f9fef3f2ab411c41e07aa3c633f4f7",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        0.5,
+        "diag_implicit/qin_zhang_2s",
+        "beta57",
+        10,
+        -1,
+        1,
+        5.5,
+        3892049570036,
+        "randomize",
+        "standard",
+        false
+      ]
+    },
+    {
+      "id": 154,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        600.9849732675808,
+        130
+      ],
+      "size": [
+        394.1066317151757,
+        93.81967921096913
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            29
+          ]
+        }
+      ],
+      "title": "Krea 2 Turbo",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "krea 2\\krea2_raw_to_turbo_r256_comfy.safetensors",
+        0.6
+      ]
+    },
+    {
+      "id": 347,
+      "type": "Note",
+      "pos": [
+        3194.016319515737,
+        -68.17769563771847
+      ],
+      "size": [
+        247.8109999999997,
+        141.19100000000003
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.5.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "Famegrid Auto Color Node is here\n\n\nhttps://github.com/ultramuseart/famegrid-auto-color"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 348,
+      "type": "RTXVideoSuperResolution",
+      "pos": [
+        3497.350799175737,
+        97.64706830958282
+      ],
+      "size": [
+        285.81015625,
+        106
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 70
+        }
+      ],
+      "outputs": [
+        {
+          "name": "upscaled_images",
+          "type": "IMAGE",
+          "links": [
+            68
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RTXVideoSuperResolution",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "scale by multiplier",
+        4,
+        "ULTRA"
+      ]
+    },
+    {
+      "id": 349,
+      "type": "ImageScaleBy",
+      "pos": [
+        3813.8837459817364,
+        102.42161915228172
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 68
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            69
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleBy",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "area",
+        0.25
+      ]
+    },
+    {
+      "id": 213,
+      "type": "SaveImage",
+      "pos": [
+        4114.675390625,
+        107
+      ],
+      "size": [
+        270,
+        270
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 69
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "famegrid_v2"
+      ]
+    },
+    {
+      "id": 340,
+      "type": "FameGridColorFinish",
+      "pos": [
+        3190,
+        131.24447054832635
+      ],
+      "size": [
+        249.7564453125,
+        82
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 44
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            70
+          ]
+        }
+      ],
+      "title": "FameGrid color and detail finish",
+      "properties": {
+        "Node name for S&R": "FameGridColorFinish",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        0.6,
+        0.6
+      ]
+    },
+    {
+      "id": 155,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1100,
+        128.91652940566115
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            45
+          ]
+        }
+      ],
+      "title": "Krea 2 filter bypass",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "krea 2\\krea2filterbypass3.safetensors",
+        1
+      ]
+    },
+    {
+      "id": 128,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1629.412799156145,
+        109.19608332247896
+      ],
+      "size": [
+        469.68785559722414,
+        90.8750158043211
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 45
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            40,
+            62
+          ]
+        }
+      ],
+      "title": "FameGrid Spicy · strength 1.0",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "krea 2\\Kurvy_Krea_2_V1.safetensors",
+        1.3
+      ]
+    },
+    {
+      "id": 350,
+      "type": "Note",
+      "pos": [
+        1665.263553351366,
+        -25.700553715099225
+      ],
+      "size": [
+        415.45454545454504,
+        88
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "IF you're using a character lora you'll likely need to turn down the strength to 0.6-1\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 346,
+      "type": "PreviewImage",
+      "pos": [
+        555.5058707134662,
+        -250.15635397575994
+      ],
+      "size": [
+        140,
+        246
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 73
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 351,
+      "type": "ShowText|pysssss",
+      "pos": [
+        217.19979219434148,
+        -549.334892558075
+      ],
+      "size": [
+        470.3299999999999,
+        218.39000000000004
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 71
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            72
+          ]
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "(A amateur photograph, detailed skin texture, shot on iphone :1.3) of a beautiful woman with (detailed skin texture, hourglass figure:1.3),kurvy curly brown hair cascading over her shoulders, warm olive skin with natural freckles, soft natural makeup, full lips smiling openly with teeth visible, standing casually in a waist-up framing with weight shifted to one hip, one hand lightly gripping the edge of her tied denim jacket and the other resting near her waist, spontaneous candid unposed moment captured mid-turn. She wears a fitted beige ribbed halter crop top tied at the front, black fitted pants, and a blue denim jacket knotted around her hips with silver chains dangling from the belt. Immediate surroundings show smooth gray concrete pillars and floor within arm’s reach. Midground reveals open parking levels with distant support columns and overhead fluorescent tubes. Distant background shows layered concrete ceilings receding into shadow with scattered ceiling lights. Overhead fluorescent lighting casts bright even illumination across her face and clothing with soft downward shadows on the concrete surfaces, natural daylight filtering in from far openings. Sharp detail, natural color balance with mild cool cast from artificial lights, high clarity, no blur, realistic iPhone grain and exposure."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 353,
+      "type": "LoadImage",
+      "pos": [
+        233.24770127792615,
+        -243.47363804863363
+      ],
+      "size": [
+        282.798828125,
+        314
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            73,
+            74
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "079280bb-43eb-4d80-b277-0549217ccfad.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 341,
+      "type": "GrokChatNode",
+      "pos": [
+        -289.39710025420305,
+        -545.3901128634221
+      ],
+      "size": [
+        477.9263671875,
+        598.2062751414206
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 74
+        }
+      ],
+      "outputs": [
+        {
+          "name": "response",
+          "type": "STRING",
+          "links": [
+            71
+          ]
+        }
+      ],
+      "title": "ALTER THIS TO SUIT YOUR CHARACTER and add the trigger word",
+      "properties": {
+        "Node name for S&R": "GrokChatNode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "You are generating a highly realistic and very aesthetically pleasing photo\n\nYour goal is to maximize photographic plausibility and realism\n\nAlways generate a single, complete image-generation prompt written focused on visual accuracy rather than prose quality\n\nALWAYS begin the generated prompt with EXACTLY THIS:\n\"(A amateur photograph, detailed skin texture, shot on iphone :1.3) of a beautiful woman with (detailed skin texture, hourglass figure:1.3),kurvy\"\n\n────────────────────────\nSUBJECT RULES (NON-NEGOTIABLE)\n────────────────────────\n- The main subject is always the first person described.\n\n────────────────────────\nMAKEUP (IF PRESENT)\n────────────────────────\n\n-  whatever is in the photo\n\n\n────────────────────────\nPOSE & EXPRESSION (use what in the refereranced photo)(CRITICAL)\n────────────────────────\nAlways describe for the main subject:\n- Their pose in detail\n\nExplicitly state the image feels unposed, spontaneous, and candid.\n\n────────────────────────\nSECONDARY SUBJECTS (REQUIRED IF PRESENT)\n────────────────────────\n\nIf other people are visible in the image:\n- Clearly identify the main subject first, then describe secondary subjects separately\n- Describe secondary subjects with LESS detail than the main subject\n- Include:\n  • Approximate position relative to the main subject\n  • Visible clothing only\n  • Posture, gesture, or activity\n  • Whether they are in focus or slightly blurred\n\nSecondary subjects should enhance realism, depth, and context — not compete for attention.\n\n────────────────────────\nCLOTHING\n────────────────────────\n\nDescribe ONLY clothing that is visible in detail.\n\n\n────────────────────────\nCAMERA & COMPOSITION\n────────────────────────\n\nEvery generated prompt MUST include:\n- Camera type: Guess from the referance image\n- Camera angle (eye-level, slightly low, etc.)\n- Photo framing (the crop) <--- MUST HAVE\n- Camera distance (medium, full body, cropped naturally)\n- the shot will always be close up, framed from waist up or shoulders up\n\n\n────────────────────────\n🚨 ENVIRONMENT (use what in the refereranced photo) (MANDATORY THREE-LAYER RULE)\n────────────────────────\n\nEvery prompt MUST describe ALL THREE layers below (if they are in the photo\n\n1️⃣ IMMEDIATE SURROUNDINGS (within arm’s reach)\n- Nearby surfaces, furniture, walls, floors, or ground\n- Small objects near the subject\n- Textures\n- Interior/Exterior Design specifics\n\n2️⃣ MIDGROUND CONTEXT\n- What fills the space behind the subject\n- Furniture layout, doors, windows, appliances, signage, or street elements\n\n3️⃣ DISTANT BACKGROUND / DEPTH (only include whats in the referance image)\n- Additional rooms\n- People or movement in the distance if appropriate\n- Atmospheric depth: reflections, light falloff, haze, layered shadows\n\n────────────────────────\nLIGHTING (REQUIRED)\n────────────────────────\n\nDescribe light SOURCES (use what in the refereranced photo):\nExamples\n- Natural light direction (windows, sunset, streetlights)\n- Artificial sources and direction (lamps, overhead lights, screens)\n- Type of lighting if profesisionally set up lighting.\n- How light interacts with both subject and environment\n- If theres any spotlighting of focused lighting effects.\n- iF outdoors what time of day, sun postion. weather.\n\n────────────────────────\nIMAGE QUALITY & COLOR TONE (use what in the refereranced photo)\n────────────────────────\n\nExplicitly include (use what in the refereranced photo):\n- Warm or cool balance with subtle color casts descriptuion\n- any filtering, color casts, lens effects, etc\n- high contrast, washed out, muted colors, low dynmaic range, blurs, etc\n- exposure level (under exposed, overexposed, normal exposure)\n- highlights and shadows\n\n────────────────────────\nFINAL VERIFICATION (MANDATORY)\n────────────────────────\n\nBefore outputting the prompt, verify:\n- The main subject is described first\n- Secondary subjects are included if present (describe them)\n- All three environment layers are present\n- The space contains multiple physical objects (unless the background is plain)\n- Lighting affects both subject and background\n- If in the referance photo include any filtering and color tone\n\n\nPrompt in natural flowing language in one paragraph\nin your prompt only include positives never things negative statements like \"this * is not in the image, etc.\nKeep to 300 words.\n\nas much variety as possible between the prompts.include different parts of graduation day\n\nno background blur or bokeh.\n",
+        "",
+        "grok-4.3",
+        10496,
+        1,
+        1,
+        false,
+        1985644658,
+        "randomize",
+        "summarize",
+        "",
+        "auto"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 352,
+      "type": "Note",
+      "pos": [
+        719.3497921943418,
+        -381.1448925580747
+      ],
+      "size": [
+        355.3799999999999,
+        159.22000000000003
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "My Custom Grok Prompting node is available on my discord in the free resources channel. \nhttps://discord.com/channels/1443937697973403730/1443997344210358282/1514354281942356138\n\nIf you wish to prompt manually just delete all the green nodes"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 354,
+      "type": "Note",
+      "pos": [
+        -571.5957319563927,
+        -545.1760701974563
+      ],
+      "size": [
+        251.33119322450648,
+        207.5309063588552
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "If you are using a character lora, add your character details and trigger word in the \"EXACTLY THIS:\" section."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 274,
+      "type": "ClownsharKSampler_Beta",
+      "pos": [
+        2580,
+        126.06700174255003
+      ],
+      "size": [
+        270,
+        418
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "shape": 7,
+          "type": "MODEL",
+          "link": 40
+        },
+        {
+          "name": "positive",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 41
+        },
+        {
+          "name": "negative",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": 42
+        },
+        {
+          "name": "latent_image",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 66
+        },
+        {
+          "name": "sigmas",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        },
+        {
+          "name": "guides",
+          "shape": 7,
+          "type": "GUIDES",
+          "link": null
+        },
+        {
+          "name": "options",
+          "shape": 7,
+          "type": "OPTIONS",
+          "link": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 39
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            63
+          ]
+        },
+        {
+          "name": "denoised",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "options",
+          "type": "OPTIONS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ClownsharKSampler_Beta",
+        "cnr_id": "RES4LYF",
+        "ver": "46de917234f9fef3f2ab411c41e07aa3c633f4f7",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        0.5,
+        "multistep/deis_2m",
+        "bong_tangent",
+        2,
+        -1,
+        0.2,
+        5.5,
+        1000003652395070,
+        "randomize",
+        "standard",
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      23,
+      48,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      24,
+      317,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      26,
+      210,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      28,
+      316,
+      0,
+      154,
+      0,
+      "MODEL"
+    ],
+    [
+      29,
+      154,
+      0,
+      155,
+      0,
+      "MODEL"
+    ],
+    [
+      32,
+      282,
+      0,
+      265,
+      7,
+      "FLOAT"
+    ],
+    [
+      37,
+      271,
+      0,
+      272,
+      1,
+      "STRING"
+    ],
+    [
+      38,
+      317,
+      0,
+      272,
+      0,
+      "CLIP"
+    ],
+    [
+      39,
+      282,
+      0,
+      274,
+      7,
+      "FLOAT"
+    ],
+    [
+      40,
+      128,
+      0,
+      274,
+      0,
+      "MODEL"
+    ],
+    [
+      41,
+      6,
+      0,
+      274,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      42,
+      272,
+      0,
+      274,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      44,
+      8,
+      0,
+      340,
+      0,
+      "IMAGE"
+    ],
+    [
+      45,
+      155,
+      0,
+      128,
+      0,
+      "MODEL"
+    ],
+    [
+      54,
+      272,
+      0,
+      344,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      60,
+      344,
+      0,
+      265,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      61,
+      6,
+      0,
+      265,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      62,
+      128,
+      0,
+      265,
+      0,
+      "MODEL"
+    ],
+    [
+      63,
+      274,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      64,
+      232,
+      0,
+      265,
+      3,
+      "LATENT"
+    ],
+    [
+      66,
+      265,
+      0,
+      274,
+      3,
+      "LATENT"
+    ],
+    [
+      68,
+      348,
+      0,
+      349,
+      0,
+      "IMAGE"
+    ],
+    [
+      69,
+      349,
+      0,
+      213,
+      0,
+      "IMAGE"
+    ],
+    [
+      70,
+      340,
+      0,
+      348,
+      0,
+      "IMAGE"
+    ],
+    [
+      71,
+      341,
+      0,
+      351,
+      0,
+      "STRING"
+    ],
+    [
+      72,
+      351,
+      0,
+      48,
+      0,
+      "STRING"
+    ],
+    [
+      73,
+      353,
+      0,
+      346,
+      0,
+      "IMAGE"
+    ],
+    [
+      74,
+      353,
+      0,
+      341,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "ds": {
+      "scale": 1.1,
+      "offset": [
+        -742.55301140927,
+        84.35429567852692
+      ]
+    },
+    "links_added_by_ue": [],
+    "frontendVersion": "1.48.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

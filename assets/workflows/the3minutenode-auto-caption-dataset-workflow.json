@@ -1,0 +1,346 @@
+{
+  "id": "2572e87f-8d42-4143-b37e-1c4500cd7046",
+  "revision": 0,
+  "last_node_id": 13,
+  "last_link_id": 9,
+  "nodes": [
+    {
+      "id": 7,
+      "type": "DownloadAndLoadFlorence2Model",
+      "pos": [
+        5161.297160478354,
+        1603.872143110242
+      ],
+      "size": [
+        332.9986328125,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora",
+          "shape": 7,
+          "type": "PEFTLORA",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-florence2",
+        "ver": "1.1.0",
+        "Node name for S&R": "DownloadAndLoadFlorence2Model"
+      },
+      "widgets_values": [
+        "gokaygokay/Florence-2-SD3-Captioner",
+        "fp16",
+        true
+      ]
+    },
+    {
+      "id": 1,
+      "type": "Florence2Run",
+      "pos": [
+        5557.702828435547,
+        1541.905003423171
+      ],
+      "size": [
+        400,
+        364
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "caption",
+          "type": "STRING",
+          "links": [
+            5
+          ]
+        },
+        {
+          "name": "data",
+          "type": "JSON",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-florence2",
+        "ver": "1.1.0",
+        "Node name for S&R": "Florence2Run"
+      },
+      "widgets_values": [
+        "",
+        "more_detailed_caption",
+        true,
+        false,
+        1024,
+        3,
+        true,
+        "",
+        42,
+        "fixed"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "SaveImageTextDataSetToFolder",
+      "pos": [
+        6021.588646967039,
+        1457.3471693717831
+      ],
+      "size": [
+        282.9869140625,
+        126
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 3
+        },
+        {
+          "name": "texts",
+          "shape": 7,
+          "type": "STRING",
+          "link": 5
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "SaveImageTextDataSetToFolder"
+      },
+      "widgets_values": [
+        "dataset",
+        "image",
+        "overwrite"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "Note",
+      "pos": [
+        6023.543275212261,
+        1311.8789639280453
+      ],
+      "size": [
+        250.76592899465004,
+        93.97726417610738
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI/output"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 2,
+      "type": "LoadImageDataSetFromFolder",
+      "pos": [
+        5155.994400388845,
+        1460.7601367549316
+      ],
+      "size": [
+        341.63441946041894,
+        62.974627643841586
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": [
+            1,
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "LoadImageDataSetFromFolder"
+      },
+      "widgets_values": [
+        "3d"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "Note",
+      "pos": [
+        5165.894693062244,
+        1314.8383408318298
+      ],
+      "size": [
+        250.76592899465004,
+        93.97726417610738
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI/input"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 13,
+      "type": "MarkdownNote",
+      "pos": [
+        6351.328216079918,
+        1317.855643242086
+      ],
+      "size": [
+        291.59505925453686,
+        88
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Link",
+      "properties": {},
+      "widgets_values": [
+        "[🟢 ComfyUI LoRA Dataset Captioner: WD14 + Florence2 Dual Workflow (ComfyUI Shortcut)](https://www.youtube.com/watch?v=u5iGv-WZckg)"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 12,
+      "type": "Label (rgthree)",
+      "pos": [
+        5164.362809686322,
+        1185.7597815825613
+      ],
+      "size": [
+        1170.80078125,
+        50
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Dataset Generator - @The 3-Minute Node - v260724",
+      "properties": {
+        "fontSize": 50,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      2,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      1,
+      2,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      9,
+      7,
+      0,
+      1,
+      1,
+      "FL2MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": [
+        -4652.36352848405,
+        -896.5371155322446
+      ]
+    },
+    "frontendVersion": "1.47.10",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
+
