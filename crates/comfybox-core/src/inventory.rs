@@ -34,15 +34,7 @@ impl<'a> Inventory<'a> {
 
     pub fn status(&self, artifact: &Artifact) -> ArtifactStatus {
         let final_path = self.artifact_path(artifact);
-        if let Ok(meta) = fs::metadata(&final_path) {
-            if let Some(expected) = artifact.size_bytes {
-                if meta.len() != expected {
-                    return ArtifactStatus::SizeMismatch {
-                        actual: meta.len(),
-                        expected,
-                    };
-                }
-            }
+        if fs::metadata(&final_path).is_ok() {
             return ArtifactStatus::Installed;
         }
         let (_, part, ranges) = temp_paths(self.comfy_root, artifact);

@@ -2107,7 +2107,7 @@
         [
           "qwen3vl_4b_bf16.safetensors",
           "https://huggingface.co/msho19/comfybox/resolve/main/qwen3vl_4b_bf16.safetensors",
-          "8.88 GB",
+          "8875719384 B",
           "Text encoder weights; BF16 precision; SafeTensors file; hosted on Hugging Face."
         ]
       ]

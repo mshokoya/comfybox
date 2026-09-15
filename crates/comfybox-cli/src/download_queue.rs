@@ -27,7 +27,10 @@ const MAX_LOG_LINES: usize = 1_000;
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum JobStatus {
     Queued,
+    Resolving,
     Downloading,
+    Processing,
+    Installing,
     Paused,
     Failed,
     Completed,
@@ -37,11 +40,25 @@ impl JobStatus {
     pub fn label(self) -> &'static str {
         match self {
             Self::Queued => "QUEUED",
-            Self::Downloading => "ACTIVE",
+            Self::Resolving => "RESOLVING",
+            Self::Downloading => "DOWNLOADING",
+            Self::Processing => "PROCESSING",
+            Self::Installing => "INSTALLING",
             Self::Paused => "PAUSED",
             Self::Failed => "FAILED",
             Self::Completed => "DONE",
         }
+    }
+
+    pub fn is_active(self) -> bool {
+        matches!(
+            self,
+            Self::Queued
+                | Self::Resolving
+                | Self::Downloading
+                | Self::Processing
+                | Self::Installing
+        )
     }
 }
 
@@ -87,6 +104,14 @@ struct SystemOperation {
     abort: Option<AbortHandle>,
 }
 
+struct CustomNodeOperation {
+    node: CustomNode,
+    root: PathBuf,
+    status: JobStatus,
+    error: Option<String>,
+    abort: Option<AbortHandle>,
+}
+
 #[derive(Serialize, Deserialize)]
 struct PersistedJob {
     artifact_id: String,
@@ -103,6 +128,10 @@ enum QueueEvent {
         artifact_id: String,
         progress: DownloadProgress,
     },
+    Stage {
+        artifact_id: String,
+        status: JobStatus,
+    },
     Finished {
         artifact_id: String,
         result: std::result::Result<(), String>,
@@ -110,12 +139,17 @@ enum QueueEvent {
     Log(String),
     OperationFinished(std::result::Result<(), String>),
     SystemOperationFinished(std::result::Result<(), String>),
+    CustomNodeFinished {
+        node_id: String,
+        result: std::result::Result<(), String>,
+    },
 }
 
 pub struct DownloadQueue {
     jobs: Vec<Job>,
     python_deps: Option<Operation>,
     system_deps: Option<SystemOperation>,
+    custom_nodes: Vec<CustomNodeOperation>,
     logs: VecDeque<String>,
     sender: mpsc::UnboundedSender<QueueEvent>,
     receiver: mpsc::UnboundedReceiver<QueueEvent>,
@@ -150,9 +184,10 @@ impl DownloadQueue {
             let Some(artifact) = catalog.artifact(&saved.artifact_id).cloned() else {
                 continue;
             };
-            let status = match saved.status {
-                JobStatus::Downloading | JobStatus::Queued => JobStatus::Paused,
-                other => other,
+            let status = if saved.status.is_active() {
+                JobStatus::Paused
+            } else {
+                saved.status
             };
             jobs.push(Job {
                 artifact,
@@ -193,6 +228,7 @@ impl DownloadQueue {
             jobs,
             python_deps: None,
             system_deps: None,
+            custom_nodes: Vec::new(),
             logs,
             sender,
             receiver,
@@ -212,10 +248,11 @@ impl DownloadQueue {
     ) -> Result<usize> {
         let mut added = 0;
         for artifact in artifacts {
-            if self.jobs.iter().any(|job| {
-                job.artifact.id == artifact.id
-                    && matches!(job.status, JobStatus::Queued | JobStatus::Downloading)
-            }) {
+            if self
+                .jobs
+                .iter()
+                .any(|job| job.artifact.id == artifact.id && job.status.is_active())
+            {
                 self.log(format!(
                     "{} is already queued or downloading",
                     artifact.name
@@ -263,18 +300,34 @@ impl DownloadQueue {
         nodes: impl IntoIterator<Item = CustomNode>,
     ) {
         for node in nodes {
-            let root = root.to_path_buf();
-            let sender = self.sender.clone();
+            if self
+                .custom_nodes
+                .iter()
+                .any(|operation| operation.node.id == node.id && operation.status.is_active())
+            {
+                self.log(format!("{} is already queued or installing", node.name));
+                continue;
+            }
             self.log(format!("queued custom-node download {}", node.name));
-            tokio::spawn(async move {
-                let name = node.name.clone();
-                let result = install_custom_node(root, node, &sender).await;
-                let message = match result {
-                    Ok(()) => format!("completed custom-node download {name}"),
-                    Err(error) => format!("failed custom-node download {name}: {error:#}"),
-                };
-                let _ = sender.send(QueueEvent::Log(message));
-            });
+            if let Some(existing) = self
+                .custom_nodes
+                .iter_mut()
+                .find(|operation| operation.node.id == node.id)
+            {
+                existing.node = node;
+                existing.root = root.to_path_buf();
+                existing.status = JobStatus::Queued;
+                existing.error = None;
+                existing.abort = None;
+            } else {
+                self.custom_nodes.push(CustomNodeOperation {
+                    node,
+                    root: root.to_path_buf(),
+                    status: JobStatus::Queued,
+                    error: None,
+                    abort: None,
+                });
+            }
         }
     }
 
@@ -369,6 +422,27 @@ impl DownloadQueue {
                         }
                     }
                 }
+                QueueEvent::CustomNodeFinished { node_id, result } => {
+                    if let Some(index) = self
+                        .custom_nodes
+                        .iter()
+                        .position(|operation| operation.node.id == node_id)
+                    {
+                        let name = self.custom_nodes[index].node.name.clone();
+                        self.custom_nodes[index].abort = None;
+                        match result {
+                            Ok(()) => {
+                                self.custom_nodes[index].status = JobStatus::Completed;
+                                self.log(format!("completed custom-node download {name}"));
+                            }
+                            Err(error) => {
+                                self.custom_nodes[index].status = JobStatus::Failed;
+                                self.custom_nodes[index].error = Some(error.clone());
+                                self.log(format!("failed custom-node download {name}: {error}"));
+                            }
+                        }
+                    }
+                }
                 QueueEvent::Progress {
                     artifact_id,
                     progress,
@@ -387,6 +461,21 @@ impl DownloadQueue {
                         }
                         job.downloaded_bytes = progress.downloaded_bytes;
                         job.total_bytes = Some(progress.total_bytes);
+                    }
+                }
+                QueueEvent::Stage {
+                    artifact_id,
+                    status,
+                } => {
+                    if let Some(job) = self
+                        .jobs
+                        .iter_mut()
+                        .find(|job| job.artifact.id == artifact_id)
+                    {
+                        job.status = status;
+                        if status != JobStatus::Downloading {
+                            job.bytes_per_second = 0.0;
+                        }
                     }
                 }
                 QueueEvent::Finished {
@@ -425,17 +514,29 @@ impl DownloadQueue {
         let mut active = self
             .jobs
             .iter()
-            .filter(|job| job.status == JobStatus::Downloading)
-            .count();
+            .filter(|job| job.status.is_active())
+            .count()
+            + self
+                .custom_nodes
+                .iter()
+                .filter(|operation| operation.status.is_active())
+                .count();
         while active < limit {
-            let Some(index) = self
+            if let Some(index) = self
                 .jobs
                 .iter()
                 .position(|job| job.status == JobStatus::Queued)
-            else {
+            {
+                self.start(index);
+            } else if let Some(index) = self
+                .custom_nodes
+                .iter()
+                .position(|operation| operation.status == JobStatus::Queued)
+            {
+                self.start_custom_node(index);
+            } else {
                 break;
-            };
-            self.start(index);
+            }
             active += 1;
             changed = true;
             persist_needed = true;
@@ -464,7 +565,20 @@ impl DownloadQueue {
 
     pub fn stop(&mut self, index: usize) -> Result<()> {
         if index >= self.jobs.len() {
-            let operation_index = index - self.jobs.len();
+            let mut operation_index = index - self.jobs.len();
+            if operation_index < self.custom_nodes.len() {
+                let operation = &mut self.custom_nodes[operation_index];
+                if let Some(abort) = operation.abort.take() {
+                    abort.abort();
+                }
+                if operation.status.is_active() {
+                    operation.status = JobStatus::Paused;
+                    let name = operation.node.name.clone();
+                    self.log(format!("paused custom-node install {name}"));
+                }
+                return Ok(());
+            }
+            operation_index -= self.custom_nodes.len();
             if operation_index == 0
                 && let Some(operation) = &mut self.python_deps
             {
@@ -489,7 +603,7 @@ impl DownloadQueue {
         if let Some(abort) = job.abort.take() {
             abort.abort();
         }
-        if matches!(job.status, JobStatus::Downloading | JobStatus::Queued) {
+        if job.status.is_active() {
             job.status = JobStatus::Paused;
             job.bytes_per_second = 0.0;
             let name = job.artifact.name.clone();
@@ -501,7 +615,16 @@ impl DownloadQueue {
 
     pub fn resume(&mut self, index: usize) -> Result<()> {
         if index >= self.jobs.len() {
-            let operation_index = index - self.jobs.len();
+            let mut operation_index = index - self.jobs.len();
+            if operation_index < self.custom_nodes.len() {
+                let operation = &mut self.custom_nodes[operation_index];
+                if operation.status == JobStatus::Paused {
+                    operation.status = JobStatus::Queued;
+                    operation.error = None;
+                }
+                return Ok(());
+            }
+            operation_index -= self.custom_nodes.len();
             if operation_index == 0
                 && let Some(operation) = &mut self.python_deps
                 && operation.status == JobStatus::Paused
@@ -532,7 +655,16 @@ impl DownloadQueue {
 
     pub fn retry(&mut self, index: usize) -> Result<()> {
         if index >= self.jobs.len() {
-            let operation_index = index - self.jobs.len();
+            let mut operation_index = index - self.jobs.len();
+            if operation_index < self.custom_nodes.len() {
+                let operation = &mut self.custom_nodes[operation_index];
+                if operation.status == JobStatus::Failed {
+                    operation.status = JobStatus::Queued;
+                    operation.error = None;
+                }
+                return Ok(());
+            }
+            operation_index -= self.custom_nodes.len();
             if operation_index == 0
                 && let Some(operation) = &mut self.python_deps
                 && operation.status == JobStatus::Failed
@@ -577,6 +709,24 @@ impl DownloadQueue {
                 endpoint: job.options.hf_endpoint.clone(),
             })
             .collect::<Vec<_>>();
+        snapshots.extend(self.custom_nodes.iter().map(|operation| {
+            JobSnapshot {
+                artifact_id: format!("custom-node:{}", operation.node.id),
+                name: operation.node.name.clone(),
+                relative_path: operation
+                    .root
+                    .join("custom_nodes")
+                    .join(&operation.node.folder_name)
+                    .display()
+                    .to_string(),
+                status: operation.status,
+                downloaded_bytes: 0,
+                total_bytes: None,
+                bytes_per_second: 0.0,
+                error: operation.error.clone(),
+                endpoint: Some(operation.node.git_url.clone()),
+            }
+        }));
         if let Some(operation) = &self.python_deps {
             snapshots.push(JobSnapshot {
                 artifact_id: "python-dependencies".into(),
@@ -611,12 +761,59 @@ impl DownloadQueue {
         snapshots
     }
 
+    pub fn artifact_status(&self, artifact_id: &str) -> Option<JobStatus> {
+        self.jobs
+            .iter()
+            .find(|job| job.artifact.id == artifact_id)
+            .map(|job| job.status)
+    }
+
+    pub fn custom_node_status(&self, node_id: &str) -> Option<JobStatus> {
+        self.custom_nodes
+            .iter()
+            .find(|operation| operation.node.id == node_id)
+            .map(|operation| operation.status)
+    }
+
+    pub fn operation_status(&self, id: &str) -> Option<JobStatus> {
+        match id {
+            "python-dependencies" => self.python_deps.as_ref().map(|operation| operation.status),
+            "system-dependencies" => self.system_deps.as_ref().map(|operation| operation.status),
+            _ => None,
+        }
+    }
+
+    pub fn has_active_operations(&self) -> bool {
+        self.jobs.iter().any(|job| job.status.is_active())
+            || self
+                .python_deps
+                .as_ref()
+                .is_some_and(|operation| operation.status.is_active())
+            || self
+                .system_deps
+                .as_ref()
+                .is_some_and(|operation| operation.status.is_active())
+            || self
+                .custom_nodes
+                .iter()
+                .any(|operation| operation.status.is_active())
+    }
+
+    pub fn active_descriptions(&self) -> Vec<String> {
+        self.snapshots()
+            .into_iter()
+            .filter(|job| job.status.is_active())
+            .map(|job| format!("{}: {}", job.name, job.status.label()))
+            .collect()
+    }
+
     pub fn logs(&self) -> impl DoubleEndedIterator<Item = &str> {
         self.logs.iter().map(String::as_str)
     }
 
     pub fn len(&self) -> usize {
         self.jobs.len()
+            + self.custom_nodes.len()
             + usize::from(self.python_deps.is_some())
             + usize::from(self.system_deps.is_some())
     }
@@ -625,6 +822,12 @@ impl DownloadQueue {
         for job in &mut self.jobs {
             if job.status != JobStatus::Downloading {
                 job.options.parallelism = parallelism.max(1);
+            }
+        }
+        for operation in &mut self.custom_nodes {
+            if let Some(abort) = operation.abort.take() {
+                abort.abort();
+                operation.status = JobStatus::Paused;
             }
         }
         self.log(format!(
@@ -694,12 +897,26 @@ impl DownloadQueue {
             });
         }));
         let log_sender = self.sender.clone();
+        let stage_id = artifact.id.clone();
         options.log = Some(Arc::new(move |message| {
+            let status = match message.as_str() {
+                "phase:resolving" => Some(JobStatus::Resolving),
+                "phase:downloading" => Some(JobStatus::Downloading),
+                "phase:processing" => Some(JobStatus::Processing),
+                "phase:installing" => Some(JobStatus::Installing),
+                _ => None,
+            };
+            if let Some(status) = status {
+                let _ = log_sender.send(QueueEvent::Stage {
+                    artifact_id: stage_id.clone(),
+                    status,
+                });
+            }
             let _ = log_sender.send(QueueEvent::Log(format!("[DOWNLOAD] {message}")));
         }));
         let sender = self.sender.clone();
         let finished_id = artifact.id.clone();
-        self.jobs[index].status = JobStatus::Downloading;
+        self.jobs[index].status = JobStatus::Resolving;
         self.jobs[index].last_progress = Instant::now();
         self.jobs[index].last_bytes = self.jobs[index].downloaded_bytes;
         self.jobs[index].error = None;
@@ -720,6 +937,25 @@ impl DownloadQueue {
         self.jobs[index].abort = Some(handle.abort_handle());
     }
 
+    fn start_custom_node(&mut self, index: usize) {
+        let node = self.custom_nodes[index].node.clone();
+        let node_id = node.id.clone();
+        let name = node.name.clone();
+        let root = self.custom_nodes[index].root.clone();
+        let sender = self.sender.clone();
+        self.custom_nodes[index].status = JobStatus::Installing;
+        self.custom_nodes[index].error = None;
+        self.log(format!("started custom-node download {name}"));
+        let task_sender = sender.clone();
+        let handle = tokio::spawn(async move {
+            let result = install_custom_node(root, node, &task_sender)
+                .await
+                .map_err(|error| format!("{error:#}"));
+            let _ = sender.send(QueueEvent::CustomNodeFinished { node_id, result });
+        });
+        self.custom_nodes[index].abort = Some(handle.abort_handle());
+    }
+
     fn start_python_deps(&mut self) {
         let Some(operation) = &mut self.python_deps else {
             return;
@@ -727,7 +963,7 @@ impl DownloadQueue {
         let root = operation.root.clone();
         let pip_index_url = operation.pip_index_url.clone();
         let sender = self.sender.clone();
-        operation.status = JobStatus::Downloading;
+        operation.status = JobStatus::Installing;
         self.log("started ComfyUI Python dependencies".into());
         let handle = tokio::spawn(async move {
             let result = install_python_dependencies(&root, &pip_index_url, &sender)
@@ -746,7 +982,7 @@ impl DownloadQueue {
         };
         let dependencies = operation.dependencies.clone();
         let sender = self.sender.clone();
-        operation.status = JobStatus::Downloading;
+        operation.status = JobStatus::Installing;
         self.log("started system dependencies".into());
         let handle = tokio::spawn(async move {
             let result = install_system_dependencies(&dependencies, &sender)

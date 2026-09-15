@@ -20,7 +20,7 @@ use ratatui::{
     layout::{Alignment, Constraint, Direction, Layout, Rect},
     style::{Color, Modifier, Style},
     text::{Line, Span, Text},
-    widgets::{Block, Borders, List, ListItem, ListState, Paragraph, Tabs, Wrap},
+    widgets::{Block, Borders, Clear, List, ListItem, ListState, Paragraph, Tabs, Wrap},
 };
 use std::{
     collections::{HashMap, HashSet},
@@ -47,6 +47,7 @@ pub enum DashboardAction {
     InstallPythonDeps,
     InstallSystemDeps,
     ConfigurePypi,
+    ConfigureHfEndpoint,
     SetHfToken,
     ToggleServer,
     InstallPackage(InstallSelection),
@@ -148,6 +149,11 @@ impl Section {
 enum Health {
     Ready,
     Missing,
+    Queued,
+    Resolving,
+    Downloading,
+    Processing,
+    Installing,
     Paused,
     Broken,
     Blocked,
@@ -159,6 +165,11 @@ impl Health {
         match self {
             Self::Ready => "READY",
             Self::Missing => "MISSING",
+            Self::Queued => "QUEUED",
+            Self::Resolving => "◐ RESOLVING",
+            Self::Downloading => "◐ DOWNLOADING",
+            Self::Processing => "◐ PROCESSING",
+            Self::Installing => "◐ INSTALLING",
             Self::Paused => "PAUSED",
             Self::Broken => "BROKEN",
             Self::Blocked => "TOKEN",
@@ -170,6 +181,11 @@ impl Health {
         match self {
             Self::Ready => GREEN,
             Self::Missing => MUTED,
+            Self::Queued => YELLOW,
+            Self::Resolving => ACCENT,
+            Self::Downloading => ACCENT,
+            Self::Processing => ACCENT,
+            Self::Installing => ACCENT,
             Self::Paused => YELLOW,
             Self::Broken => RED,
             Self::Blocked => YELLOW,
@@ -200,6 +216,7 @@ struct Dashboard<'a> {
     server_status_sender: mpsc::Sender<bool>,
     server_check_pending: bool,
     clear_before_draw: bool,
+    quit_warning: bool,
 }
 
 #[derive(Default)]
@@ -271,6 +288,7 @@ pub fn run(
         server_status_sender,
         server_check_pending: false,
         clear_before_draw: false,
+        quit_warning: false,
     };
 
     let mut needs_draw = true;
@@ -308,6 +326,9 @@ pub fn run(
             needs_draw = false;
         }
         if !event::poll(Duration::from_millis(250))? {
+            if app.queue.has_active_operations() || app.server_check_pending {
+                needs_draw = true;
+            }
             continue;
         }
         let key = match event::read()? {
@@ -322,6 +343,14 @@ pub fn run(
         if key.kind != KeyEventKind::Press {
             continue;
         }
+        let key = if matches!(key.code, KeyCode::Char('\r' | '\n')) {
+            KeyEvent {
+                code: KeyCode::Enter,
+                ..key
+            }
+        } else {
+            key
+        };
         if let Some(action) = app.handle_key(key) {
             return Ok(action);
         }
@@ -378,11 +407,58 @@ impl Dashboard<'_> {
             Section::System => self.render_system(frame, vertical[2]),
         }
         self.render_footer(frame, vertical[3]);
+        if self.quit_warning {
+            self.render_quit_warning(frame, area);
+        }
+    }
+
+    fn render_quit_warning(&self, frame: &mut Frame<'_>, area: Rect) {
+        let width = area.width.saturating_sub(4).clamp(1, 76);
+        let active = self.queue.active_descriptions();
+        let height = (active.len() as u16 + 7)
+            .min(area.height.saturating_sub(2))
+            .max(1);
+        let popup = Rect::new(
+            area.x + area.width.saturating_sub(width) / 2,
+            area.y + area.height.saturating_sub(height) / 2,
+            width,
+            height,
+        );
+        let mut lines = vec![
+            Line::from(Span::styled(
+                "Work is still in progress",
+                Style::default().fg(YELLOW).add_modifier(Modifier::BOLD),
+            )),
+            Line::from("Quitting will pause or interrupt these managed operations:"),
+            Line::from(""),
+        ];
+        lines.extend(
+            active
+                .into_iter()
+                .map(|item| Line::from(format!("• {item}"))),
+        );
+        lines.push(Line::from(""));
+        lines.push(Line::from("[ q / Enter ] Quit    [ Esc ] Return"));
+        frame.render_widget(Clear, popup);
+        frame.render_widget(
+            Paragraph::new(lines).wrap(Wrap { trim: true }).block(
+                Block::default()
+                    .title(" Confirm exit ")
+                    .borders(Borders::ALL)
+                    .border_style(Style::default().fg(YELLOW)),
+            ),
+            popup,
+        );
     }
 
     fn render_header(&self, frame: &mut Frame<'_>, area: Rect) {
         let configured = self.valid_comfy_root().is_some();
-        let server = if self.comfy_running {
+        let server = if self.server_check_pending {
+            Span::styled(
+                " ◐ CHECKING ",
+                Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+            )
+        } else if self.comfy_running {
             Span::styled(
                 " ● RUNNING ",
                 Style::default().fg(GREEN).add_modifier(Modifier::BOLD),
@@ -537,9 +613,17 @@ impl Dashboard<'_> {
             return;
         };
         let health = &self.artifact_health;
+        let jobs = self.queue.snapshots();
+        let queued = jobs
+            .iter()
+            .filter(|job| job.status == JobStatus::Queued)
+            .count();
+        let downloading = jobs.iter().filter(|job| job.status.is_active()).count();
         let lines = vec![
             metric_line("Ready", health.ready, GREEN),
             metric_line("Missing", health.missing, MUTED),
+            metric_line("Queued", queued, YELLOW),
+            metric_line("Downloading", downloading, ACCENT),
             metric_line("Paused", health.paused, YELLOW),
             metric_line("Broken", health.broken, RED),
         ];
@@ -722,10 +806,7 @@ impl Dashboard<'_> {
             .iter()
             .map(|artifact| {
                 let health = self
-                    .artifact_health
-                    .by_id
-                    .get(&artifact.id)
-                    .copied()
+                    .artifact_health_for(&artifact.id)
                     .unwrap_or(Health::Missing);
                 ListItem::new(Line::from(vec![
                     status_badge(health),
@@ -802,11 +883,7 @@ impl Dashboard<'_> {
             .custom_nodes
             .iter()
             .map(|node| {
-                let health = if self.installed_custom_nodes.contains(&node.id) {
-                    Health::Ready
-                } else {
-                    Health::Missing
-                };
+                let health = self.custom_node_health(&node.id);
                 ListItem::new(Line::from(vec![
                     status_badge(health),
                     Span::raw(" "),
@@ -1070,12 +1147,7 @@ impl Dashboard<'_> {
                 let text = match row {
                     PlanRow::Model(id) => {
                         let artifact = self.catalog.artifact(id);
-                        let health = self
-                            .artifact_health
-                            .by_id
-                            .get(id)
-                            .copied()
-                            .unwrap_or(Health::Missing);
+                        let health = self.artifact_health_for(id).unwrap_or(Health::Missing);
                         let size = artifact
                             .and_then(|item| {
                                 let source = editor.selected_sources.get(id).copied().unwrap_or(0);
@@ -1102,12 +1174,7 @@ impl Dashboard<'_> {
                             .catalog
                             .artifact(id)
                             .and_then(|a| a.sources.get(*index));
-                        let health = self
-                            .artifact_health
-                            .by_id
-                            .get(id)
-                            .copied()
-                            .unwrap_or(Health::Missing);
+                        let health = self.artifact_health_for(id).unwrap_or(Health::Missing);
                         let checked =
                             editor.selected_sources.get(id).copied().unwrap_or(0) == *index;
                         format!(
@@ -1150,12 +1217,7 @@ impl Dashboard<'_> {
                     PlanRow::DependencyArtifact(id) => {
                         let artifact = self.catalog.artifact(id);
                         let enabled = !editor.disabled_dependencies.contains(id);
-                        let health = self
-                            .artifact_health
-                            .by_id
-                            .get(id)
-                            .copied()
-                            .unwrap_or(Health::Missing);
+                        let health = self.artifact_health_for(id).unwrap_or(Health::Missing);
                         let source_index = editor.selected_sources.get(id).copied().unwrap_or(0);
                         let size = artifact
                             .and_then(|item| {
@@ -1180,7 +1242,7 @@ impl Dashboard<'_> {
                     }
                     PlanRow::DependencyNode(id) => {
                         let enabled = !editor.disabled_dependencies.contains(id);
-                        let ready = self.installed_custom_nodes.contains(id);
+                        let health = self.custom_node_health(id);
                         format!(
                             "    [{}] {}  [{}]",
                             if enabled { "x" } else { " " },
@@ -1188,7 +1250,7 @@ impl Dashboard<'_> {
                                 .custom_node(id)
                                 .map(|node| node.name.as_str())
                                 .unwrap_or(id),
-                            if ready { "READY" } else { "MISSING" }
+                            health.label()
                         )
                     }
                     PlanRow::Ok => "              [ OK — start downloads ]".into(),
@@ -1312,7 +1374,7 @@ impl Dashboard<'_> {
             .queue
             .snapshots()
             .iter()
-            .filter(|job| job.status == JobStatus::Downloading)
+            .filter(|job| job.status.is_active())
             .count();
         let lines = vec![
             Line::from(vec![
@@ -1339,6 +1401,26 @@ impl Dashboard<'_> {
                 )),
             ]),
             Line::from(vec![label("Active now"), Span::raw(active.to_string())]),
+            Line::from(vec![
+                label("Hugging Face"),
+                Span::styled(
+                    if self
+                        .cfg
+                        .hf_endpoint
+                        .as_deref()
+                        .is_some_and(|endpoint| endpoint.contains("hf-mirror.com"))
+                        || (self.cfg.hf_endpoint.is_none()
+                            && env::var("HF_ENDPOINT")
+                                .is_ok_and(|endpoint| endpoint.contains("hf-mirror.com")))
+                    {
+                        "China mirror (hf-mirror.com)"
+                    } else {
+                        "Official Hugging Face"
+                    },
+                    Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+                ),
+                Span::raw("  h change"),
+            ]),
             Line::from(vec![
                 label("Python index"),
                 Span::styled(
@@ -1412,13 +1494,46 @@ impl Dashboard<'_> {
             ]),
             Line::from(vec![
                 label("Py deps"),
-                state_span(
-                    if self.system.python_dependencies_ready {
-                        "ready"
-                    } else {
-                        "not installed"
-                    },
-                    self.system.python_dependencies_ready,
+                match self.queue.operation_status("python-dependencies") {
+                    Some(JobStatus::Queued) => Span::styled("QUEUED", Style::default().fg(YELLOW)),
+                    Some(
+                        JobStatus::Resolving
+                        | JobStatus::Downloading
+                        | JobStatus::Processing
+                        | JobStatus::Installing,
+                    ) => Span::styled("◐ INSTALLING", Style::default().fg(ACCENT)),
+                    Some(JobStatus::Failed) => Span::styled("FAILED", Style::default().fg(RED)),
+                    Some(JobStatus::Completed) => Span::styled("ready", Style::default().fg(GREEN)),
+                    Some(JobStatus::Paused) => Span::styled("PAUSED", Style::default().fg(YELLOW)),
+                    None => state_span(
+                        if self.system.python_dependencies_ready {
+                            "ready"
+                        } else {
+                            "not installed"
+                        },
+                        self.system.python_dependencies_ready,
+                    ),
+                },
+            ]),
+            Line::from(vec![
+                label("System deps job"),
+                Span::styled(
+                    self.queue
+                        .operation_status("system-dependencies")
+                        .map(JobStatus::label)
+                        .unwrap_or("idle"),
+                    Style::default().fg(match self.queue.operation_status("system-dependencies") {
+                        Some(JobStatus::Failed) => RED,
+                        Some(JobStatus::Completed) => GREEN,
+                        Some(
+                            JobStatus::Resolving
+                            | JobStatus::Downloading
+                            | JobStatus::Processing
+                            | JobStatus::Installing,
+                        ) => ACCENT,
+                        Some(JobStatus::Queued | JobStatus::Paused) => YELLOW,
+                        None => MUTED,
+                    }),
                 ),
             ]),
             Line::from(vec![
@@ -1557,7 +1672,9 @@ impl Dashboard<'_> {
                     " ←/→ tabs  ↑/↓ select  Enter watch  x pause  c continue  r retry  q quit "
                         .into()
                 }
-                Section::Settings => " ←/→ tabs  −/+ files  [/] chunks  y PyPI  q quit ".into(),
+                Section::Settings => {
+                    " ←/→ tabs  −/+ files  [/] chunks  h Hugging Face  y PyPI  q quit ".into()
+                }
                 Section::System => " ←/→ tabs  Enter install system deps  q quit ".into(),
                 _ => " ←/→ tabs  s server  l locate  i install  t token  r refresh  q quit ".into(),
             }
@@ -1572,7 +1689,7 @@ impl Dashboard<'_> {
                 | Section::CustomNodes
                 | Section::Workflows => " Enter install  r refresh checks ",
                 Section::Downloads => " Enter watch  x pause  c continue  r retry  b background ",
-                Section::Settings => " −/+ files  [/] chunks  y PyPI source ",
+                Section::Settings => " −/+ files  [/] chunks  h Hugging Face  y PyPI source ",
                 Section::System => " Enter install system deps ",
                 _ => "",
             };
@@ -1589,6 +1706,16 @@ impl Dashboard<'_> {
     }
 
     fn handle_key(&mut self, key: KeyEvent) -> Option<DashboardAction> {
+        if self.quit_warning {
+            return match key.code {
+                KeyCode::Esc => {
+                    self.quit_warning = false;
+                    None
+                }
+                KeyCode::Char('q') | KeyCode::Enter => Some(DashboardAction::Quit),
+                _ => None,
+            };
+        }
         if self.plan_editor.is_some() {
             return self.handle_plan_key(key);
         }
@@ -1597,9 +1724,19 @@ impl Dashboard<'_> {
             KeyCode::Char('b') if Section::ALL[self.section] == Section::Downloads => {
                 self.download_detail = false
             }
-            KeyCode::Char('q') | KeyCode::Esc => return Some(DashboardAction::Quit),
+            KeyCode::Char('q') | KeyCode::Esc => {
+                if self.queue.has_active_operations() {
+                    self.quit_warning = true;
+                } else {
+                    return Some(DashboardAction::Quit);
+                }
+            }
             KeyCode::Char('c') if key.modifiers.contains(KeyModifiers::CONTROL) => {
-                return Some(DashboardAction::Quit);
+                if self.queue.has_active_operations() {
+                    self.quit_warning = true;
+                } else {
+                    return Some(DashboardAction::Quit);
+                }
             }
             KeyCode::Right | KeyCode::Tab => {
                 self.section = (self.section + 1) % Section::ALL.len();
@@ -1639,6 +1776,9 @@ impl Dashboard<'_> {
             }
             KeyCode::Char('y') if Section::ALL[self.section] == Section::Settings => {
                 return Some(DashboardAction::ConfigurePypi);
+            }
+            KeyCode::Char('h') if Section::ALL[self.section] == Section::Settings => {
+                return Some(DashboardAction::ConfigureHfEndpoint);
             }
             KeyCode::Char('x') if Section::ALL[self.section] == Section::Downloads => {
                 let _ = self.queue.stop(self.download_index);
@@ -1973,11 +2113,33 @@ impl Dashboard<'_> {
             let Some(artifact) = self.catalog.artifact(id) else {
                 return Health::Broken;
             };
-            health = match self.artifact_health.by_id.get(id).copied() {
+            health = match self.artifact_health_for(id) {
                 Some(Health::Broken) => return Health::Broken,
                 Some(Health::Ready) => health,
                 _ if artifact.gated && !self.system.has_token => Health::Blocked,
                 Some(Health::Paused) if health != Health::Blocked => Health::Paused,
+                Some(Health::Downloading)
+                    if !matches!(health, Health::Paused | Health::Blocked) =>
+                {
+                    Health::Downloading
+                }
+                Some(Health::Resolving) if !matches!(health, Health::Paused | Health::Blocked) => {
+                    Health::Resolving
+                }
+                Some(Health::Processing) if !matches!(health, Health::Paused | Health::Blocked) => {
+                    Health::Processing
+                }
+                Some(Health::Installing) if !matches!(health, Health::Paused | Health::Blocked) => {
+                    Health::Installing
+                }
+                Some(Health::Queued)
+                    if !matches!(
+                        health,
+                        Health::Paused | Health::Blocked | Health::Downloading
+                    ) =>
+                {
+                    Health::Queued
+                }
                 Some(Health::Missing) if !matches!(health, Health::Paused | Health::Blocked) => {
                     Health::Missing
                 }
@@ -1987,26 +2149,57 @@ impl Dashboard<'_> {
         health
     }
 
+    fn artifact_health_for(&self, id: &str) -> Option<Health> {
+        match self.queue.artifact_status(id) {
+            Some(JobStatus::Queued) => Some(Health::Queued),
+            Some(JobStatus::Resolving) => Some(Health::Resolving),
+            Some(JobStatus::Downloading) => Some(Health::Downloading),
+            Some(JobStatus::Processing) => Some(Health::Processing),
+            Some(JobStatus::Installing) => Some(Health::Installing),
+            Some(JobStatus::Paused) => Some(Health::Paused),
+            Some(JobStatus::Failed) => Some(Health::Broken),
+            Some(JobStatus::Completed) => Some(Health::Ready),
+            None => self.artifact_health.by_id.get(id).copied(),
+        }
+    }
+
     fn custom_nodes_health<'a>(&self, ids: impl Iterator<Item = &'a String>) -> Health {
         if self.valid_comfy_root().is_none() {
             return Health::Missing;
         }
+        let mut health = Health::Ready;
         for id in ids {
             if self.catalog.custom_node(id).is_none() {
                 return Health::Broken;
             }
-            if !self.installed_custom_nodes.contains(id) {
-                return Health::Missing;
-            }
+            health = worse_health(health, self.custom_node_health(id));
         }
-        Health::Ready
+        health
+    }
+
+    fn custom_node_health(&self, id: &str) -> Health {
+        match self.queue.custom_node_status(id) {
+            Some(JobStatus::Queued) => Health::Queued,
+            Some(JobStatus::Resolving) => Health::Resolving,
+            Some(JobStatus::Downloading) => Health::Downloading,
+            Some(JobStatus::Processing) => Health::Processing,
+            Some(JobStatus::Installing) => Health::Installing,
+            Some(JobStatus::Paused) => Health::Paused,
+            Some(JobStatus::Failed) => Health::Broken,
+            Some(JobStatus::Completed) => Health::Ready,
+            None if self.installed_custom_nodes.contains(id) => Health::Ready,
+            None => Health::Missing,
+        }
     }
 }
 
 fn job_badge(status: JobStatus) -> Span<'static> {
     let color = match status {
         JobStatus::Completed => GREEN,
-        JobStatus::Downloading => ACCENT,
+        JobStatus::Resolving
+        | JobStatus::Downloading
+        | JobStatus::Processing
+        | JobStatus::Installing => ACCENT,
         JobStatus::Queued => MUTED,
         JobStatus::Paused => YELLOW,
         JobStatus::Failed => RED,
@@ -2178,10 +2371,15 @@ fn health_rank(health: Health) -> usize {
     match health {
         Health::Broken => 0,
         Health::Paused => 1,
-        Health::Blocked => 2,
-        Health::Missing => 3,
-        Health::Ready => 4,
-        Health::Discovery => 5,
+        Health::Installing => 2,
+        Health::Processing => 3,
+        Health::Downloading => 4,
+        Health::Resolving => 5,
+        Health::Queued => 6,
+        Health::Blocked => 7,
+        Health::Missing => 8,
+        Health::Ready => 9,
+        Health::Discovery => 10,
     }
 }
 
@@ -2361,6 +2559,8 @@ mod tests {
     #[test]
     fn health_priority_puts_recovery_first() {
         assert!(health_rank(Health::Broken) < health_rank(Health::Paused));
+        assert!(health_rank(Health::Paused) < health_rank(Health::Downloading));
+        assert!(health_rank(Health::Downloading) < health_rank(Health::Queued));
         assert!(health_rank(Health::Paused) < health_rank(Health::Missing));
         assert!(health_rank(Health::Missing) < health_rank(Health::Ready));
     }

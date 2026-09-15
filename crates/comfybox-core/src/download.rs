@@ -98,23 +98,27 @@ impl DownloadManager {
         artifact: &Artifact,
         opts: &DownloadOptions,
     ) -> Result<InstallOutcome> {
+        report_log(opts, "phase:resolving".into());
         let final_path = comfy_root.join(&artifact.relative_path);
-        if let Ok(meta) = fs::metadata(&final_path).await {
-            if artifact.size_bytes.map(|x| x == meta.len()).unwrap_or(true) {
-                if let Some(expected_hash) = &artifact.sha256 {
-                    if verify_sha256(final_path.clone(), expected_hash.clone()).await? {
-                        return Ok(InstallOutcome::AlreadyInstalled);
-                    }
-                } else {
-                    return Ok(InstallOutcome::AlreadyInstalled);
-                }
+        let existing_size = fs::metadata(&final_path).await.ok().map(|meta| meta.len());
+        if existing_size.is_some()
+            && let Some(expected_hash) = &artifact.sha256
+        {
+            if verify_sha256(final_path.clone(), expected_hash.clone()).await? {
+                return Ok(InstallOutcome::AlreadyInstalled);
             }
             if !opts.force {
                 bail!(
-                    "{} already exists but does not match catalog; use --force to replace",
+                    "{} already exists but does not match its SHA-256; use --force to replace",
                     final_path.display()
                 );
             }
+        }
+        if let Some(existing) = existing_size
+            && artifact.sha256.is_none()
+            && artifact.size_bytes == Some(existing)
+        {
+            return Ok(InstallOutcome::AlreadyInstalled);
         }
 
         let (url, head) = self.resolve_download_url(artifact, opts).await?;
@@ -123,20 +127,29 @@ impl DownloadManager {
             .get(CONTENT_LENGTH)
             .and_then(|x| x.to_str().ok())
             .and_then(|x| x.parse::<u64>().ok());
-        let expected = artifact
-            .size_bytes
-            .or(remote_size)
+        let expected = remote_size
+            .or(artifact.size_bytes)
             .context("remote did not provide Content-Length and catalog has no size")?;
-        if let Some(size) = artifact.size_bytes {
-            if let Some(remote) = remote_size {
-                if size != remote {
-                    bail!(
-                        "remote size changed for {}: catalog={} remote={}",
-                        artifact.name,
-                        size,
-                        remote
-                    );
-                }
+        if let (Some(catalog), Some(remote)) = (artifact.size_bytes, remote_size)
+            && catalog != remote
+        {
+            report_log(
+                opts,
+                format!(
+                    "catalog size is approximate for {}; using remote size {} instead of {}",
+                    artifact.name, remote, catalog
+                ),
+            );
+        }
+        if let Some(existing) = existing_size {
+            if artifact.sha256.is_none() && existing == expected && remote_size.is_some() {
+                return Ok(InstallOutcome::AlreadyInstalled);
+            }
+            if !opts.force {
+                bail!(
+                    "{} already exists but does not match catalog; use --force to replace",
+                    final_path.display()
+                );
             }
         }
         let supports_ranges = head
@@ -167,6 +180,7 @@ impl DownloadManager {
         )?;
         fs::create_dir_all(&temp_dir).await?;
         let resumed = part_path.exists() && already_downloaded > 0;
+        report_log(opts, "phase:downloading".into());
         if supports_ranges {
             self.download_ranged(
                 &url,
@@ -187,6 +201,7 @@ impl DownloadManager {
                 artifact.name
             );
         }
+        report_log(opts, "phase:processing".into());
         if let Some(hash) = &artifact.sha256 {
             if !verify_sha256(part_path.clone(), hash.clone()).await? {
                 bail!("SHA-256 mismatch for {}", artifact.name);
@@ -196,6 +211,7 @@ impl DownloadManager {
         if let Some(parent) = final_path.parent() {
             fs::create_dir_all(parent).await?;
         }
+        report_log(opts, "phase:installing".into());
         publish_atomically(&part_path, &final_path, opts.force).await?;
         let _ = fs::remove_dir_all(&temp_dir).await;
         Ok(if resumed {

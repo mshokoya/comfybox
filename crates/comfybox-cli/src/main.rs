@@ -1081,6 +1081,7 @@ async fn interactive(cfg: &mut AppConfig, cat: &Catalog) -> Result<()> {
                 | dashboard::DashboardAction::LocateComfyUi
                 | dashboard::DashboardAction::SetHfToken
                 | dashboard::DashboardAction::ConfigurePypi
+                | dashboard::DashboardAction::ConfigureHfEndpoint
                 | dashboard::DashboardAction::ToggleServer
         );
         if let Err(error) = execute_dashboard_action(action, cfg, cat, &mut queue).await {
@@ -1118,6 +1119,24 @@ fn prompt_pypi_source(current: &str) -> Result<&'static str> {
         PYPI_TSINGHUA
     } else {
         PYPI_OFFICIAL
+    })
+}
+
+fn prompt_hf_endpoint(current: &str) -> Result<&'static str> {
+    let mirror = "China mirror — hf-mirror.com";
+    let official = "Official Hugging Face — huggingface.co";
+    let choices = if current.contains("hf-mirror.com") {
+        vec![mirror, official]
+    } else {
+        vec![official, mirror]
+    };
+    let selected = Select::new("Hugging Face download source", choices)
+        .with_help_message("Saved for future model, workflow, and artifact downloads")
+        .prompt()?;
+    Ok(if selected == mirror {
+        "https://hf-mirror.com"
+    } else {
+        "https://huggingface.co"
     })
 }
 
@@ -1191,6 +1210,21 @@ async fn execute_dashboard_action(
             println!(
                 "{} {pip_index_url}",
                 style("✓ Python package source set to").green()
+            );
+            Ok(())
+        }
+        dashboard::DashboardAction::ConfigureHfEndpoint => {
+            let current = cfg
+                .hf_endpoint
+                .clone()
+                .or_else(|| std::env::var("HF_ENDPOINT").ok())
+                .unwrap_or_else(|| "https://huggingface.co".to_owned());
+            cfg.hf_endpoint = Some(prompt_hf_endpoint(&current)?.to_owned());
+            cfg.save()?;
+            println!(
+                "{} {}",
+                style("✓ Hugging Face source set to").green(),
+                cfg.hf_endpoint.as_deref().unwrap_or_default()
             );
             Ok(())
         }
