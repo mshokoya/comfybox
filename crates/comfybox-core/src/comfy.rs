@@ -153,6 +153,18 @@ impl ComfyManager {
     }
 
     pub async fn clone_repository(url: &str, target: &Path) -> Result<()> {
+        Self::clone_repository_with_output(url, target, true).await
+    }
+
+    pub async fn clone_repository_quiet(url: &str, target: &Path) -> Result<()> {
+        Self::clone_repository_with_output(url, target, false).await
+    }
+
+    async fn clone_repository_with_output(
+        url: &str,
+        target: &Path,
+        inherit_output: bool,
+    ) -> Result<()> {
         const ATTEMPTS: usize = 3;
         for attempt in 1..=ATTEMPTS {
             if target.exists() {
@@ -160,6 +172,11 @@ impl ComfyManager {
             }
             let mut command = Command::new("git");
             command.kill_on_drop(true);
+            if !inherit_output {
+                command
+                    .stdout(std::process::Stdio::null())
+                    .stderr(std::process::Stdio::null());
+            }
             if attempt > 1 {
                 command.arg("-c").arg("http.version=HTTP/1.1");
             }

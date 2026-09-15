@@ -120,7 +120,7 @@ pub struct DownloadQueue {
     sender: mpsc::UnboundedSender<QueueEvent>,
     receiver: mpsc::UnboundedReceiver<QueueEvent>,
     state_path: PathBuf,
-    log_path: PathBuf,
+    log_file: Option<fs::File>,
     server_log_path: Option<PathBuf>,
     server_log_offset: u64,
     server_log_partial: String,
@@ -131,6 +131,14 @@ impl DownloadQueue {
         let (sender, receiver) = mpsc::unbounded_channel();
         let state_path = AppConfig::download_queue_path()?;
         let log_path = AppConfig::config_dir()?.join("comfybox.log");
+        if let Some(parent) = log_path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+        let log_file = fs::OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open(&log_path)
+            .ok();
         let persisted = if state_path.is_file() {
             serde_json::from_slice::<Vec<PersistedJob>>(&fs::read(&state_path)?)
                 .with_context(|| format!("parse {}", state_path.display()))?
@@ -156,6 +164,7 @@ impl DownloadQueue {
                     hf_endpoint: saved.endpoint,
                     hf_token: auth::hf_token()?,
                     progress: None,
+                    log: None,
                 },
                 status,
                 downloaded_bytes: saved.downloaded_bytes,
@@ -188,7 +197,7 @@ impl DownloadQueue {
             sender,
             receiver,
             state_path,
-            log_path,
+            log_file,
             server_log_path: None,
             server_log_offset: 0,
             server_log_partial: String::new(),
@@ -319,7 +328,12 @@ impl DownloadQueue {
     pub fn tick(&mut self, max_concurrent: usize) -> bool {
         let mut changed = false;
         let mut persist_needed = false;
-        while let Ok(event) = self.receiver.try_recv() {
+        // Bound work per UI frame so noisy pip/apt processes cannot starve input
+        // handling or terminal redraws. Remaining events are consumed next tick.
+        for _ in 0..512 {
+            let Ok(event) = self.receiver.try_recv() else {
+                break;
+            };
             changed = true;
             match event {
                 QueueEvent::Log(message) => self.log(message),
@@ -679,6 +693,10 @@ impl DownloadQueue {
                 progress,
             });
         }));
+        let log_sender = self.sender.clone();
+        options.log = Some(Arc::new(move |message| {
+            let _ = log_sender.send(QueueEvent::Log(format!("[DOWNLOAD] {message}")));
+        }));
         let sender = self.sender.clone();
         let finished_id = artifact.id.clone();
         self.jobs[index].status = JobStatus::Downloading;
@@ -744,14 +762,7 @@ impl DownloadQueue {
     fn log(&mut self, message: String) {
         let line = format!("[{}] {message}", timestamp());
         self.push_log_line(line.clone());
-        if let Some(parent) = self.log_path.parent() {
-            let _ = fs::create_dir_all(parent);
-        }
-        if let Ok(mut file) = fs::OpenOptions::new()
-            .create(true)
-            .append(true)
-            .open(&self.log_path)
-        {
+        if let Some(file) = &mut self.log_file {
             let _ = writeln!(file, "{line}");
         }
     }
@@ -797,11 +808,20 @@ async fn install_custom_node(
         let temporary_base = base.join(".comfybox-tmp");
         tokio::fs::create_dir_all(&temporary_base).await?;
         let temporary = temporary_base.join(format!("{}-{}", node.id, uuid::Uuid::new_v4()));
-        if let Err(error) = ComfyManager::clone_repository(&node.git_url, &temporary).await {
+        let _ = sender.send(QueueEvent::Log(format!(
+            "[GIT] Cloning {} from {}",
+            node.name, node.git_url
+        )));
+        if let Err(error) = ComfyManager::clone_repository_quiet(&node.git_url, &temporary).await {
             let _ = tokio::fs::remove_dir_all(&temporary).await;
             return Err(error).with_context(|| format!("git clone failed for {}", node.name));
         }
         tokio::fs::rename(&temporary, &target).await?;
+        let _ = sender.send(QueueEvent::Log(format!(
+            "[GIT] Installed {} at {}",
+            node.name,
+            target.display()
+        )));
         let _ = tokio::fs::remove_dir(&temporary_base).await;
     }
     let requirements = target.join("requirements.txt");

@@ -15,7 +15,7 @@ use comfybox_core::{
     workflow::inspect_workflow,
 };
 use console::style;
-use inquire::{Confirm, MultiSelect, Password, PasswordDisplayMode, Select};
+use inquire::{Confirm, Password, PasswordDisplayMode, Select};
 use serde_json::Value;
 use std::{
     collections::BTreeSet,
@@ -520,6 +520,7 @@ fn download_options(cfg: &AppConfig, force: bool) -> Result<DownloadOptions> {
         hf_endpoint: endpoint,
         hf_token: auth::hf_token()?,
         progress: None,
+        log: None,
     })
 }
 
@@ -534,6 +535,7 @@ fn dashboard_download_options(cfg: &AppConfig, force: bool) -> Result<DownloadOp
             .or_else(|| std::env::var("HF_ENDPOINT").ok()),
         hf_token: auth::hf_token()?,
         progress: None,
+        log: None,
     })
 }
 
@@ -1221,13 +1223,18 @@ async fn execute_dashboard_action(
             }
             Ok(())
         }
-        dashboard::DashboardAction::InstallArtifact(id) => {
+        dashboard::DashboardAction::InstallArtifact(selection) => {
             let instance = configured_instance(cfg)?;
             let artifact = cat
-                .artifact(&id)
+                .artifact(&selection.id)
                 .cloned()
-                .with_context(|| format!("unknown artifact {id}"))?;
-            let artifacts = choose_artifact_sources(vec![artifact])?;
+                .with_context(|| format!("unknown artifact {}", selection.id))?;
+            let source = selection
+                .artifact_sources
+                .iter()
+                .find_map(|(id, source)| (id == &selection.id).then_some(*source))
+                .unwrap_or(0);
+            let artifacts = vec![select_artifact_source(artifact, source)];
             let options = dashboard_download_options(cfg, false)?;
             queue.enqueue(&instance.root, artifacts, &options)?;
             Ok(())
@@ -1241,48 +1248,23 @@ async fn execute_dashboard_action(
             queue.enqueue_custom_nodes(&instance.root, [node]);
             Ok(())
         }
-        dashboard::DashboardAction::InstallPackage(id) => {
+        dashboard::DashboardAction::InstallPackage(selection) => {
             let instance = configured_instance(cfg)?;
-            let package = cat
-                .package(&id)
-                .with_context(|| format!("unknown package {id}"))?;
-            let labels = package
-                .optional_groups
+            cat.package(&selection.id)
+                .with_context(|| format!("unknown package {}", selection.id))?;
+            let artifacts = selection
+                .artifact_sources
                 .iter()
-                .map(|group| format!("{} — {}", group.id, group.name))
-                .collect::<Vec<_>>();
-            let optional = if labels.is_empty() {
-                Vec::new()
-            } else {
-                MultiSelect::new("Optional components", labels)
-                    .prompt()?
-                    .into_iter()
-                    .filter_map(|label| label.split(" — ").next().map(str::to_owned))
-                    .collect()
-            };
-            let mut artifact_ids = package.primary_artifact_ids.clone();
-            artifact_ids.extend(package.dependency_artifact_ids.iter().cloned());
-            for group in &package.optional_groups {
-                if optional.contains(&group.id) {
-                    artifact_ids.extend(group.artifact_ids.iter().cloned());
-                }
-            }
-            let mut custom_node_ids = package.custom_node_ids.clone();
-            for group in &package.optional_groups {
-                if optional.contains(&group.id) {
-                    custom_node_ids.extend(group.custom_node_ids.iter().cloned());
-                }
-            }
-            let artifacts = artifact_ids
-                .iter()
-                .map(|artifact_id| {
-                    cat.artifact(artifact_id)
+                .map(|(artifact_id, source_index)| {
+                    let artifact = cat
+                        .artifact(artifact_id)
                         .cloned()
-                        .with_context(|| format!("unknown artifact {artifact_id}"))
+                        .with_context(|| format!("unknown artifact {artifact_id}"))?;
+                    Ok(select_artifact_source(artifact, *source_index))
                 })
                 .collect::<Result<Vec<_>>>()?;
-            let artifacts = choose_artifact_sources(artifacts)?;
-            let nodes = custom_node_ids
+            let nodes = selection
+                .custom_node_ids
                 .iter()
                 .map(|node_id| {
                     cat.custom_node(node_id)
@@ -1295,26 +1277,30 @@ async fn execute_dashboard_action(
             queue.enqueue_custom_nodes(&instance.root, nodes);
             let mut state = ManagedState::load()?;
             state.packages.insert(
-                id,
+                selection.id,
                 ManagedInstall {
-                    artifact_ids: artifact_ids.into_iter().collect(),
-                    custom_node_ids: custom_node_ids.into_iter().collect(),
+                    artifact_ids: selection
+                        .artifact_sources
+                        .into_iter()
+                        .map(|(id, _)| id)
+                        .collect(),
+                    custom_node_ids: selection.custom_node_ids.into_iter().collect(),
                 },
             );
             state.save()
         }
-        dashboard::DashboardAction::InstallWorkflow(id) => {
+        dashboard::DashboardAction::InstallWorkflow(selection) => {
             let instance = configured_instance(cfg)?;
             let workflow = cat
-                .workflow(&id)
-                .with_context(|| format!("unknown workflow {id}"))?;
+                .workflow(&selection.id)
+                .with_context(|| format!("unknown workflow {}", selection.id))?;
             let dest = instance.root.join("user/default/workflows");
             fs::create_dir_all(&dest)?;
             fs::write(
                 dest.join(Path::new(&workflow.file).file_name().unwrap_or_default()),
-                bundled_workflow(&id)?,
+                bundled_workflow(&selection.id)?,
             )?;
-            let nodes = workflow
+            let nodes = selection
                 .custom_node_ids
                 .iter()
                 .map(|node_id| {
@@ -1323,25 +1309,30 @@ async fn execute_dashboard_action(
                         .with_context(|| format!("unknown custom node {node_id}"))
                 })
                 .collect::<Result<Vec<_>>>()?;
-            let artifacts = workflow
-                .artifact_ids
+            let artifacts = selection
+                .artifact_sources
                 .iter()
-                .map(|artifact_id| {
-                    cat.artifact(artifact_id)
+                .map(|(artifact_id, source_index)| {
+                    let artifact = cat
+                        .artifact(artifact_id)
                         .cloned()
-                        .with_context(|| format!("unknown artifact {artifact_id}"))
+                        .with_context(|| format!("unknown artifact {artifact_id}"))?;
+                    Ok(select_artifact_source(artifact, *source_index))
                 })
                 .collect::<Result<Vec<_>>>()?;
-            let artifacts = choose_artifact_sources(artifacts)?;
             let options = dashboard_download_options(cfg, false)?;
             queue.enqueue(&instance.root, artifacts, &options)?;
             queue.enqueue_custom_nodes(&instance.root, nodes);
             let mut state = ManagedState::load()?;
             state.workflows.insert(
-                id,
+                selection.id,
                 ManagedInstall {
-                    artifact_ids: workflow.artifact_ids.iter().cloned().collect(),
-                    custom_node_ids: workflow.custom_node_ids.iter().cloned().collect(),
+                    artifact_ids: selection
+                        .artifact_sources
+                        .into_iter()
+                        .map(|(id, _)| id)
+                        .collect(),
+                    custom_node_ids: selection.custom_node_ids.into_iter().collect(),
                 },
             );
             state.save()
@@ -1349,35 +1340,15 @@ async fn execute_dashboard_action(
     }
 }
 
-fn choose_artifact_sources(mut artifacts: Vec<Artifact>) -> Result<Vec<Artifact>> {
-    for artifact in &mut artifacts {
-        if artifact.sources.len() < 2 {
-            continue;
-        }
-        let choices = artifact
-            .sources
-            .iter()
-            .enumerate()
-            .map(|(index, source)| {
-                format!(
-                    "{index}: {} · {} — {}",
-                    source.title,
-                    source.size.as_deref().unwrap_or("size unknown"),
-                    source.description
-                )
-            })
-            .collect::<Vec<_>>();
-        let selected =
-            Select::new(&format!("Download source for {}", artifact.name), choices).prompt()?;
-        let index = selected
-            .split_once(':')
-            .and_then(|(index, _)| index.parse::<usize>().ok())
-            .unwrap_or(0);
-        let source = &artifact.sources[index.min(artifact.sources.len() - 1)];
+fn select_artifact_source(mut artifact: Artifact, source_index: usize) -> Artifact {
+    if let Some(source) = artifact
+        .sources
+        .get(source_index.min(artifact.sources.len().saturating_sub(1)))
+    {
         artifact.url = source.url.clone();
         artifact.size_bytes = source.size_bytes;
     }
-    Ok(artifacts)
+    artifact
 }
 
 fn status_mark(s: &ArtifactStatus) -> String {

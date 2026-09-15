@@ -33,6 +33,7 @@ pub struct DownloadOptions {
     pub hf_endpoint: Option<String>,
     pub hf_token: Option<String>,
     pub progress: Option<Arc<dyn Fn(DownloadProgress) + Send + Sync>>,
+    pub log: Option<Arc<dyn Fn(String) + Send + Sync>>,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -50,6 +51,7 @@ impl Default for DownloadOptions {
             hf_endpoint: None,
             hf_token: None,
             progress: None,
+            log: None,
         }
     }
 }
@@ -83,6 +85,9 @@ impl DownloadManager {
     pub fn new() -> Result<Self> {
         let client = Client::builder()
             .user_agent(concat!("comfybox/", env!("CARGO_PKG_VERSION")))
+            .connect_timeout(std::time::Duration::from_secs(12))
+            .tcp_keepalive(std::time::Duration::from_secs(30))
+            .pool_idle_timeout(std::time::Duration::from_secs(60))
             .build()?;
         Ok(Self { client })
     }
@@ -112,20 +117,7 @@ impl DownloadManager {
             }
         }
 
-        let url = rewrite_hf_url(&artifact.url, opts.hf_endpoint.as_deref());
-        let mut head = self.client.head(&url).header(ACCEPT_ENCODING, "identity");
-        if let Some(token) = &opts.hf_token {
-            head = head.bearer_auth(token);
-        }
-        let head = head.send().await.with_context(|| format!("HEAD {url}"))?;
-        if !head.status().is_success() {
-            return Err(http_status_error(
-                "remote metadata request",
-                &artifact.name,
-                head.status(),
-                opts.hf_token.is_some(),
-            ));
-        }
+        let (url, head) = self.resolve_download_url(artifact, opts).await?;
         let remote_size = head
             .headers()
             .get(CONTENT_LENGTH)
@@ -211,6 +203,70 @@ impl DownloadManager {
         } else {
             InstallOutcome::Installed(final_path)
         })
+    }
+
+    async fn resolve_download_url(
+        &self,
+        artifact: &Artifact,
+        opts: &DownloadOptions,
+    ) -> Result<(String, reqwest::Response)> {
+        let candidates = download_url_candidates(&artifact.url, opts.hf_endpoint.as_deref());
+        let mut last_error = None;
+        for (candidate_index, url) in candidates.iter().enumerate() {
+            for attempt in 1..=2 {
+                let mut request = self.client.head(url).header(ACCEPT_ENCODING, "identity");
+                if let Some(token) = &opts.hf_token {
+                    request = request.bearer_auth(token);
+                }
+                match request.send().await {
+                    Ok(response) if response.status().is_success() => {
+                        if candidate_index > 0 {
+                            report_log(
+                                opts,
+                                format!(
+                                    "using fallback download endpoint for {}: {url}",
+                                    artifact.name
+                                ),
+                            );
+                        }
+                        return Ok((url.clone(), response));
+                    }
+                    Ok(response)
+                        if matches!(
+                            response.status(),
+                            reqwest::StatusCode::UNAUTHORIZED | reqwest::StatusCode::FORBIDDEN
+                        ) =>
+                    {
+                        return Err(http_status_error(
+                            "remote metadata request",
+                            &artifact.name,
+                            response.status(),
+                            opts.hf_token.is_some(),
+                        ));
+                    }
+                    Ok(response) => {
+                        last_error =
+                            Some(anyhow::anyhow!("HEAD {url} returned {}", response.status()));
+                    }
+                    Err(error) => {
+                        last_error = Some(anyhow::Error::new(error).context(format!("HEAD {url}")));
+                    }
+                }
+                if attempt < 2 {
+                    tokio::time::sleep(std::time::Duration::from_millis(500)).await;
+                }
+            }
+            if candidate_index + 1 < candidates.len() {
+                report_log(
+                    opts,
+                    format!(
+                        "{} unreachable at {}; trying Hugging Face fallback endpoint",
+                        artifact.name, url
+                    ),
+                );
+            }
+        }
+        Err(last_error.unwrap_or_else(|| anyhow::anyhow!("no download URL for {}", artifact.name)))
     }
 
     async fn download_sequential(
@@ -482,12 +538,35 @@ fn rewrite_hf_url(url: &str, endpoint: Option<&str>) -> String {
     url.to_owned()
 }
 
+fn download_url_candidates(url: &str, endpoint: Option<&str>) -> Vec<String> {
+    let preferred = rewrite_hf_url(url, endpoint);
+    let mut candidates = vec![preferred.clone()];
+    if url.starts_with("https://huggingface.co/") {
+        let fallback_endpoint = if preferred.starts_with("https://hf-mirror.com/") {
+            "https://huggingface.co"
+        } else {
+            "https://hf-mirror.com"
+        };
+        let fallback = rewrite_hf_url(url, Some(fallback_endpoint));
+        if fallback != preferred {
+            candidates.push(fallback);
+        }
+    }
+    candidates
+}
+
 fn report_progress(opts: &DownloadOptions, downloaded_bytes: u64, total_bytes: u64) {
     if let Some(callback) = &opts.progress {
         callback(DownloadProgress {
             downloaded_bytes,
             total_bytes,
         });
+    }
+}
+
+fn report_log(opts: &DownloadOptions, message: String) {
+    if let Some(callback) = &opts.log {
+        callback(message);
     }
 }
 
@@ -517,7 +596,7 @@ fn http_status_error(
 
 #[cfg(test)]
 mod tests {
-    use super::rewrite_hf_url;
+    use super::{download_url_candidates, rewrite_hf_url};
 
     #[test]
     fn hugging_face_urls_are_rewritten_to_the_selected_mirror() {
@@ -539,5 +618,26 @@ mod tests {
             ),
             "https://example.com/model.safetensors"
         );
+    }
+
+    #[test]
+    fn official_hugging_face_downloads_fall_back_to_the_mirror() {
+        let urls = download_url_candidates(
+            "https://huggingface.co/owner/repo/resolve/main/model.safetensors",
+            Some("https://huggingface.co"),
+        );
+        assert_eq!(urls.len(), 2);
+        assert!(urls[0].starts_with("https://huggingface.co/"));
+        assert!(urls[1].starts_with("https://hf-mirror.com/"));
+    }
+
+    #[test]
+    fn mirror_downloads_fall_back_to_official_hugging_face() {
+        let urls = download_url_candidates(
+            "https://huggingface.co/owner/repo/resolve/main/model.safetensors",
+            Some("https://hf-mirror.com"),
+        );
+        assert!(urls[0].starts_with("https://hf-mirror.com/"));
+        assert!(urls[1].starts_with("https://huggingface.co/"));
     }
 }

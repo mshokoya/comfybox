@@ -72,17 +72,21 @@ The native terminal dashboard is built with Ratatui and Crossterm. It opens when
 subcommand is supplied and provides dedicated operational and dependency-library views:
 
 - **Overview** — ComfyUI readiness, server state, artifact health, storage and setup warnings.
-- **Models** — installable model packages and their required model, text encoder, VAE, LoRA and custom-node dependencies.
+- **Models** — installable packages with an in-dashboard plan for choosing model sources and enabling or disabling individual dependencies.
 - **LoRAs**, **VAEs**, **Text Encoders**, **Upscalers**, and **Runtime** — filtered artifact libraries with cached health and one-key installation.
 - **Custom Nodes** — repository-backed node packs with cached installation status and one-key installation.
-- **Workflows** — bundled workflows with aggregate dependency health and one-key installation.
+- **Workflows** — bundled workflows with aggregate dependency health and the same source/dependency install-plan editor.
 - **Downloads** — live download manager with queued/active/paused/failed jobs, byte progress, speed, ETA, stop and resumable restart controls.
 - **Logs** — persistent lifecycle/error logs plus a live incremental tail of the managed ComfyUI server log; high-frequency download byte events are intentionally filtered out.
 - **Settings** — tune concurrent files and parallel chunks per file while downloads are running.
 - **System** — configured paths, Python/Git availability, `HF_TOKEN`, disk space and managed state.
 
-Use `←`/`→` or `Tab` to change views, `↑`/`↓` or `j`/`k` to select,
-`Enter` to install the selected item or focus a download. In Models, Workflows,
+Use `←`/`→` or `Tab` to change views, `↑`/`↓` or `j`/`k` to select.
+In Models and Workflows, `Enter` moves into the right-hand install plan.
+`Enter` expands a model/dependency or selects a source, while `Space` enables
+or disables the highlighted dependency. `Esc` returns to the left list, and
+the **OK** and **Cancel** rows finish the selection. Elsewhere,
+`Enter` installs the selected item or focuses a download. In Models, Workflows,
 and dependency-library views, `r` refreshes and caches filesystem health. In Downloads, use `x`
 to pause, `c` to continue a paused download, `r` to retry a failed download, and
 `b`/`Esc` to return a focused transfer to the
@@ -201,7 +205,10 @@ Before an interactive model, workflow-dependency, or individual-artifact install
 ComfyBox asks whether all Hugging Face requests in that install plan should use
 the China mirror (`https://hf-mirror.com`) or official Hugging Face. The selected
 endpoint is applied to metadata checks, sequential and ranged downloads, retries,
-and resumed chunks. Non-Hugging-Face URLs are left unchanged.
+and resumed chunks. If that endpoint cannot be reached, ComfyBox retries and then
+automatically fails over between official Hugging Face and `hf-mirror.com`;
+the switch is recorded in Logs. Authentication failures are reported immediately.
+Non-Hugging-Face URLs are left unchanged.
 
 For non-interactive runs, configure the endpoint once or export it:
 

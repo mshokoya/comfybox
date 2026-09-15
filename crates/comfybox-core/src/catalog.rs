@@ -112,7 +112,8 @@ pub struct CustomNode {
 
 impl Catalog {
     pub fn from_toml_str(raw: &str) -> Result<Self> {
-        let cat: Self = toml::from_str(raw).context("parse catalog TOML")?;
+        let mut cat: Self = toml::from_str(raw).context("parse catalog TOML")?;
+        cat.normalize_sources();
         cat.validate()?;
         Ok(cat)
     }
@@ -124,9 +125,27 @@ impl Catalog {
             Some("json") => serde_json::from_str(&raw).context("parse catalog JSON")?,
             _ => toml::from_str(&raw).context("parse catalog TOML")?,
         };
-        let cat: Self = cat;
+        let mut cat: Self = cat;
+        cat.normalize_sources();
         cat.validate()?;
         Ok(cat)
+    }
+
+    fn normalize_sources(&mut self) {
+        for artifact in &mut self.artifacts {
+            if artifact.sources.is_empty() && !artifact.url.is_empty() {
+                artifact.sources.push(ArtifactSource {
+                    title: artifact.name.clone(),
+                    url: artifact.url.clone(),
+                    size: artifact.size_bytes.map(format_human_size),
+                    size_bytes: artifact.size_bytes,
+                    description: artifact
+                        .description
+                        .clone()
+                        .unwrap_or_else(|| "Default catalog source".into()),
+                });
+            }
+        }
     }
 
     pub fn from_dependency_manifest(raw: &str) -> Result<Self> {
@@ -266,8 +285,37 @@ impl Catalog {
         if other.python_dependencies.is_some() {
             self.python_dependencies = other.python_dependencies;
         }
+        self.enrich_shared_artifact_metadata();
         self.validate()?;
         Ok(self)
+    }
+
+    fn enrich_shared_artifact_metadata(&mut self) {
+        let known_sizes = self
+            .artifacts
+            .iter()
+            .filter_map(|artifact| {
+                artifact
+                    .size_bytes
+                    .map(|size| (artifact.relative_path.clone(), size))
+            })
+            .collect::<HashMap<_, _>>();
+        for artifact in &mut self.artifacts {
+            if artifact.size_bytes.is_none()
+                && let Some(size) = known_sizes.get(&artifact.relative_path).copied()
+            {
+                artifact.size_bytes = Some(size);
+            }
+            let single_source = artifact.sources.len() == 1;
+            for source in &mut artifact.sources {
+                if single_source && source.size_bytes.is_none() {
+                    source.size_bytes = artifact.size_bytes;
+                }
+                if source.size.is_none() {
+                    source.size = source.size_bytes.map(format_human_size);
+                }
+            }
+        }
     }
 
     pub fn validate(&self) -> Result<()> {
@@ -328,6 +376,17 @@ impl Catalog {
     pub fn custom_node(&self, id: &str) -> Option<&CustomNode> {
         self.custom_nodes.iter().find(|x| x.id == id)
     }
+}
+
+fn format_human_size(bytes: u64) -> String {
+    const UNITS: [&str; 5] = ["B", "KiB", "MiB", "GiB", "TiB"];
+    let mut value = bytes as f64;
+    let mut unit = 0;
+    while value >= 1024.0 && unit < UNITS.len() - 1 {
+        value /= 1024.0;
+        unit += 1;
+    }
+    format!("{value:.1} {}", UNITS[unit])
 }
 
 #[derive(Deserialize)]
@@ -434,5 +493,58 @@ where
             map.insert(id(&item).clone(), base.len());
             base.push(item);
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn legacy_artifact_url_becomes_a_visible_default_source() {
+        let catalog = Catalog::from_toml_str(
+            r#"
+                [[artifacts]]
+                id = "model"
+                name = "Model"
+                url = "https://example.com/model.safetensors"
+                relative_path = "models/diffusion_models/model.safetensors"
+                size_bytes = 1073741824
+            "#,
+        )
+        .unwrap();
+        let artifact = catalog.artifact("model").unwrap();
+        assert_eq!(artifact.sources.len(), 1);
+        assert_eq!(artifact.sources[0].title, "Model");
+        assert_eq!(artifact.sources[0].size.as_deref(), Some("1.0 GiB"));
+    }
+
+    #[test]
+    fn merge_shares_known_size_for_the_same_target_file() {
+        let base = Catalog::from_toml_str(
+            r#"
+                [[artifacts]]
+                id = "curated"
+                name = "Curated"
+                url = "https://example.com/model.safetensors"
+                relative_path = "models/diffusion_models/model.safetensors"
+                size_bytes = 2048
+            "#,
+        )
+        .unwrap();
+        let incoming = Catalog::from_toml_str(
+            r#"
+                [[artifacts]]
+                id = "workflow-model"
+                name = "Workflow model"
+                url = "https://example.com/model.safetensors"
+                relative_path = "models/diffusion_models/model.safetensors"
+            "#,
+        )
+        .unwrap();
+        let merged = base.merge(incoming).unwrap();
+        let artifact = merged.artifact("workflow-model").unwrap();
+        assert_eq!(artifact.size_bytes, Some(2048));
+        assert_eq!(artifact.sources[0].size_bytes, Some(2048));
     }
 }

@@ -294,9 +294,10 @@ relative_path = "models/loras/Krea2/Details/KreaAmateur_V2.safetensors"
 [[artifacts]]
 id = "flux2.klein.9b.int8-convrot"
 name = "FLUX.2 Klein 9B INT8 ConvRot"
-url = "https://huggingface.co/Sakujo/FLUX.2-Klein-9B-INT8-ConvRot/resolve/main/flux-2-klein-9b-int8-ConvRot-comfyui.safetensors"
+url = "https://huggingface.co/obsxrver/ComfyUI-Native-INT8_ConvRot/resolve/main/diffusion_models/flux-2-klein-9b_int8_convrot.safetensors"
 relative_path = "models/diffusion_models/F2K/flux-2-klein-9b-int8-ConvRot-comfyui.safetensors"
-sha256 = "ff4d4314fd48ae75812df4b245f13f449e3dee866cbaf1fecc4ace332f35dd55"
+sha256 = "bd041cec0d7955d6fcbaef952ba6ebe37af9f7d032ec927657e7777f21f5c522"
+size_bytes = 9439894544
 
 [[artifacts]]
 id = "flux2.qwen3.8b.fp8mixed-abliterated"

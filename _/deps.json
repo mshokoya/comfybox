@@ -684,10 +684,10 @@
       "compatibility": "workflow-referenced",
       "source": [
         [
-          "flux-2-klein-9b-int8-ConvRot-comfyui.safetensors",
-          "https://huggingface.co/Sakujo/FLUX.2-Klein-9B-INT8-ConvRot/resolve/main/flux-2-klein-9b-int8-ConvRot-comfyui.safetensors",
-          null,
-          "Diffusion model weights; INT8 ConvRot quantization; SafeTensors file; hosted on Hugging Face."
+          "FLUX.2 Klein 9B INT8 ConvRot — ComfyUI Native",
+          "https://huggingface.co/obsxrver/ComfyUI-Native-INT8_ConvRot/resolve/main/diffusion_models/flux-2-klein-9b_int8_convrot.safetensors",
+          "9.44 GB",
+          "ComfyUI-native diffusion model weights using INT8 ConvRot quantization; hosted by obsxrver on Hugging Face."
         ]
       ]
     },

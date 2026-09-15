@@ -49,10 +49,46 @@ pub enum DashboardAction {
     ConfigurePypi,
     SetHfToken,
     ToggleServer,
-    InstallPackage(String),
-    InstallArtifact(String),
+    InstallPackage(InstallSelection),
+    InstallArtifact(InstallSelection),
     InstallCustomNode(String),
-    InstallWorkflow(String),
+    InstallWorkflow(InstallSelection),
+}
+
+#[derive(Debug)]
+pub struct InstallSelection {
+    pub id: String,
+    pub artifact_sources: Vec<(String, usize)>,
+    pub custom_node_ids: Vec<String>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+enum PlanTarget {
+    Package(String),
+    Artifact(String),
+    Workflow(String),
+}
+
+#[derive(Clone, Debug)]
+struct PlanEditor {
+    target: PlanTarget,
+    cursor: usize,
+    deps_expanded: bool,
+    expanded_artifacts: HashSet<String>,
+    selected_sources: HashMap<String, usize>,
+    disabled_dependencies: HashSet<String>,
+}
+
+#[derive(Clone, Debug)]
+enum PlanRow {
+    Model(String),
+    ModelSource(String, usize),
+    Dependencies,
+    DependencyArtifact(String),
+    DependencySource(String, usize),
+    DependencyNode(String),
+    Ok,
+    Cancel,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -153,6 +189,7 @@ struct Dashboard<'a> {
     workflow_index: usize,
     download_index: usize,
     download_detail: bool,
+    plan_editor: Option<PlanEditor>,
     comfy_running: bool,
     state: ManagedState,
     last_server_check: Instant,
@@ -162,6 +199,7 @@ struct Dashboard<'a> {
     server_status_receiver: mpsc::Receiver<bool>,
     server_status_sender: mpsc::Sender<bool>,
     server_check_pending: bool,
+    clear_before_draw: bool,
 }
 
 #[derive(Default)]
@@ -180,6 +218,7 @@ struct SystemSnapshot {
     token_status: String,
     has_token: bool,
     dependency_status: Vec<(String, bool)>,
+    python_dependencies_ready: bool,
 }
 
 pub fn run(
@@ -221,6 +260,7 @@ pub fn run(
         workflow_index: 0,
         download_index: 0,
         download_detail: false,
+        plan_editor: None,
         comfy_running,
         state,
         last_server_check: Instant::now(),
@@ -230,6 +270,7 @@ pub fn run(
         server_status_receiver,
         server_status_sender,
         server_check_pending: false,
+        clear_before_draw: false,
     };
 
     let mut needs_draw = true;
@@ -237,7 +278,8 @@ pub fn run(
         if app.queue.tick(app.cfg.max_concurrent_downloads) {
             needs_draw = true;
         }
-        if let Some(path) = app.state.comfy_log.as_deref()
+        if Section::ALL[app.section] == Section::Logs
+            && let Some(path) = app.state.comfy_log.as_deref()
             && app.queue.tail_comfyui_log(Path::new(path))
         {
             needs_draw = true;
@@ -247,7 +289,7 @@ pub fn run(
             app.server_check_pending = false;
             needs_draw = true;
         }
-        if app.last_server_check.elapsed() >= Duration::from_secs(1) && !app.server_check_pending {
+        if app.last_server_check.elapsed() >= Duration::from_secs(2) && !app.server_check_pending {
             let cfg = app.cfg.clone();
             let sender = app.server_status_sender.clone();
             std::thread::spawn(move || {
@@ -258,6 +300,10 @@ pub fn run(
             app.last_server_check = Instant::now();
         }
         if needs_draw {
+            if app.clear_before_draw {
+                terminal.clear()?;
+                app.clear_before_draw = false;
+            }
             terminal.draw(|frame| app.render(frame))?;
             needs_draw = false;
         }
@@ -267,6 +313,7 @@ pub fn run(
         let key = match event::read()? {
             Event::Key(key) => key,
             Event::Resize(_, _) => {
+                app.clear_before_draw = true;
                 needs_draw = true;
                 continue;
             }
@@ -446,9 +493,7 @@ impl Dashboard<'_> {
             .and_then(find_python)
             .map(|path| path.display().to_string())
             .unwrap_or_else(|| "Not detected".into());
-        let dependencies = self
-            .valid_comfy_root()
-            .is_some_and(crate::download_queue::python_dependencies_ready);
+        let dependencies = self.system.python_dependencies_ready;
         let token = if self.system.has_token {
             Span::styled(self.system.token_status.clone(), Style::default().fg(GREEN))
         } else {
@@ -518,9 +563,7 @@ impl Dashboard<'_> {
                 "  Public downloads work; press t to save a token for gated repositories.",
             ));
         }
-        if let Some(root) = self.valid_comfy_root()
-            && !crate::download_queue::python_dependencies_ready(root)
-        {
+        if self.valid_comfy_root().is_some() && !self.system.python_dependencies_ready {
             lines.push(warning_line(
                 "ComfyUI Python dependencies are not ready.",
                 YELLOW,
@@ -556,7 +599,7 @@ impl Dashboard<'_> {
     }
 
     fn render_models(&mut self, frame: &mut Frame<'_>, area: Rect) {
-        let columns = content_columns(area);
+        let columns = plan_columns(area);
         let items = self
             .catalog
             .packages
@@ -568,15 +611,32 @@ impl Dashboard<'_> {
                     Span::raw(" "),
                     Span::styled(package.name.clone(), Style::default().fg(Color::White)),
                     Span::styled(format!("  {}", package.id), Style::default().fg(MUTED)),
+                    Span::styled(
+                        format!(
+                            "  {}",
+                            self.artifact_ids_size(
+                                package
+                                    .primary_artifact_ids
+                                    .iter()
+                                    .chain(&package.dependency_artifact_ids)
+                            )
+                        ),
+                        Style::default().fg(MUTED),
+                    ),
                 ]))
             })
             .collect::<Vec<_>>();
+        let list_focused = self.plan_editor.is_none();
         let mut state = ListState::default()
             .with_selected(Some(self.model_index.min(items.len().saturating_sub(1))));
         frame.render_stateful_widget(
             List::new(items)
-                .highlight_symbol("› ")
-                .highlight_style(Style::default().bg(PANEL).add_modifier(Modifier::BOLD))
+                .highlight_symbol(if list_focused { "› " } else { "  " })
+                .highlight_style(if list_focused {
+                    Style::default().bg(PANEL).add_modifier(Modifier::BOLD)
+                } else {
+                    Style::default().fg(MUTED)
+                })
                 .block(
                     Block::default()
                         .title(" Model packages ")
@@ -602,6 +662,15 @@ impl Dashboard<'_> {
                         Line::from(format!("Family: {}", package.family)),
                         Line::from(format!("Required artifacts: {required}")),
                         Line::from(format!(
+                            "Download size: {}",
+                            self.artifact_ids_size(
+                                package
+                                    .primary_artifact_ids
+                                    .iter()
+                                    .chain(&package.dependency_artifact_ids)
+                            )
+                        )),
+                        Line::from(format!(
                             "Optional groups: {}",
                             package.optional_groups.len()
                         )),
@@ -610,32 +679,23 @@ impl Dashboard<'_> {
                             "Enter installs the package and its required dependencies.",
                         )),
                     ];
-                    if let Some(artifact) = package
-                        .primary_artifact_ids
-                        .first()
-                        .and_then(|id| self.catalog.artifact(id))
-                        && !artifact.sources.is_empty()
-                    {
-                        lines.push(Line::from(""));
-                        lines.push(Line::from(Span::styled(
-                            format!("Download sources: {}", artifact.sources.len()),
-                            Style::default().fg(ACCENT),
-                        )));
-                        for (index, source) in artifact.sources.iter().enumerate() {
-                            let marker = if index == 0 { "default" } else { "alternative" };
-                            let size = source.size.as_deref().unwrap_or("size unknown");
-                            lines.push(Line::from(format!(
-                                "• {} · {} · {}",
-                                source.title, size, marker
-                            )));
-                        }
-                    }
                     lines.push(Line::from(""));
-                    lines.push(Line::from("[ Enter ] Install    [ r ] Refresh checks"));
+                    if self.plan_editor.as_ref().is_some_and(|editor| {
+                        editor.target == PlanTarget::Package(package.id.clone())
+                    }) {
+                        lines.extend(self.render_plan_lines());
+                    } else {
+                        lines.push(Line::from(
+                            "[ Enter ] Configure install    [ r ] Refresh checks",
+                        ));
+                    }
                     Text::from(lines)
                 })
                 .unwrap_or_default();
-            frame.render_widget(card(" Details ", details), columns[1]);
+            frame.render_widget(
+                plan_card(" Details ", details, self.plan_editor.as_ref(), columns[1]),
+                columns[1],
+            );
         }
     }
 
@@ -656,7 +716,7 @@ impl Dashboard<'_> {
     }
 
     fn render_artifacts(&mut self, frame: &mut Frame<'_>, area: Rect) {
-        let columns = content_columns(area);
+        let columns = plan_columns(area);
         let artifacts = self.artifacts_for_section();
         let items = artifacts
             .iter()
@@ -675,11 +735,16 @@ impl Dashboard<'_> {
             })
             .collect::<Vec<_>>();
         let selected = self.artifact_index.min(items.len().saturating_sub(1));
+        let list_focused = self.plan_editor.is_none();
         let mut state = ListState::default().with_selected(Some(selected));
         frame.render_stateful_widget(
             List::new(items)
-                .highlight_symbol("› ")
-                .highlight_style(Style::default().bg(PANEL).add_modifier(Modifier::BOLD))
+                .highlight_symbol(if list_focused { "› " } else { "  " })
+                .highlight_style(if list_focused {
+                    Style::default().bg(PANEL).add_modifier(Modifier::BOLD)
+                } else {
+                    Style::default().fg(MUTED)
+                })
                 .block(
                     Block::default()
                         .title(format!(" {} ", Section::ALL[self.section].title()))
@@ -707,10 +772,26 @@ impl Dashboard<'_> {
                     ),
                 ];
                 lines.push(Line::from(""));
-                lines.push(Line::from("[ Enter ] Install    [ r ] Refresh checks"));
+                if self.plan_editor.as_ref().is_some_and(|editor| {
+                    editor.target == PlanTarget::Artifact(artifact.id.clone())
+                }) {
+                    lines.extend(self.render_plan_lines());
+                } else {
+                    lines.push(Line::from(
+                        "[ Enter ] Configure install    [ r ] Refresh checks",
+                    ));
+                }
                 Text::from(lines)
             });
-            frame.render_widget(card(" Details ", details.unwrap_or_default()), columns[1]);
+            frame.render_widget(
+                plan_card(
+                    " Install plan ",
+                    details.unwrap_or_default(),
+                    self.plan_editor.as_ref(),
+                    columns[1],
+                ),
+                columns[1],
+            );
         }
     }
 
@@ -767,7 +848,7 @@ impl Dashboard<'_> {
     }
 
     fn render_workflows(&mut self, frame: &mut Frame<'_>, area: Rect) {
-        let columns = content_columns(area);
+        let columns = plan_columns(area);
         let items = self
             .catalog
             .workflows
@@ -782,12 +863,17 @@ impl Dashboard<'_> {
                 ]))
             })
             .collect::<Vec<_>>();
+        let list_focused = self.plan_editor.is_none();
         let mut state = ListState::default()
             .with_selected(Some(self.workflow_index.min(items.len().saturating_sub(1))));
         frame.render_stateful_widget(
             List::new(items)
-                .highlight_symbol("› ")
-                .highlight_style(Style::default().bg(PANEL).add_modifier(Modifier::BOLD))
+                .highlight_symbol(if list_focused { "› " } else { "  " })
+                .highlight_style(if list_focused {
+                    Style::default().bg(PANEL).add_modifier(Modifier::BOLD)
+                } else {
+                    Style::default().fg(MUTED)
+                })
                 .block(
                     Block::default()
                         .title(" Workflows ")
@@ -799,19 +885,308 @@ impl Dashboard<'_> {
         );
         if columns.len() > 1 {
             let details = self.catalog.workflows.get(self.workflow_index).map(|workflow| {
-                Text::from(vec![
+                let mut lines = vec![
                     Line::from(Span::styled(&workflow.name, Style::default().fg(ACCENT).add_modifier(Modifier::BOLD))),
                     Line::from(format!("File: {}", workflow.file)),
                     Line::from(format!("Models: {}", workflow.artifact_ids.len())),
+                    Line::from(format!(
+                        "Download size: {}",
+                        self.artifact_ids_size(workflow.artifact_ids.iter())
+                    )),
                     Line::from(format!("Custom nodes: {}", workflow.custom_node_ids.len())),
                     Line::from(""),
                     Line::from("Enter installs the workflow, models, VAEs, text encoders, LoRAs, and custom nodes."),
                     Line::from(""),
-                    Line::from("[ Enter ] Install    [ r ] Refresh checks"),
-                ])
+                ];
+                if self.plan_editor.as_ref().is_some_and(|editor| {
+                    editor.target == PlanTarget::Workflow(workflow.id.clone())
+                }) {
+                    lines.extend(self.render_plan_lines());
+                } else {
+                    lines.push(Line::from("[ Enter ] Configure install    [ r ] Refresh checks"));
+                }
+                Text::from(lines)
             }).unwrap_or_default();
-            frame.render_widget(card(" Install plan ", details), columns[1]);
+            frame.render_widget(
+                plan_card(
+                    " Install plan ",
+                    details,
+                    self.plan_editor.as_ref(),
+                    columns[1],
+                ),
+                columns[1],
+            );
         }
+    }
+
+    fn plan_artifacts(&self, target: &PlanTarget) -> (Vec<String>, Vec<String>, Vec<String>) {
+        match target {
+            PlanTarget::Package(id) => self
+                .catalog
+                .package(id)
+                .map(|package| {
+                    let mut dependencies = package.dependency_artifact_ids.clone();
+                    let mut nodes = package.custom_node_ids.clone();
+                    for group in &package.optional_groups {
+                        dependencies.extend(group.artifact_ids.iter().cloned());
+                        nodes.extend(group.custom_node_ids.iter().cloned());
+                    }
+                    dependencies.sort();
+                    dependencies.dedup();
+                    nodes.sort();
+                    nodes.dedup();
+                    (package.primary_artifact_ids.clone(), dependencies, nodes)
+                })
+                .unwrap_or_default(),
+            PlanTarget::Artifact(id) => self
+                .catalog
+                .artifact(id)
+                .map(|_| (vec![id.clone()], Vec::new(), Vec::new()))
+                .unwrap_or_default(),
+            PlanTarget::Workflow(id) => self
+                .catalog
+                .workflow(id)
+                .map(|workflow| {
+                    let mut models = workflow
+                        .artifact_ids
+                        .iter()
+                        .filter(|id| {
+                            self.catalog.artifact(id).is_some_and(|artifact| {
+                                artifact
+                                    .relative_path
+                                    .starts_with("models/diffusion_models/")
+                                    || artifact.relative_path.starts_with("models/checkpoints/")
+                            })
+                        })
+                        .cloned()
+                        .collect::<Vec<_>>();
+                    if models.is_empty()
+                        && let Some(first) = workflow.artifact_ids.first()
+                    {
+                        models.push(first.clone());
+                    }
+                    let dependencies = workflow
+                        .artifact_ids
+                        .iter()
+                        .filter(|id| !models.contains(id))
+                        .cloned()
+                        .collect();
+                    (models, dependencies, workflow.custom_node_ids.clone())
+                })
+                .unwrap_or_default(),
+        }
+    }
+
+    fn artifact_ids_size<'b>(&self, ids: impl Iterator<Item = &'b String>) -> String {
+        let mut total = 0u64;
+        let mut unknown = 0usize;
+        for id in ids {
+            match self.catalog.artifact(id).and_then(|artifact| {
+                artifact
+                    .sources
+                    .first()
+                    .and_then(|source| source.size_bytes)
+                    .or(artifact.size_bytes)
+            }) {
+                Some(size) => total = total.saturating_add(size),
+                None => unknown += 1,
+            }
+        }
+        match (total, unknown) {
+            (0, 0) => "0 B".into(),
+            (0, _) => "size unknown".into(),
+            (_, 0) => bytes_label(total),
+            (_, count) => format!("{} + {count} unknown", bytes_label(total)),
+        }
+    }
+
+    fn plan_rows(&self) -> Vec<PlanRow> {
+        let Some(editor) = &self.plan_editor else {
+            return Vec::new();
+        };
+        let (models, dependencies, nodes) = self.plan_artifacts(&editor.target);
+        let mut rows = Vec::new();
+        for id in models {
+            rows.push(PlanRow::Model(id.clone()));
+            if editor.expanded_artifacts.contains(&id)
+                && let Some(artifact) = self.catalog.artifact(&id)
+            {
+                rows.extend(
+                    (0..artifact.sources.len().max(1))
+                        .map(|index| PlanRow::ModelSource(id.clone(), index)),
+                );
+            }
+        }
+        rows.push(PlanRow::Dependencies);
+        if editor.deps_expanded {
+            for id in dependencies {
+                rows.push(PlanRow::DependencyArtifact(id.clone()));
+                if editor.expanded_artifacts.contains(&id)
+                    && let Some(artifact) = self.catalog.artifact(&id)
+                {
+                    rows.extend(
+                        (0..artifact.sources.len().max(1))
+                            .map(|index| PlanRow::DependencySource(id.clone(), index)),
+                    );
+                }
+            }
+            rows.extend(nodes.into_iter().map(PlanRow::DependencyNode));
+        }
+        rows.push(PlanRow::Ok);
+        rows.push(PlanRow::Cancel);
+        rows
+    }
+
+    fn render_plan_lines(&self) -> Vec<Line<'static>> {
+        let Some(editor) = &self.plan_editor else {
+            return Vec::new();
+        };
+        let rows = self.plan_rows();
+        rows.iter()
+            .enumerate()
+            .map(|(row_index, row)| {
+                let selected = row_index == editor.cursor.min(rows.len().saturating_sub(1));
+                let style = if selected {
+                    Style::default()
+                        .fg(Color::Black)
+                        .bg(ACCENT)
+                        .add_modifier(Modifier::BOLD)
+                } else {
+                    Style::default().fg(Color::White)
+                };
+                let text = match row {
+                    PlanRow::Model(id) => {
+                        let artifact = self.catalog.artifact(id);
+                        let health = self
+                            .artifact_health
+                            .by_id
+                            .get(id)
+                            .copied()
+                            .unwrap_or(Health::Missing);
+                        let size = artifact
+                            .and_then(|item| {
+                                let source = editor.selected_sources.get(id).copied().unwrap_or(0);
+                                item.sources
+                                    .get(source)
+                                    .and_then(|source| source.size.clone())
+                                    .or_else(|| item.size_bytes.map(bytes_label))
+                            })
+                            .unwrap_or_else(|| "size unknown".into());
+                        format!(
+                            "{} Model  {}  [{} · {}]",
+                            if editor.expanded_artifacts.contains(id) {
+                                "▾"
+                            } else {
+                                "▸"
+                            },
+                            artifact.map(|item| item.name.as_str()).unwrap_or(id),
+                            health.label(),
+                            size
+                        )
+                    }
+                    PlanRow::ModelSource(id, index) | PlanRow::DependencySource(id, index) => {
+                        let source = self
+                            .catalog
+                            .artifact(id)
+                            .and_then(|a| a.sources.get(*index));
+                        let health = self
+                            .artifact_health
+                            .by_id
+                            .get(id)
+                            .copied()
+                            .unwrap_or(Health::Missing);
+                        let checked =
+                            editor.selected_sources.get(id).copied().unwrap_or(0) == *index;
+                        format!(
+                            "      {} {}  [{} · {}]",
+                            if checked { "●" } else { "○" },
+                            source
+                                .map(|item| item.title.as_str())
+                                .or_else(|| {
+                                    self.catalog
+                                        .artifact(id)
+                                        .map(|artifact| artifact.name.as_str())
+                                })
+                                .unwrap_or("source"),
+                            health.label(),
+                            source
+                                .and_then(|item| item.size.as_deref())
+                                .map(str::to_owned)
+                                .or_else(|| {
+                                    self.catalog
+                                        .artifact(id)
+                                        .and_then(|artifact| artifact.size_bytes)
+                                        .map(bytes_label)
+                                })
+                                .unwrap_or_else(|| "size unknown".into())
+                        )
+                    }
+                    PlanRow::Dependencies => {
+                        let (_, dependencies, nodes) = self.plan_artifacts(&editor.target);
+                        let enabled = dependencies
+                            .iter()
+                            .chain(nodes.iter())
+                            .filter(|id| !editor.disabled_dependencies.contains(*id))
+                            .count();
+                        format!(
+                            "{} Dependencies  {enabled}/{} selected",
+                            if editor.deps_expanded { "▾" } else { "▸" },
+                            dependencies.len() + nodes.len()
+                        )
+                    }
+                    PlanRow::DependencyArtifact(id) => {
+                        let artifact = self.catalog.artifact(id);
+                        let enabled = !editor.disabled_dependencies.contains(id);
+                        let health = self
+                            .artifact_health
+                            .by_id
+                            .get(id)
+                            .copied()
+                            .unwrap_or(Health::Missing);
+                        let source_index = editor.selected_sources.get(id).copied().unwrap_or(0);
+                        let size = artifact
+                            .and_then(|item| {
+                                item.sources
+                                    .get(source_index)
+                                    .and_then(|source| source.size.clone())
+                                    .or_else(|| item.size_bytes.map(bytes_label))
+                            })
+                            .unwrap_or_else(|| "size unknown".into());
+                        format!(
+                            "    {} [{}] {}  [{} · {}]",
+                            if editor.expanded_artifacts.contains(id) {
+                                "▾"
+                            } else {
+                                "▸"
+                            },
+                            if enabled { "x" } else { " " },
+                            artifact.map(|item| item.name.as_str()).unwrap_or(id),
+                            health.label(),
+                            size
+                        )
+                    }
+                    PlanRow::DependencyNode(id) => {
+                        let enabled = !editor.disabled_dependencies.contains(id);
+                        let ready = self.installed_custom_nodes.contains(id);
+                        format!(
+                            "    [{}] {}  [{}]",
+                            if enabled { "x" } else { " " },
+                            self.catalog
+                                .custom_node(id)
+                                .map(|node| node.name.as_str())
+                                .unwrap_or(id),
+                            if ready { "READY" } else { "MISSING" }
+                        )
+                    }
+                    PlanRow::Ok => "              [ OK — start downloads ]".into(),
+                    PlanRow::Cancel => "              [ Cancel ]".into(),
+                };
+                Line::from(Span::styled(
+                    format!("{} {text}", if selected { "›" } else { " " }),
+                    style,
+                ))
+            })
+            .collect()
     }
 
     fn render_downloads(&mut self, frame: &mut Frame<'_>, area: Rect) {
@@ -1025,12 +1400,12 @@ impl Dashboard<'_> {
             Line::from(vec![
                 label("Py deps"),
                 state_span(
-                    if root.is_some_and(crate::download_queue::python_dependencies_ready) {
+                    if self.system.python_dependencies_ready {
                         "ready"
                     } else {
                         "not installed"
                     },
-                    root.is_some_and(crate::download_queue::python_dependencies_ready),
+                    self.system.python_dependencies_ready,
                 ),
             ]),
             Line::from(vec![
@@ -1141,6 +1516,17 @@ impl Dashboard<'_> {
     }
 
     fn render_footer(&self, frame: &mut Frame<'_>, area: Rect) {
+        if self.plan_editor.is_some() {
+            frame.render_widget(
+                Paragraph::new(
+                    " ↑/↓ choose  Enter expand/select source  Space enable/disable dep  Esc back  OK download ",
+                )
+                .style(Style::default().fg(MUTED))
+                .alignment(Alignment::Center),
+                area,
+            );
+            return;
+        }
         let help = if area.width < 100 {
             match Section::ALL[self.section] {
                 Section::Models
@@ -1190,6 +1576,9 @@ impl Dashboard<'_> {
     }
 
     fn handle_key(&mut self, key: KeyEvent) -> Option<DashboardAction> {
+        if self.plan_editor.is_some() {
+            return self.handle_plan_key(key);
+        }
         match key.code {
             KeyCode::Esc if self.download_detail => self.download_detail = false,
             KeyCode::Char('b') if Section::ALL[self.section] == Section::Downloads => {
@@ -1199,13 +1588,18 @@ impl Dashboard<'_> {
             KeyCode::Char('c') if key.modifiers.contains(KeyModifiers::CONTROL) => {
                 return Some(DashboardAction::Quit);
             }
-            KeyCode::Right | KeyCode::Tab => self.section = (self.section + 1) % Section::ALL.len(),
+            KeyCode::Right | KeyCode::Tab => {
+                self.section = (self.section + 1) % Section::ALL.len();
+                self.clear_before_draw = true;
+            }
             KeyCode::Left | KeyCode::BackTab => {
-                self.section = (self.section + Section::ALL.len() - 1) % Section::ALL.len()
+                self.section = (self.section + Section::ALL.len() - 1) % Section::ALL.len();
+                self.clear_before_draw = true;
             }
             KeyCode::Char('1'..='9') => {
                 if let KeyCode::Char(value) = key.code {
                     self.section = value.to_digit(10).unwrap_or(1) as usize - 1;
+                    self.clear_before_draw = true;
                 }
             }
             KeyCode::Down | KeyCode::Char('j') => self.move_selection(1),
@@ -1278,8 +1672,184 @@ impl Dashboard<'_> {
             KeyCode::Enter if Section::ALL[self.section] == Section::Downloads => {
                 self.download_detail = true
             }
+            KeyCode::Enter
+                if matches!(
+                    Section::ALL[self.section],
+                    Section::Models
+                        | Section::Loras
+                        | Section::Vaes
+                        | Section::TextEncoders
+                        | Section::Upscalers
+                        | Section::RuntimeModels
+                        | Section::Workflows
+                ) =>
+            {
+                self.open_plan_editor();
+            }
             KeyCode::Enter => return self.selected_action(),
             _ => {}
+        }
+        None
+    }
+
+    fn open_plan_editor(&mut self) {
+        if self.valid_comfy_root().is_none() {
+            return;
+        }
+        let target = match Section::ALL[self.section] {
+            Section::Models => {
+                let Some(package) = self.catalog.packages.get(self.model_index) else {
+                    return;
+                };
+                if package.primary_artifact_ids.is_empty() {
+                    return;
+                }
+                PlanTarget::Package(package.id.clone())
+            }
+            Section::Workflows => {
+                let Some(workflow) = self.catalog.workflows.get(self.workflow_index) else {
+                    return;
+                };
+                PlanTarget::Workflow(workflow.id.clone())
+            }
+            Section::Loras
+            | Section::Vaes
+            | Section::TextEncoders
+            | Section::Upscalers
+            | Section::RuntimeModels => {
+                let artifacts = self.artifacts_for_section();
+                let Some(artifact) =
+                    artifacts.get(self.artifact_index.min(artifacts.len().saturating_sub(1)))
+                else {
+                    return;
+                };
+                PlanTarget::Artifact(artifact.id.clone())
+            }
+            _ => return,
+        };
+        let mut disabled_dependencies = HashSet::new();
+        if let PlanTarget::Package(id) = &target
+            && let Some(package) = self.catalog.package(id)
+        {
+            for group in &package.optional_groups {
+                disabled_dependencies.extend(group.artifact_ids.iter().cloned());
+                disabled_dependencies.extend(group.custom_node_ids.iter().cloned());
+            }
+        }
+        let (models, dependencies, _) = self.plan_artifacts(&target);
+        let expanded_artifacts = models.into_iter().chain(dependencies).collect();
+        self.plan_editor = Some(PlanEditor {
+            target,
+            cursor: 0,
+            deps_expanded: true,
+            expanded_artifacts,
+            selected_sources: HashMap::new(),
+            disabled_dependencies,
+        });
+    }
+
+    fn handle_plan_key(&mut self, key: KeyEvent) -> Option<DashboardAction> {
+        if key.code == KeyCode::Esc {
+            self.plan_editor = None;
+            return None;
+        }
+        let rows = self.plan_rows();
+        let target = self.plan_editor.as_ref()?.target.clone();
+        let plan_artifacts = self.plan_artifacts(&target);
+        let editor = self.plan_editor.as_mut()?;
+        let mut cancel = false;
+        editor.cursor = editor.cursor.min(rows.len().saturating_sub(1));
+        match key.code {
+            KeyCode::Down | KeyCode::Char('j') | KeyCode::Tab => {
+                editor.cursor = (editor.cursor + 1) % rows.len().max(1);
+            }
+            KeyCode::Up | KeyCode::Char('k') | KeyCode::BackTab => {
+                editor.cursor = (editor.cursor + rows.len().saturating_sub(1)) % rows.len().max(1);
+            }
+            KeyCode::Left => {
+                cancel = true;
+            }
+            KeyCode::Enter | KeyCode::Char(' ') | KeyCode::Right => {
+                let row = rows.get(editor.cursor)?.clone();
+                let enable_toggle = key.code == KeyCode::Char(' ');
+                match row {
+                    PlanRow::Model(id) => {
+                        if !editor.expanded_artifacts.insert(id.clone()) {
+                            editor.expanded_artifacts.remove(&id);
+                        }
+                    }
+                    PlanRow::ModelSource(id, index) | PlanRow::DependencySource(id, index) => {
+                        editor.selected_sources.insert(id, index);
+                    }
+                    PlanRow::Dependencies => editor.deps_expanded = !editor.deps_expanded,
+                    PlanRow::DependencyArtifact(id) => {
+                        if enable_toggle {
+                            if !editor.disabled_dependencies.insert(id.clone()) {
+                                editor.disabled_dependencies.remove(&id);
+                            }
+                        } else if !editor.expanded_artifacts.insert(id.clone()) {
+                            editor.expanded_artifacts.remove(&id);
+                        }
+                    }
+                    PlanRow::DependencyNode(id) => {
+                        if !editor.disabled_dependencies.insert(id.clone()) {
+                            editor.disabled_dependencies.remove(&id);
+                        }
+                    }
+                    PlanRow::Ok => {
+                        let (models, dependencies, nodes) = plan_artifacts;
+                        let artifact_sources = models
+                            .into_iter()
+                            .chain(dependencies)
+                            .filter(|id| !editor.disabled_dependencies.contains(id))
+                            .map(|id| {
+                                let source = editor.selected_sources.get(&id).copied().unwrap_or(0);
+                                (id, source)
+                            })
+                            .collect();
+                        let custom_node_ids = nodes
+                            .into_iter()
+                            .filter(|id| !editor.disabled_dependencies.contains(id))
+                            .collect();
+                        let action = match &editor.target {
+                            PlanTarget::Package(id) => {
+                                DashboardAction::InstallPackage(InstallSelection {
+                                    id: id.clone(),
+                                    artifact_sources,
+                                    custom_node_ids,
+                                })
+                            }
+                            PlanTarget::Artifact(id) => {
+                                DashboardAction::InstallArtifact(InstallSelection {
+                                    id: id.clone(),
+                                    artifact_sources,
+                                    custom_node_ids,
+                                })
+                            }
+                            PlanTarget::Workflow(id) => {
+                                DashboardAction::InstallWorkflow(InstallSelection {
+                                    id: id.clone(),
+                                    artifact_sources,
+                                    custom_node_ids,
+                                })
+                            }
+                        };
+                        return Some(action);
+                    }
+                    PlanRow::Cancel => cancel = true,
+                }
+            }
+            _ => {}
+        }
+        let cursor = editor.cursor;
+        let _ = editor;
+        if cancel {
+            self.plan_editor = None;
+            return None;
+        }
+        let new_len = self.plan_rows().len();
+        if let Some(editor) = self.plan_editor.as_mut() {
+            editor.cursor = cursor.min(new_len.saturating_sub(1));
         }
         None
     }
@@ -1309,23 +1879,8 @@ impl Dashboard<'_> {
 
     fn selected_action(&self) -> Option<DashboardAction> {
         match Section::ALL[self.section] {
-            Section::Models => {
-                self.valid_comfy_root()?;
-                let package = self.catalog.packages.get(self.model_index)?;
-                if package.primary_artifact_ids.is_empty()
-                    || self.package_health(package) == Health::Blocked
-                {
-                    None
-                } else {
-                    Some(DashboardAction::InstallPackage(package.id.clone()))
-                }
-            }
-            Section::Workflows => {
-                self.valid_comfy_root()?;
-                let workflow = self.catalog.workflows.get(self.workflow_index)?;
-                (self.workflow_health(workflow) != Health::Blocked)
-                    .then(|| DashboardAction::InstallWorkflow(workflow.id.clone()))
-            }
+            Section::Models => None,
+            Section::Workflows => None,
             Section::Loras
             | Section::Vaes
             | Section::TextEncoders
@@ -1335,7 +1890,11 @@ impl Dashboard<'_> {
                 let artifacts = self.artifacts_for_section();
                 let artifact =
                     artifacts.get(self.artifact_index.min(artifacts.len().checked_sub(1)?))?;
-                Some(DashboardAction::InstallArtifact(artifact.id.clone()))
+                Some(DashboardAction::InstallArtifact(InstallSelection {
+                    id: artifact.id.clone(),
+                    artifact_sources: vec![(artifact.id.clone(), 0)],
+                    custom_node_ids: Vec::new(),
+                }))
             }
             Section::CustomNodes => {
                 self.valid_comfy_root()?;
@@ -1531,6 +2090,40 @@ fn content_columns(area: Rect) -> Vec<Rect> {
     }
 }
 
+fn plan_columns(area: Rect) -> Vec<Rect> {
+    Layout::default()
+        .direction(Direction::Horizontal)
+        .constraints([Constraint::Percentage(55), Constraint::Percentage(45)])
+        .split(area)
+        .to_vec()
+}
+
+fn plan_card<'a>(
+    title: &'a str,
+    text: Text<'a>,
+    editor: Option<&PlanEditor>,
+    area: Rect,
+) -> Paragraph<'a> {
+    let scroll = editor
+        .map(|editor| {
+            let selected_line = 8usize.saturating_add(editor.cursor);
+            selected_line.saturating_sub(area.height.saturating_sub(4) as usize) as u16
+        })
+        .unwrap_or(0);
+    let paragraph = Paragraph::new(text).scroll((scroll, 0));
+    let paragraph = if editor.is_some() {
+        paragraph
+    } else {
+        paragraph.wrap(Wrap { trim: true })
+    };
+    paragraph.block(
+        Block::default()
+            .title(title)
+            .borders(Borders::ALL)
+            .border_style(Style::default().fg(if editor.is_some() { ACCENT } else { PANEL })),
+    )
+}
+
 fn label(value: &str) -> Span<'static> {
     Span::styled(format!("{value:<13}"), Style::default().fg(MUTED))
 }
@@ -1657,6 +2250,8 @@ fn collect_system_snapshot(cfg: &AppConfig, catalog: &Catalog) -> SystemSnapshot
             .map(|value| format!("present · {}", value.source().label()))
             .unwrap_or_else(|| "missing".into()),
         has_token: credential.is_some(),
+        python_dependencies_ready: root
+            .is_some_and(crate::download_queue::python_dependencies_ready),
         dependency_status: catalog
             .system_dependencies
             .iter()
