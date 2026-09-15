@@ -67,11 +67,34 @@ impl ComfyManager {
         }
         let mut found = Vec::new();
         let mut seen = std::collections::HashSet::new();
+        let mut scanned_roots = std::collections::HashSet::new();
         for root in roots {
+            let root = fs::canonicalize(&root).unwrap_or(root);
+            if !scanned_roots.insert(root.clone()) {
+                continue;
+            }
             for e in WalkDir::new(root)
                 .max_depth(max_depth)
                 .follow_links(false)
                 .into_iter()
+                .filter_entry(|entry| {
+                    if entry.depth() == 0 {
+                        return true;
+                    }
+                    !matches!(
+                        entry.file_name().to_str(),
+                        Some(
+                            ".git"
+                                | ".venv"
+                                | "venv"
+                                | "models"
+                                | "node_modules"
+                                | "target"
+                                | ".cache"
+                                | ".comfybox-tmp"
+                        )
+                    )
+                })
                 .filter_map(|e| e.ok())
             {
                 if !e.file_type().is_dir() {

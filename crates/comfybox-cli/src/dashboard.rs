@@ -2,7 +2,7 @@ use crate::download_queue::{DownloadQueue, JobStatus};
 use anyhow::{Context, Result};
 use comfybox_core::{
     auth,
-    catalog::{Catalog, Package, WorkflowDefinition},
+    catalog::{Artifact, Catalog, Package, WorkflowDefinition},
     comfy::ComfyManager,
     config::AppConfig,
     inventory::{ArtifactStatus, Inventory},
@@ -23,10 +23,12 @@ use ratatui::{
     widgets::{Block, Borders, List, ListItem, ListState, Paragraph, Tabs, Wrap},
 };
 use std::{
+    collections::{HashMap, HashSet},
     env,
     io::{self, IsTerminal},
     path::{Path, PathBuf},
     process::Command,
+    sync::mpsc,
     time::{Duration, Instant},
 };
 
@@ -43,10 +45,13 @@ pub enum DashboardAction {
     InstallComfyUi,
     LocateComfyUi,
     InstallPythonDeps,
+    InstallSystemDeps,
     ConfigurePypi,
     SetHfToken,
     ToggleServer,
     InstallPackage(String),
+    InstallArtifact(String),
+    InstallCustomNode(String),
     InstallWorkflow(String),
 }
 
@@ -54,6 +59,12 @@ pub enum DashboardAction {
 enum Section {
     Overview,
     Models,
+    Loras,
+    Vaes,
+    TextEncoders,
+    Upscalers,
+    RuntimeModels,
+    CustomNodes,
     Workflows,
     Downloads,
     Logs,
@@ -62,9 +73,15 @@ enum Section {
 }
 
 impl Section {
-    const ALL: [Self; 7] = [
+    const ALL: [Self; 13] = [
         Self::Overview,
         Self::Models,
+        Self::Loras,
+        Self::Vaes,
+        Self::TextEncoders,
+        Self::Upscalers,
+        Self::RuntimeModels,
+        Self::CustomNodes,
         Self::Workflows,
         Self::Downloads,
         Self::Logs,
@@ -76,6 +93,12 @@ impl Section {
         match self {
             Self::Overview => "Overview",
             Self::Models => "Models",
+            Self::Loras => "LoRAs",
+            Self::Vaes => "VAEs",
+            Self::TextEncoders => "Text Encoders",
+            Self::Upscalers => "Upscalers",
+            Self::RuntimeModels => "Runtime",
+            Self::CustomNodes => "Custom Nodes",
             Self::Workflows => "Workflows",
             Self::Downloads => "Downloads",
             Self::Logs => "Logs",
@@ -125,12 +148,38 @@ struct Dashboard<'a> {
     queue: &'a mut DownloadQueue,
     section: usize,
     model_index: usize,
+    artifact_index: usize,
+    custom_node_index: usize,
     workflow_index: usize,
     download_index: usize,
     download_detail: bool,
     comfy_running: bool,
     state: ManagedState,
     last_server_check: Instant,
+    artifact_health: ArtifactHealthSnapshot,
+    system: SystemSnapshot,
+    installed_custom_nodes: HashSet<String>,
+    server_status_receiver: mpsc::Receiver<bool>,
+    server_status_sender: mpsc::Sender<bool>,
+    server_check_pending: bool,
+}
+
+#[derive(Default)]
+struct ArtifactHealthSnapshot {
+    ready: usize,
+    missing: usize,
+    paused: usize,
+    broken: usize,
+    by_id: HashMap<String, Health>,
+}
+
+struct SystemSnapshot {
+    git: bool,
+    python: Option<PathBuf>,
+    disk: Option<u64>,
+    token_status: String,
+    has_token: bool,
+    dependency_status: Vec<(String, bool)>,
 }
 
 pub fn run(
@@ -144,6 +193,15 @@ pub fn run(
         );
     }
 
+    // Collect potentially slow filesystem/process state before clearing the terminal.
+    // The previous screen remains visible while these snapshots are refreshed.
+    let state = ManagedState::load().unwrap_or_default();
+    let comfy_running = detect_comfy_running(cfg, &state);
+    let artifact_health = collect_artifact_health(cfg, catalog);
+    let system = collect_system_snapshot(cfg, catalog);
+    let installed_custom_nodes = collect_installed_custom_nodes(cfg, catalog);
+    let (server_status_sender, server_status_receiver) = mpsc::channel();
+
     enable_raw_mode().context("enable terminal raw mode")?;
     let mut stdout = io::stdout();
     execute!(stdout, EnterAlternateScreen).context("enter alternate screen")?;
@@ -152,20 +210,26 @@ pub fn run(
     let mut terminal = Terminal::new(backend).context("create terminal")?;
     terminal.clear()?;
 
-    let state = ManagedState::load().unwrap_or_default();
-    let comfy_running = detect_comfy_running(cfg, &state);
     let mut app = Dashboard {
         cfg,
         catalog,
         queue,
         section: 0,
         model_index: 0,
+        artifact_index: 0,
+        custom_node_index: 0,
         workflow_index: 0,
         download_index: 0,
         download_detail: false,
         comfy_running,
         state,
         last_server_check: Instant::now(),
+        artifact_health,
+        system,
+        installed_custom_nodes,
+        server_status_receiver,
+        server_status_sender,
+        server_check_pending: false,
     };
 
     let mut needs_draw = true;
@@ -178,11 +242,20 @@ pub fn run(
         {
             needs_draw = true;
         }
-        if app.last_server_check.elapsed() >= Duration::from_secs(1) {
-            app.state = ManagedState::load().unwrap_or_default();
-            app.comfy_running = detect_comfy_running(app.cfg, &app.state);
-            app.last_server_check = Instant::now();
+        if let Ok(running) = app.server_status_receiver.try_recv() {
+            app.comfy_running = running;
+            app.server_check_pending = false;
             needs_draw = true;
+        }
+        if app.last_server_check.elapsed() >= Duration::from_secs(1) && !app.server_check_pending {
+            let cfg = app.cfg.clone();
+            let sender = app.server_status_sender.clone();
+            std::thread::spawn(move || {
+                let running = detect_comfy_running(&cfg, &ManagedState::default());
+                let _ = sender.send(running);
+            });
+            app.server_check_pending = true;
+            app.last_server_check = Instant::now();
         }
         if needs_draw {
             terminal.draw(|frame| app.render(frame))?;
@@ -245,6 +318,12 @@ impl Dashboard<'_> {
         match Section::ALL[self.section] {
             Section::Overview => self.render_overview(frame, vertical[2]),
             Section::Models => self.render_models(frame, vertical[2]),
+            Section::Loras
+            | Section::Vaes
+            | Section::TextEncoders
+            | Section::Upscalers
+            | Section::RuntimeModels => self.render_artifacts(frame, vertical[2]),
+            Section::CustomNodes => self.render_custom_nodes(frame, vertical[2]),
             Section::Workflows => self.render_workflows(frame, vertical[2]),
             Section::Downloads => self.render_downloads(frame, vertical[2]),
             Section::Logs => self.render_logs(frame, vertical[2]),
@@ -309,6 +388,12 @@ impl Dashboard<'_> {
                     match section {
                         Section::Overview => "Home",
                         Section::Models => "Models",
+                        Section::Loras => "LoRA",
+                        Section::Vaes => "VAE",
+                        Section::TextEncoders => "Text",
+                        Section::Upscalers => "Up",
+                        Section::RuntimeModels => "Run",
+                        Section::CustomNodes => "Nodes",
                         Section::Workflows => "Flows",
                         Section::Downloads => "DL",
                         Section::Logs => "Logs",
@@ -364,11 +449,8 @@ impl Dashboard<'_> {
         let dependencies = self
             .valid_comfy_root()
             .is_some_and(crate::download_queue::python_dependencies_ready);
-        let token = if let Some(credential) = hf_credential() {
-            Span::styled(
-                format!("present · {}", credential.source().label()),
-                Style::default().fg(GREEN),
-            )
+        let token = if self.system.has_token {
+            Span::styled(self.system.token_status.clone(), Style::default().fg(GREEN))
         } else {
             Span::styled("missing", Style::default().fg(YELLOW))
         };
@@ -399,7 +481,7 @@ impl Dashboard<'_> {
     }
 
     fn render_library_card(&self, frame: &mut Frame<'_>, area: Rect) {
-        let Some(root) = self.valid_comfy_root() else {
+        let Some(_root) = self.valid_comfy_root() else {
             frame.render_widget(
                 card(
                     " Library ",
@@ -409,27 +491,12 @@ impl Dashboard<'_> {
             );
             return;
         };
-        let inventory = Inventory {
-            comfy_root: root,
-            catalog: self.catalog,
-        };
-        let mut ready = 0;
-        let mut missing = 0;
-        let mut paused = 0;
-        let mut broken = 0;
-        for artifact in &self.catalog.artifacts {
-            match inventory.status(artifact) {
-                ArtifactStatus::Installed => ready += 1,
-                ArtifactStatus::Missing => missing += 1,
-                ArtifactStatus::Partial { .. } => paused += 1,
-                ArtifactStatus::SizeMismatch { .. } => broken += 1,
-            }
-        }
+        let health = &self.artifact_health;
         let lines = vec![
-            metric_line("Ready", ready, GREEN),
-            metric_line("Missing", missing, MUTED),
-            metric_line("Paused", paused, YELLOW),
-            metric_line("Broken", broken, RED),
+            metric_line("Ready", health.ready, GREEN),
+            metric_line("Missing", health.missing, MUTED),
+            metric_line("Paused", health.paused, YELLOW),
+            metric_line("Broken", health.broken, RED),
         ];
         frame.render_widget(card(" Artifact health ", Text::from(lines)), area);
     }
@@ -445,7 +512,7 @@ impl Dashboard<'_> {
                 "  Press l to locate one or i to install ComfyUI.",
             ));
         }
-        if !has_hf_token() {
+        if !self.system.has_token {
             lines.push(warning_line("HF_TOKEN is not set.", YELLOW));
             lines.push(Line::from(
                 "  Public downloads work; press t to save a token for gated repositories.",
@@ -460,23 +527,9 @@ impl Dashboard<'_> {
             ));
             lines.push(Line::from("  Press p to install them in the background; server start/stop is locked until complete."));
         }
-        if let Some(root) = self.valid_comfy_root() {
-            let inventory = Inventory {
-                comfy_root: root,
-                catalog: self.catalog,
-            };
-            let paused = self
-                .catalog
-                .artifacts
-                .iter()
-                .filter(|a| matches!(inventory.status(a), ArtifactStatus::Partial { .. }))
-                .count();
-            let broken = self
-                .catalog
-                .artifacts
-                .iter()
-                .filter(|a| matches!(inventory.status(a), ArtifactStatus::SizeMismatch { .. }))
-                .count();
+        if self.valid_comfy_root().is_some() {
+            let paused = self.artifact_health.paused;
+            let broken = self.artifact_health.broken;
             if paused > 0 {
                 lines.push(warning_line(
                     &format!("{paused} interrupted download(s) can be resumed from Downloads."),
@@ -541,7 +594,7 @@ impl Dashboard<'_> {
                 .map(|package| {
                     let required =
                         package.primary_artifact_ids.len() + package.dependency_artifact_ids.len();
-                    Text::from(vec![
+                    let mut lines = vec![
                         Line::from(Span::styled(
                             &package.name,
                             Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
@@ -556,10 +609,160 @@ impl Dashboard<'_> {
                         Line::from(package.description.as_deref().unwrap_or(
                             "Enter installs the package and its required dependencies.",
                         )),
-                    ])
+                    ];
+                    if let Some(artifact) = package
+                        .primary_artifact_ids
+                        .first()
+                        .and_then(|id| self.catalog.artifact(id))
+                        && !artifact.sources.is_empty()
+                    {
+                        lines.push(Line::from(""));
+                        lines.push(Line::from(Span::styled(
+                            format!("Download sources: {}", artifact.sources.len()),
+                            Style::default().fg(ACCENT),
+                        )));
+                        for (index, source) in artifact.sources.iter().enumerate() {
+                            let marker = if index == 0 { "default" } else { "alternative" };
+                            let size = source.size.as_deref().unwrap_or("size unknown");
+                            lines.push(Line::from(format!(
+                                "• {} · {} · {}",
+                                source.title, size, marker
+                            )));
+                        }
+                    }
+                    lines.push(Line::from(""));
+                    lines.push(Line::from("[ Enter ] Install    [ r ] Refresh checks"));
+                    Text::from(lines)
                 })
                 .unwrap_or_default();
             frame.render_widget(card(" Details ", details), columns[1]);
+        }
+    }
+
+    fn artifacts_for_section(&self) -> Vec<&Artifact> {
+        let kind = match Section::ALL[self.section] {
+            Section::Loras => "models/loras/",
+            Section::Vaes => "models/vae/",
+            Section::TextEncoders => "models/text_encoders/",
+            Section::Upscalers => "models/upscale_models/",
+            Section::RuntimeModels => "runtime_models/",
+            _ => return Vec::new(),
+        };
+        self.catalog
+            .artifacts
+            .iter()
+            .filter(|artifact| artifact.relative_path.starts_with(kind))
+            .collect()
+    }
+
+    fn render_artifacts(&mut self, frame: &mut Frame<'_>, area: Rect) {
+        let columns = content_columns(area);
+        let artifacts = self.artifacts_for_section();
+        let items = artifacts
+            .iter()
+            .map(|artifact| {
+                let health = self
+                    .artifact_health
+                    .by_id
+                    .get(&artifact.id)
+                    .copied()
+                    .unwrap_or(Health::Missing);
+                ListItem::new(Line::from(vec![
+                    status_badge(health),
+                    Span::raw(" "),
+                    Span::styled(artifact.name.clone(), Style::default().fg(Color::White)),
+                ]))
+            })
+            .collect::<Vec<_>>();
+        let selected = self.artifact_index.min(items.len().saturating_sub(1));
+        let mut state = ListState::default().with_selected(Some(selected));
+        frame.render_stateful_widget(
+            List::new(items)
+                .highlight_symbol("› ")
+                .highlight_style(Style::default().bg(PANEL).add_modifier(Modifier::BOLD))
+                .block(
+                    Block::default()
+                        .title(format!(" {} ", Section::ALL[self.section].title()))
+                        .borders(Borders::ALL)
+                        .border_style(Style::default().fg(PANEL)),
+                ),
+            columns[0],
+            &mut state,
+        );
+        if columns.len() > 1 {
+            let details = artifacts.get(selected).map(|artifact| {
+                let mut lines = vec![
+                    Line::from(Span::styled(
+                        &artifact.name,
+                        Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+                    )),
+                    Line::from(format!("Path: {}", artifact.relative_path)),
+                    Line::from(format!("Sources: {}", artifact.sources.len().max(1))),
+                    Line::from(""),
+                    Line::from(
+                        artifact
+                            .description
+                            .as_deref()
+                            .unwrap_or("Enter downloads this artifact."),
+                    ),
+                ];
+                lines.push(Line::from(""));
+                lines.push(Line::from("[ Enter ] Install    [ r ] Refresh checks"));
+                Text::from(lines)
+            });
+            frame.render_widget(card(" Details ", details.unwrap_or_default()), columns[1]);
+        }
+    }
+
+    fn render_custom_nodes(&mut self, frame: &mut Frame<'_>, area: Rect) {
+        let columns = content_columns(area);
+        let items = self
+            .catalog
+            .custom_nodes
+            .iter()
+            .map(|node| {
+                let health = if self.installed_custom_nodes.contains(&node.id) {
+                    Health::Ready
+                } else {
+                    Health::Missing
+                };
+                ListItem::new(Line::from(vec![
+                    status_badge(health),
+                    Span::raw(" "),
+                    Span::styled(node.name.clone(), Style::default().fg(Color::White)),
+                ]))
+            })
+            .collect::<Vec<_>>();
+        let selected = self.custom_node_index.min(items.len().saturating_sub(1));
+        let mut state = ListState::default().with_selected(Some(selected));
+        frame.render_stateful_widget(
+            List::new(items)
+                .highlight_symbol("› ")
+                .highlight_style(Style::default().bg(PANEL).add_modifier(Modifier::BOLD))
+                .block(
+                    Block::default()
+                        .title(" Custom Nodes ")
+                        .borders(Borders::ALL)
+                        .border_style(Style::default().fg(PANEL)),
+                ),
+            columns[0],
+            &mut state,
+        );
+        if columns.len() > 1 {
+            let details = self.catalog.custom_nodes.get(selected).map(|node| {
+                Text::from(vec![
+                    Line::from(Span::styled(
+                        &node.name,
+                        Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+                    )),
+                    Line::from(format!("Repository: {}", node.git_url)),
+                    Line::from(format!("Folder: {}", node.folder_name)),
+                    Line::from(format!("Aliases: {}", node.node_types.join(", "))),
+                    Line::from(""),
+                    Line::from("[ Enter ] Install    [ r ] Refresh checks"),
+                ])
+            });
+            frame.render_widget(card(" Details ", details.unwrap_or_default()), columns[1]);
         }
     }
 
@@ -603,6 +806,8 @@ impl Dashboard<'_> {
                     Line::from(format!("Custom nodes: {}", workflow.custom_node_ids.len())),
                     Line::from(""),
                     Line::from("Enter installs the workflow, models, VAEs, text encoders, LoRAs, and custom nodes."),
+                    Line::from(""),
+                    Line::from("[ Enter ] Install    [ r ] Refresh checks"),
                 ])
             }).unwrap_or_default();
             frame.render_widget(card(" Install plan ", details), columns[1]);
@@ -776,15 +981,10 @@ impl Dashboard<'_> {
 
     fn render_system(&self, frame: &mut Frame<'_>, area: Rect) {
         let root = self.valid_comfy_root();
-        let git = command_available("git");
-        let python = root.and_then(find_python);
-        let disk = root.and_then(disk_free_for);
-        let credential = hf_credential();
-        let token_status = credential
-            .as_ref()
-            .map(|value| format!("present · {}", value.source().label()))
-            .unwrap_or_else(|| "missing".into());
-        let lines = vec![
+        let git = self.system.git;
+        let python = self.system.python.as_ref();
+        let disk = self.system.disk;
+        let mut lines = vec![
             Line::from(vec![
                 label("ComfyUI"),
                 state_span(
@@ -835,7 +1035,7 @@ impl Dashboard<'_> {
             ]),
             Line::from(vec![
                 label("HF_TOKEN"),
-                state_span(&token_status, credential.is_some()),
+                state_span(&self.system.token_status, self.system.has_token),
             ]),
             Line::from(vec![
                 label("Free disk"),
@@ -868,6 +1068,67 @@ impl Dashboard<'_> {
                 Span::raw(self.state.comfy_log.as_deref().unwrap_or("not created")),
             ]),
         ];
+        if !self.catalog.system_dependencies.is_empty() {
+            lines.push(Line::from(""));
+            lines.push(Line::from(Span::styled(
+                "Manifest system dependencies",
+                Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+            )));
+            for (dependency, (_, ready)) in self
+                .catalog
+                .system_dependencies
+                .iter()
+                .zip(&self.system.dependency_status)
+            {
+                let ready = *ready;
+                lines.push(Line::from(vec![
+                    label(&dependency.package),
+                    state_span(if ready { "available" } else { "missing" }, ready),
+                    Span::styled(
+                        format!("  {}", dependency.required_by.join(", ")),
+                        Style::default().fg(MUTED),
+                    ),
+                ]));
+                if !ready {
+                    lines.push(Line::from(Span::styled(
+                        format!("  install: {}", dependency.install),
+                        Style::default().fg(MUTED),
+                    )));
+                }
+            }
+        }
+        if let Some(policy) = self.catalog.python_dependencies.as_ref() {
+            lines.push(Line::from(""));
+            lines.push(Line::from(Span::styled(
+                "Manifest Python dependency policy",
+                Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+            )));
+            if let Some(environment) = policy.get("environment").and_then(|value| value.as_str()) {
+                lines.push(Line::from(vec![
+                    label("Environment"),
+                    Span::raw(environment),
+                ]));
+            }
+            if let Some(requirements) = policy
+                .get("custom_node_requirements")
+                .and_then(|value| value.as_str())
+            {
+                lines.push(Line::from(Span::styled(
+                    requirements,
+                    Style::default().fg(MUTED),
+                )));
+            }
+        }
+        if !self.catalog.system_dependencies.is_empty() {
+            lines.push(Line::from(""));
+            lines.push(Line::from(Span::styled(
+                "[ Enter ] Install missing system dependencies",
+                Style::default()
+                    .fg(Color::Black)
+                    .bg(ACCENT)
+                    .add_modifier(Modifier::BOLD),
+            )));
+        }
         frame.render_widget(
             Paragraph::new(lines).wrap(Wrap { trim: false }).block(
                 Block::default()
@@ -882,7 +1143,14 @@ impl Dashboard<'_> {
     fn render_footer(&self, frame: &mut Frame<'_>, area: Rect) {
         let help = if area.width < 100 {
             match Section::ALL[self.section] {
-                Section::Models | Section::Workflows => {
+                Section::Models
+                | Section::Loras
+                | Section::Vaes
+                | Section::TextEncoders
+                | Section::Upscalers
+                | Section::RuntimeModels
+                | Section::CustomNodes
+                | Section::Workflows => {
                     " ←/→ tabs  ↑/↓ select  Enter install  s server  t token  r refresh  q quit "
                         .into()
                 }
@@ -891,13 +1159,22 @@ impl Dashboard<'_> {
                         .into()
                 }
                 Section::Settings => " ←/→ tabs  −/+ files  [/] chunks  y PyPI  q quit ".into(),
+                Section::System => " ←/→ tabs  Enter install system deps  q quit ".into(),
                 _ => " ←/→ tabs  s server  l locate  i install  t token  r refresh  q quit ".into(),
             }
         } else {
             let section_hint = match Section::ALL[self.section] {
-                Section::Models | Section::Workflows => " Enter install ",
+                Section::Models
+                | Section::Loras
+                | Section::Vaes
+                | Section::TextEncoders
+                | Section::Upscalers
+                | Section::RuntimeModels
+                | Section::CustomNodes
+                | Section::Workflows => " Enter install  r refresh checks ",
                 Section::Downloads => " Enter watch  x pause  c continue  r retry  b background ",
                 Section::Settings => " −/+ files  [/] chunks  y PyPI source ",
+                Section::System => " Enter install system deps ",
                 _ => "",
             };
             format!(
@@ -926,7 +1203,7 @@ impl Dashboard<'_> {
             KeyCode::Left | KeyCode::BackTab => {
                 self.section = (self.section + Section::ALL.len() - 1) % Section::ALL.len()
             }
-            KeyCode::Char('1'..='7') => {
+            KeyCode::Char('1'..='9') => {
                 if let KeyCode::Char(value) = key.code {
                     self.section = value.to_digit(10).unwrap_or(1) as usize - 1;
                 }
@@ -992,6 +1269,11 @@ impl Dashboard<'_> {
             KeyCode::Char('r') => {
                 self.state = ManagedState::load().unwrap_or_default();
                 self.comfy_running = detect_comfy_running(self.cfg, &self.state);
+                self.artifact_health = collect_artifact_health(self.cfg, self.catalog);
+                self.system = collect_system_snapshot(self.cfg, self.catalog);
+                self.installed_custom_nodes =
+                    collect_installed_custom_nodes(self.cfg, self.catalog);
+                self.queue.record("refreshed and cached dependency health");
             }
             KeyCode::Enter if Section::ALL[self.section] == Section::Downloads => {
                 self.download_detail = true
@@ -1005,6 +1287,15 @@ impl Dashboard<'_> {
     fn move_selection(&mut self, delta: isize) {
         let (index, len) = match Section::ALL[self.section] {
             Section::Models => (&mut self.model_index, self.catalog.packages.len()),
+            Section::Loras
+            | Section::Vaes
+            | Section::TextEncoders
+            | Section::Upscalers
+            | Section::RuntimeModels => {
+                let len = self.artifacts_for_section().len();
+                (&mut self.artifact_index, len)
+            }
+            Section::CustomNodes => (&mut self.custom_node_index, self.catalog.custom_nodes.len()),
             Section::Workflows => (&mut self.workflow_index, self.catalog.workflows.len()),
             Section::Downloads => (&mut self.download_index, self.queue.len()),
             _ => return,
@@ -1017,9 +1308,9 @@ impl Dashboard<'_> {
     }
 
     fn selected_action(&self) -> Option<DashboardAction> {
-        self.valid_comfy_root()?;
         match Section::ALL[self.section] {
             Section::Models => {
+                self.valid_comfy_root()?;
                 let package = self.catalog.packages.get(self.model_index)?;
                 if package.primary_artifact_ids.is_empty()
                     || self.package_health(package) == Health::Blocked
@@ -1030,11 +1321,32 @@ impl Dashboard<'_> {
                 }
             }
             Section::Workflows => {
+                self.valid_comfy_root()?;
                 let workflow = self.catalog.workflows.get(self.workflow_index)?;
                 (self.workflow_health(workflow) != Health::Blocked)
                     .then(|| DashboardAction::InstallWorkflow(workflow.id.clone()))
             }
+            Section::Loras
+            | Section::Vaes
+            | Section::TextEncoders
+            | Section::Upscalers
+            | Section::RuntimeModels => {
+                self.valid_comfy_root()?;
+                let artifacts = self.artifacts_for_section();
+                let artifact =
+                    artifacts.get(self.artifact_index.min(artifacts.len().checked_sub(1)?))?;
+                Some(DashboardAction::InstallArtifact(artifact.id.clone()))
+            }
+            Section::CustomNodes => {
+                self.valid_comfy_root()?;
+                self.catalog
+                    .custom_nodes
+                    .get(self.custom_node_index)
+                    .map(|node| DashboardAction::InstallCustomNode(node.id.clone()))
+            }
             Section::Downloads => None,
+            Section::System => (!self.catalog.system_dependencies.is_empty())
+                .then_some(DashboardAction::InstallSystemDeps),
             _ => None,
         }
     }
@@ -1081,24 +1393,20 @@ impl Dashboard<'_> {
     }
 
     fn ids_health<'a>(&self, ids: impl Iterator<Item = &'a String>) -> Health {
-        let Some(root) = self.valid_comfy_root() else {
+        if self.valid_comfy_root().is_none() {
             return Health::Missing;
-        };
-        let inventory = Inventory {
-            comfy_root: root,
-            catalog: self.catalog,
-        };
+        }
         let mut health = Health::Ready;
         for id in ids {
             let Some(artifact) = self.catalog.artifact(id) else {
                 return Health::Broken;
             };
-            health = match inventory.status(artifact) {
-                ArtifactStatus::SizeMismatch { .. } => return Health::Broken,
-                ArtifactStatus::Installed => health,
-                _ if artifact.gated && !has_hf_token() => Health::Blocked,
-                ArtifactStatus::Partial { .. } if health != Health::Blocked => Health::Paused,
-                ArtifactStatus::Missing if !matches!(health, Health::Paused | Health::Blocked) => {
+            health = match self.artifact_health.by_id.get(id).copied() {
+                Some(Health::Broken) => return Health::Broken,
+                Some(Health::Ready) => health,
+                _ if artifact.gated && !self.system.has_token => Health::Blocked,
+                Some(Health::Paused) if health != Health::Blocked => Health::Paused,
+                Some(Health::Missing) if !matches!(health, Health::Paused | Health::Blocked) => {
                     Health::Missing
                 }
                 _ => health,
@@ -1108,19 +1416,14 @@ impl Dashboard<'_> {
     }
 
     fn custom_nodes_health<'a>(&self, ids: impl Iterator<Item = &'a String>) -> Health {
-        let Some(root) = self.valid_comfy_root() else {
+        if self.valid_comfy_root().is_none() {
             return Health::Missing;
-        };
+        }
         for id in ids {
-            let Some(node) = self.catalog.custom_node(id) else {
+            if self.catalog.custom_node(id).is_none() {
                 return Health::Broken;
-            };
-            if crate::download_queue::find_equivalent_node_folder(
-                &root.join("custom_nodes"),
-                &node.folder_name,
-            )
-            .is_none()
-            {
+            }
+            if !self.installed_custom_nodes.contains(id) {
                 return Health::Missing;
             }
         }
@@ -1284,12 +1587,91 @@ fn worse_health(left: Health, right: Health) -> Health {
     }
 }
 
-fn hf_credential() -> Option<auth::HfCredential> {
-    auth::resolve_hf_token().ok().flatten()
+fn collect_artifact_health(cfg: &AppConfig, catalog: &Catalog) -> ArtifactHealthSnapshot {
+    let Some(root) = cfg
+        .comfy_path
+        .as_deref()
+        .filter(|path| ComfyManager::is_comfy_root(path))
+    else {
+        return ArtifactHealthSnapshot::default();
+    };
+    let inventory = Inventory {
+        comfy_root: root,
+        catalog,
+    };
+    let mut snapshot = ArtifactHealthSnapshot::default();
+    for artifact in &catalog.artifacts {
+        match inventory.status(artifact) {
+            ArtifactStatus::Installed => {
+                snapshot.ready += 1;
+                snapshot.by_id.insert(artifact.id.clone(), Health::Ready);
+            }
+            ArtifactStatus::Missing => {
+                snapshot.missing += 1;
+                snapshot.by_id.insert(artifact.id.clone(), Health::Missing);
+            }
+            ArtifactStatus::Partial { .. } => {
+                snapshot.paused += 1;
+                snapshot.by_id.insert(artifact.id.clone(), Health::Paused);
+            }
+            ArtifactStatus::SizeMismatch { .. } => {
+                snapshot.broken += 1;
+                snapshot.by_id.insert(artifact.id.clone(), Health::Broken);
+            }
+        }
+    }
+    snapshot
 }
 
-fn has_hf_token() -> bool {
-    hf_credential().is_some()
+fn collect_installed_custom_nodes(cfg: &AppConfig, catalog: &Catalog) -> HashSet<String> {
+    let Some(root) = cfg
+        .comfy_path
+        .as_deref()
+        .filter(|path| ComfyManager::is_comfy_root(path))
+    else {
+        return HashSet::new();
+    };
+    let base = root.join("custom_nodes");
+    catalog
+        .custom_nodes
+        .iter()
+        .filter(|node| {
+            crate::download_queue::find_equivalent_node_folder(&base, &node.folder_name).is_some()
+        })
+        .map(|node| node.id.clone())
+        .collect()
+}
+
+fn collect_system_snapshot(cfg: &AppConfig, catalog: &Catalog) -> SystemSnapshot {
+    let root = cfg
+        .comfy_path
+        .as_deref()
+        .filter(|path| ComfyManager::is_comfy_root(path));
+    let credential = hf_credential();
+    SystemSnapshot {
+        git: command_available("git"),
+        python: root.and_then(find_python),
+        disk: root.and_then(disk_free_for),
+        token_status: credential
+            .as_ref()
+            .map(|value| format!("present · {}", value.source().label()))
+            .unwrap_or_else(|| "missing".into()),
+        has_token: credential.is_some(),
+        dependency_status: catalog
+            .system_dependencies
+            .iter()
+            .map(|dependency| {
+                (
+                    dependency.id.clone(),
+                    system_dependency_ready(&dependency.id),
+                )
+            })
+            .collect(),
+    }
+}
+
+fn hf_credential() -> Option<auth::HfCredential> {
+    auth::resolve_hf_token().ok().flatten()
 }
 
 fn gib(bytes: u64) -> f64 {
@@ -1348,6 +1730,20 @@ fn command_available(command: &str) -> bool {
         .status()
         .map(|status| status.success())
         .unwrap_or(false)
+}
+
+fn system_dependency_ready(id: &str) -> bool {
+    match id {
+        "libegl" => Command::new("ldconfig")
+            .arg("-p")
+            .output()
+            .is_ok_and(|output| String::from_utf8_lossy(&output.stdout).contains("libEGL.so.1")),
+        "ffmpeg" => Command::new("ffmpeg")
+            .arg("-version")
+            .output()
+            .is_ok_and(|output| output.status.success()),
+        _ => false,
+    }
 }
 
 #[cfg(test)]

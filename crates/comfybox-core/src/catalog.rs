@@ -1,7 +1,8 @@
 use anyhow::{Context, Result, bail};
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 use std::{
-    collections::{HashMap, HashSet},
+    collections::{BTreeMap, HashMap, HashSet},
     fs,
     path::Path,
 };
@@ -16,6 +17,20 @@ pub struct Catalog {
     pub workflows: Vec<WorkflowDefinition>,
     #[serde(default)]
     pub custom_nodes: Vec<CustomNode>,
+    #[serde(default)]
+    pub system_dependencies: Vec<SystemDependency>,
+    #[serde(default)]
+    pub python_dependencies: Option<Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ArtifactSource {
+    pub title: String,
+    pub url: String,
+    pub size: Option<String>,
+    #[serde(default)]
+    pub size_bytes: Option<u64>,
+    pub description: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -28,6 +43,21 @@ pub struct Artifact {
     pub sha256: Option<String>,
     #[serde(default)]
     pub gated: bool,
+    #[serde(default)]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub sources: Vec<ArtifactSource>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SystemDependency {
+    pub id: String,
+    pub platform: String,
+    pub package: String,
+    pub detect: String,
+    pub install: String,
+    #[serde(default)]
+    pub required_by: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -99,11 +129,143 @@ impl Catalog {
         Ok(cat)
     }
 
+    pub fn from_dependency_manifest(raw: &str) -> Result<Self> {
+        let manifest: DependencyManifest =
+            serde_json::from_str(raw).context("parse dependency manifest JSON")?;
+        let mut artifacts = Vec::with_capacity(manifest.artifacts.len());
+        let mut artifact_by_path = HashMap::new();
+        for (id, entry) in manifest.artifacts {
+            let sources = entry
+                .source
+                .into_iter()
+                .map(|(title, url, size, description)| {
+                    let size_bytes = size.as_deref().and_then(parse_human_size);
+                    ArtifactSource {
+                        title,
+                        url,
+                        size,
+                        size_bytes,
+                        description,
+                    }
+                })
+                .collect::<Vec<_>>();
+            let primary = sources
+                .first()
+                .with_context(|| format!("artifact {id} has no download source"))?;
+            artifact_by_path.insert(entry.relative_path.clone(), id.clone());
+            artifacts.push(Artifact {
+                id,
+                name: primary.title.clone(),
+                url: primary.url.clone(),
+                relative_path: entry.relative_path,
+                size_bytes: primary.size_bytes,
+                sha256: entry.sha256,
+                gated: false,
+                description: Some(primary.description.clone()),
+                sources,
+            });
+        }
+        artifacts.sort_by(|a, b| a.name.cmp(&b.name));
+
+        let mut custom_nodes = manifest
+            .custom_nodes
+            .into_iter()
+            .map(|node| {
+                let folder_name = node
+                    .repository
+                    .trim_end_matches('/')
+                    .rsplit('/')
+                    .next()
+                    .unwrap_or(&node.id)
+                    .trim_end_matches(".git")
+                    .to_string();
+                CustomNode {
+                    name: humanize_id(&node.id),
+                    folder_name,
+                    git_url: node.repository,
+                    node_types: node.aliases,
+                    id: node.id,
+                }
+            })
+            .collect::<Vec<_>>();
+        custom_nodes.sort_by(|a, b| a.name.cmp(&b.name));
+
+        let mut workflows = Vec::with_capacity(manifest.workflows.len());
+        for (file, workflow) in manifest.workflows {
+            let id = file.trim_end_matches(".json").to_string();
+            let artifact_ids = workflow
+                .artifacts
+                .iter()
+                .map(|path| {
+                    artifact_by_path.get(path).cloned().with_context(|| {
+                        format!("workflow {file} references unknown artifact {path}")
+                    })
+                })
+                .collect::<Result<Vec<_>>>()?;
+            workflows.push(WorkflowDefinition {
+                name: humanize_id(&id),
+                id,
+                file,
+                artifact_ids,
+                custom_node_ids: workflow.custom_nodes,
+            });
+        }
+        workflows.sort_by(|a, b| a.name.cmp(&b.name));
+
+        let packages = artifacts
+            .iter()
+            .map(|artifact| Package {
+                id: format!("artifact.{}", artifact.id),
+                name: artifact.name.clone(),
+                family: artifact_family(&artifact.relative_path).to_string(),
+                description: artifact.description.clone(),
+                primary_artifact_ids: vec![artifact.id.clone()],
+                dependency_artifact_ids: Vec::new(),
+                custom_node_ids: Vec::new(),
+                optional_groups: Vec::new(),
+                discover_query: None,
+            })
+            .collect();
+
+        let mut system_dependencies = Vec::new();
+        for (platform, dependencies) in manifest.system_dependencies {
+            for dependency in dependencies {
+                system_dependencies.push(SystemDependency {
+                    id: dependency.id,
+                    platform: platform.clone(),
+                    package: dependency.debian_package,
+                    detect: dependency.detect,
+                    install: dependency.install_debian,
+                    required_by: dependency.required_by,
+                });
+            }
+        }
+
+        let catalog = Self {
+            artifacts,
+            packages,
+            workflows,
+            custom_nodes,
+            system_dependencies,
+            python_dependencies: Some(manifest.python_dependencies),
+        };
+        catalog.validate()?;
+        Ok(catalog)
+    }
+
     pub fn merge(mut self, other: Self) -> Result<Self> {
         merge_by_id(&mut self.artifacts, other.artifacts, |x| &x.id);
         merge_by_id(&mut self.packages, other.packages, |x| &x.id);
         merge_by_id(&mut self.workflows, other.workflows, |x| &x.id);
         merge_by_id(&mut self.custom_nodes, other.custom_nodes, |x| &x.id);
+        merge_by_id(
+            &mut self.system_dependencies,
+            other.system_dependencies,
+            |x| &x.id,
+        );
+        if other.python_dependencies.is_some() {
+            self.python_dependencies = other.python_dependencies;
+        }
         self.validate()?;
         Ok(self)
     }
@@ -166,6 +328,84 @@ impl Catalog {
     pub fn custom_node(&self, id: &str) -> Option<&CustomNode> {
         self.custom_nodes.iter().find(|x| x.id == id)
     }
+}
+
+#[derive(Deserialize)]
+struct DependencyManifest {
+    artifacts: BTreeMap<String, DependencyArtifact>,
+    workflows: BTreeMap<String, DependencyWorkflow>,
+    custom_nodes: Vec<DependencyCustomNode>,
+    python_dependencies: Value,
+    #[serde(default)]
+    system_dependencies: BTreeMap<String, Vec<DependencySystemDependency>>,
+}
+
+#[derive(Deserialize)]
+struct DependencyArtifact {
+    relative_path: String,
+    source: Vec<(String, String, Option<String>, String)>,
+    #[serde(default)]
+    sha256: Option<String>,
+}
+
+#[derive(Deserialize)]
+struct DependencyWorkflow {
+    #[serde(default)]
+    artifacts: Vec<String>,
+    #[serde(default)]
+    custom_nodes: Vec<String>,
+}
+
+#[derive(Deserialize)]
+struct DependencyCustomNode {
+    id: String,
+    #[serde(default)]
+    aliases: Vec<String>,
+    repository: String,
+}
+
+#[derive(Deserialize)]
+struct DependencySystemDependency {
+    id: String,
+    debian_package: String,
+    #[serde(default)]
+    required_by: Vec<String>,
+    detect: String,
+    install_debian: String,
+}
+
+fn parse_human_size(value: &str) -> Option<u64> {
+    let mut parts = value.split_whitespace();
+    let number = parts.next()?.parse::<f64>().ok()?;
+    let multiplier = match parts.next()?.to_ascii_uppercase().as_str() {
+        "B" => 1.0,
+        "KB" => 1_000.0,
+        "MB" => 1_000_000.0,
+        "GB" => 1_000_000_000.0,
+        "TB" => 1_000_000_000_000.0,
+        _ => return None,
+    };
+    Some((number * multiplier) as u64)
+}
+
+fn humanize_id(id: &str) -> String {
+    id.replace(['_', '-'], " ")
+        .split_whitespace()
+        .map(|word| {
+            let mut chars = word.chars();
+            chars
+                .next()
+                .map(|first| first.to_uppercase().collect::<String>() + chars.as_str())
+                .unwrap_or_default()
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+fn artifact_family(path: &str) -> &str {
+    path.strip_prefix("models/")
+        .and_then(|rest| rest.split('/').next())
+        .unwrap_or("runtime models")
 }
 
 fn ensure_unique<'a>(ids: impl Iterator<Item = &'a str>, what: &str) -> Result<()> {

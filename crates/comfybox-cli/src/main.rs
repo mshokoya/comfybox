@@ -5,7 +5,7 @@ use anyhow::{Context, Result, bail};
 use clap::{Args, Parser, Subcommand, ValueEnum};
 use comfybox_core::{
     auth::{self, HfTokenSource},
-    catalog::Catalog,
+    catalog::{Artifact, Catalog},
     comfy::{ComfyManager, ComfySource, StartOptions, configured_instance},
     config::AppConfig,
     download::{DownloadManager, DownloadOptions},
@@ -20,12 +20,14 @@ use serde_json::Value;
 use std::{
     collections::BTreeSet,
     fs,
-    io::{IsTerminal, Read},
+    io::{IsTerminal, Read, Write},
     path::{Path, PathBuf},
 };
 use tokio::process::Command;
 
 const BUILTIN_CATALOG: &str = include_str!("../../../assets/catalog/builtin.toml");
+const DEPENDENCY_MANIFEST: &str = include_str!("../../../_/deps.json");
+include!(concat!(env!("OUT_DIR"), "/dependency_workflows.rs"));
 const MINIMAX_WORKFLOW: &str =
     include_str!("../../../assets/workflows/the3minutenode-refrence-minimaxh3-workflow.json");
 const DATASET_QWEN_2509_BASIC_WORKFLOW: &str = include_str!(
@@ -257,7 +259,8 @@ fn install_hf_token_for_process() -> Result<()> {
 }
 
 fn load_catalog(extra: &[PathBuf]) -> Result<Catalog> {
-    let mut cat = Catalog::from_toml_str(BUILTIN_CATALOG)?;
+    let mut cat = Catalog::from_toml_str(BUILTIN_CATALOG)?
+        .merge(Catalog::from_dependency_manifest(DEPENDENCY_MANIFEST)?)?;
     if let Ok(dir) = AppConfig::catalog_dir() {
         if dir.is_dir() {
             let mut entries: Vec<_> = fs::read_dir(&dir)?
@@ -909,6 +912,9 @@ fn resolve_workflow_path(
     Ok(temp)
 }
 fn bundled_workflow(id: &str) -> Result<&'static str> {
+    if let Some(workflow) = dependency_manifest_workflow(id) {
+        return Ok(workflow);
+    }
     match id {
         "the3minutenode-refrence-minimaxh3-workflow" => Ok(MINIMAX_WORKFLOW),
         "the3minutenode-basicangles-dataset-qwenedit2509-workflow" => {
@@ -940,6 +946,7 @@ fn bundled_workflow(id: &str) -> Result<&'static str> {
         _ => bail!("workflow {id} is cataloged but not bundled in this build"),
     }
 }
+
 fn print_workflow_inspection(r: &comfybox_core::workflow::WorkflowInspection) {
     println!("artifacts: {:?}", r.artifact_ids);
     println!("custom nodes: {:?}", r.custom_node_ids);
@@ -1059,11 +1066,20 @@ async fn interactive(cfg: &mut AppConfig, cat: &Catalog) -> Result<()> {
         }
         let action_label = format!("{action:?}");
         queue.record(format!("action requested: {action_label}"));
-        let queues_downloads = matches!(
+        println!("{} {action_label}", style("Working…").cyan());
+        std::io::stdout().flush()?;
+        let returns_immediately = matches!(
             action,
             dashboard::DashboardAction::InstallPackage(_)
+                | dashboard::DashboardAction::InstallArtifact(_)
+                | dashboard::DashboardAction::InstallCustomNode(_)
                 | dashboard::DashboardAction::InstallWorkflow(_)
                 | dashboard::DashboardAction::InstallPythonDeps
+                | dashboard::DashboardAction::InstallSystemDeps
+                | dashboard::DashboardAction::LocateComfyUi
+                | dashboard::DashboardAction::SetHfToken
+                | dashboard::DashboardAction::ConfigurePypi
+                | dashboard::DashboardAction::ToggleServer
         );
         if let Err(error) = execute_dashboard_action(action, cfg, cat, &mut queue).await {
             queue.record(format!("action failed: {action_label}: {error:#}"));
@@ -1071,7 +1087,7 @@ async fn interactive(cfg: &mut AppConfig, cat: &Catalog) -> Result<()> {
         } else {
             queue.record(format!("action completed: {action_label}"));
         }
-        if queues_downloads {
+        if returns_immediately {
             continue;
         }
         println!("\nPress Enter to return to the dashboard…");
@@ -1156,6 +1172,15 @@ async fn execute_dashboard_action(
             cfg.save()?;
             queue.enqueue_python_deps(&instance.root, pip_index_url)
         }
+        dashboard::DashboardAction::InstallSystemDeps => {
+            if !Confirm::new("Install missing system dependencies with apt-get?")
+                .with_default(true)
+                .prompt()?
+            {
+                return Ok(());
+            }
+            queue.enqueue_system_deps(cat.system_dependencies.clone())
+        }
         dashboard::DashboardAction::ConfigurePypi => {
             let pip_index_url = prompt_pypi_source(&cfg.pypi_index_url)?;
             cfg.pypi_index_url = pip_index_url.to_owned();
@@ -1194,6 +1219,26 @@ async fn execute_dashboard_action(
                     style("✓ ComfyUI started").green()
                 );
             }
+            Ok(())
+        }
+        dashboard::DashboardAction::InstallArtifact(id) => {
+            let instance = configured_instance(cfg)?;
+            let artifact = cat
+                .artifact(&id)
+                .cloned()
+                .with_context(|| format!("unknown artifact {id}"))?;
+            let artifacts = choose_artifact_sources(vec![artifact])?;
+            let options = dashboard_download_options(cfg, false)?;
+            queue.enqueue(&instance.root, artifacts, &options)?;
+            Ok(())
+        }
+        dashboard::DashboardAction::InstallCustomNode(id) => {
+            let instance = configured_instance(cfg)?;
+            let node = cat
+                .custom_node(&id)
+                .cloned()
+                .with_context(|| format!("unknown custom node {id}"))?;
+            queue.enqueue_custom_nodes(&instance.root, [node]);
             Ok(())
         }
         dashboard::DashboardAction::InstallPackage(id) => {
@@ -1236,6 +1281,7 @@ async fn execute_dashboard_action(
                         .with_context(|| format!("unknown artifact {artifact_id}"))
                 })
                 .collect::<Result<Vec<_>>>()?;
+            let artifacts = choose_artifact_sources(artifacts)?;
             let nodes = custom_node_ids
                 .iter()
                 .map(|node_id| {
@@ -1286,6 +1332,7 @@ async fn execute_dashboard_action(
                         .with_context(|| format!("unknown artifact {artifact_id}"))
                 })
                 .collect::<Result<Vec<_>>>()?;
+            let artifacts = choose_artifact_sources(artifacts)?;
             let options = dashboard_download_options(cfg, false)?;
             queue.enqueue(&instance.root, artifacts, &options)?;
             queue.enqueue_custom_nodes(&instance.root, nodes);
@@ -1300,6 +1347,37 @@ async fn execute_dashboard_action(
             state.save()
         }
     }
+}
+
+fn choose_artifact_sources(mut artifacts: Vec<Artifact>) -> Result<Vec<Artifact>> {
+    for artifact in &mut artifacts {
+        if artifact.sources.len() < 2 {
+            continue;
+        }
+        let choices = artifact
+            .sources
+            .iter()
+            .enumerate()
+            .map(|(index, source)| {
+                format!(
+                    "{index}: {} · {} — {}",
+                    source.title,
+                    source.size.as_deref().unwrap_or("size unknown"),
+                    source.description
+                )
+            })
+            .collect::<Vec<_>>();
+        let selected =
+            Select::new(&format!("Download source for {}", artifact.name), choices).prompt()?;
+        let index = selected
+            .split_once(':')
+            .and_then(|(index, _)| index.parse::<usize>().ok())
+            .unwrap_or(0);
+        let source = &artifact.sources[index.min(artifact.sources.len() - 1)];
+        artifact.url = source.url.clone();
+        artifact.size_bytes = source.size_bytes;
+    }
+    Ok(artifacts)
 }
 
 fn status_mark(s: &ArtifactStatus) -> String {
@@ -1357,4 +1435,40 @@ fn uuid_like() -> String {
             .unwrap_or_default()
             .as_nanos()
     )
+}
+
+#[cfg(test)]
+mod dependency_manifest_tests {
+    use super::*;
+
+    #[test]
+    fn complete_dependency_manifest_is_cataloged_and_bundled() {
+        let manifest: Value = serde_json::from_str(DEPENDENCY_MANIFEST).unwrap();
+        let catalog = Catalog::from_dependency_manifest(DEPENDENCY_MANIFEST).unwrap();
+        assert_eq!(
+            catalog.artifacts.len(),
+            manifest["artifacts"].as_object().unwrap().len()
+        );
+        assert_eq!(
+            catalog.workflows.len(),
+            manifest["workflows"].as_object().unwrap().len()
+        );
+        assert_eq!(
+            catalog.custom_nodes.len(),
+            manifest["custom_nodes"].as_array().unwrap().len()
+        );
+        assert!(
+            catalog
+                .artifacts
+                .iter()
+                .all(|artifact| !artifact.sources.is_empty())
+        );
+        for workflow in &catalog.workflows {
+            assert!(
+                dependency_manifest_workflow(&workflow.id).is_some(),
+                "{} is not bundled",
+                workflow.id
+            );
+        }
+    }
 }

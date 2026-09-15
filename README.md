@@ -13,12 +13,17 @@ comfybox-rust/
 │   └── comfybox-cli/    # clap commands + interactive terminal UX
 ├── assets/
 │   ├── catalog/builtin.toml
-│   └── workflows/
+│   └── workflows/       # workflows embedded automatically at build time
+├── _/
+│   ├── deps.json        # complete generated workflow dependency manifest
 ├── docs/
 └── examples/
 ```
 
 The model registry is declarative. Reusable files are **artifacts**, installable bundles are **packages**, and workflows reference known artifacts/custom nodes by ID.
+At build time ComfyBox merges `_/deps.json` into the curated catalog and embeds every
+JSON file in `assets/workflows`. Each manifest artifact becomes directly installable in the
+Models tab, and workflow entries install their full artifact and custom-node sets.
 
 ## Main capabilities
 
@@ -38,6 +43,9 @@ The model registry is declarative. Reusable files are **artifacts**, installable
 - External TOML/JSON catalog overrides.
 - `HF_ENDPOINT` mirror support and `HF_TOKEN` support.
 - Full-screen terminal dashboard in addition to deterministic subcommands.
+- One-key installation of missing manifest system packages from the System tab on
+  Debian/Ubuntu Linux, with the `apt-get` process running in the background and
+  streaming output to Downloads and Logs.
 
 ## Build
 
@@ -61,10 +69,12 @@ comfybox
 ```
 
 The native terminal dashboard is built with Ratatui and Crossterm. It opens when no
-subcommand is supplied and provides seven views:
+subcommand is supplied and provides dedicated operational and dependency-library views:
 
 - **Overview** — ComfyUI readiness, server state, artifact health, storage and setup warnings.
 - **Models** — installable model packages and their required model, text encoder, VAE, LoRA and custom-node dependencies.
+- **LoRAs**, **VAEs**, **Text Encoders**, **Upscalers**, and **Runtime** — filtered artifact libraries with cached health and one-key installation.
+- **Custom Nodes** — repository-backed node packs with cached installation status and one-key installation.
 - **Workflows** — bundled workflows with aggregate dependency health and one-key installation.
 - **Downloads** — live download manager with queued/active/paused/failed jobs, byte progress, speed, ETA, stop and resumable restart controls.
 - **Logs** — persistent lifecycle/error logs plus a live incremental tail of the managed ComfyUI server log; high-frequency download byte events are intentionally filtered out.
@@ -72,7 +82,8 @@ subcommand is supplied and provides seven views:
 - **System** — configured paths, Python/Git availability, `HF_TOKEN`, disk space and managed state.
 
 Use `←`/`→` or `Tab` to change views, `↑`/`↓` or `j`/`k` to select,
-`Enter` to install a package/workflow or focus a download. In Downloads, use `x`
+`Enter` to install the selected item or focus a download. In Models, Workflows,
+and dependency-library views, `r` refreshes and caches filesystem health. In Downloads, use `x`
 to pause, `c` to continue a paused download, `r` to retry a failed download, and
 `b`/`Esc` to return a focused transfer to the
 background. In Settings, `-`/`+` changes concurrent files and `[`/`]` changes
@@ -258,9 +269,12 @@ This is intentional. A repository name is not enough information to decide wheth
 
 See `docs/CATALOG.md`.
 
-## Current initial catalog
+## Current catalog
 
-The initial manifest includes curated entries for MiniMax H3 BF16, Krea 2 Raw/Turbo BF16, Z-Image Base/Turbo BF16, Qwen Image BF16/2512, Qwen Image Edit 2509/2511, Ideogram 4's current Comfy package, SCAIL-2's primary model, SDXL Base/Refiner, plus discovery entries for broader BFL, SDXL, Wan/Wan Animate and LTX families.
+The curated catalog is augmented by every artifact, workflow, custom node, Python
+dependency policy, and system dependency recorded in `_/deps.json`. Artifact source
+metadata includes its title, URL, reported size, and description; the first source is
+the default download and all alternatives remain available to the catalog.
 
 The catalog is data. Adding a new package should normally require only manifest changes rather than downloader/process code changes.
 

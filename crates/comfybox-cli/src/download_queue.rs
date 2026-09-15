@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use comfybox_core::{
     auth,
-    catalog::{Artifact, Catalog, CustomNode},
+    catalog::{Artifact, Catalog, CustomNode, SystemDependency},
     comfy::ComfyManager,
     config::{AppConfig, atomic_write_json},
     download::{DownloadManager, DownloadOptions, DownloadProgress},
@@ -80,6 +80,13 @@ struct Operation {
     abort: Option<AbortHandle>,
 }
 
+struct SystemOperation {
+    dependencies: Vec<SystemDependency>,
+    status: JobStatus,
+    error: Option<String>,
+    abort: Option<AbortHandle>,
+}
+
 #[derive(Serialize, Deserialize)]
 struct PersistedJob {
     artifact_id: String,
@@ -102,11 +109,13 @@ enum QueueEvent {
     },
     Log(String),
     OperationFinished(std::result::Result<(), String>),
+    SystemOperationFinished(std::result::Result<(), String>),
 }
 
 pub struct DownloadQueue {
     jobs: Vec<Job>,
     python_deps: Option<Operation>,
+    system_deps: Option<SystemOperation>,
     logs: VecDeque<String>,
     sender: mpsc::UnboundedSender<QueueEvent>,
     receiver: mpsc::UnboundedReceiver<QueueEvent>,
@@ -174,6 +183,7 @@ impl DownloadQueue {
         Ok(Self {
             jobs,
             python_deps: None,
+            system_deps: None,
             logs,
             sender,
             receiver,
@@ -276,6 +286,36 @@ impl DownloadQueue {
         Ok(())
     }
 
+    pub fn enqueue_system_deps(&mut self, dependencies: Vec<SystemDependency>) -> Result<()> {
+        if !cfg!(target_os = "linux") {
+            anyhow::bail!("automatic system dependency installation is only supported on Linux");
+        }
+        if !command_exists("apt-get") {
+            anyhow::bail!("apt-get is unavailable; install the manifest system packages manually");
+        }
+        let dependencies = dependencies
+            .into_iter()
+            .filter(|dependency| !system_package_installed(&dependency.package))
+            .collect::<Vec<_>>();
+        if dependencies.is_empty() {
+            self.log("all manifest system dependencies are already installed".into());
+            return Ok(());
+        }
+        let names = dependencies
+            .iter()
+            .map(|dependency| dependency.package.as_str())
+            .collect::<Vec<_>>()
+            .join(", ");
+        self.system_deps = Some(SystemOperation {
+            dependencies,
+            status: JobStatus::Queued,
+            error: None,
+            abort: None,
+        });
+        self.log(format!("queued system dependencies: {names}"));
+        Ok(())
+    }
+
     pub fn tick(&mut self, max_concurrent: usize) -> bool {
         let mut changed = false;
         let mut persist_needed = false;
@@ -295,6 +335,22 @@ impl DownloadQueue {
                                 operation.status = JobStatus::Failed;
                                 operation.error = Some(error.clone());
                                 self.log(format!("failed ComfyUI Python dependencies: {error}"));
+                            }
+                        }
+                    }
+                }
+                QueueEvent::SystemOperationFinished(result) => {
+                    if let Some(operation) = &mut self.system_deps {
+                        operation.abort = None;
+                        match result {
+                            Ok(()) => {
+                                operation.status = JobStatus::Completed;
+                                self.log("completed system dependencies".into());
+                            }
+                            Err(error) => {
+                                operation.status = JobStatus::Failed;
+                                operation.error = Some(error.clone());
+                                self.log(format!("failed system dependencies: {error}"));
                             }
                         }
                     }
@@ -378,6 +434,14 @@ impl DownloadQueue {
             self.start_python_deps();
             changed = true;
         }
+        if self
+            .system_deps
+            .as_ref()
+            .is_some_and(|operation| operation.status == JobStatus::Queued)
+        {
+            self.start_system_deps();
+            changed = true;
+        }
         if persist_needed {
             let _ = self.save();
         }
@@ -386,12 +450,22 @@ impl DownloadQueue {
 
     pub fn stop(&mut self, index: usize) -> Result<()> {
         if index >= self.jobs.len() {
-            if let Some(operation) = &mut self.python_deps {
+            let operation_index = index - self.jobs.len();
+            if operation_index == 0
+                && let Some(operation) = &mut self.python_deps
+            {
                 if let Some(abort) = operation.abort.take() {
                     abort.abort();
                 }
                 operation.status = JobStatus::Paused;
                 self.log("paused ComfyUI Python dependencies".into());
+            } else if operation_index == usize::from(self.python_deps.is_some())
+                && self.system_deps.is_some()
+            {
+                self.log(
+                    "system dependency installation cannot be paused safely; let apt-get finish"
+                        .into(),
+                );
             }
             return Ok(());
         }
@@ -413,7 +487,15 @@ impl DownloadQueue {
 
     pub fn resume(&mut self, index: usize) -> Result<()> {
         if index >= self.jobs.len() {
-            if let Some(operation) = &mut self.python_deps
+            let operation_index = index - self.jobs.len();
+            if operation_index == 0
+                && let Some(operation) = &mut self.python_deps
+                && operation.status == JobStatus::Paused
+            {
+                operation.status = JobStatus::Queued;
+                operation.error = None;
+            } else if operation_index == usize::from(self.python_deps.is_some())
+                && let Some(operation) = &mut self.system_deps
                 && operation.status == JobStatus::Paused
             {
                 operation.status = JobStatus::Queued;
@@ -436,7 +518,15 @@ impl DownloadQueue {
 
     pub fn retry(&mut self, index: usize) -> Result<()> {
         if index >= self.jobs.len() {
-            if let Some(operation) = &mut self.python_deps
+            let operation_index = index - self.jobs.len();
+            if operation_index == 0
+                && let Some(operation) = &mut self.python_deps
+                && operation.status == JobStatus::Failed
+            {
+                operation.status = JobStatus::Queued;
+                operation.error = None;
+            } else if operation_index == usize::from(self.python_deps.is_some())
+                && let Some(operation) = &mut self.system_deps
                 && operation.status == JobStatus::Failed
             {
                 operation.status = JobStatus::Queued;
@@ -486,6 +576,24 @@ impl DownloadQueue {
                 endpoint: Some(operation.pip_index_url.clone()),
             });
         }
+        if let Some(operation) = &self.system_deps {
+            snapshots.push(JobSnapshot {
+                artifact_id: "system-dependencies".into(),
+                name: "System dependencies".into(),
+                relative_path: operation
+                    .dependencies
+                    .iter()
+                    .map(|dependency| dependency.package.as_str())
+                    .collect::<Vec<_>>()
+                    .join(", "),
+                status: operation.status,
+                downloaded_bytes: 0,
+                total_bytes: None,
+                bytes_per_second: 0.0,
+                error: operation.error.clone(),
+                endpoint: Some("apt-get".into()),
+            });
+        }
         snapshots
     }
 
@@ -494,7 +602,9 @@ impl DownloadQueue {
     }
 
     pub fn len(&self) -> usize {
-        self.jobs.len() + usize::from(self.python_deps.is_some())
+        self.jobs.len()
+            + usize::from(self.python_deps.is_some())
+            + usize::from(self.system_deps.is_some())
     }
 
     pub fn update_chunk_parallelism(&mut self, parallelism: usize) {
@@ -608,6 +718,25 @@ impl DownloadQueue {
             let _ = sender.send(QueueEvent::OperationFinished(result));
         });
         if let Some(operation) = &mut self.python_deps {
+            operation.abort = Some(handle.abort_handle());
+        }
+    }
+
+    fn start_system_deps(&mut self) {
+        let Some(operation) = &mut self.system_deps else {
+            return;
+        };
+        let dependencies = operation.dependencies.clone();
+        let sender = self.sender.clone();
+        operation.status = JobStatus::Downloading;
+        self.log("started system dependencies".into());
+        let handle = tokio::spawn(async move {
+            let result = install_system_dependencies(&dependencies, &sender)
+                .await
+                .map_err(|error| format!("{error:#}"));
+            let _ = sender.send(QueueEvent::SystemOperationFinished(result));
+        });
+        if let Some(operation) = &mut self.system_deps {
             operation.abort = Some(handle.abort_handle());
         }
     }
@@ -840,6 +969,56 @@ async fn install_python_dependencies(
     )
     .await?;
     Ok(())
+}
+
+async fn install_system_dependencies(
+    dependencies: &[SystemDependency],
+    sender: &mpsc::UnboundedSender<QueueEvent>,
+) -> Result<()> {
+    let packages = dependencies
+        .iter()
+        .map(|dependency| dependency.package.as_str())
+        .collect::<Vec<_>>();
+    let _ = sender.send(QueueEvent::Log(format!(
+        "[SYSTEM] Installing {}",
+        packages.join(", ")
+    )));
+    run_logged(Command::new("apt-get").arg("update"), sender).await?;
+    run_logged(
+        Command::new("apt-get")
+            .arg("install")
+            .arg("-y")
+            .args(&packages)
+            .env("DEBIAN_FRONTEND", "noninteractive"),
+        sender,
+    )
+    .await?;
+    for dependency in dependencies {
+        if !system_package_installed(&dependency.package) {
+            anyhow::bail!(
+                "{} was not detected after apt-get completed",
+                dependency.package
+            );
+        }
+    }
+    Ok(())
+}
+
+fn command_exists(command: &str) -> bool {
+    std::process::Command::new(command)
+        .arg("--version")
+        .output()
+        .is_ok()
+}
+
+fn system_package_installed(package: &str) -> bool {
+    std::process::Command::new("dpkg-query")
+        .args(["-W", "-f=${Status}", package])
+        .output()
+        .is_ok_and(|output| {
+            output.status.success()
+                && String::from_utf8_lossy(&output.stdout).contains("install ok installed")
+        })
 }
 
 async fn install_custom_node_python_requirements(
