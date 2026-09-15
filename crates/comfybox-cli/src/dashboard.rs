@@ -20,7 +20,10 @@ use ratatui::{
     layout::{Alignment, Constraint, Direction, Layout, Rect},
     style::{Color, Modifier, Style},
     text::{Line, Span, Text},
-    widgets::{Block, Borders, Clear, List, ListItem, ListState, Paragraph, Tabs, Wrap},
+    widgets::{
+        Block, Borders, Cell, Clear, List, ListItem, ListState, Paragraph, Row, Table, TableState,
+        Tabs, Wrap,
+    },
 };
 use std::{
     collections::{HashMap, HashSet},
@@ -78,6 +81,7 @@ struct PlanEditor {
     expanded_artifacts: HashSet<String>,
     selected_sources: HashMap<String, usize>,
     disabled_dependencies: HashSet<String>,
+    cancel_selected: bool,
 }
 
 #[derive(Clone, Debug)]
@@ -90,6 +94,7 @@ enum PlanRow {
     DependencyNode(String),
     Ok,
     Cancel,
+    Actions,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -690,47 +695,61 @@ impl Dashboard<'_> {
             .iter()
             .map(|package| {
                 let health = self.package_health(package);
-                ListItem::new(Line::from(vec![
-                    status_badge(health),
-                    Span::raw(" "),
-                    Span::styled(package.name.clone(), Style::default().fg(Color::White)),
-                    Span::styled(format!("  {}", package.id), Style::default().fg(MUTED)),
-                    Span::styled(
-                        format!(
-                            "  {}",
-                            self.artifact_ids_size(
-                                package
-                                    .primary_artifact_ids
-                                    .iter()
-                                    .chain(&package.dependency_artifact_ids)
-                            )
+                Row::new(vec![
+                    Cell::from(package.name.clone()),
+                    Cell::from(health.label()).style(Style::default().fg(health.color())),
+                    Cell::from(
+                        self.artifact_ids_size(
+                            package
+                                .primary_artifact_ids
+                                .iter()
+                                .chain(&package.dependency_artifact_ids),
                         ),
-                        Style::default().fg(MUTED),
                     ),
-                ]))
+                ])
             })
             .collect::<Vec<_>>();
         let list_focused = self.plan_editor.is_none();
-        let mut state = ListState::default()
+        let mut state = TableState::default()
             .with_selected(Some(self.model_index.min(items.len().saturating_sub(1))));
         frame.render_stateful_widget(
-            List::new(items)
-                .highlight_symbol(if list_focused { "› " } else { "  " })
-                .highlight_style(if list_focused {
-                    Style::default().bg(PANEL).add_modifier(Modifier::BOLD)
-                } else {
-                    Style::default().fg(MUTED)
-                })
-                .block(
-                    Block::default()
-                        .title(" Model packages ")
-                        .borders(Borders::ALL)
-                        .border_style(Style::default().fg(PANEL)),
-                ),
+            Table::new(
+                items,
+                [
+                    Constraint::Min(24),
+                    Constraint::Length(16),
+                    Constraint::Length(18),
+                ],
+            )
+            .header(
+                Row::new(["Title", "Status", "Size"])
+                    .style(Style::default().fg(ACCENT).add_modifier(Modifier::BOLD)),
+            )
+            .highlight_symbol(if list_focused { "› " } else { "  " })
+            .row_highlight_style(if list_focused {
+                Style::default().bg(PANEL).add_modifier(Modifier::BOLD)
+            } else {
+                Style::default().fg(MUTED)
+            })
+            .block(
+                Block::default()
+                    .title(" Model packages ")
+                    .borders(Borders::ALL)
+                    .border_style(Style::default().fg(PANEL)),
+            ),
             columns[0],
             &mut state,
         );
         if columns.len() > 1 {
+            if self.plan_editor.as_ref().is_some_and(|editor| {
+                self.catalog
+                    .packages
+                    .get(self.model_index)
+                    .is_some_and(|package| editor.target == PlanTarget::Package(package.id.clone()))
+            }) {
+                self.render_dependency_plan_table(frame, columns[1], " Required artifacts ");
+                return;
+            }
             let details = self
                 .catalog
                 .packages
@@ -764,15 +783,9 @@ impl Dashboard<'_> {
                         )),
                     ];
                     lines.push(Line::from(""));
-                    if self.plan_editor.as_ref().is_some_and(|editor| {
-                        editor.target == PlanTarget::Package(package.id.clone())
-                    }) {
-                        lines.extend(self.render_plan_lines());
-                    } else {
-                        lines.push(Line::from(
-                            "[ Enter ] Configure install    [ r ] Refresh checks",
-                        ));
-                    }
+                    lines.push(Line::from(
+                        "[ Enter ] Configure install    [ r ] Refresh checks",
+                    ));
                     Text::from(lines)
                 })
                 .unwrap_or_default();
@@ -932,35 +945,56 @@ impl Dashboard<'_> {
             .iter()
             .map(|workflow| {
                 let health = self.workflow_health(workflow);
-                ListItem::new(Line::from(vec![
-                    status_badge(health),
-                    Span::raw(" "),
-                    Span::styled(workflow.name.clone(), Style::default().fg(Color::White)),
-                    Span::styled(format!("  {}", workflow.id), Style::default().fg(MUTED)),
-                ]))
+                Row::new(vec![
+                    Cell::from(workflow.name.clone()),
+                    Cell::from(health.label()).style(Style::default().fg(health.color())),
+                    Cell::from(self.artifact_ids_size(workflow.artifact_ids.iter())),
+                ])
             })
             .collect::<Vec<_>>();
         let list_focused = self.plan_editor.is_none();
-        let mut state = ListState::default()
+        let mut state = TableState::default()
             .with_selected(Some(self.workflow_index.min(items.len().saturating_sub(1))));
         frame.render_stateful_widget(
-            List::new(items)
-                .highlight_symbol(if list_focused { "› " } else { "  " })
-                .highlight_style(if list_focused {
-                    Style::default().bg(PANEL).add_modifier(Modifier::BOLD)
-                } else {
-                    Style::default().fg(MUTED)
-                })
-                .block(
-                    Block::default()
-                        .title(" Workflows ")
-                        .borders(Borders::ALL)
-                        .border_style(Style::default().fg(PANEL)),
-                ),
+            Table::new(
+                items,
+                [
+                    Constraint::Min(24),
+                    Constraint::Length(16),
+                    Constraint::Length(18),
+                ],
+            )
+            .header(
+                Row::new(["Title", "Status", "Size"])
+                    .style(Style::default().fg(ACCENT).add_modifier(Modifier::BOLD)),
+            )
+            .highlight_symbol(if list_focused { "› " } else { "  " })
+            .row_highlight_style(if list_focused {
+                Style::default().bg(PANEL).add_modifier(Modifier::BOLD)
+            } else {
+                Style::default().fg(MUTED)
+            })
+            .block(
+                Block::default()
+                    .title(" Workflows ")
+                    .borders(Borders::ALL)
+                    .border_style(Style::default().fg(PANEL)),
+            ),
             columns[0],
             &mut state,
         );
         if columns.len() > 1 {
+            if self.plan_editor.as_ref().is_some_and(|editor| {
+                self.catalog
+                    .workflows
+                    .get(self.workflow_index)
+                    .is_some_and(|workflow| {
+                        editor.target == PlanTarget::Workflow(workflow.id.clone())
+                    })
+            }) {
+                self.render_dependency_plan_table(frame, columns[1], " Required artifacts ");
+                return;
+            }
             let details = self.catalog.workflows.get(self.workflow_index).map(|workflow| {
                 let mut lines = vec![
                     Line::from(Span::styled(&workflow.name, Style::default().fg(ACCENT).add_modifier(Modifier::BOLD))),
@@ -975,13 +1009,7 @@ impl Dashboard<'_> {
                     Line::from("Enter installs the workflow, models, VAEs, text encoders, LoRAs, and custom nodes."),
                     Line::from(""),
                 ];
-                if self.plan_editor.as_ref().is_some_and(|editor| {
-                    editor.target == PlanTarget::Workflow(workflow.id.clone())
-                }) {
-                    lines.extend(self.render_plan_lines());
-                } else {
-                    lines.push(Line::from("[ Enter ] Configure install    [ r ] Refresh checks"));
-                }
+                lines.push(Line::from("[ Enter ] Configure install    [ r ] Refresh checks"));
                 Text::from(lines)
             }).unwrap_or_default();
             frame.render_widget(
@@ -1122,8 +1150,7 @@ impl Dashboard<'_> {
             }
             rows.extend(nodes.into_iter().map(PlanRow::DependencyNode));
         }
-        rows.push(PlanRow::Ok);
-        rows.push(PlanRow::Cancel);
+        rows.push(PlanRow::Actions);
         rows
     }
 
@@ -1255,6 +1282,9 @@ impl Dashboard<'_> {
                     }
                     PlanRow::Ok => "              [ OK — start downloads ]".into(),
                     PlanRow::Cancel => "              [ Cancel ]".into(),
+                    PlanRow::Actions => {
+                        "              [ OK — start downloads ]    [ Cancel ]".into()
+                    }
                 };
                 Line::from(Span::styled(
                     format!("{} {text}", if selected { "›" } else { " " }),
@@ -1262,6 +1292,210 @@ impl Dashboard<'_> {
                 ))
             })
             .collect()
+    }
+
+    fn render_dependency_plan_table(&self, frame: &mut Frame<'_>, area: Rect, title: &str) {
+        let Some(editor) = &self.plan_editor else {
+            return;
+        };
+        let plan_rows = self.plan_rows();
+        let action_focused = matches!(
+            plan_rows.get(editor.cursor),
+            Some(PlanRow::Actions | PlanRow::Ok | PlanRow::Cancel)
+        );
+        let rows = plan_rows
+            .iter()
+            .filter(|row| !matches!(row, PlanRow::Actions | PlanRow::Ok | PlanRow::Cancel))
+            .map(|row| {
+                let (kind, status, title, size) = match row {
+                    PlanRow::Model(id) | PlanRow::DependencyArtifact(id) => {
+                        let artifact = self.catalog.artifact(id);
+                        let enabled = !editor.disabled_dependencies.contains(id);
+                        let is_dependency = matches!(row, PlanRow::DependencyArtifact(_));
+                        let child_prefix = if is_dependency { "  ├─ " } else { "" };
+                        let health = self.artifact_health_for(id).unwrap_or(Health::Missing);
+                        let source_index = editor.selected_sources.get(id).copied().unwrap_or(0);
+                        let size = artifact
+                            .and_then(|item| {
+                                item.sources
+                                    .get(source_index)
+                                    .and_then(|source| source.size.clone())
+                                    .or_else(|| item.size_bytes.map(bytes_label))
+                            })
+                            .unwrap_or_else(|| "unknown".into());
+                        (
+                            artifact.map(artifact_type).unwrap_or("artifact"),
+                            if enabled { health.label() } else { "SKIPPED" },
+                            format!(
+                                "{child_prefix}{}{} {}",
+                                if is_dependency {
+                                    if enabled { "[x] " } else { "[ ] " }
+                                } else {
+                                    ""
+                                },
+                                if editor.expanded_artifacts.contains(id) {
+                                    "▾"
+                                } else {
+                                    "▸"
+                                },
+                                artifact.map(|item| item.name.as_str()).unwrap_or(id)
+                            ),
+                            size,
+                        )
+                    }
+                    PlanRow::ModelSource(id, index) | PlanRow::DependencySource(id, index) => {
+                        let artifact = self.catalog.artifact(id);
+                        let source = artifact.and_then(|item| item.sources.get(*index));
+                        let selected =
+                            editor.selected_sources.get(id).copied().unwrap_or(0) == *index;
+                        let child_prefix = if matches!(row, PlanRow::DependencySource(_, _)) {
+                            "      └─ "
+                        } else {
+                            "  └─ "
+                        };
+                        (
+                            "source",
+                            if selected { "SELECTED" } else { "AVAILABLE" },
+                            format!(
+                                "{child_prefix}{} {}",
+                                if selected { "●" } else { "○" },
+                                source
+                                    .map(|item| item.title.as_str())
+                                    .or_else(|| artifact.map(|item| item.name.as_str()))
+                                    .unwrap_or("source")
+                            ),
+                            source
+                                .and_then(|item| item.size.clone())
+                                .or_else(|| {
+                                    artifact.and_then(|item| item.size_bytes).map(bytes_label)
+                                })
+                                .unwrap_or_else(|| "unknown".into()),
+                        )
+                    }
+                    PlanRow::Dependencies => {
+                        let (_, dependencies, nodes) = self.plan_artifacts(&editor.target);
+                        let enabled = dependencies
+                            .iter()
+                            .chain(nodes.iter())
+                            .filter(|id| !editor.disabled_dependencies.contains(*id))
+                            .count();
+                        (
+                            "group",
+                            "",
+                            format!(
+                                "{} Dependencies ({enabled}/{})",
+                                if editor.deps_expanded { "▾" } else { "▸" },
+                                dependencies.len() + nodes.len()
+                            ),
+                            String::new(),
+                        )
+                    }
+                    PlanRow::DependencyNode(id) => {
+                        let enabled = !editor.disabled_dependencies.contains(id);
+                        (
+                            "custom node",
+                            if enabled {
+                                self.custom_node_health(id).label()
+                            } else {
+                                "SKIPPED"
+                            },
+                            format!(
+                                "  ├─ [{}] {}",
+                                if enabled { "x" } else { " " },
+                                self.catalog
+                                    .custom_node(id)
+                                    .map(|node| node.name.as_str())
+                                    .unwrap_or(id)
+                            ),
+                            "—".into(),
+                        )
+                    }
+                    PlanRow::Ok => ("", "", "[ OK — start downloads ]".into(), "".into()),
+                    PlanRow::Cancel => ("", "", "[ Cancel ]".into(), "".into()),
+                    PlanRow::Actions => (
+                        "",
+                        "",
+                        if editor.cancel_selected {
+                            "  [ OK — start downloads ]    › [ Cancel ]"
+                        } else {
+                            "› [ OK — start downloads ]      [ Cancel ]"
+                        }
+                        .into(),
+                        "".into(),
+                    ),
+                };
+                let table_row = Row::new(vec![
+                    Cell::from(title),
+                    Cell::from(kind),
+                    Cell::from(status),
+                    Cell::from(size),
+                ]);
+                if matches!(row, PlanRow::Dependencies | PlanRow::Actions) {
+                    table_row.top_margin(1)
+                } else {
+                    table_row
+                }
+            })
+            .collect::<Vec<_>>();
+        let outer = Block::default()
+            .title(title)
+            .borders(Borders::ALL)
+            .border_style(Style::default().fg(ACCENT));
+        let inner = outer.inner(area);
+        frame.render_widget(outer, area);
+        let sections = Layout::default()
+            .direction(Direction::Vertical)
+            .constraints([
+                Constraint::Min(2),
+                Constraint::Length(1),
+                Constraint::Length(1),
+            ])
+            .split(inner);
+        let mut state = TableState::default().with_selected(if action_focused {
+            None
+        } else {
+            Some(editor.cursor.min(rows.len().saturating_sub(1)))
+        });
+        frame.render_stateful_widget(
+            Table::new(
+                rows,
+                [
+                    Constraint::Min(20),
+                    Constraint::Length(13),
+                    Constraint::Length(16),
+                    Constraint::Length(14),
+                ],
+            )
+            .header(
+                Row::new(["Title", "Type", "Status", "Size"])
+                    .style(Style::default().fg(ACCENT).add_modifier(Modifier::BOLD)),
+            )
+            .row_highlight_style(
+                Style::default()
+                    .fg(Color::Black)
+                    .bg(ACCENT)
+                    .add_modifier(Modifier::BOLD),
+            )
+            .highlight_symbol("› "),
+            sections[0],
+            &mut state,
+        );
+        let actions = if editor.cancel_selected {
+            "  [ OK — start downloads ]    › [ Cancel ]"
+        } else {
+            "› [ OK — start downloads ]      [ Cancel ]"
+        };
+        frame.render_widget(
+            Paragraph::new(actions).style(if action_focused {
+                Style::default()
+                    .fg(Color::Black)
+                    .bg(ACCENT)
+                    .add_modifier(Modifier::BOLD)
+            } else {
+                Style::default().fg(MUTED)
+            }),
+            sections[2],
+        );
     }
 
     fn render_downloads(&mut self, frame: &mut Frame<'_>, area: Rect) {
@@ -1889,15 +2123,14 @@ impl Dashboard<'_> {
                 disabled_dependencies.extend(group.custom_node_ids.iter().cloned());
             }
         }
-        let (models, dependencies, _) = self.plan_artifacts(&target);
-        let expanded_artifacts = models.into_iter().chain(dependencies).collect();
         self.plan_editor = Some(PlanEditor {
             target,
             cursor: 0,
-            deps_expanded: true,
-            expanded_artifacts,
+            deps_expanded: false,
+            expanded_artifacts: HashSet::new(),
             selected_sources: HashMap::new(),
             disabled_dependencies,
+            cancel_selected: false,
         });
     }
 
@@ -1920,76 +2153,86 @@ impl Dashboard<'_> {
                 editor.cursor = (editor.cursor + rows.len().saturating_sub(1)) % rows.len().max(1);
             }
             KeyCode::Left => {
-                cancel = true;
+                if matches!(rows.get(editor.cursor), Some(PlanRow::Actions)) {
+                    editor.cancel_selected = false;
+                } else {
+                    cancel = true;
+                }
             }
             KeyCode::Enter | KeyCode::Char(' ') | KeyCode::Right => {
                 let row = rows.get(editor.cursor)?.clone();
                 let enable_toggle = key.code == KeyCode::Char(' ');
-                match row {
-                    PlanRow::Model(id) => {
-                        if !editor.expanded_artifacts.insert(id.clone()) {
-                            editor.expanded_artifacts.remove(&id);
+                if matches!(row, PlanRow::Actions) && key.code == KeyCode::Right {
+                    editor.cancel_selected = true;
+                } else {
+                    match row {
+                        PlanRow::Model(id) => {
+                            if !editor.expanded_artifacts.insert(id.clone()) {
+                                editor.expanded_artifacts.remove(&id);
+                            }
                         }
-                    }
-                    PlanRow::ModelSource(id, index) | PlanRow::DependencySource(id, index) => {
-                        editor.selected_sources.insert(id, index);
-                    }
-                    PlanRow::Dependencies => editor.deps_expanded = !editor.deps_expanded,
-                    PlanRow::DependencyArtifact(id) => {
-                        if enable_toggle {
+                        PlanRow::ModelSource(id, index) | PlanRow::DependencySource(id, index) => {
+                            editor.selected_sources.insert(id, index);
+                        }
+                        PlanRow::Dependencies => editor.deps_expanded = !editor.deps_expanded,
+                        PlanRow::DependencyArtifact(id) => {
+                            if enable_toggle {
+                                if !editor.disabled_dependencies.insert(id.clone()) {
+                                    editor.disabled_dependencies.remove(&id);
+                                }
+                            } else if !editor.expanded_artifacts.insert(id.clone()) {
+                                editor.expanded_artifacts.remove(&id);
+                            }
+                        }
+                        PlanRow::DependencyNode(id) => {
                             if !editor.disabled_dependencies.insert(id.clone()) {
                                 editor.disabled_dependencies.remove(&id);
                             }
-                        } else if !editor.expanded_artifacts.insert(id.clone()) {
-                            editor.expanded_artifacts.remove(&id);
                         }
-                    }
-                    PlanRow::DependencyNode(id) => {
-                        if !editor.disabled_dependencies.insert(id.clone()) {
-                            editor.disabled_dependencies.remove(&id);
+                        PlanRow::Actions if editor.cancel_selected => cancel = true,
+                        PlanRow::Ok | PlanRow::Actions => {
+                            let (models, dependencies, nodes) = plan_artifacts;
+                            let artifact_sources = models
+                                .into_iter()
+                                .chain(dependencies)
+                                .filter(|id| !editor.disabled_dependencies.contains(id))
+                                .map(|id| {
+                                    let source =
+                                        editor.selected_sources.get(&id).copied().unwrap_or(0);
+                                    (id, source)
+                                })
+                                .collect();
+                            let custom_node_ids = nodes
+                                .into_iter()
+                                .filter(|id| !editor.disabled_dependencies.contains(id))
+                                .collect();
+                            let action = match &editor.target {
+                                PlanTarget::Package(id) => {
+                                    DashboardAction::InstallPackage(InstallSelection {
+                                        id: id.clone(),
+                                        artifact_sources,
+                                        custom_node_ids,
+                                    })
+                                }
+                                PlanTarget::Artifact(id) => {
+                                    DashboardAction::InstallArtifact(InstallSelection {
+                                        id: id.clone(),
+                                        artifact_sources,
+                                        custom_node_ids,
+                                    })
+                                }
+                                PlanTarget::Workflow(id) => {
+                                    DashboardAction::InstallWorkflow(InstallSelection {
+                                        id: id.clone(),
+                                        artifact_sources,
+                                        custom_node_ids,
+                                    })
+                                }
+                            };
+                            return Some(action);
                         }
+                        PlanRow::Cancel => cancel = true,
                     }
-                    PlanRow::Ok => {
-                        let (models, dependencies, nodes) = plan_artifacts;
-                        let artifact_sources = models
-                            .into_iter()
-                            .chain(dependencies)
-                            .filter(|id| !editor.disabled_dependencies.contains(id))
-                            .map(|id| {
-                                let source = editor.selected_sources.get(&id).copied().unwrap_or(0);
-                                (id, source)
-                            })
-                            .collect();
-                        let custom_node_ids = nodes
-                            .into_iter()
-                            .filter(|id| !editor.disabled_dependencies.contains(id))
-                            .collect();
-                        let action = match &editor.target {
-                            PlanTarget::Package(id) => {
-                                DashboardAction::InstallPackage(InstallSelection {
-                                    id: id.clone(),
-                                    artifact_sources,
-                                    custom_node_ids,
-                                })
-                            }
-                            PlanTarget::Artifact(id) => {
-                                DashboardAction::InstallArtifact(InstallSelection {
-                                    id: id.clone(),
-                                    artifact_sources,
-                                    custom_node_ids,
-                                })
-                            }
-                            PlanTarget::Workflow(id) => {
-                                DashboardAction::InstallWorkflow(InstallSelection {
-                                    id: id.clone(),
-                                    artifact_sources,
-                                    custom_node_ids,
-                                })
-                            }
-                        };
-                        return Some(action);
-                    }
-                    PlanRow::Cancel => cancel = true,
                 }
             }
             _ => {}
@@ -2273,6 +2516,27 @@ fn bytes_label(bytes: u64) -> String {
         unit += 1;
     }
     format!("{value:.1} {}", UNITS[unit])
+}
+
+fn artifact_type(artifact: &Artifact) -> &'static str {
+    let path = artifact.relative_path.as_str();
+    if path.starts_with("models/vae/") {
+        "VAE"
+    } else if path.starts_with("models/loras/") {
+        "LoRA"
+    } else if path.starts_with("models/text_encoders/") {
+        "text encoder"
+    } else if path.starts_with("models/upscale_models/") {
+        "upscaler"
+    } else if path.starts_with("runtime_models/") {
+        "runtime"
+    } else if path.starts_with("models/diffusion_models/")
+        || path.starts_with("models/checkpoints/")
+    {
+        "model"
+    } else {
+        "artifact"
+    }
 }
 
 fn card<'a>(title: &'a str, text: Text<'a>) -> Paragraph<'a> {
