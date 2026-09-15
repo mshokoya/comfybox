@@ -785,7 +785,7 @@ impl Dashboard<'_> {
             });
             frame.render_widget(
                 plan_card(
-                    " Install plan ",
+                    " Download source ",
                     details.unwrap_or_default(),
                     self.plan_editor.as_ref(),
                     columns[1],
@@ -1006,6 +1006,19 @@ impl Dashboard<'_> {
         };
         let (models, dependencies, nodes) = self.plan_artifacts(&editor.target);
         let mut rows = Vec::new();
+        if matches!(editor.target, PlanTarget::Artifact(_)) {
+            if let Some(id) = models.first()
+                && let Some(artifact) = self.catalog.artifact(id)
+            {
+                rows.extend(
+                    (0..artifact.sources.len().max(1))
+                        .map(|index| PlanRow::ModelSource(id.clone(), index)),
+                );
+            }
+            rows.push(PlanRow::Ok);
+            rows.push(PlanRow::Cancel);
+            return rows;
+        }
         for id in models {
             rows.push(PlanRow::Model(id.clone()));
             if editor.expanded_artifacts.contains(&id)
