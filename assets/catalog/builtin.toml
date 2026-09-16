@@ -290,7 +290,7 @@ relative_path = "models/loras/Krea2/bfs_head_swap_v1.1_krea2.safetensors"
 [[artifacts]]
 id = "krea2.amateur.v2"
 name = "Krea 2 Amateur V2 LoRA"
-url = "https://civitai.com/api/download/models/3276982"
+url = "https://huggingface.co/msho19/comfybox/resolve/main/powerpuff-amateur-v2-krea.safetensors"
 relative_path = "models/loras/Krea2/Details/KreaAmateur_V2.safetensors"
 
 [[artifacts]]
