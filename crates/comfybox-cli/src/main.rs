@@ -15,7 +15,7 @@ use comfybox_core::{
     workflow::inspect_workflow,
 };
 use console::style;
-use inquire::{Confirm, Password, PasswordDisplayMode, Select};
+use inquire::{Confirm, Password, PasswordDisplayMode, Select, Text};
 use serde_json::Value;
 use std::{
     collections::BTreeSet,
@@ -1372,6 +1372,80 @@ async fn execute_dashboard_action(
             );
             state.save()
         }
+        dashboard::DashboardAction::LocateArtifact(id) => {
+            let instance = configured_instance(cfg)?;
+            let artifact = cat
+                .artifact(&id)
+                .with_context(|| format!("unknown artifact {id}"))?;
+            let source = match Select::new(
+                &format!("Locate existing {} file", artifact.name),
+                vec!["Enter or paste a path", "Browse the file tree"],
+            )
+            .prompt()?
+            {
+                "Browse the file tree" => browse_file(std::env::current_dir()?)?,
+                _ => {
+                    let input = Text::new("Artifact file path").prompt()?;
+                    PathBuf::from(input.trim())
+                }
+            };
+            let source = fs::canonicalize(&source)
+                .with_context(|| format!("locate existing {} file", artifact.name))?;
+            if !source.is_file() {
+                bail!("selected artifact is not a file: {}", source.display());
+            }
+            let (temp_dir, _, _) = comfybox_core::download::temp_paths(&instance.root, artifact);
+            if source.starts_with(&temp_dir) {
+                bail!(
+                    "select the completed artifact file, not resumable data inside {}",
+                    temp_dir.display()
+                );
+            }
+            let destination = instance.root.join(&artifact.relative_path);
+            let destination_matches = fs::canonicalize(&destination)
+                .ok()
+                .is_some_and(|path| path == source);
+            if !destination_matches {
+                if destination.exists() || destination.is_symlink() {
+                    if !Confirm::new(&format!(
+                        "Replace the existing artifact at {}?",
+                        destination.display()
+                    ))
+                    .with_default(false)
+                    .prompt()?
+                    {
+                        return Ok(());
+                    }
+                    if destination.is_dir() && !destination.is_symlink() {
+                        bail!(
+                            "artifact destination is a directory: {}",
+                            destination.display()
+                        );
+                    }
+                    fs::remove_file(&destination).with_context(|| {
+                        format!("replace artifact link {}", destination.display())
+                    })?;
+                }
+                if let Some(parent) = destination.parent() {
+                    fs::create_dir_all(parent)?;
+                }
+                create_file_symlink(&source, &destination)?;
+            }
+            if temp_dir.exists() {
+                fs::remove_dir_all(&temp_dir).with_context(|| {
+                    format!("delete superseded download data {}", temp_dir.display())
+                })?;
+            }
+            queue.forget_artifacts(std::iter::once(id.as_str()))?;
+            queue.record(format!("located {} at {}", artifact.name, source.display()));
+            println!(
+                "{} {} → {}",
+                style("✓ Artifact located").green(),
+                destination.display(),
+                source.display()
+            );
+            Ok(())
+        }
         dashboard::DashboardAction::DeleteArtifacts(ids) => {
             let instance = configured_instance(cfg)?;
             for id in &ids {
@@ -1396,6 +1470,28 @@ async fn execute_dashboard_action(
             Ok(())
         }
     }
+}
+
+#[cfg(unix)]
+fn create_file_symlink(source: &Path, destination: &Path) -> Result<()> {
+    std::os::unix::fs::symlink(source, destination).with_context(|| {
+        format!(
+            "link artifact {} to {}",
+            destination.display(),
+            source.display()
+        )
+    })
+}
+
+#[cfg(windows)]
+fn create_file_symlink(source: &Path, destination: &Path) -> Result<()> {
+    std::os::windows::fs::symlink_file(source, destination).with_context(|| {
+        format!(
+            "link artifact {} to {}",
+            destination.display(),
+            source.display()
+        )
+    })
 }
 
 fn select_artifact_source(mut artifact: Artifact, source_index: usize) -> Artifact {
@@ -1451,6 +1547,62 @@ fn browse_directory(start: PathBuf) -> Result<PathBuf> {
         cur = cur.join(name)
     }
 }
+
+fn browse_file(start: PathBuf) -> Result<PathBuf> {
+    let mut current = start;
+    loop {
+        let mut directories = Vec::new();
+        let mut files = Vec::new();
+        for entry in fs::read_dir(&current)?.filter_map(|entry| entry.ok()) {
+            let path = entry.path();
+            if path.is_dir() {
+                directories.push(path);
+            } else if path.is_file() {
+                files.push(path);
+            }
+        }
+        directories.sort();
+        files.sort();
+
+        let mut choices = Vec::new();
+        if current.parent().is_some() {
+            choices.push("[..]".to_owned());
+        }
+        choices.extend(directories.iter().map(|path| {
+            format!(
+                "[{}/]",
+                path.file_name().unwrap_or_default().to_string_lossy()
+            )
+        }));
+        choices.extend(files.iter().map(|path| {
+            path.file_name()
+                .unwrap_or_default()
+                .to_string_lossy()
+                .into_owned()
+        }));
+
+        if choices.is_empty() {
+            bail!(
+                "no files or directories are visible in {}",
+                current.display()
+            );
+        }
+        let choice = Select::new(&format!("File: {}", current.display()), choices).prompt()?;
+        if choice == "[..]" {
+            current = current.parent().unwrap_or(&current).to_path_buf();
+            continue;
+        }
+        if let Some(name) = choice
+            .strip_prefix('[')
+            .and_then(|value| value.strip_suffix("/]"))
+        {
+            current.push(name);
+            continue;
+        }
+        return Ok(current.join(choice));
+    }
+}
+
 fn gib(b: u64) -> f64 {
     b as f64 / 1024.0 / 1024.0 / 1024.0
 }

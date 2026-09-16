@@ -31,7 +31,6 @@ pub enum JobStatus {
     Downloading,
     Processing,
     Installing,
-    Stopped,
     Paused,
     Failed,
     Completed,
@@ -45,7 +44,6 @@ impl JobStatus {
             Self::Downloading => "DOWNLOADING",
             Self::Processing => "PROCESSING",
             Self::Installing => "INSTALLING",
-            Self::Stopped => "STOPPED",
             Self::Paused => "PAUSED",
             Self::Failed => "FAILED",
             Self::Completed => "DONE",
@@ -176,7 +174,11 @@ impl DownloadQueue {
             .open(&log_path)
             .ok();
         let persisted = if state_path.is_file() {
-            serde_json::from_slice::<Vec<PersistedJob>>(&fs::read(&state_path)?)
+            let state = fs::read_to_string(&state_path)?;
+            // Older releases exposed a destructive `Stopped` lifecycle. Treat any
+            // such persisted jobs as paused so their resumable data remains usable.
+            let state = state.replace("\"Stopped\"", "\"Paused\"");
+            serde_json::from_str::<Vec<PersistedJob>>(&state)
                 .with_context(|| format!("parse {}", state_path.display()))?
         } else {
             Vec::new()
@@ -565,7 +567,7 @@ impl DownloadQueue {
         changed
     }
 
-    pub fn stop(&mut self, index: usize) -> Result<()> {
+    pub fn pause(&mut self, index: usize) -> Result<()> {
         if index >= self.jobs.len() {
             let mut operation_index = index - self.jobs.len();
             if operation_index < self.custom_nodes.len() {
@@ -613,42 +615,6 @@ impl DownloadQueue {
             self.save()?;
         }
         Ok(())
-    }
-
-    /// Stop an artifact transfer and discard all resumable temporary data.
-    pub fn cancel_download(&mut self, index: usize) -> Result<()> {
-        if index < self.jobs.len() {
-            let job = &mut self.jobs[index];
-            if let Some(abort) = job.abort.take() {
-                abort.abort();
-            }
-            let (temp_dir, _, _) = temp_paths(&job.root, &job.artifact);
-            if temp_dir.exists() {
-                fs::remove_dir_all(&temp_dir)
-                    .with_context(|| format!("delete temporary download {}", temp_dir.display()))?;
-            }
-            job.status = JobStatus::Stopped;
-            job.downloaded_bytes = 0;
-            job.bytes_per_second = 0.0;
-            job.error = None;
-            let name = job.artifact.name.clone();
-            self.log(format!("stopped {name}; temporary download data deleted"));
-            return self.save();
-        }
-        let operation_index = index - self.jobs.len();
-        if operation_index < self.custom_nodes.len() {
-            let operation = &mut self.custom_nodes[operation_index];
-            if let Some(abort) = operation.abort.take() {
-                abort.abort();
-            }
-            delete_custom_node_temp(&operation.root, &operation.node.id)?;
-            operation.status = JobStatus::Stopped;
-            operation.error = None;
-            let name = operation.node.name.clone();
-            self.log(format!("stopped {name}; temporary clone data deleted"));
-            return Ok(());
-        }
-        anyhow::bail!("this operation cannot be safely stopped and discarded")
     }
 
     /// Remove a queue record, optionally discarding its resumable temporary data.

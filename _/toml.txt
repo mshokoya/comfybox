@@ -1,374 +1,1167 @@
-[
-    minimax.h3.ref2va.bf16
-    Minimax
-    Minimax H3 - REF2VA - BF16
-    [
-        https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_bf16.safetensors
-    ]
-    diffusion_model
-    [video]
-]
-
 # Built-in ComfyBox catalog.
 # URLs/paths here are curated. Fast-moving families are represented as discovery-only
 # packages until a complete ComfyUI dependency mapping is verified.
 
 [[artifacts]]
 id = "minimax.h3.ref2va.bf16"
-name = "MiniMax H3 Ref2VA BF16"
-bit_data_type = "BF"
-url = "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_bf16.safetensors"
+name = "MiniMax H3 - Ref2VA - BF16"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_bf16.safetensors", "e32c54c1a7b4f5f397f195cea267ccb18806303bb665678c4bee60953bdf3026", 66280487368, true],
+]
 relative_path = "models/diffusion_models/minimax_h3_ref2va_bf16.safetensors"
-size_bytes = 66280487368
-sha256 = "e32c54c1a7b4f5f397f195cea267ccb18806303bb665678c4bee60953bdf3026"
 group = "Minimax"
-tags = ["video"]
+tags = ["video", "bf16", "ref2va"]
+
+[[artifacts]]
+id = "minimax.h3.ref2va.int8-convrot"
+name = "MiniMax H3 - Ref2VA - INT8 ConvRot"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_int8_convrot.safetensors", "9eef934046a0671bc8a5daf87100705e1478419c574cfde70c50fbe6885f76a9", 34038894550, true],
+]
+relative_path = "models/diffusion_models/minimax_h3_ref2va_int8_convrot.safetensors"
+group = "Minimax"
+tags = ["video", "int8", "convrot", "ref2va"]
+
+[[artifacts]]
+id = "minimax.h3.ref2va.pruned.bf16"
+name = "MiniMax H3 - Ref2VA - Pruned BF16"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_bf16.safetensors", "37c0da793e20ca735272ec2be655f08a2e10f97a3ec8fdfb40f5b39a736ed6fe", 40225724176, true],
+]
+relative_path = "models/diffusion_models/minimax_h3_ref2va_pruned_bf16.safetensors"
+group = "Minimax"
+tags = ["video", "bf16", "pruned", "ref2va"]
+
+[[artifacts]]
+id = "minimax.h3.ref2va.pruned.fp8-scaled"
+name = "MiniMax H3 - Ref2VA - Pruned FP8 Scaled"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_fp8_scaled.safetensors", "f86f2f79ebd2d76eb8eeb46091e83982e6ff51d255747e7b16e92834b392b8e9", 20958205608, true],
+]
+relative_path = "models/diffusion_models/minimax_h3_ref2va_pruned_fp8_scaled.safetensors"
+group = "Minimax"
+tags = ["video", "fp8", "scaled", "pruned", "ref2va"]
+
+[[artifacts]]
+id = "minimax.h3.ref2va.pruned.int8-convrot"
+name = "MiniMax H3 - Ref2VA - Pruned INT8 ConvRot"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors", "9255f52b6677845ad238f20dfaafa94727053694127ab7f255c048f0f9365779", 20970379616, true],
+]
+relative_path = "models/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors"
+group = "Minimax"
+tags = ["video", "int8", "convrot", "pruned", "ref2va"]
+
+[[artifacts]]
+id = "minimax.h3.fl2va.bf16"
+name = "MiniMax H3 - FL2VA - BF16"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_bf16.safetensors", "907d4add438438ec1544f5240c3b38532ed934fe6be75677a6bbda2a6fdd6182", 66280487368, true],
+]
+relative_path = "models/diffusion_models/minimax_h3_fl2va_bf16.safetensors"
+group = "Minimax"
+tags = ["video", "bf16", "fl2va"]
+
+[[artifacts]]
+id = "minimax.h3.fl2va.int8-convrot"
+name = "MiniMax H3 - FL2VA - INT8 ConvRot"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_int8_convrot.safetensors", "7ad4c73e6e378b822ffd1629f27f632d3787d95f5e468e3af958f98c58df96a5", 34038892334, true],
+]
+relative_path = "models/diffusion_models/minimax_h3_fl2va_int8_convrot.safetensors"
+group = "Minimax"
+tags = ["video", "int8", "convrot", "fl2va"]
+
+[[artifacts]]
+id = "minimax.h3.fl2va.pruned.bf16"
+name = "MiniMax H3 - FL2VA - Pruned BF16"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_bf16.safetensors", "a32572fb90b5508b201ec7c2eddcc184b13ddfd3c6f6d2cf06a0b46535d541b4", 40225724176, true],
+]
+relative_path = "models/diffusion_models/minimax_h3_fl2va_pruned_bf16.safetensors"
+group = "Minimax"
+tags = ["video", "bf16", "pruned", "fl2va"]
+
+[[artifacts]]
+id = "minimax.h3.fl2va.pruned.fp8-scaled"
+name = "MiniMax H3 - FL2VA - Pruned FP8 Scaled"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_fp8_scaled.safetensors", "12944c1f7791637e7de12208aef04da82bd26b95271b1b47d817364315ade993", 20958205608, true],
+]
+relative_path = "models/diffusion_models/minimax_h3_fl2va_pruned_fp8_scaled.safetensors"
+group = "Minimax"
+tags = ["video", "fp8", "scaled", "pruned", "fl2va"]
+
+[[artifacts]]
+id = "minimax.h3.fl2va.pruned.int8-convrot"
+name = "MiniMax H3 - FL2VA - Pruned INT8 ConvRot"
+url = [
+    ["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors", "e889202c41dafb67b10d67b97f0d8541508036a6090af23425a5c2615d03c47a", 20970379616, true],
+]
+relative_path = "models/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors"
+group = "Minimax"
+tags = ["video", "int8", "convrot", "pruned", "fl2va"]
+
 
 [[artifacts]]
 id = "minimax.h3.qwen3vl32b.bf16"
-name = "Qwen3-VL 32B MiniMax H3 BF16"
-url = "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_bf16.safetensors"
+name = "Qwen3-VL - MiniMax H3 - 32B - BF16"
+url = [["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_bf16.safetensors", "600d567f6a9629c8574e8e7041b199bdd9c59a986afa7906910a81919610607d", 51506295256, true]]
 relative_path = "models/text_encoders/qwen3vl_32b_minimax_h3_bf16.safetensors"
-size_bytes = 51506295256
+group = "Qwen"
+tags = ["video", "bf16", "32b", "minimax", "qwen"]
+
+[[artifacts]]
+id = "minimax.h3.qwen3vl32b.int8-convrot"
+name = "Qwen3-VL - 32B - MiniMax H3 - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_int8_convrot.safetensors", "bc2ced0fbea64757fa9acddccfc0b3f4819d1dcf1da6c124d690d368be283923", 27141342152, true]]
+relative_path = "models/text_encoders/qwen3vl_32b_minimax_h3_int8_convrot.safetensors"
+group = "Qwen"
+tags = ["video", "int8", "convrot", "32b", "minimax", "qwen"]
+
+[[artifacts]]
+id = "minimax.h3.qwen3vl32b.nvfp4-awq"
+name = "Qwen3-VL - 32B - MiniMax H3 - NVFP4 AWQ"
+url = [["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors", "35a88d51044231fe332301d7a62aa81e3f2cba62febeb446e2c1e3e0ef76f2c6", 15687142551, true]]
+relative_path = "models/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors"
+group = "Qwen"
+tags = ["video", "nvfp4", "awq", "32b", "minimax", "qwen"]
+
 
 [[artifacts]]
 id = "minimax.h3.video-vae.fp16"
-name = "MiniMax H3 Video VAE FP16"
-url = "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors"
+name = "MiniMax H3 - Video VAE - FP16"
+url = [["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors", "7c1f131492e7eddacaac9069a61b81bdd39de5cc96561e677c5eab1cdce5e522", 5207808496, true]]
 relative_path = "models/vae/minimax_h3_video_vae_fp16.safetensors"
-size_bytes = 5207808496
+group = "Minimax"
+tags = ["video", "vae", "fp16", "minimax"]
+
+[[artifacts]]
+id = "minimax.h3.video-vae.int8-convrot"
+name = "MiniMax H3 - Video VAE - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_int8_convrot.safetensors", "52a2c8c73583c86e4f41cdcce3a6ad0ea562987bc0bf3d60a0cef5f5c8e60c0e", 2811065184, true]]
+relative_path = "models/vae/minimax_h3_video_vae_int8_convrot.safetensors"
+group = "Minimax"
+tags = ["video", "vae", "int8", "convrot", "minimax"]
 
 [[artifacts]]
 id = "minimax.h3.audio-vae.fp32"
-name = "MiniMax H3 Audio VAE FP32"
-url = "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors"
+name = "MiniMax H3 - Audio VAE - FP32"
+url = [["https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors", "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48", 605254808, true]]
 relative_path = "models/vae/minimax_h3_audio_vae_fp32.safetensors"
-size_bytes = 605254808
+group = "Minimax"
+tags = ["audio", "vae", "fp32", "minimax"]
 
 [[artifacts]]
 id = "krea2.raw.bf16"
-name = "Krea 2 Raw BF16"
-url = "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_bf16.safetensors"
+name = "Krea 2 - Raw - BF16"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_bf16.safetensors", "f99bb0ff8e362b77342bc4994e0c50906fe7ef7074864b181b7d48d2fa6d03d7", 26283332608, true]]
 relative_path = "models/diffusion_models/krea2_raw_bf16.safetensors"
-sha256 = "f99bb0ff8e362b77342bc4994e0c50906fe7ef7074864b181b7d48d2fa6d03d7"
+group = "Krea 2"
+tags = ["image", "raw", "bf16", "krea2"]
+
+[[artifacts]]
+id = "krea2.raw.fp8-scaled"
+name = "Krea 2 - Raw - FP8 Scaled"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_fp8_scaled.safetensors", "48cd5d6c100297968349b41a8e77c6591d1dac18a215807f5f25f59e5c54cd61", 13141730784, true]]
+relative_path = "models/diffusion_models/krea2_raw_fp8_scaled.safetensors"
+group = "Krea 2"
+tags = ["image", "raw", "fp8", "scaled", "krea2"]
+
+[[artifacts]]
+id = "krea2.raw.int8-convrot"
+name = "Krea 2 - Raw - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_int8_convrot.safetensors", "5585a4a38c4bcfb6fde2d480a4aa6edf7f665721ebde56d30662c35a45f5fa5c", 13492686496, true]]
+relative_path = "models/diffusion_models/krea2_raw_int8_convrot.safetensors"
+group = "Krea 2"
+tags = ["image", "raw", "int8", "convrot", "krea2"]
 
 [[artifacts]]
 id = "krea2.turbo.bf16"
-name = "Krea 2 Turbo BF16"
-url = "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_bf16.safetensors"
+name = "Krea 2 - Turbo - BF16"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_bf16.safetensors", "78bbf8f4165eda19cea3cb06c78089221932a39e2eed8af9da741f942c47ffb3", 26283332608, true]]
 relative_path = "models/diffusion_models/krea2_turbo_bf16.safetensors"
-sha256 = "78bbf8f4165eda19cea3cb06c78089221932a39e2eed8af9da741f942c47ffb3"
+group = "Krea 2"
+tags = ["image", "turbo", "bf16", "krea2"]
+
+[[artifacts]]
+id = "krea2.turbo.fp8-scaled"
+name = "Krea 2 - Turbo - FP8 Scaled"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors", "eb4dd8c612cfd10f64f25b057e6e6bbcb5737c94a7372177e456dbf7579502f1", 13141730784, true]]
+relative_path = "models/diffusion_models/krea2_turbo_fp8_scaled.safetensors"
+group = "Krea 2"
+tags = ["image", "turbo", "fp8", "scaled", "krea2"]
+
+[[artifacts]]
+id = "krea2.turbo.int8-convrot"
+name = "Krea 2 - Turbo - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_int8_convrot.safetensors", "8e4eeda70dd5037ab1ba2bef6b417f9f901e26093117cf397f741fc1fdaaf3f1", 13492686496, true]]
+relative_path = "models/diffusion_models/krea2_turbo_int8_convrot.safetensors"
+group = "Krea 2"
+tags = ["image", "turbo", "int8", "convrot", "krea2"]
+
+[[artifacts]]
+id = "krea2.turbo.mxfp8"
+name = "Krea 2 - Turbo - MXFP8"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_mxfp8.safetensors", "4c09131a442c3a01e95f934b43c76c1e691b9f683694a7b68d6fc707d5ecfce3", 13532318080, true]]
+relative_path = "models/diffusion_models/krea2_turbo_mxfp8.safetensors"
+group = "Krea 2"
+tags = ["image", "turbo", "mxfp8", "krea2"]
+
+[[artifacts]]
+id = "krea2.turbo.nvfp4"
+name = "Krea 2 - Turbo - NVFP4"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_nvfp4.safetensors", "61527003b2d537055494d01bc8efe51d6e86e64192ba23e3721a5647231fe394", 7673668448, true]]
+relative_path = "models/diffusion_models/krea2_turbo_nvfp4.safetensors"
+group = "Krea 2"
+tags = ["image", "turbo", "nvfp4", "krea2"]
 
 [[artifacts]]
 id = "krea2.qwen3vl4b.bf16"
-name = "Krea 2 Qwen3-VL 4B BF16"
-url = "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/text_encoders/qwen3vl_4b_bf16.safetensors"
+name = "Qwen3-VL - 4B - Krea 2 - BF16"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/text_encoders/qwen3vl_4b_bf16.safetensors", "36f3ff447ef59201722e8f9ce6020c9819fdcfba6aa2608c4e09b1c0ce114e34", 8875719384, true]]
 relative_path = "models/text_encoders/qwen3vl_4b_bf16.safetensors"
-sha256 = "36f3ff447ef59201722e8f9ce6020c9819fdcfba6aa2608c4e09b1c0ce114e34"
-size_bytes = 8875719384
+group = "Qwen"
+tags = ["image", "bf16", "4b", "krea2"]
+
+[[artifacts]]
+id = "krea2.qwen3vl4b.fp8"
+name = "Qwen3-VL - 4B - Krea 2 - FP8 Scaled"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors", "54bd5144df0bbc25dd6ccadfcb826b521445a1b06ae5a42570bdd2974ca87094", 5242467968, true]]
+relative_path = "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors"
+group = "Qwen"
+tags = ["image", "fp8", "scaled", "4b", "krea2"]
 
 [[artifacts]]
 id = "qwen.image.vae"
-name = "Qwen Image VAE"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors"
+name = "Qwen Image - VAE"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors", "a70580f0213e67967ee9c95f05bb400e8fb08307e017a924bf3441223e023d1f", 253806246, true]]
 relative_path = "models/vae/qwen_image_vae.safetensors"
+group = "Qwen Image"
+tags = ["image", "vae", "qwen-image"]
 
 [[artifacts]]
 id = "qwen.image.encoder.2.5vl7b"
-name = "Qwen 2.5 VL 7B Text Encoder"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b.safetensors"
+name = "Qwen 2.5-VL - 7B - Qwen Image - BF16"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b.safetensors", "cfafd739459bc86257397259f612a9aee88e5b98e85b5c0d0d1717e898b3463a", 16584415576, true]]
 relative_path = "models/text_encoders/qwen_2.5_vl_7b.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "bf16", "7b", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.image.encoder.2.5vl7b.fp8"
+name = "Qwen 2.5-VL - 7B - Qwen Image - FP8 Scaled"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors", "cb5636d852a0ea6a9075ab1bef496c0db7aef13c02350571e388aea959c5c0b4", 9384670680, true]]
+relative_path = "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "fp8", "scaled", "7b", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.image.encoder.2.5vl7b.nvfp4"
+name = "Qwen 2.5-VL - 7B - Qwen Image - NVFP4"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_nvfp4.safetensors", "c7bb24d331f5df991bab2ce76a15195b12652e86a69a79823183c6a047407463", 6114433446, true]]
+relative_path = "models/text_encoders/qwen_2.5_vl_7b_nvfp4.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "nvfp4", "7b", "qwen-image"]
 
 [[artifacts]]
 id = "qwen.image.bf16"
-name = "Qwen Image BF16"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors"
+name = "Qwen Image - BF16"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors", "d08fb5d68026c0d87325f9a7b3ad6454061113a2bc73cc883114dae172937ae7", 40861031488, true]]
 relative_path = "models/diffusion_models/qwen_image_bf16.safetensors"
-sha256 = "d08fb5d68026c0d87325f9a7b3ad6454061113a2bc73cc883114dae172937ae7"
+group = "Qwen Image"
+tags = ["image", "bf16", "qwen-image"]
 
 [[artifacts]]
 id = "qwen.image.2512.bf16"
-name = "Qwen Image 2512 BF16"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_bf16.safetensors"
+name = "Qwen Image 2512 - BF16"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_bf16.safetensors", "cbf55390fff27dbc785046d7007b04e0c5dd7421e7ef128f2831eacb53a8e075", 40861031488, true]]
 relative_path = "models/diffusion_models/qwen_image_2512_bf16.safetensors"
+group = "Qwen Image"
+tags = ["image", "bf16", "2512", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.image.2512.fp8-e4m3fn"
+name = "Qwen Image 2512 - FP8 E4M3FN"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors", "5dc80554d5d83390046a2f4a94ece06afb7700bf7b0aaf8bde9769793875876b", 20430679144, true]]
+relative_path = "models/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors"
+group = "Qwen Image"
+tags = ["image", "fp8", "e4m3fn", "2512", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.image.fp8-e4m3fn"
+name = "Qwen Image - FP8 E4M3FN"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_e4m3fn.safetensors", "98763a127701eb6fb59096f7742cb3aa7d64ed510b9f4e882d8351f8176e3ce3", 20430635136, true]]
+relative_path = "models/diffusion_models/qwen_image_fp8_e4m3fn.safetensors"
+group = "Qwen Image"
+tags = ["image", "fp8", "e4m3fn", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.image.fp8-hq"
+name = "Qwen Image - FP8 HQ"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_hq.safetensors", "d6027c88c850c25f56752d9d0ab79910c5d04e9e8515d00301c5c9301210ce4c", 22741809576, true]]
+relative_path = "models/diffusion_models/qwen_image_fp8_hq.safetensors"
+group = "Qwen Image"
+tags = ["image", "fp8", "hq", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.image.fp8mixed"
+name = "Qwen Image - FP8 Mixed"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8mixed.safetensors", "0ee8375df948e428b5cee97b62f7311ab11a6085eb5b1918f66bfab047fedc18", 20533672381, true]]
+relative_path = "models/diffusion_models/qwen_image_fp8mixed.safetensors"
+group = "Qwen Image"
+tags = ["image", "fp8", "mixed", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.image.nvfp4"
+name = "Qwen Image - NVFP4"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_nvfp4.safetensors", "54df91fa379a6487aa7869b678d5c1fa9e4b30db1019d0ab8dbce629daa8a5a8", 19769139136, true]]
+relative_path = "models/diffusion_models/qwen_image_nvfp4.safetensors"
+group = "Qwen Image"
+tags = ["image", "nvfp4", "qwen-image"]
 
 [[artifacts]]
 id = "qwen.edit.2509.bf16"
-name = "Qwen Image Edit 2509 BF16"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_bf16.safetensors"
+name = "Qwen Image Edit 2509 - BF16"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_bf16.safetensors", "2da4dc223f9e6cfb8aa97f966d1bb46b24dbae314256ba587cb02bfbcb60ef6d", 40861031488, true]]
 relative_path = "models/diffusion_models/qwen_image_edit_2509_bf16.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "bf16", "2509", "qwen-image"]
 
 [[artifacts]]
 id = "qwen.edit.2511.bf16"
-name = "Qwen Image Edit 2511 BF16"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_bf16.safetensors"
+name = "Qwen Image Edit 2511 - BF16"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_bf16.safetensors", "ae42d927b5fac4f278b9a894554c727e619727a63622976f2d95625be4bce08c", 40861031560, true]]
 relative_path = "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors"
-sha256 = "ae42d927b5fac4f278b9a894554c727e619727a63622976f2d95625be4bce08c"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "bf16", "2511", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.edit.bf16"
+name = "Qwen Image Edit - BF16"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_bf16.safetensors", "f133f246ba14ba2a24e1a9df64fe4da35281e684b467c992059429bfb6187625", 40861031488, true]]
+relative_path = "models/diffusion_models/qwen_image_edit_bf16.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "bf16", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.edit.fp8-e4m3fn"
+name = "Qwen Image Edit - FP8 - E4M3FN"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors", "393c6743d1de2e9031b5197027b36116f2096958ccc0223526d34e1860266021", 20430635136, true]]
+relative_path = "models/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "fp8", "e4m3fn", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.edit.2509.fp8-e4m3fn"
+name = "Qwen Image Edit 2509 - FP8 - E4M3FN"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors", "318568f61951ab9da21100c7b896e3c1da67f0d2efad6421545e022cfaa2b2b4", 20430698424, true]]
+relative_path = "models/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "fp8", "e4m3fn", "2509", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.edit.2509.int8-convrot"
+name = "Qwen Image Edit 2509 - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_int8_convrot.safetensors", "638402843782296122f42f2ff557a63a9535c4fbc3f6978308042c8d0f4012b4", 20499083752, true]]
+relative_path = "models/diffusion_models/qwen_image_edit_2509_int8_convrot.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "int8", "convrot", "2509", "qwen-image"]
+
+[[artifacts]]
+id = "qwen.edit.2511.fp8mixed"
+name = "Qwen Image Edit 2511 - FP8 Mixed"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors", "c9fdc158e46d3b61ef75f21ae866ca2fe808bf4a53643120d1c1e87c19280a4e", 20533762817, true]]
+relative_path = "models/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "fp8", "mixed", "2511", "qwen-image"]
+
+[[artifacts]]
+id = "firered.image-edit.1.0.bf16"
+name = "FireRed Image Edit 1.0 - BF16"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/firered_image_edit_1.0_bf16.safetensors", "17f68cb7f85b796e74d9598b74893f4e430fc2a534fa9ab42e1f6dd83d0f4a4c", 40861031488, true]]
+relative_path = "models/diffusion_models/firered_image_edit_1.0_bf16.safetensors"
+group = "FireRed Image Edit"
+tags = ["image", "edit", "bf16", "firered"]
 
 [[artifacts]]
 id = "zimage.base.bf16"
-name = "Z-Image Base BF16"
-url = "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/diffusion_models/z_image_bf16.safetensors"
+name = "Z-Image Base - BF16"
+url = [["https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/diffusion_models/z_image_bf16.safetensors", "996a67d3ff666946b1c25cbc16d1b1918b6cc0ac166309e23fe3b3d830263dee", 12309866400, true]]
 relative_path = "models/diffusion_models/z_image_bf16.safetensors"
-sha256 = "996a67d3ff666946b1c25cbc16d1b1918b6cc0ac166309e23fe3b3d830263dee"
+group = "Z-Image"
+tags = ["image", "base", "bf16", "z-image"]
+
+[[artifacts]]
+id = "zimage.base.int8-convrot"
+name = "Z-Image Base - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/diffusion_models/z_image_int8_convrot.safetensors", "eb2b470694fbd9778f15efd309000ea0091312c018c10a352c120b1da9bf4279", 6201001296, true]]
+relative_path = "models/diffusion_models/z_image_int8_convrot.safetensors"
+group = "Z-Image"
+tags = ["image", "base", "int8", "convrot", "z-image"]
 
 [[artifacts]]
 id = "zimage.turbo.bf16"
-name = "Z-Image Turbo BF16"
-url = "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors"
+name = "Z-Image Turbo - BF16"
+url = [["https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors", "2407613050b809ffdff18a4ac99af83ea6b95443ecebdf80e064a79c825574a6", 12309866400, true]]
 relative_path = "models/diffusion_models/z_image_turbo_bf16.safetensors"
-sha256 = "2407613050b809ffdff18a4ac99af83ea6b95443ecebdf80e064a79c825574a6"
+group = "Z-Image"
+tags = ["image", "turbo", "bf16", "z-image"]
+
+[[artifacts]]
+id = "zimage.turbo.int8-convrot"
+name = "Z-Image Turbo - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_int8_convrot.safetensors", "be517ebd47c912a5626a588e1aeea43e6be4a43c0cdcd2b48a2a780d9f358635", 6201001296, true]]
+relative_path = "models/diffusion_models/z_image_turbo_int8_convrot.safetensors"
+group = "Z-Image"
+tags = ["image", "turbo", "int8", "convrot", "z-image"]
+
+[[artifacts]]
+id = "zimage.turbo.nvfp4"
+name = "Z-Image Turbo - NVFP4"
+url = [["https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_nvfp4.safetensors", "a553c889dbcb910de4c98293237573219a37007c1074a3f04576646a088bd5c8", 4509509600, true]]
+relative_path = "models/diffusion_models/z_image_turbo_nvfp4.safetensors"
+group = "Z-Image"
+tags = ["image", "turbo", "nvfp4", "z-image"]
 
 [[artifacts]]
 id = "zimage.ae"
 name = "Z-Image Autoencoder"
-url = "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors"
+url = [["https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors", "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38", 335304388, true]]
 relative_path = "models/vae/ae.safetensors"
+group = "Z-Image"
+tags = ["image", "vae", "autoencoder", "z-image"]
 
 [[artifacts]]
 id = "zimage.qwen3.4b.fp8mixed"
-name = "Z-Image Qwen 3 4B FP8 Mixed Encoder"
-url = "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/text_encoders/qwen_3_4b_fp8_mixed.safetensors"
+name = "Qwen 3 - 4B - Z-Image - FP8 Mixed"
+url = [["https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/text_encoders/qwen_3_4b_fp8_mixed.safetensors", "72450b19758172c5a7273cf7de729d1c17e7f434a104a00167624cba94f68f15", 5631994051, true]]
 relative_path = "models/text_encoders/qwen_3_4b_fp8_mixed.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "fp8", "mixed", "4b", "z-image"]
+
+[[artifacts]]
+id = "zimage.qwen3.4b"
+name = "Qwen 3 - 4B - Z-Image"
+url = [["https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/text_encoders/qwen_3_4b.safetensors", "6c671498573ac2f7a5501502ccce8d2b08ea6ca2f661c458e708f36b36edfc5a", 8044982048, true]]
+relative_path = "models/text_encoders/qwen_3_4b.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "4b", "z-image"]
+
+[[artifacts]]
+id = "zimage.qwen3.4b.fp4mixed"
+name = "Qwen 3 - 4B - Z-Image - FP4 Mixed"
+url = [["https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/text_encoders/qwen_3_4b_fp4_mixed.safetensors", "7ca32dcf07dfe7692945d80fff86e3a74cb83c6206b9b223ac6836b939bb85d6", 3479416193, true]]
+relative_path = "models/text_encoders/qwen_3_4b_fp4_mixed.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "fp4", "mixed", "4b", "z-image"]
 
 [[artifacts]]
 id = "ideogram4.fp8"
-name = "Ideogram 4 FP8 Scaled"
-url = "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_fp8_scaled.safetensors"
+name = "Ideogram 4 - FP8 Scaled"
+url = [["https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_fp8_scaled.safetensors", "49a946f1b0f8bcf5eab7d3b1ecc7b453c104e034cb1b592032745692724bd306", 9280741285, true]]
 relative_path = "models/diffusion_models/ideogram4_fp8_scaled.safetensors"
-sha256 = "49a946f1b0f8bcf5eab7d3b1ecc7b453c104e034cb1b592032745692724bd306"
+group = "Ideogram 4"
+tags = ["image", "fp8", "scaled", "ideogram4"]
+
+[[artifacts]]
+id = "ideogram4.int8-convrot"
+name = "Ideogram 4 - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_int8_convrot.safetensors", "a9164002943463b4c7b2abd88c82a488c088acc35762651e4d8604d6ce4a163d", 9583465712, true]]
+relative_path = "models/diffusion_models/ideogram4_int8_convrot.safetensors"
+group = "Ideogram 4"
+tags = ["image", "int8", "convrot", "ideogram4"]
+
+[[artifacts]]
+id = "ideogram4.nvfp4-mixed"
+name = "Ideogram 4 - NVFP4 Mixed"
+url = [["https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_nvfp4_mixed.safetensors", "e7923b4b0a1129ae5afcc09e63046185688c8b09eb9a1a748cccdbde5d381609", 5490550037, true]]
+relative_path = "models/diffusion_models/ideogram4_nvfp4_mixed.safetensors"
+group = "Ideogram 4"
+tags = ["image", "nvfp4", "mixed", "ideogram4"]
+
+[[artifacts]]
+id = "ideogram4.unconditional.fp8-scaled"
+name = "Ideogram 4 Unconditional - FP8 Scaled"
+url = [["https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_unconditional_fp8_scaled.safetensors", "9b359007dae162cca7591d00868feea733eb7c56e56e3a214a4d5a9a2a07cd60", 9280741293, true]]
+relative_path = "models/diffusion_models/ideogram4_unconditional_fp8_scaled.safetensors"
+group = "Ideogram 4"
+tags = ["image", "unconditional", "fp8", "scaled", "ideogram4"]
+
+[[artifacts]]
+id = "ideogram4.unconditional.int8-convrot"
+name = "Ideogram 4 Unconditional - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_unconditional_int8_convrot.safetensors", "cd03ed94f244c9cb705e7d30ca0f40b5f5b004bb20674117adff88d16416c23d", 9583465712, true]]
+relative_path = "models/diffusion_models/ideogram4_unconditional_int8_convrot.safetensors"
+group = "Ideogram 4"
+tags = ["image", "unconditional", "int8", "convrot", "ideogram4"]
+
+[[artifacts]]
+id = "ideogram4.unconditional.nvfp4-mixed"
+name = "Ideogram 4 Unconditional - NVFP4 Mixed"
+url = [["https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_unconditional_nvfp4_mixed.safetensors", "639e37bd1dd7ee35e23c7cfccf93a518ddc7f4587818956ec42b31e659fd6ac0", 5490550037, true]]
+relative_path = "models/diffusion_models/ideogram4_unconditional_nvfp4_mixed.safetensors"
+group = "Ideogram 4"
+tags = ["image", "unconditional", "nvfp4", "mixed", "ideogram4"]
 
 [[artifacts]]
 id = "ideogram4.qwen3vl8b.fp8"
-name = "Ideogram 4 Qwen3-VL 8B FP8 Text Encoder"
-url = "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/text_encoders/qwen3vl_8b_fp8_scaled.safetensors"
+name = "Qwen3-VL - 8B - Ideogram 4 - FP8 Scaled"
+url = [["https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/text_encoders/qwen3vl_8b_fp8_scaled.safetensors", "4ba424cf62e51392e4d1a39933e803706f4e823c1065f36aaf149c6453f66bcd", 10588637512, true]]
 relative_path = "models/text_encoders/qwen3vl_8b_fp8_scaled.safetensors"
-sha256 = "4ba424cf62e51392e4d1a39933e803706f4e823c1065f36aaf149c6453f66bcd"
+group = "Qwen"
+tags = ["image", "text-encoder", "fp8", "scaled", "8b", "ideogram4"]
+
+[[artifacts]]
+id = "ideogram4.qwen3vl8b.nvfp4"
+name = "Qwen3-VL - 8B - Ideogram 4 - NVFP4"
+url = [["https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/text_encoders/qwen3vl_8b_nvfp4.safetensors", "e462e9e0c3b9313ae17f82040d7c77beb92d7aef3e40692d7803228dab7c3b98", 6305221764, true]]
+relative_path = "models/text_encoders/qwen3vl_8b_nvfp4.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "nvfp4", "8b", "ideogram4"]
 
 [[artifacts]]
 id = "flux2.vae"
-name = "Flux 2 VAE"
-url = "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/vae/flux2-vae.safetensors"
+name = "FLUX.2 - IDEOGRAM 4 - VAE"
+url = [["https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/vae/flux2-vae.safetensors", "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3", 336211292, true]]
 relative_path = "models/vae/flux2-vae.safetensors"
-sha256 = "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3"
+group = "FLUX.2"
+tags = ["image", "vae", "flux2", "ideogram4"]
 
 [[artifacts]]
 id = "scail2.fp16"
-name = "SCAIL-2 FP16"
-url = "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_fp16.safetensors"
+name = "SCAIL-2 - FP16"
+url = [["https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_fp16.safetensors", "e3f9cd52184949ee8ffdc01ba14de4c619e0ddfa09ae105cb7efce5c8dc9fe43", 32794040328, true]]
 relative_path = "models/diffusion_models/wan2.1_14B_SCAIL_2_fp16.safetensors"
-sha256 = "e3f9cd52184949ee8ffdc01ba14de4c619e0ddfa09ae105cb7efce5c8dc9fe43"
+group = "SCAIL-2"
+tags = ["video", "wan2.1", "14b", "fp16", "scail2"]
+
+[[artifacts]]
+id = "scail2.fp8-scaled"
+name = "SCAIL-2 - FP8 Scaled"
+url = [["https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_fp8_scaled.safetensors", "11513b4697ecf566de0cb74660c478f301fb6699a62b10369e91a6ed0fd6b083", 17694586857, true]]
+relative_path = "models/diffusion_models/wan2.1_14B_SCAIL_2_fp8_scaled.safetensors"
+group = "SCAIL-2"
+tags = ["video", "wan2.1", "14b", "fp8", "scaled", "scail2"]
+
+[[artifacts]]
+id = "scail2.int8-convrot"
+name = "SCAIL-2 - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_int8_convrot.safetensors", "a2114c18a811243185f103765cd5004b61652141aa55a9016d3bdceebceb5ac0", 16654506256, true]]
+relative_path = "models/diffusion_models/wan2.1_14B_SCAIL_2_int8_convrot.safetensors"
+group = "SCAIL-2"
+tags = ["video", "wan2.1", "14b", "int8", "convrot", "scail2"]
+
+[[artifacts]]
+id = "scail2.mxfp8"
+name = "SCAIL-2 - MXFP8"
+url = [["https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_mxfp8.safetensors", "94b69204e4d299ef71e0d3204b8f1709c7193e0a1850bf0eb6479a644413f195", 17150733432, true]]
+relative_path = "models/diffusion_models/wan2.1_14B_SCAIL_2_mxfp8.safetensors"
+group = "SCAIL-2"
+tags = ["video", "wan2.1", "14b", "mxfp8", "scail2"]
+
+[[artifacts]]
+id = "scail2.nvfp4-mxfp8-mix"
+name = "SCAIL-2 - NVFP4/MXFP8 Mix"
+url = [["https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_nvfp4_mxpf8_mix.safetensors", "5053562142b46a12ef368360373304609ce6e6e010b3fddd35ef1cd27e180e7d", 11023570536, true]]
+relative_path = "models/diffusion_models/wan2.1_14B_SCAIL_2_nvfp4_mxpf8_mix.safetensors"
+group = "SCAIL-2"
+tags = ["video", "wan2.1", "14b", "nvfp4", "mxfp8", "mixed", "scail2"]
 
 [[artifacts]]
 id = "sdxl.base.1.0"
-name = "SDXL Base 1.0"
-url = "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
+name = "Stable Diffusion XL Base 1.0 - Standard VAE"
+url = [["https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors", "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b", 6938078334, true]]
 relative_path = "models/checkpoints/sd_xl_base_1.0.safetensors"
+group = "Stable Diffusion"
+tags = ["image", "checkpoint", "base", "sdxl", "1.0"]
+
+[[artifacts]]
+id = "sdxl.base.1.0.0.9vae"
+name = "Stable Diffusion XL Base 1.0 - 0.9 VAE"
+url = [["https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0_0.9vae.safetensors", "e6bb9ea85bbf7bf6478a7c6d18b71246f22e95d41bcdd80ed40aa212c33cfeff", 6938078334, true]]
+relative_path = "models/checkpoints/sd_xl_base_1.0_0.9vae.safetensors"
+group = "Stable Diffusion"
+tags = ["image", "checkpoint", "base", "sdxl", "1.0", "0.9-vae"]
 
 [[artifacts]]
 id = "sdxl.refiner.1.0"
-name = "SDXL Refiner 1.0"
-url = "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+name = "Stable Diffusion XL Refiner 1.0 - Standard VAE"
+url = [["https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors", "7440042bbdc8a24813002c09b6b69b64dc90fded4472613437b7f55f9b7d9c5f", 6075981930, true]]
 relative_path = "models/checkpoints/sd_xl_refiner_1.0.safetensors"
+group = "Stable Diffusion"
+tags = ["image", "checkpoint", "refiner", "sdxl", "1.0"]
 
 [[artifacts]]
-id = "qwen.image.encoder.2.5vl7b.fp8"
-name = "Qwen 2.5 VL 7B FP8 Scaled Text Encoder"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors"
-relative_path = "models/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors"
+id = "sdxl.refiner.1.0.0.9vae"
+name = "Stable Diffusion XL Refiner 1.0 - 0.9 VAE"
+url = [["https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0_0.9vae.safetensors", "8d0ce6c016004cbdacd50f937dad381d8c396628d621a7f97191470532780164", 6075981930, true]]
+relative_path = "models/checkpoints/sd_xl_refiner_1.0_0.9vae.safetensors"
+group = "Stable Diffusion"
+tags = ["image", "checkpoint", "refiner", "sdxl", "1.0", "0.9-vae"]
+
 
 [[artifacts]]
 id = "qwen.edit.2509.fp8mixed"
-name = "Qwen Image Edit 2509 FP8 Mixed"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors"
+name = "Qwen Image Edit 2509 - FP8 Mixed"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors", "c742e8c584c11f65d846816b334d2c25a89e0a196d2790a813c6bf943e40a492", 20533579421, true]]
 relative_path = "models/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors"
-sha256 = "1945996f67c697523287d3b9fde1a51c4fef10e4de49db83822bab657d7d88d5"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "fp8", "mixed", "2509", "qwen-image"]
 
 [[artifacts]]
 id = "qwen.edit.2511.int8-convrot"
-name = "Qwen Image Edit 2511 INT8 ConvRot"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors"
+name = "Qwen Image Edit 2511 - INT8 ConvRot"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors", "11b5af5ac601821d73930c84846c9a158e67177356daf927ce1c8d10f3963829", 20499083824, true]]
 relative_path = "models/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "int8", "convrot", "2511", "qwen-image"]
 
 [[artifacts]]
 id = "qwen.edit.2509.lightning-4step"
-name = "Qwen Image Edit 2509 Lightning 4-Step FP32 LoRA"
-url = "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors"
+name = "Qwen Image Edit 2509 Lightning - 4-Step - FP32 LoRA"
+url = [["https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors", "6065f62669c999b4516ac4a6e7a120252bf7ff819b407dcb77b868d575e736b1", 1698951104, true]]
 relative_path = "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "lightning", "4-step", "fp32", "2509"]
+
+[[artifacts]]
+id = "qwen.edit.2509.lightning-4step.bf16"
+name = "Qwen Image Edit 2509 Lightning - 4-Step - BF16 LoRA"
+url = [["https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors", "2a32ce938ec71db2b49a817b4844ae86995569518dea56ee0ddc209cbe8e1377", 849608296, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "lightning", "4-step", "bf16", "2509"]
+
+[[artifacts]]
+id = "qwen.edit.2509.lightning-8step.fp32"
+name = "Qwen Image Edit 2509 Lightning - 8-Step - FP32 LoRA"
+url = [["https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-fp32.safetensors", "eece790fc6ac8c0e36ce8e53cb5f78edf370bf2da79918148db037f529f7e841", 1698951104, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-fp32.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "lightning", "8-step", "fp32", "2509"]
+
+[[artifacts]]
+id = "qwen.edit.2509.lightning-8step.bf16"
+name = "Qwen Image Edit 2509 Lightning - 8-Step - BF16 LoRA"
+url = [["https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-bf16.safetensors", "b5c48ba90d22294cc4e20ea4a347496e2136295ad438ff79ad4fe841f28d7f72", 849608296, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-bf16.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "lightning", "8-step", "bf16", "2509"]
 
 [[artifacts]]
 id = "qwen.edit.2509.multiple-angles"
-name = "Qwen Image Edit 2509 Multiple Angles LoRA"
-url = "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Edit-2509-Multiple-angles.safetensors"
+name = "Qwen Image Edit 2509 - Multiple Angles LoRA"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Edit-2509-Multiple-angles.safetensors", "e0cea9508025a39e41f50da0e7d10fbd9db182d057c745136a42ef8829914c8f", 236117032, true]]
 relative_path = "models/loras/Qwen-Edit-2509-Multiple-angles.safetensors"
-sha256 = "e0cea9508025a39e41f50da0e7d10fbd9db182d057c745136a42ef8829914c8f"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "multiple-angles", "2509"]
+
+[[artifacts]]
+id = "qwen.edit.2509.anything2real-alpha"
+name = "Qwen Image Edit 2509 - Anything2Real Alpha LoRA"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Anything2RealAlpha.safetensors", "62ee14b063d53a24f842ef9f612b90ac7016df11027abe6266fab871bb44aae9", 609646608, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2509-Anything2RealAlpha.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "anything2real", "2509"]
+
+[[artifacts]]
+id = "qwen.edit.2509.fusion"
+name = "Qwen Image Edit 2509 - Fusion LoRA"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Fusion.safetensors", "a0cd7db2cfc2133414ff6fae6978a4981c8114148d58f288fed25b4ef93b5dcd", 236117032, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2509-Fusion.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "fusion", "2509"]
+
+[[artifacts]]
+id = "qwen.edit.2509.light-migration"
+name = "Qwen Image Edit 2509 - Light Migration LoRA"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Light-Migration.safetensors", "202d76cfbf0f8e670154ef300b0f28e4a4bfdb94dd91a535f6ab73769314ae3f", 236117032, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2509-Light-Migration.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "light-migration", "2509"]
+
+[[artifacts]]
+id = "qwen.edit.2509.relight"
+name = "Qwen Image Edit 2509 - Relight LoRA"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Relight.safetensors", "2a11c2b74ce0965abf35a8c8db52305072e970a689ca904b5a5b5a94d0aab86c", 236117032, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2509-Relight.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "relight", "2509"]
+
+[[artifacts]]
+id = "qwen.edit.2509.white-to-scene"
+name = "Qwen Image Edit 2509 - White to Scene LoRA"
+url = [["https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-White_to_Scene.safetensors", "96a10c01869ce8ce82f820f8217881d4a998487b1058eb3057a33c74419645f8", 236117032, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2509-White_to_Scene.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "white-to-scene", "2509"]
 
 [[artifacts]]
 id = "qwen.edit.next-scene-v2"
-name = "Qwen Image Edit Next Scene v2 LoRA"
-url = "https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509/resolve/main/next-scene_lora-v2-3000.safetensors"
+name = "Qwen Image Edit 2509 - Next Scene v2 - 3000-Step LoRA"
+url = [["https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509/resolve/main/next-scene_lora-v2-3000.safetensors", "8abf2306649a62282f89968515097650acaf7b040687c9b6c56e37558e6df9e1", 295146176, true]]
 relative_path = "models/loras/next-scene_lora-v2-3000.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "next-scene", "v2", "3000-step", "2509"]
+
+[[artifacts]]
+id = "qwen.edit.next-scene-v1"
+name = "Qwen Image Edit 2509 - Next Scene v1 - 3000-Step LoRA"
+url = [["https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509/resolve/main/next-scene_lora_v1-3000.safetensors", "c31f5e95e1934a34079f6c4c22842299ff28bcc5d2798639df52f5c03de724dd", 295146184, true]]
+relative_path = "models/loras/next-scene_lora_v1-3000.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "next-scene", "v1", "3000-step", "2509"]
 
 [[artifacts]]
 id = "qwen.edit.skin.1.1.2750"
-name = "Qwen Edit Skin 1.1 2750 LoRA (disabled in workflow)"
-url = "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002750.safetensors"
+name = "Qwen Edit Skin 1.1 - 2750-Step LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002750.safetensors", "b21181e7efc54b695ea579cc4d212d940018832a4366eb10b1feba1a89b882ed", 295146184, true]]
 relative_path = "models/loras/qwen-edit-skin_1.1_000002750.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "v1.1", "2750-step"]
+
+[[artifacts]]
+id = "qwen.edit.skin.primary"
+name = "Qwen Edit Skin - Primary LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin.safetensors", "e4efd5ee1e5555eb438c214aa0ee6009f0215f13dbe817128615909871eed4b1", 295146176, true]]
+relative_path = "models/loras/qwen-edit-skin.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "primary"]
+
+[[artifacts]]
+id = "qwen.edit.skin.4000"
+name = "Qwen Edit Skin - 4000-Step LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004000.safetensors", "39cba6d4c1ceda71c7cd59cdf9763db2a1f0c7b303238ffa50a7241130ec70cb", 295146176, true]]
+relative_path = "models/loras/qwen-edit-skin_000004000.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "4000-step"]
+
+[[artifacts]]
+id = "qwen.edit.skin.4250"
+name = "Qwen Edit Skin - 4250-Step LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004250.safetensors", "c6837962e984dcf4c8a26c60ccbcc22a6d607e18d9ea1154cba065bf508d83a7", 295146176, true]]
+relative_path = "models/loras/qwen-edit-skin_000004250.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "4250-step"]
+
+[[artifacts]]
+id = "qwen.edit.skin.4500"
+name = "Qwen Edit Skin - 4500-Step LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004500.safetensors", "f69565b9423b2d3c7b090d17aa26d4adae7902f56c69c4357626aa1e5d6afea4", 295146176, true]]
+relative_path = "models/loras/qwen-edit-skin_000004500.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "4500-step"]
+
+[[artifacts]]
+id = "qwen.edit.skin.4750"
+name = "Qwen Edit Skin - 4750-Step LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004750.safetensors", "e049c2fbb06aff069c6e204f3c99ed420bc771957d63f7eb583ef8cfb5c8c073", 295146176, true]]
+relative_path = "models/loras/qwen-edit-skin_000004750.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "4750-step"]
+
+[[artifacts]]
+id = "qwen.edit.skin.1.1.1750"
+name = "Qwen Edit Skin 1.1 - 1750-Step LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000001750.safetensors", "dfa3150472fc566951a3019012eb4cab7cbe62201e407df282d9397e55e7a160", 295146184, true]]
+relative_path = "models/loras/qwen-edit-skin_1.1_000001750.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "v1.1", "1750-step"]
+
+[[artifacts]]
+id = "qwen.edit.skin.1.1.2000"
+name = "Qwen Edit Skin 1.1 - 2000-Step LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002000.safetensors", "19588edc8125cd25255a3651c2894159f4bb9a2aa7c7049a6056ee7860069880", 295146184, true]]
+relative_path = "models/loras/qwen-edit-skin_1.1_000002000.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "v1.1", "2000-step"]
+
+[[artifacts]]
+id = "qwen.edit.skin.1.1.2250"
+name = "Qwen Edit Skin 1.1 - 2250-Step LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002250.safetensors", "ef43391c33f20d7cc3477bc30443c1da0439ec1d412a3d99be53753cdd64b3f4", 295146184, true]]
+relative_path = "models/loras/qwen-edit-skin_1.1_000002250.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "v1.1", "2250-step"]
+
+[[artifacts]]
+id = "qwen.edit.skin.1.1.2500"
+name = "Qwen Edit Skin 1.1 - 2500-Step LoRA"
+url = [["https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002500.safetensors", "1dc6933e6b68a763779110d412dfdc7cb3188cbb7965b379e33ddb39c8f540fa", 295146184, true]]
+relative_path = "models/loras/qwen-edit-skin_1.1_000002500.safetensors"
+group = "Qwen Edit Skin"
+tags = ["image", "edit", "lora", "skin", "v1.1", "2500-step"]
 
 [[artifacts]]
 id = "qwen.edit.2511.multiple-angles"
-name = "Qwen Image Edit 2511 Multiple Angles LoRA"
-url = "https://huggingface.co/fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA/resolve/main/qwen-image-edit-2511-multiple-angles-lora.safetensors"
+name = "Qwen Image Edit 2511 - Multiple Angles LoRA"
+url = [["https://huggingface.co/fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA/resolve/main/qwen-image-edit-2511-multiple-angles-lora.safetensors", "42426ded4e25fd22879d9e198b857556445ef4ca56e8da3246d0345155bb6765", 295140688, true]]
 relative_path = "models/loras/qwen-image-edit-2511-multiple-angles-lora.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "multiple-angles", "2511"]
 
 [[artifacts]]
 id = "qwen.edit.2511.lightning-4step.fp32"
-name = "Qwen Image Edit 2511 Lightning 4-Step FP32 LoRA"
-url = "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors"
+name = "Qwen Image Edit 2511 Lightning - 4-Step - FP32 LoRA"
+url = [["https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors", "6f03a8cbb49f8dd422d23759b03cb254264c44aa3717d7903349ee42695baf18", 1698951104, true]]
 relative_path = "models/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "lightning", "4-step", "fp32", "2511"]
 
 [[artifacts]]
 id = "qwen.edit.2511.lightning-4step.bf16"
-name = "Qwen Image Edit 2511 Lightning 4-Step BF16 LoRA"
-url = "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors"
+name = "Qwen Image Edit 2511 Lightning - 4-Step - BF16 LoRA"
+url = [["https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors", "22226e8d05d354bb356627d428809f5afd7819399b077238a2b70a82883a904f", 849608296, true]]
 relative_path = "models/loras/QwenEdit2511/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "lightning", "4-step", "bf16", "2511"]
+
+[[artifacts]]
+id = "qwen.edit.2511.lightning-8step.fp32"
+name = "Qwen Image Edit 2511 Lightning - 8-Step - FP32 LoRA"
+url = [["https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-fp32.safetensors", "e2e24eda6295bf08222638b0b8278628461e86e8e1bc1b10411c7def13451262", 1698951104, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-fp32.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "lightning", "8-step", "fp32", "2511"]
+
+[[artifacts]]
+id = "qwen.edit.2511.lightning-8step.bf16"
+name = "Qwen Image Edit 2511 Lightning - 8-Step - BF16 LoRA"
+url = [["https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors", "a9e81a58a78f260f67b337a6f615e8fa4cd3bc79847c77b7d61a581b789b1ba8", 849608296, true]]
+relative_path = "models/loras/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "lightning", "8-step", "bf16", "2511"]
 
 [[artifacts]]
 id = "flux2.klein.9b"
 name = "FLUX.2 Klein 9B"
-url = "https://huggingface.co/black-forest-labs/FLUX.2-klein-9B/resolve/main/flux-2-klein-9b.safetensors"
+url = [["https://huggingface.co/black-forest-labs/FLUX.2-klein-9B/resolve/main/flux-2-klein-9b.safetensors", "0975d6b77b5f510b99547d6724a208e36527df654e8f6134f59ece3f9f30da58", 18157185168, true]]
 relative_path = "models/diffusion_models/flux-2-klein-9b.safetensors"
+group = "FLUX.2"
+tags = ["image", "9b", "flux2", "klein"]
 
 [[artifacts]]
 id = "flux2.klein.9b.fp8"
-name = "FLUX.2 Klein 9B FP8 (workflow alternative)"
-url = "https://huggingface.co/black-forest-labs/FLUX.2-klein-9b-fp8/resolve/main/flux-2-klein-9b-fp8.safetensors"
+name = "FLUX.2 Klein 9B - FP8"
+url = [["https://huggingface.co/black-forest-labs/FLUX.2-klein-9B-fp8/resolve/main/flux-2-klein-9b-fp8.safetensors", "865ba09f5b4c3cbd3468a4bd3acb9fcb2f8740c54317482f0bcd4ed1d3655cee", 9433061528, true]]
 relative_path = "models/diffusion_models/flux-2-klein-9b-fp8.safetensors"
+group = "FLUX.2"
+tags = ["image", "9b", "fp8", "flux2", "klein"]
 
 [[artifacts]]
 id = "flux2.small-decoder"
-name = "FLUX.2 Small Decoder (workflow alternative)"
-url = "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/full_encoder_small_decoder.safetensors"
+name = "FLUX.2 - Full Encoder + Small Decoder VAE"
+url = [["https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/full_encoder_small_decoder.safetensors", "ea4273f02d1fafbf8e1d1c2cf6018ed8748652eb0bf34f2dd91171f16f15ab62", 249519092, true]]
 relative_path = "models/vae/full_encoder_small_decoder.safetensors"
+group = "FLUX.2"
+tags = ["image", "vae", "full-encoder", "small-decoder", "flux2"]
+
+[[artifacts]]
+id = "flux2.small-decoder.decoder-only"
+name = "FLUX.2 - Small Decoder Only"
+url = [["https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/small_decoder.safetensors", "ad783347747561d974f347f1b7377ebca15330621ace6a2e3f8dfaa83f5c211f", 111801980, true]]
+relative_path = "models/vae/small_decoder.safetensors"
+group = "FLUX.2"
+tags = ["image", "vae", "decoder-only", "small-decoder", "flux2"]
 
 [[artifacts]]
 id = "flux2.qwen3.8b.fp8mixed"
-name = "Qwen 3 8B FP8 Mixed Text Encoder"
-url = "https://huggingface.co/PatrickZane/qwen_3_8b_fp8mixed.safetensors/resolve/main/qwen_3_8b_fp8mixed.safetensors"
+name = "Qwen 3 - 8B - FLUX.2 - FP8 Mixed"
+url = [["https://huggingface.co/PatrickZane/qwen_3_8b_fp8mixed.safetensors/resolve/main/qwen_3_8b_fp8mixed.safetensors", "abad16806e0cbabc54e0325d6565847443fe396d5f0be38bb3cd3fe75a1201d6", 8664848742, true]]
 relative_path = "models/text_encoders/qwen_3_8b_fp8mixed.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "fp8", "mixed", "8b", "flux2"]
 
 [[artifacts]]
 id = "flux2.klein.multiple-angles"
-name = "FLUX.2 Klein 9B Multiple Angles LoRA"
-url = "https://huggingface.co/Alexali/multiple-angles-flux2K/resolve/main/multiple-angles-flux-klein-9b.safetensors"
+name = "FLUX.2 Klein 9B - Multiple Angles LoRA"
+url = [["https://huggingface.co/Alexali/multiple-angles-flux2K/resolve/main/multiple-angles-flux-klein-9b.safetensors", "3dc50269a94c29d679f9e5b52868cea1b26542cf32e8976ee74d8ce16c98d692", 87070312, true]]
 relative_path = "models/loras/exp/multiple-angles-flux-klein-9b.safetensors"
-sha256 = "3dc50269a94c29d679f9e5b52868cea1b26542cf32e8976ee74d8ce16c98d692"
-
-[[artifacts]]
-id = "krea2.turbo.int8-convrot"
-name = "Krea 2 Turbo INT8 ConvRot"
-url = "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_int8_convrot.safetensors"
-relative_path = "models/diffusion_models/krea2_turbo_int8_convrot.safetensors"
-sha256 = "8e4eeda70dd5037ab1ba2bef6b417f9f901e26093117cf397f741fc1fdaaf3f1"
-
-[[artifacts]]
-id = "krea2.turbo.fp8"
-name = "Krea 2 Turbo FP8 Scaled (workflow alternative)"
-url = "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors"
-relative_path = "models/diffusion_models/krea2_turbo_fp8_scaled.safetensors"
-
-[[artifacts]]
-id = "krea2.qwen3vl4b.fp8"
-name = "Krea 2 Qwen3-VL 4B FP8 Scaled"
-url = "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors"
-relative_path = "models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors"
+group = "FLUX.2"
+tags = ["image", "lora", "multiple-angles", "9b", "flux2", "klein"]
 
 [[artifacts]]
 id = "krea2.identity-edit.v1.2"
-name = "Krea 2 Identity Edit v1.2 LoRA"
-url = "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2.safetensors"
+name = "Krea 2 Identity Edit - v1.2 LoRA"
+url = [["https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2.safetensors", "6adf9a69cc9502d286db7b69964d37da7e9cfe4b05b4d004bc275f087d3fd3cf", 1828256432, true]]
 relative_path = "models/loras/krea2/krea2_identity_edit_v1_2.safetensors"
+group = "Krea 2 Identity Edit"
+tags = ["image", "edit", "lora", "identity", "v1.2", "krea2"]
+
+[[artifacts]]
+id = "krea2.identity-edit.v1"
+name = "Krea 2 Identity Edit - v1 LoRA"
+url = [["https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1.safetensors", "5bccb332b682c4db7ec176b857b0bd0c3c97edeed9b4564d9ec8d3a3b4556346", 1828256864, true]]
+relative_path = "models/loras/krea2/krea2_identity_edit_v1.safetensors"
+group = "Krea 2 Identity Edit"
+tags = ["image", "edit", "lora", "identity", "v1", "krea2"]
+
+[[artifacts]]
+id = "krea2.identity-edit.v1.1"
+name = "Krea 2 Identity Edit - v1.1 LoRA"
+url = [["https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_1.safetensors", "89fe1ebdc6e9d0399d161103f7696adfd71ce613696aeac5962aa7f20e163ff6", 1828256432, true]]
+relative_path = "models/loras/krea2/krea2_identity_edit_v1_1.safetensors"
+group = "Krea 2 Identity Edit"
+tags = ["image", "edit", "lora", "identity", "v1.1", "krea2"]
+
+[[artifacts]]
+id = "krea2.identity-edit.v1.1.r128"
+name = "Krea 2 Identity Edit - v1.1 - Rank 128 LoRA"
+url = [["https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_1_r128.safetensors", "78b403a45024d51c24b618046ec1176c346416951f8f4c6c707d1b337ae1d40f", 914159744, true]]
+relative_path = "models/loras/krea2/krea2_identity_edit_v1_1_r128.safetensors"
+group = "Krea 2 Identity Edit"
+tags = ["image", "edit", "lora", "identity", "v1.1", "rank-128", "krea2"]
+
+[[artifacts]]
+id = "krea2.identity-edit.v1.1.r64"
+name = "Krea 2 Identity Edit - v1.1 - Rank 64 LoRA"
+url = [["https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_1_r64.safetensors", "f20684520077d8463dbbc5f892ac319b4cf4307d0299da2dbf6bf5d69ad0ab1d", 457111048, true]]
+relative_path = "models/loras/krea2/krea2_identity_edit_v1_1_r64.safetensors"
+group = "Krea 2 Identity Edit"
+tags = ["image", "edit", "lora", "identity", "v1.1", "rank-64", "krea2"]
+
+[[artifacts]]
+id = "krea2.identity-edit.v1.2.r128"
+name = "Krea 2 Identity Edit - v1.2 - Rank 128 LoRA"
+url = [["https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2_r128.safetensors", "f53db0bb4b081d638f196865cbc9f055379704fafb788336784fc1ccde18d825", 914159744, true]]
+relative_path = "models/loras/krea2/krea2_identity_edit_v1_2_r128.safetensors"
+group = "Krea 2 Identity Edit"
+tags = ["image", "edit", "lora", "identity", "v1.2", "rank-128", "krea2"]
+
+[[artifacts]]
+id = "krea2.identity-edit.v1.2.r64"
+name = "Krea 2 Identity Edit - v1.2 - Rank 64 LoRA"
+url = [["https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2_r64.safetensors", "f794b47142555c929cf536a2f1e4f335174b9aedbb08572b07d45814d4242423", 457111048, true]]
+relative_path = "models/loras/krea2/krea2_identity_edit_v1_2_r64.safetensors"
+group = "Krea 2 Identity Edit"
+tags = ["image", "edit", "lora", "identity", "v1.2", "rank-64", "krea2"]
 
 [[artifacts]]
 id = "krea2.turbo.fp8.face-swap"
-name = "Krea 2 Turbo FP8 Scaled (face-swap filename)"
-url = "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors"
+name = "Krea 2 - Turbo - FP8 Scaled (Face-Swap Alias)"
+url = [["https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors", "eb4dd8c612cfd10f64f25b057e6e6bbcb5737c94a7372177e456dbf7579502f1", 13141730784, true]]
 relative_path = "models/diffusion_models/Krea2/krea-2-turbo-fp8.safetensors"
+group = "Krea 2"
+tags = ["image", "turbo", "fp8", "scaled", "face-swap", "workflow-alias", "krea2"]
 
 [[artifacts]]
 id = "bfs.krea2.head-swap.v1.1"
-name = "BFS Krea 2 Head Swap v1.1 LoRA"
-url = "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1.1_krea2.safetensors"
+name = "BFS Krea 2 - Head Swap v1.1 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1.1_krea2.safetensors", "abc6c468c578b36e6bd960106ad5886afd3f5321e4fe2de26c05bb5c6585b836", 914159816, true]]
 relative_path = "models/loras/Krea2/bfs_head_swap_v1.1_krea2.safetensors"
+group = "Krea 2"
+tags = ["image", "lora", "head-swap", "v1.1", "krea2", "bfs"]
+
+[[artifacts]]
+id = "bfs.krea2.body-swap.v1"
+name = "BFS Krea 2 - Body Swap v1 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_body_swap_v1_krea2.safetensors", "0b3d043714c912c55c525ac68a53f50dbfaa6a024d735c28dfed12cd214a0d79", 914160176, true]]
+relative_path = "models/loras/Krea2/bfs_body_swap_v1_krea2.safetensors"
+group = "Krea 2"
+tags = ["image", "lora", "body-swap", "v1", "krea2", "bfs"]
+
+[[artifacts]]
+id = "bfs.ltx2.head-swap.v1.12000-train3"
+name = "BFS LTX-2 - Head Swap v1 - 12000-Step Train 3 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1_ltx2_ic_lora_12000_train_3.safetensors", "27bb754d5c5029e64131d854217ddb37dfa17eb07864201e911e9c89e633ecaf", 1308756368, true]]
+relative_path = "models/loras/LTX2/bfs_head_swap_v1_ltx2_ic_lora_12000_train_3.safetensors"
+group = "LTX 2"
+tags = ["video", "lora", "head-swap", "v1", "12000-step", "ltx2", "bfs"]
+
+[[artifacts]]
+id = "bfs.ltx2.head-swap.v1.5000"
+name = "BFS LTX-2 - Head Swap v1 - 5000-Step LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1_ltx2_ic_lora_5000.safetensors", "e11d18bb009b2c2a938b99a32f3ab140705fdbea7b65029c3cda3ceeb89e654c", 1308756368, true]]
+relative_path = "models/loras/LTX2/bfs_head_swap_v1_ltx2_ic_lora_5000.safetensors"
+group = "LTX 2"
+tags = ["video", "lora", "head-swap", "v1", "5000-step", "ltx2", "bfs"]
+
+[[artifacts]]
+id = "bfs.ltx2.head-swap.v1.6000"
+name = "BFS LTX-2 - Head Swap v1 - 6000-Step LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1_ltx2_ic_lora_6000.safetensors", "4021b4143bd935e565aeaaf5bf8ef43e8f3aa3faf7a9ae0a73f1879342f32d12", 1308756368, true]]
+relative_path = "models/loras/LTX2/bfs_head_swap_v1_ltx2_ic_lora_6000.safetensors"
+group = "LTX 2"
+tags = ["video", "lora", "head-swap", "v1", "6000-step", "ltx2", "bfs"]
+
+[[artifacts]]
+id = "bfs.flux2-klein.4b.head-swap.v1.1-optional"
+name = "BFS FLUX.2 Klein 4B - Head Swap v1.1 Optional LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1.1_optional_flux-klein_4b.safetensors", "8234563b48b66b22aaaa0df9b4c70636e65f06d443c3b20a9356425040255839", 1478513544, true]]
+relative_path = "models/loras/Flux2Klein/bfs_head_v1.1_optional_flux-klein_4b.safetensors"
+group = "FLUX.2"
+tags = ["image", "lora", "head-swap", "v1.1", "optional", "4b", "flux2", "klein", "bfs"]
+
+[[artifacts]]
+id = "bfs.flux2-klein.4b.head-swap.v1"
+name = "BFS FLUX.2 Klein 4B - Head Swap v1 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_4b.safetensors", "77aabcd6144612dd4873080b99283dd9a27977712548bee161894f62c91ff09c", 369644384, true]]
+relative_path = "models/loras/Flux2Klein/bfs_head_v1_flux-klein_4b.safetensors"
+group = "FLUX.2"
+tags = ["image", "lora", "head-swap", "v1", "4b", "flux2", "klein", "bfs"]
+
+[[artifacts]]
+id = "bfs.flux2-klein.9b.head-swap.3750-r64"
+name = "BFS FLUX.2 Klein 9B - Head Swap v1 - 3750-Step Rank 64 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_9b_step3750_rank64.safetensors", "49907a240602488d2846861d7570dd95d80609f44be7e3347965735712b1be16", 331379568, true]]
+relative_path = "models/loras/Flux2Klein/bfs_head_v1_flux-klein_9b_step3750_rank64.safetensors"
+group = "FLUX.2"
+tags = ["image", "lora", "head-swap", "v1", "3750-step", "rank-64", "9b", "flux2", "klein", "bfs"]
+
+[[artifacts]]
+id = "bfs.qwen2509.face-swap.v1"
+name = "BFS Qwen Image Edit 2509 - Face Swap v1 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_face_v1_qwen_image_edit_2509.safetensors", "c9f18ba062d0c8aa3c98169005b616bc95866fe9956c2608dcfd29b1e9b20359", 590058816, true]]
+relative_path = "models/loras/QwenEdit2509/bfs_face_v1_qwen_image_edit_2509.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "face-swap", "v1", "2509", "qwen-image", "bfs"]
+
+[[artifacts]]
+id = "bfs.qwen2509.head-swap.v1"
+name = "BFS Qwen Image Edit 2509 - Head Swap v1 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_qwen_image_edit_2509.safetensors", "d71ee1612e4b416fc0f62a1a59a3d66b7ee6d86a1a7c35aacc2f929e0326f68d", 590058808, true]]
+relative_path = "models/loras/QwenEdit2509/bfs_head_v1_qwen_image_edit_2509.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "head-swap", "v1", "2509", "qwen-image", "bfs"]
+
+[[artifacts]]
+id = "bfs.qwen2509.head-swap.v2"
+name = "BFS Qwen Image Edit 2509 - Head Swap v2 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v2_qwen_image_edit_2509.safetensors", "a928f106fcba6e4b196ef511289f075b4690eba0f6bc3fa3755fdba2ec2a428c", 147687224, true]]
+relative_path = "models/loras/QwenEdit2509/bfs_head_v2_qwen_image_edit_2509.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "head-swap", "v2", "2509", "qwen-image", "bfs"]
+
+[[artifacts]]
+id = "bfs.qwen2509.head-swap.v3"
+name = "BFS Qwen Image Edit 2509 - Head Swap v3 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v3_qwen_image_edit_2509.safetensors", "49aac5a55175ab5ebd89ffdae4c336eaca1899f5b725b70c0c039f6d4a8d86e6", 73957904, true]]
+relative_path = "models/loras/QwenEdit2509/bfs_head_v3_qwen_image_edit_2509.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "head-swap", "v3", "2509", "qwen-image", "bfs"]
+
+[[artifacts]]
+id = "bfs.qwen2509.head-swap.v4"
+name = "BFS Qwen Image Edit 2509 - Head Swap v4 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v4_qwen_image_edit_2509.safetensors", "cd3278c33c7df36bb87169d0a283851d60e88ecac48123b5c8dcc82551d6e402", 147794944, true]]
+relative_path = "models/loras/QwenEdit2509/bfs_head_v4_qwen_image_edit_2509.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "head-swap", "v4", "2509", "qwen-image", "bfs"]
+
+[[artifacts]]
+id = "bfs.qwen2511.head-swap.v5.rank32-fp32"
+name = "BFS Qwen Image Edit 2511 - Head Swap v5 - Rank 32 FP32 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_merged_version_rank_32_fp32.safetensors", "0a137e61245781412421f5dee5db4ccac28b6c9952c042d1123a84609107cd10", 1206402600, true]]
+relative_path = "models/loras/QwenEdit2511/bfs_head_v5_2511_merged_version_rank_32_fp32.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "head-swap", "v5", "rank-32", "fp32", "2511", "qwen-image", "bfs"]
+
+[[artifacts]]
+id = "bfs.qwen2511.head-swap.v5.original"
+name = "Qwen Image Edit 2511 BFS - Head Swap v5 Original LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_original.safetensors", "5055ec271228d4767fd327efa59dbdea6f2a628d6d890101eb4fd5015cb1ac57", 147685552, true]]
+relative_path = "models/loras/QwenEdit2511/bfs_head_v5_2511_original.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "head-swap", "v5", "original", "2511", "qwen-image", "bfs"]
 
 [[artifacts]]
 id = "krea2.amateur.v2"
-name = "Krea 2 Amateur V2 LoRA"
-url = "https://civitai.com/api/download/models/3276982"
+name = "Krea 2 - Amateur v2 LoRA"
+url = [["https://huggingface.co/msho19/comfybox/resolve/main/powerpuff-amateur-v2-krea.safetensors", "8953f6960d43a8055f1dbc9b7e349ddb1fca688297c0a15be8b6ee4c69ca2af3", 228588904, true]]
 relative_path = "models/loras/Krea2/Details/KreaAmateur_V2.safetensors"
+group = "Krea 2"
+tags = ["image", "lora", "amateur", "details", "v2", "krea2"]
+
+[[artifacts]]
+id = "krea2.amateur.v4"
+name = "Krea 2 - Amateur v4 LoRA"
+url = [["https://huggingface.co/msho19/comfybox/resolve/main/powerpuff-amateur-v4-krea.safetensors", "0ad3b5092c99b4a1696df4ab07407775309da6c21d36c9a506f6b5ff153552ec", 228588912, true]]
+relative_path = "models/loras/Krea2/Details/KreaAmateur_V4.safetensors"
+group = "Krea 2"
+tags = ["image", "lora", "amateur", "details", "v4", "krea2"]
 
 [[artifacts]]
 id = "flux2.klein.9b.int8-convrot"
-name = "FLUX.2 Klein 9B INT8 ConvRot"
-url = "https://huggingface.co/obsxrver/ComfyUI-Native-INT8_ConvRot/resolve/main/diffusion_models/flux-2-klein-9b_int8_convrot.safetensors"
+name = "FLUX.2 Klein 9B - INT8 ConvRot"
+url = [["https://huggingface.co/obsxrver/ComfyUI-Native-INT8_ConvRot/resolve/main/diffusion_models/flux-2-klein-9b_int8_convrot.safetensors", "bd041cec0d7955d6fcbaef952ba6ebe37af9f7d032ec927657e7777f21f5c522", 9439894544, true]]
 relative_path = "models/diffusion_models/F2K/flux-2-klein-9b-int8-ConvRot-comfyui.safetensors"
-sha256 = "bd041cec0d7955d6fcbaef952ba6ebe37af9f7d032ec927657e7777f21f5c522"
-size_bytes = 9439894544
+group = "FLUX.2"
+tags = ["image", "9b", "int8", "convrot", "flux2", "klein"]
 
 [[artifacts]]
 id = "flux2.qwen3.8b.fp8mixed-abliterated"
-name = "Qwen 3 8B FP8 Mixed Abliterated Text Encoder"
-url = "https://huggingface.co/edicamargo/qwen_3_8b_fp8mixed_abliterated/resolve/main/qwen_3_8b_fp8mixed_abliterated.safetensors"
+name = "Qwen 3 - 8B - FLUX.2 - FP8 Mixed Abliterated"
+url = [["https://huggingface.co/edicamargo/qwen_3_8b_fp8mixed_abliterated/resolve/main/qwen_3_8b_fp8mixed_abliterated.safetensors", "b61c59554ecc8374c55bc2c41b467953b23b499aafe6c04c1e58dd52b2a29c14", 8191089224, true]]
 relative_path = "models/text_encoders/qwen_3_8b_fp8mixed_abliterated.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "fp8", "mixed", "abliterated", "8b", "flux2"]
 
 [[artifacts]]
 id = "bfs.flux2-klein.9b.head-swap"
-name = "BFS FLUX.2 Klein 9B Head Swap LoRA"
-url = "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors"
+name = "BFS FLUX.2 Klein 9B - Head Swap v1 - 3500-Step Rank 128 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors", "70d8aaf332d710b905d5085afaa87c3ef577edffd54ffcfadeb8c47a854f9044", 662729912, true]]
 relative_path = "models/loras/Flux2Klein/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors"
+group = "FLUX.2"
+tags = ["image", "lora", "head-swap", "v1", "3500-step", "rank-128", "9b", "flux2", "klein", "bfs"]
 
 [[artifacts]]
 id = "qwen.image.encoder.2.5vl7b.int8-convrot"
-name = "Qwen 2.5 VL 7B INT8 ConvRot Text Encoder"
-url = "https://huggingface.co/supermind/int8_convrot_models/resolve/main/text_encoders/qwen_2.5_vl_7b_int8_convrot.safetensors"
+name = "Qwen 2.5-VL - 7B - Qwen Image - INT8 ConvRot"
+url = [["https://huggingface.co/supermind/int8_convrot_models/resolve/main/text_encoders/qwen_2.5_vl_7b_int8_convrot.safetensors", "5ae7646f584c8e2fbc25484770f64c32edf653f7512b564f60eac60dbefe99c4", 9576432160, true]]
 relative_path = "models/text_encoders/qwen_2.5_vl_7b_int8_convrot.safetensors"
+group = "Qwen"
+tags = ["image", "text-encoder", "int8", "convrot", "7b", "qwen-image"]
 
 [[artifacts]]
 id = "bfs.qwen2511.head-swap.v5"
-name = "BFS Qwen Image Edit 2511 Head Swap v5 LoRA"
-url = "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors"
+name = "BFS Qwen Image Edit 2511 - Head Swap v5 - Rank 16 FP16 LoRA"
+url = [["https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors", "1315a08947e5d6d7c53ea4fc59f272e0d54efd7f2da35999b7d873a7cf4fa89b", 307464216, true]]
 relative_path = "models/loras/QwenEdit2511/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors"
+group = "Qwen Image Edit"
+tags = ["image", "edit", "lora", "head-swap", "v5", "rank-16", "fp16", "2511", "qwen-image", "bfs"]
 
 [[artifacts]]
 id = "qwen.edit.f2p"
-name = "Qwen Image Edit F2P LoRA"
-url = "https://huggingface.co/landon2022/F2P/resolve/main/Qwen-Image-Edit-F2P.safetensors"
+name = "Qwen Image Edit - F2P LoRA"
+url = [["https://huggingface.co/landon2022/F2P/resolve/main/Qwen-Image-Edit-F2P.safetensors", "3eaec9705c770f3453a802ff317f5095c806cc27b069b760015f71bd26179f2e", 472047152, true]]
 relative_path = "models/loras/QwenEdit2511/Qwen-Image-Edit-F2P.safetensors"
+group = "Qwen Image Edit 2511"
+tags = ["image", "edit", "lora", "f2p", "2511", "qwen-image"]
 
 [[artifacts]]
 id = "upscale.clear-reality.4x"
-name = "4x ClearReality V1 Upscaler"
-url = "https://huggingface.co/SimonJoz/comfy/resolve/main/upscalers/4x-ClearRealityV1.pth"
+name = "ClearReality V1 - 4x Upscaler"
+url = [["https://huggingface.co/SimonJoz/comfy/resolve/main/upscalers/4x-ClearRealityV1.pth", "a4cd3a25b00e0be949d4302fc774eb4d7f2ed5f47cdb51551e2d75fa6562e51e", 9016074, true]]
 relative_path = "models/upscale_models/4x-ClearRealityV1.pth"
-sha256 = "a4cd3a25b00e0be949d4302fc774eb4d7f2ed5f47cdb51551e2d75fa6562e51e"
+group = "Upscalers"
+tags = ["image", "upscaler", "4x", "clear-reality", "v1"]
+
+[[artifacts]]
+id = "upscale.clear-reality-soft.4x"
+name = "ClearReality Soft V1 - 4x Upscaler"
+url = [["https://huggingface.co/SimonJoz/comfy/resolve/main/upscalers/4x-ClearRealityV1_Soft.pth", "08f74a031c26444ec9d6c6750ea88df04fc91207dc0eb6973fa1881ac5a15b21", 9016074, true]]
+relative_path = "models/upscale_models/4x-ClearRealityV1_Soft.pth"
+group = "Upscalers"
+tags = ["image", "upscaler", "4x", "clear-reality-soft", "v1"]
 
 [[custom_nodes]]
 id = "rgthree-comfy"
-name = "rgthree-comfy"
+name = "rgthree"
 git_url = "https://github.com/rgthree/rgthree-comfy"
 folder_name = "rgthree-comfy"
 node_types = ["GetNode", "SetNode", "Seed (rgthree)", "Power Lora Loader (rgthree)", "Label (rgthree)", "Bookmark (rgthree)", "Image Comparer (rgthree)", "Fast Groups Muter (rgthree)"]
 
 [[custom_nodes]]
 id = "comfyui-kjnodes"
-name = "ComfyUI-KJNodes"
+name = "ComfyUI KJNodes"
 git_url = "https://github.com/kijai/ComfyUI-KJNodes"
 folder_name = "ComfyUI-KJNodes"
 node_types = ["ImageScaleToTotalPixels", "ImageCropV2", "ResolutionSelector", "ImageConcatMulti", "ImageResizeKJv2"]
 
 [[custom_nodes]]
 id = "comfyui-easy-use"
-name = "ComfyUI-Easy-Use"
+name = "ComfyUI Easy Use"
 git_url = "https://github.com/yolain/ComfyUI-Easy-Use"
 folder_name = "ComfyUI-Easy-Use"
 node_types = ["easy cleanGpuUsed", "easy clearCacheAll", "easy promptLine"]

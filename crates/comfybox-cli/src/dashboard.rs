@@ -27,7 +27,7 @@ use ratatui::{
 };
 use std::{
     collections::{HashMap, HashSet},
-    env,
+    env, fs,
     io::{self, IsTerminal},
     path::{Path, PathBuf},
     process::Command,
@@ -57,6 +57,7 @@ pub enum DashboardAction {
     InstallArtifact(InstallSelection),
     InstallCustomNode(String),
     InstallWorkflow(InstallSelection),
+    LocateArtifact(String),
     DeleteArtifacts(Vec<String>),
 }
 
@@ -652,16 +653,31 @@ impl Dashboard<'_> {
                 Style::default().fg(MUTED),
             ),
             config,
-            Span::raw("  "),
-            server,
         ]);
+        let columns = Layout::default()
+            .direction(Direction::Horizontal)
+            .constraints([Constraint::Min(30), Constraint::Length(29)])
+            .split(area);
         frame.render_widget(
             Paragraph::new(header).block(
                 Block::default()
                     .borders(Borders::BOTTOM)
                     .border_style(Style::default().fg(PANEL)),
             ),
-            area,
+            columns[0],
+        );
+        frame.render_widget(
+            Paragraph::new(Line::from(vec![
+                Span::styled(" COMFYUI INSTANCE ", Style::default().fg(MUTED)),
+                server,
+            ]))
+            .alignment(Alignment::Right)
+            .block(
+                Block::default()
+                    .borders(Borders::BOTTOM)
+                    .border_style(Style::default().fg(PANEL)),
+            ),
+            columns[1],
         );
     }
 
@@ -914,7 +930,7 @@ impl Dashboard<'_> {
                 .map(|package| {
                     let required =
                         package.primary_artifact_ids.len() + package.dependency_artifact_ids.len();
-                    let lines = vec![
+                    let mut lines = vec![
                         Line::from(Span::styled(
                             &package.name,
                             Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
@@ -934,11 +950,12 @@ impl Dashboard<'_> {
                             "Optional groups: {}",
                             package.optional_groups.len()
                         )),
-                        Line::from(""),
-                        Line::from(package.description.as_deref().unwrap_or(
-                            "Enter installs the package and its required dependencies.",
-                        )),
                     ];
+                    lines.extend(self.manual_location_lines(package.primary_artifact_ids.iter()));
+                    lines.push(Line::from(""));
+                    lines.push(Line::from(package.description.as_deref().unwrap_or(
+                        "Enter installs the package and its required dependencies.",
+                    )));
                     Text::from(lines)
                 })
                 .unwrap_or_default();
@@ -947,7 +964,7 @@ impl Dashboard<'_> {
                 columns[1],
                 " Details ",
                 details,
-                "[ Enter ] Configure install    [ d ] Delete selected artifacts",
+                "[ Enter ] Configure install    [ l ] Locate model    [ d ] Delete artifacts",
                 false,
             );
         }
@@ -1015,21 +1032,22 @@ impl Dashboard<'_> {
                 return;
             }
             let details = artifacts.get(selected).map(|artifact| {
-                let lines = vec![
+                let mut lines = vec![
                     Line::from(Span::styled(
                         &artifact.name,
                         Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
                     )),
                     Line::from(format!("Path: {}", artifact.relative_path)),
                     Line::from(format!("Sources: {}", artifact.sources.len().max(1))),
-                    Line::from(""),
-                    Line::from(
-                        artifact
-                            .description
-                            .as_deref()
-                            .unwrap_or("Enter downloads this artifact."),
-                    ),
                 ];
+                lines.extend(self.manual_location_lines(std::iter::once(&artifact.id)));
+                lines.push(Line::from(""));
+                lines.push(Line::from(
+                    artifact
+                        .description
+                        .as_deref()
+                        .unwrap_or("Enter downloads this artifact."),
+                ));
                 Text::from(lines)
             });
             self.render_detail_actions(
@@ -1037,7 +1055,7 @@ impl Dashboard<'_> {
                 columns[1],
                 " Download source ",
                 details.unwrap_or_default(),
-                "[ Enter ] Configure install    [ d ] Delete artifact",
+                "[ Enter ] Configure install    [ l ] Locate artifact    [ d ] Delete artifact",
                 false,
             );
         }
@@ -1155,7 +1173,7 @@ impl Dashboard<'_> {
                 return;
             }
             let details = self.catalog.workflows.get(self.workflow_index).map(|workflow| {
-                let lines = vec![
+                let mut lines = vec![
                     Line::from(Span::styled(&workflow.name, Style::default().fg(ACCENT).add_modifier(Modifier::BOLD))),
                     Line::from(format!("File: {}", workflow.file)),
                     Line::from(format!("Models: {}", workflow.artifact_ids.len())),
@@ -1164,9 +1182,10 @@ impl Dashboard<'_> {
                         self.artifact_ids_size(workflow.artifact_ids.iter())
                     )),
                     Line::from(format!("Custom nodes: {}", workflow.custom_node_ids.len())),
-                    Line::from(""),
-                    Line::from("Enter installs the workflow, models, VAEs, text encoders, LoRAs, and custom nodes."),
                 ];
+                lines.extend(self.manual_location_lines(workflow.artifact_ids.iter()));
+                lines.push(Line::from(""));
+                lines.push(Line::from("Enter installs the workflow, models, VAEs, text encoders, LoRAs, and custom nodes."));
                 Text::from(lines)
             }).unwrap_or_default();
             self.render_detail_actions(
@@ -1174,7 +1193,7 @@ impl Dashboard<'_> {
                 columns[1],
                 " Install plan ",
                 details,
-                "[ Enter ] Configure install    [ d ] Delete selected artifacts",
+                "[ Enter ] Configure install    [ l ] Locate in plan    [ d ] Delete artifacts",
                 false,
             );
         }
@@ -1259,6 +1278,33 @@ impl Dashboard<'_> {
             (_, 0) => bytes_label(total),
             (_, count) => format!("{} + {count} unknown", bytes_label(total)),
         }
+    }
+
+    fn manual_artifact_location(&self, id: &str) -> Option<PathBuf> {
+        let artifact = self.catalog.artifact(id)?;
+        let path = self.valid_comfy_root()?.join(&artifact.relative_path);
+        fs::symlink_metadata(&path)
+            .ok()?
+            .file_type()
+            .is_symlink()
+            .then(|| fs::read_link(path).ok())?
+    }
+
+    fn manual_location_lines<'b>(
+        &self,
+        ids: impl Iterator<Item = &'b String>,
+    ) -> Vec<Line<'static>> {
+        ids.filter_map(|id| {
+            self.manual_artifact_location(id).map(|path| {
+                let name = self
+                    .catalog
+                    .artifact(id)
+                    .map(|artifact| artifact.name.as_str())
+                    .unwrap_or(id);
+                Line::from(format!("Located: {name} → {}", path.display()))
+            })
+        })
+        .collect()
     }
 
     fn plan_rows(&self) -> Vec<PlanRow> {
@@ -1479,11 +1525,15 @@ impl Dashboard<'_> {
                                     .or_else(|| item.size_bytes.map(bytes_label))
                             })
                             .unwrap_or_else(|| "unknown".into());
+                        let located = self
+                            .manual_artifact_location(id)
+                            .map(|path| format!(" · located: {}", path.display()))
+                            .unwrap_or_default();
                         (
                             artifact.map(artifact_type).unwrap_or("artifact"),
                             if enabled { health.label() } else { "SKIPPED" },
                             format!(
-                                "{child_prefix}{}{} {}",
+                                "{child_prefix}{}{} {}{located}",
                                 if is_dependency {
                                     if enabled { "[x] " } else { "[ ] " }
                                 } else {
@@ -1658,14 +1708,16 @@ impl Dashboard<'_> {
         let jobs = self.queue.snapshots();
         self.download_index = self.download_index.min(jobs.len().saturating_sub(1));
         if self.download_detail {
+            let outer = Block::default()
+                .title(" Download details · b/Esc background ")
+                .borders(Borders::ALL)
+                .border_style(Style::default().fg(PANEL));
+            let inner = outer.inner(area);
+            frame.render_widget(outer, area);
             let sections = Layout::default()
                 .direction(Direction::Vertical)
-                .constraints([
-                    Constraint::Min(4),
-                    Constraint::Length(1),
-                    Constraint::Length(1),
-                ])
-                .split(area);
+                .constraints([Constraint::Min(4), Constraint::Length(1)])
+                .split(inner);
             let mut text = jobs
                 .get(self.download_index)
                 .map(job_details)
@@ -1691,17 +1743,12 @@ impl Dashboard<'_> {
                         .map(|line| Line::from(line.to_owned())),
                 );
             }
+            frame.render_widget(Paragraph::new(text).wrap(Wrap { trim: false }), sections[0]);
             frame.render_widget(
-                card(" Download details · b/Esc background ", text),
-                sections[0],
-            );
-            frame.render_widget(
-                Paragraph::new(
-                    "[ p ] Pause  [ c ] Continue  [ r ] Retry  [ x ] Stop + discard temp  [ d ] Delete record + temp  [ m ] Remove record only",
-                )
-                .style(Style::default().fg(ACCENT))
-                .alignment(Alignment::Center),
-                sections[2],
+                Paragraph::new("[p pause] [c continue] [r retry] [d delete] [m remove] [b back]")
+                    .style(Style::default().fg(ACCENT))
+                    .alignment(Alignment::Right),
+                sections[1],
             );
             return;
         }
@@ -1756,7 +1803,7 @@ impl Dashboard<'_> {
                 columns[1],
                 " Progress and recovery ",
                 details,
-                "Enter to focus download actions",
+                "[Enter focus]",
                 false,
             );
         }
@@ -1920,9 +1967,7 @@ impl Dashboard<'_> {
                     ) => Span::styled("◐ INSTALLING", Style::default().fg(ACCENT)),
                     Some(JobStatus::Failed) => Span::styled("FAILED", Style::default().fg(RED)),
                     Some(JobStatus::Completed) => Span::styled("ready", Style::default().fg(GREEN)),
-                    Some(JobStatus::Paused | JobStatus::Stopped) => {
-                        Span::styled("PAUSED", Style::default().fg(YELLOW))
-                    }
+                    Some(JobStatus::Paused) => Span::styled("PAUSED", Style::default().fg(YELLOW)),
                     None => state_span(
                         if self.system.python_dependencies_ready {
                             "ready"
@@ -1949,7 +1994,7 @@ impl Dashboard<'_> {
                             | JobStatus::Processing
                             | JobStatus::Installing,
                         ) => ACCENT,
-                        Some(JobStatus::Queued | JobStatus::Paused | JobStatus::Stopped) => YELLOW,
+                        Some(JobStatus::Queued | JobStatus::Paused) => YELLOW,
                         None => MUTED,
                     }),
                 ),
@@ -2068,7 +2113,7 @@ impl Dashboard<'_> {
             Style::default().fg(MUTED)
         };
         let local_help = if self.plan_editor.is_some() {
-            "[↑/↓ choose] [Enter expand/select] [Space toggle] [Esc back]"
+            "[↑/↓ choose] [Enter expand/select] [Space toggle] [l locate] [Esc back]"
         } else {
             match Section::ALL[self.section] {
                 Section::Models
@@ -2077,18 +2122,30 @@ impl Dashboard<'_> {
                 | Section::TextEncoders
                 | Section::Upscalers
                 | Section::RuntimeModels
-                | Section::CustomNodes
-                | Section::Workflows => "[←/→ tabs] [↑/↓ select] [Enter install] [d delete]",
+                | Section::Workflows => {
+                    "[←/→ tabs] [↑/↓ select] [Enter install] [l locate] [d delete]"
+                }
+                Section::CustomNodes => "[←/→ tabs] [↑/↓ select] [Enter install]",
                 Section::Downloads => "[←/→ tabs] [↑/↓ select] [Enter watch]",
                 Section::Settings => "[←/→ tabs] [−/+ files] [[/] chunks] [h HF] [y PyPI]",
                 Section::System => "[←/→ tabs] [Enter install system deps]",
                 _ => "[←/→ tabs]",
             }
         };
+        let rows = Layout::default()
+            .direction(Direction::Vertical)
+            .constraints([Constraint::Length(1), Constraint::Length(1)])
+            .split(area);
+        frame.render_widget(
+            Paragraph::new(local_help)
+                .style(Style::default().fg(MUTED))
+                .alignment(Alignment::Right),
+            rows[0],
+        );
         let columns = Layout::default()
             .direction(Direction::Horizontal)
             .constraints([Constraint::Length(14), Constraint::Min(10)])
-            .split(area);
+            .split(rows[1]);
         frame.render_widget(
             Paragraph::new(if self.global_commands {
                 "[: disable]"
@@ -2099,12 +2156,8 @@ impl Dashboard<'_> {
             columns[0],
         );
         frame.render_widget(
-            Paragraph::new(Line::from(vec![
-                Span::styled(local_help, Style::default().fg(MUTED)),
-                Span::raw(" "),
-                Span::styled(self.global_shortcuts(), global_style),
-            ]))
-            .alignment(Alignment::Right),
+            Paragraph::new(Span::styled(self.global_shortcuts(), global_style))
+                .alignment(Alignment::Right),
             columns[1],
         );
     }
@@ -2222,17 +2275,10 @@ impl Dashboard<'_> {
             KeyCode::Char('h') if Section::ALL[self.section] == Section::Settings => {
                 return Some(DashboardAction::ConfigureHfEndpoint);
             }
-            KeyCode::Char('x')
-                if Section::ALL[self.section] == Section::Downloads && self.download_detail =>
-            {
-                if let Err(error) = self.queue.cancel_download(self.download_index) {
-                    self.queue.record(format!("stop failed: {error:#}"));
-                }
-            }
             KeyCode::Char('p')
                 if Section::ALL[self.section] == Section::Downloads && self.download_detail =>
             {
-                let _ = self.queue.stop(self.download_index);
+                let _ = self.queue.pause(self.download_index);
             }
             KeyCode::Char('c')
                 if Section::ALL[self.section] == Section::Downloads && self.download_detail =>
@@ -2250,6 +2296,11 @@ impl Dashboard<'_> {
                 if let Err(error) = self.queue.remove_download(self.download_index, true) {
                     self.queue
                         .record(format!("delete download failed: {error:#}"));
+                } else {
+                    // Deleting a paused transfer removes its partial data and queue
+                    // record, so immediately replace the cached PAUSED health with
+                    // the artifact's actual on-disk state (normally MISSING).
+                    self.artifact_health = collect_artifact_health(self.cfg, self.catalog);
                 }
                 self.download_index = self.download_index.min(self.queue.len().saturating_sub(1));
             }
@@ -2316,6 +2367,22 @@ impl Dashboard<'_> {
                 ) =>
             {
                 self.open_delete_dialog();
+            }
+            KeyCode::Char('l')
+                if matches!(
+                    Section::ALL[self.section],
+                    Section::Models
+                        | Section::Loras
+                        | Section::Vaes
+                        | Section::TextEncoders
+                        | Section::Upscalers
+                        | Section::RuntimeModels
+                        | Section::Workflows
+                ) =>
+            {
+                if let Some(id) = self.selected_artifact_to_locate() {
+                    return Some(DashboardAction::LocateArtifact(id));
+                }
             }
             KeyCode::Enter => return self.selected_action(),
             _ => {}
@@ -2480,6 +2547,20 @@ impl Dashboard<'_> {
             return None;
         }
         let rows = self.plan_rows();
+        if key.code == KeyCode::Char('l') {
+            let id = match rows.get(self.plan_editor.as_ref()?.cursor) {
+                Some(
+                    PlanRow::Model(id)
+                    | PlanRow::ModelSource(id, _)
+                    | PlanRow::DependencyArtifact(id)
+                    | PlanRow::DependencySource(id, _),
+                ) => Some(id.clone()),
+                _ => None,
+            };
+            if let Some(id) = id {
+                return Some(DashboardAction::LocateArtifact(id));
+            }
+        }
         let target = self.plan_editor.as_ref()?.target.clone();
         let plan_artifacts = self.plan_artifacts(&target);
         let editor = self.plan_editor.as_mut()?;
@@ -2646,6 +2727,38 @@ impl Dashboard<'_> {
         }
     }
 
+    fn selected_artifact_to_locate(&self) -> Option<String> {
+        let prefer_missing = |ids: &[String]| {
+            ids.iter()
+                .find(|id| self.artifact_health_for(id) != Some(Health::Ready))
+                .or_else(|| ids.first())
+                .cloned()
+        };
+        match Section::ALL[self.section] {
+            Section::Models => self
+                .catalog
+                .packages
+                .get(self.model_index)
+                .and_then(|package| prefer_missing(&package.primary_artifact_ids)),
+            Section::Workflows => self
+                .catalog
+                .workflows
+                .get(self.workflow_index)
+                .and_then(|workflow| prefer_missing(&workflow.artifact_ids)),
+            Section::Loras
+            | Section::Vaes
+            | Section::TextEncoders
+            | Section::Upscalers
+            | Section::RuntimeModels => {
+                let artifacts = self.artifacts_for_section();
+                artifacts
+                    .get(self.artifact_index.min(artifacts.len().saturating_sub(1)))
+                    .map(|artifact| artifact.id.clone())
+            }
+            _ => None,
+        }
+    }
+
     fn valid_comfy_root(&self) -> Option<&Path> {
         self.cfg
             .comfy_path
@@ -2657,15 +2770,7 @@ impl Dashboard<'_> {
         if package.primary_artifact_ids.is_empty() {
             return Health::Discovery;
         }
-        worse_health(
-            self.ids_health(
-                package
-                    .primary_artifact_ids
-                    .iter()
-                    .chain(&package.dependency_artifact_ids),
-            ),
-            self.custom_nodes_health(package.custom_node_ids.iter()),
-        )
+        self.ids_health(package.primary_artifact_ids.iter())
     }
 
     fn workflow_health(&self, workflow: &WorkflowDefinition) -> Health {
@@ -2740,7 +2845,6 @@ impl Dashboard<'_> {
             Some(JobStatus::Processing) => Some(Health::Processing),
             Some(JobStatus::Installing) => Some(Health::Installing),
             Some(JobStatus::Paused) => Some(Health::Paused),
-            Some(JobStatus::Stopped) => Some(Health::Missing),
             Some(JobStatus::Failed) => Some(Health::Broken),
             Some(JobStatus::Completed) => Some(Health::Ready),
             None => self.artifact_health.by_id.get(id).copied(),
@@ -2769,7 +2873,6 @@ impl Dashboard<'_> {
             Some(JobStatus::Processing) => Health::Processing,
             Some(JobStatus::Installing) => Health::Installing,
             Some(JobStatus::Paused) => Health::Paused,
-            Some(JobStatus::Stopped) => Health::Missing,
             Some(JobStatus::Failed) => Health::Broken,
             Some(JobStatus::Completed) => Health::Ready,
             None if self.installed_custom_nodes.contains(id) => Health::Ready,
@@ -2786,7 +2889,7 @@ fn job_badge(status: JobStatus) -> Span<'static> {
         | JobStatus::Processing
         | JobStatus::Installing => ACCENT,
         JobStatus::Queued => MUTED,
-        JobStatus::Paused | JobStatus::Stopped => YELLOW,
+        JobStatus::Paused => YELLOW,
         JobStatus::Failed => RED,
     };
     Span::styled(
@@ -2836,10 +2939,6 @@ fn job_details(job: &crate::download_queue::JobSnapshot) -> Text<'static> {
             job.endpoint.as_deref().unwrap_or("https://huggingface.co")
         )),
         Line::from(format!("ID: {}", job.artifact_id)),
-        Line::from(""),
-        Line::from("p pauses; c continues; r retries; x stops and discards temporary data."),
-        Line::from("d deletes the record and temp data; m removes only the manager record."),
-        Line::from("Enter focuses this view; b returns the transfer to the background."),
     ];
     if let Some(error) = &job.error {
         lines.push(Line::from(Span::styled(
