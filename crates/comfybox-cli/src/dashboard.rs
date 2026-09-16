@@ -10,7 +10,7 @@ use comfybox_core::{
     storage,
 };
 use crossterm::{
-    event::{self, Event, KeyCode, KeyEvent, KeyEventKind, KeyModifiers},
+    event::{self, Event, KeyCode, KeyEvent, KeyEventKind},
     execute,
     terminal::{EnterAlternateScreen, LeaveAlternateScreen, disable_raw_mode, enable_raw_mode},
 };
@@ -232,6 +232,7 @@ struct Dashboard<'a> {
     server_check_pending: bool,
     clear_before_draw: bool,
     quit_warning: bool,
+    global_commands: bool,
 }
 
 #[derive(Default)]
@@ -305,6 +306,7 @@ pub fn run(
         server_check_pending: false,
         clear_before_draw: false,
         quit_warning: false,
+        global_commands: false,
     };
 
     let mut needs_draw = true;
@@ -394,21 +396,16 @@ impl Dashboard<'_> {
     }
 
     fn global_shortcuts(&self) -> String {
-        let modifier = if cfg!(target_os = "macos") {
-            "Cmd"
-        } else {
-            "Ctrl"
-        };
         let mut shortcuts = vec![
-            format!("{modifier}+Q quit"),
-            format!("{modifier}+S server"),
-            format!("{modifier}+R refresh"),
+            "[q quit]".to_owned(),
+            "[s server]".to_owned(),
+            "[r refresh]".to_owned(),
         ];
         if self.valid_comfy_root().is_none() {
-            shortcuts.push(format!("{modifier}+I install"));
-            shortcuts.push(format!("{modifier}+L locate"));
+            shortcuts.push("[i install]".to_owned());
+            shortcuts.push("[l locate]".to_owned());
         } else if !self.system.python_dependencies_ready {
-            shortcuts.push(format!("{modifier}+P Python deps"));
+            shortcuts.push("[p Python deps]".to_owned());
         }
         if self
             .system
@@ -416,9 +413,9 @@ impl Dashboard<'_> {
             .iter()
             .any(|(_, ready)| !ready)
         {
-            shortcuts.push(format!("{modifier}+C system deps"));
+            shortcuts.push("[c system deps]".to_owned());
         }
-        shortcuts.join("  ")
+        shortcuts.join(" ")
     }
 
     fn render_detail_actions<'a>(
@@ -802,14 +799,9 @@ impl Dashboard<'_> {
                 "No valid ComfyUI installation is configured.",
                 RED,
             ));
-            let modifier = if cfg!(target_os = "macos") {
-                "Cmd"
-            } else {
-                "Ctrl"
-            };
-            lines.push(Line::from(format!(
-                "  Press {modifier}+L to locate one or {modifier}+I to install ComfyUI."
-            )));
+            lines.push(Line::from(
+                "  Press :, then l to locate or i to install ComfyUI.",
+            ));
         }
         if !self.system.has_token {
             lines.push(warning_line("HF_TOKEN is not set.", YELLOW));
@@ -822,12 +814,7 @@ impl Dashboard<'_> {
                 "ComfyUI Python dependencies are not ready.",
                 YELLOW,
             ));
-            let modifier = if cfg!(target_os = "macos") {
-                "Cmd"
-            } else {
-                "Ctrl"
-            };
-            lines.push(Line::from(format!("  Press {modifier}+P to install them in the background; server start/stop is locked until complete.")));
+            lines.push(Line::from("  Press :, then p to install them in the background; server start/stop is locked until complete."));
         }
         if self.valid_comfy_root().is_some() {
             let paused = self.artifact_health.paused;
@@ -2075,20 +2062,14 @@ impl Dashboard<'_> {
     }
 
     fn render_footer(&self, frame: &mut Frame<'_>, area: Rect) {
-        if self.plan_editor.is_some() {
-            frame.render_widget(
-                Paragraph::new(format!(
-                    " ↑/↓ choose  Enter expand/select source  Space enable/disable dep  Esc back  OK download  {} ",
-                    self.global_shortcuts()
-                ))
-                .style(Style::default().fg(MUTED))
-                .alignment(Alignment::Center),
-                area,
-            );
-            return;
-        }
-        let global = self.global_shortcuts();
-        let help = if area.width < 100 {
+        let global_style = if self.global_commands {
+            Style::default().fg(ACCENT).add_modifier(Modifier::BOLD)
+        } else {
+            Style::default().fg(MUTED)
+        };
+        let local_help = if self.plan_editor.is_some() {
+            "[↑/↓ choose] [Enter expand/select] [Space toggle] [Esc back]"
+        } else {
             match Section::ALL[self.section] {
                 Section::Models
                 | Section::Loras
@@ -2097,44 +2078,98 @@ impl Dashboard<'_> {
                 | Section::Upscalers
                 | Section::RuntimeModels
                 | Section::CustomNodes
-                | Section::Workflows => {
-                    format!(" ←/→ tabs  ↑/↓ select  Enter install  d delete  {global} ")
-                }
-                Section::Downloads => {
-                    format!(" ←/→ tabs  ↑/↓ select  Enter watch  {global} ")
-                }
-                Section::Settings => {
-                    " ←/→ tabs  −/+ files  [/] chunks  h Hugging Face  y PyPI  q quit ".into()
-                }
-                Section::System => format!(" ←/→ tabs  Enter install system deps  {global} "),
-                _ => format!(" ←/→ tabs  {global} "),
+                | Section::Workflows => "[←/→ tabs] [↑/↓ select] [Enter install] [d delete]",
+                Section::Downloads => "[←/→ tabs] [↑/↓ select] [Enter watch]",
+                Section::Settings => "[←/→ tabs] [−/+ files] [[/] chunks] [h HF] [y PyPI]",
+                Section::System => "[←/→ tabs] [Enter install system deps]",
+                _ => "[←/→ tabs]",
             }
-        } else {
-            let section_hint = match Section::ALL[self.section] {
-                Section::Models
-                | Section::Loras
-                | Section::Vaes
-                | Section::TextEncoders
-                | Section::Upscalers
-                | Section::RuntimeModels
-                | Section::CustomNodes
-                | Section::Workflows => " Enter install  d delete ",
-                Section::Downloads => " Enter watch ",
-                Section::Settings => " −/+ files  [/] chunks  h Hugging Face  y PyPI source ",
-                Section::System => " Enter install system deps ",
-                _ => "",
-            };
-            format!(" ←/→ tabs  ↑/↓ select {section_hint} {global} ")
         };
+        let columns = Layout::default()
+            .direction(Direction::Horizontal)
+            .constraints([Constraint::Length(14), Constraint::Min(10)])
+            .split(area);
         frame.render_widget(
-            Paragraph::new(help)
-                .style(Style::default().fg(MUTED))
-                .alignment(Alignment::Center),
-            area,
+            Paragraph::new(if self.global_commands {
+                "[: disable]"
+            } else {
+                "[: activate]"
+            })
+            .style(global_style),
+            columns[0],
+        );
+        frame.render_widget(
+            Paragraph::new(Line::from(vec![
+                Span::styled(local_help, Style::default().fg(MUTED)),
+                Span::raw(" "),
+                Span::styled(self.global_shortcuts(), global_style),
+            ]))
+            .alignment(Alignment::Right),
+            columns[1],
         );
     }
 
     fn handle_key(&mut self, key: KeyEvent) -> Option<DashboardAction> {
+        if key.code == KeyCode::Char(':') {
+            self.global_commands = !self.global_commands;
+            return None;
+        }
+        if self.global_commands {
+            if key.code == KeyCode::Esc {
+                self.global_commands = false;
+                return None;
+            }
+            let action = match key.code {
+                KeyCode::Char('q') => {
+                    if self.queue.has_active_operations() {
+                        self.quit_warning = true;
+                        None
+                    } else {
+                        Some(DashboardAction::Quit)
+                    }
+                }
+                KeyCode::Char('s') => {
+                    if self
+                        .valid_comfy_root()
+                        .is_some_and(crate::download_queue::python_dependencies_ready)
+                    {
+                        Some(DashboardAction::ToggleServer)
+                    } else {
+                        self.queue
+                            .record("server action blocked: install Python dependencies first");
+                        None
+                    }
+                }
+                KeyCode::Char('r') => {
+                    self.refresh_cached_state();
+                    None
+                }
+                KeyCode::Char('i') if self.valid_comfy_root().is_none() => {
+                    Some(DashboardAction::InstallComfyUi)
+                }
+                KeyCode::Char('l') if self.valid_comfy_root().is_none() => {
+                    Some(DashboardAction::LocateComfyUi)
+                }
+                KeyCode::Char('p')
+                    if self.valid_comfy_root().is_some()
+                        && !self.system.python_dependencies_ready =>
+                {
+                    Some(DashboardAction::InstallPythonDeps)
+                }
+                KeyCode::Char('c')
+                    if self
+                        .system
+                        .dependency_status
+                        .iter()
+                        .any(|(_, ready)| !ready) =>
+                {
+                    Some(DashboardAction::InstallSystemDeps)
+                }
+                _ => return None,
+            };
+            self.global_commands = false;
+            return action;
+        }
         if self.delete_dialog.is_some() {
             return self.handle_delete_key(key);
         }
@@ -2147,49 +2182,6 @@ impl Dashboard<'_> {
                 KeyCode::Char('q') | KeyCode::Enter => Some(DashboardAction::Quit),
                 _ => None,
             };
-        }
-        if command_key(&key, 'q') {
-            if self.queue.has_active_operations() {
-                self.quit_warning = true;
-                return None;
-            }
-            return Some(DashboardAction::Quit);
-        }
-        if command_key(&key, 's') {
-            if self
-                .valid_comfy_root()
-                .is_some_and(crate::download_queue::python_dependencies_ready)
-            {
-                return Some(DashboardAction::ToggleServer);
-            }
-            self.queue
-                .record("server action blocked: install Python dependencies first");
-            return None;
-        }
-        if command_key(&key, 'r') {
-            self.refresh_cached_state();
-            return None;
-        }
-        if command_key(&key, 'i') && self.valid_comfy_root().is_none() {
-            return Some(DashboardAction::InstallComfyUi);
-        }
-        if command_key(&key, 'l') && self.valid_comfy_root().is_none() {
-            return Some(DashboardAction::LocateComfyUi);
-        }
-        if command_key(&key, 'p')
-            && self.valid_comfy_root().is_some()
-            && !self.system.python_dependencies_ready
-        {
-            return Some(DashboardAction::InstallPythonDeps);
-        }
-        if command_key(&key, 'c')
-            && self
-                .system
-                .dependency_status
-                .iter()
-                .any(|(_, ready)| !ready)
-        {
-            return Some(DashboardAction::InstallSystemDeps);
         }
         if self.plan_editor.is_some() {
             return self.handle_plan_key(key);
@@ -2801,16 +2793,6 @@ fn job_badge(status: JobStatus) -> Span<'static> {
         format!("{:<8}", status.label()),
         Style::default().fg(color).add_modifier(Modifier::BOLD),
     )
-}
-
-fn command_key(key: &KeyEvent, value: char) -> bool {
-    let modifier_pressed = if cfg!(target_os = "macos") {
-        key.modifiers.contains(KeyModifiers::SUPER) || key.modifiers.contains(KeyModifiers::META)
-    } else {
-        key.modifiers.contains(KeyModifiers::CONTROL)
-    };
-    matches!(key.code, KeyCode::Char(actual) if actual.eq_ignore_ascii_case(&value))
-        && modifier_pressed
 }
 
 fn job_details(job: &crate::download_queue::JobSnapshot) -> Text<'static> {
