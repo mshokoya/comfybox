@@ -4,7 +4,7 @@ use comfybox_core::{
     catalog::{Artifact, Catalog, CustomNode, SystemDependency},
     comfy::ComfyManager,
     config::{AppConfig, atomic_write_json},
-    download::{DownloadManager, DownloadOptions, DownloadProgress},
+    download::{DownloadManager, DownloadOptions, DownloadProgress, temp_paths},
 };
 use serde::{Deserialize, Serialize};
 use std::{
@@ -31,6 +31,7 @@ pub enum JobStatus {
     Downloading,
     Processing,
     Installing,
+    Stopped,
     Paused,
     Failed,
     Completed,
@@ -44,6 +45,7 @@ impl JobStatus {
             Self::Downloading => "DOWNLOADING",
             Self::Processing => "PROCESSING",
             Self::Installing => "INSTALLING",
+            Self::Stopped => "STOPPED",
             Self::Paused => "PAUSED",
             Self::Failed => "FAILED",
             Self::Completed => "DONE",
@@ -613,6 +615,123 @@ impl DownloadQueue {
         Ok(())
     }
 
+    /// Stop an artifact transfer and discard all resumable temporary data.
+    pub fn cancel_download(&mut self, index: usize) -> Result<()> {
+        if index < self.jobs.len() {
+            let job = &mut self.jobs[index];
+            if let Some(abort) = job.abort.take() {
+                abort.abort();
+            }
+            let (temp_dir, _, _) = temp_paths(&job.root, &job.artifact);
+            if temp_dir.exists() {
+                fs::remove_dir_all(&temp_dir)
+                    .with_context(|| format!("delete temporary download {}", temp_dir.display()))?;
+            }
+            job.status = JobStatus::Stopped;
+            job.downloaded_bytes = 0;
+            job.bytes_per_second = 0.0;
+            job.error = None;
+            let name = job.artifact.name.clone();
+            self.log(format!("stopped {name}; temporary download data deleted"));
+            return self.save();
+        }
+        let operation_index = index - self.jobs.len();
+        if operation_index < self.custom_nodes.len() {
+            let operation = &mut self.custom_nodes[operation_index];
+            if let Some(abort) = operation.abort.take() {
+                abort.abort();
+            }
+            delete_custom_node_temp(&operation.root, &operation.node.id)?;
+            operation.status = JobStatus::Stopped;
+            operation.error = None;
+            let name = operation.node.name.clone();
+            self.log(format!("stopped {name}; temporary clone data deleted"));
+            return Ok(());
+        }
+        anyhow::bail!("this operation cannot be safely stopped and discarded")
+    }
+
+    /// Remove a queue record, optionally discarding its resumable temporary data.
+    pub fn remove_download(&mut self, index: usize, delete_temp: bool) -> Result<()> {
+        if index < self.jobs.len() {
+            if let Some(abort) = self.jobs[index].abort.take() {
+                abort.abort();
+            }
+            let job = self.jobs.remove(index);
+            if delete_temp {
+                let (temp_dir, _, _) = temp_paths(&job.root, &job.artifact);
+                if temp_dir.exists() {
+                    fs::remove_dir_all(&temp_dir).with_context(|| {
+                        format!("delete temporary download {}", temp_dir.display())
+                    })?;
+                }
+            }
+            self.log(format!(
+                "removed {} from download manager{}",
+                job.artifact.name,
+                if delete_temp {
+                    " and deleted temporary data"
+                } else {
+                    "; installed artifact and temporary data were left untouched"
+                }
+            ));
+            return self.save();
+        }
+        let mut operation_index = index - self.jobs.len();
+        if operation_index < self.custom_nodes.len() {
+            if let Some(abort) = self.custom_nodes[operation_index].abort.take() {
+                abort.abort();
+            }
+            let operation = self.custom_nodes.remove(operation_index);
+            if delete_temp {
+                delete_custom_node_temp(&operation.root, &operation.node.id)?;
+            }
+            self.log(format!(
+                "removed {} from download manager",
+                operation.node.name
+            ));
+            return Ok(());
+        }
+        operation_index -= self.custom_nodes.len();
+        if operation_index == 0 && self.python_deps.is_some() {
+            if let Some(mut operation) = self.python_deps.take()
+                && let Some(abort) = operation.abort.take()
+            {
+                abort.abort();
+            }
+            self.log("removed Python dependency operation from download manager".into());
+            return Ok(());
+        }
+        operation_index = operation_index.saturating_sub(usize::from(self.python_deps.is_some()));
+        if operation_index == 0 && self.system_deps.is_some() {
+            if self
+                .system_deps
+                .as_ref()
+                .is_some_and(|operation| operation.status.is_active())
+            {
+                anyhow::bail!("active system package installation cannot be removed safely");
+            }
+            self.system_deps = None;
+            self.log("removed system dependency operation from download manager".into());
+            return Ok(());
+        }
+        anyhow::bail!("download record no longer exists")
+    }
+
+    pub fn forget_artifacts<'a>(&mut self, ids: impl IntoIterator<Item = &'a str>) -> Result<()> {
+        let ids = ids.into_iter().collect::<std::collections::HashSet<_>>();
+        for job in &mut self.jobs {
+            if ids.contains(job.artifact.id.as_str())
+                && let Some(abort) = job.abort.take()
+            {
+                abort.abort();
+            }
+        }
+        self.jobs
+            .retain(|job| !ids.contains(job.artifact.id.as_str()));
+        self.save()
+    }
+
     pub fn resume(&mut self, index: usize) -> Result<()> {
         if index >= self.jobs.len() {
             let mut operation_index = index - self.jobs.len();
@@ -1078,6 +1197,20 @@ async fn install_custom_node(
             .await?;
     }
     ensure_known_node_runtime(&python, &node.folder_name, sender).await?;
+    Ok(())
+}
+
+fn delete_custom_node_temp(root: &Path, node_id: &str) -> Result<()> {
+    let temp_base = root.join("custom_nodes/.comfybox-tmp");
+    let Ok(entries) = fs::read_dir(&temp_base) else {
+        return Ok(());
+    };
+    let prefix = format!("{node_id}-");
+    for entry in entries.filter_map(std::result::Result::ok) {
+        if entry.file_name().to_string_lossy().starts_with(&prefix) {
+            fs::remove_dir_all(entry.path())?;
+        }
+    }
     Ok(())
 }
 

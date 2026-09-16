@@ -1083,6 +1083,7 @@ async fn interactive(cfg: &mut AppConfig, cat: &Catalog) -> Result<()> {
                 | dashboard::DashboardAction::ConfigurePypi
                 | dashboard::DashboardAction::ConfigureHfEndpoint
                 | dashboard::DashboardAction::ToggleServer
+                | dashboard::DashboardAction::DeleteArtifacts(_)
         );
         if let Err(error) = execute_dashboard_action(action, cfg, cat, &mut queue).await {
             queue.record(format!("action failed: {action_label}: {error:#}"));
@@ -1370,6 +1371,29 @@ async fn execute_dashboard_action(
                 },
             );
             state.save()
+        }
+        dashboard::DashboardAction::DeleteArtifacts(ids) => {
+            let instance = configured_instance(cfg)?;
+            for id in &ids {
+                let artifact = cat
+                    .artifact(id)
+                    .with_context(|| format!("unknown artifact {id}"))?;
+                let path = instance.root.join(&artifact.relative_path);
+                if path.is_file() || path.is_symlink() {
+                    fs::remove_file(&path)
+                        .with_context(|| format!("delete artifact {}", path.display()))?;
+                }
+                let (temp_dir, _, _) =
+                    comfybox_core::download::temp_paths(&instance.root, artifact);
+                if temp_dir.exists() {
+                    fs::remove_dir_all(&temp_dir).with_context(|| {
+                        format!("delete temporary artifact data {}", temp_dir.display())
+                    })?;
+                }
+                queue.record(format!("deleted artifact {}", artifact.name));
+            }
+            queue.forget_artifacts(ids.iter().map(String::as_str))?;
+            Ok(())
         }
     }
 }

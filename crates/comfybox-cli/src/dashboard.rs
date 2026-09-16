@@ -57,6 +57,7 @@ pub enum DashboardAction {
     InstallArtifact(InstallSelection),
     InstallCustomNode(String),
     InstallWorkflow(InstallSelection),
+    DeleteArtifacts(Vec<String>),
 }
 
 #[derive(Debug)]
@@ -85,6 +86,14 @@ struct PlanEditor {
 }
 
 #[derive(Clone, Debug)]
+struct DeleteDialog {
+    title: String,
+    items: Vec<(String, String, bool)>,
+    cursor: usize,
+}
+
+#[derive(Clone, Debug)]
+#[allow(dead_code)]
 enum PlanRow {
     Model(String),
     ModelSource(String, usize),
@@ -211,6 +220,7 @@ struct Dashboard<'a> {
     download_index: usize,
     download_detail: bool,
     plan_editor: Option<PlanEditor>,
+    delete_dialog: Option<DeleteDialog>,
     comfy_running: bool,
     state: ManagedState,
     last_server_check: Instant,
@@ -283,6 +293,7 @@ pub fn run(
         download_index: 0,
         download_detail: false,
         plan_editor: None,
+        delete_dialog: None,
         comfy_running,
         state,
         last_server_check: Instant::now(),
@@ -373,6 +384,78 @@ impl Drop for TerminalGuard {
 }
 
 impl Dashboard<'_> {
+    fn refresh_cached_state(&mut self) {
+        self.state = ManagedState::load().unwrap_or_default();
+        self.comfy_running = detect_comfy_running(self.cfg, &self.state);
+        self.artifact_health = collect_artifact_health(self.cfg, self.catalog);
+        self.system = collect_system_snapshot(self.cfg, self.catalog);
+        self.installed_custom_nodes = collect_installed_custom_nodes(self.cfg, self.catalog);
+        self.queue.record("refreshed and cached dependency health");
+    }
+
+    fn global_shortcuts(&self) -> String {
+        let modifier = if cfg!(target_os = "macos") {
+            "Cmd"
+        } else {
+            "Ctrl"
+        };
+        let mut shortcuts = vec![
+            format!("{modifier}+Q quit"),
+            format!("{modifier}+S server"),
+            format!("{modifier}+R refresh"),
+        ];
+        if self.valid_comfy_root().is_none() {
+            shortcuts.push(format!("{modifier}+I install"));
+            shortcuts.push(format!("{modifier}+L locate"));
+        } else if !self.system.python_dependencies_ready {
+            shortcuts.push(format!("{modifier}+P Python deps"));
+        }
+        if self
+            .system
+            .dependency_status
+            .iter()
+            .any(|(_, ready)| !ready)
+        {
+            shortcuts.push(format!("{modifier}+C system deps"));
+        }
+        shortcuts.join("  ")
+    }
+
+    fn render_detail_actions<'a>(
+        &self,
+        frame: &mut Frame<'_>,
+        area: Rect,
+        title: &'a str,
+        details: Text<'a>,
+        actions: &'a str,
+        active: bool,
+    ) {
+        let outer = Block::default()
+            .title(title)
+            .borders(Borders::ALL)
+            .border_style(Style::default().fg(if active { ACCENT } else { PANEL }));
+        let inner = outer.inner(area);
+        frame.render_widget(outer, area);
+        let sections = Layout::default()
+            .direction(Direction::Vertical)
+            .constraints([
+                Constraint::Min(2),
+                Constraint::Length(1),
+                Constraint::Length(1),
+            ])
+            .split(inner);
+        frame.render_widget(
+            Paragraph::new(details).wrap(Wrap { trim: false }),
+            sections[0],
+        );
+        frame.render_widget(
+            Paragraph::new(actions)
+                .style(Style::default().fg(if active { ACCENT } else { MUTED }))
+                .alignment(Alignment::Center),
+            sections[2],
+        );
+    }
+
     fn render(&mut self, frame: &mut Frame<'_>) {
         let area = frame.area();
         if area.width < 72 || area.height < 20 {
@@ -414,7 +497,84 @@ impl Dashboard<'_> {
         self.render_footer(frame, vertical[3]);
         if self.quit_warning {
             self.render_quit_warning(frame, area);
+        } else if self.delete_dialog.is_some() {
+            self.render_delete_dialog(frame, area);
         }
+    }
+
+    fn render_delete_dialog(&self, frame: &mut Frame<'_>, area: Rect) {
+        let Some(dialog) = &self.delete_dialog else {
+            return;
+        };
+        let width = area.width.saturating_sub(4).clamp(40, 88);
+        let height = (dialog.items.len() as u16 + 8)
+            .min(area.height.saturating_sub(2))
+            .max(8);
+        let popup = Rect::new(
+            area.x + area.width.saturating_sub(width) / 2,
+            area.y + area.height.saturating_sub(height) / 2,
+            width,
+            height,
+        );
+        let mut lines = vec![
+            Line::from(Span::styled(
+                &dialog.title,
+                Style::default().fg(RED).add_modifier(Modifier::BOLD),
+            )),
+            Line::from("Checked files will be permanently deleted from ComfyUI."),
+            Line::from("Use Space/Enter to toggle files; move to Delete checked to confirm."),
+            Line::from(""),
+        ];
+        lines.extend(
+            dialog
+                .items
+                .iter()
+                .enumerate()
+                .map(|(index, (_, name, checked))| {
+                    let selected = dialog.cursor == index;
+                    Line::from(Span::styled(
+                        format!(
+                            "{} [{}] {name}",
+                            if selected { "›" } else { " " },
+                            if *checked { "x" } else { " " }
+                        ),
+                        if selected {
+                            Style::default()
+                                .fg(Color::Black)
+                                .bg(ACCENT)
+                                .add_modifier(Modifier::BOLD)
+                        } else {
+                            Style::default().fg(Color::White)
+                        },
+                    ))
+                }),
+        );
+        let action_selected = dialog.cursor == dialog.items.len();
+        lines.push(Line::from(""));
+        lines.push(Line::from(Span::styled(
+            format!(
+                "{} [ Delete checked ]    [ Esc — cancel ]",
+                if action_selected { "›" } else { " " }
+            ),
+            if action_selected {
+                Style::default()
+                    .fg(Color::Black)
+                    .bg(RED)
+                    .add_modifier(Modifier::BOLD)
+            } else {
+                Style::default().fg(MUTED)
+            },
+        )));
+        frame.render_widget(Clear, popup);
+        frame.render_widget(
+            Paragraph::new(lines).wrap(Wrap { trim: false }).block(
+                Block::default()
+                    .title(" Confirm artifact deletion ")
+                    .borders(Borders::ALL)
+                    .border_style(Style::default().fg(RED)),
+            ),
+            popup,
+        );
     }
 
     fn render_quit_warning(&self, frame: &mut Frame<'_>, area: Rect) {
@@ -642,14 +802,19 @@ impl Dashboard<'_> {
                 "No valid ComfyUI installation is configured.",
                 RED,
             ));
-            lines.push(Line::from(
-                "  Press l to locate one or i to install ComfyUI.",
-            ));
+            let modifier = if cfg!(target_os = "macos") {
+                "Cmd"
+            } else {
+                "Ctrl"
+            };
+            lines.push(Line::from(format!(
+                "  Press {modifier}+L to locate one or {modifier}+I to install ComfyUI."
+            )));
         }
         if !self.system.has_token {
             lines.push(warning_line("HF_TOKEN is not set.", YELLOW));
             lines.push(Line::from(
-                "  Public downloads work; press t to save a token for gated repositories.",
+                "  Public downloads work; open Settings or System and press t for gated repositories.",
             ));
         }
         if self.valid_comfy_root().is_some() && !self.system.python_dependencies_ready {
@@ -657,7 +822,12 @@ impl Dashboard<'_> {
                 "ComfyUI Python dependencies are not ready.",
                 YELLOW,
             ));
-            lines.push(Line::from("  Press p to install them in the background; server start/stop is locked until complete."));
+            let modifier = if cfg!(target_os = "macos") {
+                "Cmd"
+            } else {
+                "Ctrl"
+            };
+            lines.push(Line::from(format!("  Press {modifier}+P to install them in the background; server start/stop is locked until complete.")));
         }
         if self.valid_comfy_root().is_some() {
             let paused = self.artifact_health.paused;
@@ -757,7 +927,7 @@ impl Dashboard<'_> {
                 .map(|package| {
                     let required =
                         package.primary_artifact_ids.len() + package.dependency_artifact_ids.len();
-                    let mut lines = vec![
+                    let lines = vec![
                         Line::from(Span::styled(
                             &package.name,
                             Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
@@ -782,16 +952,16 @@ impl Dashboard<'_> {
                             "Enter installs the package and its required dependencies.",
                         )),
                     ];
-                    lines.push(Line::from(""));
-                    lines.push(Line::from(
-                        "[ Enter ] Configure install    [ r ] Refresh checks",
-                    ));
                     Text::from(lines)
                 })
                 .unwrap_or_default();
-            frame.render_widget(
-                plan_card(" Details ", details, self.plan_editor.as_ref(), columns[1]),
+            self.render_detail_actions(
+                frame,
                 columns[1],
+                " Details ",
+                details,
+                "[ Enter ] Configure install    [ d ] Delete selected artifacts",
+                false,
             );
         }
     }
@@ -849,8 +1019,16 @@ impl Dashboard<'_> {
             &mut state,
         );
         if columns.len() > 1 {
+            if self.plan_editor.as_ref().is_some_and(|editor| {
+                artifacts.get(selected).is_some_and(|artifact| {
+                    editor.target == PlanTarget::Artifact(artifact.id.clone())
+                })
+            }) {
+                self.render_dependency_plan_table(frame, columns[1], " Download source ");
+                return;
+            }
             let details = artifacts.get(selected).map(|artifact| {
-                let mut lines = vec![
+                let lines = vec![
                     Line::from(Span::styled(
                         &artifact.name,
                         Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
@@ -865,26 +1043,15 @@ impl Dashboard<'_> {
                             .unwrap_or("Enter downloads this artifact."),
                     ),
                 ];
-                lines.push(Line::from(""));
-                if self.plan_editor.as_ref().is_some_and(|editor| {
-                    editor.target == PlanTarget::Artifact(artifact.id.clone())
-                }) {
-                    lines.extend(self.render_plan_lines());
-                } else {
-                    lines.push(Line::from(
-                        "[ Enter ] Configure install    [ r ] Refresh checks",
-                    ));
-                }
                 Text::from(lines)
             });
-            frame.render_widget(
-                plan_card(
-                    " Download source ",
-                    details.unwrap_or_default(),
-                    self.plan_editor.as_ref(),
-                    columns[1],
-                ),
+            self.render_detail_actions(
+                frame,
                 columns[1],
+                " Download source ",
+                details.unwrap_or_default(),
+                "[ Enter ] Configure install    [ d ] Delete artifact",
+                false,
             );
         }
     }
@@ -929,11 +1096,16 @@ impl Dashboard<'_> {
                     Line::from(format!("Repository: {}", node.git_url)),
                     Line::from(format!("Folder: {}", node.folder_name)),
                     Line::from(format!("Aliases: {}", node.node_types.join(", "))),
-                    Line::from(""),
-                    Line::from("[ Enter ] Install    [ r ] Refresh checks"),
                 ])
             });
-            frame.render_widget(card(" Details ", details.unwrap_or_default()), columns[1]);
+            self.render_detail_actions(
+                frame,
+                columns[1],
+                " Details ",
+                details.unwrap_or_default(),
+                "[ Enter ] Install",
+                false,
+            );
         }
     }
 
@@ -996,7 +1168,7 @@ impl Dashboard<'_> {
                 return;
             }
             let details = self.catalog.workflows.get(self.workflow_index).map(|workflow| {
-                let mut lines = vec![
+                let lines = vec![
                     Line::from(Span::styled(&workflow.name, Style::default().fg(ACCENT).add_modifier(Modifier::BOLD))),
                     Line::from(format!("File: {}", workflow.file)),
                     Line::from(format!("Models: {}", workflow.artifact_ids.len())),
@@ -1007,19 +1179,16 @@ impl Dashboard<'_> {
                     Line::from(format!("Custom nodes: {}", workflow.custom_node_ids.len())),
                     Line::from(""),
                     Line::from("Enter installs the workflow, models, VAEs, text encoders, LoRAs, and custom nodes."),
-                    Line::from(""),
                 ];
-                lines.push(Line::from("[ Enter ] Configure install    [ r ] Refresh checks"));
                 Text::from(lines)
             }).unwrap_or_default();
-            frame.render_widget(
-                plan_card(
-                    " Install plan ",
-                    details,
-                    self.plan_editor.as_ref(),
-                    columns[1],
-                ),
+            self.render_detail_actions(
+                frame,
                 columns[1],
+                " Install plan ",
+                details,
+                "[ Enter ] Configure install    [ d ] Delete selected artifacts",
+                false,
             );
         }
     }
@@ -1120,8 +1289,7 @@ impl Dashboard<'_> {
                         .map(|index| PlanRow::ModelSource(id.clone(), index)),
                 );
             }
-            rows.push(PlanRow::Ok);
-            rows.push(PlanRow::Cancel);
+            rows.push(PlanRow::Actions);
             return rows;
         }
         for id in models {
@@ -1154,6 +1322,7 @@ impl Dashboard<'_> {
         rows
     }
 
+    #[allow(dead_code)]
     fn render_plan_lines(&self) -> Vec<Line<'static>> {
         let Some(editor) = &self.plan_editor else {
             return Vec::new();
@@ -1502,6 +1671,14 @@ impl Dashboard<'_> {
         let jobs = self.queue.snapshots();
         self.download_index = self.download_index.min(jobs.len().saturating_sub(1));
         if self.download_detail {
+            let sections = Layout::default()
+                .direction(Direction::Vertical)
+                .constraints([
+                    Constraint::Min(4),
+                    Constraint::Length(1),
+                    Constraint::Length(1),
+                ])
+                .split(area);
             let mut text = jobs
                 .get(self.download_index)
                 .map(job_details)
@@ -1527,7 +1704,18 @@ impl Dashboard<'_> {
                         .map(|line| Line::from(line.to_owned())),
                 );
             }
-            frame.render_widget(card(" Download details · b/Esc background ", text), area);
+            frame.render_widget(
+                card(" Download details · b/Esc background ", text),
+                sections[0],
+            );
+            frame.render_widget(
+                Paragraph::new(
+                    "[ p ] Pause  [ c ] Continue  [ r ] Retry  [ x ] Stop + discard temp  [ d ] Delete record + temp  [ m ] Remove record only",
+                )
+                .style(Style::default().fg(ACCENT))
+                .alignment(Alignment::Center),
+                sections[2],
+            );
             return;
         }
         let columns = content_columns(area);
@@ -1576,7 +1764,14 @@ impl Dashboard<'_> {
                         "No downloads yet.\nInstall a model package or workflow to add jobs.",
                     )
                 });
-            frame.render_widget(card(" Progress and recovery ", details), columns[1]);
+            self.render_detail_actions(
+                frame,
+                columns[1],
+                " Progress and recovery ",
+                details,
+                "Enter to focus download actions",
+                false,
+            );
         }
     }
 
@@ -1738,7 +1933,9 @@ impl Dashboard<'_> {
                     ) => Span::styled("◐ INSTALLING", Style::default().fg(ACCENT)),
                     Some(JobStatus::Failed) => Span::styled("FAILED", Style::default().fg(RED)),
                     Some(JobStatus::Completed) => Span::styled("ready", Style::default().fg(GREEN)),
-                    Some(JobStatus::Paused) => Span::styled("PAUSED", Style::default().fg(YELLOW)),
+                    Some(JobStatus::Paused | JobStatus::Stopped) => {
+                        Span::styled("PAUSED", Style::default().fg(YELLOW))
+                    }
                     None => state_span(
                         if self.system.python_dependencies_ready {
                             "ready"
@@ -1765,7 +1962,7 @@ impl Dashboard<'_> {
                             | JobStatus::Processing
                             | JobStatus::Installing,
                         ) => ACCENT,
-                        Some(JobStatus::Queued | JobStatus::Paused) => YELLOW,
+                        Some(JobStatus::Queued | JobStatus::Paused | JobStatus::Stopped) => YELLOW,
                         None => MUTED,
                     }),
                 ),
@@ -1880,15 +2077,17 @@ impl Dashboard<'_> {
     fn render_footer(&self, frame: &mut Frame<'_>, area: Rect) {
         if self.plan_editor.is_some() {
             frame.render_widget(
-                Paragraph::new(
-                    " ↑/↓ choose  Enter expand/select source  Space enable/disable dep  Esc back  OK download ",
-                )
+                Paragraph::new(format!(
+                    " ↑/↓ choose  Enter expand/select source  Space enable/disable dep  Esc back  OK download  {} ",
+                    self.global_shortcuts()
+                ))
                 .style(Style::default().fg(MUTED))
                 .alignment(Alignment::Center),
                 area,
             );
             return;
         }
+        let global = self.global_shortcuts();
         let help = if area.width < 100 {
             match Section::ALL[self.section] {
                 Section::Models
@@ -1899,18 +2098,16 @@ impl Dashboard<'_> {
                 | Section::RuntimeModels
                 | Section::CustomNodes
                 | Section::Workflows => {
-                    " ←/→ tabs  ↑/↓ select  Enter install  s server  t token  r refresh  q quit "
-                        .into()
+                    format!(" ←/→ tabs  ↑/↓ select  Enter install  d delete  {global} ")
                 }
                 Section::Downloads => {
-                    " ←/→ tabs  ↑/↓ select  Enter watch  x pause  c continue  r retry  q quit "
-                        .into()
+                    format!(" ←/→ tabs  ↑/↓ select  Enter watch  {global} ")
                 }
                 Section::Settings => {
                     " ←/→ tabs  −/+ files  [/] chunks  h Hugging Face  y PyPI  q quit ".into()
                 }
-                Section::System => " ←/→ tabs  Enter install system deps  q quit ".into(),
-                _ => " ←/→ tabs  s server  l locate  i install  t token  r refresh  q quit ".into(),
+                Section::System => format!(" ←/→ tabs  Enter install system deps  {global} "),
+                _ => format!(" ←/→ tabs  {global} "),
             }
         } else {
             let section_hint = match Section::ALL[self.section] {
@@ -1921,15 +2118,13 @@ impl Dashboard<'_> {
                 | Section::Upscalers
                 | Section::RuntimeModels
                 | Section::CustomNodes
-                | Section::Workflows => " Enter install  r refresh checks ",
-                Section::Downloads => " Enter watch  x pause  c continue  r retry  b background ",
+                | Section::Workflows => " Enter install  d delete ",
+                Section::Downloads => " Enter watch ",
                 Section::Settings => " −/+ files  [/] chunks  h Hugging Face  y PyPI source ",
                 Section::System => " Enter install system deps ",
                 _ => "",
             };
-            format!(
-                " ←/→ tabs  ↑/↓ select {section_hint} s start/stop  l locate  i install ComfyUI  p Python deps  t token  r refresh  q quit "
-            )
+            format!(" ←/→ tabs  ↑/↓ select {section_hint} {global} ")
         };
         frame.render_widget(
             Paragraph::new(help)
@@ -1940,6 +2135,9 @@ impl Dashboard<'_> {
     }
 
     fn handle_key(&mut self, key: KeyEvent) -> Option<DashboardAction> {
+        if self.delete_dialog.is_some() {
+            return self.handle_delete_key(key);
+        }
         if self.quit_warning {
             return match key.code {
                 KeyCode::Esc => {
@@ -1950,6 +2148,49 @@ impl Dashboard<'_> {
                 _ => None,
             };
         }
+        if command_key(&key, 'q') {
+            if self.queue.has_active_operations() {
+                self.quit_warning = true;
+                return None;
+            }
+            return Some(DashboardAction::Quit);
+        }
+        if command_key(&key, 's') {
+            if self
+                .valid_comfy_root()
+                .is_some_and(crate::download_queue::python_dependencies_ready)
+            {
+                return Some(DashboardAction::ToggleServer);
+            }
+            self.queue
+                .record("server action blocked: install Python dependencies first");
+            return None;
+        }
+        if command_key(&key, 'r') {
+            self.refresh_cached_state();
+            return None;
+        }
+        if command_key(&key, 'i') && self.valid_comfy_root().is_none() {
+            return Some(DashboardAction::InstallComfyUi);
+        }
+        if command_key(&key, 'l') && self.valid_comfy_root().is_none() {
+            return Some(DashboardAction::LocateComfyUi);
+        }
+        if command_key(&key, 'p')
+            && self.valid_comfy_root().is_some()
+            && !self.system.python_dependencies_ready
+        {
+            return Some(DashboardAction::InstallPythonDeps);
+        }
+        if command_key(&key, 'c')
+            && self
+                .system
+                .dependency_status
+                .iter()
+                .any(|(_, ready)| !ready)
+        {
+            return Some(DashboardAction::InstallSystemDeps);
+        }
         if self.plan_editor.is_some() {
             return self.handle_plan_key(key);
         }
@@ -1958,20 +2199,7 @@ impl Dashboard<'_> {
             KeyCode::Char('b') if Section::ALL[self.section] == Section::Downloads => {
                 self.download_detail = false
             }
-            KeyCode::Char('q') | KeyCode::Esc => {
-                if self.queue.has_active_operations() {
-                    self.quit_warning = true;
-                } else {
-                    return Some(DashboardAction::Quit);
-                }
-            }
-            KeyCode::Char('c') if key.modifiers.contains(KeyModifiers::CONTROL) => {
-                if self.queue.has_active_operations() {
-                    self.quit_warning = true;
-                } else {
-                    return Some(DashboardAction::Quit);
-                }
-            }
+            KeyCode::Esc => {}
             KeyCode::Right | KeyCode::Tab => {
                 self.section = (self.section + 1) % Section::ALL.len();
                 self.clear_before_draw = true;
@@ -1988,25 +2216,13 @@ impl Dashboard<'_> {
             }
             KeyCode::Down | KeyCode::Char('j') => self.move_selection(1),
             KeyCode::Up | KeyCode::Char('k') => self.move_selection(-1),
-            KeyCode::Char('s') if self.valid_comfy_root().is_some() => {
-                if self
-                    .valid_comfy_root()
-                    .is_some_and(crate::download_queue::python_dependencies_ready)
-                {
-                    return Some(DashboardAction::ToggleServer);
-                }
-                self.queue
-                    .record("server action blocked: install Python dependencies first");
-            }
-            KeyCode::Char('l') => return Some(DashboardAction::LocateComfyUi),
-            KeyCode::Char('i') => return Some(DashboardAction::InstallComfyUi),
-            KeyCode::Char('t') => return Some(DashboardAction::SetHfToken),
-            KeyCode::Char('p') => {
-                if self.valid_comfy_root().is_some() {
-                    return Some(DashboardAction::InstallPythonDeps);
-                }
-                self.queue
-                    .record("Python dependency install blocked: install or locate ComfyUI first");
+            KeyCode::Char('t')
+                if matches!(
+                    Section::ALL[self.section],
+                    Section::Settings | Section::System
+                ) =>
+            {
+                return Some(DashboardAction::SetHfToken);
             }
             KeyCode::Char('y') if Section::ALL[self.section] == Section::Settings => {
                 return Some(DashboardAction::ConfigurePypi);
@@ -2014,14 +2230,45 @@ impl Dashboard<'_> {
             KeyCode::Char('h') if Section::ALL[self.section] == Section::Settings => {
                 return Some(DashboardAction::ConfigureHfEndpoint);
             }
-            KeyCode::Char('x') if Section::ALL[self.section] == Section::Downloads => {
+            KeyCode::Char('x')
+                if Section::ALL[self.section] == Section::Downloads && self.download_detail =>
+            {
+                if let Err(error) = self.queue.cancel_download(self.download_index) {
+                    self.queue.record(format!("stop failed: {error:#}"));
+                }
+            }
+            KeyCode::Char('p')
+                if Section::ALL[self.section] == Section::Downloads && self.download_detail =>
+            {
                 let _ = self.queue.stop(self.download_index);
             }
-            KeyCode::Char('c') if Section::ALL[self.section] == Section::Downloads => {
+            KeyCode::Char('c')
+                if Section::ALL[self.section] == Section::Downloads && self.download_detail =>
+            {
                 let _ = self.queue.resume(self.download_index);
             }
-            KeyCode::Char('r') if Section::ALL[self.section] == Section::Downloads => {
+            KeyCode::Char('r')
+                if Section::ALL[self.section] == Section::Downloads && self.download_detail =>
+            {
                 let _ = self.queue.retry(self.download_index);
+            }
+            KeyCode::Delete | KeyCode::Char('d')
+                if Section::ALL[self.section] == Section::Downloads && self.download_detail =>
+            {
+                if let Err(error) = self.queue.remove_download(self.download_index, true) {
+                    self.queue
+                        .record(format!("delete download failed: {error:#}"));
+                }
+                self.download_index = self.download_index.min(self.queue.len().saturating_sub(1));
+            }
+            KeyCode::Char('m')
+                if Section::ALL[self.section] == Section::Downloads && self.download_detail =>
+            {
+                if let Err(error) = self.queue.remove_download(self.download_index, false) {
+                    self.queue
+                        .record(format!("remove download failed: {error:#}"));
+                }
+                self.download_index = self.download_index.min(self.queue.len().saturating_sub(1));
             }
             KeyCode::Char('+') | KeyCode::Char('=')
                 if Section::ALL[self.section] == Section::Settings =>
@@ -2047,15 +2294,6 @@ impl Dashboard<'_> {
                     .update_chunk_parallelism(self.cfg.download_parallelism);
                 let _ = self.cfg.save();
             }
-            KeyCode::Char('r') => {
-                self.state = ManagedState::load().unwrap_or_default();
-                self.comfy_running = detect_comfy_running(self.cfg, &self.state);
-                self.artifact_health = collect_artifact_health(self.cfg, self.catalog);
-                self.system = collect_system_snapshot(self.cfg, self.catalog);
-                self.installed_custom_nodes =
-                    collect_installed_custom_nodes(self.cfg, self.catalog);
-                self.queue.record("refreshed and cached dependency health");
-            }
             KeyCode::Enter if Section::ALL[self.section] == Section::Downloads => {
                 self.download_detail = true
             }
@@ -2073,7 +2311,117 @@ impl Dashboard<'_> {
             {
                 self.open_plan_editor();
             }
+            KeyCode::Char('d')
+                if matches!(
+                    Section::ALL[self.section],
+                    Section::Models
+                        | Section::Loras
+                        | Section::Vaes
+                        | Section::TextEncoders
+                        | Section::Upscalers
+                        | Section::RuntimeModels
+                        | Section::Workflows
+                ) =>
+            {
+                self.open_delete_dialog();
+            }
             KeyCode::Enter => return self.selected_action(),
+            _ => {}
+        }
+        None
+    }
+
+    fn open_delete_dialog(&mut self) {
+        let target = match Section::ALL[self.section] {
+            Section::Models => self.catalog.packages.get(self.model_index).map(|package| {
+                (
+                    package.name.clone(),
+                    PlanTarget::Package(package.id.clone()),
+                )
+            }),
+            Section::Workflows => self
+                .catalog
+                .workflows
+                .get(self.workflow_index)
+                .map(|workflow| {
+                    (
+                        workflow.name.clone(),
+                        PlanTarget::Workflow(workflow.id.clone()),
+                    )
+                }),
+            Section::Loras
+            | Section::Vaes
+            | Section::TextEncoders
+            | Section::Upscalers
+            | Section::RuntimeModels => {
+                let artifacts = self.artifacts_for_section();
+                artifacts
+                    .get(self.artifact_index.min(artifacts.len().saturating_sub(1)))
+                    .map(|artifact| {
+                        (
+                            artifact.name.clone(),
+                            PlanTarget::Artifact(artifact.id.clone()),
+                        )
+                    })
+            }
+            _ => None,
+        };
+        let Some((title, target)) = target else {
+            return;
+        };
+        let (models, dependencies, _) = self.plan_artifacts(&target);
+        let mut ids = models.into_iter().chain(dependencies).collect::<Vec<_>>();
+        ids.sort();
+        ids.dedup();
+        let items = ids
+            .into_iter()
+            .map(|id| {
+                let name = self
+                    .catalog
+                    .artifact(&id)
+                    .map(|artifact| artifact.name.clone())
+                    .unwrap_or_else(|| id.clone());
+                (id, name, true)
+            })
+            .collect::<Vec<_>>();
+        if !items.is_empty() {
+            self.delete_dialog = Some(DeleteDialog {
+                title: format!("Delete {title}"),
+                items,
+                cursor: 0,
+            });
+        }
+    }
+
+    fn handle_delete_key(&mut self, key: KeyEvent) -> Option<DashboardAction> {
+        let dialog = self.delete_dialog.as_mut()?;
+        let len = dialog.items.len() + 1;
+        match key.code {
+            KeyCode::Esc => self.delete_dialog = None,
+            KeyCode::Down | KeyCode::Char('j') | KeyCode::Tab => {
+                dialog.cursor = (dialog.cursor + 1) % len;
+            }
+            KeyCode::Up | KeyCode::Char('k') | KeyCode::BackTab => {
+                dialog.cursor = (dialog.cursor + len - 1) % len;
+            }
+            KeyCode::Char(' ') if dialog.cursor < dialog.items.len() => {
+                dialog.items[dialog.cursor].2 = !dialog.items[dialog.cursor].2;
+            }
+            KeyCode::Enter if dialog.cursor < dialog.items.len() => {
+                dialog.items[dialog.cursor].2 = !dialog.items[dialog.cursor].2;
+            }
+            KeyCode::Enter => {
+                let ids = dialog
+                    .items
+                    .iter()
+                    .filter(|(_, _, checked)| *checked)
+                    .map(|(id, _, _)| id.clone())
+                    .collect::<Vec<_>>();
+                self.delete_dialog = None;
+                if !ids.is_empty() {
+                    return Some(DashboardAction::DeleteArtifacts(ids));
+                }
+            }
             _ => {}
         }
         None
@@ -2400,6 +2748,7 @@ impl Dashboard<'_> {
             Some(JobStatus::Processing) => Some(Health::Processing),
             Some(JobStatus::Installing) => Some(Health::Installing),
             Some(JobStatus::Paused) => Some(Health::Paused),
+            Some(JobStatus::Stopped) => Some(Health::Missing),
             Some(JobStatus::Failed) => Some(Health::Broken),
             Some(JobStatus::Completed) => Some(Health::Ready),
             None => self.artifact_health.by_id.get(id).copied(),
@@ -2428,6 +2777,7 @@ impl Dashboard<'_> {
             Some(JobStatus::Processing) => Health::Processing,
             Some(JobStatus::Installing) => Health::Installing,
             Some(JobStatus::Paused) => Health::Paused,
+            Some(JobStatus::Stopped) => Health::Missing,
             Some(JobStatus::Failed) => Health::Broken,
             Some(JobStatus::Completed) => Health::Ready,
             None if self.installed_custom_nodes.contains(id) => Health::Ready,
@@ -2444,13 +2794,23 @@ fn job_badge(status: JobStatus) -> Span<'static> {
         | JobStatus::Processing
         | JobStatus::Installing => ACCENT,
         JobStatus::Queued => MUTED,
-        JobStatus::Paused => YELLOW,
+        JobStatus::Paused | JobStatus::Stopped => YELLOW,
         JobStatus::Failed => RED,
     };
     Span::styled(
         format!("{:<8}", status.label()),
         Style::default().fg(color).add_modifier(Modifier::BOLD),
     )
+}
+
+fn command_key(key: &KeyEvent, value: char) -> bool {
+    let modifier_pressed = if cfg!(target_os = "macos") {
+        key.modifiers.contains(KeyModifiers::SUPER) || key.modifiers.contains(KeyModifiers::META)
+    } else {
+        key.modifiers.contains(KeyModifiers::CONTROL)
+    };
+    matches!(key.code, KeyCode::Char(actual) if actual.eq_ignore_ascii_case(&value))
+        && modifier_pressed
 }
 
 fn job_details(job: &crate::download_queue::JobSnapshot) -> Text<'static> {
@@ -2495,7 +2855,8 @@ fn job_details(job: &crate::download_queue::JobSnapshot) -> Text<'static> {
         )),
         Line::from(format!("ID: {}", job.artifact_id)),
         Line::from(""),
-        Line::from("x pauses; c continues a paused job; r retries a failed job."),
+        Line::from("p pauses; c continues; r retries; x stops and discards temporary data."),
+        Line::from("d deletes the record and temp data; m removes only the manager record."),
         Line::from("Enter focuses this view; b returns the transfer to the background."),
     ];
     if let Some(error) = &job.error {
@@ -2568,6 +2929,7 @@ fn plan_columns(area: Rect) -> Vec<Rect> {
         .to_vec()
 }
 
+#[allow(dead_code)]
 fn plan_card<'a>(
     title: &'a str,
     text: Text<'a>,
