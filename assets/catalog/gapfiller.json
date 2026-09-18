@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "artifact_type": "gapfiller",
+  "generated_from": [
+    "_/bui.toml",
+    "_/deps.json"
+  ],
+  "artifact_count": 1,
+  "artifacts": [
+    {
+      "id": "gapfiller_v1",
+      "type": "gapfiller",
+      "relative_path": "models/gapfiller/gapfiller_v1.pt",
+      "loader": "GapFillerRetime",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "gapfiller_v1.pt",
+          "url": "https://github.com/KernelPanicKitten/ComfyUI-GapFiller/releases/download/v0.1.0/gapfiller_v1.pt",
+          "description": "Runtime model; PT file; hosted as a GitHub release asset.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "runtime-model",
+      "name": "gapfiller_v1.pt",
+      "url": "https://github.com/KernelPanicKitten/ComfyUI-GapFiller/releases/download/v0.1.0/gapfiller_v1.pt",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "Runtime model; PT file; hosted as a GitHub release asset."
+    }
+  ]
+}

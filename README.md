@@ -12,18 +12,16 @@ comfybox-rust/
 │   ├── comfybox-core/   # catalog, downloader, inventory, workflow, process, storage
 │   └── comfybox-cli/    # clap commands + interactive terminal UX
 ├── assets/
-│   ├── catalog/builtin.toml
+│   ├── catalog/         # split JSON catalogs embedded automatically at build time
 │   └── workflows/       # workflows embedded automatically at build time
-├── _/
-│   ├── deps.json        # complete generated workflow dependency manifest
 ├── docs/
 └── examples/
 ```
 
 The model registry is declarative. Reusable files are **artifacts**, installable bundles are **packages**, and workflows reference known artifacts/custom nodes by ID.
-At build time ComfyBox merges `_/deps.json` into the curated catalog and embeds every
-JSON file in `assets/workflows`. Each manifest artifact becomes directly installable in the
-Models tab, and workflow entries install their full artifact and custom-node sets.
+At build time ComfyBox embeds and merges every JSON file in `assets/catalog`, and embeds
+every JSON file in `assets/workflows`. Artifact-type catalogs populate the dependency
+tabs, while the package and workflow catalogs define complete install plans.
 
 ## Main capabilities
 
@@ -278,8 +276,7 @@ See `docs/CATALOG.md`.
 
 ## Current catalog
 
-The curated catalog is augmented by every artifact, workflow, custom node, Python
-dependency policy, and system dependency recorded in `_/deps.json`. Artifact source
+The built-in catalog is split by responsibility under `assets/catalog`. Artifact source
 metadata includes its title, URL, reported size, and description; the first source is
 the default download and all alternatives remain available to the catalog.
 

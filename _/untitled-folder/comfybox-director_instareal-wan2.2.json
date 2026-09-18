@@ -1,0 +1,708 @@
+{
+  "id": "8f3d6fe1-953c-4b20-ae0d-7e8f1f7d2fd4",
+  "revision": 0,
+  "last_node_id": 30,
+  "last_link_id": 20,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "SaveVideo",
+      "pos": [
+        1550,
+        300
+      ],
+      "size": [
+        500,
+        280
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0"
+      },
+      "widgets_values": [
+        "video/Wan22_director_instareal",
+        "auto",
+        "auto"
+      ],
+      "title": "Save video"
+    },
+    {
+      "id": 10,
+      "type": "UNETLoader",
+      "pos": [
+        -1400,
+        20
+      ],
+      "size": [
+        660,
+        100
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
+        "default"
+      ],
+      "title": "Wan A14B high-noise base model"
+    },
+    {
+      "id": 11,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -1040,
+        20
+      ],
+      "size": [
+        440,
+        100
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "wan2.2_t2v_A14b_high_noise_lora_rank64.safetensors",
+        1.0
+      ],
+      "title": "High-noise step-distill LoRA"
+    },
+    {
+      "id": 12,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -660,
+        20
+      ],
+      "size": [
+        440,
+        100
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "Instareal_HighNoise.safetensors",
+        1.0
+      ],
+      "title": "Instareal high-noise LoRA"
+    },
+    {
+      "id": 13,
+      "type": "UNETLoader",
+      "pos": [
+        -1400,
+        200
+      ],
+      "size": [
+        660,
+        100
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
+        "default"
+      ],
+      "title": "Wan A14B low-noise base model"
+    },
+    {
+      "id": 14,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -1040,
+        200
+      ],
+      "size": [
+        440,
+        100
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "wan2.2_t2v_A14b_low_noise_lora_rank64.safetensors",
+        1.0
+      ],
+      "title": "Low-noise step-distill LoRA"
+    },
+    {
+      "id": 15,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -660,
+        200
+      ],
+      "size": [
+        440,
+        100
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "Instareal_LowNoise.safetensors",
+        1.0
+      ],
+      "title": "Instareal low-noise LoRA"
+    },
+    {
+      "id": 16,
+      "type": "CLIPLoader",
+      "pos": [
+        -1400,
+        390
+      ],
+      "size": [
+        660,
+        120
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "wan",
+        "default"
+      ],
+      "title": "Wan text encoder"
+    },
+    {
+      "id": 17,
+      "type": "VAELoader",
+      "pos": [
+        -1400,
+        560
+      ],
+      "size": [
+        660,
+        70
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "wan_2.1_vae.safetensors"
+      ],
+      "title": "Wan VAE"
+    },
+    {
+      "id": 18,
+      "type": "CLIPVisionLoader",
+      "pos": [
+        -1400,
+        670
+      ],
+      "size": [
+        660,
+        70
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP_VISION",
+          "type": "CLIP_VISION",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "CLIPVisionLoader"
+      },
+      "widgets_values": [
+        "clip_vision_h.safetensors"
+      ],
+      "title": "CLIP Vision (for I2V / FFLF)"
+    },
+    {
+      "id": 20,
+      "type": "VideoModelLoader",
+      "pos": [
+        -190,
+        120
+      ],
+      "size": [
+        520,
+        340
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "high_noise",
+          "type": "MODEL",
+          "link": 12
+        },
+        {
+          "name": "low_noise",
+          "type": "MODEL",
+          "link": 15
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 16
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 17
+        },
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "clip_vision",
+          "type": "CLIP_VISION",
+          "link": 18
+        },
+        {
+          "name": "upscaler",
+          "type": "LATENT_UPSCALE_MODEL",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "models",
+          "type": "VIDEO_MODELS",
+          "links": [
+            20
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VideoModelLoader"
+      },
+      "widgets_values": [
+        "wan22",
+        true
+      ],
+      "title": "Video Model Loader — Wan 2.2 A14B"
+    },
+    {
+      "id": 21,
+      "type": "MiniMaxH3Director",
+      "pos": [
+        600,
+        140
+      ],
+      "size": [
+        780,
+        470
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "models",
+          "type": "VIDEO_MODELS",
+          "link": 20
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "video_vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "ref_model",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "first_frame",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "last_frame",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "ref_stack",
+          "type": "H3_REFSTACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "frames",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3Director"
+      },
+      "widgets_values": [
+        "{}",
+        "Instareal. High-fidelity cinematic realism, realistic human subjects, physically accurate lighting, natural materials, grounded camera and motion.",
+        "16:9",
+        "0.98 MP (1344x768) *",
+        24.0,
+        0,
+        "timestamps",
+        true,
+        "match",
+        "lanczos",
+        false,
+        "auto",
+        "off"
+      ],
+      "title": "Video Director — Wan 2.2 + Instareal"
+    },
+    {
+      "id": 30,
+      "type": "MarkdownNote",
+      "pos": [
+        -1830,
+        -80
+      ],
+      "size": [
+        420,
+        980
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Wan 2.2 A14B + Video Director + Instareal\n\nWhat this workflow does:\n1. Uses Video Director with model_type = wan22.\n2. Patches BOTH Wan branches with their required step-distill LoRAs at 1.0.\n3. Then applies Instareal to BOTH branches at 1.0.\n4. CLIP Vision is connected so the same workflow can handle T2V, I2V, and FFLF timeline clips.\n\nPrompting / strengths:\n- Trigger word: Instareal\n- Your note says recommended strength is 0.8 to 1.2, with 1.0 as the starting point. This workflow uses 1.0 by default.\n- Keep Instareal in global_style or clip prompts whenever you want the realism effect.\n\nImportant loader note:\n- The Director profile documentation is based on GGUF loaders for Wan. If your setup prefers GGUFLoaderKJ or UnetLoaderGGUF instead of UNETLoader, swap these two loader nodes accordingly.\n- The two Instareal filenames here are placeholders; replace them with the exact high-noise and low-noise filenames you downloaded.\n\nTimeline notes:\n- timeline_json starts as {}. Open the Video Director timeline UI and add your T2V, I2V, or FFLF clips there.\n"
+      ],
+      "title": "README — Wan22 + Instareal + Director"
+    }
+  ],
+  "links": [
+    [
+      1,
+      21,
+      0,
+      1,
+      0,
+      "VIDEO"
+    ],
+    [
+      10,
+      10,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      11,
+      11,
+      0,
+      12,
+      0,
+      "MODEL"
+    ],
+    [
+      12,
+      12,
+      0,
+      20,
+      1,
+      "MODEL"
+    ],
+    [
+      13,
+      13,
+      0,
+      14,
+      0,
+      "MODEL"
+    ],
+    [
+      14,
+      14,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      15,
+      15,
+      0,
+      20,
+      2,
+      "MODEL"
+    ],
+    [
+      16,
+      16,
+      0,
+      20,
+      3,
+      "CLIP"
+    ],
+    [
+      17,
+      17,
+      0,
+      20,
+      4,
+      "VAE"
+    ],
+    [
+      18,
+      18,
+      0,
+      20,
+      6,
+      "CLIP_VISION"
+    ],
+    [
+      20,
+      20,
+      0,
+      21,
+      0,
+      "VIDEO_MODELS"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8,
+      "offset": [
+        40,
+        50
+      ]
+    }
+  },
+  "version": 0.4
+}

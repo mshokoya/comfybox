@@ -1,0 +1,2223 @@
+{
+  "schema_version": 1,
+  "artifact_type": "diffusion_models",
+  "generated_from": [
+    "_/bui.toml",
+    "_/deps.json"
+  ],
+  "artifact_count": 65,
+  "artifacts": [
+    {
+      "id": "firered.image-edit.1.0.bf16",
+      "name": "FireRed Image Edit 1.0 - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/firered_image_edit_1.0_bf16.safetensors",
+      "group": "FireRed Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "bf16",
+        "firered"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/firered_image_edit_1.0_bf16.safetensors",
+          "sha256": "17f68cb7f85b796e74d9598b74893f4e430fc2a534fa9ab42e1f6dd83d0f4a4c",
+          "size_bytes": 40861031488,
+          "enabled": true,
+          "title": "FireRed Image Edit 1.0 - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/firered_image_edit_1.0_bf16.safetensors",
+      "size_bytes": 40861031488,
+      "sha256": "17f68cb7f85b796e74d9598b74893f4e430fc2a534fa9ab42e1f6dd83d0f4a4c",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "flux2.klein.9b",
+      "legacy_ids": [
+        "flux_2_klein_9b"
+      ],
+      "name": "FLUX.2 Klein 9B",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/flux-2-klein-9b.safetensors",
+      "group": "FLUX.2",
+      "tags": [
+        "image",
+        "9b",
+        "flux2",
+        "klein"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "flux-2-klein-9b.safetensors",
+          "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-9B/resolve/main/flux-2-klein-9b.safetensors",
+          "description": "Diffusion model weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "0975d6b77b5f510b99547d6724a208e36527df654e8f6134f59ece3f9f30da58",
+          "size_bytes": 18157185168,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-9B/resolve/main/flux-2-klein-9b.safetensors",
+      "size_bytes": 18157185168,
+      "sha256": "0975d6b77b5f510b99547d6724a208e36527df654e8f6134f59ece3f9f30da58",
+      "gated": false,
+      "description": "Diffusion model weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "flux2.klein.9b.fp8",
+      "legacy_ids": [
+        "flux_2_klein_9b_fp8"
+      ],
+      "name": "FLUX.2 Klein 9B - FP8",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/flux-2-klein-9b-fp8.safetensors",
+      "group": "FLUX.2",
+      "tags": [
+        "image",
+        "9b",
+        "fp8",
+        "flux2",
+        "klein"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-9B-fp8/resolve/main/flux-2-klein-9b-fp8.safetensors",
+          "sha256": "865ba09f5b4c3cbd3468a4bd3acb9fcb2f8740c54317482f0bcd4ed1d3655cee",
+          "size_bytes": 9433061528,
+          "enabled": true,
+          "title": "FLUX.2 Klein 9B - FP8",
+          "description": "Catalog download source",
+          "size": null
+        },
+        {
+          "title": "flux-2-klein-9b-fp8.safetensors",
+          "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-9b-fp8/resolve/main/flux-2-klein-9b-fp8.safetensors",
+          "description": "Diffusion model weights; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-9B-fp8/resolve/main/flux-2-klein-9b-fp8.safetensors",
+      "size_bytes": 9433061528,
+      "sha256": "865ba09f5b4c3cbd3468a4bd3acb9fcb2f8740c54317482f0bcd4ed1d3655cee",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "flux2.klein.9b.int8-convrot",
+      "legacy_ids": [
+        "flux_2_klein_9b_int8_convrot_comfyui"
+      ],
+      "name": "FLUX.2 Klein 9B - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/F2K/flux-2-klein-9b-int8-ConvRot-comfyui.safetensors",
+      "group": "FLUX.2",
+      "tags": [
+        "image",
+        "9b",
+        "int8",
+        "convrot",
+        "flux2",
+        "klein"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "FLUX.2 Klein 9B INT8 ConvRot — ComfyUI Native",
+          "url": "https://huggingface.co/obsxrver/ComfyUI-Native-INT8_ConvRot/resolve/main/diffusion_models/flux-2-klein-9b_int8_convrot.safetensors",
+          "size": "9.44 GB",
+          "description": "ComfyUI-native diffusion model weights using INT8 ConvRot quantization; hosted by obsxrver on Hugging Face.",
+          "sha256": "bd041cec0d7955d6fcbaef952ba6ebe37af9f7d032ec927657e7777f21f5c522",
+          "size_bytes": 9439894544,
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/obsxrver/ComfyUI-Native-INT8_ConvRot/resolve/main/diffusion_models/flux-2-klein-9b_int8_convrot.safetensors",
+      "size_bytes": 9439894544,
+      "sha256": "bd041cec0d7955d6fcbaef952ba6ebe37af9f7d032ec927657e7777f21f5c522",
+      "gated": false,
+      "description": "ComfyUI-native diffusion model weights using INT8 ConvRot quantization; hosted by obsxrver on Hugging Face."
+    },
+    {
+      "id": "ideogram4.fp8",
+      "name": "Ideogram 4 - FP8 Scaled",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/ideogram4_fp8_scaled.safetensors",
+      "group": "Ideogram 4",
+      "tags": [
+        "image",
+        "fp8",
+        "scaled",
+        "ideogram4"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_fp8_scaled.safetensors",
+          "sha256": "49a946f1b0f8bcf5eab7d3b1ecc7b453c104e034cb1b592032745692724bd306",
+          "size_bytes": 9280741285,
+          "enabled": true,
+          "title": "Ideogram 4 - FP8 Scaled",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_fp8_scaled.safetensors",
+      "size_bytes": 9280741285,
+      "sha256": "49a946f1b0f8bcf5eab7d3b1ecc7b453c104e034cb1b592032745692724bd306",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "ideogram4.int8-convrot",
+      "name": "Ideogram 4 - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/ideogram4_int8_convrot.safetensors",
+      "group": "Ideogram 4",
+      "tags": [
+        "image",
+        "int8",
+        "convrot",
+        "ideogram4"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_int8_convrot.safetensors",
+          "sha256": "a9164002943463b4c7b2abd88c82a488c088acc35762651e4d8604d6ce4a163d",
+          "size_bytes": 9583465712,
+          "enabled": true,
+          "title": "Ideogram 4 - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_int8_convrot.safetensors",
+      "size_bytes": 9583465712,
+      "sha256": "a9164002943463b4c7b2abd88c82a488c088acc35762651e4d8604d6ce4a163d",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "ideogram4.nvfp4-mixed",
+      "name": "Ideogram 4 - NVFP4 Mixed",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/ideogram4_nvfp4_mixed.safetensors",
+      "group": "Ideogram 4",
+      "tags": [
+        "image",
+        "nvfp4",
+        "mixed",
+        "ideogram4"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_nvfp4_mixed.safetensors",
+          "sha256": "e7923b4b0a1129ae5afcc09e63046185688c8b09eb9a1a748cccdbde5d381609",
+          "size_bytes": 5490550037,
+          "enabled": true,
+          "title": "Ideogram 4 - NVFP4 Mixed",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_nvfp4_mixed.safetensors",
+      "size_bytes": 5490550037,
+      "sha256": "e7923b4b0a1129ae5afcc09e63046185688c8b09eb9a1a748cccdbde5d381609",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "ideogram4.unconditional.fp8-scaled",
+      "name": "Ideogram 4 Unconditional - FP8 Scaled",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/ideogram4_unconditional_fp8_scaled.safetensors",
+      "group": "Ideogram 4",
+      "tags": [
+        "image",
+        "unconditional",
+        "fp8",
+        "scaled",
+        "ideogram4"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_unconditional_fp8_scaled.safetensors",
+          "sha256": "9b359007dae162cca7591d00868feea733eb7c56e56e3a214a4d5a9a2a07cd60",
+          "size_bytes": 9280741293,
+          "enabled": true,
+          "title": "Ideogram 4 Unconditional - FP8 Scaled",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_unconditional_fp8_scaled.safetensors",
+      "size_bytes": 9280741293,
+      "sha256": "9b359007dae162cca7591d00868feea733eb7c56e56e3a214a4d5a9a2a07cd60",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "ideogram4.unconditional.int8-convrot",
+      "name": "Ideogram 4 Unconditional - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/ideogram4_unconditional_int8_convrot.safetensors",
+      "group": "Ideogram 4",
+      "tags": [
+        "image",
+        "unconditional",
+        "int8",
+        "convrot",
+        "ideogram4"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_unconditional_int8_convrot.safetensors",
+          "sha256": "cd03ed94f244c9cb705e7d30ca0f40b5f5b004bb20674117adff88d16416c23d",
+          "size_bytes": 9583465712,
+          "enabled": true,
+          "title": "Ideogram 4 Unconditional - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_unconditional_int8_convrot.safetensors",
+      "size_bytes": 9583465712,
+      "sha256": "cd03ed94f244c9cb705e7d30ca0f40b5f5b004bb20674117adff88d16416c23d",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "ideogram4.unconditional.nvfp4-mixed",
+      "name": "Ideogram 4 Unconditional - NVFP4 Mixed",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/ideogram4_unconditional_nvfp4_mixed.safetensors",
+      "group": "Ideogram 4",
+      "tags": [
+        "image",
+        "unconditional",
+        "nvfp4",
+        "mixed",
+        "ideogram4"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_unconditional_nvfp4_mixed.safetensors",
+          "sha256": "639e37bd1dd7ee35e23c7cfccf93a518ddc7f4587818956ec42b31e659fd6ac0",
+          "size_bytes": 5490550037,
+          "enabled": true,
+          "title": "Ideogram 4 Unconditional - NVFP4 Mixed",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/diffusion_models/ideogram4_unconditional_nvfp4_mixed.safetensors",
+      "size_bytes": 5490550037,
+      "sha256": "639e37bd1dd7ee35e23c7cfccf93a518ddc7f4587818956ec42b31e659fd6ac0",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.raw.bf16",
+      "legacy_ids": [
+        "models_diffusion_models_krea2_raw_bf16"
+      ],
+      "name": "Krea 2 - Raw - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_raw_bf16.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "raw",
+        "bf16",
+        "krea2"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2_raw_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_bf16.safetensors",
+          "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "f99bb0ff8e362b77342bc4994e0c50906fe7ef7074864b181b7d48d2fa6d03d7",
+          "size_bytes": 26283332608,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_bf16.safetensors",
+      "size_bytes": 26283332608,
+      "sha256": "f99bb0ff8e362b77342bc4994e0c50906fe7ef7074864b181b7d48d2fa6d03d7",
+      "gated": false,
+      "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "krea2.raw.fp8-scaled",
+      "name": "Krea 2 - Raw - FP8 Scaled",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_raw_fp8_scaled.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "raw",
+        "fp8",
+        "scaled",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_fp8_scaled.safetensors",
+          "sha256": "48cd5d6c100297968349b41a8e77c6591d1dac18a215807f5f25f59e5c54cd61",
+          "size_bytes": 13141730784,
+          "enabled": true,
+          "title": "Krea 2 - Raw - FP8 Scaled",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_fp8_scaled.safetensors",
+      "size_bytes": 13141730784,
+      "sha256": "48cd5d6c100297968349b41a8e77c6591d1dac18a215807f5f25f59e5c54cd61",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.raw.int8-convrot",
+      "name": "Krea 2 - Raw - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_raw_int8_convrot.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "raw",
+        "int8",
+        "convrot",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_int8_convrot.safetensors",
+          "sha256": "5585a4a38c4bcfb6fde2d480a4aa6edf7f665721ebde56d30662c35a45f5fa5c",
+          "size_bytes": 13492686496,
+          "enabled": true,
+          "title": "Krea 2 - Raw - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_int8_convrot.safetensors",
+      "size_bytes": 13492686496,
+      "sha256": "5585a4a38c4bcfb6fde2d480a4aa6edf7f665721ebde56d30662c35a45f5fa5c",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.turbo.bf16",
+      "name": "Krea 2 - Turbo - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_turbo_bf16.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "turbo",
+        "bf16",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_bf16.safetensors",
+          "sha256": "78bbf8f4165eda19cea3cb06c78089221932a39e2eed8af9da741f942c47ffb3",
+          "size_bytes": 26283332608,
+          "enabled": true,
+          "title": "Krea 2 - Turbo - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_bf16.safetensors",
+      "size_bytes": 26283332608,
+      "sha256": "78bbf8f4165eda19cea3cb06c78089221932a39e2eed8af9da741f942c47ffb3",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.turbo.fp8-scaled",
+      "legacy_ids": [
+        "krea2_turbo_fp8_scaled"
+      ],
+      "name": "Krea 2 - Turbo - FP8 Scaled",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "turbo",
+        "fp8",
+        "scaled",
+        "krea2"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2_turbo_fp8_scaled.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+          "description": "Diffusion model weights; FP8 scaled precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "eb4dd8c612cfd10f64f25b057e6e6bbcb5737c94a7372177e456dbf7579502f1",
+          "size_bytes": 13141730784,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+      "size_bytes": 13141730784,
+      "sha256": "eb4dd8c612cfd10f64f25b057e6e6bbcb5737c94a7372177e456dbf7579502f1",
+      "gated": false,
+      "description": "Diffusion model weights; FP8 scaled precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "krea2.turbo.fp8.face-swap",
+      "legacy_ids": [
+        "krea_2_turbo_fp8"
+      ],
+      "name": "Krea 2 - Turbo - FP8 Scaled (Face-Swap Alias)",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Krea2/krea-2-turbo-fp8.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "turbo",
+        "fp8",
+        "scaled",
+        "face-swap",
+        "workflow-alias",
+        "krea2"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2_turbo_fp8_scaled.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+          "description": "Diffusion model weights; FP8 scaled precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "eb4dd8c612cfd10f64f25b057e6e6bbcb5737c94a7372177e456dbf7579502f1",
+          "size_bytes": 13141730784,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+      "size_bytes": 13141730784,
+      "sha256": "eb4dd8c612cfd10f64f25b057e6e6bbcb5737c94a7372177e456dbf7579502f1",
+      "gated": false,
+      "description": "Diffusion model weights; FP8 scaled precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "krea2.turbo.int8-convrot",
+      "legacy_ids": [
+        "krea2_turbo_int8_convrot"
+      ],
+      "name": "Krea 2 - Turbo - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "turbo",
+        "int8",
+        "convrot",
+        "krea2"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2_turbo_int8_convrot.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+          "description": "Diffusion model weights; INT8 ConvRot quantization; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "8e4eeda70dd5037ab1ba2bef6b417f9f901e26093117cf397f741fc1fdaaf3f1",
+          "size_bytes": 13492686496,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_int8_convrot.safetensors",
+      "size_bytes": 13492686496,
+      "sha256": "8e4eeda70dd5037ab1ba2bef6b417f9f901e26093117cf397f741fc1fdaaf3f1",
+      "gated": false,
+      "description": "Diffusion model weights; INT8 ConvRot quantization; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "krea2.turbo.mxfp8",
+      "name": "Krea 2 - Turbo - MXFP8",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_turbo_mxfp8.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "turbo",
+        "mxfp8",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_mxfp8.safetensors",
+          "sha256": "4c09131a442c3a01e95f934b43c76c1e691b9f683694a7b68d6fc707d5ecfce3",
+          "size_bytes": 13532318080,
+          "enabled": true,
+          "title": "Krea 2 - Turbo - MXFP8",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_mxfp8.safetensors",
+      "size_bytes": 13532318080,
+      "sha256": "4c09131a442c3a01e95f934b43c76c1e691b9f683694a7b68d6fc707d5ecfce3",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.turbo.nvfp4",
+      "legacy_ids": [
+        "krea2_turbo_nvfp4"
+      ],
+      "name": "Krea 2 - Turbo - NVFP4",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/krea2_turbo_nvfp4.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "turbo",
+        "nvfp4",
+        "krea2"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_nvfp4.safetensors",
+          "sha256": "61527003b2d537055494d01bc8efe51d6e86e64192ba23e3721a5647231fe394",
+          "size_bytes": 7673668448,
+          "enabled": true,
+          "title": "Krea 2 - Turbo - NVFP4",
+          "description": "Catalog download source",
+          "size": null
+        },
+        {
+          "title": "krea2_turbo_nvfp4.safetensors",
+          "url": "https://huggingface.co/Abiray/Krea-2-Turbo-FP8-NVFP4/resolve/main/krea2_turbo_nvfp4.safetensors",
+          "size": "7.67 GB",
+          "description": "Diffusion model weights; NVFP4 quantization; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 7670000000
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_nvfp4.safetensors",
+      "size_bytes": 7673668448,
+      "sha256": "61527003b2d537055494d01bc8efe51d6e86e64192ba23e3721a5647231fe394",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2_raw_bf16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/diffusion_models/krea2_raw_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2_raw_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_bf16.safetensors",
+          "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "krea2_raw_bf16.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_bf16.safetensors",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.fl2va.bf16",
+      "name": "MiniMax H3 - FL2VA - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_fl2va_bf16.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "bf16",
+        "fl2va"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_bf16.safetensors",
+          "sha256": "907d4add438438ec1544f5240c3b38532ed934fe6be75677a6bbda2a6fdd6182",
+          "size_bytes": 66280487368,
+          "enabled": true,
+          "title": "MiniMax H3 - FL2VA - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_bf16.safetensors",
+      "size_bytes": 66280487368,
+      "sha256": "907d4add438438ec1544f5240c3b38532ed934fe6be75677a6bbda2a6fdd6182",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.fl2va.int8-convrot",
+      "name": "MiniMax H3 - FL2VA - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_fl2va_int8_convrot.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "int8",
+        "convrot",
+        "fl2va"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_int8_convrot.safetensors",
+          "sha256": "7ad4c73e6e378b822ffd1629f27f632d3787d95f5e468e3af958f98c58df96a5",
+          "size_bytes": 34038892334,
+          "enabled": true,
+          "title": "MiniMax H3 - FL2VA - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_int8_convrot.safetensors",
+      "size_bytes": 34038892334,
+      "sha256": "7ad4c73e6e378b822ffd1629f27f632d3787d95f5e468e3af958f98c58df96a5",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.fl2va.pruned.bf16",
+      "name": "MiniMax H3 - FL2VA - Pruned BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_fl2va_pruned_bf16.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "bf16",
+        "pruned",
+        "fl2va"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_bf16.safetensors",
+          "sha256": "a32572fb90b5508b201ec7c2eddcc184b13ddfd3c6f6d2cf06a0b46535d541b4",
+          "size_bytes": 40225724176,
+          "enabled": true,
+          "title": "MiniMax H3 - FL2VA - Pruned BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_bf16.safetensors",
+      "size_bytes": 40225724176,
+      "sha256": "a32572fb90b5508b201ec7c2eddcc184b13ddfd3c6f6d2cf06a0b46535d541b4",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.fl2va.pruned.fp8-scaled",
+      "name": "MiniMax H3 - FL2VA - Pruned FP8 Scaled",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_fl2va_pruned_fp8_scaled.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "fp8",
+        "scaled",
+        "pruned",
+        "fl2va"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_fp8_scaled.safetensors",
+          "sha256": "12944c1f7791637e7de12208aef04da82bd26b95271b1b47d817364315ade993",
+          "size_bytes": 20958205608,
+          "enabled": true,
+          "title": "MiniMax H3 - FL2VA - Pruned FP8 Scaled",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_fp8_scaled.safetensors",
+      "size_bytes": 20958205608,
+      "sha256": "12944c1f7791637e7de12208aef04da82bd26b95271b1b47d817364315ade993",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.fl2va.pruned.int8-convrot",
+      "name": "MiniMax H3 - FL2VA - Pruned INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "int8",
+        "convrot",
+        "pruned",
+        "fl2va"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+          "sha256": "e889202c41dafb67b10d67b97f0d8541508036a6090af23425a5c2615d03c47a",
+          "size_bytes": 20970379616,
+          "enabled": true,
+          "title": "MiniMax H3 - FL2VA - Pruned INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+      "size_bytes": 20970379616,
+      "sha256": "e889202c41dafb67b10d67b97f0d8541508036a6090af23425a5c2615d03c47a",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.ref2va.bf16",
+      "legacy_ids": [
+        "minimax_h3_ref2va_bf16"
+      ],
+      "name": "MiniMax H3 - Ref2VA - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_ref2va_bf16.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "bf16",
+        "ref2va"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "minimax_h3_ref2va_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_bf16.safetensors",
+          "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "e32c54c1a7b4f5f397f195cea267ccb18806303bb665678c4bee60953bdf3026",
+          "size_bytes": 66280487368,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_bf16.safetensors",
+      "size_bytes": 66280487368,
+      "sha256": "e32c54c1a7b4f5f397f195cea267ccb18806303bb665678c4bee60953bdf3026",
+      "gated": false,
+      "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.ref2va.int8-convrot",
+      "name": "MiniMax H3 - Ref2VA - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_ref2va_int8_convrot.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "int8",
+        "convrot",
+        "ref2va"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_int8_convrot.safetensors",
+          "sha256": "9eef934046a0671bc8a5daf87100705e1478419c574cfde70c50fbe6885f76a9",
+          "size_bytes": 34038894550,
+          "enabled": true,
+          "title": "MiniMax H3 - Ref2VA - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_int8_convrot.safetensors",
+      "size_bytes": 34038894550,
+      "sha256": "9eef934046a0671bc8a5daf87100705e1478419c574cfde70c50fbe6885f76a9",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.ref2va.pruned.bf16",
+      "name": "MiniMax H3 - Ref2VA - Pruned BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_ref2va_pruned_bf16.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "bf16",
+        "pruned",
+        "ref2va"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_bf16.safetensors",
+          "sha256": "37c0da793e20ca735272ec2be655f08a2e10f97a3ec8fdfb40f5b39a736ed6fe",
+          "size_bytes": 40225724176,
+          "enabled": true,
+          "title": "MiniMax H3 - Ref2VA - Pruned BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_bf16.safetensors",
+      "size_bytes": 40225724176,
+      "sha256": "37c0da793e20ca735272ec2be655f08a2e10f97a3ec8fdfb40f5b39a736ed6fe",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.ref2va.pruned.fp8-scaled",
+      "name": "MiniMax H3 - Ref2VA - Pruned FP8 Scaled",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_ref2va_pruned_fp8_scaled.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "fp8",
+        "scaled",
+        "pruned",
+        "ref2va"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_fp8_scaled.safetensors",
+          "sha256": "f86f2f79ebd2d76eb8eeb46091e83982e6ff51d255747e7b16e92834b392b8e9",
+          "size_bytes": 20958205608,
+          "enabled": true,
+          "title": "MiniMax H3 - Ref2VA - Pruned FP8 Scaled",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_fp8_scaled.safetensors",
+      "size_bytes": 20958205608,
+      "sha256": "f86f2f79ebd2d76eb8eeb46091e83982e6ff51d255747e7b16e92834b392b8e9",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.ref2va.pruned.int8-convrot",
+      "name": "MiniMax H3 - Ref2VA - Pruned INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "int8",
+        "convrot",
+        "pruned",
+        "ref2va"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+          "sha256": "9255f52b6677845ad238f20dfaafa94727053694127ab7f255c048f0f9365779",
+          "size_bytes": 20970379616,
+          "enabled": true,
+          "title": "MiniMax H3 - Ref2VA - Pruned INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "size_bytes": 20970379616,
+      "sha256": "9255f52b6677845ad238f20dfaafa94727053694127ab7f255c048f0f9365779",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "pid_qwenimage_1024_to_4096_4step_bf16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/nvidia_pid/pid_qwenimage_1024_to_4096_4step_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "pid_qwenimage_1024_to_4096_4step_bf16.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/pid_qwenimage_1024_to_4096_4step_bf16.safetensors",
+          "size": "2.72 GB",
+          "description": "Diffusion model weights; BF16 precision; 4-step variant; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 2720000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "pid_qwenimage_1024_to_4096_4step_bf16.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/pid_qwenimage_1024_to_4096_4step_bf16.safetensors",
+      "size_bytes": 2720000000,
+      "sha256": null,
+      "gated": false,
+      "description": "Diffusion model weights; BF16 precision; 4-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.image.bf16",
+      "name": "Qwen Image - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_bf16.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "bf16",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors",
+          "sha256": "d08fb5d68026c0d87325f9a7b3ad6454061113a2bc73cc883114dae172937ae7",
+          "size_bytes": 40861031488,
+          "enabled": true,
+          "title": "Qwen Image - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors",
+      "size_bytes": 40861031488,
+      "sha256": "d08fb5d68026c0d87325f9a7b3ad6454061113a2bc73cc883114dae172937ae7",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.fp8-e4m3fn",
+      "name": "Qwen Image - FP8 E4M3FN",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_fp8_e4m3fn.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "fp8",
+        "e4m3fn",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_e4m3fn.safetensors",
+          "sha256": "98763a127701eb6fb59096f7742cb3aa7d64ed510b9f4e882d8351f8176e3ce3",
+          "size_bytes": 20430635136,
+          "enabled": true,
+          "title": "Qwen Image - FP8 E4M3FN",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_e4m3fn.safetensors",
+      "size_bytes": 20430635136,
+      "sha256": "98763a127701eb6fb59096f7742cb3aa7d64ed510b9f4e882d8351f8176e3ce3",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.fp8-hq",
+      "name": "Qwen Image - FP8 HQ",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_fp8_hq.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "fp8",
+        "hq",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_hq.safetensors",
+          "sha256": "d6027c88c850c25f56752d9d0ab79910c5d04e9e8515d00301c5c9301210ce4c",
+          "size_bytes": 22741809576,
+          "enabled": true,
+          "title": "Qwen Image - FP8 HQ",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_hq.safetensors",
+      "size_bytes": 22741809576,
+      "sha256": "d6027c88c850c25f56752d9d0ab79910c5d04e9e8515d00301c5c9301210ce4c",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.fp8mixed",
+      "name": "Qwen Image - FP8 Mixed",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_fp8mixed.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "fp8",
+        "mixed",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8mixed.safetensors",
+          "sha256": "0ee8375df948e428b5cee97b62f7311ab11a6085eb5b1918f66bfab047fedc18",
+          "size_bytes": 20533672381,
+          "enabled": true,
+          "title": "Qwen Image - FP8 Mixed",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8mixed.safetensors",
+      "size_bytes": 20533672381,
+      "sha256": "0ee8375df948e428b5cee97b62f7311ab11a6085eb5b1918f66bfab047fedc18",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.nvfp4",
+      "name": "Qwen Image - NVFP4",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_nvfp4.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "nvfp4",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_nvfp4.safetensors",
+          "sha256": "54df91fa379a6487aa7869b678d5c1fa9e4b30db1019d0ab8dbce629daa8a5a8",
+          "size_bytes": 19769139136,
+          "enabled": true,
+          "title": "Qwen Image - NVFP4",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_nvfp4.safetensors",
+      "size_bytes": 19769139136,
+      "sha256": "54df91fa379a6487aa7869b678d5c1fa9e4b30db1019d0ab8dbce629daa8a5a8",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.2512.bf16",
+      "name": "Qwen Image 2512 - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_2512_bf16.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "bf16",
+        "2512",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_bf16.safetensors",
+          "sha256": "cbf55390fff27dbc785046d7007b04e0c5dd7421e7ef128f2831eacb53a8e075",
+          "size_bytes": 40861031488,
+          "enabled": true,
+          "title": "Qwen Image 2512 - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_bf16.safetensors",
+      "size_bytes": 40861031488,
+      "sha256": "cbf55390fff27dbc785046d7007b04e0c5dd7421e7ef128f2831eacb53a8e075",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.2512.fp8-e4m3fn",
+      "name": "Qwen Image 2512 - FP8 E4M3FN",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "fp8",
+        "e4m3fn",
+        "2512",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors",
+          "sha256": "5dc80554d5d83390046a2f4a94ece06afb7700bf7b0aaf8bde9769793875876b",
+          "size_bytes": 20430679144,
+          "enabled": true,
+          "title": "Qwen Image 2512 - FP8 E4M3FN",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors",
+      "size_bytes": 20430679144,
+      "sha256": "5dc80554d5d83390046a2f4a94ece06afb7700bf7b0aaf8bde9769793875876b",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.bf16",
+      "name": "Qwen Image Edit - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_bf16.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "bf16",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_bf16.safetensors",
+          "sha256": "f133f246ba14ba2a24e1a9df64fe4da35281e684b467c992059429bfb6187625",
+          "size_bytes": 40861031488,
+          "enabled": true,
+          "title": "Qwen Image Edit - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_bf16.safetensors",
+      "size_bytes": 40861031488,
+      "sha256": "f133f246ba14ba2a24e1a9df64fe4da35281e684b467c992059429bfb6187625",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.fp8-e4m3fn",
+      "name": "Qwen Image Edit - FP8 - E4M3FN",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "fp8",
+        "e4m3fn",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors",
+          "sha256": "393c6743d1de2e9031b5197027b36116f2096958ccc0223526d34e1860266021",
+          "size_bytes": 20430635136,
+          "enabled": true,
+          "title": "Qwen Image Edit - FP8 - E4M3FN",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors",
+      "size_bytes": 20430635136,
+      "sha256": "393c6743d1de2e9031b5197027b36116f2096958ccc0223526d34e1860266021",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2509.bf16",
+      "name": "Qwen Image Edit 2509 - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2509_bf16.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "bf16",
+        "2509",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_bf16.safetensors",
+          "sha256": "2da4dc223f9e6cfb8aa97f966d1bb46b24dbae314256ba587cb02bfbcb60ef6d",
+          "size_bytes": 40861031488,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_bf16.safetensors",
+      "size_bytes": 40861031488,
+      "sha256": "2da4dc223f9e6cfb8aa97f966d1bb46b24dbae314256ba587cb02bfbcb60ef6d",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2509.fp8-e4m3fn",
+      "legacy_ids": [
+        "qwen_image_edit_2509_fp8_e4m3fn"
+      ],
+      "name": "Qwen Image Edit 2509 - FP8 - E4M3FN",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "fp8",
+        "e4m3fn",
+        "2509",
+        "qwen-image"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+          "sha256": "318568f61951ab9da21100c7b896e3c1da67f0d2efad6421545e022cfaa2b2b4",
+          "size_bytes": 20430698424,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 - FP8 - E4M3FN",
+          "description": "Catalog download source",
+          "size": null
+        },
+        {
+          "title": "qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+          "url": "https://huggingface.co/theunlikely/Qwen-Image-Edit-2509/resolve/main/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+          "size": "20.43 GB",
+          "description": "Diffusion model weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 20430000000
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+      "size_bytes": 20430698424,
+      "sha256": "318568f61951ab9da21100c7b896e3c1da67f0d2efad6421545e022cfaa2b2b4",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2509.fp8mixed",
+      "legacy_ids": [
+        "qwen_image_edit_2509_fp8mixed"
+      ],
+      "name": "Qwen Image Edit 2509 - FP8 Mixed",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "fp8",
+        "mixed",
+        "2509",
+        "qwen-image"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen_image_edit_2509_fp8mixed.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+          "description": "Diffusion model weights; FP8 mixed precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "c742e8c584c11f65d846816b334d2c25a89e0a196d2790a813c6bf943e40a492",
+          "size_bytes": 20533579421,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_fp8mixed.safetensors",
+      "size_bytes": 20533579421,
+      "sha256": "c742e8c584c11f65d846816b334d2c25a89e0a196d2790a813c6bf943e40a492",
+      "gated": false,
+      "description": "Diffusion model weights; FP8 mixed precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.2509.int8-convrot",
+      "name": "Qwen Image Edit 2509 - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2509_int8_convrot.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "int8",
+        "convrot",
+        "2509",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_int8_convrot.safetensors",
+          "sha256": "638402843782296122f42f2ff557a63a9535c4fbc3f6978308042c8d0f4012b4",
+          "size_bytes": 20499083752,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2509_int8_convrot.safetensors",
+      "size_bytes": 20499083752,
+      "sha256": "638402843782296122f42f2ff557a63a9535c4fbc3f6978308042c8d0f4012b4",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2511.bf16",
+      "legacy_ids": [
+        "qwen_image_edit_2511_bf16"
+      ],
+      "name": "Qwen Image Edit 2511 - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "bf16",
+        "2511",
+        "qwen-image"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen_image_edit_2511_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+          "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "ae42d927b5fac4f278b9a894554c727e619727a63622976f2d95625be4bce08c",
+          "size_bytes": 40861031560,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_bf16.safetensors",
+      "size_bytes": 40861031560,
+      "sha256": "ae42d927b5fac4f278b9a894554c727e619727a63622976f2d95625be4bce08c",
+      "gated": false,
+      "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.2511.fp8mixed",
+      "legacy_ids": [
+        "qwen_image_edit_2511_fp8mixed"
+      ],
+      "name": "Qwen Image Edit 2511 - FP8 Mixed",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "fp8",
+        "mixed",
+        "2511",
+        "qwen-image"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors",
+          "sha256": "c9fdc158e46d3b61ef75f21ae866ca2fe808bf4a53643120d1c1e87c19280a4e",
+          "size_bytes": 20533762817,
+          "enabled": true,
+          "title": "Qwen Image Edit 2511 - FP8 Mixed",
+          "description": "Catalog download source",
+          "size": null
+        },
+        {
+          "title": "qwen_image_edit_2511_fp8mixed.safetensors",
+          "url": "https://huggingface.co/art1455/Qwen2511/resolve/main/qwen_image_edit_2511_fp8mixed.safetensors",
+          "size": "20.53 GB",
+          "description": "Diffusion model weights; FP8 mixed precision; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 20530000000
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors",
+      "size_bytes": 20533762817,
+      "sha256": "c9fdc158e46d3b61ef75f21ae866ca2fe808bf4a53643120d1c1e87c19280a4e",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2511.int8-convrot",
+      "legacy_ids": [
+        "models_diffusion_models_qwen_image_edit_2511_int8_convrot"
+      ],
+      "name": "Qwen Image Edit 2511 - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "int8",
+        "convrot",
+        "2511",
+        "qwen-image"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen_image_edit_2511_int8_convrot.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+          "description": "Diffusion model weights; INT8 ConvRot quantization; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "11b5af5ac601821d73930c84846c9a158e67177356daf927ce1c8d10f3963829",
+          "size_bytes": 20499083824,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+      "size_bytes": 20499083824,
+      "sha256": "11b5af5ac601821d73930c84846c9a158e67177356daf927ce1c8d10f3963829",
+      "gated": false,
+      "description": "Diffusion model weights; INT8 ConvRot quantization; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen_image_bf16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/split_files/diffusion_models/qwen_image_bf16.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen_image_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors",
+          "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "qwen_image_bf16.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1_0",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen/qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1.0.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1.0.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1.0.safetensors",
+          "size": "20.45 GB",
+          "description": "Diffusion model weights; FP8 E4M3FN scaled precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 20450000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1.0.safetensors",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/qwen_image_edit_2511_fp8_e4m3fn_scaled_lightning_comfyui_4steps_v1.0.safetensors",
+      "size_bytes": 20450000000,
+      "sha256": null,
+      "gated": false,
+      "description": "Diffusion model weights; FP8 E4M3FN scaled precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen_image_edit_2511_int8_convrot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Qwen/qwen_image_edit_2511_int8_convrot.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen_image_edit_2511_int8_convrot.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+          "description": "Diffusion model weights; INT8 ConvRot quantization; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "qwen_image_edit_2511_int8_convrot.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_int8_convrot.safetensors",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "Diffusion model weights; INT8 ConvRot quantization; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen_image_q6_k",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen-image-Q6_K.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen-image-Q6_K.gguf",
+          "url": "https://huggingface.co/city96/Qwen-Image-gguf/resolve/main/qwen-image-Q6_K.gguf",
+          "size": "16.82 GB",
+          "description": "Diffusion model weights; GGUF Q6_K quantization; GGUF file; hosted on Hugging Face.",
+          "size_bytes": 16820000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "qwen-image-Q6_K.gguf",
+      "url": "https://huggingface.co/city96/Qwen-Image-gguf/resolve/main/qwen-image-Q6_K.gguf",
+      "size_bytes": 16820000000,
+      "sha256": null,
+      "gated": false,
+      "description": "Diffusion model weights; GGUF Q6_K quantization; GGUF file; hosted on Hugging Face."
+    },
+    {
+      "id": "scail2.fp16",
+      "name": "SCAIL-2 - FP16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.1_14B_SCAIL_2_fp16.safetensors",
+      "group": "SCAIL-2",
+      "tags": [
+        "video",
+        "wan2.1",
+        "14b",
+        "fp16",
+        "scail2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_fp16.safetensors",
+          "sha256": "e3f9cd52184949ee8ffdc01ba14de4c619e0ddfa09ae105cb7efce5c8dc9fe43",
+          "size_bytes": 32794040328,
+          "enabled": true,
+          "title": "SCAIL-2 - FP16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_fp16.safetensors",
+      "size_bytes": 32794040328,
+      "sha256": "e3f9cd52184949ee8ffdc01ba14de4c619e0ddfa09ae105cb7efce5c8dc9fe43",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "scail2.fp8-scaled",
+      "name": "SCAIL-2 - FP8 Scaled",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.1_14B_SCAIL_2_fp8_scaled.safetensors",
+      "group": "SCAIL-2",
+      "tags": [
+        "video",
+        "wan2.1",
+        "14b",
+        "fp8",
+        "scaled",
+        "scail2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_fp8_scaled.safetensors",
+          "sha256": "11513b4697ecf566de0cb74660c478f301fb6699a62b10369e91a6ed0fd6b083",
+          "size_bytes": 17694586857,
+          "enabled": true,
+          "title": "SCAIL-2 - FP8 Scaled",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_fp8_scaled.safetensors",
+      "size_bytes": 17694586857,
+      "sha256": "11513b4697ecf566de0cb74660c478f301fb6699a62b10369e91a6ed0fd6b083",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "scail2.int8-convrot",
+      "name": "SCAIL-2 - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.1_14B_SCAIL_2_int8_convrot.safetensors",
+      "group": "SCAIL-2",
+      "tags": [
+        "video",
+        "wan2.1",
+        "14b",
+        "int8",
+        "convrot",
+        "scail2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_int8_convrot.safetensors",
+          "sha256": "a2114c18a811243185f103765cd5004b61652141aa55a9016d3bdceebceb5ac0",
+          "size_bytes": 16654506256,
+          "enabled": true,
+          "title": "SCAIL-2 - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_int8_convrot.safetensors",
+      "size_bytes": 16654506256,
+      "sha256": "a2114c18a811243185f103765cd5004b61652141aa55a9016d3bdceebceb5ac0",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "scail2.mxfp8",
+      "name": "SCAIL-2 - MXFP8",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.1_14B_SCAIL_2_mxfp8.safetensors",
+      "group": "SCAIL-2",
+      "tags": [
+        "video",
+        "wan2.1",
+        "14b",
+        "mxfp8",
+        "scail2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_mxfp8.safetensors",
+          "sha256": "94b69204e4d299ef71e0d3204b8f1709c7193e0a1850bf0eb6479a644413f195",
+          "size_bytes": 17150733432,
+          "enabled": true,
+          "title": "SCAIL-2 - MXFP8",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_mxfp8.safetensors",
+      "size_bytes": 17150733432,
+      "sha256": "94b69204e4d299ef71e0d3204b8f1709c7193e0a1850bf0eb6479a644413f195",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "scail2.nvfp4-mxfp8-mix",
+      "name": "SCAIL-2 - NVFP4/MXFP8 Mix",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.1_14B_SCAIL_2_nvfp4_mxpf8_mix.safetensors",
+      "group": "SCAIL-2",
+      "tags": [
+        "video",
+        "wan2.1",
+        "14b",
+        "nvfp4",
+        "mxfp8",
+        "mixed",
+        "scail2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_nvfp4_mxpf8_mix.safetensors",
+          "sha256": "5053562142b46a12ef368360373304609ce6e6e010b3fddd35ef1cd27e180e7d",
+          "size_bytes": 11023570536,
+          "enabled": true,
+          "title": "SCAIL-2 - NVFP4/MXFP8 Mix",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_nvfp4_mxpf8_mix.safetensors",
+      "size_bytes": 11023570536,
+      "sha256": "5053562142b46a12ef368360373304609ce6e6e010b3fddd35ef1cd27e180e7d",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "ultrarealistic_finetune_project_v4_q8",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/UltraRealistic_FineTune_Project_v4_Q8.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "sha256": "81b64654e6a2779689577b425d1a22f940c7e136f8864b66ec21714adad1624c",
+      "sources": [
+        {
+          "title": "Ultra_Real_Fine_Tune_V40.gguf",
+          "url": "https://huggingface.co/Akalabeth12/Text-to-Image/resolve/main/FLUX/Ultra_Real_Fine_Tune_V40.gguf",
+          "size": "12.72 GB",
+          "description": "Diffusion model weights; GGUF file; hosted on Hugging Face.",
+          "size_bytes": 12720000000
+        }
+      ],
+      "candidate_sources": [
+        {
+          "url": "https://civitai.com/models/978314/ultrareal-fine-tune",
+          "status": "model-page-needs-file-selection"
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/Akalabeth12/Text-to-Image/resolve/main/FLUX/Ultra_Real_Fine_Tune_V40.gguf",
+          "source_filename": "Ultra_Real_Fine_Tune_V40.gguf",
+          "save_as": "models/diffusion_models/UltraRealistic_FineTune_Project_v4_Q8.gguf",
+          "size": "12.72 GB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "Ultra_Real_Fine_Tune_V40.gguf",
+      "url": "https://huggingface.co/Akalabeth12/Text-to-Image/resolve/main/FLUX/Ultra_Real_Fine_Tune_V40.gguf",
+      "size_bytes": 12720000000,
+      "gated": false,
+      "description": "Diffusion model weights; GGUF file; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2_1_infinitetalk_multi_q8",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan/Wan2_1-InfiniteTalk_Multi_Q8.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Wan2_1-InfiniteTalk_Multi_Q8.gguf",
+          "url": "https://huggingface.co/Kijai/WanVideo_comfy_GGUF/resolve/main/InfiniteTalk/Wan2_1-InfiniteTalk_Multi_Q8.gguf",
+          "size": "2.65 GB",
+          "description": "Diffusion model weights; GGUF Q8 quantization; GGUF file; hosted on Hugging Face.",
+          "size_bytes": 2650000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "Wan2_1-InfiniteTalk_Multi_Q8.gguf",
+      "url": "https://huggingface.co/Kijai/WanVideo_comfy_GGUF/resolve/main/InfiniteTalk/Wan2_1-InfiniteTalk_Multi_Q8.gguf",
+      "size_bytes": 2650000000,
+      "sha256": null,
+      "gated": false,
+      "description": "Diffusion model weights; GGUF Q8 quantization; GGUF file; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2_2_t2v_a14b_highnoise_q8_0",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+          "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/HighNoise/Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+          "size": "15.40 GB",
+          "description": "Diffusion model weights; GGUF Q8_0 quantization; high-noise stage; GGUF file; hosted on Hugging Face.",
+          "size_bytes": 15400000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+      "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/HighNoise/Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+      "size_bytes": 15400000000,
+      "sha256": null,
+      "gated": false,
+      "description": "Diffusion model weights; GGUF Q8_0 quantization; high-noise stage; GGUF file; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2_2_t2v_a14b_lownoise_q8_0",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+      "loader": "UnetLoaderGGUF",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+          "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/LowNoise/Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+          "size": "15.40 GB",
+          "description": "Diffusion model weights; GGUF Q8_0 quantization; low-noise stage; GGUF file; hosted on Hugging Face.",
+          "size_bytes": 15400000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "name": "Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+      "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/LowNoise/Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+      "size_bytes": 15400000000,
+      "sha256": null,
+      "gated": false,
+      "description": "Diffusion model weights; GGUF Q8_0 quantization; low-noise stage; GGUF file; hosted on Hugging Face."
+    },
+    {
+      "id": "zimage.base.bf16",
+      "legacy_ids": [
+        "z_image_bf16"
+      ],
+      "name": "Z-Image Base - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/z_image_bf16.safetensors",
+      "group": "Z-Image",
+      "tags": [
+        "image",
+        "base",
+        "bf16",
+        "z-image"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "z_image_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/diffusion_models/z_image_bf16.safetensors",
+          "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "996a67d3ff666946b1c25cbc16d1b1918b6cc0ac166309e23fe3b3d830263dee",
+          "size_bytes": 12309866400,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/diffusion_models/z_image_bf16.safetensors",
+      "size_bytes": 12309866400,
+      "sha256": "996a67d3ff666946b1c25cbc16d1b1918b6cc0ac166309e23fe3b3d830263dee",
+      "gated": false,
+      "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "zimage.base.int8-convrot",
+      "name": "Z-Image Base - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/z_image_int8_convrot.safetensors",
+      "group": "Z-Image",
+      "tags": [
+        "image",
+        "base",
+        "int8",
+        "convrot",
+        "z-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/diffusion_models/z_image_int8_convrot.safetensors",
+          "sha256": "eb2b470694fbd9778f15efd309000ea0091312c018c10a352c120b1da9bf4279",
+          "size_bytes": 6201001296,
+          "enabled": true,
+          "title": "Z-Image Base - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/diffusion_models/z_image_int8_convrot.safetensors",
+      "size_bytes": 6201001296,
+      "sha256": "eb2b470694fbd9778f15efd309000ea0091312c018c10a352c120b1da9bf4279",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "zimage.turbo.bf16",
+      "legacy_ids": [
+        "z_image_turbo_bf16"
+      ],
+      "name": "Z-Image Turbo - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/z_image_turbo_bf16.safetensors",
+      "group": "Z-Image",
+      "tags": [
+        "image",
+        "turbo",
+        "bf16",
+        "z-image"
+      ],
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "z_image_turbo_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors",
+          "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "2407613050b809ffdff18a4ac99af83ea6b95443ecebdf80e064a79c825574a6",
+          "size_bytes": 12309866400,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors",
+      "size_bytes": 12309866400,
+      "sha256": "2407613050b809ffdff18a4ac99af83ea6b95443ecebdf80e064a79c825574a6",
+      "gated": false,
+      "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "zimage.turbo.int8-convrot",
+      "name": "Z-Image Turbo - INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/z_image_turbo_int8_convrot.safetensors",
+      "group": "Z-Image",
+      "tags": [
+        "image",
+        "turbo",
+        "int8",
+        "convrot",
+        "z-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_int8_convrot.safetensors",
+          "sha256": "be517ebd47c912a5626a588e1aeea43e6be4a43c0cdcd2b48a2a780d9f358635",
+          "size_bytes": 6201001296,
+          "enabled": true,
+          "title": "Z-Image Turbo - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_int8_convrot.safetensors",
+      "size_bytes": 6201001296,
+      "sha256": "be517ebd47c912a5626a588e1aeea43e6be4a43c0cdcd2b48a2a780d9f358635",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "zimage.turbo.nvfp4",
+      "name": "Z-Image Turbo - NVFP4",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/z_image_turbo_nvfp4.safetensors",
+      "group": "Z-Image",
+      "tags": [
+        "image",
+        "turbo",
+        "nvfp4",
+        "z-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_nvfp4.safetensors",
+          "sha256": "a553c889dbcb910de4c98293237573219a37007c1074a3f04576646a088bd5c8",
+          "size_bytes": 4509509600,
+          "enabled": true,
+          "title": "Z-Image Turbo - NVFP4",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_nvfp4.safetensors",
+      "size_bytes": 4509509600,
+      "sha256": "a553c889dbcb910de4c98293237573219a37007c1074a3f04576646a088bd5c8",
+      "gated": false,
+      "description": "Catalog download source"
+    }
+  ]
+}

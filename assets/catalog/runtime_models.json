@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "artifact_type": "runtime_models",
+  "generated_from": [
+    "_/bui.toml",
+    "_/deps.json"
+  ],
+  "artifact_count": 5,
+  "artifacts": [
+    {
+      "id": "dw_ll_ucoco_384_bs5_torchscript",
+      "type": "runtime_models",
+      "relative_path": "runtime_models/dw-ll_ucoco_384_bs5.torchscript.pt",
+      "loader": "DWPreprocessor",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "dw-ll_ucoco_384_bs5.torchscript.pt",
+          "url": "https://huggingface.co/hr16/DWPose-TorchScript-BatchSize5/resolve/main/dw-ll_ucoco_384_bs5.torchscript.pt",
+          "size": "135.1 MB",
+          "description": "Runtime model; PT file; hosted on Hugging Face.",
+          "size_bytes": 135100000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "runtime-model",
+      "name": "dw-ll_ucoco_384_bs5.torchscript.pt",
+      "url": "https://huggingface.co/hr16/DWPose-TorchScript-BatchSize5/resolve/main/dw-ll_ucoco_384_bs5.torchscript.pt",
+      "size_bytes": 135100000,
+      "sha256": null,
+      "gated": false,
+      "description": "Runtime model; PT file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen2_5_vl_7b_instruct_abliterated_mmproj_q8_0",
+      "type": "runtime_models",
+      "relative_path": "runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf",
+      "loader": "MultimodalGeneratorAdvanced|LP",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf",
+          "url": "https://huggingface.co/mradermacher/Qwen2.5-VL-7B-Instruct-abliterated-GGUF/resolve/main/Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf",
+          "size": "853.1 MB",
+          "description": "Runtime model; GGUF Q8_0 quantization; abliterated variant; GGUF file; hosted on Hugging Face.",
+          "size_bytes": 853100000
+        }
+      ],
+      "candidate_sources": [
+        {
+          "url": "https://huggingface.co/wangkanai/qwen2.5-vl-7b-instruct/tree/main",
+          "status": "filename-mismatch-or-not-found",
+          "expected_filename": "Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "runtime-model",
+      "name": "Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf",
+      "url": "https://huggingface.co/mradermacher/Qwen2.5-VL-7B-Instruct-abliterated-GGUF/resolve/main/Qwen2.5-VL-7B-Instruct-abliterated.mmproj-Q8_0.gguf",
+      "size_bytes": 853100000,
+      "sha256": null,
+      "gated": false,
+      "description": "Runtime model; GGUF Q8_0 quantization; abliterated variant; GGUF file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen2_5_vl_7b_instruct_abliterated_q5_k_m",
+      "type": "runtime_models",
+      "relative_path": "runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf",
+      "loader": "MultimodalGeneratorAdvanced|LP",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf",
+          "url": "https://huggingface.co/mradermacher/Qwen2.5-VL-7B-Instruct-abliterated-GGUF/resolve/main/Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf",
+          "size": "5.44 GB",
+          "description": "Runtime model; GGUF Q5_K_M quantization; abliterated variant; GGUF file; hosted on Hugging Face.",
+          "size_bytes": 5440000000
+        },
+        {
+          "title": "qwen2.5-vl-7b-instruct-abliterated-q5-k-m.gguf",
+          "url": "https://huggingface.co/wangkanai/qwen2.5-vl-7b-instruct/resolve/main/qwen2.5-vl-7b-instruct-abliterated-q5-k-m.gguf",
+          "size": "5.44 GB",
+          "description": "Runtime model; abliterated variant; GGUF file; hosted on Hugging Face.",
+          "size_bytes": 5440000000
+        }
+      ],
+      "candidate_sources": [
+        {
+          "url": "https://huggingface.co/wangkanai/qwen2.5-vl-7b-instruct/tree/main",
+          "status": "filename-mismatch-or-not-found",
+          "expected_filename": "Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf"
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/wangkanai/qwen2.5-vl-7b-instruct/resolve/main/qwen2.5-vl-7b-instruct-abliterated-q5-k-m.gguf",
+          "source_filename": "qwen2.5-vl-7b-instruct-abliterated-q5-k-m.gguf",
+          "save_as": "runtime_models/Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf",
+          "size": "5.44 GB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "runtime-model",
+      "name": "Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf",
+      "url": "https://huggingface.co/mradermacher/Qwen2.5-VL-7B-Instruct-abliterated-GGUF/resolve/main/Qwen2.5-VL-7B-Instruct-abliterated.Q5_K_M.gguf",
+      "size_bytes": 5440000000,
+      "sha256": null,
+      "gated": false,
+      "description": "Runtime model; GGUF Q5_K_M quantization; abliterated variant; GGUF file; hosted on Hugging Face."
+    },
+    {
+      "id": "seedvr2_ema_3b_fp16",
+      "type": "runtime_models",
+      "relative_path": "runtime_models/seedvr2_ema_3b_fp16.safetensors",
+      "loader": "SeedVR2",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "seedvr2_ema_3b_fp16.safetensors",
+          "url": "https://huggingface.co/numz/SeedVR2_comfyUI/resolve/main/seedvr2_ema_3b_fp16.safetensors",
+          "size": "6.78 GB",
+          "description": "Runtime model; FP16 precision; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 6780000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "runtime-model",
+      "name": "seedvr2_ema_3b_fp16.safetensors",
+      "url": "https://huggingface.co/numz/SeedVR2_comfyUI/resolve/main/seedvr2_ema_3b_fp16.safetensors",
+      "size_bytes": 6780000000,
+      "sha256": null,
+      "gated": false,
+      "description": "Runtime model; FP16 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "yolox_l_torchscript",
+      "type": "runtime_models",
+      "relative_path": "runtime_models/yolox_l.torchscript.pt",
+      "loader": "DWPreprocessor",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "yolox_l.torchscript.pt",
+          "url": "https://huggingface.co/hr16/yolox-onnx/resolve/main/yolox_l.torchscript.pt",
+          "size": "217.7 MB",
+          "description": "Runtime model; PT file; hosted on Hugging Face.",
+          "size_bytes": 217700000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "runtime-model",
+      "name": "yolox_l.torchscript.pt",
+      "url": "https://huggingface.co/hr16/yolox-onnx/resolve/main/yolox_l.torchscript.pt",
+      "size_bytes": 217700000,
+      "sha256": null,
+      "gated": false,
+      "description": "Runtime model; PT file; hosted on Hugging Face."
+    }
+  ]
+}

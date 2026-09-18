@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "artifact_type": "upscale_models",
+  "generated_from": [
+    "_/bui.toml",
+    "_/deps.json"
+  ],
+  "artifact_count": 4,
+  "artifacts": [
+    {
+      "id": "4xnmkdsuperscale_4xnmkdsuperscale",
+      "type": "upscale_models",
+      "relative_path": "models/upscale_models/4xNMKDSuperscale_4xNMKDSuperscale.pt",
+      "loader": "UpscaleModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "4xNMKDSuperscale_4xNMKDSuperscale.pt",
+          "url": "https://huggingface.co/shubhdotai/upscaler/resolve/9b9bfba2a119bee0d175427cadb05283a3ed2fb1/4xNMKDSuperscale_4xNMKDSuperscale.pt",
+          "size": "67.0 MB",
+          "description": "Upscale model weights; PT file; hosted on Hugging Face.",
+          "size_bytes": 67000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "upscale_models",
+      "name": "4xNMKDSuperscale_4xNMKDSuperscale.pt",
+      "url": "https://huggingface.co/shubhdotai/upscaler/resolve/9b9bfba2a119bee0d175427cadb05283a3ed2fb1/4xNMKDSuperscale_4xNMKDSuperscale.pt",
+      "size_bytes": 67000000,
+      "sha256": null,
+      "gated": false,
+      "description": "Upscale model weights; PT file; hosted on Hugging Face."
+    },
+    {
+      "id": "4xpurephoto_realplskr",
+      "type": "upscale_models",
+      "relative_path": "models/upscale_models/4xPurePhoto-RealPLSKR.pth",
+      "loader": "UpscaleModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "4xPurePhoto-RealPLSKR.pth",
+          "url": "https://huggingface.co/mp3pintyo/upscale/resolve/8c80d55cdc2cc831912ece1848429cd3be52f9e1/4xPurePhoto-RealPLSKR.pth",
+          "size": "29.7 MB",
+          "description": "Upscale model weights; PTH file; hosted on Hugging Face.",
+          "size_bytes": 29700000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "upscale_models",
+      "name": "4xPurePhoto-RealPLSKR.pth",
+      "url": "https://huggingface.co/mp3pintyo/upscale/resolve/8c80d55cdc2cc831912ece1848429cd3be52f9e1/4xPurePhoto-RealPLSKR.pth",
+      "size_bytes": 29700000,
+      "sha256": null,
+      "gated": false,
+      "description": "Upscale model weights; PTH file; hosted on Hugging Face."
+    },
+    {
+      "id": "upscale.clear-reality-soft.4x",
+      "name": "ClearReality Soft V1 - 4x Upscaler",
+      "type": "upscale_models",
+      "relative_path": "models/upscale_models/4x-ClearRealityV1_Soft.pth",
+      "group": "Upscalers",
+      "tags": [
+        "image",
+        "upscaler",
+        "4x",
+        "clear-reality-soft",
+        "v1"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/SimonJoz/comfy/resolve/main/upscalers/4x-ClearRealityV1_Soft.pth",
+          "sha256": "08f74a031c26444ec9d6c6750ea88df04fc91207dc0eb6973fa1881ac5a15b21",
+          "size_bytes": 9016074,
+          "enabled": true,
+          "title": "ClearReality Soft V1 - 4x Upscaler",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/SimonJoz/comfy/resolve/main/upscalers/4x-ClearRealityV1_Soft.pth",
+      "size_bytes": 9016074,
+      "sha256": "08f74a031c26444ec9d6c6750ea88df04fc91207dc0eb6973fa1881ac5a15b21",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "upscale.clear-reality.4x",
+      "legacy_ids": [
+        "4x_clearrealityv1"
+      ],
+      "name": "ClearReality V1 - 4x Upscaler",
+      "type": "upscale_models",
+      "relative_path": "models/upscale_models/4x-ClearRealityV1.pth",
+      "group": "Upscalers",
+      "tags": [
+        "image",
+        "upscaler",
+        "4x",
+        "clear-reality",
+        "v1"
+      ],
+      "loader": "UpscaleModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "4x-ClearRealityV1.pth",
+          "url": "https://huggingface.co/SimonJoz/comfy/resolve/main/upscalers/4x-ClearRealityV1.pth",
+          "description": "Upscale model weights; PTH file; hosted on Hugging Face.",
+          "sha256": "a4cd3a25b00e0be949d4302fc774eb4d7f2ed5f47cdb51551e2d75fa6562e51e",
+          "size_bytes": 9016074,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "upscale_models",
+      "url": "https://huggingface.co/SimonJoz/comfy/resolve/main/upscalers/4x-ClearRealityV1.pth",
+      "size_bytes": 9016074,
+      "sha256": "a4cd3a25b00e0be949d4302fc774eb4d7f2ed5f47cdb51551e2d75fa6562e51e",
+      "gated": false,
+      "description": "Upscale model weights; PTH file; hosted on Hugging Face."
+    }
+  ]
+}

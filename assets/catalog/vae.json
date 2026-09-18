@@ -1,0 +1,506 @@
+{
+  "schema_version": 1,
+  "artifact_type": "vae",
+  "generated_from": [
+    "_/bui.toml",
+    "_/deps.json"
+  ],
+  "artifact_count": 14,
+  "artifacts": [
+    {
+      "id": "ae",
+      "type": "vae",
+      "relative_path": "models/vae/FLUX1/ae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "ae.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors",
+          "description": "VAE weights; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "name": "ae.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "flux2.small-decoder",
+      "legacy_ids": [
+        "full_encoder_small_decoder"
+      ],
+      "name": "FLUX.2 - Full Encoder + Small Decoder VAE",
+      "type": "vae",
+      "relative_path": "models/vae/full_encoder_small_decoder.safetensors",
+      "group": "FLUX.2",
+      "tags": [
+        "image",
+        "vae",
+        "full-encoder",
+        "small-decoder",
+        "flux2"
+      ],
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "full_encoder_small_decoder.safetensors",
+          "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/full_encoder_small_decoder.safetensors",
+          "description": "VAE weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "ea4273f02d1fafbf8e1d1c2cf6018ed8748652eb0bf34f2dd91171f16f15ab62",
+          "size_bytes": 249519092,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/full_encoder_small_decoder.safetensors",
+      "size_bytes": 249519092,
+      "sha256": "ea4273f02d1fafbf8e1d1c2cf6018ed8748652eb0bf34f2dd91171f16f15ab62",
+      "gated": false,
+      "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "flux2.vae",
+      "legacy_ids": [
+        "flux2_vae"
+      ],
+      "name": "FLUX.2 - IDEOGRAM 4 - VAE",
+      "type": "vae",
+      "relative_path": "models/vae/flux2-vae.safetensors",
+      "group": "FLUX.2",
+      "tags": [
+        "image",
+        "vae",
+        "flux2",
+        "ideogram4"
+      ],
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "flux2-vae.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/vae/flux2-vae.safetensors",
+          "description": "VAE weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+          "size_bytes": 336211292,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "url": "https://huggingface.co/Comfy-Org/Ideogram-4/resolve/main/vae/flux2-vae.safetensors",
+      "size_bytes": 336211292,
+      "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+      "gated": false,
+      "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "flux2.small-decoder.decoder-only",
+      "name": "FLUX.2 - Small Decoder Only",
+      "type": "vae",
+      "relative_path": "models/vae/small_decoder.safetensors",
+      "group": "FLUX.2",
+      "tags": [
+        "image",
+        "vae",
+        "decoder-only",
+        "small-decoder",
+        "flux2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/small_decoder.safetensors",
+          "sha256": "ad783347747561d974f347f1b7377ebca15330621ace6a2e3f8dfaa83f5c211f",
+          "size_bytes": 111801980,
+          "enabled": true,
+          "title": "FLUX.2 - Small Decoder Only",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/small_decoder.safetensors",
+      "size_bytes": 111801980,
+      "sha256": "ad783347747561d974f347f1b7377ebca15330621ace6a2e3f8dfaa83f5c211f",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "flux_ultra_vae",
+      "type": "vae",
+      "relative_path": "models/vae/flux ultra vae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sha256": "2bf9ad685686b480b03651a8d8595951e4a5578016b8ead4af5e22d3dc9b3409",
+      "sources": [
+        {
+          "title": "diffusion_pytorch_model.safetensors",
+          "url": "https://huggingface.co/Owen777/UltraFlux-v1/resolve/main/vae/diffusion_pytorch_model.safetensors",
+          "size": "335.3 MB",
+          "description": "VAE weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 335300000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/Owen777/UltraFlux-v1/resolve/main/vae/diffusion_pytorch_model.safetensors",
+          "source_filename": "diffusion_pytorch_model.safetensors",
+          "save_as": "models/vae/flux ultra vae.safetensors",
+          "size": "335.3 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "name": "diffusion_pytorch_model.safetensors",
+      "url": "https://huggingface.co/Owen777/UltraFlux-v1/resolve/main/vae/diffusion_pytorch_model.safetensors",
+      "size_bytes": 335300000,
+      "gated": false,
+      "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.audio-vae.fp32",
+      "legacy_ids": [
+        "minimax_h3_audio_vae_fp32"
+      ],
+      "name": "MiniMax H3 - Audio VAE - FP32",
+      "type": "vae",
+      "relative_path": "models/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "audio",
+        "vae",
+        "fp32",
+        "minimax"
+      ],
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "minimax_h3_audio_vae_fp32.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+          "description": "VAE weights; FP32 precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48",
+          "size_bytes": 605254808,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "size_bytes": 605254808,
+      "sha256": "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48",
+      "gated": false,
+      "description": "VAE weights; FP32 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.video-vae.fp16",
+      "legacy_ids": [
+        "minimax_h3_video_vae_fp16"
+      ],
+      "name": "MiniMax H3 - Video VAE - FP16",
+      "type": "vae",
+      "relative_path": "models/vae/minimax_h3_video_vae_fp16.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "vae",
+        "fp16",
+        "minimax"
+      ],
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "minimax_h3_video_vae_fp16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+          "description": "VAE weights; FP16 precision; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "7c1f131492e7eddacaac9069a61b81bdd39de5cc96561e677c5eab1cdce5e522",
+          "size_bytes": 5207808496,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+      "size_bytes": 5207808496,
+      "sha256": "7c1f131492e7eddacaac9069a61b81bdd39de5cc96561e677c5eab1cdce5e522",
+      "gated": false,
+      "description": "VAE weights; FP16 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.video-vae.int8-convrot",
+      "name": "MiniMax H3 - Video VAE - INT8 ConvRot",
+      "type": "vae",
+      "relative_path": "models/vae/minimax_h3_video_vae_int8_convrot.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "vae",
+        "int8",
+        "convrot",
+        "minimax"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_int8_convrot.safetensors",
+          "sha256": "52a2c8c73583c86e4f41cdcce3a6ad0ea562987bc0bf3d60a0cef5f5c8e60c0e",
+          "size_bytes": 2811065184,
+          "enabled": true,
+          "title": "MiniMax H3 - Video VAE - INT8 ConvRot",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_int8_convrot.safetensors",
+      "size_bytes": 2811065184,
+      "sha256": "52a2c8c73583c86e4f41cdcce3a6ad0ea562987bc0bf3d60a0cef5f5c8e60c0e",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.vae",
+      "legacy_ids": [
+        "qwen_image_vae"
+      ],
+      "name": "Qwen Image - VAE",
+      "type": "vae",
+      "relative_path": "models/vae/qwen_image_vae.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "vae",
+        "qwen-image"
+      ],
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen_image_vae.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors",
+          "description": "VAE weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "a70580f0213e67967ee9c95f05bb400e8fb08307e017a924bf3441223e023d1f",
+          "size_bytes": 253806246,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors",
+      "size_bytes": 253806246,
+      "sha256": "a70580f0213e67967ee9c95f05bb400e8fb08307e017a924bf3441223e023d1f",
+      "gated": false,
+      "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2_1_vae_fp32",
+      "type": "vae",
+      "relative_path": "models/vae/Wan2_1_VAE_fp32.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2_1_vae_fp32.safetensors",
+          "url": "https://huggingface.co/calcuis/wan-gguf/resolve/2a7520ea1e79d3f1f3f454a938613235633e1cba/wan2_1_vae_fp32.safetensors",
+          "size": "507.6 MB",
+          "description": "VAE weights; FP32 precision; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 507600000
+        }
+      ],
+      "candidate_sources": [
+        {
+          "url": "https://huggingface.co/calcuis/wan-gguf/tree/2a7520ea1e79d3f1f3f454a938613235633e1cba",
+          "status": "filename-mismatch-or-not-found",
+          "expected_filename": "Wan2_1_VAE_fp32.safetensors"
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/calcuis/wan-gguf/resolve/2a7520ea1e79d3f1f3f454a938613235633e1cba/wan2_1_vae_fp32.safetensors",
+          "source_filename": "wan2_1_vae_fp32.safetensors",
+          "save_as": "models/vae/Wan2_1_VAE_fp32.safetensors",
+          "size": "507.6 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "name": "wan2_1_vae_fp32.safetensors",
+      "url": "https://huggingface.co/calcuis/wan-gguf/resolve/2a7520ea1e79d3f1f3f454a938613235633e1cba/wan2_1_vae_fp32.safetensors",
+      "size_bytes": 507600000,
+      "sha256": null,
+      "gated": false,
+      "description": "VAE weights; FP32 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "wan_2_1_vae",
+      "type": "vae",
+      "relative_path": "models/vae/wan_2.1_vae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan_2.1_vae.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors",
+          "size": "253.8 MB",
+          "description": "VAE weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 253800000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "name": "wan_2.1_vae.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors",
+      "size_bytes": 253800000,
+      "sha256": null,
+      "gated": false,
+      "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "zimage.ae",
+      "name": "Z-Image Autoencoder",
+      "type": "vae",
+      "relative_path": "models/vae/ae.safetensors",
+      "group": "Z-Image",
+      "tags": [
+        "image",
+        "vae",
+        "autoencoder",
+        "z-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors",
+          "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+          "size_bytes": 335304388,
+          "enabled": true,
+          "title": "Z-Image Autoencoder",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors",
+      "size_bytes": 335304388,
+      "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "z_image",
+      "type": "vae",
+      "relative_path": "models/vae/z-image.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "ae.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors",
+          "size": "335.3 MB",
+          "description": "VAE weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 335300000
+        }
+      ],
+      "candidate_sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/z_image_turbo/tree/main/split_files/vae",
+          "status": "filename-mismatch-or-not-found",
+          "expected_filename": "z-image.safetensors"
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors",
+          "source_filename": "ae.safetensors",
+          "save_as": "models/vae/z-image.safetensors",
+          "size": "335.3 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "name": "ae.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors",
+      "size_bytes": 335300000,
+      "sha256": null,
+      "gated": false,
+      "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "zimagebase_ae",
+      "type": "vae",
+      "relative_path": "models/vae/zimagebase_ae.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "workflow-referenced",
+      "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+      "sources": [
+        {
+          "title": "ae.safetensors",
+          "url": "https://huggingface.co/metercai/SimpleSDXL2/resolve/5e33790e9d3b45f5e27db9182d06b2f33b8bb741/flux1/ae.safetensors",
+          "size": "335.3 MB",
+          "description": "VAE weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 335300000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/metercai/SimpleSDXL2/resolve/5e33790e9d3b45f5e27db9182d06b2f33b8bb741/flux1/ae.safetensors",
+          "source_filename": "ae.safetensors",
+          "save_as": "models/vae/zimagebase_ae.safetensors",
+          "size": "335.3 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "vae",
+      "name": "ae.safetensors",
+      "url": "https://huggingface.co/metercai/SimpleSDXL2/resolve/5e33790e9d3b45f5e27db9182d06b2f33b8bb741/flux1/ae.safetensors",
+      "size_bytes": 335300000,
+      "gated": false,
+      "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
+    }
+  ]
+}

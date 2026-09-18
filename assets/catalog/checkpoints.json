@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "artifact_type": "checkpoints",
+  "generated_from": [
+    "_/bui.toml",
+    "_/deps.json"
+  ],
+  "artifact_count": 4,
+  "artifacts": [
+    {
+      "id": "sdxl.base.1.0.0.9vae",
+      "name": "Stable Diffusion XL Base 1.0 - 0.9 VAE",
+      "type": "checkpoints",
+      "relative_path": "models/checkpoints/sd_xl_base_1.0_0.9vae.safetensors",
+      "group": "Stable Diffusion",
+      "tags": [
+        "image",
+        "checkpoint",
+        "base",
+        "sdxl",
+        "1.0",
+        "0.9-vae"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0_0.9vae.safetensors",
+          "sha256": "e6bb9ea85bbf7bf6478a7c6d18b71246f22e95d41bcdd80ed40aa212c33cfeff",
+          "size_bytes": 6938078334,
+          "enabled": true,
+          "title": "Stable Diffusion XL Base 1.0 - 0.9 VAE",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0_0.9vae.safetensors",
+      "size_bytes": 6938078334,
+      "sha256": "e6bb9ea85bbf7bf6478a7c6d18b71246f22e95d41bcdd80ed40aa212c33cfeff",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "sdxl.base.1.0",
+      "name": "Stable Diffusion XL Base 1.0 - Standard VAE",
+      "type": "checkpoints",
+      "relative_path": "models/checkpoints/sd_xl_base_1.0.safetensors",
+      "group": "Stable Diffusion",
+      "tags": [
+        "image",
+        "checkpoint",
+        "base",
+        "sdxl",
+        "1.0"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors",
+          "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
+          "size_bytes": 6938078334,
+          "enabled": true,
+          "title": "Stable Diffusion XL Base 1.0 - Standard VAE",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors",
+      "size_bytes": 6938078334,
+      "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "sdxl.refiner.1.0.0.9vae",
+      "name": "Stable Diffusion XL Refiner 1.0 - 0.9 VAE",
+      "type": "checkpoints",
+      "relative_path": "models/checkpoints/sd_xl_refiner_1.0_0.9vae.safetensors",
+      "group": "Stable Diffusion",
+      "tags": [
+        "image",
+        "checkpoint",
+        "refiner",
+        "sdxl",
+        "1.0",
+        "0.9-vae"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0_0.9vae.safetensors",
+          "sha256": "8d0ce6c016004cbdacd50f937dad381d8c396628d621a7f97191470532780164",
+          "size_bytes": 6075981930,
+          "enabled": true,
+          "title": "Stable Diffusion XL Refiner 1.0 - 0.9 VAE",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0_0.9vae.safetensors",
+      "size_bytes": 6075981930,
+      "sha256": "8d0ce6c016004cbdacd50f937dad381d8c396628d621a7f97191470532780164",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "sdxl.refiner.1.0",
+      "name": "Stable Diffusion XL Refiner 1.0 - Standard VAE",
+      "type": "checkpoints",
+      "relative_path": "models/checkpoints/sd_xl_refiner_1.0.safetensors",
+      "group": "Stable Diffusion",
+      "tags": [
+        "image",
+        "checkpoint",
+        "refiner",
+        "sdxl",
+        "1.0"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors",
+          "sha256": "7440042bbdc8a24813002c09b6b69b64dc90fded4472613437b7f55f9b7d9c5f",
+          "size_bytes": 6075981930,
+          "enabled": true,
+          "title": "Stable Diffusion XL Refiner 1.0 - Standard VAE",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors",
+      "size_bytes": 6075981930,
+      "sha256": "7440042bbdc8a24813002c09b6b69b64dc90fded4472613437b7f55f9b7d9c5f",
+      "gated": false,
+      "description": "Catalog download source"
+    }
+  ]
+}

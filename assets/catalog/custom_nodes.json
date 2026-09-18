@@ -1,0 +1,708 @@
+{
+  "schema_version": 1,
+  "custom_nodes": [
+    {
+      "id": "comfy-image-saver",
+      "name": "Comfy Image Saver",
+      "git_url": "https://github.com/giriss/comfy-image-saver",
+      "folder_name": "comfy-image-saver",
+      "node_types": [
+        "comfy-image-saver"
+      ],
+      "aliases": [
+        "comfy-image-saver"
+      ],
+      "repository": "https://github.com/giriss/comfy-image-saver",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-aspect-ratio-crop-node",
+      "name": "Comfyui Aspect Ratio Crop Node",
+      "git_url": "https://github.com/vrgamegirl19/comfyui-vrgamedevgirl",
+      "folder_name": "comfyui-vrgamedevgirl",
+      "node_types": [
+        "comfyui-aspect-ratio-crop-node"
+      ],
+      "aliases": [
+        "comfyui-aspect-ratio-crop-node"
+      ],
+      "repository": "https://github.com/vrgamegirl19/comfyui-vrgamedevgirl",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-comfyroll",
+      "name": "ComfyUI Comfyroll Custom Nodes",
+      "git_url": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
+      "folder_name": "ComfyUI_Comfyroll_CustomNodes",
+      "node_types": [
+        "CR Simple Text Watermark"
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ]
+    },
+    {
+      "id": "comfyui_comfyroll_customnodes",
+      "name": "Comfyui Comfyroll Customnodes",
+      "git_url": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
+      "folder_name": "ComfyUI_Comfyroll_CustomNodes",
+      "node_types": [
+        "ComfyUI_Comfyroll_CustomNodes"
+      ],
+      "aliases": [
+        "ComfyUI_Comfyroll_CustomNodes"
+      ],
+      "repository": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui_controlaltai_nodes",
+      "name": "Comfyui Controlaltai Nodes",
+      "git_url": "https://github.com/gseth/ControlAltAI-Nodes",
+      "folder_name": "ControlAltAI-Nodes",
+      "node_types": [
+        "comfyui_controlaltai_nodes"
+      ],
+      "aliases": [
+        "comfyui_controlaltai_nodes"
+      ],
+      "repository": "https://github.com/gseth/ControlAltAI-Nodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui_controlnet_aux",
+      "name": "Comfyui Controlnet Aux",
+      "git_url": "https://github.com/Fannovel16/comfyui_controlnet_aux",
+      "folder_name": "comfyui_controlnet_aux",
+      "node_types": [
+        "comfyui_controlnet_aux"
+      ],
+      "aliases": [
+        "comfyui_controlnet_aux"
+      ],
+      "repository": "https://github.com/Fannovel16/comfyui_controlnet_aux",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-controlnet-aux",
+      "name": "ComfyUI ControlNet Auxiliary Preprocessors",
+      "git_url": "https://github.com/Fannovel16/comfyui_controlnet_aux",
+      "folder_name": "comfyui_controlnet_aux",
+      "node_types": [
+        "DWPreprocessor"
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ]
+    },
+    {
+      "id": "comfyui-custom-scripts",
+      "name": "Comfyui Custom Scripts",
+      "git_url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
+      "folder_name": "ComfyUI-Custom-Scripts",
+      "node_types": [
+        "comfyui-custom-scripts"
+      ],
+      "aliases": [
+        "comfyui-custom-scripts"
+      ],
+      "repository": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-easy-use",
+      "name": "ComfyUI Easy Use",
+      "git_url": "https://github.com/yolain/ComfyUI-Easy-Use",
+      "folder_name": "ComfyUI-Easy-Use",
+      "node_types": [
+        "easy cleanGpuUsed",
+        "easy clearCacheAll",
+        "easy promptLine"
+      ],
+      "aliases": [
+        "comfyui-easy-use"
+      ],
+      "repository": "https://github.com/yolain/ComfyUI-Easy-Use",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui_essentials",
+      "name": "Comfyui Essentials",
+      "git_url": "https://github.com/cubiq/ComfyUI_essentials",
+      "folder_name": "ComfyUI_essentials",
+      "node_types": [
+        "comfyui_essentials"
+      ],
+      "aliases": [
+        "comfyui_essentials"
+      ],
+      "repository": "https://github.com/cubiq/ComfyUI_essentials",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-face-analysis",
+      "name": "ComfyUI Face Analysis",
+      "git_url": "https://github.com/cubiq/ComfyUI_FaceAnalysis",
+      "folder_name": "ComfyUI_FaceAnalysis",
+      "node_types": [
+        "FaceAnalysisModels",
+        "FaceEmbedDistance"
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ]
+    },
+    {
+      "id": "comfyui_faceanalysis",
+      "name": "Comfyui Faceanalysis",
+      "git_url": "https://github.com/cubiq/ComfyUI_FaceAnalysis",
+      "folder_name": "ComfyUI_FaceAnalysis",
+      "node_types": [
+        "comfyui_faceanalysis"
+      ],
+      "aliases": [
+        "comfyui_faceanalysis"
+      ],
+      "repository": "https://github.com/cubiq/ComfyUI_FaceAnalysis",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-florence2",
+      "name": "ComfyUI Florence 2",
+      "git_url": "https://github.com/kijai/ComfyUI-Florence2",
+      "folder_name": "ComfyUI-Florence2",
+      "node_types": [
+        "DownloadAndLoadFlorence2Model",
+        "Florence2Run"
+      ],
+      "aliases": [
+        "comfyui-florence2"
+      ],
+      "repository": "https://github.com/kijai/ComfyUI-Florence2",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-gapfiller",
+      "name": "ComfyUI GapFiller",
+      "git_url": "https://github.com/KernelPanicKitten/ComfyUI-GapFiller",
+      "folder_name": "ComfyUI-GapFiller",
+      "node_types": [
+        "GapFillerRetime"
+      ],
+      "aliases": [
+        "ComfyUI-GapFiller"
+      ],
+      "repository": "https://github.com/KernelPanicKitten/ComfyUI-GapFiller",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-gguf",
+      "name": "Comfyui Gguf",
+      "git_url": "https://github.com/city96/ComfyUI-GGUF",
+      "folder_name": "ComfyUI-GGUF",
+      "node_types": [
+        "ComfyUI-GGUF",
+        "comfyui-gguf"
+      ],
+      "aliases": [
+        "ComfyUI-GGUF",
+        "comfyui-gguf"
+      ],
+      "repository": "https://github.com/city96/ComfyUI-GGUF",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-imageautotone",
+      "name": "Comfyui Imageautotone",
+      "git_url": "https://github.com/SparknightLLC/ComfyUI-ImageAutotone",
+      "folder_name": "ComfyUI-ImageAutotone",
+      "node_types": [
+        "comfyui-imageautotone"
+      ],
+      "aliases": [
+        "comfyui-imageautotone"
+      ],
+      "repository": "https://github.com/SparknightLLC/ComfyUI-ImageAutotone",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-impact-pack",
+      "name": "Comfyui Impact Pack",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Impact-Pack",
+      "folder_name": "ComfyUI-Impact-Pack",
+      "node_types": [
+        "comfyui-impact-pack"
+      ],
+      "aliases": [
+        "comfyui-impact-pack"
+      ],
+      "repository": "https://github.com/ltdrdata/ComfyUI-Impact-Pack",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-inpaint-cropandstitch",
+      "name": "ComfyUI Inpaint Crop and Stitch",
+      "git_url": "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch",
+      "folder_name": "ComfyUI-Inpaint-CropAndStitch",
+      "node_types": [
+        "InpaintCropImproved",
+        "InpaintStitchImproved"
+      ],
+      "aliases": [
+        "comfyui-inpaint-cropandstitch"
+      ],
+      "repository": "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-inspire-pack",
+      "name": "Comfyui Inspire Pack",
+      "git_url": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack",
+      "folder_name": "ComfyUI-Inspire-Pack",
+      "node_types": [
+        "comfyui-inspire-pack"
+      ],
+      "aliases": [
+        "comfyui-inspire-pack"
+      ],
+      "repository": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-kjnodes",
+      "name": "ComfyUI KJNodes",
+      "git_url": "https://github.com/kijai/ComfyUI-KJNodes",
+      "folder_name": "ComfyUI-KJNodes",
+      "node_types": [
+        "ImageScaleToTotalPixels",
+        "ImageCropV2",
+        "ResolutionSelector",
+        "ImageConcatMulti",
+        "ImageResizeKJv2"
+      ],
+      "aliases": [
+        "comfyui-kjnodes"
+      ],
+      "repository": "https://github.com/kijai/ComfyUI-KJNodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-krea2edit",
+      "name": "ComfyUI Krea 2 Edit",
+      "git_url": "https://github.com/lbouaraba/comfyui-krea2edit",
+      "folder_name": "comfyui-krea2edit",
+      "node_types": [
+        "Krea2EditGroundedEncode",
+        "Krea2EditModelPatch"
+      ],
+      "aliases": [
+        "comfyui-krea2edit"
+      ],
+      "repository": "https://github.com/lbouaraba/comfyui-krea2edit",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-krea2t-enhancer",
+      "name": "Comfyui Krea2t Enhancer",
+      "git_url": "https://github.com/capitan01R/ComfyUI-Krea2T-Enhancer",
+      "folder_name": "ComfyUI-Krea2T-Enhancer",
+      "node_types": [
+        "ComfyUI-Krea2T-Enhancer"
+      ],
+      "aliases": [
+        "ComfyUI-Krea2T-Enhancer"
+      ],
+      "repository": "https://github.com/capitan01R/ComfyUI-Krea2T-Enhancer",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui_layerstyle",
+      "name": "Comfyui Layerstyle",
+      "git_url": "https://github.com/chflame163/ComfyUI_LayerStyle",
+      "folder_name": "ComfyUI_LayerStyle",
+      "node_types": [
+        "comfyui_layerstyle"
+      ],
+      "aliases": [
+        "comfyui_layerstyle"
+      ],
+      "repository": "https://github.com/chflame163/ComfyUI_LayerStyle",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-layerstyle",
+      "name": "ComfyUI LayerStyle",
+      "git_url": "https://github.com/chflame163/ComfyUI_LayerStyle",
+      "folder_name": "ComfyUI_LayerStyle",
+      "node_types": [
+        "LayerColor: Exposure",
+        "LayerMask: MaskGrow"
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ]
+    },
+    {
+      "id": "comfyui-levelpixel-advanced",
+      "name": "Comfyui Levelpixel Advanced",
+      "git_url": "https://github.com/LevelPixel/ComfyUI-LevelPixel-Advanced",
+      "folder_name": "ComfyUI-LevelPixel-Advanced",
+      "node_types": [
+        "comfyui-levelpixel-advanced"
+      ],
+      "aliases": [
+        "comfyui-levelpixel-advanced"
+      ],
+      "repository": "https://github.com/LevelPixel/ComfyUI-LevelPixel-Advanced",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-magickwand",
+      "name": "Comfyui Magickwand",
+      "git_url": "https://github.com/Fannovel16/ComfyUI-MagickWand",
+      "folder_name": "ComfyUI-MagickWand",
+      "node_types": [
+        "comfyui-magickwand"
+      ],
+      "aliases": [
+        "comfyui-magickwand"
+      ],
+      "repository": "https://github.com/Fannovel16/ComfyUI-MagickWand",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "outputlists-combiner",
+      "name": "ComfyUI Output Lists Combiner",
+      "git_url": "https://github.com/geroldmeisinger/ComfyUI-outputlists-combiner",
+      "folder_name": "ComfyUI-outputlists-combiner",
+      "node_types": [
+        "StringOutputList",
+        "StringConcatenate",
+        "StringFormat"
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ]
+    },
+    {
+      "id": "comfyui-outputlists_combiner",
+      "name": "Comfyui Outputlists Combiner",
+      "git_url": "https://github.com/geroldmeisinger/ComfyUI-outputlists-combiner",
+      "folder_name": "ComfyUI-outputlists-combiner",
+      "node_types": [
+        "comfyui-outputlists_combiner"
+      ],
+      "aliases": [
+        "comfyui-outputlists_combiner"
+      ],
+      "repository": "https://github.com/geroldmeisinger/ComfyUI-outputlists-combiner",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-pixaroma",
+      "name": "ComfyUI Pixaroma",
+      "git_url": "https://github.com/pixaroma/ComfyUI-Pixaroma",
+      "folder_name": "ComfyUI-Pixaroma",
+      "node_types": [
+        "LoadImageCrop",
+        "PixaromaCompare",
+        "PixaromaInpaintCrop",
+        "PixaromaInpaintStitch",
+        "PixaromaMonitor",
+        "PixaromaNote",
+        "PixaromaRunTimer",
+        "PixaromaVersionCheck",
+        "RMBG"
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ]
+    },
+    {
+      "id": "comfyui-qwenmultiangle",
+      "name": "Comfyui Qwenmultiangle",
+      "git_url": "https://github.com/jtydhr88/ComfyUI-qwenmultiangle",
+      "folder_name": "ComfyUI-qwenmultiangle",
+      "node_types": [
+        "comfyui-qwenmultiangle"
+      ],
+      "aliases": [
+        "comfyui-qwenmultiangle"
+      ],
+      "repository": "https://github.com/jtydhr88/ComfyUI-qwenmultiangle",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-videohelpersuite",
+      "name": "ComfyUI Video Helper Suite",
+      "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite",
+      "folder_name": "ComfyUI-VideoHelperSuite",
+      "node_types": [
+        "VHS_LoadVideo"
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ]
+    },
+    {
+      "id": "comfyui-workflow-encrypt",
+      "name": "Comfyui Workflow Encrypt",
+      "git_url": "https://github.com/jtydhr88/ComfyUI-Workflow-Encrypt",
+      "folder_name": "ComfyUI-Workflow-Encrypt",
+      "node_types": [
+        "comfyui-workflow-encrypt"
+      ],
+      "aliases": [
+        "comfyui-workflow-encrypt"
+      ],
+      "repository": "https://github.com/jtydhr88/ComfyUI-Workflow-Encrypt",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "controlaltai-nodes",
+      "name": "Controlaltai Nodes",
+      "git_url": "https://github.com/gseth/ControlAltAI-Nodes",
+      "folder_name": "ControlAltAI-Nodes",
+      "node_types": [
+        "controlaltai-nodes"
+      ],
+      "aliases": [
+        "controlaltai-nodes"
+      ],
+      "repository": "https://github.com/gseth/ControlAltAI-Nodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "deno-custom-nodes",
+      "name": "Deno Custom Nodes",
+      "git_url": "https://github.com/Deno2026/comfyui-deno-custom-nodes",
+      "folder_name": "comfyui-deno-custom-nodes",
+      "node_types": [
+        "deno-custom-nodes"
+      ],
+      "aliases": [
+        "deno-custom-nodes"
+      ],
+      "repository": "https://github.com/Deno2026/comfyui-deno-custom-nodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "masquerade-nodes-comfyui",
+      "name": "Masquerade Nodes for ComfyUI",
+      "git_url": "https://github.com/BadCafeCode/masquerade-nodes-comfyui",
+      "folder_name": "masquerade-nodes-comfyui",
+      "node_types": [
+        "Cut By Mask"
+      ],
+      "aliases": [
+        "masquerade-nodes-comfyui"
+      ],
+      "repository": "https://github.com/BadCafeCode/masquerade-nodes-comfyui",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "res4lyf",
+      "name": "Res4lyf",
+      "git_url": "https://github.com/ClownsharkBatwing/RES4LYF",
+      "folder_name": "RES4LYF",
+      "node_types": [
+        "RES4LYF",
+        "res4lyf"
+      ],
+      "aliases": [
+        "RES4LYF",
+        "res4lyf"
+      ],
+      "repository": "https://github.com/ClownsharkBatwing/RES4LYF",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "rgthree-comfy",
+      "name": "rgthree",
+      "git_url": "https://github.com/rgthree/rgthree-comfy",
+      "folder_name": "rgthree-comfy",
+      "node_types": [
+        "GetNode",
+        "SetNode",
+        "Seed (rgthree)",
+        "Power Lora Loader (rgthree)",
+        "Label (rgthree)",
+        "Bookmark (rgthree)",
+        "Image Comparer (rgthree)",
+        "Fast Groups Muter (rgthree)"
+      ],
+      "aliases": [
+        "rgthree-comfy"
+      ],
+      "repository": "https://github.com/rgthree/rgthree-comfy",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "seedvr2_videoupscaler",
+      "name": "Seedvr2 Videoupscaler",
+      "git_url": "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler",
+      "folder_name": "ComfyUI-SeedVR2_VideoUpscaler",
+      "node_types": [
+        "seedvr2_videoupscaler"
+      ],
+      "aliases": [
+        "seedvr2_videoupscaler"
+      ],
+      "repository": "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "cg-use-everywhere",
+      "name": "Use Everywhere",
+      "git_url": "https://github.com/chrisgoringe/cg-use-everywhere",
+      "folder_name": "cg-use-everywhere",
+      "node_types": [
+        "Anything Everywhere"
+      ],
+      "aliases": [
+        "cg-use-everywhere"
+      ],
+      "repository": "https://github.com/chrisgoringe/cg-use-everywhere",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "vnccs-utils",
+      "name": "Vnccs Utils",
+      "git_url": "https://github.com/AHEKOT/ComfyUI_VNCCS_Utils",
+      "folder_name": "ComfyUI_VNCCS_Utils",
+      "node_types": [
+        "vnccs-utils"
+      ],
+      "aliases": [
+        "vnccs-utils"
+      ],
+      "repository": "https://github.com/AHEKOT/ComfyUI_VNCCS_Utils",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "was-ns",
+      "name": "Was Ns",
+      "git_url": "https://github.com/ltdrdata/was-node-suite-comfyui",
+      "folder_name": "was-node-suite-comfyui",
+      "node_types": [
+        "was-ns"
+      ],
+      "aliases": [
+        "was-ns"
+      ],
+      "repository": "https://github.com/ltdrdata/was-node-suite-comfyui",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    }
+  ]
+}

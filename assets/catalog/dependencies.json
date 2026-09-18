@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "system_dependencies": [
+    {
+      "id": "libegl",
+      "platform": "linux",
+      "package": "libegl1",
+      "detect": "ldconfig -p contains libEGL.so.1",
+      "install": "apt-get install -y libegl1",
+      "required_by": [
+        "skia-python",
+        "ComfyUI-outputlists-combiner"
+      ]
+    },
+    {
+      "id": "ffmpeg",
+      "platform": "linux",
+      "package": "ffmpeg",
+      "detect": "ffmpeg -version",
+      "install": "apt-get install -y ffmpeg",
+      "required_by": [
+        "ComfyUI-VideoHelperSuite",
+        "video loading and saving"
+      ]
+    }
+  ],
+  "python_dependencies": {
+    "environment": "ComfyUI/.venv",
+    "custom_node_requirements": "Install each pinned custom node requirements.txt; consolidate into requirements.lock after compatibility testing."
+  }
+}

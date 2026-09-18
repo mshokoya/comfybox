@@ -1,0 +1,3369 @@
+{
+  "schema_version": 1,
+  "artifact_type": "loras",
+  "generated_from": [
+    "_/bui.toml",
+    "_/deps.json"
+  ],
+  "artifact_count": 96,
+  "artifacts": [
+    {
+      "id": "1girl_qwen_v3",
+      "type": "loras",
+      "relative_path": "models/loras/1GIRL_QWEN_V3.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "1GIRL_QWEN_V3.safetensors",
+          "url": "https://huggingface.co/BauDevs/Lora_qwen_styles/resolve/main/1GIRL_QWEN_V3.safetensors",
+          "size": "2.36 GB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 2360000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Instara - 1GIRL - v3 - qwen",
+      "url": "https://civitai.com/models/1923241/1girl-qwen-image",
+      "family": "Qwen",
+      "group": "Instara",
+      "size_bytes": 2360000000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "2000analogcore_v3",
+      "type": "loras",
+      "relative_path": "models/loras/flux/AprilDan/2000analogcore_v3.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "2000analogcore_v3.safetensors",
+          "url": "https://huggingface.co/Thekingbalxd/FLUX.1-dev/resolve/bf8d506e8be2eefad3ec39d534eb233c80272369/2000analogcore_v3.safetensors",
+          "size": "153.3 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 153300000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Danrisi - 2000s Analog Core - v3 - FLUX.1 Dev - LoRA",
+      "url": "https://civitai.com/models/1134895/2000s-analog-core?modelVersionId=1640450",
+      "family": "FLUX.1 Dev",
+      "group": "Danrisi",
+      "size_bytes": 153300000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "2026_02_15_19_33_05_save_6860_70_0",
+      "type": "loras",
+      "relative_path": "models/loras/z-image base/famegrid2/2026-02-15_19-33-05-save-6860-70-0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "2026-02-15_19-33-05-save-6860-70-0.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/2026-02-15_19-33-05-save-6860-70-0.safetensors",
+          "size": "384.3 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 384300000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "[UNKNOWN BASE MODEL] - 2026-02-15_19-33-05-save-6860-70-0.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/2026-02-15_19-33-05-save-6860-70-0.safetensors",
+      "family": "UNKNOWN",
+      "group": "UNKNOWN",
+      "size_bytes": 384300000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "bfs.flux2-klein.4b.head-swap.v1",
+      "name": "Alissonerdx - BFS Head Swap v1 - FLUX.2 Klein 4B - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Flux2Klein/bfs_head_v1_flux-klein_4b.safetensors",
+      "tags": [
+        "image",
+        "lora",
+        "head-swap",
+        "v1",
+        "4b",
+        "flux2",
+        "klein",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_4b.safetensors",
+          "sha256": "77aabcd6144612dd4873080b99283dd9a27977712548bee161894f62c91ff09c",
+          "size_bytes": 369644384,
+          "enabled": true,
+          "title": "BFS FLUX.2 Klein 4B - Head Swap v1 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_4b.safetensors",
+      "family": "FLUX.2",
+      "group": "Alissonerdx",
+      "size_bytes": 369644384,
+      "sha256": "77aabcd6144612dd4873080b99283dd9a27977712548bee161894f62c91ff09c",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.flux2-klein.4b.head-swap.v1.1-optional",
+      "name": "Alissonerdx - BFS Head Swap v1.1 Optional - FLUX.2 Klein 4B - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Flux2Klein/bfs_head_v1.1_optional_flux-klein_4b.safetensors",
+      "family": "FLUX.2",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "lora",
+        "head-swap",
+        "v1.1",
+        "optional",
+        "4b",
+        "flux2",
+        "klein",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1.1_optional_flux-klein_4b.safetensors",
+          "sha256": "8234563b48b66b22aaaa0df9b4c70636e65f06d443c3b20a9356425040255839",
+          "size_bytes": 1478513544,
+          "enabled": true,
+          "title": "BFS FLUX.2 Klein 4B - Head Swap v1.1 Optional LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1.1_optional_flux-klein_4b.safetensors",
+      "size_bytes": 1478513544,
+      "sha256": "8234563b48b66b22aaaa0df9b4c70636e65f06d443c3b20a9356425040255839",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.flux2-klein.9b.head-swap",
+      "legacy_ids": [
+        "bfs_head_v1_flux_klein_9b_step3500_rank128"
+      ],
+      "name": "Alissonerdx - BFS Head Swap v1 - 3500-Step Rank 128 - FLUX.2 Klein 9B - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Flux2Klein/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors",
+      "family": "FLUX.2",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "lora",
+        "head-swap",
+        "v1",
+        "3500-step",
+        "rank-128",
+        "9b",
+        "flux2",
+        "klein",
+        "bfs"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors",
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors",
+          "description": "LoRA weights; rank 128; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "70d8aaf332d710b905d5085afaa87c3ef577edffd54ffcfadeb8c47a854f9044",
+          "size_bytes": 662729912,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_9b_step3500_rank128.safetensors",
+      "size_bytes": 662729912,
+      "sha256": "70d8aaf332d710b905d5085afaa87c3ef577edffd54ffcfadeb8c47a854f9044",
+      "gated": false,
+      "description": "LoRA weights; rank 128; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "bfs.flux2-klein.9b.head-swap.3750-r64",
+      "name": "Alissonerdx - BFS Head Swap v1 - 3750-Step Rank 64 - FLUX.2 Klein 9B - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Flux2Klein/bfs_head_v1_flux-klein_9b_step3750_rank64.safetensors",
+      "family": "FLUX.2",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "lora",
+        "head-swap",
+        "v1",
+        "3750-step",
+        "rank-64",
+        "9b",
+        "flux2",
+        "klein",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_9b_step3750_rank64.safetensors",
+          "sha256": "49907a240602488d2846861d7570dd95d80609f44be7e3347965735712b1be16",
+          "size_bytes": 331379568,
+          "enabled": true,
+          "title": "BFS FLUX.2 Klein 9B - Head Swap v1 - 3750-Step Rank 64 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_flux-klein_9b_step3750_rank64.safetensors",
+      "size_bytes": 331379568,
+      "sha256": "49907a240602488d2846861d7570dd95d80609f44be7e3347965735712b1be16",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.krea2.body-swap.v1",
+      "name": "Alissonerdx - BFS Body Swap v1 - Krea 2 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Krea2/bfs_body_swap_v1_krea2.safetensors",
+      "family": "Krea 2",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "lora",
+        "body-swap",
+        "v1",
+        "krea2",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_body_swap_v1_krea2.safetensors",
+          "sha256": "0b3d043714c912c55c525ac68a53f50dbfaa6a024d735c28dfed12cd214a0d79",
+          "size_bytes": 914160176,
+          "enabled": true,
+          "title": "BFS Krea 2 - Body Swap v1 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_body_swap_v1_krea2.safetensors",
+      "size_bytes": 914160176,
+      "sha256": "0b3d043714c912c55c525ac68a53f50dbfaa6a024d735c28dfed12cd214a0d79",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.krea2.head-swap.v1.1",
+      "legacy_ids": [
+        "bfs_head_swap_v1_1_krea2"
+      ],
+      "name": "Alissonerdx - BFS Head Swap v1.1 - Krea 2 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Krea2/bfs_head_swap_v1.1_krea2.safetensors",
+      "family": "Krea 2",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "lora",
+        "head-swap",
+        "v1.1",
+        "krea2",
+        "bfs"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "bfs_head_swap_v1.1_krea2.safetensors",
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1.1_krea2.safetensors",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "abc6c468c578b36e6bd960106ad5886afd3f5321e4fe2de26c05bb5c6585b836",
+          "size_bytes": 914159816,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1.1_krea2.safetensors",
+      "size_bytes": 914159816,
+      "sha256": "abc6c468c578b36e6bd960106ad5886afd3f5321e4fe2de26c05bb5c6585b836",
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "bfs.ltx2.head-swap.v1.12000-train3",
+      "name": "Alissonerdx - BFS Head Swap v1 - 12000-Step Train 3 - LTX-2 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/LTX2/bfs_head_swap_v1_ltx2_ic_lora_12000_train_3.safetensors",
+      "family": "LTX 2",
+      "group": "Alissonerdx",
+      "tags": [
+        "video",
+        "lora",
+        "head-swap",
+        "v1",
+        "12000-step",
+        "ltx2",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1_ltx2_ic_lora_12000_train_3.safetensors",
+          "sha256": "27bb754d5c5029e64131d854217ddb37dfa17eb07864201e911e9c89e633ecaf",
+          "size_bytes": 1308756368,
+          "enabled": true,
+          "title": "BFS LTX-2 - Head Swap v1 - 12000-Step Train 3 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1_ltx2_ic_lora_12000_train_3.safetensors",
+      "size_bytes": 1308756368,
+      "sha256": "27bb754d5c5029e64131d854217ddb37dfa17eb07864201e911e9c89e633ecaf",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.ltx2.head-swap.v1.5000",
+      "name": "Alissonerdx - BFS Head Swap v1 - 5000-Step - LTX-2 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/LTX2/bfs_head_swap_v1_ltx2_ic_lora_5000.safetensors",
+      "family": "LTX 2",
+      "group": "Alissonerdx",
+      "tags": [
+        "video",
+        "lora",
+        "head-swap",
+        "v1",
+        "5000-step",
+        "ltx2",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1_ltx2_ic_lora_5000.safetensors",
+          "sha256": "e11d18bb009b2c2a938b99a32f3ab140705fdbea7b65029c3cda3ceeb89e654c",
+          "size_bytes": 1308756368,
+          "enabled": true,
+          "title": "BFS LTX-2 - Head Swap v1 - 5000-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1_ltx2_ic_lora_5000.safetensors",
+      "size_bytes": 1308756368,
+      "sha256": "e11d18bb009b2c2a938b99a32f3ab140705fdbea7b65029c3cda3ceeb89e654c",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.ltx2.head-swap.v1.6000",
+      "name": "Alissonerdx - BFS Head Swap v1 - 6000-Step - LTX-2 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/LTX2/bfs_head_swap_v1_ltx2_ic_lora_6000.safetensors",
+      "family": "LTX 2",
+      "group": "Alissonerdx",
+      "tags": [
+        "video",
+        "lora",
+        "head-swap",
+        "v1",
+        "6000-step",
+        "ltx2",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1_ltx2_ic_lora_6000.safetensors",
+          "sha256": "4021b4143bd935e565aeaaf5bf8ef43e8f3aa3faf7a9ae0a73f1879342f32d12",
+          "size_bytes": 1308756368,
+          "enabled": true,
+          "title": "BFS LTX-2 - Head Swap v1 - 6000-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_swap_v1_ltx2_ic_lora_6000.safetensors",
+      "size_bytes": 1308756368,
+      "sha256": "4021b4143bd935e565aeaaf5bf8ef43e8f3aa3faf7a9ae0a73f1879342f32d12",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.qwen2509.face-swap.v1",
+      "name": "Alissonerdx - BFS Face Swap v1 - Qwen Image Edit 2509 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2509/bfs_face_v1_qwen_image_edit_2509.safetensors",
+      "family": "Qwen Image Edit",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "face-swap",
+        "v1",
+        "2509",
+        "qwen-image",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_face_v1_qwen_image_edit_2509.safetensors",
+          "sha256": "c9f18ba062d0c8aa3c98169005b616bc95866fe9956c2608dcfd29b1e9b20359",
+          "size_bytes": 590058816,
+          "enabled": true,
+          "title": "BFS Qwen Image Edit 2509 - Face Swap v1 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_face_v1_qwen_image_edit_2509.safetensors",
+      "size_bytes": 590058816,
+      "sha256": "c9f18ba062d0c8aa3c98169005b616bc95866fe9956c2608dcfd29b1e9b20359",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.qwen2509.head-swap.v1",
+      "name": "Alissonerdx - BFS Head Swap v1 - Qwen Image Edit 2509 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2509/bfs_head_v1_qwen_image_edit_2509.safetensors",
+      "family": "Qwen Image Edit",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "head-swap",
+        "v1",
+        "2509",
+        "qwen-image",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_qwen_image_edit_2509.safetensors",
+          "sha256": "d71ee1612e4b416fc0f62a1a59a3d66b7ee6d86a1a7c35aacc2f929e0326f68d",
+          "size_bytes": 590058808,
+          "enabled": true,
+          "title": "BFS Qwen Image Edit 2509 - Head Swap v1 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1_qwen_image_edit_2509.safetensors",
+      "size_bytes": 590058808,
+      "sha256": "d71ee1612e4b416fc0f62a1a59a3d66b7ee6d86a1a7c35aacc2f929e0326f68d",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.qwen2509.head-swap.v2",
+      "name": "Alissonerdx - BFS Head Swap v2 - Qwen Image Edit 2509 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2509/bfs_head_v2_qwen_image_edit_2509.safetensors",
+      "family": "Qwen Image Edit",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "head-swap",
+        "v2",
+        "2509",
+        "qwen-image",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v2_qwen_image_edit_2509.safetensors",
+          "sha256": "a928f106fcba6e4b196ef511289f075b4690eba0f6bc3fa3755fdba2ec2a428c",
+          "size_bytes": 147687224,
+          "enabled": true,
+          "title": "BFS Qwen Image Edit 2509 - Head Swap v2 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v2_qwen_image_edit_2509.safetensors",
+      "size_bytes": 147687224,
+      "sha256": "a928f106fcba6e4b196ef511289f075b4690eba0f6bc3fa3755fdba2ec2a428c",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.qwen2509.head-swap.v3",
+      "name": "Alissonerdx - BFS Head Swap v3 - Qwen Image Edit 2509 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2509/bfs_head_v3_qwen_image_edit_2509.safetensors",
+      "family": "Qwen Image Edit",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "head-swap",
+        "v3",
+        "2509",
+        "qwen-image",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v3_qwen_image_edit_2509.safetensors",
+          "sha256": "49aac5a55175ab5ebd89ffdae4c336eaca1899f5b725b70c0c039f6d4a8d86e6",
+          "size_bytes": 73957904,
+          "enabled": true,
+          "title": "BFS Qwen Image Edit 2509 - Head Swap v3 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v3_qwen_image_edit_2509.safetensors",
+      "size_bytes": 73957904,
+      "sha256": "49aac5a55175ab5ebd89ffdae4c336eaca1899f5b725b70c0c039f6d4a8d86e6",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.qwen2509.head-swap.v4",
+      "name": "Alissonerdx - BFS Head Swap v4 - Qwen Image Edit 2509 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2509/bfs_head_v4_qwen_image_edit_2509.safetensors",
+      "family": "Qwen Image Edit",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "head-swap",
+        "v4",
+        "2509",
+        "qwen-image",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v4_qwen_image_edit_2509.safetensors",
+          "sha256": "cd3278c33c7df36bb87169d0a283851d60e88ecac48123b5c8dcc82551d6e402",
+          "size_bytes": 147794944,
+          "enabled": true,
+          "title": "BFS Qwen Image Edit 2509 - Head Swap v4 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v4_qwen_image_edit_2509.safetensors",
+      "size_bytes": 147794944,
+      "sha256": "cd3278c33c7df36bb87169d0a283851d60e88ecac48123b5c8dcc82551d6e402",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "bfs.qwen2511.head-swap.v5",
+      "legacy_ids": [
+        "bfs_head_v5_2511_merged_version_rank_16_fp16"
+      ],
+      "name": "Alissonerdx - BFS Head Swap v5 - Rank 16 FP16 - Qwen Image Edit 2511 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors",
+      "family": "Qwen Image Edit",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "head-swap",
+        "v5",
+        "rank-16",
+        "fp16",
+        "2511",
+        "qwen-image",
+        "bfs"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors",
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors",
+          "description": "LoRA weights; FP16 precision; rank 16; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "1315a08947e5d6d7c53ea4fc59f272e0d54efd7f2da35999b7d873a7cf4fa89b",
+          "size_bytes": 307464216,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_merged_version_rank_16_fp16.safetensors",
+      "size_bytes": 307464216,
+      "sha256": "1315a08947e5d6d7c53ea4fc59f272e0d54efd7f2da35999b7d873a7cf4fa89b",
+      "gated": false,
+      "description": "LoRA weights; FP16 precision; rank 16; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "bfs.qwen2511.head-swap.v5.rank32-fp32",
+      "name": "Alissonerdx - BFS Head Swap v5 - Rank 32 FP32 - Qwen Image Edit 2511 - LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/bfs_head_v5_2511_merged_version_rank_32_fp32.safetensors",
+      "family": "Qwen Image Edit",
+      "group": "Alissonerdx",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "head-swap",
+        "v5",
+        "rank-32",
+        "fp32",
+        "2511",
+        "qwen-image",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_merged_version_rank_32_fp32.safetensors",
+          "sha256": "0a137e61245781412421f5dee5db4ccac28b6c9952c042d1123a84609107cd10",
+          "size_bytes": 1206402600,
+          "enabled": true,
+          "title": "BFS Qwen Image Edit 2511 - Head Swap v5 - Rank 32 FP32 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_merged_version_rank_32_fp32.safetensors",
+      "size_bytes": 1206402600,
+      "sha256": "0a137e61245781412421f5dee5db4ccac28b6c9952c042d1123a84609107cd10",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32.safetensors",
+          "url": "https://huggingface.co/chilkersion/NRDX/resolve/main/2284062/2570621/custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32.safetensors",
+          "description": "LoRA weights; FP32 precision; Lightning acceleration; 8-step variant; rank 4; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "candidate_sources": [
+        {
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/tree/main",
+          "status": "filename-mismatch-or-not-found",
+          "expected_filename": "custom_lightning_qwen_image_edit_2511_4or8steps_rank_4_fp32.safetensors"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Lightx2v - Custom Lightning - 4or8steps - Rank 4 - FP32 - Qwen Image Edit 2511 - LoRA",
+      "family": "Qwen Image Edit",
+      "group": "Lightx2v",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "lightning",
+        "4or8steps",
+        "rank-4",
+        "fp32",
+        "2511",
+        "qwen-image",
+        "bfs"
+      ],
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/tree/main",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; FP32 precision; Lightning acceleration; 8-step variant; rank 4; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "famegrid_qwen_14_finetune_rlskn_000050",
+      "type": "loras",
+      "relative_path": "models/loras/Famegrid_Qwen_14_Finetune_RLSKN-000050.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "famegrid-qwen-std-v1.5-realskinfix.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-qwen-std-v1.5-realskinfix.safetensors",
+          "size": "1.18 GB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 1180000000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-qwen-std-v1.5-realskinfix.safetensors",
+          "source_filename": "famegrid-qwen-std-v1.5-realskinfix.safetensors",
+          "save_as": "models/loras/Famegrid_Qwen_14_Finetune_RLSKN-000050.safetensors",
+          "size": "1.18 GB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Famegrid - RealSkinFix - Qwen Std V1.5 - LoRA",
+      "family": "Qwen Image Edit",
+      "group": "Famegrid",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "rank-16",
+        "fp32",
+        "2511",
+        "qwen-image",
+        "bfs"
+      ],
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-qwen-std-v1.5-realskinfix.safetensors",
+      "size_bytes": 1180000000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "famegrid_spicy",
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/famegrid_spicy.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "famegrid-krea2-spicy-v1.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-krea2-spicy-v1.safetensors",
+          "size": "1.56 GB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 1560000000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-krea2-spicy-v1.safetensors",
+          "source_filename": "famegrid-krea2-spicy-v1.safetensors",
+          "save_as": "models/loras/krea 2/famegrid_spicy.safetensors",
+          "size": "1.56 GB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Famegrid - Spicy V1 - Krea 2 - LoRA",
+      "family": "Krea 2",
+      "group": "Famegrid",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "rank-16",
+        "fp32",
+        "2511",
+        "krea2",
+        "bfs"
+      ],
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-krea2-spicy-v1.safetensors",
+      "size_bytes": 1560000000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "famegrid_standard_krea_2",
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/Famegrid Krea 2 Standard Pass 1/Famegrid Standard Krea 2.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "famegrid-krea2-standard-v1.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-krea2-standard-v1.safetensors",
+          "size": "228.6 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 228600000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-krea2-standard-v1.safetensors",
+          "source_filename": "famegrid-krea2-standard-v1.safetensors",
+          "save_as": "models/loras/krea 2/Famegrid Krea 2 Standard Pass 1/Famegrid Standard Krea 2.safetensors",
+          "size": "228.6 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Famegrid - Standard V1 - Krea 2 - LoRA",
+      "family": "Krea 2",
+      "group": "Famegrid",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "rank-16",
+        "fp32",
+        "2511",
+        "krea2",
+        "bfs"
+      ],
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-krea2-standard-v1.safetensors",
+      "size_bytes": 228600000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "famegrid_ultrareal",
+      "type": "loras",
+      "relative_path": "models/loras/krea-2/famegrid_ultrareal.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sha256": "d5be841ce9d314b455f902dc20dcf5d15d371d67a10637c551181af54299d275",
+      "sources": [
+        {
+          "title": "famegrid-krea2-natural-v1.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-krea2-natural-v1.safetensors",
+          "size": "1.56 GB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 1560000000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-krea2-natural-v1.safetensors",
+          "source_filename": "famegrid-krea2-natural-v1.safetensors",
+          "save_as": "models/loras/krea-2/famegrid_ultrareal.safetensors",
+          "size": "1.56 GB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Famegrid - Natural V1 - Krea 2 - LoRA",
+      "family": "Krea 2",
+      "group": "Famegrid",
+      "tags": [
+        "image",
+        "lora",
+        "rank-16",
+        "fp32",
+        "krea2"
+      ],
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-krea2-natural-v1.safetensors",
+      "size_bytes": 1560000000,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "famegrid_zimage_spicy_v2_fp32",
+      "type": "loras",
+      "relative_path": "models/loras/famegrid-zimage-spicy-v2/famegrid-zimage-spicy-v2-fp32.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "famegrid-zimage-spicy-v2-fp32.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-zimage-spicy-v2-fp32.safetensors",
+          "size": "1.52 GB",
+          "description": "LoRA weights; FP32 precision; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 1520000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Famegrid - Spicy V2 - Z-Image - LoRA",
+      "family": "Z-Image",
+      "group": "Famegrid",
+      "tags": [
+        "image",
+        "lora",
+        "rank-16",
+        "fp32",
+        "zimage"
+      ],
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-zimage-spicy-v2-fp32.safetensors",
+      "size_bytes": 1520000000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; FP32 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "flux2.klein.multiple-angles",
+      "legacy_ids": [
+        "multiple_angles_flux_klein_9b"
+      ],
+      "name": "FLUX.2 Klein 9B - Multiple Angles LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/exp/multiple-angles-flux-klein-9b.safetensors",
+      "family": "FLUX",
+      "group": "FLUX.2",
+      "tags": [
+        "image",
+        "lora",
+        "multiple-angles",
+        "9b",
+        "flux2",
+        "klein"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "multiple-angles-flux-klein-9b.safetensors",
+          "url": "https://huggingface.co/Alexali/multiple-angles-flux2K/resolve/main/multiple-angles-flux-klein-9b.safetensors",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "3dc50269a94c29d679f9e5b52868cea1b26542cf32e8976ee74d8ce16c98d692",
+          "size_bytes": 87070312,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/Alexali/multiple-angles-flux2K/resolve/main/multiple-angles-flux-klein-9b.safetensors",
+      "size_bytes": 87070312,
+      "sha256": "3dc50269a94c29d679f9e5b52868cea1b26542cf32e8976ee74d8ce16c98d692",
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "fmgrd42026_02_17_13_14_24_save_10780_20_0",
+      "type": "loras",
+      "relative_path": "models/loras/z-image base/famegrid5/fmgrd42026-02-17_13-14-24-save-10780-20-0.safetensors",
+      "loader": "easy loraNames",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "fmgrd42026-02-17_13-14-24-save-10780-20-0.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/fmgrd42026-02-17_13-14-24-save-10780-20-0.safetensors",
+          "size": "280.2 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 280200000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Famegrid - fmgrd42026-02-17_13-14-24-save-10780-20-0",
+      "family": "Unknown",
+      "group": "Famegrid",
+      "tags": [
+        "image",
+        "lora"
+      ],
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/fmgrd42026-02-17_13-14-24-save-10780-20-0.safetensors",
+      "size_bytes": 280200000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "grainscape_ultrareal_v3",
+      "type": "loras",
+      "relative_path": "models/loras/flux/may_loras/GrainScape_UltraReal_v3.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sha256": "c124cb3b27d56d257910beb563958524f6b21aab104a7ba8e31e450ccec6aca1",
+      "sources": [
+        {
+          "title": "danrisi-grainscape-ultrareal-v2-flux1dev.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-grainscape-ultrareal-v2-flux1dev.safetensors",
+          "size": "153.3 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 153300000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-grainscape-ultrareal-v2-flux1dev.safetensors",
+          "source_filename": "danrisi-grainscape-ultrareal-v2-flux1dev.safetensors",
+          "save_as": "models/loras/flux/may_loras/GrainScape_UltraReal_v3.safetensors",
+          "size": "153.3 MB",
+          "warning": "Workflow requests v3 but supplied source is labelled v2."
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "danrisi-grainscape-ultrareal-v2-flux1dev.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-grainscape-ultrareal-v2-flux1dev.safetensors",
+      "size_bytes": 153300000,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "insatgirlv2_3_low",
+      "type": "loras",
+      "relative_path": "models/loras/Insatgirlv2.3_low.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "instara-instagirl-v2.5-low-wan2.2.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/instara-instagirl-v2.5-low-wan2.2.safetensors",
+          "size": "2.45 GB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 2450000000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/instara-instagirl-v2.5-low-wan2.2.safetensors",
+          "source_filename": "instara-instagirl-v2.5-low-wan2.2.safetensors",
+          "save_as": "models/loras/Insatgirlv2.3_low.safetensors",
+          "size": "2.45 GB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "instara-instagirl-v2.5-low-wan2.2.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/instara-instagirl-v2.5-low-wan2.2.safetensors",
+      "size_bytes": 2450000000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "instagirlv2_3_high",
+      "type": "loras",
+      "relative_path": "models/loras/Instagirlv2.3_high.safetensors",
+      "loader": "LoraLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "instara-Instagirl-v2.5-high-wan2.2.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/instara-Instagirl-v2.5-high-wan2.2.safetensors",
+          "size": "306.8 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 306800000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/instara-Instagirl-v2.5-high-wan2.2.safetensors",
+          "source_filename": "instara-Instagirl-v2.5-high-wan2.2.safetensors",
+          "save_as": "models/loras/Instagirlv2.3_high.safetensors",
+          "size": "306.8 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "instara-Instagirl-v2.5-high-wan2.2.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/instara-Instagirl-v2.5-high-wan2.2.safetensors",
+      "size_bytes": 306800000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "instamodel_1",
+      "type": "loras",
+      "relative_path": "models/loras/Instamodel_1.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Instamodel_1.safetensors",
+          "url": "https://huggingface.co/aufjsufjaujda3/wan/resolve/main/Instamodel_1.safetensors",
+          "size": "306.8 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 306800000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Instamodel_1.safetensors",
+      "url": "https://huggingface.co/aufjsufjaujda3/wan/resolve/main/Instamodel_1.safetensors",
+      "size_bytes": 306800000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "krea2.amateur.v2",
+      "legacy_ids": [
+        "kreaamateur_v2"
+      ],
+      "name": "Krea 2 - Amateur v2 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Krea2/Details/KreaAmateur_V2.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "lora",
+        "amateur",
+        "details",
+        "v2",
+        "krea2"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/powerpuff-amateur-v2-krea.safetensors",
+          "sha256": "8953f6960d43a8055f1dbc9b7e349ddb1fca688297c0a15be8b6ee4c69ca2af3",
+          "size_bytes": 228588904,
+          "enabled": true,
+          "title": "Krea 2 - Amateur v2 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        },
+        {
+          "title": "KreaAmateur V2 LoRA",
+          "url": "https://civitai.com/api/download/models/3276982",
+          "description": "LoRA weights; hosted on Civitai.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/powerpuff-amateur-v2-krea.safetensors",
+      "size_bytes": 228588904,
+      "sha256": "8953f6960d43a8055f1dbc9b7e349ddb1fca688297c0a15be8b6ee4c69ca2af3",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.amateur.v4",
+      "name": "Krea 2 - Amateur v4 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Krea2/Details/KreaAmateur_V4.safetensors",
+      "group": "Krea 2",
+      "tags": [
+        "image",
+        "lora",
+        "amateur",
+        "details",
+        "v4",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/powerpuff-amateur-v4-krea.safetensors",
+          "sha256": "0ad3b5092c99b4a1696df4ab07407775309da6c21d36c9a506f6b5ff153552ec",
+          "size_bytes": 228588912,
+          "enabled": true,
+          "title": "Krea 2 - Amateur v4 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/powerpuff-amateur-v4-krea.safetensors",
+      "size_bytes": 228588912,
+      "sha256": "0ad3b5092c99b4a1696df4ab07407775309da6c21d36c9a506f6b5ff153552ec",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.identity-edit.v1",
+      "name": "Krea 2 Identity Edit - v1 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/krea2/krea2_identity_edit_v1.safetensors",
+      "group": "Krea 2 Identity Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "identity",
+        "v1",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1.safetensors",
+          "sha256": "5bccb332b682c4db7ec176b857b0bd0c3c97edeed9b4564d9ec8d3a3b4556346",
+          "size_bytes": 1828256864,
+          "enabled": true,
+          "title": "Krea 2 Identity Edit - v1 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1.safetensors",
+      "size_bytes": 1828256864,
+      "sha256": "5bccb332b682c4db7ec176b857b0bd0c3c97edeed9b4564d9ec8d3a3b4556346",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.identity-edit.v1.1.r128",
+      "name": "Krea 2 Identity Edit - v1.1 - Rank 128 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/krea2/krea2_identity_edit_v1_1_r128.safetensors",
+      "group": "Krea 2 Identity Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "identity",
+        "v1.1",
+        "rank-128",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_1_r128.safetensors",
+          "sha256": "78b403a45024d51c24b618046ec1176c346416951f8f4c6c707d1b337ae1d40f",
+          "size_bytes": 914159744,
+          "enabled": true,
+          "title": "Krea 2 Identity Edit - v1.1 - Rank 128 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_1_r128.safetensors",
+      "size_bytes": 914159744,
+      "sha256": "78b403a45024d51c24b618046ec1176c346416951f8f4c6c707d1b337ae1d40f",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.identity-edit.v1.1.r64",
+      "name": "Krea 2 Identity Edit - v1.1 - Rank 64 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/krea2/krea2_identity_edit_v1_1_r64.safetensors",
+      "group": "Krea 2 Identity Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "identity",
+        "v1.1",
+        "rank-64",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_1_r64.safetensors",
+          "sha256": "f20684520077d8463dbbc5f892ac319b4cf4307d0299da2dbf6bf5d69ad0ab1d",
+          "size_bytes": 457111048,
+          "enabled": true,
+          "title": "Krea 2 Identity Edit - v1.1 - Rank 64 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_1_r64.safetensors",
+      "size_bytes": 457111048,
+      "sha256": "f20684520077d8463dbbc5f892ac319b4cf4307d0299da2dbf6bf5d69ad0ab1d",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.identity-edit.v1.1",
+      "name": "Krea 2 Identity Edit - v1.1 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/krea2/krea2_identity_edit_v1_1.safetensors",
+      "group": "Krea 2 Identity Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "identity",
+        "v1.1",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_1.safetensors",
+          "sha256": "89fe1ebdc6e9d0399d161103f7696adfd71ce613696aeac5962aa7f20e163ff6",
+          "size_bytes": 1828256432,
+          "enabled": true,
+          "title": "Krea 2 Identity Edit - v1.1 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_1.safetensors",
+      "size_bytes": 1828256432,
+      "sha256": "89fe1ebdc6e9d0399d161103f7696adfd71ce613696aeac5962aa7f20e163ff6",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.identity-edit.v1.2.r128",
+      "name": "Krea 2 Identity Edit - v1.2 - Rank 128 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/krea2/krea2_identity_edit_v1_2_r128.safetensors",
+      "group": "Krea 2 Identity Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "identity",
+        "v1.2",
+        "rank-128",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2_r128.safetensors",
+          "sha256": "f53db0bb4b081d638f196865cbc9f055379704fafb788336784fc1ccde18d825",
+          "size_bytes": 914159744,
+          "enabled": true,
+          "title": "Krea 2 Identity Edit - v1.2 - Rank 128 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2_r128.safetensors",
+      "size_bytes": 914159744,
+      "sha256": "f53db0bb4b081d638f196865cbc9f055379704fafb788336784fc1ccde18d825",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.identity-edit.v1.2.r64",
+      "name": "Krea 2 Identity Edit - v1.2 - Rank 64 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/krea2/krea2_identity_edit_v1_2_r64.safetensors",
+      "group": "Krea 2 Identity Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "identity",
+        "v1.2",
+        "rank-64",
+        "krea2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2_r64.safetensors",
+          "sha256": "f794b47142555c929cf536a2f1e4f335174b9aedbb08572b07d45814d4242423",
+          "size_bytes": 457111048,
+          "enabled": true,
+          "title": "Krea 2 Identity Edit - v1.2 - Rank 64 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2_r64.safetensors",
+      "size_bytes": 457111048,
+      "sha256": "f794b47142555c929cf536a2f1e4f335174b9aedbb08572b07d45814d4242423",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "krea2.identity-edit.v1.2",
+      "legacy_ids": [
+        "krea2_identity_edit_v1_2"
+      ],
+      "name": "Krea 2 Identity Edit - v1.2 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/krea2/krea2_identity_edit_v1_2.safetensors",
+      "group": "Krea 2 Identity Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "identity",
+        "v1.2",
+        "krea2"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2_identity_edit_v1_2.safetensors",
+          "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2.safetensors",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "6adf9a69cc9502d286db7b69964d37da7e9cfe4b05b4d004bc275f087d3fd3cf",
+          "size_bytes": 1828256432,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/krea2_identity_edit_v1_2.safetensors",
+      "size_bytes": 1828256432,
+      "sha256": "6adf9a69cc9502d286db7b69964d37da7e9cfe4b05b4d004bc275f087d3fd3cf",
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "krea2_raw_to_turbo_r256_comfy",
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/krea2_raw_to_turbo_r256_comfy.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2_raw_to_turbo_r256_comfy.safetensors",
+          "url": "https://huggingface.co/Kutches/Kr3a/resolve/main/krea2_raw_to_turbo_r256_comfy.safetensors",
+          "size": "1.72 GB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 1720000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "krea2_raw_to_turbo_r256_comfy.safetensors",
+      "url": "https://huggingface.co/Kutches/Kr3a/resolve/main/krea2_raw_to_turbo_r256_comfy.safetensors",
+      "size_bytes": 1720000000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "krea2_turbo_lora_rank_64_bf16",
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/krea2_turbo_lora_rank_64_bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2_turbo_lora_rank_64_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/loras/krea2_turbo_lora_rank_64_bf16.safetensors",
+          "size": "469.4 MB",
+          "description": "LoRA weights; BF16 precision; rank 64; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 469400000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "krea2_turbo_lora_rank_64_bf16.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/loras/krea2_turbo_lora_rank_64_bf16.safetensors",
+      "size_bytes": 469400000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; BF16 precision; rank 64; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "krea2filterbypass3",
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/krea2filterbypass3.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2filterbypass3.safetensors",
+          "url": "https://huggingface.co/uzumix/krea2filterbypass3.safetensors/resolve/main/krea2filterbypass3.safetensors",
+          "size": "0.2 KB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 200
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "krea2filterbypass3.safetensors",
+      "url": "https://huggingface.co/uzumix/krea2filterbypass3.safetensors/resolve/main/krea2filterbypass3.safetensors",
+      "size_bytes": 200,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "krea_detail_enhancer_exp_v2",
+      "type": "loras",
+      "relative_path": "models/loras/krea/krea-detail-enhancer-exp-v2.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "reverentelusarca-elusarcas-detail-enhancer-edit-v1-krea2.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/reverentelusarca-elusarcas-detail-enhancer-edit-v1-krea2.safetensors",
+          "size": "228.6 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 228600000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/reverentelusarca-elusarcas-detail-enhancer-edit-v1-krea2.safetensors",
+          "source_filename": "reverentelusarca-elusarcas-detail-enhancer-edit-v1-krea2.safetensors",
+          "save_as": "models/loras/krea/krea-detail-enhancer-exp-v2.safetensors",
+          "size": "228.6 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "reverentelusarca-elusarcas-detail-enhancer-edit-v1-krea2.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/reverentelusarca-elusarcas-detail-enhancer-edit-v1-krea2.safetensors",
+      "size_bytes": 228600000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "kurvy_krea_2_v1",
+      "type": "loras",
+      "relative_path": "models/loras/krea 2/Kurvy_Krea_2_V1.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "famegrid-kurvy-krea2.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-kurvy-krea2.safetensors",
+          "size": "1.56 GB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 1560000000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-kurvy-krea2.safetensors",
+          "source_filename": "famegrid-kurvy-krea2.safetensors",
+          "save_as": "models/loras/krea 2/Kurvy_Krea_2_V1.safetensors",
+          "size": "1.56 GB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "famegrid-kurvy-krea2.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-kurvy-krea2.safetensors",
+      "size_bytes": 1560000000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "l3n0v0",
+      "type": "loras",
+      "relative_path": "models/loras/l3n0v0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "danrisi-lenovo-krea2.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-lenovo-krea2.safetensors",
+          "size": "114.3 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 114300000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-lenovo-krea2.safetensors",
+          "source_filename": "danrisi-lenovo-krea2.safetensors",
+          "save_as": "models/loras/l3n0v0.safetensors",
+          "size": "114.3 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "danrisi-lenovo-krea2.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-lenovo-krea2.safetensors",
+      "size_bytes": 114300000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "lenovo",
+      "type": "loras",
+      "relative_path": "models/loras/flux/jun_loras/lenovo.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "lenovo.safetensors",
+          "url": "https://huggingface.co/Danrisi/Lenovo_Qwen/resolve/main/lenovo.safetensors",
+          "size": "47.2 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 47200000
+        },
+        {
+          "title": "danrisi-lenovo-krea2.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-lenovo-krea2.safetensors",
+          "size": "114.3 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 114300000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-lenovo-krea2.safetensors",
+          "source_filename": "danrisi-lenovo-krea2.safetensors",
+          "save_as": "models/loras/flux/jun_loras/lenovo.safetensors",
+          "size": "114.3 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "lenovo.safetensors",
+      "url": "https://huggingface.co/Danrisi/Lenovo_Qwen/resolve/main/lenovo.safetensors",
+      "size_bytes": 47200000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "lenovo_z_000002500",
+      "type": "loras",
+      "relative_path": "models/loras/z-image/lenovo_z_000002500.safetensors",
+      "loader": "LoraLoaderZImage",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "danrisi-lenovo-krea2.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-lenovo-krea2.safetensors",
+          "size": "114.3 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 114300000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-lenovo-krea2.safetensors",
+          "source_filename": "danrisi-lenovo-krea2.safetensors",
+          "save_as": "models/loras/z-image/lenovo_z_000002500.safetensors",
+          "size": "114.3 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "danrisi-lenovo-krea2.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-lenovo-krea2.safetensors",
+      "size_bytes": 114300000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "model",
+      "type": "loras",
+      "relative_path": "models/loras/VAE-approx/model.pt",
+      "loader": "easy loraNames",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "model.pt",
+          "url": "https://huggingface.co/mirroring/civitai_mirror/resolve/2af05cb49471f63d6111344e0c754cfbd733e4ac/models/VAE-approx/model.pt",
+          "size": "213.8 KB",
+          "description": "LoRA weights; PT file; hosted on Hugging Face.",
+          "size_bytes": 213800
+        }
+      ],
+      "candidate_sources": [
+        {
+          "url": "https://huggingface.co/mirroring/civitai_mirror/tree/2af05cb49471f63d6111344e0c754cfbd733e4ac/models/VAE-approx",
+          "status": "filename-mismatch-or-not-found",
+          "expected_filename": "model.pt"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "model.pt",
+      "url": "https://huggingface.co/mirroring/civitai_mirror/resolve/2af05cb49471f63d6111344e0c754cfbd733e4ac/models/VAE-approx/model.pt",
+      "size_bytes": 213800,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; PT file; hosted on Hugging Face."
+    },
+    {
+      "id": "models_loras_krea_2_krea2filterbypass3",
+      "type": "loras",
+      "relative_path": "models/loras/krea-2/krea2filterbypass3.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2filterbypass3.safetensors",
+          "url": "https://huggingface.co/uzumix/krea2filterbypass3.safetensors/resolve/main/krea2filterbypass3.safetensors",
+          "size": "0.2 KB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 200
+        }
+      ],
+      "source_reused_by_exact_filename": true,
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "krea2filterbypass3.safetensors",
+      "url": "https://huggingface.co/uzumix/krea2filterbypass3.safetensors/resolve/main/krea2filterbypass3.safetensors",
+      "size_bytes": 200,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "models_loras_krea_krea2_turbo_lora_rank_64_bf16",
+      "type": "loras",
+      "relative_path": "models/loras/krea/krea2_turbo_lora_rank_64_bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2_turbo_lora_rank_64_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/loras/krea2_turbo_lora_rank_64_bf16.safetensors",
+          "size": "469.4 MB",
+          "description": "LoRA weights; BF16 precision; rank 64; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 469400000
+        }
+      ],
+      "source_reused_by_exact_filename": true,
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "krea2_turbo_lora_rank_64_bf16.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/loras/krea2_turbo_lora_rank_64_bf16.safetensors",
+      "size_bytes": 469400000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; BF16 precision; rank 64; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "models_loras_krea_krea2filterbypass3",
+      "type": "loras",
+      "relative_path": "models/loras/krea/krea2filterbypass3.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "krea2filterbypass3.safetensors",
+          "url": "https://huggingface.co/uzumix/krea2filterbypass3.safetensors/resolve/main/krea2filterbypass3.safetensors",
+          "size": "0.2 KB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 200
+        }
+      ],
+      "source_reused_by_exact_filename": true,
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "krea2filterbypass3.safetensors",
+      "url": "https://huggingface.co/uzumix/krea2filterbypass3.safetensors/resolve/main/krea2filterbypass3.safetensors",
+      "size_bytes": 200,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "models_loras_qwen_qwen_image_edit_2511_lightning_4steps_v1_0_bf16",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          "description": "LoRA weights; BF16 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; BF16 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "mysticxxx_v4",
+      "type": "loras",
+      "relative_path": "models/loras/flux/MysticXXX-v4.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "MysticXXX-v4.safetensors",
+          "url": "https://huggingface.co/model-hub-nd/test3/resolve/main/MysticXXX-v4.safetensors",
+          "size": "153.9 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 153900000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "MysticXXX-v4.safetensors",
+      "url": "https://huggingface.co/model-hub-nd/test3/resolve/main/MysticXXX-v4.safetensors",
+      "size_bytes": 153900000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "nicegirls_8k",
+      "type": "loras",
+      "relative_path": "models/loras/z-image/nicegirls/nicegirls_8k.safetensors",
+      "loader": "LoraLoaderZImage",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "danrisi-ultrareal-nicegirls-zit.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-ultrareal-nicegirls-zit.safetensors",
+          "size": "170.1 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 170100000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-ultrareal-nicegirls-zit.safetensors",
+          "source_filename": "danrisi-ultrareal-nicegirls-zit.safetensors",
+          "save_as": "models/loras/z-image/nicegirls/nicegirls_8k.safetensors",
+          "size": "170.1 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "danrisi-ultrareal-nicegirls-zit.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-ultrareal-nicegirls-zit.safetensors",
+      "size_bytes": 170100000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.skin.4000",
+      "name": "Qwen Edit Skin - 4000-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_000004000.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "4000-step"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004000.safetensors",
+          "sha256": "39cba6d4c1ceda71c7cd59cdf9763db2a1f0c7b303238ffa50a7241130ec70cb",
+          "size_bytes": 295146176,
+          "enabled": true,
+          "title": "Qwen Edit Skin - 4000-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004000.safetensors",
+      "size_bytes": 295146176,
+      "sha256": "39cba6d4c1ceda71c7cd59cdf9763db2a1f0c7b303238ffa50a7241130ec70cb",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.skin.4250",
+      "name": "Qwen Edit Skin - 4250-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_000004250.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "4250-step"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004250.safetensors",
+          "sha256": "c6837962e984dcf4c8a26c60ccbcc22a6d607e18d9ea1154cba065bf508d83a7",
+          "size_bytes": 295146176,
+          "enabled": true,
+          "title": "Qwen Edit Skin - 4250-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004250.safetensors",
+      "size_bytes": 295146176,
+      "sha256": "c6837962e984dcf4c8a26c60ccbcc22a6d607e18d9ea1154cba065bf508d83a7",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.skin.4500",
+      "name": "Qwen Edit Skin - 4500-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_000004500.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "4500-step"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004500.safetensors",
+          "sha256": "f69565b9423b2d3c7b090d17aa26d4adae7902f56c69c4357626aa1e5d6afea4",
+          "size_bytes": 295146176,
+          "enabled": true,
+          "title": "Qwen Edit Skin - 4500-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004500.safetensors",
+      "size_bytes": 295146176,
+      "sha256": "f69565b9423b2d3c7b090d17aa26d4adae7902f56c69c4357626aa1e5d6afea4",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.skin.4750",
+      "name": "Qwen Edit Skin - 4750-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_000004750.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "4750-step"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004750.safetensors",
+          "sha256": "e049c2fbb06aff069c6e204f3c99ed420bc771957d63f7eb583ef8cfb5c8c073",
+          "size_bytes": 295146176,
+          "enabled": true,
+          "title": "Qwen Edit Skin - 4750-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_000004750.safetensors",
+      "size_bytes": 295146176,
+      "sha256": "e049c2fbb06aff069c6e204f3c99ed420bc771957d63f7eb583ef8cfb5c8c073",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.skin.primary",
+      "legacy_ids": [
+        "qwen_edit_skin"
+      ],
+      "name": "Qwen Edit Skin - Primary LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "primary"
+      ],
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen-edit-skin.safetensors",
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin.safetensors",
+          "size": "295.1 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "e4efd5ee1e5555eb438c214aa0ee6009f0215f13dbe817128615909871eed4b1",
+          "size_bytes": 295146176,
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin.safetensors",
+      "size_bytes": 295146176,
+      "sha256": "e4efd5ee1e5555eb438c214aa0ee6009f0215f13dbe817128615909871eed4b1",
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.skin.1.1.1750",
+      "name": "Qwen Edit Skin 1.1 - 1750-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_1.1_000001750.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "v1.1",
+        "1750-step"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000001750.safetensors",
+          "sha256": "dfa3150472fc566951a3019012eb4cab7cbe62201e407df282d9397e55e7a160",
+          "size_bytes": 295146184,
+          "enabled": true,
+          "title": "Qwen Edit Skin 1.1 - 1750-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000001750.safetensors",
+      "size_bytes": 295146184,
+      "sha256": "dfa3150472fc566951a3019012eb4cab7cbe62201e407df282d9397e55e7a160",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.skin.1.1.2000",
+      "name": "Qwen Edit Skin 1.1 - 2000-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_1.1_000002000.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "v1.1",
+        "2000-step"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002000.safetensors",
+          "sha256": "19588edc8125cd25255a3651c2894159f4bb9a2aa7c7049a6056ee7860069880",
+          "size_bytes": 295146184,
+          "enabled": true,
+          "title": "Qwen Edit Skin 1.1 - 2000-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002000.safetensors",
+      "size_bytes": 295146184,
+      "sha256": "19588edc8125cd25255a3651c2894159f4bb9a2aa7c7049a6056ee7860069880",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.skin.1.1.2250",
+      "name": "Qwen Edit Skin 1.1 - 2250-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_1.1_000002250.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "v1.1",
+        "2250-step"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002250.safetensors",
+          "sha256": "ef43391c33f20d7cc3477bc30443c1da0439ec1d412a3d99be53753cdd64b3f4",
+          "size_bytes": 295146184,
+          "enabled": true,
+          "title": "Qwen Edit Skin 1.1 - 2250-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002250.safetensors",
+      "size_bytes": 295146184,
+      "sha256": "ef43391c33f20d7cc3477bc30443c1da0439ec1d412a3d99be53753cdd64b3f4",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.skin.1.1.2500",
+      "name": "Qwen Edit Skin 1.1 - 2500-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_1.1_000002500.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "v1.1",
+        "2500-step"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002500.safetensors",
+          "sha256": "1dc6933e6b68a763779110d412dfdc7cb3188cbb7965b379e33ddb39c8f540fa",
+          "size_bytes": 295146184,
+          "enabled": true,
+          "title": "Qwen Edit Skin 1.1 - 2500-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002500.safetensors",
+      "size_bytes": 295146184,
+      "sha256": "1dc6933e6b68a763779110d412dfdc7cb3188cbb7965b379e33ddb39c8f540fa",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.skin.1.1.2750",
+      "legacy_ids": [
+        "qwen_edit_skin_1_1_000002750"
+      ],
+      "name": "Qwen Edit Skin 1.1 - 2750-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-edit-skin_1.1_000002750.safetensors",
+      "group": "Qwen Edit Skin",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "skin",
+        "v1.1",
+        "2750-step"
+      ],
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen-edit-skin_1.1_000002750.safetensors",
+          "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002750.safetensors",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "b21181e7efc54b695ea579cc4d212d940018832a4366eb10b1feba1a89b882ed",
+          "size_bytes": 295146184,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002750.safetensors",
+      "size_bytes": 295146184,
+      "sha256": "b21181e7efc54b695ea579cc4d212d940018832a4366eb10b1feba1a89b882ed",
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.f2p",
+      "legacy_ids": [
+        "qwen_image_edit_f2p"
+      ],
+      "name": "Qwen Image Edit - F2P LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/Qwen-Image-Edit-F2P.safetensors",
+      "group": "Qwen Image Edit 2511",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "f2p",
+        "2511",
+        "qwen-image"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Edit-F2P.safetensors",
+          "url": "https://huggingface.co/landon2022/F2P/resolve/main/Qwen-Image-Edit-F2P.safetensors",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "3eaec9705c770f3453a802ff317f5095c806cc27b069b760015f71bd26179f2e",
+          "size_bytes": 472047152,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/landon2022/F2P/resolve/main/Qwen-Image-Edit-F2P.safetensors",
+      "size_bytes": 472047152,
+      "sha256": "3eaec9705c770f3453a802ff317f5095c806cc27b069b760015f71bd26179f2e",
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.2509.anything2real-alpha",
+      "name": "Qwen Image Edit 2509 - Anything2Real Alpha LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Anything2RealAlpha.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "anything2real",
+        "2509"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Anything2RealAlpha.safetensors",
+          "sha256": "62ee14b063d53a24f842ef9f612b90ac7016df11027abe6266fab871bb44aae9",
+          "size_bytes": 609646608,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 - Anything2Real Alpha LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Anything2RealAlpha.safetensors",
+      "size_bytes": 609646608,
+      "sha256": "62ee14b063d53a24f842ef9f612b90ac7016df11027abe6266fab871bb44aae9",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2509.fusion",
+      "name": "Qwen Image Edit 2509 - Fusion LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Fusion.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "fusion",
+        "2509"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Fusion.safetensors",
+          "sha256": "a0cd7db2cfc2133414ff6fae6978a4981c8114148d58f288fed25b4ef93b5dcd",
+          "size_bytes": 236117032,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 - Fusion LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Fusion.safetensors",
+      "size_bytes": 236117032,
+      "sha256": "a0cd7db2cfc2133414ff6fae6978a4981c8114148d58f288fed25b4ef93b5dcd",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2509.light-migration",
+      "name": "Qwen Image Edit 2509 - Light Migration LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Light-Migration.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "light-migration",
+        "2509"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Light-Migration.safetensors",
+          "sha256": "202d76cfbf0f8e670154ef300b0f28e4a4bfdb94dd91a535f6ab73769314ae3f",
+          "size_bytes": 236117032,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 - Light Migration LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Light-Migration.safetensors",
+      "size_bytes": 236117032,
+      "sha256": "202d76cfbf0f8e670154ef300b0f28e4a4bfdb94dd91a535f6ab73769314ae3f",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2509.multiple-angles",
+      "legacy_ids": [
+        "qwen_edit_2509_multiple_angles"
+      ],
+      "name": "Qwen Image Edit 2509 - Multiple Angles LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "multiple-angles",
+        "2509"
+      ],
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Edit-2509-Multiple-angles.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "e0cea9508025a39e41f50da0e7d10fbd9db182d057c745136a42ef8829914c8f",
+          "size_bytes": 236117032,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+      "size_bytes": 236117032,
+      "sha256": "e0cea9508025a39e41f50da0e7d10fbd9db182d057c745136a42ef8829914c8f",
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.next-scene-v1",
+      "name": "Qwen Image Edit 2509 - Next Scene v1 - 3000-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/next-scene_lora_v1-3000.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "next-scene",
+        "v1",
+        "3000-step",
+        "2509"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509/resolve/main/next-scene_lora_v1-3000.safetensors",
+          "sha256": "c31f5e95e1934a34079f6c4c22842299ff28bcc5d2798639df52f5c03de724dd",
+          "size_bytes": 295146184,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 - Next Scene v1 - 3000-Step LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509/resolve/main/next-scene_lora_v1-3000.safetensors",
+      "size_bytes": 295146184,
+      "sha256": "c31f5e95e1934a34079f6c4c22842299ff28bcc5d2798639df52f5c03de724dd",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.next-scene-v2",
+      "legacy_ids": [
+        "next_scene_lora_v2_3000"
+      ],
+      "name": "Qwen Image Edit 2509 - Next Scene v2 - 3000-Step LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/next-scene_lora-v2-3000.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "next-scene",
+        "v2",
+        "3000-step",
+        "2509"
+      ],
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "next-scene_lora-v2-3000.safetensors",
+          "url": "https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509/resolve/main/next-scene_lora-v2-3000.safetensors",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "8abf2306649a62282f89968515097650acaf7b040687c9b6c56e37558e6df9e1",
+          "size_bytes": 295146176,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509/resolve/main/next-scene_lora-v2-3000.safetensors",
+      "size_bytes": 295146176,
+      "sha256": "8abf2306649a62282f89968515097650acaf7b040687c9b6c56e37558e6df9e1",
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.2509.relight",
+      "name": "Qwen Image Edit 2509 - Relight LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Relight.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "relight",
+        "2509"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Relight.safetensors",
+          "sha256": "2a11c2b74ce0965abf35a8c8db52305072e970a689ca904b5a5b5a94d0aab86c",
+          "size_bytes": 236117032,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 - Relight LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-Relight.safetensors",
+      "size_bytes": 236117032,
+      "sha256": "2a11c2b74ce0965abf35a8c8db52305072e970a689ca904b5a5b5a94d0aab86c",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2509.white-to-scene",
+      "name": "Qwen Image Edit 2509 - White to Scene LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-White_to_Scene.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "white-to-scene",
+        "2509"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-White_to_Scene.safetensors",
+          "sha256": "96a10c01869ce8ce82f820f8217881d4a998487b1058eb3057a33c74419645f8",
+          "size_bytes": 236117032,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 - White to Scene LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/loras/Qwen-Image-Edit-2509-White_to_Scene.safetensors",
+      "size_bytes": 236117032,
+      "sha256": "96a10c01869ce8ce82f820f8217881d4a998487b1058eb3057a33c74419645f8",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2509.lightning-4step.bf16",
+      "legacy_ids": [
+        "qwen_image_edit_2509_lightning_4steps_v1_0_bf16"
+      ],
+      "name": "Qwen Image Edit 2509 Lightning - 4-Step - BF16 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "lightning",
+        "4-step",
+        "bf16",
+        "2509"
+      ],
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+          "size": "849.6 MB",
+          "description": "LoRA weights; BF16 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "2a32ce938ec71db2b49a817b4844ae86995569518dea56ee0ddc209cbe8e1377",
+          "size_bytes": 849608296,
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "size_bytes": 849608296,
+      "sha256": "2a32ce938ec71db2b49a817b4844ae86995569518dea56ee0ddc209cbe8e1377",
+      "gated": false,
+      "description": "LoRA weights; BF16 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.2509.lightning-4step",
+      "legacy_ids": [
+        "qwen_image_edit_2509_lightning_4steps_v1_0_fp32"
+      ],
+      "name": "Qwen Image Edit 2509 Lightning - 4-Step - FP32 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "lightning",
+        "4-step",
+        "fp32",
+        "2509"
+      ],
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+          "description": "LoRA weights; FP32 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "6065f62669c999b4516ac4a6e7a120252bf7ff819b407dcb77b868d575e736b1",
+          "size_bytes": 1698951104,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-fp32.safetensors",
+      "size_bytes": 1698951104,
+      "sha256": "6065f62669c999b4516ac4a6e7a120252bf7ff819b407dcb77b868d575e736b1",
+      "gated": false,
+      "description": "LoRA weights; FP32 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.2509.lightning-8step.bf16",
+      "name": "Qwen Image Edit 2509 Lightning - 8-Step - BF16 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-bf16.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "lightning",
+        "8-step",
+        "bf16",
+        "2509"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-bf16.safetensors",
+          "sha256": "b5c48ba90d22294cc4e20ea4a347496e2136295ad438ff79ad4fe841f28d7f72",
+          "size_bytes": 849608296,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 Lightning - 8-Step - BF16 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-bf16.safetensors",
+      "size_bytes": 849608296,
+      "sha256": "b5c48ba90d22294cc4e20ea4a347496e2136295ad438ff79ad4fe841f28d7f72",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2509.lightning-8step.fp32",
+      "name": "Qwen Image Edit 2509 Lightning - 8-Step - FP32 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-fp32.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "lightning",
+        "8-step",
+        "fp32",
+        "2509"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-fp32.safetensors",
+          "sha256": "eece790fc6ac8c0e36ce8e53cb5f78edf370bf2da79918148db037f529f7e841",
+          "size_bytes": 1698951104,
+          "enabled": true,
+          "title": "Qwen Image Edit 2509 Lightning - 8-Step - FP32 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-2509/Qwen-Image-Edit-2509-Lightning-8steps-V1.0-fp32.safetensors",
+      "size_bytes": 1698951104,
+      "sha256": "eece790fc6ac8c0e36ce8e53cb5f78edf370bf2da79918148db037f529f7e841",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2511.multiple-angles",
+      "legacy_ids": [
+        "models_loras_qwen_image_edit_2511_multiple_angles_lora"
+      ],
+      "name": "Qwen Image Edit 2511 - Multiple Angles LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "multiple-angles",
+        "2511"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen-image-edit-2511-multiple-angles-lora.safetensors",
+          "url": "https://huggingface.co/fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA/resolve/main/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "42426ded4e25fd22879d9e198b857556445ef4ca56e8da3246d0345155bb6765",
+          "size_bytes": 295140688,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA/resolve/main/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+      "size_bytes": 295140688,
+      "sha256": "42426ded4e25fd22879d9e198b857556445ef4ca56e8da3246d0345155bb6765",
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "bfs.qwen2511.head-swap.v5.original",
+      "name": "Qwen Image Edit 2511 BFS - Head Swap v5 Original LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/bfs_head_v5_2511_original.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "head-swap",
+        "v5",
+        "original",
+        "2511",
+        "qwen-image",
+        "bfs"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_original.safetensors",
+          "sha256": "5055ec271228d4767fd327efa59dbdea6f2a628d6d890101eb4fd5015cb1ac57",
+          "size_bytes": 147685552,
+          "enabled": true,
+          "title": "Qwen Image Edit 2511 BFS - Head Swap v5 Original LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v5_2511_original.safetensors",
+      "size_bytes": 147685552,
+      "sha256": "5055ec271228d4767fd327efa59dbdea6f2a628d6d890101eb4fd5015cb1ac57",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2511.lightning-4step.bf16",
+      "legacy_ids": [
+        "models_loras_qwenedit2511_qwen_image_edit_2511_lightning_4steps_v1_0_bf16"
+      ],
+      "name": "Qwen Image Edit 2511 Lightning - 4-Step - BF16 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/QwenEdit2511/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "lightning",
+        "4-step",
+        "bf16",
+        "2511"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          "description": "LoRA weights; BF16 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "22226e8d05d354bb356627d428809f5afd7819399b077238a2b70a82883a904f",
+          "size_bytes": 849608296,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "size_bytes": 849608296,
+      "sha256": "22226e8d05d354bb356627d428809f5afd7819399b077238a2b70a82883a904f",
+      "gated": false,
+      "description": "LoRA weights; BF16 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.2511.lightning-4step.fp32",
+      "legacy_ids": [
+        "qwen_image_edit_2511_lightning_4steps_v1_0_fp32"
+      ],
+      "name": "Qwen Image Edit 2511 Lightning - 4-Step - FP32 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "lightning",
+        "4-step",
+        "fp32",
+        "2511"
+      ],
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors",
+          "description": "LoRA weights; FP32 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face.",
+          "sha256": "6f03a8cbb49f8dd422d23759b03cb254264c44aa3717d7903349ee42695baf18",
+          "size_bytes": 1698951104,
+          "enabled": true,
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-fp32.safetensors",
+      "size_bytes": 1698951104,
+      "sha256": "6f03a8cbb49f8dd422d23759b03cb254264c44aa3717d7903349ee42695baf18",
+      "gated": false,
+      "description": "LoRA weights; FP32 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.2511.lightning-8step.bf16",
+      "name": "Qwen Image Edit 2511 Lightning - 8-Step - BF16 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "lightning",
+        "8-step",
+        "bf16",
+        "2511"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors",
+          "sha256": "a9e81a58a78f260f67b337a6f615e8fa4cd3bc79847c77b7d61a581b789b1ba8",
+          "size_bytes": 849608296,
+          "enabled": true,
+          "title": "Qwen Image Edit 2511 Lightning - 8-Step - BF16 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors",
+      "size_bytes": 849608296,
+      "sha256": "a9e81a58a78f260f67b337a6f615e8fa4cd3bc79847c77b7d61a581b789b1ba8",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.2511.lightning-8step.fp32",
+      "name": "Qwen Image Edit 2511 Lightning - 8-Step - FP32 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-fp32.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "lora",
+        "lightning",
+        "8-step",
+        "fp32",
+        "2511"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-fp32.safetensors",
+          "sha256": "e2e24eda6295bf08222638b0b8278628461e86e8e1bc1b10411c7def13451262",
+          "size_bytes": 1698951104,
+          "enabled": true,
+          "title": "Qwen Image Edit 2511 Lightning - 8-Step - FP32 LoRA",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-fp32.safetensors",
+      "size_bytes": 1698951104,
+      "sha256": "e2e24eda6295bf08222638b0b8278628461e86e8e1bc1b10411c7def13451262",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen_image_edit_2511_lightning_4steps_v1_0_bf16",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+          "description": "LoRA weights; BF16 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; BF16 precision; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen_image_edit_2511_multiple_angles_lora",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen/2511/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "qwen-image-edit-2511-multiple-angles-lora.safetensors",
+          "url": "https://huggingface.co/fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA/resolve/main/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "qwen-image-edit-2511-multiple-angles-lora.safetensors",
+      "url": "https://huggingface.co/fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA/resolve/main/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen_image_edit_lightning_8steps_v1_0",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-Lightning-8steps-V1.0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Edit-Lightning-8steps-V1.0.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-Lightning-8steps-V1.0.safetensors",
+          "size": "1.70 GB",
+          "description": "LoRA weights; Lightning acceleration; 8-step variant; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 1700000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Qwen-Image-Edit-Lightning-8steps-V1.0.safetensors",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Edit-Lightning-8steps-V1.0.safetensors",
+      "size_bytes": 1700000000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; Lightning acceleration; 8-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen_image_edit_unblur_upscale_20",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Edit-Unblur-Upscale_20.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Edit-Unblur-Upscale_20.safetensors",
+          "url": "https://huggingface.co/prithivMLmods/Qwen-Image-Edit-2511-Unblur-Upscale/resolve/main/Qwen-Image-Edit-Unblur-Upscale_20.safetensors",
+          "size": "236.1 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 236100000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Qwen-Image-Edit-Unblur-Upscale_20.safetensors",
+      "url": "https://huggingface.co/prithivMLmods/Qwen-Image-Edit-2511-Unblur-Upscale/resolve/main/Qwen-Image-Edit-Unblur-Upscale_20.safetensors",
+      "size_bytes": 236100000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen_image_lightning_4steps_v1_0",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Lightning-4steps-V1.0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Lightning-4steps-V1.0.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Lightning-4steps-V1.0.safetensors",
+          "description": "LoRA weights; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face.",
+          "size": null,
+          "size_bytes": null
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Qwen-Image-Lightning-4steps-V1.0.safetensors",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Lightning-4steps-V1.0.safetensors",
+      "size_bytes": null,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; Lightning acceleration; 4-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen_image_lightning_8steps_v2_0",
+      "type": "loras",
+      "relative_path": "models/loras/Qwen-Image-Lightning-8steps-V2.0.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Qwen-Image-Lightning-8steps-V2.0.safetensors",
+          "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Lightning-8steps-V2.0.safetensors",
+          "size": "1.70 GB",
+          "description": "LoRA weights; Lightning acceleration; 8-step variant; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 1700000000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Qwen-Image-Lightning-8steps-V2.0.safetensors",
+      "url": "https://huggingface.co/lightx2v/Qwen-Image-Lightning/resolve/main/Qwen-Image-Lightning-8steps-V2.0.safetensors",
+      "size_bytes": 1700000000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; Lightning acceleration; 8-step variant; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "samsung_v3",
+      "type": "loras",
+      "relative_path": "models/loras/flux/may_loras/Samsung_v3.safetensors",
+      "loader": "Power Lora Loader (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "danrisi-samsung-fluxklein9b.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-samsung-fluxklein9b.safetensors",
+          "size": "82.9 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 82900000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-samsung-fluxklein9b.safetensors",
+          "source_filename": "danrisi-samsung-fluxklein9b.safetensors",
+          "save_as": "models/loras/flux/may_loras/Samsung_v3.safetensors",
+          "size": "82.9 MB"
+        },
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-samsung-fluxklein9b.safetensors",
+          "source_filename": "danrisi-samsung-fluxklein9b.safetensors",
+          "save_as": "models/loras/flux/may_loras/Samsung_v3.safetensors",
+          "size": "82.9 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "danrisi-samsung-fluxklein9b.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/danrisi-samsung-fluxklein9b.safetensors",
+      "size_bytes": 82900000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "samsungcam",
+      "type": "loras",
+      "relative_path": "models/loras/samsungcam.safetensors",
+      "loader": "Lora Loader Stack (rgthree)",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Samsung.safetensors",
+          "url": "https://huggingface.co/Danrisi/Qwen-image_SamsungCam_UltraReal/resolve/8763417bc74727177601cdba5b30c271b1c37d9a/Samsung.safetensors",
+          "size": "47.2 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 47200000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/Danrisi/Qwen-image_SamsungCam_UltraReal/resolve/8763417bc74727177601cdba5b30c271b1c37d9a/Samsung.safetensors",
+          "source_filename": "Samsung.safetensors",
+          "save_as": "models/loras/samsungcam.safetensors",
+          "size": "47.2 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Samsung.safetensors",
+      "url": "https://huggingface.co/Danrisi/Qwen-image_SamsungCam_UltraReal/resolve/8763417bc74727177601cdba5b30c271b1c37d9a/Samsung.safetensors",
+      "size_bytes": 47200000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "sonyalpha_zimage",
+      "type": "loras",
+      "relative_path": "models/loras/z-image/SonyAlpha_ZImage.safetensors",
+      "loader": "LoraLoader|pysssss",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "SonyAlpha_ZImage.safetensors",
+          "url": "https://huggingface.co/cptsl/SonyAlphaA7/resolve/main/SonyAlpha_ZImage.safetensors",
+          "size": "85.1 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 85100000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "SonyAlpha_ZImage.safetensors",
+      "url": "https://huggingface.co/cptsl/SonyAlphaA7/resolve/main/SonyAlpha_ZImage.safetensors",
+      "size_bytes": 85100000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "subject_plus_z_image_v1",
+      "type": "loras",
+      "relative_path": "models/loras/z-image/Subject_Plus_Z_Image_V1.safetensors",
+      "loader": "LoraLoader|pysssss",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "famegrid-zit-subject-plus-standard.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-zit-subject-plus-standard.safetensors",
+          "size": "678.4 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 678400000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-zit-subject-plus-standard.safetensors",
+          "source_filename": "famegrid-zit-subject-plus-standard.safetensors",
+          "save_as": "models/loras/z-image/Subject_Plus_Z_Image_V1.safetensors",
+          "size": "678.4 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "famegrid-zit-subject-plus-standard.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-zit-subject-plus-standard.safetensors",
+      "size_bytes": 678400000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "subjectplus_vibes_v1",
+      "type": "loras",
+      "relative_path": "models/loras/z-image/subjectplus_vibes_v1.safetensors",
+      "loader": "LoraLoader|pysssss",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "famegrid-zit-subject-plus-vibes-v1.safetensors",
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-zit-subject-plus-vibes-v1.safetensors",
+          "size": "680.3 MB",
+          "description": "LoRA weights; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 680300000
+        }
+      ],
+      "renamed_downloads": [
+        {
+          "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-zit-subject-plus-vibes-v1.safetensors",
+          "source_filename": "famegrid-zit-subject-plus-vibes-v1.safetensors",
+          "save_as": "models/loras/z-image/subjectplus_vibes_v1.safetensors",
+          "size": "680.3 MB"
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "famegrid-zit-subject-plus-vibes-v1.safetensors",
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/famegrid-zit-subject-plus-vibes-v1.safetensors",
+      "size_bytes": 680300000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "wan21_t2v_14b_lightx2v_cfg_step_distill_lora_rank32",
+      "type": "loras",
+      "relative_path": "models/loras/Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors",
+          "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors",
+          "size": "316.8 MB",
+          "description": "LoRA weights; rank 32; SafeTensors file; hosted on Hugging Face.",
+          "size_bytes": 316800000
+        }
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "declared_type": "loras",
+      "name": "Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors",
+      "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan21_T2V_14B_lightx2v_cfg_step_distill_lora_rank32.safetensors",
+      "size_bytes": 316800000,
+      "sha256": null,
+      "gated": false,
+      "description": "LoRA weights; rank 32; SafeTensors file; hosted on Hugging Face."
+    }
+  ]
+}

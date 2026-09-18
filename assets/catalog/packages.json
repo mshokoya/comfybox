@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "packages": [
+    {
+      "id": "minimax-h3-bf16",
+      "name": "MiniMax H3 BF16",
+      "family": "MiniMax H3",
+      "primary_artifact_ids": [
+        "minimax.h3.ref2va.bf16"
+      ],
+      "dependency_artifact_ids": [
+        "minimax.h3.qwen3vl32b.bf16",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32"
+      ]
+    },
+    {
+      "id": "krea2-bf16",
+      "name": "Krea 2 Raw BF16",
+      "family": "Krea 2",
+      "primary_artifact_ids": [
+        "krea2.raw.bf16"
+      ],
+      "dependency_artifact_ids": [
+        "krea2.qwen3vl4b.bf16",
+        "qwen.image.vae"
+      ]
+    },
+    {
+      "id": "krea2-turbo-bf16",
+      "name": "Krea 2 Turbo BF16",
+      "family": "Krea 2",
+      "primary_artifact_ids": [
+        "krea2.turbo.bf16"
+      ],
+      "dependency_artifact_ids": [
+        "krea2.qwen3vl4b.bf16",
+        "qwen.image.vae"
+      ]
+    },
+    {
+      "id": "krea2-turbo-int8-convrot",
+      "name": "Krea 2 Turbo INT8 (ConvRot)",
+      "family": "Krea 2",
+      "primary_artifact_ids": [
+        "krea2.turbo.int8-convrot"
+      ],
+      "dependency_artifact_ids": [
+        "krea2.qwen3vl4b.fp8",
+        "qwen.image.vae"
+      ]
+    },
+    {
+      "id": "krea2-edit",
+      "name": "Krea 2 Edit / Identity Edit",
+      "family": "Krea 2",
+      "description": "Community edit integrations move quickly; discover first until the complete custom-node mapping is pinned.",
+      "discover_query": "krea2 identity edit"
+    },
+    {
+      "id": "z-image-base-bf16",
+      "name": "Z-Image Base BF16",
+      "family": "Z-Image",
+      "primary_artifact_ids": [
+        "zimage.base.bf16"
+      ],
+      "dependency_artifact_ids": [
+        "zimage.ae",
+        "zimage.qwen3.4b.fp8mixed"
+      ]
+    },
+    {
+      "id": "z-image-turbo-bf16",
+      "name": "Z-Image Turbo BF16",
+      "family": "Z-Image",
+      "primary_artifact_ids": [
+        "zimage.turbo.bf16"
+      ],
+      "dependency_artifact_ids": [
+        "zimage.ae",
+        "zimage.qwen3.4b.fp8mixed"
+      ]
+    },
+    {
+      "id": "qwen-image-bf16",
+      "name": "Qwen Image BF16",
+      "family": "Qwen Image",
+      "primary_artifact_ids": [
+        "qwen.image.bf16"
+      ],
+      "dependency_artifact_ids": [
+        "qwen.image.encoder.2.5vl7b",
+        "qwen.image.vae"
+      ]
+    },
+    {
+      "id": "qwen-image-2512-bf16",
+      "name": "Qwen Image 2512 BF16",
+      "family": "Qwen Image",
+      "primary_artifact_ids": [
+        "qwen.image.2512.bf16"
+      ],
+      "dependency_artifact_ids": [
+        "qwen.image.encoder.2.5vl7b",
+        "qwen.image.vae"
+      ]
+    },
+    {
+      "id": "qwen-image-edit-2509-bf16",
+      "name": "Qwen Image Edit 2509 BF16",
+      "family": "Qwen Image Edit",
+      "primary_artifact_ids": [
+        "qwen.edit.2509.bf16"
+      ],
+      "dependency_artifact_ids": [
+        "qwen.image.encoder.2.5vl7b",
+        "qwen.image.vae"
+      ]
+    },
+    {
+      "id": "qwen-image-edit-2511-bf16",
+      "name": "Qwen Image Edit 2511 BF16",
+      "family": "Qwen Image Edit",
+      "primary_artifact_ids": [
+        "qwen.edit.2511.bf16"
+      ],
+      "dependency_artifact_ids": [
+        "qwen.image.encoder.2.5vl7b",
+        "qwen.image.vae"
+      ]
+    },
+    {
+      "id": "ideogram-4",
+      "name": "Ideogram 4 (FP8 Comfy package)",
+      "family": "Ideogram 4",
+      "primary_artifact_ids": [
+        "ideogram4.fp8"
+      ],
+      "dependency_artifact_ids": [
+        "ideogram4.qwen3vl8b.fp8",
+        "flux2.vae"
+      ]
+    },
+    {
+      "id": "scail-2",
+      "name": "SCAIL-2 FP16 model",
+      "family": "SCAIL-2",
+      "primary_artifact_ids": [
+        "scail2.fp16"
+      ],
+      "description": "Primary model is mapped; use workflow inspection to resolve additional Wan dependencies before production use."
+    },
+    {
+      "id": "sdxl-base-1.0",
+      "name": "Stable Diffusion XL Base 1.0",
+      "family": "SDXL",
+      "primary_artifact_ids": [
+        "sdxl.base.1.0"
+      ]
+    },
+    {
+      "id": "sdxl-refiner-1.0",
+      "name": "Stable Diffusion XL Refiner 1.0",
+      "family": "SDXL",
+      "primary_artifact_ids": [
+        "sdxl.refiner.1.0"
+      ]
+    },
+    {
+      "id": "sdxl-ecosystem",
+      "name": "SDXL ecosystem (live discovery)",
+      "family": "SDXL",
+      "discover_query": "SDXL"
+    },
+    {
+      "id": "black-forest-labs-bf16",
+      "name": "Black Forest Labs BF16 family (live discovery)",
+      "family": "Black Forest Labs",
+      "discover_query": "black-forest-labs BF16"
+    },
+    {
+      "id": "wan-latest",
+      "name": "Wan latest family (live discovery)",
+      "family": "Wan",
+      "discover_query": "Wan-AI Wan"
+    },
+    {
+      "id": "wan-animate-latest",
+      "name": "Wan Animate latest (live discovery)",
+      "family": "Wan",
+      "discover_query": "Wan Animate"
+    },
+    {
+      "id": "ltx-latest",
+      "name": "LTX latest family (live discovery)",
+      "family": "LTX",
+      "discover_query": "LTX video"
+    }
+  ]
+}

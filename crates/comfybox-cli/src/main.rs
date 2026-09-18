@@ -25,47 +25,8 @@ use std::{
 };
 use tokio::process::Command;
 
-const BUILTIN_CATALOG: &str = include_str!("../../../assets/catalog/builtin.toml");
-const DEPENDENCY_MANIFEST: &str = include_str!("../../../_/deps.json");
-include!(concat!(env!("OUT_DIR"), "/dependency_workflows.rs"));
-const MINIMAX_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/the3minutenode-refrence-minimaxh3-workflow.json");
-const DATASET_QWEN_2509_BASIC_WORKFLOW: &str = include_str!(
-    "../../../assets/workflows/the3minutenode-basicangles-dataset-qwenedit2509-workflow.json"
-);
-const DATASET_QWEN_2509_FACE_WORKFLOW: &str = include_str!(
-    "../../../assets/workflows/the3minutenode-face-dataset-qwenedit2509-workflow.json"
-);
-const DATASET_QWEN_2509_LIFESTYLE_WORKFLOW: &str = include_str!(
-    "../../../assets/workflows/the3minutenode-lifestyle-dataset-qwenedit2509-workflow.json"
-);
-const DATASET_QWEN_2511_BODY_WORKFLOW: &str = include_str!(
-    "../../../assets/workflows/the3minutenode-bodyangles-dataset-qwenedit2511-workflow.json"
-);
-const DATASET_FLUX2_KLEIN_BODY_WORKFLOW: &str = include_str!(
-    "../../../assets/workflows/the3minutenode-bodyangles-dataset-flux2klein9b-workflow.json"
-);
-const DATASET_KREA2_LIFESTYLE_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/the3minutenode-lifestyle-dataset-krea2-workflow.json");
-const DATASET_POST_PRODUCTION_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/the3minutenode-post-production-dataset-workflow.json");
-const DATASET_AUTO_CAPTION_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/the3minutenode-auto-caption-dataset-workflow.json");
-const KREA2_GENERATE_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/the3minutenode-generate-krea2-workflow.json");
-const FACE_SWAP_COMPARISON_WORKFLOW: &str = include_str!(
-    "../../../assets/workflows/the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow.json"
-);
-const FLUX2_KLEIN_FACE_SWAP_WORKFLOW: &str = include_str!(
-    "../../../assets/workflows/the3minutenode-face-swap-flux2-klein-face-workflow.json"
-);
-const KREA2_FACE_SWAP_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/the3minutenode-face-swap-krea2-workflow.json");
-const MINIMAX_H3_CHARACTER_SWAP_WORKFLOW: &str = include_str!(
-    "../../../assets/workflows/comfybox-character-swap-bf16-24to60-minimaxh3-workflow.json"
-);
-const QWEN_2511_FACE_SWAP_WORKFLOW: &str =
-    include_str!("../../../assets/workflows/the3minutenode-face-swap-qwenedit2511-workflow.json");
+include!(concat!(env!("OUT_DIR"), "/builtin_catalogs.rs"));
+include!(concat!(env!("OUT_DIR"), "/bundled_workflows.rs"));
 const PYPI_OFFICIAL: &str = "https://pypi.org/simple";
 const PYPI_ALIBABA: &str = "https://mirrors.aliyun.com/pypi/simple/";
 const PYPI_TSINGHUA: &str = "https://pypi.tuna.tsinghua.edu.cn/simple";
@@ -259,8 +220,10 @@ fn install_hf_token_for_process() -> Result<()> {
 }
 
 fn load_catalog(extra: &[PathBuf]) -> Result<Catalog> {
-    let mut cat = Catalog::from_toml_str(BUILTIN_CATALOG)?
-        .merge(Catalog::from_dependency_manifest(DEPENDENCY_MANIFEST)?)?;
+    let mut cat = Catalog::default();
+    for raw in builtin_catalogs() {
+        cat = cat.merge(Catalog::from_json_fragment(raw)?)?;
+    }
     if let Ok(dir) = AppConfig::catalog_dir() {
         if dir.is_dir() {
             let mut entries: Vec<_> = fs::read_dir(&dir)?
@@ -914,39 +877,8 @@ fn resolve_workflow_path(
     Ok(temp)
 }
 fn bundled_workflow(id: &str) -> Result<&'static str> {
-    if let Some(workflow) = dependency_manifest_workflow(id) {
-        return Ok(workflow);
-    }
-    match id {
-        "the3minutenode-refrence-minimaxh3-workflow" => Ok(MINIMAX_WORKFLOW),
-        "the3minutenode-basicangles-dataset-qwenedit2509-workflow" => {
-            Ok(DATASET_QWEN_2509_BASIC_WORKFLOW)
-        }
-        "the3minutenode-face-dataset-qwenedit2509-workflow" => Ok(DATASET_QWEN_2509_FACE_WORKFLOW),
-        "the3minutenode-lifestyle-dataset-qwenedit2509-workflow" => {
-            Ok(DATASET_QWEN_2509_LIFESTYLE_WORKFLOW)
-        }
-        "the3minutenode-bodyangles-dataset-qwenedit2511-workflow" => {
-            Ok(DATASET_QWEN_2511_BODY_WORKFLOW)
-        }
-        "the3minutenode-bodyangles-dataset-flux2klein9b-workflow" => {
-            Ok(DATASET_FLUX2_KLEIN_BODY_WORKFLOW)
-        }
-        "the3minutenode-lifestyle-dataset-krea2-workflow" => Ok(DATASET_KREA2_LIFESTYLE_WORKFLOW),
-        "the3minutenode-post-production-dataset-workflow" => Ok(DATASET_POST_PRODUCTION_WORKFLOW),
-        "the3minutenode-auto-caption-dataset-workflow" => Ok(DATASET_AUTO_CAPTION_WORKFLOW),
-        "the3minutenode-generate-krea2-workflow" => Ok(KREA2_GENERATE_WORKFLOW),
-        "the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow" => {
-            Ok(FACE_SWAP_COMPARISON_WORKFLOW)
-        }
-        "the3minutenode-face-swap-flux2-klein-face-workflow" => Ok(FLUX2_KLEIN_FACE_SWAP_WORKFLOW),
-        "the3minutenode-face-swap-krea2-workflow" => Ok(KREA2_FACE_SWAP_WORKFLOW),
-        "comfybox-character-swap-bf16-24to60-minimaxh3-workflow" => {
-            Ok(MINIMAX_H3_CHARACTER_SWAP_WORKFLOW)
-        }
-        "the3minutenode-face-swap-qwenedit2511-workflow" => Ok(QWEN_2511_FACE_SWAP_WORKFLOW),
-        _ => bail!("workflow {id} is cataloged but not bundled in this build"),
-    }
+    embedded_workflow(id)
+        .with_context(|| format!("workflow {id} is cataloged but not bundled in this build"))
 }
 
 fn print_workflow_inspection(r: &comfybox_core::workflow::WorkflowInspection) {
@@ -1619,34 +1551,27 @@ fn uuid_like() -> String {
 }
 
 #[cfg(test)]
-mod dependency_manifest_tests {
+mod builtin_catalog_tests {
     use super::*;
 
     #[test]
-    fn complete_dependency_manifest_is_cataloged_and_bundled() {
-        let manifest: Value = serde_json::from_str(DEPENDENCY_MANIFEST).unwrap();
-        let catalog = Catalog::from_dependency_manifest(DEPENDENCY_MANIFEST).unwrap();
-        assert_eq!(
-            catalog.artifacts.len(),
-            manifest["artifacts"].as_object().unwrap().len()
-        );
-        assert_eq!(
-            catalog.workflows.len(),
-            manifest["workflows"].as_object().unwrap().len()
-        );
-        assert_eq!(
-            catalog.custom_nodes.len(),
-            manifest["custom_nodes"].as_array().unwrap().len()
-        );
+    fn split_json_catalogs_are_complete_and_bundled() {
+        let catalog = load_catalog(&[]).unwrap();
+        assert_eq!(catalog.artifacts.len(), 210);
+        assert_eq!(catalog.packages.len(), 20);
+        assert_eq!(catalog.workflows.len(), 44);
+        assert_eq!(catalog.custom_nodes.len(), 41);
+        assert_eq!(catalog.system_dependencies.len(), 2);
+        assert!(catalog.python_dependencies.is_some());
         assert!(
             catalog
                 .artifacts
                 .iter()
-                .all(|artifact| !artifact.sources.is_empty())
+                .all(|artifact| !artifact.sources.is_empty() && !artifact.url.is_empty())
         );
         for workflow in &catalog.workflows {
             assert!(
-                dependency_manifest_workflow(&workflow.id).is_some(),
+                embedded_workflow(&workflow.id).is_some(),
                 "{} is not bundled",
                 workflow.id
             );
