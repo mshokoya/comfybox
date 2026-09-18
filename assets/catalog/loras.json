@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 96,
+  "artifact_count": 106,
   "artifacts": [
     {
       "id": "1girl_qwen_v3",
@@ -3364,6 +3364,188 @@
       "sha256": null,
       "gated": false,
       "description": "LoRA weights; rank 32; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.ref2v.turbo.4step.v0.1.bf16",
+      "name": "MiniMax H3 Ref2V Turbo 4-Step v0.1 BF16 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/minimax_h3_ref2v_turbo_4step_v0.1_comfyui_bf16.safetensors",
+      "group": "Minimax",
+      "tags": ["video", "lora", "ref2v", "turbo", "4step", "bf16", "minimax"],
+      "sources": [
+        {
+          "title": "MiniMax H3 Ref2V Turbo 4-Step v0.1 BF16 LoRA",
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/loras/minimax_h3_ref2v_turbo_4step_v0.1_comfyui_bf16.safetensors",
+          "size": "1.96 GB",
+          "size_bytes": 1956193000,
+          "description": "ComfyUI-native MiniMax H3 Ref2V Turbo four-step BF16 LoRA."
+        }
+      ],
+      "catalog_sources": ["workflow:loratech-director-minimaxh3"],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/loras/minimax_h3_ref2v_turbo_4step_v0.1_comfyui_bf16.safetensors",
+      "size_bytes": 1956193000,
+      "sha256": "5b9ab5ade15d0775676d01a907268a69a1468dc6033b3b0d3ded5502f3ebb84c",
+      "gated": false,
+      "description": "ComfyUI-native MiniMax H3 Ref2V Turbo four-step BF16 LoRA."
+    },
+    {
+      "id": "minimax.h3.fl2v.turbo.4step.v1.0.768p.bf16",
+      "name": "MiniMax H3 FL2V Turbo 4-Step v1.0 768p BF16 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/minimax_h3_fl2v_turbo_4step_v1.0_768p_comfyui_bf16.safetensors",
+      "group": "Minimax",
+      "tags": ["video", "lora", "fl2v", "turbo", "4step", "768p", "bf16", "minimax"],
+      "sources": [
+        {
+          "title": "MiniMax H3 FL2V Turbo 4-Step v1.0 768p BF16 LoRA",
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/loras/minimax_h3_fl2v_turbo_4step_v1.0_768p_comfyui_bf16.safetensors",
+          "size": "1.96 GB",
+          "size_bytes": 1956192992,
+          "description": "ComfyUI-native MiniMax H3 FL2V Turbo four-step 768p BF16 LoRA."
+        }
+      ],
+      "catalog_sources": ["workflow:loratech-director-minimaxh3"],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/loras/minimax_h3_fl2v_turbo_4step_v1.0_768p_comfyui_bf16.safetensors",
+      "size_bytes": 1956192992,
+      "sha256": "c396a9a06f58399e9df9754b18299818d84a2ddd371724ba48fe4a41221437dc",
+      "gated": false,
+      "description": "ComfyUI-native MiniMax H3 FL2V Turbo four-step 768p BF16 LoRA."
+    },
+    {
+      "id": "minimax.h3.ref2v.turbo.8step.v1.0.768p.bf16",
+      "name": "MiniMax H3 Ref2V Turbo 8-Step v1.0 768p BF16 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+      "group": "Minimax",
+      "tags": ["video", "lora", "ref2v", "turbo", "8step", "768p", "bf16", "minimax"],
+      "sources": [
+        {
+          "title": "MiniMax H3 Ref2V Turbo 8-Step v1.0 768p BF16 LoRA",
+          "url": "https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+          "size": "1.96 GB",
+          "size_bytes": 1956193000,
+          "description": "ComfyUI-native MiniMax H3 Ref2V Turbo eight-step 768p BF16 LoRA."
+        }
+      ],
+      "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"],
+      "url": "https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+      "size_bytes": 1956193000,
+      "sha256": "6a56f41ab4229c9dd845b9501bbd475ee57e112d846cf2e819d534a1ae928c5a",
+      "gated": false,
+      "description": "ComfyUI-native MiniMax H3 Ref2V Turbo eight-step 768p BF16 LoRA."
+    },
+    {
+      "id": "wan2.2.animate.relight.bf16",
+      "name": "Wan 2.2 Animate Relight BF16 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/wan2.2_animate_14B_relight_lora_bf16.safetensors",
+      "group": "Wan 2.2",
+      "tags": ["video", "lora", "animate", "relight", "bf16", "wan2.2"],
+      "sources": [{"title":"Wan 2.2 Animate Relight BF16 LoRA","url":"https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_animate_14B_relight_lora_bf16.safetensors","size":"1.44 GB","size_bytes":1436673432,"description":"ComfyUI-native Wan 2.2 Animate 14B relighting LoRA."}],
+      "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"],
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_animate_14B_relight_lora_bf16.safetensors",
+      "size_bytes": 1436673432,
+      "sha256": "5f4b6b9d3bc745a86e7bfd511f3880d90cf59c3bded9584d92c028f583fa74a3",
+      "gated": false,
+      "description": "ComfyUI-native Wan 2.2 Animate 14B relighting LoRA."
+    },
+    {
+      "id": "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
+      "name": "LightX2V Wan I2V 14B 480p CFG Step Distill Rank 64 BF16 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors",
+      "group": "Wan",
+      "tags": ["video", "lora", "i2v", "lightx2v", "14b", "480p", "bf16"],
+      "sources": [{"title":"LightX2V Wan I2V 14B 480p CFG Step Distill Rank 64 BF16 LoRA","url":"https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors","size":"738 MB","size_bytes":738005744,"description":"LightX2V CFG and step-distilled Rank 64 BF16 LoRA for Wan I2V 14B at 480p."}],
+      "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"],
+      "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors",
+      "size_bytes": 738005744,
+      "sha256": "85c4a61c30e0497aa44b91d93a893b624708461a56fe5485183b28fa07e2dfb3",
+      "gated": false,
+      "description": "LightX2V CFG and step-distilled Rank 64 BF16 LoRA for Wan I2V 14B at 480p."
+    },
+    {
+      "id": "minimax.h3.realism-people.t2v-i2v-r2v",
+      "name": "MiniMax H3 Realism People T2V/I2V/R2V LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/h3-realism-people-t2v-i2v-r2v.safetensors",
+      "group": "Minimax",
+      "tags": ["video", "lora", "realism", "people", "t2v", "i2v", "r2v", "minimax", "h3"],
+      "sources": [
+        {
+          "title": "MiniMax H3 Realism People T2V/I2V/R2V LoRA",
+          "url": "https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors",
+          "size": "131 MB",
+          "size_bytes": 131229656,
+          "description": "Rank-32 realism LoRA for MiniMax H3 text-to-video, image-to-video, and reference-to-video generation. Trigger word: r34l1sm."
+        }
+      ],
+      "catalog_sources": ["workflow:comfybox-director-realism-people-minimaxh3"],
+      "url": "https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors",
+      "size_bytes": 131229656,
+      "sha256": "acc529601d2da117fb81179e76c56e488a3beab1171659d305f04fa3655b787e",
+      "gated": false,
+      "description": "Rank-32 realism LoRA for MiniMax H3 text-to-video, image-to-video, and reference-to-video generation. Trigger word: r34l1sm."
+    },
+    {
+      "id": "wan2.2.t2v.a14b.high-noise.distill.rank64",
+      "name": "Wan 2.2 T2V A14B High Noise Distill Rank 64 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/wan2.2_t2v_A14b_high_noise_lora_rank64.safetensors",
+      "group": "Wan 2.2",
+      "tags": ["video", "lora", "t2v", "a14b", "high-noise", "distill", "rank64", "wan2.2"],
+      "sources": [{"title":"LightX2V Wan 2.2 T2V A14B High Noise 4-Step Rank 64 LoRA","url":"https://huggingface.co/lightx2v/Wan2.2-Distill-Loras/resolve/main/wan2.2_t2v_A14b_high_noise_lora_rank64_lightx2v_4step_1217.safetensors","size":"614 MB","size_bytes":613518320,"description":"High-noise four-step LightX2V distillation LoRA, saved under the filename expected by the workflow."}],
+      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"],
+      "url": "https://huggingface.co/lightx2v/Wan2.2-Distill-Loras/resolve/main/wan2.2_t2v_A14b_high_noise_lora_rank64_lightx2v_4step_1217.safetensors",
+      "size_bytes": 613518320,
+      "sha256": "89003385f8a9d53ba58fd6ede647fdc90292e8568a54683fcfe6db5556a31769",
+      "gated": false,
+      "description": "High-noise four-step LightX2V distillation LoRA, saved under the filename expected by the workflow."
+    },
+    {
+      "id": "wan2.2.t2v.a14b.low-noise.distill.rank64",
+      "name": "Wan 2.2 T2V A14B Low Noise Distill Rank 64 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/wan2.2_t2v_A14b_low_noise_lora_rank64.safetensors",
+      "group": "Wan 2.2",
+      "tags": ["video", "lora", "t2v", "a14b", "low-noise", "distill", "rank64", "wan2.2"],
+      "sources": [{"title":"LightX2V Wan 2.2 T2V A14B Low Noise 4-Step Rank 64 LoRA","url":"https://huggingface.co/lightx2v/Wan2.2-Distill-Loras/resolve/main/wan2.2_t2v_A14b_low_noise_lora_rank64_lightx2v_4step_1217.safetensors","size":"614 MB","size_bytes":613518320,"description":"Low-noise four-step LightX2V distillation LoRA, saved under the filename expected by the workflow."}],
+      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"],
+      "url": "https://huggingface.co/lightx2v/Wan2.2-Distill-Loras/resolve/main/wan2.2_t2v_A14b_low_noise_lora_rank64_lightx2v_4step_1217.safetensors",
+      "size_bytes": 613518320,
+      "sha256": "4df7c206f3189472da2f92c0a42dcf308f04433d9c14302d08d56e99a3f51322",
+      "gated": false,
+      "description": "Low-noise four-step LightX2V distillation LoRA, saved under the filename expected by the workflow."
+    },
+    {
+      "id": "wan2.2.instareal.high-noise",
+      "name": "InstaReal Wan 2.2 High Noise LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Instareal_HighNoise.safetensors",
+      "group": "Wan 2.2",
+      "tags": ["video", "lora", "instareal", "instagirl", "high-noise", "realism", "wan2.2"],
+      "sources": [{"title":"InstaGirl v2.5 High Noise Wan 2.2 LoRA","url":"https://huggingface.co/msho19/comfybox/resolve/main/instara-Instagirl-v2.5-high-wan2.2.safetensors","size":"307 MB","size_bytes":306847440,"description":"High-noise InstaGirl v2.5 realism LoRA, saved as Instareal_HighNoise.safetensors for this workflow."}],
+      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"],
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/instara-Instagirl-v2.5-high-wan2.2.safetensors",
+      "size_bytes": 306847440,
+      "sha256": "f70b111391cfedba5613ee54e8e65cd9b5da1fd86791d7847924829533b0ada0",
+      "gated": false,
+      "description": "High-noise InstaGirl v2.5 realism LoRA, saved as Instareal_HighNoise.safetensors for this workflow."
+    },
+    {
+      "id": "wan2.2.instareal.low-noise",
+      "name": "InstaReal Wan 2.2 Low Noise LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/Instareal_LowNoise.safetensors",
+      "group": "Wan 2.2",
+      "tags": ["video", "lora", "instareal", "instagirl", "low-noise", "realism", "wan2.2"],
+      "sources": [{"title":"InstaGirl v2.5 Low Noise Wan 2.2 LoRA","url":"https://huggingface.co/msho19/comfybox/resolve/main/instara-instagirl-v2.5-low-wan2.2.safetensors","size":"2.45 GB","size_bytes":2453809800,"description":"Low-noise InstaGirl v2.5 realism LoRA, saved as Instareal_LowNoise.safetensors for this workflow."}],
+      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"],
+      "url": "https://huggingface.co/msho19/comfybox/resolve/main/instara-instagirl-v2.5-low-wan2.2.safetensors",
+      "size_bytes": 2453809800,
+      "sha256": "a0bc8c8875260d9b098cc435f83910620ed170305d9a9b02314de346b3ec4fe0",
+      "gated": false,
+      "description": "Low-noise InstaGirl v2.5 realism LoRA, saved as Instareal_LowNoise.safetensors for this workflow."
     }
   ]
 }

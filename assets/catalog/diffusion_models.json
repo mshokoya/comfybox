@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 65,
+  "artifact_count": 70,
   "artifacts": [
     {
       "id": "firered.image-edit.1.0.bf16",
@@ -2218,6 +2218,105 @@
       "sha256": "a553c889dbcb910de4c98293237573219a37007c1074a3f04576646a088bd5c8",
       "gated": false,
       "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.fastvideo-vsa-datafree.1300step.4step.int8-convrot",
+      "name": "MiniMax H3 FastVideo VSA Datafree 1300-Step 4-Step INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
+      "group": "Minimax",
+      "tags": ["video", "fastvideo", "vsa", "4step", "int8", "convrot", "minimax"],
+      "sources": [
+        {
+          "title": "MiniMax H3 FastVideo VSA Datafree 4-Step INT8 ConvRot",
+          "url": "https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
+          "size": "22.9 GB",
+          "size_bytes": 22898594920,
+          "description": "Experimental MiniMax H3 FastVideo VSA 4-step INT8 ConvRot diffusion model."
+        }
+      ],
+      "catalog_sources": ["workflow:loratech-director-minimaxh3"],
+      "url": "https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
+      "size_bytes": 22898594920,
+      "sha256": "7221ae65d78780354d51e5048d29728d9f1f8fb9baf50b1dd3df85f5101413d3",
+      "gated": false,
+      "description": "Experimental MiniMax H3 FastVideo VSA 4-step INT8 ConvRot diffusion model."
+    },
+    {
+      "id": "minimax.h3.ref2va.pruned.nvfp4-convrot-int8",
+      "name": "MiniMax H3 Ref2VA Pruned NVFP4 ConvRot INT8",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
+      "group": "Minimax",
+      "tags": ["video", "ref2va", "pruned", "nvfp4", "convrot", "int8", "minimax"],
+      "sources": [
+        {
+          "title": "MiniMax H3 Ref2VA Pruned NVFP4 ConvRot INT8",
+          "url": "https://huggingface.co/rockerBOO/minimax-h3-nvfp4-convrot/resolve/main/minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
+          "size": "20.1 GB",
+          "size_bytes": 20070947267,
+          "description": "ComfyUI-compatible mixed NVFP4 and INT8 ConvRot MiniMax H3 Ref2VA diffusion model."
+        }
+      ],
+      "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"],
+      "url": "https://huggingface.co/rockerBOO/minimax-h3-nvfp4-convrot/resolve/main/minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
+      "size_bytes": 20070947267,
+      "sha256": "9593074fc37e898a9dd08ed7762a675837719a8d97ba3afde904a94474eadf8b",
+      "gated": false,
+      "description": "ComfyUI-compatible mixed NVFP4 and INT8 ConvRot MiniMax H3 Ref2VA diffusion model."
+    },
+    {
+      "id": "wan2.2.animate.14b.bf16",
+      "name": "Wan 2.2 Animate 14B BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.2_animate_14B_bf16.safetensors",
+      "group": "Wan 2.2",
+      "tags": ["video", "animate", "14b", "bf16", "wan2.2"],
+      "sources": [
+        {
+          "title": "Wan 2.2 Animate 14B BF16",
+          "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_animate_14B_bf16.safetensors",
+          "size": "34.5 GB",
+          "size_bytes": 34549787368,
+          "description": "ComfyUI-native Wan 2.2 Animate 14B BF16 diffusion model."
+        }
+      ],
+      "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"],
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_animate_14B_bf16.safetensors",
+      "size_bytes": 34549787368,
+      "sha256": "7d37cb0120488dec2a061135aa3018426925318a60838c3de935c829abc88667",
+      "gated": false,
+      "description": "ComfyUI-native Wan 2.2 Animate 14B BF16 diffusion model."
+    },
+    {
+      "id": "wan2.2.t2v.a14b.high-noise.q6-k",
+      "name": "Wan 2.2 T2V A14B High Noise Q6_K",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
+      "group": "Wan 2.2",
+      "tags": ["video", "t2v", "a14b", "high-noise", "gguf", "q6-k", "wan2.2"],
+      "sources": [{"title":"Wan 2.2 T2V A14B High Noise Q6_K GGUF","url":"https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/HighNoise/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf","size":"12.0 GB","size_bytes":12002013696,"description":"High-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."}],
+      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"],
+      "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/HighNoise/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
+      "size_bytes": 12002013696,
+      "sha256": "504340d1d4eb9c754a824861234cedb5519155c125aa8dbb4c170716d899cd3b",
+      "gated": false,
+      "description": "High-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."
+    },
+    {
+      "id": "wan2.2.t2v.a14b.low-noise.q6-k",
+      "name": "Wan 2.2 T2V A14B Low Noise Q6_K",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
+      "group": "Wan 2.2",
+      "tags": ["video", "t2v", "a14b", "low-noise", "gguf", "q6-k", "wan2.2"],
+      "sources": [{"title":"Wan 2.2 T2V A14B Low Noise Q6_K GGUF","url":"https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/LowNoise/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf","size":"12.0 GB","size_bytes":12002013696,"description":"Low-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."}],
+      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"],
+      "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/LowNoise/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
+      "size_bytes": 12002013696,
+      "sha256": "db35061810049f77f571198d6a7bab422dec94fe0bf016b145b5cfc03eaaf661",
+      "gated": false,
+      "description": "Low-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."
     }
   ]
 }

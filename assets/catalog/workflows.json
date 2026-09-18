@@ -955,6 +955,126 @@
       ]
     },
     {
+      "id": "loratech-director-minimaxh3-workflow",
+      "name": "LoraTech — Director MiniMax H3",
+      "file": "loratech-director-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.ref2va.pruned.int8-convrot",
+        "minimax.h3.ref2v.turbo.4step.v0.1.bf16",
+        "minimax.h3.fl2v.turbo.4step.v1.0.768p.bf16",
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.fastvideo-vsa-datafree.1300step.4step.int8-convrot",
+        "ultralytics.face-yolov8m"
+      ],
+      "custom_node_ids": [
+        "comfyui-easy-use",
+        "comfyui-kjnodes",
+        "comfyui-impact-pack",
+        "plaguekind-nodes",
+        "minimax-h3-motion-director"
+      ],
+      "catalog_sources": ["workflow:loratech-director-minimaxh3"]
+    },
+    {
+      "id": "comfybox-refiner-and-director-minimaxh3-workflow",
+      "name": "ComfyBox — Refiner and Director MiniMax H3",
+      "file": "comfybox-refiner-and-director-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.ref2va.pruned.nvfp4-convrot-int8",
+        "minimax.h3.ref2v.turbo.8step.v1.0.768p.bf16"
+      ],
+      "custom_node_ids": [
+        "comfyui-kjnodes",
+        "comfyui-videohelpersuite",
+        "comfyui-sol-attn",
+        "comfyui-minimax-h3-director"
+      ],
+      "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"]
+    },
+    {
+      "id": "comfybox-director-relight-wananimate2.2-workflow",
+      "name": "ComfyBox — Director Relight Wan Animate 2.2",
+      "file": "comfybox-director-relight-wananimate2.2-workflow.json",
+      "artifact_ids": [
+        "wan2.2.animate.14b.bf16",
+        "wan2.2.animate.relight.bf16",
+        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
+        "umt5_xxl_fp8_e4m3fn_scaled",
+        "wan_2_1_vae",
+        "clip-vision.h"
+      ],
+      "custom_node_ids": ["comfyui-video-director"],
+      "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"]
+    },
+    {
+      "id": "comfybox-director-realism-people-minimaxh3-workflow",
+      "name": "ComfyBox — Director Realism People MiniMax H3",
+      "file": "comfybox-director-realism-people-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.ref2va.pruned.int8-convrot",
+        "minimax.h3.realism-people.t2v-i2v-r2v",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32"
+      ],
+      "custom_node_ids": ["comfyui-video-director"],
+      "catalog_sources": ["workflow:comfybox-director-realism-people-minimaxh3"]
+    },
+    {
+      "id": "comfybox-director-instareal-wan2.2-workflow",
+      "name": "ComfyBox — Director InstaReal Wan 2.2",
+      "file": "comfybox-director-instareal-wan2.2-workflow.json",
+      "artifact_ids": [
+        "wan2.2.t2v.a14b.high-noise.q6-k",
+        "wan2.2.t2v.a14b.low-noise.q6-k",
+        "wan2.2.t2v.a14b.high-noise.distill.rank64",
+        "wan2.2.t2v.a14b.low-noise.distill.rank64",
+        "wan2.2.instareal.high-noise",
+        "wan2.2.instareal.low-noise",
+        "umt5_xxl_fp8_e4m3fn_scaled",
+        "wan_2_1_vae",
+        "clip-vision.h"
+      ],
+      "custom_node_ids": ["comfyui-video-director", "comfyui-gguf"],
+      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"]
+    },
+    {
+      "id": "comfybox-character-swap-realism-lora-24to60-minimaxh3-workflow",
+      "name": "ComfyBox — Character Swap Realism LoRA 24-to-60 MiniMax H3",
+      "file": "comfybox-character-swap-realism-lora-24to60-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.bf16",
+        "minimax.h3.qwen3vl32b.bf16",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.realism-people.t2v-i2v-r2v",
+        "gapfiller_v1"
+      ],
+      "custom_node_ids": ["comfyui-gapfiller", "comfyui-videohelpersuite"],
+      "catalog_sources": ["workflow:comfybox-character-swap-realism-lora-24to60-minimaxh3"]
+    },
+    {
+      "id": "comfybox-character-swap-base-24to60-minimaxh3-workflow",
+      "name": "ComfyBox — Character Swap Base 24-to-60 MiniMax H3",
+      "file": "comfybox-character-swap-base-24to60-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.bf16",
+        "minimax.h3.qwen3vl32b.bf16",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "gapfiller_v1"
+      ],
+      "custom_node_ids": ["comfyui-gapfiller", "comfyui-videohelpersuite"],
+      "catalog_sources": ["workflow:comfybox-character-swap-base-24to60-minimaxh3"]
+    },
+    {
       "id": "ukr8b3g201-360multiangle-qwenedit2511-workflow",
       "name": "Ukr8b3g201 360multiangle Qwenedit2511 Workflow",
       "file": "ukr8b3g201-360multiangle-qwenedit2511-workflow.json",

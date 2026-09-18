@@ -105,6 +105,15 @@ pub struct CustomNode {
     pub id: String,
     pub name: String,
     pub git_url: String,
+    /// Optional pre-packaged ZIP mirror. When present, ComfyBox tries this source
+    /// first and falls back to `git_url` if the archive cannot be downloaded or
+    /// unpacked.
+    #[serde(default)]
+    pub archive_url: Option<String>,
+    #[serde(default)]
+    pub archive_sha256: Option<String>,
+    #[serde(default)]
+    pub archive_size_bytes: Option<u64>,
     pub folder_name: String,
     #[serde(default)]
     pub node_types: Vec<String>,

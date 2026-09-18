@@ -1123,19 +1123,50 @@ async fn install_custom_node(
 ) -> Result<()> {
     let base = root.join("custom_nodes");
     tokio::fs::create_dir_all(&base).await?;
+    let python = if cfg!(windows) {
+        root.join(".venv/Scripts/python.exe")
+    } else {
+        root.join(".venv/bin/python")
+    };
+    if !python.is_file() {
+        anyhow::bail!("ComfyUI virtual environment is missing; install Python dependencies first");
+    }
     let target = find_equivalent_node_folder(&base, &node.folder_name)
         .unwrap_or_else(|| base.join(&node.folder_name));
     if !target.exists() {
         let temporary_base = base.join(".comfybox-tmp");
         tokio::fs::create_dir_all(&temporary_base).await?;
         let temporary = temporary_base.join(format!("{}-{}", node.id, uuid::Uuid::new_v4()));
-        let _ = sender.send(QueueEvent::Log(format!(
-            "[GIT] Cloning {} from {}",
-            node.name, node.git_url
-        )));
-        if let Err(error) = ComfyManager::clone_repository_quiet(&node.git_url, &temporary).await {
-            let _ = tokio::fs::remove_dir_all(&temporary).await;
-            return Err(error).with_context(|| format!("git clone failed for {}", node.name));
+        let archive_result = if let Some(archive_url) = node.archive_url.as_deref() {
+            install_custom_node_archive(
+                archive_url,
+                node.archive_sha256.as_deref(),
+                &temporary,
+                &python,
+                &node.name,
+                sender,
+            )
+            .await
+        } else {
+            Err(anyhow::anyhow!("no archive source configured"))
+        };
+        if let Err(archive_error) = archive_result {
+            if node.archive_url.is_some() {
+                let _ = sender.send(QueueEvent::Log(format!(
+                    "[ARCHIVE] {} failed ({archive_error:#}); falling back to Git",
+                    node.name
+                )));
+            }
+            let _ = sender.send(QueueEvent::Log(format!(
+                "[GIT] Cloning {} from {}",
+                node.name, node.git_url
+            )));
+            if let Err(error) =
+                ComfyManager::clone_repository_quiet(&node.git_url, &temporary).await
+            {
+                let _ = tokio::fs::remove_dir_all(&temporary).await;
+                return Err(error).with_context(|| format!("git clone failed for {}", node.name));
+            }
         }
         tokio::fs::rename(&temporary, &target).await?;
         let _ = sender.send(QueueEvent::Log(format!(
@@ -1146,14 +1177,6 @@ async fn install_custom_node(
         let _ = tokio::fs::remove_dir(&temporary_base).await;
     }
     let requirements = target.join("requirements.txt");
-    let python = if cfg!(windows) {
-        root.join(".venv/Scripts/python.exe")
-    } else {
-        root.join(".venv/bin/python")
-    };
-    if !python.is_file() {
-        anyhow::bail!("ComfyUI virtual environment is missing; install Python dependencies first");
-    }
     if requirements.is_file() {
         let _ = sender.send(QueueEvent::Log(format!(
             "[PYTHON] Installing requirements for {}",
@@ -1163,6 +1186,77 @@ async fn install_custom_node(
             .await?;
     }
     ensure_known_node_runtime(&python, &node.folder_name, sender).await?;
+    Ok(())
+}
+
+async fn install_custom_node_archive(
+    url: &str,
+    expected_sha256: Option<&str>,
+    target: &Path,
+    python: &Path,
+    name: &str,
+    sender: &mpsc::UnboundedSender<QueueEvent>,
+) -> Result<()> {
+    use sha2::{Digest, Sha256};
+
+    let _ = sender.send(QueueEvent::Log(format!(
+        "[ARCHIVE] Downloading {name} from {url}"
+    )));
+    let response = reqwest::Client::new()
+        .get(url)
+        .send()
+        .await
+        .with_context(|| format!("download custom-node archive for {name}"))?
+        .error_for_status()
+        .with_context(|| format!("custom-node archive returned an error for {name}"))?;
+    let bytes = response
+        .bytes()
+        .await
+        .with_context(|| format!("read custom-node archive for {name}"))?;
+    if let Some(expected) = expected_sha256 {
+        let actual = hex::encode(Sha256::digest(&bytes));
+        if !actual.eq_ignore_ascii_case(expected) {
+            anyhow::bail!("SHA-256 mismatch for {name}: expected {expected}, received {actual}");
+        }
+    }
+
+    let archive = target.with_extension("zip");
+    let extracted = target.with_extension("extracted");
+    tokio::fs::write(&archive, &bytes).await?;
+    tokio::fs::create_dir_all(&extracted).await?;
+
+    let status = Command::new(python)
+        .arg("-m")
+        .arg("zipfile")
+        .arg("-e")
+        .arg(&archive)
+        .arg(&extracted)
+        .status()
+        .await
+        .with_context(|| format!("start ZIP extraction for {name}"))?;
+    let _ = tokio::fs::remove_file(&archive).await;
+    if !status.success() {
+        let _ = tokio::fs::remove_dir_all(&extracted).await;
+        anyhow::bail!("ZIP extraction failed for {name} with {status}");
+    }
+
+    let mut entries = tokio::fs::read_dir(&extracted).await?;
+    let first = entries.next_entry().await?;
+    let second = entries.next_entry().await?;
+    if let (Some(entry), None) = (first, second) {
+        if entry.file_type().await?.is_dir() {
+            tokio::fs::rename(entry.path(), target).await?;
+            let _ = tokio::fs::remove_dir(&extracted).await;
+        } else {
+            tokio::fs::rename(&extracted, target).await?;
+        }
+    } else {
+        tokio::fs::rename(&extracted, target).await?;
+    }
+    let _ = sender.send(QueueEvent::Log(format!(
+        "[ARCHIVE] Unpacked {name} at {}",
+        target.display()
+    )));
     Ok(())
 }
 

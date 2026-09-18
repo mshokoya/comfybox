@@ -330,7 +330,8 @@
         "ImageCropV2",
         "ResolutionSelector",
         "ImageConcatMulti",
-        "ImageResizeKJv2"
+        "ImageResizeKJv2",
+        "MiniMaxH3MemoryEfficientSageAttentionPatch"
       ],
       "aliases": [
         "comfyui-kjnodes"
@@ -516,7 +517,8 @@
       "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite",
       "folder_name": "ComfyUI-VideoHelperSuite",
       "node_types": [
-        "VHS_LoadVideo"
+        "VHS_LoadVideo",
+        "VHS_VideoCombine"
       ],
       "catalog_sources": [
         "_/bui.toml"
@@ -686,6 +688,76 @@
       "catalog_sources": [
         "_/deps.json"
       ]
+    },
+    {
+      "id": "plaguekind-nodes",
+      "name": "ComfyUI PlagueKind Nodes",
+      "git_url": "https://github.com/PlagueKind/ComfyUI-PlagueKind-Nodes",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-plaguekind-nodes.zip",
+      "archive_sha256": "a406e97eb814b9db0c1b95a9c5d42317a9ca4fd8e81a0b0fe22f03b9532f2464",
+      "archive_size_bytes": 174403,
+      "folder_name": "ComfyUI-PlagueKind-Nodes",
+      "node_types": ["H3SLAAttention"],
+      "aliases": ["plaguekind-nodes", "comfyui-plaguekind-nodes"],
+      "repository": "https://github.com/PlagueKind/ComfyUI-PlagueKind-Nodes",
+      "commit_sha": null,
+      "catalog_sources": ["workflow:loratech-director-minimaxh3"]
+    },
+    {
+      "id": "minimax-h3-motion-director",
+      "name": "MiniMax H3 Motion Director",
+      "git_url": "https://github.com/j955229/ComfyUI-MiniMax-H3-Motion-Director",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-minimax-h3-motion-director.zip",
+      "archive_sha256": "d8cee614cdb8517b1f65ddc0973c2aaed26f81aa4098d5c3f60ece5b5d4f8c52",
+      "archive_size_bytes": 23148563,
+      "folder_name": "ComfyUI-MiniMax-H3-Motion-Director",
+      "node_types": ["MiniMaxH3MotionDirector"],
+      "aliases": ["minimax-h3-motion-director", "comfyui-minimax-h3-motion-director"],
+      "repository": "https://github.com/j955229/ComfyUI-MiniMax-H3-Motion-Director",
+      "commit_sha": null,
+      "catalog_sources": ["workflow:loratech-director-minimaxh3"]
+    },
+    {
+      "id": "comfyui-sol-attn",
+      "name": "ComfyUI Sol Attention",
+      "git_url": "https://github.com/Saganaki22/ComfyUI-sol-attn",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfybox-comfyui-sol-attn.zip",
+      "archive_sha256": "ac6a4b7f0c1df01c0365717c885704f785fe6e75a622744de31213318bae8a33",
+      "archive_size_bytes": 65457,
+      "folder_name": "ComfyUI-sol-attn",
+      "node_types": ["MiniMaxH3MemoryEfficientSolAttentionPatch"],
+      "aliases": ["comfyui-sol-attn", "sol-attn"],
+      "repository": "https://github.com/Saganaki22/ComfyUI-sol-attn",
+      "commit_sha": null,
+      "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"]
+    },
+    {
+      "id": "comfyui-minimax-h3-director",
+      "name": "ComfyUI MiniMax H3 Director",
+      "git_url": "https://github.com/AIMixer/ComfyUI_MiniMaxH3_Director",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfybox-comfyui_director-minimaxh3.zip",
+      "archive_sha256": "ad21006fc831b7712450e3c66be3da0ab813ae9bffa9b0028ca6578098604a47",
+      "archive_size_bytes": 710073,
+      "folder_name": "ComfyUI_MiniMaxH3_Director",
+      "node_types": ["MiniMaxH3Director"],
+      "aliases": ["comfyui-minimax-h3-director", "minimax-h3-director"],
+      "repository": "https://github.com/AIMixer/ComfyUI_MiniMaxH3_Director",
+      "commit_sha": null,
+      "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"]
+    },
+    {
+      "id": "comfyui-video-director",
+      "name": "ComfyUI Video Director",
+      "git_url": "https://github.com/Thefrizzy1/ComfyUI-MiniMaxH3-Director",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-minimaxh3-director.zip",
+      "archive_sha256": "3b078b5552a98ee4d519433e23e4ec7b54ce5162f6a9679ba5d277058ead7656",
+      "archive_size_bytes": 255157,
+      "folder_name": "ComfyUI-MiniMaxH3-Director",
+      "node_types": ["VideoModelLoader", "MiniMaxH3Director"],
+      "aliases": ["comfyui-video-director", "comfyui-minimaxh3-director-generalized"],
+      "repository": "https://github.com/Thefrizzy1/ComfyUI-MiniMaxH3-Director",
+      "commit_sha": null,
+      "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"]
     },
     {
       "id": "was-ns",

@@ -1,0 +1,1406 @@
+{
+  "id": "79e9753c-d7eb-464f-b072-38c26f869748",
+  "revision": 0,
+  "last_node_id": 54,
+  "last_link_id": 117,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "pos": [
+        -1012.298095703125,
+        117.5058822631836
+      ],
+      "size": [
+        360,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "clip_name",
+          "name": "clip_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name"
+          }
+        },
+        {
+          "label": "type",
+          "name": "type",
+          "type": "COMBO",
+          "widget": {
+            "name": "type"
+          }
+        },
+        {
+          "label": "device",
+          "name": "device",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            73
+          ]
+        }
+      ],
+      "title": "CLIP (minimax / Qwen3-VL)",
+      "properties": {
+        "Node name for S&R": "CLIPLoader",
+        "models": [
+          {
+            "name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+            "directory": "text_encoders"
+          }
+        ],
+        "widget_ue_connectable": {
+          "clip_name": true,
+          "type": true,
+          "device": true
+        }
+      },
+      "widgets_values": [
+        "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "minimax",
+        "default"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [
+        -1012.298095703125,
+        277.5058898925781
+      ],
+      "size": [
+        360,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "vae_name",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            74
+          ]
+        }
+      ],
+      "title": "Video VAE",
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "models": [
+          {
+            "name": "minimax_h3_video_vae_fp16.safetensors",
+            "directory": "vae"
+          }
+        ],
+        "widget_ue_connectable": {
+          "vae_name": true
+        }
+      },
+      "widgets_values": [
+        "minimax_h3_video_vae_fp16.safetensors"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "VAELoader",
+      "pos": [
+        -1012.298095703125,
+        397.5058898925781
+      ],
+      "size": [
+        360,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "vae_name",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            75
+          ]
+        }
+      ],
+      "title": "Audio VAE",
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "models": [
+          {
+            "name": "minimax_h3_audio_vae_fp32.safetensors",
+            "directory": "vae"
+          }
+        ],
+        "widget_ue_connectable": {
+          "vae_name": true
+        }
+      },
+      "widgets_values": [
+        "minimax_h3_audio_vae_fp32.safetensors"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "MarkdownNote",
+      "pos": [
+        -677.5318603515625,
+        1021.9142456054688
+      ],
+      "size": [
+        300,
+        512
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Note: Size Settings Reference",
+      "properties": {
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "| megapixels | Aspect | Output (multiple=32) |\n|---|---|---|\n| 0.2 | 16:9 | 608 x 352 |\n| 0.3 | 16:9 | 736 x 416 |\n| 0.4 | 16:9 | 864 x 480 |\n| 0.5 | 16:9 | 960 x 544 |\n| 0.6 | 16:9 | 1056 x 608 |\n| 0.7 | 16:9 | 1152 x 640 |\n| 0.8 | 16:9 | 1216 x 672 |\n| 0.9 | 16:9 | 1280 x 736 |\n| 0.98 | 16:9 | 1344 x 768 |\n| 1.0 | 16:9 | 1376 x 768 |\n| 1.2 | 16:9 | 1504 x 832 |\n| 1.5 | 16:9 | 1664 x 928 |\n| 1.8 | 16:9 | 1824 x 1024 |\n| 2.0 | 16:9 | 1920 x 1088 |\n"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 6,
+      "type": "CreateVideo",
+      "pos": [
+        1006.6064453125,
+        342.4009704589844
+      ],
+      "size": [
+        280,
+        120
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 77
+        },
+        {
+          "label": "audio",
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 78
+        },
+        {
+          "label": "fps",
+          "name": "fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fps"
+          },
+          "link": 79
+        },
+        {
+          "label": "bit_depth",
+          "name": "bit_depth",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "bit_depth"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "VIDEO",
+          "name": "VIDEO",
+          "type": "VIDEO",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateVideo",
+        "widget_ue_connectable": {
+          "fps": true,
+          "bit_depth": true
+        }
+      },
+      "widgets_values": [
+        24,
+        8
+      ]
+    },
+    {
+      "id": 7,
+      "type": "SaveVideo",
+      "pos": [
+        1320.0169677734375,
+        288.26611328125
+      ],
+      "size": [
+        210,
+        180
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "video",
+          "name": "video",
+          "type": "VIDEO",
+          "link": 9
+        },
+        {
+          "label": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          }
+        },
+        {
+          "label": "format",
+          "name": "format",
+          "type": "COMBO",
+          "widget": {
+            "name": "format"
+          }
+        },
+        {
+          "label": "codec",
+          "name": "codec",
+          "type": "COMFY_DYNAMICCOMBO_V3",
+          "widget": {
+            "name": "codec"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "video_url",
+          "name": "video_url",
+          "type": "STRING"
+        },
+        {
+          "label": "video",
+          "name": "video",
+          "type": "VIDEO"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveVideo",
+        "widget_ue_connectable": {
+          "codec": true,
+          "filename_prefix": true,
+          "format": true
+        }
+      },
+      "widgets_values": [
+        "video/MiniMaxH3_Director",
+        "auto",
+        "auto"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "MiniMaxH3MemoryEfficientSageAttentionPatch",
+      "pos": [
+        314.0702819824219,
+        -183.1494903564453
+      ],
+      "size": [
+        376.7386169433594,
+        26
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 112
+        }
+      ],
+      "outputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            98
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3MemoryEfficientSageAttentionPatch",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 51,
+      "type": "MiniMaxH3MemoryEfficientSolAttentionPatch",
+      "pos": [
+        -503.53271484375,
+        -308.7344055175781
+      ],
+      "size": [
+        404.6529235839844,
+        250
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 114
+        },
+        {
+          "label": "enabled",
+          "name": "enabled",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "enabled"
+          }
+        },
+        {
+          "label": "tau",
+          "name": "tau",
+          "type": "FLOAT",
+          "widget": {
+            "name": "tau"
+          }
+        },
+        {
+          "label": "min_tokens",
+          "name": "min_tokens",
+          "type": "INT",
+          "widget": {
+            "name": "min_tokens"
+          }
+        },
+        {
+          "label": "strict",
+          "name": "strict",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "strict"
+          }
+        },
+        {
+          "label": "thresh_type",
+          "name": "thresh_type",
+          "type": "COMBO",
+          "widget": {
+            "name": "thresh_type"
+          }
+        },
+        {
+          "label": "int8_qk",
+          "name": "int8_qk",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "int8_qk"
+          }
+        },
+        {
+          "label": "int8_pv",
+          "name": "int8_pv",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "int8_pv"
+          }
+        },
+        {
+          "label": "sink_conditioning",
+          "name": "sink_conditioning",
+          "type": "COMBO",
+          "widget": {
+            "name": "sink_conditioning"
+          }
+        },
+        {
+          "label": "dense_blocks",
+          "name": "dense_blocks",
+          "type": "STRING",
+          "widget": {
+            "name": "dense_blocks"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            112
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3MemoryEfficientSolAttentionPatch",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        true,
+        1.3,
+        4096,
+        false,
+        "diag",
+        false,
+        false,
+        "exact_kv",
+        ""
+      ]
+    },
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        -1015.1451416015625,
+        -6.835294246673584
+      ],
+      "size": [
+        360,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "unet_name",
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          }
+        },
+        {
+          "label": "weight_dtype",
+          "name": "weight_dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "weight_dtype"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            113
+          ]
+        }
+      ],
+      "title": "MiniMax H3 UNET",
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "models": [
+          {
+            "name": "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+            "directory": "diffusion_models"
+          }
+        ],
+        "widget_ue_connectable": {
+          "weight_dtype": true,
+          "unet_name": true
+        }
+      },
+      "widgets_values": [
+        "minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 52,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -566.7295532226562,
+        -22.985172271728516
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 113
+        },
+        {
+          "label": "lora_name",
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          }
+        },
+        {
+          "label": "strength_model",
+          "name": "strength_model",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength_model"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            114
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+        1
+      ]
+    },
+    {
+      "id": 40,
+      "type": "MiniMaxH3Director",
+      "pos": [
+        -346.9624328613281,
+        -45.537017822265625
+      ],
+      "size": [
+        1249.2337646484375,
+        1566
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 98
+        },
+        {
+          "label": "video_vae",
+          "name": "video_vae",
+          "type": "VAE",
+          "link": 74
+        },
+        {
+          "label": "audio_vae",
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 75
+        },
+        {
+          "label": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 73
+        },
+        {
+          "label": "i2v_groups",
+          "name": "i2v_groups",
+          "shape": 7,
+          "type": "MMX_DIR_GROUP"
+        },
+        {
+          "label": "r2v_groups",
+          "name": "r2v_groups",
+          "shape": 7,
+          "type": "MMX_DIR_GROUP"
+        },
+        {
+          "label": "refine",
+          "name": "refine",
+          "shape": 7,
+          "type": "MMX_DIR_REFINE",
+          "link": null
+        },
+        {
+          "label": "sigmas",
+          "name": "sigmas",
+          "shape": 7,
+          "type": "SIGMAS"
+        },
+        {
+          "label": "task_type",
+          "name": "task_type",
+          "type": "COMBO",
+          "widget": {
+            "name": "task_type"
+          }
+        },
+        {
+          "label": "global_prompt",
+          "name": "global_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "global_prompt"
+          }
+        },
+        {
+          "label": "bd_grp_sample",
+          "name": "bd_grp_sample",
+          "type": "BDGROUP",
+          "widget": {
+            "name": "bd_grp_sample"
+          }
+        },
+        {
+          "label": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          }
+        },
+        {
+          "label": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          }
+        },
+        {
+          "label": "frame_rate",
+          "name": "frame_rate",
+          "type": "FLOAT",
+          "widget": {
+            "name": "frame_rate"
+          }
+        },
+        {
+          "label": "width",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "label": "height",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          }
+        },
+        {
+          "label": "ref_max_size",
+          "name": "ref_max_size",
+          "type": "INT",
+          "widget": {
+            "name": "ref_max_size"
+          }
+        },
+        {
+          "label": "total_frames",
+          "name": "total_frames",
+          "type": "INT",
+          "widget": {
+            "name": "total_frames"
+          }
+        },
+        {
+          "label": "timeline_data",
+          "name": "timeline_data",
+          "type": "STRING",
+          "widget": {
+            "name": "timeline_data"
+          }
+        },
+        {
+          "label": "bd_grp_advanced",
+          "name": "bd_grp_advanced",
+          "shape": 7,
+          "type": "BDGROUP",
+          "widget": {
+            "name": "bd_grp_advanced"
+          }
+        },
+        {
+          "label": "steps",
+          "name": "steps",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          }
+        },
+        {
+          "label": "sampler",
+          "name": "sampler",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler"
+          }
+        },
+        {
+          "label": "scheduler",
+          "name": "scheduler",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          }
+        },
+        {
+          "label": "shift_video",
+          "name": "shift_video",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "shift_video"
+          }
+        },
+        {
+          "label": "shift_audio",
+          "name": "shift_audio",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "shift_audio"
+          }
+        },
+        {
+          "label": "bd_grp_perf",
+          "name": "bd_grp_perf",
+          "shape": 7,
+          "type": "BDGROUP",
+          "widget": {
+            "name": "bd_grp_perf"
+          }
+        },
+        {
+          "label": "clear_vram_between_segments",
+          "name": "clear_vram_between_segments",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "clear_vram_between_segments"
+          }
+        },
+        {
+          "label": "export_source_images",
+          "name": "export_source_images",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "export_source_images"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "images",
+          "name": "images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": [
+            77,
+            86
+          ]
+        },
+        {
+          "label": "audio",
+          "name": "audio",
+          "shape": 6,
+          "type": "AUDIO",
+          "links": [
+            78,
+            107
+          ]
+        },
+        {
+          "label": "fps",
+          "name": "fps",
+          "type": "FLOAT",
+          "links": [
+            79
+          ]
+        },
+        {
+          "label": "frame_count",
+          "name": "frame_count",
+          "type": "INT"
+        },
+        {
+          "label": "source_images",
+          "name": "source_images",
+          "shape": 6,
+          "type": "IMAGE"
+        },
+        {
+          "label": "report",
+          "name": "report",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "label": "images_pre_refine",
+          "name": "images_pre_refine",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": [
+            115
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3Director",
+        "widget_ue_connectable": {
+          "shift_audio": true,
+          "seed": true,
+          "shift_video": true,
+          "export_source_images": true,
+          "cfg": true,
+          "global_prompt": true,
+          "timeline_data": true,
+          "bd_grp_sample": true,
+          "frame_rate": true,
+          "steps": true,
+          "total_frames": true,
+          "sampler": true,
+          "bd_grp_perf": true,
+          "scheduler": true,
+          "clear_vram_between_segments": true,
+          "width": true,
+          "ref_max_size": true,
+          "bd_grp_advanced": true,
+          "task_type": true,
+          "height": true
+        }
+      },
+      "widgets_values": [
+        "r2v — 参考主体生视频(Reference to Video)",
+        "subject_definitions:\n<Subject 1> is a young adult woman with long dark brown wavy hair, light blue-green eyes, natural eyebrows, and a realistic photorealistic appearance. Her identity and attire are completely locked to the reference image: a fitted cream-colored ribbed long-sleeve top, light blue high-waisted denim jeans, delicate gold hoop earrings, a fine gold necklace with a small pendant, and a slim silver bracelet. She has a natural slim build and realistic body proportions. Her facial features, hairstyle, skin tone, clothing, jewelry, and overall appearance must remain consistent throughout the entire video.",
+        "采样设置",
+        1,
+        63527771462302,
+        "randomize",
+        24,
+        1376,
+        768,
+        1376,
+        1458,
+        "{\"version\":5,\"editMode\":\"segment\",\"totalFrames\":1458,\"frameRate\":24,\"video\":{\"fileName\":\"\",\"videoFile\":\"\",\"subfolder\":\"\",\"type\":\"input\",\"frames\":[],\"frameMap\":[],\"deletedSourceRanges\":[],\"sourceFrameCount\":525,\"width\":0,\"height\":0},\"videoClips\":[],\"global\":{\"taskType\":\"r2v — 参考主体生视频(Reference to Video)\",\"prompt\":\"subject_definitions:\\n<Subject 1> is a young adult woman with long dark brown wavy hair, light blue-green eyes, natural eyebrows, and a realistic photorealistic appearance. Her identity and attire are completely locked to the reference image: a fitted cream-colored ribbed long-sleeve top, light blue high-waisted denim jeans, delicate gold hoop earrings, a fine gold necklace with a small pendant, and a slim silver bracelet. She has a natural slim build and realistic body proportions. Her facial features, hairstyle, skin tone, clothing, jewelry, and overall appearance must remain consistent throughout the entire video.\",\"refs\":[{\"index\":0,\"imageFile\":\"e5f9d282098a2ca94cdda763667f3cf2608b1bc8033e4bddd84bb93c1674b866.png\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},{\"index\":1,\"imageFile\":\"3416062efb804bbb4b3fa0eb3b1d7ddb94d918a0ae5724e0f3091b0152600b4b.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},{\"index\":2,\"imageFile\":\"21894a09a49626842052211ae7e8b446d89dccbb6f5d2b81ba5149950ab6f328.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"referenceVideo\":{\"videoFile\":\"\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},\"continuousReference\":false,\"genImage\":{\"imageFile\":\"\"},\"sourceWidth\":768,\"sourceHeight\":1024,\"refAudios\":[],\"commonEnabled\":true,\"commonCollapsed\":true,\"refVideos\":[]},\"output\":{\"mode\":\"fixed\",\"aspectRatio\":\"16:9 (宽屏)\",\"megapixels\":1,\"multiple\":32,\"longEdge\":1376,\"width\":1376,\"height\":768,\"maxExportFrames\":0,\"exportMode\":\"all\",\"audioMode\":\"source\",\"exportSourceImages\":false,\"refImageSize\":\"match\",\"continuityEnabled\":true,\"continuityOverlapFrames\":22},\"runSelectEnabled\":true,\"runSelection\":[0,1],\"segments\":[{\"id\":\"mtl7cjmjkmsj9\",\"start\":0,\"length\":243,\"frameCount\":243,\"durationSec\":10,\"prompt\":\"<Picture 4>  Preserve her exact facial identity, hairstyle, pink long-sleeve sleep top, white bedding, body proportions, skin tone, and overall appearance throughout the entire video.\\nCreate a photorealistic 7-second vertical 9:16 cinematic lifestyle video continuing the same bedroom scene. The girl is sleeping in bed with warm morning sunlight streaming in from the window, a glass of water and phone on the nightstand.\\n0–2 seconds — ALARM RINGS AND SHE STIRS\\nShe is asleep with her eyes closed, resting on the white pillow. The phone on the nightstand suddenly vibrates and rings loudly. She furrows her brow slightly and shifts her head against the pillow as the sound registers. Her breathing quickens slightly as she is pulled from deep sleep.\\n2–3.5 seconds — REACHING FOR THE PHONE\\nHer eyes flutter open, looking groggy and half asleep. She lifts her head slightly off the pillow and instinctively reaches her hand out toward the nightstand to grab the ringing phone.\\n3.5–5 seconds — PICKING UP THE PHONE\\nShe brings the phone closer to her face, holding it in her hand. Her movements are lazy and sleepy as she turns her head to look at the bright, glowing screen. Her fingers naturally find the screen.\\n5–7 seconds — TURNING OFF THE ALARM\\nShe taps and swipes the screen to dismiss the alarm. The ringing stops. She stares at the screen for a brief second, then sighs softly and lets her hand drop back down to the bed, settling back against her pillow, now fully awake but still peaceful.\\nCAMERA & REALISM\\nPhotorealistic bedroom footage, realistic handheld/cinematic camera behavior, natural autofocus shifting from her face to her hand and the phone. Realistic hair strands moving against the pillow, realistic fabric folding, soft morning light casting natural warm shadows across the bed. Keep the exact same character, outfit, hairstyle, bedroom environment, lighting, and visual continuity from the previous scene. No sudden movements, no exaggerated expressions, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated objects, no outfit changes, no unrealistic physics.]\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"0f4e0aada83cbeef1cfcbc32cc329876252135ca7a60d2ccf4738be90dab9d42.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":false,\"refImageSize\":\"match\"},{\"id\":\"mtl7ckrkpj7xa\",\"start\":243,\"length\":294,\"frameCount\":294,\"durationSec\":12,\"prompt\":\"<Picture 4> <Picture 4>  Preserve her exact facial identity, hairstyle, pink long-sleeve top, pink shorts, body proportions, skin tone, overall appearance, and the exact walk-in closet environment throughout the entire video.\\nCreate a photorealistic 12-second vertical 9:16 cinematic lifestyle video continuing the exact same closet scene. The girl is standing in front of her closet holding a white long-sleeve shirt on a hanger with her right hand, looking at it critically, with a mirror on her left.\\n0–3 seconds — ASSESSING THE SHIRT\\nShe stands in front of the closet, holding the white long-sleeve top up. She tilts her head slightly to the left and right, studying the fabric and fit with a thoughtful, evaluating expression.\\n3–6 seconds — CHECKING THE MIRROR\\nShe shifts her gaze naturally toward the mirror on her left to see how the color might look on her. She holds the shirt up slightly higher, adjusting her posture to get a better visual perspective of the outfit.\\n6–9 seconds — CONSIDERING ALTERNATIVES\\nHer left hand reaches into the rack of clothes, gently brushing past a few hangers as she considers an alternative. She looks back down at the white shirt, comparing the options in her mind.\\n9–12 seconds — FINAL DECISION\\nShe brings the white shirt back up towards her chest, holding it against herself to gauge the fit. She breaks into a subtle, approving smile and turns her body slightly toward the mirror, fully deciding on the outfit and preparing to head back to the bedroom.\\nCAMERA & REALISM\\nPhotorealistic walk-in closet footage, realistic handheld/cinematic camera behavior, natural autofocus shifting from her face to the shirt in her hand and her reflection in the mirror. Realistic hair strands moving naturally with her head turns, realistic fabric folding on the pink outfit and the white shirt, soft natural window light casting warm shadows across the room. Keep the exact same character, outfit, hairstyle, closet environment, lighting, and visual continuity from the previous scene. No sudden movements, no exaggerated expressions, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated objects, no outfit changes, no unrealistic physics.]\\n\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"eed4b25d35f0abf746df0eb6bfe76b143360e7bc18e9513485490995645ef140.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\"},{\"id\":\"mtl7nipd2ix8q\",\"start\":537,\"length\":277,\"frameCount\":277,\"durationSec\":11,\"prompt\":\"[Image is the sole character identity reference. Preserve her exact facial identity, hairstyle, cream-colored fitted long-sleeve top, blue jeans, black jacket over her arm, body proportions, skin tone, and overall appearance throughout the entire video.\\nCreate a photorealistic 12-second vertical 9:16 cinematic lifestyle video continuing the same apartment and city street scene. The girl is outside, with a yellow taxi waiting nearby.\\n0–2 seconds — LEAVING THE BUILDING TOWER\\nShe steps out of the glass doors of her apartment building onto the busy city street. She holds a black jacket over one arm. Her expression is purposeful and ready for the day. The camera provides a wide cinematic shot of her walking, with the building towering behind her.\\n2–5 seconds — TRYING TO CATCH A TAXI\\nShe spots a yellow taxi approaching down the street. She walks to the curb, raises her hand, and makes a natural, realistic gesture to flag the taxi down. The morning light catches her face.\\n5–8 seconds — TAXI STOPS\\nThe yellow taxi smoothly pulls over and comes to a complete stop right beside her at the curb. She lowers her hand, casually walks up to the car, and reaches for the back door handle.\\n8–12 seconds — ENTERING THE TAXI\\nShe pulls the yellow door open and steps inside, carefully holding her jacket. She settles onto the back seat, looks briefly back out at the street, and reaches out to pull the door shut, preparing to ride off.\\nCAMERA & REALISM\\nPhotorealistic city street footage, realistic handheld/cinematic camera behavior. Natural autofocus shifting from her walking to her hand flagging the cab, and finally into the taxi interior. Realistic fabric folding on her clothes and jacket, realistic moving hair strands, warm golden sunrise lighting casting natural shadows on the street, realistic reflections on the taxi glass. Keep the exact same character, outfit, hairstyle, taxi, environment, lighting, and visual continuity from the previous scene. No sudden movements, no exaggerated expressions, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated objects, no outfit changes, no unrealistic physics.]\\n\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"eedcd8ffadcb16d3f5187bd2322a3628a2bf6e6119a6da720281d4fa1405555c.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\"},{\"id\":\"mtjrk3opvarni\",\"start\":814,\"length\":226,\"frameCount\":226,\"durationSec\":9,\"prompt\":\" <Picture 1>  is the sole character identity reference. Preserve her exact facial identity, hairstyle, cream-colored fitted long-sleeve top, blue jeans, body proportions, skin tone, jewelry, and overall appearance throughout the entire video.\\nCreate a photorealistic 7-second vertical 9:16 cinematic lifestyle video set inside the same warm, cozy modern café shown in the reference image. The girl is casually walking through the café while carrying a ceramic cup of coffee in one hand. She looks relaxed and natural, as if enjoying a quiet morning alone. <Picture 1> \\n0–2 seconds — WALKING THROUGH THE CAFÉ\\nShe walks naturally through the café while carefully carrying the coffee cup.\\nHer pace is relaxed and unhurried.\\nHer free hand moves naturally at her side.\\nShe briefly looks around the café as she walks, scanning the available seating.\\nThe camera follows her from a natural slightly front-facing angle with subtle handheld realism.\\n2–4 seconds — FINDS A SPOT\\nShe notices an empty seat beside the large window.\\nShe slows down naturally and turns slightly toward the table.\\nShe looks toward the seat, then toward the window, with a small satisfied expression as though she has found a nice place to sit.\\nThe camera gently follows her movement and reframes toward the table.\\n4–6 seconds — SITS DOWN\\nShe carefully approaches the chair and naturally sits down.\\nHer movements are smooth and believable, with realistic weight transfer.\\nShe keeps the coffee cup secure in her hand while sitting.\\nHer hair and clothing move naturally with the motion.\\nThe camera lowers slightly and settles into a medium shot as she sits.\\n6–7 seconds — TAKES A SIP\\nOnce seated, she brings the coffee cup toward her lips and takes a small relaxed sip.\\nShe lowers the cup slightly and looks toward the window.\\nWarm sunlight falls naturally across her face.\\nCAMERA & REALISM\\nNatural handheld café cinematography, subtle camera movement, realistic autofocus, natural exposure adaptation, believable human motion, realistic coffee movement inside the cup, accurate hand and finger motion, physically correct hair and clothing movement.\\nKeep the same café interior, lighting, furniture, window, coffee cup, outfit, hairstyle, and character appearance consistent.\\nNo sudden cuts, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated limbs, no changing outfit, no changing cup, no unnatural walking, no floating objects.\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"e5f9d282098a2ca94cdda763667f3cf2608b1bc8033e4bddd84bb93c1674b866.png\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\"},{\"id\":\"mtjsmlbpap5am\",\"start\":1040,\"length\":226,\"frameCount\":226,\"durationSec\":9,\"prompt\":\"<Picture 2>  is the sole character identity reference. Preserve her exact facial identity, hairstyle, cream-colored fitted long-sleeve top, blue jeans, jewelry, body proportions, skin tone, and overall appearance throughout the entire video.\\nCreate a photorealistic 7-second vertical 9:16 cinematic lifestyle video continuing naturally from the previous scene. The girl is seated at the café table beside the large window with her ceramic coffee cup in both hands.<Picture 2>  \\n0–2 seconds — HOLDS THE COFFEE\\nShe sits comfortably at the table, holding the warm coffee cup with both hands.\\nShe looks down at the coffee for a moment with a calm, content expression.\\nA faint curl of steam rises naturally from the cup.\\nHer posture is relaxed and casual.\\n2–4 seconds — SIPS\\nShe gently lifts the cup toward her lips and takes a slow sip of coffee.\\nHer movements are subtle and realistic.\\nAfter the sip, she lowers the cup slightly while keeping it in her hands.\\nHer eyes remain relaxed and natural.\\n4–5.5 seconds — LOOKS OUTSIDE\\nShe turns her head toward the large café window.\\nHer expression becomes thoughtful and peaceful as she looks outside.\\nSoft sunlight illuminates the side of her face.\\nHer hair shifts subtly as she turns.\\n5.5–7 seconds — QUIET MOMENT\\nShe continues looking outside for a moment while holding the coffee cup close to her chest.\\nShe gives a very subtle contented smile.\\nThe camera makes a gentle slow push toward her, keeping her face and coffee cup in focus while the café background remains softly blurred.\\nCAMERA & REALISM\\nPhotorealistic modern café footage, natural smartphone/cinematic hybrid aesthetic, realistic autofocus, subtle depth of field, warm sunlight, accurate reflections on the window, realistic steam, natural skin texture, physically correct hand movement and coffee-cup interaction.\\nKeep her exact identity and outfit consistent with the reference.\\nMaintain the same café, same table, same chair, same window, same lighting direction, and same coffee cup.\\nNo face morphing, no identity drift, no changing hairstyle, no clothing changes, no warped fingers, no extra hands, no duplicated objects, no artificial smile, no exaggerated movement.\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"3416062efb804bbb4b3fa0eb3b1d7ddb94d918a0ae5724e0f3091b0152600b4b.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\"},{\"id\":\"mtka8oqfuaj2i\",\"start\":1266,\"length\":192,\"frameCount\":192,\"durationSec\":8,\"prompt\":\"<Picture 3> ] is the sole character identity reference. Preserve her exact facial identity, hairstyle, cream-colored fitted long-sleeve top, blue jeans, jewelry, body proportions, skin tone, and overall appearance throughout the entire video.\\nCreate a photorealistic 7-second vertical 9:16 cinematic lifestyle video continuing the same café scene. The girl is seated at the wooden café table beside the window with her ceramic coffee cup. <Picture 3> \\nThe action should feel like a small, believable everyday accident rather than exaggerated comedy.\\n0–2 seconds — PREPARES TO PUT DOWN THE CUP\\nAfter enjoying her coffee, she gently moves the cup from near her face toward the table.\\nShe looks down at the spot where she is about to place it.\\nHer movement is casual and natural.\\n2–3.5 seconds — ACCIDENTAL SPILL\\nAs she sets the cup down, her hand accidentally catches the edge of the cup or places it slightly unevenly.\\nThe cup tilts unexpectedly.\\nA small amount of coffee spills over the rim onto the wooden tabletop.\\nThe spill should behave realistically, spreading naturally across the surface with believable liquid physics.\\nShe immediately notices what happened.\\n3.5–5 seconds — SURPRISED REACTION\\nShe quickly looks down at the spilled coffee with a brief surprised expression.\\nHer eyebrows lift slightly.\\nShe moves her free hand toward the spill instinctively as though trying to stop it from spreading.\\nThe reaction should remain subtle and realistic.\\n5–7 seconds — ANNOYED & DISAPPOINTED\\nShe looks at the mess with mild annoyance and disappointment.\\nShe exhales softly and gives a small frustrated expression, slightly pressing her lips together.\\nShe glances briefly toward the coffee cup and then back at the spill.\\nHer reaction should feel like a genuine everyday annoyance, not an exaggerated emotional performance.\\nThe camera gently moves closer toward the table, capturing both her expression and the spilled coffee.\\nCAMERA & REALISM\\nPhotorealistic café footage, realistic handheld/cinematic camera behavior, natural autofocus shifting from her face to the coffee spill, physically accurate liquid simulation, realistic ceramic cup movement, natural hand interaction, realistic reflections and sunlight on the wet wooden table.\\nKeep the exact same character, outfit, hairstyle, coffee cup, café environment, table, lighting, and visual continuity from the previous scenes.\\nThe coffee spill must look physically believable and remain on the table.\\nNo exploding liquid, no excessive spill, no broken cup, no exaggerated reaction, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated objects, no outfit changes, no environment changes, no unrealistic physics.\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"21894a09a49626842052211ae7e8b446d89dccbb6f5d2b81ba5149950ab6f328.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\"}],\"timelineMode\":\"prompt_batch\",\"width\":1376,\"height\":768,\"refMaxSize\":1376,\"gen\":{\"defaultFrameCount\":124},\"keyframes\":[{\"id\":\"msdtx3zi62ktv_s\",\"imageFile\":\"0059.png\",\"width\":768,\"height\":1024,\"start\":0,\"length\":62,\"frameCount\":62,\"durationSec\":5,\"prompt\":\"一个猴子在极速奔跑，跑的过程中裤子掉在地上，但他仍然继续奔跑。过程中伴随自然的跑步声\",\"negativePrompt\":\"bad video\",\"isStartFrame\":true,\"isEndFrame\":false},{\"id\":\"msdtx3zi62ktv_e\",\"imageFile\":\"0060.png\",\"width\":512,\"height\":682,\"start\":62,\"length\":62,\"frameCount\":62,\"durationSec\":5,\"prompt\":\"\",\"negativePrompt\":\"bad video\",\"isStartFrame\":false,\"isEndFrame\":true},{\"id\":\"msdtx87njf33g_s\",\"imageFile\":\"0060.png\",\"width\":512,\"height\":682,\"start\":124,\"length\":62,\"frameCount\":62,\"durationSec\":5,\"prompt\":\"猴子在快速奔跑，双臂自然摆动，跑到一个岩石旁，慢慢的坐下，随着时间的流逝，沙尘慢慢消失，漏出蓝天背景。过程中伴随自然的跑步、坐下时候产生的声音\",\"negativePrompt\":\"bad video\",\"isStartFrame\":true,\"isEndFrame\":false},{\"id\":\"msdtx87njf33g_e\",\"imageFile\":\"0062.png\",\"width\":768,\"height\":1024,\"start\":186,\"length\":62,\"frameCount\":62,\"durationSec\":5,\"prompt\":\"\",\"negativePrompt\":\"bad video\",\"isStartFrame\":false,\"isEndFrame\":true},{\"id\":\"msdtwxyuscavj_s\",\"imageFile\":\"0062.png\",\"width\":768,\"height\":1024,\"start\":248,\"length\":62,\"frameCount\":62,\"durationSec\":5,\"prompt\":\"猴子从岩石上起身，起身后穿上衣服，背上书包，去教室上课，慢慢走到教室里，过程中伴随穿衣、背书包、走路的背景音\",\"negativePrompt\":\"bad video\",\"isStartFrame\":true,\"isEndFrame\":false},{\"id\":\"msdtwxyuscavj_e\",\"imageFile\":\"0086.png\",\"width\":768,\"height\":1024,\"start\":310,\"length\":62,\"frameCount\":62,\"durationSec\":5,\"prompt\":\"\",\"negativePrompt\":\"bad video\",\"isStartFrame\":false,\"isEndFrame\":true},{\"id\":\"msdx1e2eigp2x\",\"imageFile\":\"\",\"width\":0,\"height\":0,\"start\":372,\"length\":124,\"frameCount\":124,\"durationSec\":5,\"prompt\":\"\",\"negativePrompt\":\"bad video\",\"isStartFrame\":true,\"isEndFrame\":false}],\"durationSec\":20,\"shots\":[{\"id\":\"msdtx3zi62ktv\",\"durationSec\":5,\"prompt\":\"一个猴子在极速奔跑，跑的过程中裤子掉在地上，但他仍然继续奔跑。过程中伴随自然的跑步声\",\"negativePrompt\":\"bad video\",\"startImage\":{\"imageFile\":\"0059.png\",\"width\":768,\"height\":1024},\"endImage\":{\"imageFile\":\"0060.png\",\"width\":512,\"height\":682}},{\"id\":\"msdtx87njf33g\",\"durationSec\":5,\"prompt\":\"猴子在快速奔跑，双臂自然摆动，跑到一个岩石旁，慢慢的坐下，随着时间的流逝，沙尘慢慢消失，漏出蓝天背景。过程中伴随自然的跑步、坐下时候产生的声音\",\"negativePrompt\":\"bad video\",\"startImage\":{\"imageFile\":\"0060.png\",\"width\":512,\"height\":682},\"endImage\":{\"imageFile\":\"0062.png\",\"width\":768,\"height\":1024}},{\"id\":\"msdtwxyuscavj\",\"durationSec\":5,\"prompt\":\"猴子从岩石上起身，起身后穿上衣服，背上书包，去教室上课，慢慢走到教室里，过程中伴随穿衣、背书包、走路的背景音\",\"negativePrompt\":\"bad video\",\"startImage\":{\"imageFile\":\"0062.png\",\"width\":768,\"height\":1024},\"endImage\":{\"imageFile\":\"0086.png\",\"width\":768,\"height\":1024}},{\"id\":\"msdx1e2eigp2x\",\"durationSec\":5,\"prompt\":\"\",\"negativePrompt\":\"bad video\",\"startImage\":null,\"endImage\":null}],\"liveTaePreview\":true,\"batchDetailMode\":\"all\",\"batchWorkspaces\":{\"r2v\":{\"selectedIndex\":0,\"editMode\":\"segment\",\"runSelectEnabled\":true,\"runSelection\":[0,1],\"segments\":[{\"id\":\"mtl7cjmjkmsj9\",\"start\":0,\"length\":243,\"frameCount\":243,\"durationSec\":10,\"prompt\":\"<Picture 4>  Preserve her exact facial identity, hairstyle, pink long-sleeve sleep top, white bedding, body proportions, skin tone, and overall appearance throughout the entire video.\\nCreate a photorealistic 7-second vertical 9:16 cinematic lifestyle video continuing the same bedroom scene. The girl is sleeping in bed with warm morning sunlight streaming in from the window, a glass of water and phone on the nightstand.\\n0–2 seconds — ALARM RINGS AND SHE STIRS\\nShe is asleep with her eyes closed, resting on the white pillow. The phone on the nightstand suddenly vibrates and rings loudly. She furrows her brow slightly and shifts her head against the pillow as the sound registers. Her breathing quickens slightly as she is pulled from deep sleep.\\n2–3.5 seconds — REACHING FOR THE PHONE\\nHer eyes flutter open, looking groggy and half asleep. She lifts her head slightly off the pillow and instinctively reaches her hand out toward the nightstand to grab the ringing phone.\\n3.5–5 seconds — PICKING UP THE PHONE\\nShe brings the phone closer to her face, holding it in her hand. Her movements are lazy and sleepy as she turns her head to look at the bright, glowing screen. Her fingers naturally find the screen.\\n5–7 seconds — TURNING OFF THE ALARM\\nShe taps and swipes the screen to dismiss the alarm. The ringing stops. She stares at the screen for a brief second, then sighs softly and lets her hand drop back down to the bed, settling back against her pillow, now fully awake but still peaceful.\\nCAMERA & REALISM\\nPhotorealistic bedroom footage, realistic handheld/cinematic camera behavior, natural autofocus shifting from her face to her hand and the phone. Realistic hair strands moving against the pillow, realistic fabric folding, soft morning light casting natural warm shadows across the bed. Keep the exact same character, outfit, hairstyle, bedroom environment, lighting, and visual continuity from the previous scene. No sudden movements, no exaggerated expressions, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated objects, no outfit changes, no unrealistic physics.]\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"0f4e0aada83cbeef1cfcbc32cc329876252135ca7a60d2ccf4738be90dab9d42.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":false,\"refImageSize\":\"match\",\"referenceVideo\":{\"videoFile\":\"\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},\"_videoFrameCount\":243,\"previewFps\":24},{\"id\":\"mtl7ckrkpj7xa\",\"start\":243,\"length\":294,\"frameCount\":294,\"durationSec\":12,\"prompt\":\"<Picture 4> <Picture 4>  Preserve her exact facial identity, hairstyle, pink long-sleeve top, pink shorts, body proportions, skin tone, overall appearance, and the exact walk-in closet environment throughout the entire video.\\nCreate a photorealistic 12-second vertical 9:16 cinematic lifestyle video continuing the exact same closet scene. The girl is standing in front of her closet holding a white long-sleeve shirt on a hanger with her right hand, looking at it critically, with a mirror on her left.\\n0–3 seconds — ASSESSING THE SHIRT\\nShe stands in front of the closet, holding the white long-sleeve top up. She tilts her head slightly to the left and right, studying the fabric and fit with a thoughtful, evaluating expression.\\n3–6 seconds — CHECKING THE MIRROR\\nShe shifts her gaze naturally toward the mirror on her left to see how the color might look on her. She holds the shirt up slightly higher, adjusting her posture to get a better visual perspective of the outfit.\\n6–9 seconds — CONSIDERING ALTERNATIVES\\nHer left hand reaches into the rack of clothes, gently brushing past a few hangers as she considers an alternative. She looks back down at the white shirt, comparing the options in her mind.\\n9–12 seconds — FINAL DECISION\\nShe brings the white shirt back up towards her chest, holding it against herself to gauge the fit. She breaks into a subtle, approving smile and turns her body slightly toward the mirror, fully deciding on the outfit and preparing to head back to the bedroom.\\nCAMERA & REALISM\\nPhotorealistic walk-in closet footage, realistic handheld/cinematic camera behavior, natural autofocus shifting from her face to the shirt in her hand and her reflection in the mirror. Realistic hair strands moving naturally with her head turns, realistic fabric folding on the pink outfit and the white shirt, soft natural window light casting warm shadows across the room. Keep the exact same character, outfit, hairstyle, closet environment, lighting, and visual continuity from the previous scene. No sudden movements, no exaggerated expressions, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated objects, no outfit changes, no unrealistic physics.]\\n\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"eed4b25d35f0abf746df0eb6bfe76b143360e7bc18e9513485490995645ef140.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\",\"referenceVideo\":{\"videoFile\":\"\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},\"_videoFrameCount\":294,\"previewFps\":24},{\"id\":\"mtl7nipd2ix8q\",\"start\":537,\"length\":277,\"frameCount\":277,\"durationSec\":11,\"prompt\":\"[Image is the sole character identity reference. Preserve her exact facial identity, hairstyle, cream-colored fitted long-sleeve top, blue jeans, black jacket over her arm, body proportions, skin tone, and overall appearance throughout the entire video.\\nCreate a photorealistic 12-second vertical 9:16 cinematic lifestyle video continuing the same apartment and city street scene. The girl is outside, with a yellow taxi waiting nearby.\\n0–2 seconds — LEAVING THE BUILDING TOWER\\nShe steps out of the glass doors of her apartment building onto the busy city street. She holds a black jacket over one arm. Her expression is purposeful and ready for the day. The camera provides a wide cinematic shot of her walking, with the building towering behind her.\\n2–5 seconds — TRYING TO CATCH A TAXI\\nShe spots a yellow taxi approaching down the street. She walks to the curb, raises her hand, and makes a natural, realistic gesture to flag the taxi down. The morning light catches her face.\\n5–8 seconds — TAXI STOPS\\nThe yellow taxi smoothly pulls over and comes to a complete stop right beside her at the curb. She lowers her hand, casually walks up to the car, and reaches for the back door handle.\\n8–12 seconds — ENTERING THE TAXI\\nShe pulls the yellow door open and steps inside, carefully holding her jacket. She settles onto the back seat, looks briefly back out at the street, and reaches out to pull the door shut, preparing to ride off.\\nCAMERA & REALISM\\nPhotorealistic city street footage, realistic handheld/cinematic camera behavior. Natural autofocus shifting from her walking to her hand flagging the cab, and finally into the taxi interior. Realistic fabric folding on her clothes and jacket, realistic moving hair strands, warm golden sunrise lighting casting natural shadows on the street, realistic reflections on the taxi glass. Keep the exact same character, outfit, hairstyle, taxi, environment, lighting, and visual continuity from the previous scene. No sudden movements, no exaggerated expressions, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated objects, no outfit changes, no unrealistic physics.]\\n\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"eedcd8ffadcb16d3f5187bd2322a3628a2bf6e6119a6da720281d4fa1405555c.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\",\"referenceVideo\":{\"videoFile\":\"\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},\"_videoFrameCount\":277,\"previewFps\":24},{\"id\":\"mtjrk3opvarni\",\"start\":814,\"length\":226,\"frameCount\":226,\"durationSec\":9,\"prompt\":\" <Picture 1>  is the sole character identity reference. Preserve her exact facial identity, hairstyle, cream-colored fitted long-sleeve top, blue jeans, body proportions, skin tone, jewelry, and overall appearance throughout the entire video.\\nCreate a photorealistic 7-second vertical 9:16 cinematic lifestyle video set inside the same warm, cozy modern café shown in the reference image. The girl is casually walking through the café while carrying a ceramic cup of coffee in one hand. She looks relaxed and natural, as if enjoying a quiet morning alone. <Picture 1> \\n0–2 seconds — WALKING THROUGH THE CAFÉ\\nShe walks naturally through the café while carefully carrying the coffee cup.\\nHer pace is relaxed and unhurried.\\nHer free hand moves naturally at her side.\\nShe briefly looks around the café as she walks, scanning the available seating.\\nThe camera follows her from a natural slightly front-facing angle with subtle handheld realism.\\n2–4 seconds — FINDS A SPOT\\nShe notices an empty seat beside the large window.\\nShe slows down naturally and turns slightly toward the table.\\nShe looks toward the seat, then toward the window, with a small satisfied expression as though she has found a nice place to sit.\\nThe camera gently follows her movement and reframes toward the table.\\n4–6 seconds — SITS DOWN\\nShe carefully approaches the chair and naturally sits down.\\nHer movements are smooth and believable, with realistic weight transfer.\\nShe keeps the coffee cup secure in her hand while sitting.\\nHer hair and clothing move naturally with the motion.\\nThe camera lowers slightly and settles into a medium shot as she sits.\\n6–7 seconds — TAKES A SIP\\nOnce seated, she brings the coffee cup toward her lips and takes a small relaxed sip.\\nShe lowers the cup slightly and looks toward the window.\\nWarm sunlight falls naturally across her face.\\nCAMERA & REALISM\\nNatural handheld café cinematography, subtle camera movement, realistic autofocus, natural exposure adaptation, believable human motion, realistic coffee movement inside the cup, accurate hand and finger motion, physically correct hair and clothing movement.\\nKeep the same café interior, lighting, furniture, window, coffee cup, outfit, hairstyle, and character appearance consistent.\\nNo sudden cuts, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated limbs, no changing outfit, no changing cup, no unnatural walking, no floating objects.\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"e5f9d282098a2ca94cdda763667f3cf2608b1bc8033e4bddd84bb93c1674b866.png\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\",\"referenceVideo\":{\"videoFile\":\"\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},\"_videoFrameCount\":226,\"previewFps\":24},{\"id\":\"mtjsmlbpap5am\",\"start\":1040,\"length\":226,\"frameCount\":226,\"durationSec\":9,\"prompt\":\"<Picture 2>  is the sole character identity reference. Preserve her exact facial identity, hairstyle, cream-colored fitted long-sleeve top, blue jeans, jewelry, body proportions, skin tone, and overall appearance throughout the entire video.\\nCreate a photorealistic 7-second vertical 9:16 cinematic lifestyle video continuing naturally from the previous scene. The girl is seated at the café table beside the large window with her ceramic coffee cup in both hands.<Picture 2>  \\n0–2 seconds — HOLDS THE COFFEE\\nShe sits comfortably at the table, holding the warm coffee cup with both hands.\\nShe looks down at the coffee for a moment with a calm, content expression.\\nA faint curl of steam rises naturally from the cup.\\nHer posture is relaxed and casual.\\n2–4 seconds — SIPS\\nShe gently lifts the cup toward her lips and takes a slow sip of coffee.\\nHer movements are subtle and realistic.\\nAfter the sip, she lowers the cup slightly while keeping it in her hands.\\nHer eyes remain relaxed and natural.\\n4–5.5 seconds — LOOKS OUTSIDE\\nShe turns her head toward the large café window.\\nHer expression becomes thoughtful and peaceful as she looks outside.\\nSoft sunlight illuminates the side of her face.\\nHer hair shifts subtly as she turns.\\n5.5–7 seconds — QUIET MOMENT\\nShe continues looking outside for a moment while holding the coffee cup close to her chest.\\nShe gives a very subtle contented smile.\\nThe camera makes a gentle slow push toward her, keeping her face and coffee cup in focus while the café background remains softly blurred.\\nCAMERA & REALISM\\nPhotorealistic modern café footage, natural smartphone/cinematic hybrid aesthetic, realistic autofocus, subtle depth of field, warm sunlight, accurate reflections on the window, realistic steam, natural skin texture, physically correct hand movement and coffee-cup interaction.\\nKeep her exact identity and outfit consistent with the reference.\\nMaintain the same café, same table, same chair, same window, same lighting direction, and same coffee cup.\\nNo face morphing, no identity drift, no changing hairstyle, no clothing changes, no warped fingers, no extra hands, no duplicated objects, no artificial smile, no exaggerated movement.\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"3416062efb804bbb4b3fa0eb3b1d7ddb94d918a0ae5724e0f3091b0152600b4b.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\",\"referenceVideo\":{\"videoFile\":\"\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},\"_videoFrameCount\":226,\"previewFps\":24},{\"id\":\"mtka8oqfuaj2i\",\"start\":1266,\"length\":192,\"frameCount\":192,\"durationSec\":8,\"prompt\":\"<Picture 3> ] is the sole character identity reference. Preserve her exact facial identity, hairstyle, cream-colored fitted long-sleeve top, blue jeans, jewelry, body proportions, skin tone, and overall appearance throughout the entire video.\\nCreate a photorealistic 7-second vertical 9:16 cinematic lifestyle video continuing the same café scene. The girl is seated at the wooden café table beside the window with her ceramic coffee cup. <Picture 3> \\nThe action should feel like a small, believable everyday accident rather than exaggerated comedy.\\n0–2 seconds — PREPARES TO PUT DOWN THE CUP\\nAfter enjoying her coffee, she gently moves the cup from near her face toward the table.\\nShe looks down at the spot where she is about to place it.\\nHer movement is casual and natural.\\n2–3.5 seconds — ACCIDENTAL SPILL\\nAs she sets the cup down, her hand accidentally catches the edge of the cup or places it slightly unevenly.\\nThe cup tilts unexpectedly.\\nA small amount of coffee spills over the rim onto the wooden tabletop.\\nThe spill should behave realistically, spreading naturally across the surface with believable liquid physics.\\nShe immediately notices what happened.\\n3.5–5 seconds — SURPRISED REACTION\\nShe quickly looks down at the spilled coffee with a brief surprised expression.\\nHer eyebrows lift slightly.\\nShe moves her free hand toward the spill instinctively as though trying to stop it from spreading.\\nThe reaction should remain subtle and realistic.\\n5–7 seconds — ANNOYED & DISAPPOINTED\\nShe looks at the mess with mild annoyance and disappointment.\\nShe exhales softly and gives a small frustrated expression, slightly pressing her lips together.\\nShe glances briefly toward the coffee cup and then back at the spill.\\nHer reaction should feel like a genuine everyday annoyance, not an exaggerated emotional performance.\\nThe camera gently moves closer toward the table, capturing both her expression and the spilled coffee.\\nCAMERA & REALISM\\nPhotorealistic café footage, realistic handheld/cinematic camera behavior, natural autofocus shifting from her face to the coffee spill, physically accurate liquid simulation, realistic ceramic cup movement, natural hand interaction, realistic reflections and sunlight on the wet wooden table.\\nKeep the exact same character, outfit, hairstyle, coffee cup, café environment, table, lighting, and visual continuity from the previous scenes.\\nThe coffee spill must look physically believable and remain on the table.\\nNo exploding liquid, no excessive spill, no broken cup, no exaggerated reaction, no identity drift, no face distortion, no warped hands, no extra fingers, no duplicated objects, no outfit changes, no environment changes, no unrealistic physics.\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[{\"index\":3,\"imageFile\":\"21894a09a49626842052211ae7e8b446d89dccbb6f5d2b81ba5149950ab6f328.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"continuityFromPrev\":true,\"refImageSize\":\"match\",\"referenceVideo\":{\"videoFile\":\"\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},\"_videoFrameCount\":192,\"previewFps\":24}],\"globalCommon\":{\"commonEnabled\":true,\"commonCollapsed\":true,\"prompt\":\"subject_definitions:\\n<Subject 1> is a young adult woman with long dark brown wavy hair, light blue-green eyes, natural eyebrows, and a realistic photorealistic appearance. Her identity and attire are completely locked to the reference image: a fitted cream-colored ribbed long-sleeve top, light blue high-waisted denim jeans, delicate gold hoop earrings, a fine gold necklace with a small pendant, and a slim silver bracelet. She has a natural slim build and realistic body proportions. Her facial features, hairstyle, skin tone, clothing, jewelry, and overall appearance must remain consistent throughout the entire video.\",\"refs\":[{\"index\":0,\"imageFile\":\"e5f9d282098a2ca94cdda763667f3cf2608b1bc8033e4bddd84bb93c1674b866.png\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},{\"index\":1,\"imageFile\":\"3416062efb804bbb4b3fa0eb3b1d7ddb94d918a0ae5724e0f3091b0152600b4b.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"},{\"index\":2,\"imageFile\":\"21894a09a49626842052211ae7e8b446d89dccbb6f5d2b81ba5149950ab6f328.jpg\",\"fileName\":\"\",\"type\":\"input\",\"subfolder\":\"\"}],\"refAudios\":[],\"refVideos\":[]}},\"t2v\":{\"selectedIndex\":0,\"editMode\":\"segment\",\"runSelectEnabled\":false,\"runSelection\":[],\"segments\":[{\"id\":\"mtkbhgm0by0hz\",\"start\":0,\"length\":124,\"frameCount\":124,\"durationSec\":5,\"prompt\":\"\",\"negativePrompt\":\"\",\"taskType\":\"\",\"refs\":[],\"refAudios\":[],\"refVideos\":[],\"genImage\":{\"imageFile\":\"\",\"fileName\":\"\"},\"previewFps\":24,\"refImageSize\":\"match\",\"_videoFrameCount\":124,\"previewLive\":false,\"previewStep\":null,\"previewTotalSteps\":null}],\"globalCommon\":{\"commonEnabled\":false,\"commonCollapsed\":false,\"prompt\":\"\",\"refs\":[],\"refAudios\":[],\"refVideos\":[]}}},\"videoWorkspaces\":{\"v2v\":{\"selectedIndex\":0,\"currentFrame\":0,\"editMode\":\"global\",\"runSelectEnabled\":false,\"runSelection\":[],\"totalFrames\":683,\"frameRate\":24,\"storageWidth\":928,\"storageHeight\":32,\"segments\":[],\"video\":{\"fileName\":\"\",\"videoFile\":\"\",\"subfolder\":\"\",\"type\":\"input\",\"frames\":[],\"frameMap\":[],\"deletedSourceRanges\":[],\"sourceFrameCount\":0,\"width\":0,\"height\":0,\"storageWidth\":928,\"storageHeight\":32},\"videoClips\":[],\"globalCommon\":{\"commonEnabled\":false,\"commonCollapsed\":false,\"prompt\":\"\",\"refs\":[],\"refAudios\":[],\"refVideos\":[]}}}}",
+        "高级采样",
+        8,
+        "euler",
+        "simple",
+        12,
+        3,
+        false,
+        "性能",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 41,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        1623.72314453125,
+        -19.2023983001709
+      ],
+      "size": [
+        920.119140625,
+        874.39208984375
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 86
+        },
+        {
+          "label": "audio",
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 107
+        },
+        {
+          "label": "meta_batch",
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager"
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE"
+        },
+        {
+          "label": "frame_rate",
+          "name": "frame_rate",
+          "type": "FLOAT",
+          "widget": {
+            "name": "frame_rate"
+          }
+        },
+        {
+          "label": "loop_count",
+          "name": "loop_count",
+          "type": "INT",
+          "widget": {
+            "name": "loop_count"
+          }
+        },
+        {
+          "label": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          }
+        },
+        {
+          "label": "format",
+          "name": "format",
+          "type": "COMBO",
+          "widget": {
+            "name": "format"
+          }
+        },
+        {
+          "label": "pingpong",
+          "name": "pingpong",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "pingpong"
+          }
+        },
+        {
+          "label": "save_output",
+          "name": "save_output",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "save_output"
+          }
+        },
+        {
+          "label": "no_preview",
+          "name": "no_preview",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "no_preview"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "Filenames",
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": {
+        "frame_rate": 23.7999267578125,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "no_preview": false,
+        "videopreview": {
+          "paused": false,
+          "hidden": false,
+          "params": {
+            "storageProvider": "cos",
+            "cos_url": "https://rh-hk-images.xiaoyaoyou.com//8b0aa8d864dad12d1ba337b0f71c13a1/output/AnimateDiff_00002_p85-audio_iaplp_1788518343.mp4",
+            "workflow": "AnimateDiff_00002_p85.png",
+            "format": "video/h264-mp4",
+            "subfolder": "",
+            "label": "Normal",
+            "type": "output",
+            "frame_rate": 23.7999267578125,
+            "bucket": "rh-hk-images-1252422369",
+            "score": 27,
+            "filename": "AnimateDiff_00002_p85-audio_iaplp_1788518343.mp4",
+            "fullpath": "/data/ComfyUI/personal/8b0aa8d864dad12d1ba337b0f71c13a1/output/AnimateDiff_00002_p85-audio.mp4",
+            "objectKey": "8b0aa8d864dad12d1ba337b0f71c13a1/output/AnimateDiff_00002_p85-audio_iaplp_1788518343.mp4"
+          }
+        }
+      }
+    },
+    {
+      "id": 53,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        2554.092529296875,
+        -17.630718231201172
+      ],
+      "size": [
+        920.119140625,
+        874.39208984375
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 115
+        },
+        {
+          "label": "audio",
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO"
+        },
+        {
+          "label": "meta_batch",
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager"
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE"
+        },
+        {
+          "label": "frame_rate",
+          "name": "frame_rate",
+          "type": "FLOAT",
+          "widget": {
+            "name": "frame_rate"
+          }
+        },
+        {
+          "label": "loop_count",
+          "name": "loop_count",
+          "type": "INT",
+          "widget": {
+            "name": "loop_count"
+          }
+        },
+        {
+          "label": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          }
+        },
+        {
+          "label": "format",
+          "name": "format",
+          "type": "COMBO",
+          "widget": {
+            "name": "format"
+          }
+        },
+        {
+          "label": "pingpong",
+          "name": "pingpong",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "pingpong"
+          }
+        },
+        {
+          "label": "save_output",
+          "name": "save_output",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "save_output"
+          }
+        },
+        {
+          "label": "no_preview",
+          "name": "no_preview",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "no_preview"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "label": "Filenames",
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": {
+        "frame_rate": 23.7999267578125,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "no_preview": false,
+        "videopreview": {
+          "paused": false,
+          "hidden": false,
+          "params": {
+            "storageProvider": "cos",
+            "cos_url": "https://rh-hk-images.xiaoyaoyou.com//8b0aa8d864dad12d1ba337b0f71c13a1/output/AnimateDiff_00001_p85_gqnur_1788518332.mp4",
+            "workflow": "AnimateDiff_00001_p85.png",
+            "format": "video/h264-mp4",
+            "subfolder": "",
+            "label": "Normal",
+            "type": "output",
+            "frame_rate": 23.7999267578125,
+            "bucket": "rh-hk-images-1252422369",
+            "score": 38,
+            "filename": "AnimateDiff_00001_p85_gqnur_1788518332.mp4",
+            "fullpath": "/data/ComfyUI/personal/8b0aa8d864dad12d1ba337b0f71c13a1/output/AnimateDiff_00001_p85.mp4",
+            "objectKey": "8b0aa8d864dad12d1ba337b0f71c13a1/output/AnimateDiff_00001_p85_gqnur_1788518332.mp4"
+          }
+        }
+      }
+    }
+  ],
+  "links": [
+    [
+      9,
+      6,
+      0,
+      7,
+      0,
+      "VIDEO"
+    ],
+    [
+      73,
+      2,
+      0,
+      40,
+      3,
+      "CLIP"
+    ],
+    [
+      74,
+      3,
+      0,
+      40,
+      1,
+      "VAE"
+    ],
+    [
+      75,
+      4,
+      0,
+      40,
+      2,
+      "VAE"
+    ],
+    [
+      77,
+      40,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      78,
+      40,
+      1,
+      6,
+      1,
+      "AUDIO"
+    ],
+    [
+      79,
+      40,
+      2,
+      6,
+      2,
+      "FLOAT"
+    ],
+    [
+      86,
+      40,
+      0,
+      41,
+      0,
+      "IMAGE"
+    ],
+    [
+      98,
+      15,
+      0,
+      40,
+      0,
+      "MODEL"
+    ],
+    [
+      107,
+      40,
+      1,
+      41,
+      1,
+      "AUDIO"
+    ],
+    [
+      112,
+      51,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      113,
+      1,
+      0,
+      52,
+      0,
+      "MODEL"
+    ],
+    [
+      114,
+      52,
+      0,
+      51,
+      0,
+      "MODEL"
+    ],
+    [
+      115,
+      40,
+      6,
+      53,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 2,
+      "title": "MiniMax H3 Director",
+      "bounding": [
+        -320,
+        40,
+        1120,
+        960
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "links_added_by_ue": [],
+    "note": "MiniMax H3 Director · t2v",
+    "ue_links": [],
+    "pixaromaGroups": [],
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ],
+    "frontendVersion": "1.23.0",
+    "ds": {
+      "scale": 0.1,
+      "offset": [
+        3724.6093951349612,
+        9572.124776513323
+      ]
+    },
+    "KKvideo_latentpreview": false,
+    "KKvideo_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0
+  },
+  "version": 0.4
+}

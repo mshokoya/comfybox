@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "artifact_type": "clip_vision",
+  "generated_from": ["workflow:comfybox-director-relight-wananimate2.2"],
+  "artifact_count": 1,
+  "artifacts": [
+    {
+      "id": "clip-vision.h",
+      "name": "CLIP Vision H",
+      "type": "clip_vision",
+      "relative_path": "models/clip_vision/clip_vision_h.safetensors",
+      "group": "CLIP Vision",
+      "tags": ["image", "video", "clip-vision", "vision-encoder"],
+      "sources": [{"title":"CLIP Vision H","url":"https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/clip_vision/clip_vision_h.safetensors","size":"1.26 GB","size_bytes":1264219396,"description":"CLIP Vision H encoder packaged for native ComfyUI workflows."}],
+      "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"],
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/clip_vision/clip_vision_h.safetensors",
+      "size_bytes": 1264219396,
+      "sha256": "64a7ef761bfccbadbaa3da77366aac4185a6c58fa5de5f589b42a65bcc21f161",
+      "gated": false,
+      "description": "CLIP Vision H encoder packaged for native ComfyUI workflows."
+    }
+  ]
+}
