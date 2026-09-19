@@ -1,8 +1,8 @@
 {
   "id": "1b3fa08b-9c7c-4fa8-9603-7f9d841a5e5d",
   "revision": 0,
-  "last_node_id": 60,
-  "last_link_id": 31,
+  "last_node_id": 61,
+  "last_link_id": 35,
   "nodes": [
     {
       "id": 1,
@@ -159,7 +159,7 @@
         {
           "name": "vae",
           "type": "VAE",
-          "link": 8
+          "link": 35
         }
       ],
       "outputs": [
@@ -175,46 +175,6 @@
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
         "Node name for S&R": "VAEDecode"
-      },
-      "widgets_values": []
-    },
-    {
-      "id": 5,
-      "type": "VAEDecodeAudio",
-      "pos": [
-        440,
-        470
-      ],
-      "size": [
-        240,
-        80
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "samples",
-          "type": "LATENT",
-          "link": 24
-        },
-        {
-          "name": "vae",
-          "type": "VAE",
-          "link": 9
-        }
-      ],
-      "outputs": [
-        {
-          "name": "AUDIO",
-          "type": "AUDIO",
-          "links": []
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.33.0",
-        "Node name for S&R": "VAEDecodeAudio"
       },
       "widgets_values": []
     },
@@ -407,7 +367,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 16
+          "link": 33
         }
       ],
       "outputs": [
@@ -425,7 +385,7 @@
         "Node name for S&R": "BasicScheduler"
       },
       "widgets_values": [
-        "beta",
+        "simple",
         20,
         1.0
       ]
@@ -493,7 +453,7 @@
           "name": "ref_video_audios.ref_video_audio_0",
           "shape": 7,
           "type": "AUDIO",
-          "link": null
+          "link": 34
         },
         {
           "label": "ref_audio_0",
@@ -653,7 +613,8 @@
           "name": "VAE",
           "type": "VAE",
           "links": [
-            8
+            8,
+            35
           ]
         }
       ],
@@ -734,7 +695,8 @@
         "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "character_ref_1.jpg"
+        "character_ref_1.jpg",
+        "image"
       ],
       "title": "Character reference 1"
     },
@@ -773,7 +735,8 @@
         "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "character_ref_2.jpg"
+        "character_ref_2.jpg",
+        "image"
       ],
       "title": "Character reference 2"
     },
@@ -812,93 +775,101 @@
         "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "character_ref_3.jpg"
+        "character_ref_3.jpg",
+        "image"
       ],
       "title": "Character reference 3"
     },
     {
       "id": 30,
-      "type": "VHS_LoadVideo",
+      "type": "LoadVideo",
       "pos": [
         -650,
         1050
       ],
       "size": [
         500,
-        420
+        380
       ],
       "flags": {},
       "order": 19,
       "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VIDEO",
+          "type": "VIDEO",
+          "links": [
+            32
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "LoadVideo"
+      },
+      "widgets_values": [
+        "SOURCE_SHOT.mp4",
+        "image"
+      ],
+      "title": "Upload source shot — must be 24 FPS"
+    },
+    {
+      "id": 61,
+      "type": "GetVideoComponents",
+      "pos": [
+        -100,
+        1050
+      ],
+      "size": [
+        270,
+        120
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
       "inputs": [
         {
-          "name": "meta_batch",
-          "type": "VHS_BatchManager",
-          "shape": 7,
-          "link": null
-        },
-        {
-          "name": "vae",
-          "type": "VAE",
-          "shape": 7,
-          "link": null
+          "name": "video",
+          "type": "VIDEO",
+          "link": 32
         }
       ],
       "outputs": [
         {
-          "name": "IMAGE",
+          "name": "images",
           "type": "IMAGE",
           "links": [
             4
           ]
         },
         {
-          "name": "frame_count",
-          "type": "INT",
-          "links": null
-        },
-        {
           "name": "audio",
           "type": "AUDIO",
           "links": [
-            5
+            5,
+            34
           ]
         },
         {
-          "name": "video_info",
-          "type": "VHS_VIDEOINFO",
+          "name": "fps",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "bit_depth",
+          "type": "INT",
           "links": null
         }
       ],
       "properties": {
-        "Node name for S&R": "VHS_LoadVideo"
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "GetVideoComponents"
       },
-      "widgets_values": {
-        "video": "SOURCE_SHOT.mp4",
-        "force_rate": 24,
-        "force_size": "Disabled",
-        "custom_width": 0,
-        "custom_height": 0,
-        "frame_load_cap": 0,
-        "skip_first_frames": 0,
-        "select_every_nth": 1,
-        "choose video to upload": "image",
-        "videopreview": {
-          "hidden": false,
-          "paused": false,
-          "params": {
-            "force_rate": 24,
-            "frame_load_cap": 0,
-            "skip_first_frames": 0,
-            "select_every_nth": 1,
-            "filename": "SOURCE_SHOT.mp4",
-            "type": "input",
-            "format": "video/mp4"
-          },
-          "muted": false
-        }
-      },
-      "title": "Source shot — exact 24 FPS"
+      "widgets_values": [],
+      "title": "Source frames + original audio"
     },
     {
       "id": 40,
@@ -912,7 +883,7 @@
         170
       ],
       "flags": {},
-      "order": 20,
+      "order": 21,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -938,7 +909,7 @@
       },
       "widgets_values": [
         "16:9 (Widescreen)",
-        0.4,
+        0.98,
         32
       ],
       "title": "Generate at H3 native resolution"
@@ -955,13 +926,13 @@
         760
       ],
       "flags": {},
-      "order": 21,
+      "order": 22,
       "mode": 0,
       "inputs": [],
       "outputs": [],
       "properties": {},
       "widgets_values": [
-        "BEST-QUALITY 30-MIN H3 CHARACTER SWAP\n\n1. Work shot-by-shot, never as one 30-minute H3 render. Target 5–15 s shots; 8 s is a good default.\n2. Keep H3 at native 24 FPS and use GapFiller only AFTER H3. This preserves every H3-generated frame and creates exact target-timestamp frames for 60 FPS.\n3. Feed the original shot to <Video 1>; feed 3 consistent character references to <Picture 1-3>.\n4. Keep ORIGINAL AUDIO from VHS_LoadVideo and mux it after interpolation.\n5. Do not feed interpolated 60 FPS frames back into H3.\n6. BF16 master settings are intentional for maximum fidelity and require high VRAM/system memory.\n7. Keep the same references and identity description for every shot to reduce identity drift.\n8. This workflow inserts fal/MiniMax-H3-Realism-People-LoRA between the UNETLoader and the guider/scheduler. Keep the trigger word r34l1sm. in the prompt. Start at LoRA strength 0.7."
+        "BEST-QUALITY 30-MIN H3 CHARACTER SWAP\n\n1. Work shot-by-shot, never as one 30-minute H3 render. Target 5–15 s shots; this workflow uses a valid 192-frame (8 s) H3 length.\n2. Upload a 24 FPS source shot with the native LoadVideo node. GapFiller runs only AFTER H3 and creates exact target-timestamp frames for 60 FPS.\n3. Feed the original shot and its soundtrack to <Video 1>; feed 3 sharp, consistent, naturally lit character references to <Picture 1-3>.\n4. Keep ORIGINAL AUDIO from GetVideoComponents and mux it after interpolation; generated audio is intentionally not decoded.\n5. Do not feed interpolated 60 FPS frames back into H3.\n6. BF16 master weights, 1344x768 native output, and maximum reference-image sizing are intentional for maximum identity and texture fidelity. They require high VRAM/system memory.\n7. Keep the same references, prompt, and seed strategy for every shot to reduce identity drift.\n8. The fal/MiniMax-H3-Realism-People-LoRA is applied to both the guider and scheduler paths. Keep the trigger word r34l1sm at the start of the prompt. Strength 1.0 is the model author's intended setting; use 0.6-0.8 only for a lighter effect.\n9. The official H3 sampling baseline is res_multistep + simple scheduler, 20 steps, denoise 1.0."
       ],
       "title": "READ ME — LONG VIDEO PIPELINE + REALISM LORA"
     },
@@ -991,7 +962,8 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            16
+            16,
+            33
           ]
         }
       ],
@@ -1002,7 +974,7 @@
       },
       "widgets_values": [
         "h3-realism-people-t2v-i2v-r2v.safetensors",
-        0.7
+        1.0
       ],
       "title": "Realism People LoRA"
     }
@@ -1010,7 +982,7 @@
   "links": [
     [
       4,
-      30,
+      61,
       0,
       13,
       6,
@@ -1018,8 +990,8 @@
     ],
     [
       5,
-      30,
-      2,
+      61,
+      1,
       2,
       1,
       "AUDIO"
@@ -1074,7 +1046,7 @@
     ],
     [
       16,
-      15,
+      60,
       0,
       7,
       0,
@@ -1183,6 +1155,38 @@
       60,
       0,
       "MODEL"
+    ],
+    [
+      32,
+      30,
+      0,
+      61,
+      0,
+      "VIDEO"
+    ],
+    [
+      33,
+      60,
+      0,
+      12,
+      0,
+      "MODEL"
+    ],
+    [
+      34,
+      61,
+      1,
+      13,
+      7,
+      "AUDIO"
+    ],
+    [
+      35,
+      16,
+      0,
+      4,
+      1,
+      "VAE"
     ]
   ],
   "groups": [],

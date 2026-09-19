@@ -1057,7 +1057,7 @@
         "minimax.h3.realism-people.t2v-i2v-r2v",
         "gapfiller_v1"
       ],
-      "custom_node_ids": ["comfyui-gapfiller", "comfyui-videohelpersuite"],
+      "custom_node_ids": ["comfyui-gapfiller"],
       "catalog_sources": ["workflow:comfybox-character-swap-realism-lora-24to60-minimaxh3"]
     },
     {
