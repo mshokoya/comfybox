@@ -120,6 +120,8 @@ struct PersistedJob {
     downloaded_bytes: u64,
     total_bytes: Option<u64>,
     endpoint: Option<String>,
+    #[serde(default)]
+    github_proxy: Option<String>,
     force: bool,
 }
 
@@ -201,6 +203,7 @@ impl DownloadQueue {
                     chunk_size_bytes: cfg.chunk_size_bytes,
                     force: saved.force,
                     hf_endpoint: saved.endpoint,
+                    github_proxy: saved.github_proxy,
                     hf_token: auth::hf_token()?,
                     progress: None,
                     log: None,
@@ -791,7 +794,19 @@ impl DownloadQueue {
                 total_bytes: job.total_bytes,
                 bytes_per_second: job.bytes_per_second,
                 error: job.error.clone(),
-                endpoint: job.options.hf_endpoint.clone(),
+                endpoint: if job.artifact.url.starts_with("https://github.com/")
+                    || job
+                        .artifact
+                        .url
+                        .starts_with("https://raw.githubusercontent.com/")
+                {
+                    job.options
+                        .github_proxy
+                        .clone()
+                        .or_else(|| Some("https://github.com".into()))
+                } else {
+                    job.options.hf_endpoint.clone()
+                },
             })
             .collect::<Vec<_>>();
         snapshots.extend(self.custom_nodes.iter().map(|operation| {
@@ -1109,6 +1124,7 @@ impl DownloadQueue {
                 downloaded_bytes: job.downloaded_bytes,
                 total_bytes: job.total_bytes,
                 endpoint: job.options.hf_endpoint.clone(),
+                github_proxy: job.options.github_proxy.clone(),
                 force: job.options.force,
             })
             .collect::<Vec<_>>();
@@ -1161,11 +1177,31 @@ async fn install_custom_node(
                 "[GIT] Cloning {} from {}",
                 node.name, node.git_url
             )));
-            if let Err(error) =
+            if let Err(proxy_error) =
                 ComfyManager::clone_repository_quiet(&node.git_url, &temporary).await
             {
+                let direct_url = node
+                    .git_url
+                    .rfind("https://github.com/")
+                    .filter(|index| *index > 0)
+                    .map(|index| node.git_url[index..].to_owned());
                 let _ = tokio::fs::remove_dir_all(&temporary).await;
-                return Err(error).with_context(|| format!("git clone failed for {}", node.name));
+                if let Some(direct_url) = direct_url {
+                    let _ = sender.send(QueueEvent::Log(format!(
+                        "[GIT] Proxy clone failed for {} ({proxy_error:#}); retrying direct GitHub",
+                        node.name
+                    )));
+                    if let Err(direct_error) =
+                        ComfyManager::clone_repository_quiet(&direct_url, &temporary).await
+                    {
+                        let _ = tokio::fs::remove_dir_all(&temporary).await;
+                        return Err(direct_error)
+                            .with_context(|| format!("git clone failed for {}", node.name));
+                    }
+                } else {
+                    return Err(proxy_error)
+                        .with_context(|| format!("git clone failed for {}", node.name));
+                }
             }
         }
         tokio::fs::rename(&temporary, &target).await?;

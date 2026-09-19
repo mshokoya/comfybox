@@ -5,7 +5,7 @@ use anyhow::{Context, Result, bail};
 use clap::{Args, Parser, Subcommand, ValueEnum};
 use comfybox_core::{
     auth::{self, HfTokenSource},
-    catalog::{Artifact, Catalog},
+    catalog::{Artifact, Catalog, CustomNode},
     comfy::{ComfyManager, ComfySource, StartOptions, configured_instance},
     config::AppConfig,
     download::{DownloadManager, DownloadOptions},
@@ -15,6 +15,7 @@ use comfybox_core::{
     workflow::inspect_workflow,
 };
 use console::style;
+use indicatif::{ProgressBar, ProgressStyle};
 use inquire::{Confirm, Password, PasswordDisplayMode, Select, Text};
 use serde_json::Value;
 use std::{
@@ -22,6 +23,7 @@ use std::{
     fs,
     io::{IsTerminal, Read, Write},
     path::{Path, PathBuf},
+    time::{Duration, SystemTime, UNIX_EPOCH},
 };
 use tokio::process::Command;
 
@@ -481,6 +483,7 @@ fn download_options(cfg: &AppConfig, force: bool) -> Result<DownloadOptions> {
         chunk_size_bytes: cfg.chunk_size_bytes,
         force,
         hf_endpoint: endpoint,
+        github_proxy: None,
         hf_token: auth::hf_token()?,
         progress: None,
         log: None,
@@ -496,10 +499,155 @@ fn dashboard_download_options(cfg: &AppConfig, force: bool) -> Result<DownloadOp
             .hf_endpoint
             .clone()
             .or_else(|| std::env::var("HF_ENDPOINT").ok()),
+        github_proxy: None,
         hf_token: auth::hf_token()?,
         progress: None,
         log: None,
     })
+}
+
+fn is_github_download_url(url: &str) -> bool {
+    url.starts_with("https://github.com/")
+        || url.starts_with("https://raw.githubusercontent.com/")
+        || url.starts_with("https://gist.github.com/")
+}
+
+fn proxied_github_url(proxy: &str, url: &str) -> String {
+    format!("{}/{}", proxy.trim_end_matches('/'), url)
+}
+
+fn selected_node_uses_github(node: &CustomNode) -> bool {
+    node.archive_url
+        .as_deref()
+        .map(is_github_download_url)
+        .unwrap_or_else(|| is_github_download_url(&node.git_url))
+}
+
+fn parse_active_github_proxies(page: &str) -> Vec<String> {
+    let mut candidates = Vec::new();
+    for (status_index, _) in page.match_indices("当前可用") {
+        let before = &page[..status_index];
+        let Some(start) = before.rfind("href=\\\"") else {
+            continue;
+        };
+        let value = &before[start + "href=\\\"".len()..];
+        let Some(end) = value.find("\\\"") else {
+            continue;
+        };
+        let candidate = value[..end].trim_end_matches('/').to_owned();
+        if candidate.starts_with("https://") && !candidates.contains(&candidate) {
+            candidates.push(candidate);
+        }
+    }
+    candidates
+}
+
+async fn discover_live_github_proxy() -> Option<String> {
+    let client = reqwest::Client::builder()
+        .user_agent(concat!("comfybox/", env!("CARGO_PKG_VERSION")))
+        .connect_timeout(Duration::from_secs(5))
+        .timeout(Duration::from_secs(10))
+        .build()
+        .ok()?;
+    // Keep the most recently published working endpoint as a fallback. The
+    // listing site itself may be unavailable from the same network that needs
+    // a GitHub proxy, and its Vue chunk name may change independently.
+    let mut candidates = vec!["https://ghfast.top".to_owned()];
+    if let Ok(response) = client
+        .get("https://ghproxy.link/js/src_views_home_HomeView_vue.js")
+        .send()
+        .await
+        && let Ok(response) = response.error_for_status()
+        && let Ok(page) = response.text().await
+    {
+        for candidate in parse_active_github_proxies(&page) {
+            if !candidates.contains(&candidate) {
+                candidates.push(candidate);
+            }
+        }
+    }
+    let random_offset = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap_or_default()
+        .subsec_nanos() as usize
+        % candidates.len();
+    candidates.rotate_left(random_offset);
+    let github_probe = "https://github.com/octocat/Hello-World/archive/refs/heads/master.zip";
+    for proxy in candidates {
+        let probe = proxied_github_url(&proxy, github_probe);
+        if client
+            .get(probe)
+            .header(reqwest::header::RANGE, "bytes=0-0")
+            .header(reqwest::header::ACCEPT_ENCODING, "identity")
+            .send()
+            .await
+            .is_ok_and(|response| {
+                response.status().is_success()
+                    || response.status() == reqwest::StatusCode::PARTIAL_CONTENT
+            })
+        {
+            return Some(proxy);
+        }
+    }
+    None
+}
+
+async fn choose_github_proxy() -> Result<Option<String>> {
+    let spinner = ProgressBar::new_spinner();
+    spinner.set_style(
+        ProgressStyle::with_template(
+            "GitHub download source\n  Direct GitHub\n{spinner:.cyan} {msg}",
+        )?
+        .tick_strings(&["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]),
+    );
+    spinner.set_message("Proxy (...checking proxy live...) [disabled]");
+    spinner.enable_steady_tick(Duration::from_millis(80));
+    let proxy = discover_live_github_proxy().await;
+    spinner.finish_and_clear();
+    let direct = "Direct GitHub".to_owned();
+    let Some(proxy) = proxy else {
+        println!("{}", style("Proxy dead (disabled)").red());
+        Select::new("GitHub download source", vec![direct]).prompt()?;
+        return Ok(None);
+    };
+    let proxy_choice = format!("Proxy ({proxy})");
+    let selected = Select::new(
+        "GitHub download source",
+        vec![direct.clone(), proxy_choice.clone()],
+    )
+    .with_help_message("The proxy was selected randomly from ghproxy.link and verified live")
+    .prompt()?;
+    Ok((selected == proxy_choice).then_some(proxy))
+}
+
+async fn configure_github_downloads(
+    artifacts: &[Artifact],
+    nodes: &mut [CustomNode],
+    options: &mut DownloadOptions,
+) -> Result<()> {
+    let has_github = artifacts
+        .iter()
+        .any(|artifact| is_github_download_url(&artifact.url))
+        || nodes.iter().any(selected_node_uses_github);
+    if !has_github {
+        return Ok(());
+    }
+    let proxy = choose_github_proxy().await?;
+    options.github_proxy = proxy.clone();
+    let Some(proxy) = proxy else {
+        return Ok(());
+    };
+    for node in nodes {
+        if is_github_download_url(&node.git_url) {
+            node.git_url = proxied_github_url(&proxy, &node.git_url);
+        }
+        if let Some(archive_url) = node.archive_url.as_mut()
+            && is_github_download_url(archive_url)
+        {
+            *archive_url = proxied_github_url(&proxy, archive_url);
+        }
+    }
+    Ok(())
 }
 
 fn uninstall_comfy(cfg: &mut AppConfig, yes: bool) -> Result<()> {
@@ -1202,7 +1350,8 @@ async fn execute_dashboard_action(
                 .find_map(|(id, source)| (id == &selection.id).then_some(*source))
                 .unwrap_or(0);
             let artifacts = vec![select_artifact_source(artifact, source)];
-            let options = dashboard_download_options(cfg, false)?;
+            let mut options = dashboard_download_options(cfg, false)?;
+            configure_github_downloads(&artifacts, &mut [], &mut options).await?;
             queue.enqueue(&instance.root, artifacts, &options)?;
             Ok(())
         }
@@ -1212,7 +1361,10 @@ async fn execute_dashboard_action(
                 .custom_node(&id)
                 .cloned()
                 .with_context(|| format!("unknown custom node {id}"))?;
-            queue.enqueue_custom_nodes(&instance.root, [node]);
+            let mut nodes = vec![node];
+            let mut options = dashboard_download_options(cfg, false)?;
+            configure_github_downloads(&[], &mut nodes, &mut options).await?;
+            queue.enqueue_custom_nodes(&instance.root, nodes);
             Ok(())
         }
         dashboard::DashboardAction::InstallPackage(selection) => {
@@ -1230,7 +1382,7 @@ async fn execute_dashboard_action(
                     Ok(select_artifact_source(artifact, *source_index))
                 })
                 .collect::<Result<Vec<_>>>()?;
-            let nodes = selection
+            let mut nodes = selection
                 .custom_node_ids
                 .iter()
                 .map(|node_id| {
@@ -1239,7 +1391,8 @@ async fn execute_dashboard_action(
                         .with_context(|| format!("unknown custom node {node_id}"))
                 })
                 .collect::<Result<Vec<_>>>()?;
-            let options = dashboard_download_options(cfg, false)?;
+            let mut options = dashboard_download_options(cfg, false)?;
+            configure_github_downloads(&artifacts, &mut nodes, &mut options).await?;
             queue.enqueue(&instance.root, artifacts, &options)?;
             queue.enqueue_custom_nodes(&instance.root, nodes);
             let mut state = ManagedState::load()?;
@@ -1267,7 +1420,7 @@ async fn execute_dashboard_action(
                 dest.join(Path::new(&workflow.file).file_name().unwrap_or_default()),
                 bundled_workflow(&selection.id)?,
             )?;
-            let nodes = selection
+            let mut nodes = selection
                 .custom_node_ids
                 .iter()
                 .map(|node_id| {
@@ -1287,7 +1440,8 @@ async fn execute_dashboard_action(
                     Ok(select_artifact_source(artifact, *source_index))
                 })
                 .collect::<Result<Vec<_>>>()?;
-            let options = dashboard_download_options(cfg, false)?;
+            let mut options = dashboard_download_options(cfg, false)?;
+            configure_github_downloads(&artifacts, &mut nodes, &mut options).await?;
             queue.enqueue(&instance.root, artifacts, &options)?;
             queue.enqueue_custom_nodes(&instance.root, nodes);
             let mut state = ManagedState::load()?;
@@ -1553,6 +1707,20 @@ fn uuid_like() -> String {
 #[cfg(test)]
 mod builtin_catalog_tests {
     use super::*;
+
+    #[test]
+    fn ghproxy_page_parser_only_returns_active_https_proxies() {
+        let page = r#"href=\"https://live-one.example/\" 当前可用
+            href=\"https://dead.example\" 已被墙
+            href=\"https://live-two.example\" 当前可用"#;
+        assert_eq!(
+            parse_active_github_proxies(page),
+            vec![
+                "https://live-one.example".to_owned(),
+                "https://live-two.example".to_owned()
+            ]
+        );
+    }
 
     #[test]
     fn split_json_catalogs_are_complete_and_bundled() {

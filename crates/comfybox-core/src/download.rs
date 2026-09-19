@@ -31,6 +31,7 @@ pub struct DownloadOptions {
     pub chunk_size_bytes: u64,
     pub force: bool,
     pub hf_endpoint: Option<String>,
+    pub github_proxy: Option<String>,
     pub hf_token: Option<String>,
     pub progress: Option<Arc<dyn Fn(DownloadProgress) + Send + Sync>>,
     pub log: Option<Arc<dyn Fn(String) + Send + Sync>>,
@@ -49,6 +50,7 @@ impl Default for DownloadOptions {
             chunk_size_bytes: 16 * 1024 * 1024,
             force: false,
             hf_endpoint: None,
+            github_proxy: None,
             hf_token: None,
             progress: None,
             log: None,
@@ -226,7 +228,11 @@ impl DownloadManager {
         artifact: &Artifact,
         opts: &DownloadOptions,
     ) -> Result<(String, reqwest::Response)> {
-        let candidates = download_url_candidates(&artifact.url, opts.hf_endpoint.as_deref());
+        let candidates = download_url_candidates(
+            &artifact.url,
+            opts.hf_endpoint.as_deref(),
+            opts.github_proxy.as_deref(),
+        );
         let mut last_error = None;
         for (candidate_index, url) in candidates.iter().enumerate() {
             for attempt in 1..=2 {
@@ -276,7 +282,7 @@ impl DownloadManager {
                 report_log(
                     opts,
                     format!(
-                        "{} unreachable at {}; trying Hugging Face fallback endpoint",
+                        "{} unreachable at {}; trying fallback download endpoint",
                         artifact.name, url
                     ),
                 );
@@ -554,7 +560,34 @@ fn rewrite_hf_url(url: &str, endpoint: Option<&str>) -> String {
     url.to_owned()
 }
 
-fn download_url_candidates(url: &str, endpoint: Option<&str>) -> Vec<String> {
+fn is_github_url(url: &str) -> bool {
+    url.starts_with("https://github.com/")
+        || url.starts_with("https://raw.githubusercontent.com/")
+        || url.starts_with("https://gist.github.com/")
+}
+
+fn rewrite_github_url(url: &str, proxy: Option<&str>) -> String {
+    if !is_github_url(url) {
+        return url.to_owned();
+    }
+    proxy
+        .map(|proxy| format!("{}/{}", proxy.trim_end_matches('/'), url))
+        .unwrap_or_else(|| url.to_owned())
+}
+
+fn download_url_candidates(
+    url: &str,
+    endpoint: Option<&str>,
+    github_proxy: Option<&str>,
+) -> Vec<String> {
+    if is_github_url(url) {
+        let preferred = rewrite_github_url(url, github_proxy);
+        let mut candidates = vec![preferred.clone()];
+        if preferred != url {
+            candidates.push(url.to_owned());
+        }
+        return candidates;
+    }
     let preferred = rewrite_hf_url(url, endpoint);
     let mut candidates = vec![preferred.clone()];
     if url.starts_with("https://huggingface.co/") {
@@ -612,7 +645,7 @@ fn http_status_error(
 
 #[cfg(test)]
 mod tests {
-    use super::{download_url_candidates, rewrite_hf_url};
+    use super::{download_url_candidates, rewrite_github_url, rewrite_hf_url};
 
     #[test]
     fn hugging_face_urls_are_rewritten_to_the_selected_mirror() {
@@ -641,6 +674,7 @@ mod tests {
         let urls = download_url_candidates(
             "https://huggingface.co/owner/repo/resolve/main/model.safetensors",
             Some("https://huggingface.co"),
+            None,
         );
         assert_eq!(urls.len(), 2);
         assert!(urls[0].starts_with("https://huggingface.co/"));
@@ -652,8 +686,32 @@ mod tests {
         let urls = download_url_candidates(
             "https://huggingface.co/owner/repo/resolve/main/model.safetensors",
             Some("https://hf-mirror.com"),
+            None,
         );
         assert!(urls[0].starts_with("https://hf-mirror.com/"));
         assert!(urls[1].starts_with("https://huggingface.co/"));
+    }
+
+    #[test]
+    fn github_urls_are_rewritten_to_the_selected_proxy() {
+        assert_eq!(
+            rewrite_github_url(
+                "https://github.com/owner/repo/releases/download/v1/model.pt",
+                Some("https://ghfast.top/"),
+            ),
+            "https://ghfast.top/https://github.com/owner/repo/releases/download/v1/model.pt"
+        );
+    }
+
+    #[test]
+    fn proxied_github_downloads_fall_back_to_direct_github() {
+        let urls = download_url_candidates(
+            "https://github.com/owner/repo/archive/refs/heads/main.zip",
+            None,
+            Some("https://ghfast.top"),
+        );
+        assert_eq!(urls.len(), 2);
+        assert!(urls[0].starts_with("https://ghfast.top/https://github.com/"));
+        assert!(urls[1].starts_with("https://github.com/"));
     }
 }
