@@ -9,7 +9,7 @@ use reqwest::{
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::{
-    collections::BTreeSet,
+    collections::{BTreeSet, VecDeque},
     fs as stdfs,
     io::Read,
     path::{Path, PathBuf},
@@ -22,7 +22,6 @@ use sysinfo::Disks;
 use tokio::{
     fs::{self, OpenOptions},
     io::{AsyncSeekExt, AsyncWriteExt},
-    sync::Semaphore,
 };
 
 #[derive(Clone)]
@@ -379,86 +378,26 @@ impl DownloadManager {
             }
             start = end + 1;
         }
-        let sem = Arc::new(Semaphore::new(opts.parallelism.max(1)));
+        let mut missing = VecDeque::from(missing);
         let mut tasks = FuturesUnordered::new();
-        for (start, end) in missing {
-            let permit = sem.clone().acquire_owned().await?;
-            let client = self.client.clone();
-            let url = url.to_owned();
-            let token = opts.hf_token.clone();
-            let live_downloaded = Arc::clone(&live_downloaded);
-            let progress = opts.progress.clone();
-            tasks.push(tokio::spawn(async move {
-                let _permit = permit;
-                let want = end - start + 1;
-                let mut last_error: Option<anyhow::Error> = None;
-                for attempt in 0..8u32 {
-                    let mut req = client
-                        .get(&url)
-                        .header(ACCEPT_ENCODING, "identity")
-                        .header(RANGE, format!("bytes={start}-{end}"));
-                    if let Some(token) = &token {
-                        req = req.bearer_auth(token);
-                    }
-                    match req.send().await {
-                        Ok(res) if res.status() == reqwest::StatusCode::PARTIAL_CONTENT => {
-                            let mut stream = res.bytes_stream();
-                            let mut bytes = BytesMut::with_capacity(want as usize);
-                            let mut attempt_bytes = 0u64;
-                            let mut unreported = 0u64;
-                            let mut stream_error = None;
-                            while let Some(item) = stream.next().await {
-                                match item {
-                                    Ok(part) => {
-                                        let count = part.len() as u64;
-                                        attempt_bytes += count;
-                                        unreported += count;
-                                        bytes.extend_from_slice(&part);
-                                        let total = live_downloaded.fetch_add(count, Ordering::Relaxed) + count;
-                                        if unreported >= 512 * 1024 || attempt_bytes == want {
-                                            if let Some(callback) = &progress { callback(DownloadProgress { downloaded_bytes: total.min(expected), total_bytes: expected }); }
-                                            unreported = 0;
-                                        }
-                                    }
-                                    Err(error) => { stream_error = Some(error); break; }
-                                }
-                            }
-                            if attempt_bytes == want && stream_error.is_none() {
-                                return Ok::<_, anyhow::Error>((start, end, bytes.freeze()));
-                            }
-                            live_downloaded.fetch_sub(attempt_bytes, Ordering::Relaxed);
-                            if let Some(callback) = &progress { callback(DownloadProgress { downloaded_bytes: live_downloaded.load(Ordering::Relaxed), total_bytes: expected }); }
-                            last_error = Some(stream_error.map(anyhow::Error::from).unwrap_or_else(|| anyhow::anyhow!("range {start}-{end} returned {attempt_bytes} bytes, expected {want}")));
-                        }
-                        Ok(res)
-                            if matches!(
-                                res.status(),
-                                reqwest::StatusCode::UNAUTHORIZED | reqwest::StatusCode::FORBIDDEN
-                            ) =>
-                        {
-                            return Err(http_status_error(
-                                "range download",
-                                &url,
-                                res.status(),
-                                token.is_some(),
-                            ));
-                        }
-                        Ok(res) => {
-                            last_error = Some(anyhow::anyhow!(
-                                "range request {start}-{end} failed with {}",
-                                res.status()
-                            ))
-                        }
-                        Err(e) => last_error = Some(e.into()),
-                    }
-                    tokio::time::sleep(std::time::Duration::from_secs((attempt + 1).min(5) as u64))
-                        .await;
-                }
-                Err(last_error.unwrap_or_else(|| anyhow::anyhow!("range {start}-{end} failed")))
-            }));
+        let parallelism = opts.parallelism.max(1);
+        for _ in 0..parallelism {
+            let Some((start, end)) = missing.pop_front() else {
+                break;
+            };
+            tasks.push(fetch_range(
+                self.client.clone(),
+                url.to_owned(),
+                opts.hf_token.clone(),
+                start,
+                end,
+                expected,
+                Arc::clone(&live_downloaded),
+                opts.progress.clone(),
+            ));
         }
-        while let Some(joined) = tasks.next().await {
-            let (start, end, bytes) = joined??;
+        while let Some(downloaded) = tasks.next().await {
+            let (start, end, bytes) = downloaded?;
             {
                 let mut f = file.lock().await;
                 f.seek(std::io::SeekFrom::Start(start)).await?;
@@ -467,10 +406,120 @@ impl DownloadManager {
             state.completed.push(CompletedRange { start, end });
             state.completed.sort_by_key(|r| r.start);
             atomic_write_range_state(ranges_path, &state).await?;
+
+            // Keep only `parallelism` chunks in memory. The previous implementation
+            // queued every completed chunk before it started consuming task results,
+            // which could retain most of a large model in RAM and delayed resume
+            // checkpoints until the download was nearly complete.
+            if let Some((next_start, next_end)) = missing.pop_front() {
+                tasks.push(fetch_range(
+                    self.client.clone(),
+                    url.to_owned(),
+                    opts.hf_token.clone(),
+                    next_start,
+                    next_end,
+                    expected,
+                    Arc::clone(&live_downloaded),
+                    opts.progress.clone(),
+                ));
+            }
         }
         file.lock().await.sync_all().await?;
         Ok(())
     }
+}
+
+async fn fetch_range(
+    client: Client,
+    url: String,
+    token: Option<String>,
+    start: u64,
+    end: u64,
+    expected: u64,
+    live_downloaded: Arc<AtomicU64>,
+    progress: Option<Arc<dyn Fn(DownloadProgress) + Send + Sync>>,
+) -> Result<(u64, u64, bytes::Bytes)> {
+    let want = end - start + 1;
+    let mut last_error: Option<anyhow::Error> = None;
+    for attempt in 0..8u32 {
+        let mut req = client
+            .get(&url)
+            .header(ACCEPT_ENCODING, "identity")
+            .header(RANGE, format!("bytes={start}-{end}"));
+        if let Some(token) = &token {
+            req = req.bearer_auth(token);
+        }
+        match req.send().await {
+            Ok(res) if res.status() == reqwest::StatusCode::PARTIAL_CONTENT => {
+                let mut stream = res.bytes_stream();
+                let mut bytes = BytesMut::with_capacity(want as usize);
+                let mut attempt_bytes = 0u64;
+                let mut unreported = 0u64;
+                let mut stream_error = None;
+                while let Some(item) = stream.next().await {
+                    match item {
+                        Ok(part) => {
+                            let count = part.len() as u64;
+                            attempt_bytes += count;
+                            unreported += count;
+                            bytes.extend_from_slice(&part);
+                            let total = live_downloaded.fetch_add(count, Ordering::Relaxed) + count;
+                            if unreported >= 512 * 1024 || attempt_bytes == want {
+                                if let Some(callback) = &progress {
+                                    callback(DownloadProgress {
+                                        downloaded_bytes: total.min(expected),
+                                        total_bytes: expected,
+                                    });
+                                }
+                                unreported = 0;
+                            }
+                        }
+                        Err(error) => {
+                            stream_error = Some(error);
+                            break;
+                        }
+                    }
+                }
+                if attempt_bytes == want && stream_error.is_none() {
+                    return Ok((start, end, bytes.freeze()));
+                }
+                live_downloaded.fetch_sub(attempt_bytes, Ordering::Relaxed);
+                if let Some(callback) = &progress {
+                    callback(DownloadProgress {
+                        downloaded_bytes: live_downloaded.load(Ordering::Relaxed),
+                        total_bytes: expected,
+                    });
+                }
+                last_error = Some(stream_error.map(anyhow::Error::from).unwrap_or_else(|| {
+                    anyhow::anyhow!(
+                        "range {start}-{end} returned {attempt_bytes} bytes, expected {want}"
+                    )
+                }));
+            }
+            Ok(res)
+                if matches!(
+                    res.status(),
+                    reqwest::StatusCode::UNAUTHORIZED | reqwest::StatusCode::FORBIDDEN
+                ) =>
+            {
+                return Err(http_status_error(
+                    "range download",
+                    &url,
+                    res.status(),
+                    token.is_some(),
+                ));
+            }
+            Ok(res) => {
+                last_error = Some(anyhow::anyhow!(
+                    "range request {start}-{end} failed with {}",
+                    res.status()
+                ));
+            }
+            Err(error) => last_error = Some(error.into()),
+        }
+        tokio::time::sleep(std::time::Duration::from_secs((attempt + 1).min(5) as u64)).await;
+    }
+    Err(last_error.unwrap_or_else(|| anyhow::anyhow!("range {start}-{end} failed")))
 }
 
 pub fn temp_paths(comfy_root: &Path, artifact: &Artifact) -> (PathBuf, PathBuf, Option<PathBuf>) {
