@@ -236,7 +236,8 @@ impl DownloadManager {
         for (candidate_index, url) in candidates.iter().enumerate() {
             for attempt in 1..=2 {
                 let mut request = self.client.head(url).header(ACCEPT_ENCODING, "identity");
-                if let Some(token) = &opts.hf_token {
+                let request_token = hf_token_for_url(opts.hf_token.as_ref(), url);
+                if let Some(token) = request_token {
                     request = request.bearer_auth(token);
                 }
                 match request.send().await {
@@ -258,12 +259,19 @@ impl DownloadManager {
                             reqwest::StatusCode::UNAUTHORIZED | reqwest::StatusCode::FORBIDDEN
                         ) =>
                     {
-                        return Err(http_status_error(
+                        let error = http_status_error(
                             "remote metadata request",
-                            &artifact.name,
+                            url,
                             response.status(),
-                            opts.hf_token.is_some(),
-                        ));
+                            request_token.is_some(),
+                        );
+                        if is_hugging_face_url(url) {
+                            return Err(error);
+                        }
+                        // GitHub proxies sometimes reject HEAD or unrelated
+                        // Authorization headers. Treat that proxy as unavailable
+                        // and continue to the direct GitHub fallback.
+                        last_error = Some(error);
                     }
                     Ok(response) => {
                         last_error =
@@ -301,7 +309,8 @@ impl DownloadManager {
             fs::remove_file(part).await?;
         }
         let mut req = self.client.get(url).header(ACCEPT_ENCODING, "identity");
-        if let Some(token) = &opts.hf_token {
+        let request_token = hf_token_for_url(opts.hf_token.as_ref(), url);
+        if let Some(token) = request_token {
             req = req.bearer_auth(token);
         }
         let res = req.send().await?;
@@ -310,7 +319,7 @@ impl DownloadManager {
                 "download",
                 url,
                 res.status(),
-                opts.hf_token.is_some(),
+                request_token.is_some(),
             ));
         }
         let mut stream = res.bytes_stream();
@@ -446,7 +455,8 @@ async fn fetch_range(
             .get(&url)
             .header(ACCEPT_ENCODING, "identity")
             .header(RANGE, format!("bytes={start}-{end}"));
-        if let Some(token) = &token {
+        let request_token = hf_token_for_url(token.as_ref(), &url);
+        if let Some(token) = request_token {
             req = req.bearer_auth(token);
         }
         match req.send().await {
@@ -506,7 +516,7 @@ async fn fetch_range(
                     "range download",
                     &url,
                     res.status(),
-                    token.is_some(),
+                    request_token.is_some(),
                 ));
             }
             Ok(res) => {
@@ -615,6 +625,16 @@ fn is_github_url(url: &str) -> bool {
         || url.starts_with("https://gist.github.com/")
 }
 
+fn is_hugging_face_url(url: &str) -> bool {
+    url.starts_with("https://huggingface.co/") || url.starts_with("https://hf-mirror.com/")
+}
+
+fn hf_token_for_url<'a>(token: Option<&'a String>, url: &str) -> Option<&'a str> {
+    is_hugging_face_url(url)
+        .then(|| token.map(String::as_str))
+        .flatten()
+}
+
 fn rewrite_github_url(url: &str, proxy: Option<&str>) -> String {
     if !is_github_url(url) {
         return url.to_owned();
@@ -678,14 +698,16 @@ fn http_status_error(
         status,
         reqwest::StatusCode::UNAUTHORIZED | reqwest::StatusCode::FORBIDDEN
     ) {
-        if token_present {
+        if is_hugging_face_url(target) && token_present {
             anyhow::anyhow!(
                 "{operation} was rejected for {target}: {status}; HF_TOKEN may be invalid or may not have accepted the repository terms"
             )
-        } else {
+        } else if is_hugging_face_url(target) {
             anyhow::anyhow!(
                 "{operation} requires authentication for {target}: {status}; set HF_TOKEN and accept any repository terms before retrying"
             )
+        } else {
+            anyhow::anyhow!("{operation} was rejected for {target}: {status}")
         }
     } else {
         anyhow::anyhow!("{operation} failed for {target}: {status}")
@@ -694,7 +716,10 @@ fn http_status_error(
 
 #[cfg(test)]
 mod tests {
-    use super::{download_url_candidates, rewrite_github_url, rewrite_hf_url};
+    use super::{
+        download_url_candidates, hf_token_for_url, http_status_error, rewrite_github_url,
+        rewrite_hf_url,
+    };
 
     #[test]
     fn hugging_face_urls_are_rewritten_to_the_selected_mirror() {
@@ -762,5 +787,48 @@ mod tests {
         assert_eq!(urls.len(), 2);
         assert!(urls[0].starts_with("https://ghfast.top/https://github.com/"));
         assert!(urls[1].starts_with("https://github.com/"));
+    }
+
+    #[test]
+    fn hugging_face_token_is_never_sent_to_github_or_proxies() {
+        let token = "hf_secret".to_owned();
+        assert_eq!(
+            hf_token_for_url(
+                Some(&token),
+                "https://huggingface.co/owner/repo/resolve/main/model.bin"
+            ),
+            Some("hf_secret")
+        );
+        assert_eq!(
+            hf_token_for_url(
+                Some(&token),
+                "https://hf-mirror.com/owner/repo/resolve/main/model.bin"
+            ),
+            Some("hf_secret")
+        );
+        assert_eq!(
+            hf_token_for_url(
+                Some(&token),
+                "https://ghfast.top/https://github.com/owner/repo/file.bin"
+            ),
+            None
+        );
+        assert_eq!(
+            hf_token_for_url(Some(&token), "https://github.com/owner/repo/file.bin"),
+            None
+        );
+    }
+
+    #[test]
+    fn github_authorization_errors_do_not_blame_hugging_face_token() {
+        let message = http_status_error(
+            "remote metadata request",
+            "https://ghfast.top/https://github.com/owner/repo/file.bin",
+            reqwest::StatusCode::UNAUTHORIZED,
+            false,
+        )
+        .to_string();
+        assert!(!message.contains("HF_TOKEN"));
+        assert!(message.contains("401 Unauthorized"));
     }
 }
