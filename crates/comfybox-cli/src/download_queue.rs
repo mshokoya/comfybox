@@ -60,6 +60,16 @@ impl JobStatus {
                 | Self::Installing
         )
     }
+
+    /// Returns true only while work is actually running and consuming a
+    /// download-manager concurrency slot. Queued jobs are pending work, but do
+    /// not occupy a slot.
+    pub fn occupies_download_slot(self) -> bool {
+        matches!(
+            self,
+            Self::Resolving | Self::Downloading | Self::Processing | Self::Installing
+        )
+    }
 }
 
 #[derive(Clone, Debug)]
@@ -190,11 +200,10 @@ impl DownloadQueue {
             let Some(artifact) = catalog.artifact(&saved.artifact_id).cloned() else {
                 continue;
             };
-            let status = if saved.status.is_active() {
-                JobStatus::Paused
-            } else {
-                saved.status
-            };
+            // A process that was running when ComfyBox exited cannot still be
+            // managed by this queue, so restore it as paused. A queued job has
+            // not started and must remain queued so the scheduler can launch it.
+            let status = restored_status(saved.status);
             jobs.push(Job {
                 artifact,
                 root: saved.root,
@@ -521,12 +530,12 @@ impl DownloadQueue {
         let mut active = self
             .jobs
             .iter()
-            .filter(|job| job.status.is_active())
+            .filter(|job| job.status.occupies_download_slot())
             .count()
             + self
                 .custom_nodes
                 .iter()
-                .filter(|operation| operation.status.is_active())
+                .filter(|operation| operation.status.occupies_download_slot())
                 .count();
         while active < limit {
             if let Some(index) = self
@@ -905,6 +914,18 @@ impl DownloadQueue {
             .filter(|job| job.status.is_active())
             .map(|job| format!("{}: {}", job.name, job.status.label()))
             .collect()
+    }
+
+    pub fn active_download_count(&self) -> usize {
+        self.jobs
+            .iter()
+            .filter(|job| job.status.occupies_download_slot())
+            .count()
+            + self
+                .custom_nodes
+                .iter()
+                .filter(|operation| operation.status.occupies_download_slot())
+                .count()
     }
 
     pub fn logs(&self) -> impl DoubleEndedIterator<Item = &str> {
@@ -1728,6 +1749,14 @@ impl Drop for DownloadQueue {
     }
 }
 
+fn restored_status(status: JobStatus) -> JobStatus {
+    if status.occupies_download_slot() {
+        JobStatus::Paused
+    } else {
+        status
+    }
+}
+
 fn timestamp() -> String {
     let seconds = SystemTime::now()
         .duration_since(UNIX_EPOCH)
@@ -1740,4 +1769,36 @@ fn timestamp() -> String {
         seconds / 60 % 60,
         seconds % 60
     )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{JobStatus, restored_status};
+
+    #[test]
+    fn queued_jobs_are_pending_but_do_not_occupy_download_slots() {
+        assert!(JobStatus::Queued.is_active());
+        assert!(!JobStatus::Queued.occupies_download_slot());
+    }
+
+    #[test]
+    fn running_stages_occupy_download_slots() {
+        for status in [
+            JobStatus::Resolving,
+            JobStatus::Downloading,
+            JobStatus::Processing,
+            JobStatus::Installing,
+        ] {
+            assert!(status.occupies_download_slot());
+        }
+        for status in [JobStatus::Paused, JobStatus::Failed, JobStatus::Completed] {
+            assert!(!status.occupies_download_slot());
+        }
+    }
+
+    #[test]
+    fn queued_jobs_remain_queued_after_restart() {
+        assert_eq!(restored_status(JobStatus::Queued), JobStatus::Queued);
+        assert_eq!(restored_status(JobStatus::Downloading), JobStatus::Paused);
+    }
 }

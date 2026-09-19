@@ -796,7 +796,10 @@ impl Dashboard<'_> {
             .iter()
             .filter(|job| job.status == JobStatus::Queued)
             .count();
-        let downloading = jobs.iter().filter(|job| job.status.is_active()).count();
+        let downloading = jobs
+            .iter()
+            .filter(|job| job.status.occupies_download_slot())
+            .count();
         let lines = vec![
             metric_line("Ready", health.ready, GREEN),
             metric_line("Missing", health.missing, MUTED),
@@ -1833,12 +1836,7 @@ impl Dashboard<'_> {
     }
 
     fn render_settings(&self, frame: &mut Frame<'_>, area: Rect) {
-        let active = self
-            .queue
-            .snapshots()
-            .iter()
-            .filter(|job| job.status.is_active())
-            .count();
+        let active = self.queue.active_download_count();
         let lines = vec![
             Line::from(vec![
                 label("Files"),
