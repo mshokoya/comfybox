@@ -2,6 +2,88 @@
   "schema_version": 1,
   "workflows": [
     {
+      "id": "Instara-1girl-stand-alone-V3-qwen-workflow",
+      "name": "Instara 1girl Stand Alone V3 Qwen Workflow",
+      "file": "Instara-1girl-stand-alone-V3-qwen-workflow.json",
+      "artifact_ids": [
+        "qwen_image_bf16",
+        "1girl_qwen_v3",
+        "qwen.image.encoder.2.5vl7b",
+        "qwen.image.vae"
+      ],
+      "custom_node_ids": [
+        "comfy-image-saver",
+        "res4lyf",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "Instara-1girl_samsung-by-danrisi-v3-qwen-workflow",
+      "name": "Instara 1girl Samsung By Danrisi V3 Qwen Workflow",
+      "file": "Instara-1girl_samsung-by-danrisi-v3-qwen-workflow.json",
+      "artifact_ids": [
+        "qwen_image_bf16",
+        "1girl_qwen_v3",
+        "samsungcam",
+        "qwen.image.encoder.2.5vl7b",
+        "qwen.image.vae"
+      ],
+      "custom_node_ids": [
+        "comfy-image-saver",
+        "res4lyf",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "aiseek-minimaxh3-workflow",
+      "name": "AISeek MiniMax H3",
+      "file": "aiseek-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.realism-people.t2v-i2v-r2v",
+        "minimax.h3.fl2v.turbo.8step.v1.0.bf16"
+      ],
+      "custom_node_ids": [
+        "comfyui-pixaroma",
+        "rgthree-comfy",
+        "comfyui-videohelpersuite"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfybox-character-swap-base-24to60-minimaxh3-workflow",
+      "name": "ComfyBox — Character Swap Base 24-to-60 MiniMax H3",
+      "file": "comfybox-character-swap-base-24to60-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.bf16",
+        "minimax.h3.qwen3vl32b.bf16",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "gapfiller_v1"
+      ],
+      "custom_node_ids": [
+        "comfyui-gapfiller",
+        "comfyui-videohelpersuite",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-character-swap-base-24to60-minimaxh3"
+      ]
+    },
+    {
       "id": "comfybox-character-swap-bf16-24to60-minimaxh3-workflow",
       "name": "ComfyBox — MiniMax H3 Character Swap BF16 24-to-60",
       "file": "comfybox-character-swap-bf16-24to60-minimaxh3-workflow.json",
@@ -11,10 +93,121 @@
         "minimax.h3.video-vae.fp16",
         "minimax.h3.audio-vae.fp32"
       ],
-      "custom_node_ids": ["comfyui-gapfiller","comfyui-videohelpersuite","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui-gapfiller",
+        "comfyui-videohelpersuite",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfybox-character-swap-realism-lora-24to60-minimaxh3-workflow",
+      "name": "ComfyBox — Character Swap Realism LoRA 24-to-60 MiniMax H3",
+      "file": "comfybox-character-swap-realism-lora-24to60-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.bf16",
+        "minimax.h3.qwen3vl32b.bf16",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.realism-people.t2v-i2v-r2v",
+        "gapfiller_v1"
+      ],
+      "custom_node_ids": [
+        "comfyui-gapfiller",
+        "comfyui-easy-use",
+        "comfyui-kjnodes"
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-character-swap-realism-lora-24to60-minimaxh3"
+      ]
+    },
+    {
+      "id": "comfybox-director-instareal-wan2.2-workflow",
+      "name": "ComfyBox — Director InstaReal Wan 2.2",
+      "file": "comfybox-director-instareal-wan2.2-workflow.json",
+      "artifact_ids": [
+        "wan2.2.t2v.a14b.high-noise.q6-k",
+        "wan2.2.t2v.a14b.low-noise.q6-k",
+        "wan2.2.t2v.a14b.high-noise.distill.rank64",
+        "wan2.2.t2v.a14b.low-noise.distill.rank64",
+        "wan2.2.instareal.high-noise",
+        "wan2.2.instareal.low-noise",
+        "umt5_xxl_fp8_e4m3fn_scaled",
+        "wan_2_1_vae",
+        "clip-vision.h"
+      ],
+      "custom_node_ids": [
+        "comfyui-video-director",
+        "comfyui-gguf",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-director-instareal-wan2.2"
+      ]
+    },
+    {
+      "id": "comfybox-director-realism-people-minimaxh3-workflow",
+      "name": "ComfyBox — Director Realism People MiniMax H3",
+      "file": "comfybox-director-realism-people-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.ref2va.pruned.int8-convrot",
+        "minimax.h3.realism-people.t2v-i2v-r2v",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32"
+      ],
+      "custom_node_ids": [
+        "comfyui-video-director",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-director-realism-people-minimaxh3"
+      ]
+    },
+    {
+      "id": "comfybox-director-relight-wananimate2.2-workflow",
+      "name": "ComfyBox — Director Relight Wan Animate 2.2",
+      "file": "comfybox-director-relight-wananimate2.2-workflow.json",
+      "artifact_ids": [
+        "wan2.2.animate.14b.bf16",
+        "wan2.2.animate.relight.bf16",
+        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
+        "umt5_xxl_fp8_e4m3fn_scaled",
+        "wan_2_1_vae",
+        "clip-vision.h"
+      ],
+      "custom_node_ids": [
+        "comfyui-video-director",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-director-relight-wananimate2.2"
+      ]
+    },
+    {
+      "id": "comfybox-refiner-and-director-minimaxh3-workflow",
+      "name": "ComfyBox — Refiner and Director MiniMax H3",
+      "file": "comfybox-refiner-and-director-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.ref2va.pruned.nvfp4-convrot-int8",
+        "minimax.h3.ref2v.turbo.8step.v1.0.768p.bf16"
+      ],
+      "custom_node_ids": [
+        "comfyui-kjnodes",
+        "comfyui-videohelpersuite",
+        "comfyui-sol-attn",
+        "comfyui-minimax-h3-director",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-refiner-and-director-minimaxh3"
       ]
     },
     {
@@ -28,7 +221,11 @@
         "zimage.qwen3.4b",
         "z_image"
       ],
-      "custom_node_ids": ["controlaltai-nodes","res4lyf","comfyui-easy-use"],
+      "custom_node_ids": [
+        "controlaltai-nodes",
+        "res4lyf",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -49,7 +246,16 @@
         "4xnmkdsuperscale_4xnmkdsuperscale",
         "ae"
       ],
-      "custom_node_ids": ["cg-use-everywhere","comfyui-gguf","comfyui-impact-pack","comfyui_controlaltai_nodes","comfyui_essentials","controlaltai-nodes","rgthree-comfy","comfyui-easy-use"],
+      "custom_node_ids": [
+        "cg-use-everywhere",
+        "comfyui-gguf",
+        "comfyui-impact-pack",
+        "comfyui_controlaltai_nodes",
+        "comfyui_essentials",
+        "controlaltai-nodes",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -65,7 +271,11 @@
         "zimage.qwen3.4b",
         "z_image"
       ],
-      "custom_node_ids": ["controlaltai-nodes","res4lyf","comfyui-easy-use"],
+      "custom_node_ids": [
+        "controlaltai-nodes",
+        "res4lyf",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -96,7 +306,9 @@
         "qwen.image.encoder.2.5vl7b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": ["comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -113,7 +325,10 @@
         "krea2.qwen3vl4b.bf16",
         "wan2_1_vae_fp32"
       ],
-      "custom_node_ids": ["res4lyf","comfyui-easy-use"],
+      "custom_node_ids": [
+        "res4lyf",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -130,7 +345,10 @@
         "krea2.qwen3vl4b.bf16",
         "wan2_1_vae_fp32"
       ],
-      "custom_node_ids": ["res4lyf","comfyui-easy-use"],
+      "custom_node_ids": [
+        "res4lyf",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -166,7 +384,10 @@
         "krea2.qwen3vl4b.bf16",
         "wan2_1_vae_fp32"
       ],
-      "custom_node_ids": ["res4lyf","comfyui-easy-use"],
+      "custom_node_ids": [
+        "res4lyf",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -185,7 +406,19 @@
         "qwen2_5_vl_7b_instruct_abliterated_mmproj_q8_0",
         "seedvr2_ema_3b_fp16"
       ],
-      "custom_node_ids": ["comfyui-aspect-ratio-crop-node","comfyui-custom-scripts","comfyui-gguf","comfyui-imageautotone","comfyui-inspire-pack","comfyui-levelpixel-advanced","comfyui-magickwand","rgthree-comfy","seedvr2_videoupscaler","was-ns","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui-aspect-ratio-crop-node",
+        "comfyui-custom-scripts",
+        "comfyui-gguf",
+        "comfyui-imageautotone",
+        "comfyui-inspire-pack",
+        "comfyui-levelpixel-advanced",
+        "comfyui-magickwand",
+        "rgthree-comfy",
+        "seedvr2_videoupscaler",
+        "was-ns",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -248,7 +481,12 @@
         "zimage.qwen3.4b",
         "flux_ultra_vae"
       ],
-      "custom_node_ids": ["comfyui-aspect-ratio-crop-node","comfyui-custom-scripts","res4lyf","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui-aspect-ratio-crop-node",
+        "comfyui-custom-scripts",
+        "res4lyf",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -264,40 +502,73 @@
         "zimage.qwen3.4b",
         "flux_ultra_vae"
       ],
-      "custom_node_ids": ["comfyui-aspect-ratio-crop-node","comfyui-custom-scripts","comfyui_controlnet_aux","controlaltai-nodes","res4lyf","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui-aspect-ratio-crop-node",
+        "comfyui-custom-scripts",
+        "comfyui_controlnet_aux",
+        "controlaltai-nodes",
+        "res4lyf",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
     },
     {
-      "id": "Instara-1girl_samsung-by-danrisi-v3-qwen-workflow",
-      "name": "Instara 1girl Samsung By Danrisi V3 Qwen Workflow",
-      "file": "Instara-1girl_samsung-by-danrisi-v3-qwen-workflow.json",
+      "id": "foxydits-minimaxH3T2VI2VREF2VAdvanced_v20",
+      "name": "FoxyDits MiniMax H3 T2V/I2V/Ref2V Advanced v2.0",
+      "file": "foxydits-minimaxH3T2VI2VREF2VAdvanced_v20.json",
       "artifact_ids": [
-        "qwen_image_bf16",
-        "1girl_qwen_v3",
-        "samsungcam",
-        "qwen.image.encoder.2.5vl7b",
-        "qwen.image.vae"
+        "minimax.h3.ref2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.tae.h3",
+        "minimax.h3.fl2v.turbo.8step.v1.0.bf16"
       ],
-      "custom_node_ids": ["comfy-image-saver","res4lyf","rgthree-comfy","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui-frame-interpolation",
+        "whatdreamscost-comfyui",
+        "comfyui-spectrum-minimax-h3",
+        "comfyui-mainodes",
+        "rgthree-comfy",
+        "comfyui-kjnodes",
+        "comfyui-easy-use",
+        "comfyui-videohelpersuite",
+        "comfyui-sol-attn"
+      ],
       "catalog_sources": [
-        "_/deps.json"
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
       ]
     },
     {
-      "id": "Instara-1girl-stand-alone-V3-qwen-workflow",
-      "name": "Instara 1girl Stand Alone V3 Qwen Workflow",
-      "file": "Instara-1girl-stand-alone-V3-qwen-workflow.json",
+      "id": "foxydits-minimaxSEEDHUNTERWorkflowLatent_v20",
+      "name": "FoxyDits MiniMax Seed Hunter Latent v2.0",
+      "file": "foxydits-minimaxSEEDHUNTERWorkflowLatent_v20.json",
       "artifact_ids": [
-        "qwen_image_bf16",
-        "1girl_qwen_v3",
-        "qwen.image.encoder.2.5vl7b",
-        "qwen.image.vae"
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.fl2v.turbo.silver-dareties.pruned.v1",
+        "rife.flownet"
       ],
-      "custom_node_ids": ["comfy-image-saver","res4lyf","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui-vfi",
+        "comfyui-minimaxh3mod",
+        "comfyui-h3-prompt-ide",
+        "comfyui-fantastic-minimaxh3-promptbuilder",
+        "rgthree-comfy",
+        "comfyui-kjnodes",
+        "comfyui-easy-use",
+        "comfyui-videohelpersuite",
+        "comfyui-impact-pack",
+        "cg-use-everywhere"
+      ],
       "catalog_sources": [
-        "_/deps.json"
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
       ]
     },
     {
@@ -315,7 +586,12 @@
         "umt5_xxl_fp8_e4m3fn_scaled",
         "wan_2_1_vae"
       ],
-      "custom_node_ids": ["comfy-image-saver","comfyui-gguf","comfyui-kjnodes","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfy-image-saver",
+        "comfyui-gguf",
+        "comfyui-kjnodes",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -335,9 +611,229 @@
         "umt5_xxl_fp8_e4m3fn_scaled",
         "wan_2_1_vae"
       ],
-      "custom_node_ids": ["comfy-image-saver","comfyui-gguf","comfyui-kjnodes","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfy-image-saver",
+        "comfyui-gguf",
+        "comfyui-kjnodes",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
+      ]
+    },
+    {
+      "id": "jon-H3-TIR2V-V7f-REF-EXAMPLE",
+      "name": "Jon H3 TIR2V V7f Reference Example",
+      "file": "jon-H3-TIR2V-V7f-REF-EXAMPLE.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.tae.h3",
+        "minimax.h3.photoreal.ph0t0r34l.4410"
+      ],
+      "custom_node_ids": [
+        "comfyui-kjnodes",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "jonxl-H3-TIR2V-V7e_1FRAME",
+      "name": "JonXL H3 TIR2V V7e One Frame",
+      "file": "jonxl-H3-TIR2V-V7e_1FRAME.json",
+      "artifact_ids": [
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.image-vae.t1.step1597",
+        "minimax.h3.tae.h3",
+        "minimax.h3.photoreal.ph0t0r34l.4410"
+      ],
+      "custom_node_ids": [
+        "comfyui-mm-1frame",
+        "comfyui-kjnodes",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "jonxl-H3-TIR2V-V7f",
+      "name": "JonXL H3 TIR2V V7f",
+      "file": "jonxl-H3-TIR2V-V7f.json",
+      "artifact_ids": [
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.tae.h3",
+        "minimax.h3.photoreal.ph0t0r34l.4410"
+      ],
+      "custom_node_ids": [
+        "comfyui-kjnodes",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "jonxl-H3-Upscale-AIO-v1",
+      "name": "JonXL H3 Upscale AIO v1",
+      "file": "jonxl-H3-Upscale-AIO-v1.json",
+      "artifact_ids": [
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.tae.h3",
+        "minimax.h3.upscale.1920"
+      ],
+      "custom_node_ids": [
+        "comfyui-fearnworks-nodes",
+        "comfyui-kjnodes",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "jonxl-H3-Upscale-Easy-v1",
+      "name": "JonXL H3 Upscale Easy v1",
+      "file": "jonxl-H3-Upscale-Easy-v1.json",
+      "artifact_ids": [
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.tae.h3",
+        "minimax.h3.upscale.1920"
+      ],
+      "custom_node_ids": [
+        "comfyui-kjnodes",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "loratech-director-minimaxh3-workflow",
+      "name": "LoraTech — Director MiniMax H3",
+      "file": "loratech-director-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.ref2va.pruned.int8-convrot",
+        "minimax.h3.ref2v.turbo.4step.v0.1.bf16",
+        "minimax.h3.fl2v.turbo.4step.v1.0.768p.bf16",
+        "minimax.h3.fl2va.pruned.int8-convrot",
+        "minimax.h3.fastvideo-vsa-datafree.1300step.4step.int8-convrot",
+        "ultralytics.face-yolov8m"
+      ],
+      "custom_node_ids": [
+        "comfyui-easy-use",
+        "comfyui-kjnodes",
+        "comfyui-impact-pack",
+        "plaguekind-nodes",
+        "minimax-h3-motion-director"
+      ],
+      "catalog_sources": [
+        "workflow:loratech-director-minimaxh3"
+      ]
+    },
+    {
+      "id": "prompt_mastery-long_video_motion_transfer-scail2-workflow",
+      "name": "Prompt Mastery Long Video Motion Transfer SCAIL-2",
+      "file": "prompt_mastery-long_video_motion_transfer-scail2-workflow.json",
+      "artifact_ids": [
+        "umt5_xxl_fp8_e4m3fn_scaled",
+        "clip-vision.h",
+        "wan_2_1_vae",
+        "scail2.fp8-scaled",
+        "sam3.1.multiplex.fp16",
+        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank256.bf16",
+        "gimm-vfi.r.arb-lpips.fp32"
+      ],
+      "custom_node_ids": [
+        "comfyui-gimm-vfi",
+        "comfyui-scail2-multi-cond",
+        "comfyui-swwan",
+        "comfyui-kjnodes",
+        "comfyui-videohelpersuite",
+        "comfyui_essentials"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "prompt_mastery-ref_to_video_sound_reference-V1-workflow",
+      "name": "Prompt Mastery Reference-to-Video Sound Reference v1",
+      "file": "prompt_mastery-ref_to_video_sound_reference-V1-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.xueluo.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.ref2v.turbo.4step.v0.1.bf16"
+      ],
+      "custom_node_ids": [
+        "comfyui-minimax-h3-audio-t8",
+        "comfyui-swwan",
+        "comfyui-kjnodes",
+        "rgthree-comfy",
+        "comfyui-videohelpersuite",
+        "comfyui-easy-use",
+        "comfyui-text-translation",
+        "comfyui-workflow-encrypt"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "prompt_mastery-ultra_speed_singularity-minimaxh3-workflow",
+      "name": "Prompt Mastery Ultra Speed Singularity MiniMax H3",
+      "file": "prompt_mastery-ultra_speed_singularity-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.singularity.ref2va.v1.3.int8",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.ref2v.turbo.4step.v0.1.bf16",
+        "minimax.h3.latent-upscaler.3d-conv-v1.fp16"
+      ],
+      "custom_node_ids": [
+        "comfyui-minimax-h3-latent-upscaler",
+        "comfyui-minimax-h3-audio-t8",
+        "comfyui-kjnodes",
+        "comfyui-text-translation",
+        "comfyui-workflow-encrypt"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder",
+        "user-provided workflow dependencies"
       ]
     },
     {
@@ -355,7 +851,12 @@
         "qwen.image.vae",
         "wan_2_1_vae"
       ],
-      "custom_node_ids": ["comfyui-workflow-encrypt","deno-custom-nodes","rgthree-comfy","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui-workflow-encrypt",
+        "deno-custom-nodes",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -373,8 +874,97 @@
         "qwen.image.encoder.2.5vl7b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": ["comfyui_faceanalysis","rgthree-comfy","vnccs-utils","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui_faceanalysis",
+        "rgthree-comfy",
+        "vnccs-utils",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-auto-caption-dataset-workflow",
+      "name": "The3MinuteNode — Florence 2 Auto Caption Dataset",
+      "file": "the3minutenode-auto-caption-dataset-workflow.json",
+      "artifact_ids": [],
+      "custom_node_ids": [
+        "rgthree-comfy",
+        "comfyui-florence2"
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-basicangles-dataset-qwenedit2509-workflow",
+      "name": "The3MinuteNode — Qwen Edit 2509 / 8 Basic Angles Dataset",
+      "file": "the3minutenode-basicangles-dataset-qwenedit2509-workflow.json",
+      "artifact_ids": [
+        "qwen.edit.2509.fp8mixed",
+        "qwen.image.encoder.2.5vl7b.fp8",
+        "qwen.image.vae",
+        "qwen.edit.2509.lightning-4step",
+        "qwen.edit.2509.multiple-angles",
+        "qwen.edit.next-scene-v2"
+      ],
+      "custom_node_ids": [
+        "rgthree-comfy",
+        "comfyui-kjnodes",
+        "comfyui-easy-use",
+        "comfyui-face-analysis",
+        "outputlists-combiner"
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-bodyangles-dataset-flux2klein9b-workflow",
+      "name": "The3MinuteNode — FLUX.2 Klein 9B / 64 Body Angles Dataset",
+      "file": "the3minutenode-bodyangles-dataset-flux2klein9b-workflow.json",
+      "artifact_ids": [
+        "flux2.klein.9b",
+        "flux2.qwen3.8b.fp8mixed",
+        "flux2.vae",
+        "flux2.klein.multiple-angles"
+      ],
+      "custom_node_ids": [
+        "rgthree-comfy",
+        "comfyui-kjnodes",
+        "comfyui-easy-use",
+        "comfyui-face-analysis",
+        "outputlists-combiner"
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-bodyangles-dataset-qwenedit2511-workflow",
+      "name": "The3MinuteNode — Qwen Edit 2511 / 64 Body Angles Dataset",
+      "file": "the3minutenode-bodyangles-dataset-qwenedit2511-workflow.json",
+      "artifact_ids": [
+        "qwen.edit.2511.int8-convrot",
+        "qwen.image.encoder.2.5vl7b.fp8",
+        "qwen.image.vae",
+        "qwen.edit.2511.lightning-4step.fp32",
+        "qwen.edit.2511.multiple-angles",
+        "qwen.edit.next-scene-v2"
+      ],
+      "custom_node_ids": [
+        "rgthree-comfy",
+        "comfyui-kjnodes",
+        "comfyui-easy-use",
+        "comfyui-face-analysis",
+        "outputlists-combiner"
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
         "_/deps.json"
       ]
     },
@@ -439,7 +1029,10 @@
         "krea2.qwen3vl4b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-easy-use"],
+      "custom_node_ids": [
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -462,6 +1055,53 @@
         "rgthree-comfy"
       ],
       "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-face-dataset-qwenedit2509-workflow",
+      "name": "The3MinuteNode — Qwen Edit 2509 / 20 Face Dataset",
+      "file": "the3minutenode-face-dataset-qwenedit2509-workflow.json",
+      "artifact_ids": [
+        "qwen.edit.2509.fp8mixed",
+        "qwen.image.encoder.2.5vl7b.fp8",
+        "qwen.image.vae",
+        "qwen.edit.2509.lightning-4step",
+        "qwen.edit.2509.multiple-angles",
+        "qwen.edit.next-scene-v2"
+      ],
+      "custom_node_ids": [
+        "rgthree-comfy",
+        "comfyui-kjnodes",
+        "comfyui-easy-use",
+        "comfyui-face-analysis",
+        "outputlists-combiner"
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-face-swap-flux2-klein-face-workflow",
+      "name": "The3MinuteNode — FLUX.2 Klein Face Swap",
+      "file": "the3minutenode-face-swap-flux2-klein-face-workflow.json",
+      "artifact_ids": [
+        "flux2.klein.9b.int8-convrot",
+        "flux2.qwen3.8b.fp8mixed-abliterated",
+        "flux2.vae",
+        "bfs.flux2-klein.9b.head-swap"
+      ],
+      "custom_node_ids": [
+        "rgthree-comfy",
+        "comfyui-kjnodes",
+        "comfyui-easy-use",
+        "comfyui-pixaroma",
+        "comfyui-inpaint-cropandstitch",
+        "comfyui-comfyroll"
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
         "_/deps.json"
       ]
     },
@@ -510,59 +1150,6 @@
       ]
     },
     {
-      "id": "the3minutenode-multiangle-qwenedit2509-workflow",
-      "name": "The3minutenode Multiangle Qwenedit2509 Workflow",
-      "file": "the3minutenode-multiangle-qwenedit2509-workflow.json",
-      "artifact_ids": [
-        "qwen.edit.2509.fp8mixed",
-        "qwen.edit.2511.bf16",
-        "qwen.edit.2509.multiple-angles",
-        "qwen.edit.2509.lightning-4step",
-        "qwen.edit.next-scene-v2",
-        "qwen.edit.skin.1.1.2750",
-        "qwen.image.encoder.2.5vl7b.fp8",
-        "qwen.image.vae"
-      ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-easy-use"],
-      "catalog_sources": [
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-multiangles-detail-qwenedit2509-workflow",
-      "name": "The3minutenode Multiangles Detail Qwenedit2509 Workflow",
-      "file": "the3minutenode-multiangles-detail-qwenedit2509-workflow.json",
-      "artifact_ids": [
-        "qwen.edit.2509.fp8mixed",
-        "qwen.edit.2511.bf16",
-        "qwen.edit.2509.multiple-angles",
-        "qwen.edit.2509.lightning-4step.bf16",
-        "qwen_image_edit_unblur_upscale_20",
-        "qwen.edit.next-scene-v2",
-        "qwen.edit.skin.primary",
-        "qwen.image.encoder.2.5vl7b.fp8",
-        "qwen.image.vae"
-      ],
-      "custom_node_ids": [
-        "rgthree-comfy"
-      ],
-      "catalog_sources": [
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-prompt-enhancer-gemma4-workflow",
-      "name": "The3minutenode Prompt Enhancer Gemma4 Workflow",
-      "file": "the3minutenode-prompt-enhancer-gemma4-workflow.json",
-      "artifact_ids": [
-        "gemma4_e4b_it_fp8_scaled"
-      ],
-      "custom_node_ids": [],
-      "catalog_sources": [
-        "_/deps.json"
-      ]
-    },
-    {
       "id": "the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow",
       "name": "The3MinuteNode — Face Swap / Krea 2 vs Qwen 2511 vs FLUX.2 Klein",
       "file": "the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow.json",
@@ -601,59 +1188,6 @@
       ]
     },
     {
-      "id": "the3minutenode-auto-caption-dataset-workflow",
-      "name": "The3MinuteNode — Florence 2 Auto Caption Dataset",
-      "file": "the3minutenode-auto-caption-dataset-workflow.json",
-      "artifact_ids": [],
-      "custom_node_ids": [
-        "rgthree-comfy",
-        "comfyui-florence2"
-      ],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-bodyangles-dataset-flux2klein9b-workflow",
-      "name": "The3MinuteNode — FLUX.2 Klein 9B / 64 Body Angles Dataset",
-      "file": "the3minutenode-bodyangles-dataset-flux2klein9b-workflow.json",
-      "artifact_ids": [
-        "flux2.klein.9b",
-        "flux2.qwen3.8b.fp8mixed",
-        "flux2.vae",
-        "flux2.klein.multiple-angles"
-      ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-face-swap-flux2-klein-face-workflow",
-      "name": "The3MinuteNode — FLUX.2 Klein Face Swap",
-      "file": "the3minutenode-face-swap-flux2-klein-face-workflow.json",
-      "artifact_ids": [
-        "flux2.klein.9b.int8-convrot",
-        "flux2.qwen3.8b.fp8mixed-abliterated",
-        "flux2.vae",
-        "bfs.flux2-klein.9b.head-swap"
-      ],
-      "custom_node_ids": [
-        "rgthree-comfy",
-        "comfyui-kjnodes",
-        "comfyui-easy-use",
-        "comfyui-pixaroma",
-        "comfyui-inpaint-cropandstitch",
-        "comfyui-comfyroll"
-      ],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
       "id": "the3minutenode-face-swap-krea2-workflow",
       "name": "The3MinuteNode — Krea 2 Face Swap",
       "file": "the3minutenode-face-swap-krea2-workflow.json",
@@ -664,146 +1198,14 @@
         "bfs.krea2.head-swap.v1.1",
         "krea2.amateur.v2"
       ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-krea2edit","comfyui-pixaroma","comfyui-comfyroll","comfyui-easy-use"],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-generate-krea2-workflow",
-      "name": "The3MinuteNode — Krea 2 Generate",
-      "file": "the3minutenode-generate-krea2-workflow.json",
-      "artifact_ids": [
-        "krea2.turbo.int8-convrot",
-        "krea2.qwen3vl4b.fp8",
-        "qwen.image.vae"
-      ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-easy-use"],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-lifestyle-dataset-krea2-workflow",
-      "name": "The3MinuteNode — Krea 2 Lifestyle Dataset",
-      "file": "the3minutenode-lifestyle-dataset-krea2-workflow.json",
-      "artifact_ids": [
-        "krea2.turbo.int8-convrot",
-        "krea2.qwen3vl4b.fp8",
-        "qwen.image.vae",
-        "krea2.identity-edit.v1.2"
-      ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner","comfyui-krea2edit"],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-refrence-minimaxh3-workflow",
-      "name": "The3MinuteNode — MiniMax H3 Reference-to-Video",
-      "file": "the3minutenode-refrence-minimaxh3-workflow.json",
-      "artifact_ids": [
-        "minimax.h3.ref2va.bf16",
-        "minimax.h3.qwen3vl32b.bf16",
-        "minimax.h3.video-vae.fp16",
-        "minimax.h3.audio-vae.fp32"
-      ],
-      "custom_node_ids": [],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-post-production-dataset-workflow",
-      "name": "The3MinuteNode — Post Production Dataset",
-      "file": "the3minutenode-post-production-dataset-workflow.json",
-      "artifact_ids": [
-        "krea2.turbo.int8-convrot",
-        "krea2.qwen3vl4b.fp8",
-        "qwen.image.vae",
-        "flux2.klein.9b",
-        "flux2.qwen3.8b.fp8mixed",
-        "flux2.vae"
-      ],
       "custom_node_ids": [
-        "rgthree-comfy"
+        "rgthree-comfy",
+        "comfyui-kjnodes",
+        "comfyui-krea2edit",
+        "comfyui-pixaroma",
+        "comfyui-comfyroll",
+        "comfyui-easy-use"
       ],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-lifestyle-dataset-qwenedit2509-workflow",
-      "name": "The3MinuteNode — Qwen Edit 2509 / 12 Lifestyle Dataset",
-      "file": "the3minutenode-lifestyle-dataset-qwenedit2509-workflow.json",
-      "artifact_ids": [
-        "qwen.edit.2509.fp8mixed",
-        "qwen.image.encoder.2.5vl7b.fp8",
-        "qwen.image.vae",
-        "qwen.edit.2509.lightning-4step",
-        "qwen.edit.2509.multiple-angles",
-        "qwen.edit.next-scene-v2"
-      ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-face-dataset-qwenedit2509-workflow",
-      "name": "The3MinuteNode — Qwen Edit 2509 / 20 Face Dataset",
-      "file": "the3minutenode-face-dataset-qwenedit2509-workflow.json",
-      "artifact_ids": [
-        "qwen.edit.2509.fp8mixed",
-        "qwen.image.encoder.2.5vl7b.fp8",
-        "qwen.image.vae",
-        "qwen.edit.2509.lightning-4step",
-        "qwen.edit.2509.multiple-angles",
-        "qwen.edit.next-scene-v2"
-      ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-basicangles-dataset-qwenedit2509-workflow",
-      "name": "The3MinuteNode — Qwen Edit 2509 / 8 Basic Angles Dataset",
-      "file": "the3minutenode-basicangles-dataset-qwenedit2509-workflow.json",
-      "artifact_ids": [
-        "qwen.edit.2509.fp8mixed",
-        "qwen.image.encoder.2.5vl7b.fp8",
-        "qwen.image.vae",
-        "qwen.edit.2509.lightning-4step",
-        "qwen.edit.2509.multiple-angles",
-        "qwen.edit.next-scene-v2"
-      ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
-      "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "the3minutenode-bodyangles-dataset-qwenedit2511-workflow",
-      "name": "The3MinuteNode — Qwen Edit 2511 / 64 Body Angles Dataset",
-      "file": "the3minutenode-bodyangles-dataset-qwenedit2511-workflow.json",
-      "artifact_ids": [
-        "qwen.edit.2511.int8-convrot",
-        "qwen.image.encoder.2.5vl7b.fp8",
-        "qwen.image.vae",
-        "qwen.edit.2511.lightning-4step.fp32",
-        "qwen.edit.2511.multiple-angles",
-        "qwen.edit.next-scene-v2"
-      ],
-      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -840,119 +1242,161 @@
       ]
     },
     {
-      "id": "loratech-director-minimaxh3-workflow",
-      "name": "LoraTech — Director MiniMax H3",
-      "file": "loratech-director-minimaxh3-workflow.json",
+      "id": "the3minutenode-generate-krea2-workflow",
+      "name": "The3MinuteNode — Krea 2 Generate",
+      "file": "the3minutenode-generate-krea2-workflow.json",
       "artifact_ids": [
-        "minimax.h3.audio-vae.fp32",
-        "minimax.h3.video-vae.fp16",
-        "minimax.h3.qwen3vl32b.nvfp4-awq",
-        "minimax.h3.ref2va.pruned.int8-convrot",
-        "minimax.h3.ref2v.turbo.4step.v0.1.bf16",
-        "minimax.h3.fl2v.turbo.4step.v1.0.768p.bf16",
-        "minimax.h3.fl2va.pruned.int8-convrot",
-        "minimax.h3.fastvideo-vsa-datafree.1300step.4step.int8-convrot",
-        "ultralytics.face-yolov8m"
+        "krea2.turbo.int8-convrot",
+        "krea2.qwen3vl4b.fp8",
+        "qwen.image.vae"
       ],
       "custom_node_ids": [
-        "comfyui-easy-use",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-lifestyle-dataset-krea2-workflow",
+      "name": "The3MinuteNode — Krea 2 Lifestyle Dataset",
+      "file": "the3minutenode-lifestyle-dataset-krea2-workflow.json",
+      "artifact_ids": [
+        "krea2.turbo.int8-convrot",
+        "krea2.qwen3vl4b.fp8",
+        "qwen.image.vae",
+        "krea2.identity-edit.v1.2"
+      ],
+      "custom_node_ids": [
+        "rgthree-comfy",
         "comfyui-kjnodes",
-        "comfyui-impact-pack",
-        "plaguekind-nodes",
-        "minimax-h3-motion-director"
+        "comfyui-easy-use",
+        "comfyui-face-analysis",
+        "outputlists-combiner",
+        "comfyui-krea2edit"
       ],
-      "catalog_sources": ["workflow:loratech-director-minimaxh3"]
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
     },
     {
-      "id": "comfybox-refiner-and-director-minimaxh3-workflow",
-      "name": "ComfyBox — Refiner and Director MiniMax H3",
-      "file": "comfybox-refiner-and-director-minimaxh3-workflow.json",
+      "id": "the3minutenode-lifestyle-dataset-qwenedit2509-workflow",
+      "name": "The3MinuteNode — Qwen Edit 2509 / 12 Lifestyle Dataset",
+      "file": "the3minutenode-lifestyle-dataset-qwenedit2509-workflow.json",
       "artifact_ids": [
-        "minimax.h3.qwen3vl32b.nvfp4-awq",
-        "minimax.h3.video-vae.fp16",
-        "minimax.h3.audio-vae.fp32",
-        "minimax.h3.ref2va.pruned.nvfp4-convrot-int8",
-        "minimax.h3.ref2v.turbo.8step.v1.0.768p.bf16"
+        "qwen.edit.2509.fp8mixed",
+        "qwen.image.encoder.2.5vl7b.fp8",
+        "qwen.image.vae",
+        "qwen.edit.2509.lightning-4step",
+        "qwen.edit.2509.multiple-angles",
+        "qwen.edit.next-scene-v2"
       ],
-      "custom_node_ids": ["comfyui-kjnodes","comfyui-videohelpersuite","comfyui-sol-attn","comfyui-minimax-h3-director","comfyui-easy-use"],
-      "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"]
+      "custom_node_ids": [
+        "rgthree-comfy",
+        "comfyui-kjnodes",
+        "comfyui-easy-use",
+        "comfyui-face-analysis",
+        "outputlists-combiner"
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
     },
     {
-      "id": "comfybox-director-relight-wananimate2.2-workflow",
-      "name": "ComfyBox — Director Relight Wan Animate 2.2",
-      "file": "comfybox-director-relight-wananimate2.2-workflow.json",
+      "id": "the3minutenode-multiangle-qwenedit2509-workflow",
+      "name": "The3minutenode Multiangle Qwenedit2509 Workflow",
+      "file": "the3minutenode-multiangle-qwenedit2509-workflow.json",
       "artifact_ids": [
-        "wan2.2.animate.14b.bf16",
-        "wan2.2.animate.relight.bf16",
-        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
-        "umt5_xxl_fp8_e4m3fn_scaled",
-        "wan_2_1_vae",
-        "clip-vision.h"
+        "qwen.edit.2509.fp8mixed",
+        "qwen.edit.2511.bf16",
+        "qwen.edit.2509.multiple-angles",
+        "qwen.edit.2509.lightning-4step",
+        "qwen.edit.next-scene-v2",
+        "qwen.edit.skin.1.1.2750",
+        "qwen.image.encoder.2.5vl7b.fp8",
+        "qwen.image.vae"
       ],
-      "custom_node_ids": ["comfyui-video-director","comfyui-easy-use"],
-      "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"]
+      "custom_node_ids": [
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ]
     },
     {
-      "id": "comfybox-director-realism-people-minimaxh3-workflow",
-      "name": "ComfyBox — Director Realism People MiniMax H3",
-      "file": "comfybox-director-realism-people-minimaxh3-workflow.json",
+      "id": "the3minutenode-multiangles-detail-qwenedit2509-workflow",
+      "name": "The3minutenode Multiangles Detail Qwenedit2509 Workflow",
+      "file": "the3minutenode-multiangles-detail-qwenedit2509-workflow.json",
       "artifact_ids": [
-        "minimax.h3.fl2va.pruned.int8-convrot",
-        "minimax.h3.ref2va.pruned.int8-convrot",
-        "minimax.h3.realism-people.t2v-i2v-r2v",
-        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "qwen.edit.2509.fp8mixed",
+        "qwen.edit.2511.bf16",
+        "qwen.edit.2509.multiple-angles",
+        "qwen.edit.2509.lightning-4step.bf16",
+        "qwen_image_edit_unblur_upscale_20",
+        "qwen.edit.next-scene-v2",
+        "qwen.edit.skin.primary",
+        "qwen.image.encoder.2.5vl7b.fp8",
+        "qwen.image.vae"
+      ],
+      "custom_node_ids": [
+        "rgthree-comfy"
+      ],
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-post-production-dataset-workflow",
+      "name": "The3MinuteNode — Post Production Dataset",
+      "file": "the3minutenode-post-production-dataset-workflow.json",
+      "artifact_ids": [
+        "krea2.turbo.int8-convrot",
+        "krea2.qwen3vl4b.fp8",
+        "qwen.image.vae",
+        "flux2.klein.9b",
+        "flux2.qwen3.8b.fp8mixed",
+        "flux2.vae"
+      ],
+      "custom_node_ids": [
+        "rgthree-comfy"
+      ],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-prompt-enhancer-gemma4-workflow",
+      "name": "The3minutenode Prompt Enhancer Gemma4 Workflow",
+      "file": "the3minutenode-prompt-enhancer-gemma4-workflow.json",
+      "artifact_ids": [
+        "gemma4_e4b_it_fp8_scaled"
+      ],
+      "custom_node_ids": [],
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "the3minutenode-refrence-minimaxh3-workflow",
+      "name": "The3MinuteNode — MiniMax H3 Reference-to-Video",
+      "file": "the3minutenode-refrence-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.bf16",
+        "minimax.h3.qwen3vl32b.bf16",
         "minimax.h3.video-vae.fp16",
         "minimax.h3.audio-vae.fp32"
       ],
-      "custom_node_ids": ["comfyui-video-director","comfyui-easy-use"],
-      "catalog_sources": ["workflow:comfybox-director-realism-people-minimaxh3"]
-    },
-    {
-      "id": "comfybox-director-instareal-wan2.2-workflow",
-      "name": "ComfyBox — Director InstaReal Wan 2.2",
-      "file": "comfybox-director-instareal-wan2.2-workflow.json",
-      "artifact_ids": [
-        "wan2.2.t2v.a14b.high-noise.q6-k",
-        "wan2.2.t2v.a14b.low-noise.q6-k",
-        "wan2.2.t2v.a14b.high-noise.distill.rank64",
-        "wan2.2.t2v.a14b.low-noise.distill.rank64",
-        "wan2.2.instareal.high-noise",
-        "wan2.2.instareal.low-noise",
-        "umt5_xxl_fp8_e4m3fn_scaled",
-        "wan_2_1_vae",
-        "clip-vision.h"
-      ],
-      "custom_node_ids": ["comfyui-video-director","comfyui-gguf","comfyui-easy-use"],
-      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"]
-    },
-    {
-      "id": "comfybox-character-swap-realism-lora-24to60-minimaxh3-workflow",
-      "name": "ComfyBox — Character Swap Realism LoRA 24-to-60 MiniMax H3",
-      "file": "comfybox-character-swap-realism-lora-24to60-minimaxh3-workflow.json",
-      "artifact_ids": [
-        "minimax.h3.ref2va.bf16",
-        "minimax.h3.qwen3vl32b.bf16",
-        "minimax.h3.video-vae.fp16",
-        "minimax.h3.audio-vae.fp32",
-        "minimax.h3.realism-people.t2v-i2v-r2v",
-        "gapfiller_v1"
-      ],
-      "custom_node_ids": ["comfyui-gapfiller", "comfyui-easy-use", "comfyui-kjnodes"],
-      "catalog_sources": ["workflow:comfybox-character-swap-realism-lora-24to60-minimaxh3"]
-    },
-    {
-      "id": "comfybox-character-swap-base-24to60-minimaxh3-workflow",
-      "name": "ComfyBox — Character Swap Base 24-to-60 MiniMax H3",
-      "file": "comfybox-character-swap-base-24to60-minimaxh3-workflow.json",
-      "artifact_ids": [
-        "minimax.h3.ref2va.bf16",
-        "minimax.h3.qwen3vl32b.bf16",
-        "minimax.h3.video-vae.fp16",
-        "minimax.h3.audio-vae.fp32",
-        "gapfiller_v1"
-      ],
-      "custom_node_ids": ["comfyui-gapfiller","comfyui-videohelpersuite","comfyui-easy-use"],
-      "catalog_sources": ["workflow:comfybox-character-swap-base-24to60-minimaxh3"]
+      "custom_node_ids": [],
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
     },
     {
       "id": "ukr8b3g201-360multiangle-qwenedit2511-workflow",
@@ -966,7 +1410,11 @@
         "qwen.image.encoder.2.5vl7b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": ["comfyui-qwenmultiangle","rgthree-comfy","comfyui-easy-use"],
+      "custom_node_ids": [
+        "comfyui-qwenmultiangle",
+        "rgthree-comfy",
+        "comfyui-easy-use"
+      ],
       "catalog_sources": [
         "_/deps.json"
       ]

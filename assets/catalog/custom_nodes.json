@@ -2,6 +2,24 @@
   "schema_version": 1,
   "custom_nodes": [
     {
+      "id": "cg-use-everywhere",
+      "name": "Use Everywhere",
+      "git_url": "https://github.com/chrisgoringe/cg-use-everywhere",
+      "folder_name": "cg-use-everywhere",
+      "node_types": [
+        "Anything Everywhere"
+      ],
+      "aliases": [
+        "cg-use-everywhere"
+      ],
+      "repository": "https://github.com/chrisgoringe/cg-use-everywhere",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/bui.toml",
+        "_/deps.json"
+      ]
+    },
+    {
       "id": "comfy-image-saver",
       "name": "Comfy Image Saver",
       "git_url": "https://github.com/giriss/comfy-image-saver",
@@ -45,57 +63,6 @@
       ],
       "catalog_sources": [
         "_/bui.toml"
-      ]
-    },
-    {
-      "id": "comfyui_comfyroll_customnodes",
-      "name": "Comfyui Comfyroll Customnodes",
-      "git_url": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
-      "folder_name": "ComfyUI_Comfyroll_CustomNodes",
-      "node_types": [
-        "ComfyUI_Comfyroll_CustomNodes"
-      ],
-      "aliases": [
-        "ComfyUI_Comfyroll_CustomNodes"
-      ],
-      "repository": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
-      "commit_sha": null,
-      "catalog_sources": [
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "comfyui_controlaltai_nodes",
-      "name": "Comfyui Controlaltai Nodes",
-      "git_url": "https://github.com/gseth/ControlAltAI-Nodes",
-      "folder_name": "ControlAltAI-Nodes",
-      "node_types": [
-        "comfyui_controlaltai_nodes"
-      ],
-      "aliases": [
-        "comfyui_controlaltai_nodes"
-      ],
-      "repository": "https://github.com/gseth/ControlAltAI-Nodes",
-      "commit_sha": null,
-      "catalog_sources": [
-        "_/deps.json"
-      ]
-    },
-    {
-      "id": "comfyui_controlnet_aux",
-      "name": "Comfyui Controlnet Aux",
-      "git_url": "https://github.com/Fannovel16/comfyui_controlnet_aux",
-      "folder_name": "comfyui_controlnet_aux",
-      "node_types": [
-        "comfyui_controlnet_aux"
-      ],
-      "aliases": [
-        "comfyui_controlnet_aux"
-      ],
-      "repository": "https://github.com/Fannovel16/comfyui_controlnet_aux",
-      "commit_sha": null,
-      "catalog_sources": [
-        "_/deps.json"
       ]
     },
     {
@@ -148,23 +115,6 @@
       ]
     },
     {
-      "id": "comfyui_essentials",
-      "name": "Comfyui Essentials",
-      "git_url": "https://github.com/cubiq/ComfyUI_essentials",
-      "folder_name": "ComfyUI_essentials",
-      "node_types": [
-        "comfyui_essentials"
-      ],
-      "aliases": [
-        "comfyui_essentials"
-      ],
-      "repository": "https://github.com/cubiq/ComfyUI_essentials",
-      "commit_sha": null,
-      "catalog_sources": [
-        "_/deps.json"
-      ]
-    },
-    {
       "id": "comfyui-face-analysis",
       "name": "ComfyUI Face Analysis",
       "git_url": "https://github.com/cubiq/ComfyUI_FaceAnalysis",
@@ -178,20 +128,46 @@
       ]
     },
     {
-      "id": "comfyui_faceanalysis",
-      "name": "Comfyui Faceanalysis",
-      "git_url": "https://github.com/cubiq/ComfyUI_FaceAnalysis",
-      "folder_name": "ComfyUI_FaceAnalysis",
+      "id": "comfyui-fantastic-minimaxh3-promptbuilder",
+      "name": "ComfyUI Fantastic MiniMax H3 Prompt Builder",
+      "git_url": "https://github.com/Adudeguyman/ComfyUI-Fantastic-MiniMaxH3-PromptBuilder",
+      "folder_name": "ComfyUI-Fantastic-MiniMaxH3-PromptBuilder",
       "node_types": [
-        "comfyui_faceanalysis"
+        "MiniMaxH3ReferenceSplitter",
+        "MiniMaxH3MediaLoader"
       ],
       "aliases": [
-        "comfyui_faceanalysis"
+        "ComfyUI-Fantastic-MiniMaxH3-PromptBuilder",
+        "ComfyUI Fantastic MiniMax H3 Prompt Builder"
       ],
-      "repository": "https://github.com/cubiq/ComfyUI_FaceAnalysis",
+      "repository": "https://github.com/Adudeguyman/ComfyUI-Fantastic-MiniMaxH3-PromptBuilder",
       "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-Fantastic-MiniMaxH3-PromptBuilder-main.zip",
+      "archive_sha256": "f9613274eb3121a2c96b91d39176a2a3f5b1b9751aca78a3f57921052d10bc08",
+      "archive_size_bytes": 3724463,
       "catalog_sources": [
-        "_/deps.json"
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-fearnworks-nodes",
+      "name": "ComfyUI Fearnworks Nodes",
+      "git_url": "https://github.com/fearnworks/ComfyUI_FearnworksNodes",
+      "folder_name": "ComfyUI_FearnworksNodes",
+      "node_types": [
+        "LoadImagesFromFolderKJ"
+      ],
+      "aliases": [
+        "ComfyUI_FearnworksNodes",
+        "ComfyUI Fearnworks Nodes"
+      ],
+      "repository": "https://github.com/fearnworks/ComfyUI_FearnworksNodes",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI_FearnworksNodes-main.zip",
+      "archive_sha256": "f18f64d2a8a903d22e24a359f9f93b543bb647d805a751c513ffa2950cdb8ef1",
+      "archive_size_bytes": 1576049,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
       ]
     },
     {
@@ -211,6 +187,27 @@
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-frame-interpolation",
+      "name": "ComfyUI Frame Interpolation",
+      "git_url": "https://github.com/Fannovel16/ComfyUI-Frame-Interpolation",
+      "folder_name": "ComfyUI-Frame-Interpolation",
+      "node_types": [
+        "FILM VFI"
+      ],
+      "aliases": [
+        "ComfyUI-Frame-Interpolation",
+        "ComfyUI Frame Interpolation"
+      ],
+      "repository": "https://github.com/Fannovel16/ComfyUI-Frame-Interpolation",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-Frame-Interpolation-main.zip",
+      "archive_sha256": "de2758d79bee7c50ea8f3c4a25fe0d1320514cf84bcc3e8ceb9875a99ce718e1",
+      "archive_size_bytes": 16848085,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
       ]
     },
     {
@@ -248,6 +245,50 @@
       "commit_sha": null,
       "catalog_sources": [
         "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui-gimm-vfi",
+      "name": "ComfyUI GIMM-VFI",
+      "git_url": "https://github.com/kijai/ComfyUI-GIMM-VFI",
+      "folder_name": "ComfyUI-GIMM-VFI",
+      "node_types": [
+        "DownloadAndLoadGIMMVFIModel",
+        "GIMMVFI_interpolate"
+      ],
+      "aliases": [
+        "ComfyUI-GIMM-VFI",
+        "ComfyUI GIMM-VFI"
+      ],
+      "repository": "https://github.com/kijai/ComfyUI-GIMM-VFI",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-GIMM-VFI-main.zip",
+      "archive_sha256": "7fd4963f0545c4d3417edc929558b6eb916133b5cd78fc262e0147c823d78ada",
+      "archive_size_bytes": 1011292,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-h3-prompt-ide",
+      "name": "ComfyUI H3 Prompt IDE",
+      "git_url": "https://github.com/ethanfel/ComfyUI-H3-Prompt-IDE",
+      "folder_name": "ComfyUI-H3-Prompt-IDE",
+      "node_types": [
+        "H3PromptIDE",
+        "H3PromptReferenceInputs"
+      ],
+      "aliases": [
+        "ComfyUI-H3-Prompt-IDE",
+        "ComfyUI H3 Prompt IDE"
+      ],
+      "repository": "https://github.com/ethanfel/ComfyUI-H3-Prompt-IDE",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-H3-Prompt-IDE-main.zip",
+      "archive_sha256": "ff9424d06824c9707a930fb0e588b30e62e0665d60db2697ac70934c70b5c43e",
+      "archive_size_bytes": 587064,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
       ]
     },
     {
@@ -380,23 +421,6 @@
       ]
     },
     {
-      "id": "comfyui_layerstyle",
-      "name": "Comfyui Layerstyle",
-      "git_url": "https://github.com/chflame163/ComfyUI_LayerStyle",
-      "folder_name": "ComfyUI_LayerStyle",
-      "node_types": [
-        "comfyui_layerstyle"
-      ],
-      "aliases": [
-        "comfyui_layerstyle"
-      ],
-      "repository": "https://github.com/chflame163/ComfyUI_LayerStyle",
-      "commit_sha": null,
-      "catalog_sources": [
-        "_/deps.json"
-      ]
-    },
-    {
       "id": "comfyui-layerstyle",
       "name": "ComfyUI LayerStyle",
       "git_url": "https://github.com/chflame163/ComfyUI_LayerStyle",
@@ -444,17 +468,135 @@
       ]
     },
     {
-      "id": "outputlists-combiner",
-      "name": "ComfyUI Output Lists Combiner",
-      "git_url": "https://github.com/geroldmeisinger/ComfyUI-outputlists-combiner",
-      "folder_name": "ComfyUI-outputlists-combiner",
+      "id": "comfyui-mainodes",
+      "name": "ComfyUI MAINodes",
+      "git_url": "https://github.com/matlowai/ComfyUI-MAINodes",
+      "folder_name": "ComfyUI-MAINodes",
       "node_types": [
-        "StringOutputList",
-        "StringConcatenate",
-        "StringFormat"
+        "H3ExactRecover",
+        "H3TimeSmear",
+        "H3V2VInit",
+        "H3InjectSchedule",
+        "H3JerkOracle"
       ],
+      "aliases": [
+        "ComfyUI-MAINodes",
+        "ComfyUI MAINodes"
+      ],
+      "repository": "https://github.com/matlowai/ComfyUI-MAINodes",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-MAINodes-main.zip",
+      "archive_sha256": "85b175d76fddd87388e75bca7a978a9775818eb2f72b11d08d98646765f498a3",
+      "archive_size_bytes": 97498478,
       "catalog_sources": [
-        "_/bui.toml"
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-minimax-h3-audio-t8",
+      "name": "ComfyUI MiniMax H3 Audio T8",
+      "git_url": "https://github.com/T8mars/comfyui-minimax-h3-audio-T8",
+      "folder_name": "comfyui-minimax-h3-audio-T8",
+      "node_types": [
+        "MiniMaxH3AVDecodeT8",
+        "MiniMaxH3DualClockSamplerT8"
+      ],
+      "aliases": [
+        "comfyui-minimax-h3-audio-T8",
+        "ComfyUI MiniMax H3 Audio T8"
+      ],
+      "repository": "https://github.com/T8mars/comfyui-minimax-h3-audio-T8",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-minimax-h3-audio-T8-main.zip",
+      "archive_sha256": "f773da246dda2ff1e6e67054fd83c0ecb81810d660a0222eea0d58a29aec8125",
+      "archive_size_bytes": 7860779,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-minimax-h3-director",
+      "name": "ComfyUI MiniMax H3 Director",
+      "git_url": "https://github.com/AIMixer/ComfyUI_MiniMaxH3_Director",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfybox-comfyui_director-minimaxh3.zip",
+      "archive_sha256": "ad21006fc831b7712450e3c66be3da0ab813ae9bffa9b0028ca6578098604a47",
+      "archive_size_bytes": 710073,
+      "folder_name": "ComfyUI_MiniMaxH3_Director",
+      "node_types": [
+        "MiniMaxH3Director"
+      ],
+      "aliases": [
+        "comfyui-minimax-h3-director",
+        "minimax-h3-director"
+      ],
+      "repository": "https://github.com/AIMixer/ComfyUI_MiniMaxH3_Director",
+      "commit_sha": null,
+      "catalog_sources": [
+        "workflow:comfybox-refiner-and-director-minimaxh3"
+      ]
+    },
+    {
+      "id": "comfyui-minimax-h3-latent-upscaler",
+      "name": "ComfyUI MiniMax H3 Latent Upscaler",
+      "git_url": "https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler",
+      "folder_name": "Comfyui_Minimax_h3_latent_Upscaler",
+      "node_types": [
+        "MinimaxH3LatentUpscaler3D"
+      ],
+      "aliases": [
+        "Comfyui_Minimax_h3_latent_Upscaler",
+        "ComfyUI MiniMax H3 Latent Upscaler"
+      ],
+      "repository": "https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/Comfyui_Minimax_h3_latent_Upscaler-main.zip",
+      "archive_sha256": "3acaa50e280a99f35c48e5c48f4d240b5e1ba7792e7129ad446a16da9612fb5e",
+      "archive_size_bytes": 8896688,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-minimaxh3mod",
+      "name": "ComfyUI MiniMaxH3 Mod",
+      "git_url": "https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod",
+      "folder_name": "ComfyUI-MiniMaxH3Mod",
+      "node_types": [
+        "MiniMaxH3RefModsLoader",
+        "MiniMaxH3RefModApply"
+      ],
+      "aliases": [
+        "ComfyUI-MiniMaxH3Mod",
+        "ComfyUI MiniMaxH3 Mod"
+      ],
+      "repository": "https://github.com/Luisacaotica/ComfyUI-MiniMaxH3Mod",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-MiniMaxH3Mod-main.zip",
+      "archive_sha256": "1af2abe8b39cee4c86b49e8c9d44ae7654cc424906713ac2ef0f6387159f9a02",
+      "archive_size_bytes": 54148460,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-mm-1frame",
+      "name": "ComfyUI MM One Frame",
+      "git_url": "https://github.com/cicalooo/ComfyUI-MM-1Frame",
+      "folder_name": "ComfyUI-MM-1Frame",
+      "node_types": [
+        "MM1FrameMiniMaxH3ReferenceToImage"
+      ],
+      "aliases": [
+        "ComfyUI-MM-1Frame",
+        "ComfyUI MM One Frame"
+      ],
+      "repository": "https://github.com/cicalooo/ComfyUI-MM-1Frame",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-MM-1Frame-master.zip",
+      "archive_sha256": "3c5bb989005f12a68da97900a1e89484b4882b6bf146853f4e14138230916eee",
+      "archive_size_bytes": 11852,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
       ]
     },
     {
@@ -512,6 +654,135 @@
       ]
     },
     {
+      "id": "comfyui-scail2-multi-cond",
+      "name": "ComfyUI SCAIL2 Multi Condition",
+      "git_url": "https://github.com/TTPlanetPig/comfyui_scail2_multi_cond",
+      "folder_name": "comfyui_scail2_multi_cond",
+      "node_types": [
+        "SCAIL2ScheduledLongVideoWithSAM",
+        "SCAIL2SegmentPlanBuilder"
+      ],
+      "aliases": [
+        "comfyui_scail2_multi_cond",
+        "ComfyUI SCAIL2 Multi Condition"
+      ],
+      "repository": "https://github.com/TTPlanetPig/comfyui_scail2_multi_cond",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui_scail2_multi_cond-main.zip",
+      "archive_sha256": "eb94ffe159eecd08adc9ca018cf5b7a49ce4a9688c9efae46c565d317a37a106",
+      "archive_size_bytes": 107522,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-sol-attn",
+      "name": "ComfyUI Sol Attention",
+      "git_url": "https://github.com/Saganaki22/ComfyUI-sol-attn",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfybox-comfyui-sol-attn.zip",
+      "archive_sha256": "ac6a4b7f0c1df01c0365717c885704f785fe6e75a622744de31213318bae8a33",
+      "archive_size_bytes": 65457,
+      "folder_name": "ComfyUI-sol-attn",
+      "node_types": [
+        "MiniMaxH3MemoryEfficientSolAttentionPatch"
+      ],
+      "aliases": [
+        "comfyui-sol-attn",
+        "sol-attn"
+      ],
+      "repository": "https://github.com/Saganaki22/ComfyUI-sol-attn",
+      "commit_sha": null,
+      "catalog_sources": [
+        "workflow:comfybox-refiner-and-director-minimaxh3"
+      ]
+    },
+    {
+      "id": "comfyui-spectrum-minimax-h3",
+      "name": "ComfyUI Spectrum MiniMax H3",
+      "git_url": "https://github.com/xmarre/ComfyUI-Spectrum-MiniMax-H3",
+      "folder_name": "ComfyUI-Spectrum-MiniMax-H3",
+      "node_types": [
+        "SpectrumApplyMiniMaxH3"
+      ],
+      "aliases": [
+        "ComfyUI-Spectrum-MiniMax-H3",
+        "ComfyUI Spectrum MiniMax H3"
+      ],
+      "repository": "https://github.com/xmarre/ComfyUI-Spectrum-MiniMax-H3",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-Spectrum-MiniMax-H3-main.zip",
+      "archive_sha256": "ad2088b7993feab4f8935c1b1a0c5b186797e8ed5fbe662518684abd477c4a9f",
+      "archive_size_bytes": 618653,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-swwan",
+      "name": "ComfyUI Swwan",
+      "git_url": "https://github.com/aining2022/ComfyUI_Swwan",
+      "folder_name": "ComfyUI_Swwan",
+      "node_types": [
+        "LayerUtility: ImageScaleByAspectRatio V2",
+        "ImageResizeKJv2"
+      ],
+      "aliases": [
+        "ComfyUI_Swwan",
+        "ComfyUI Swwan"
+      ],
+      "repository": "https://github.com/aining2022/ComfyUI_Swwan",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI_Swwan-main.zip",
+      "archive_sha256": "e3ee09eb0555b3e5526cbbf8a74e7a8a9fec296949b38613948af48a41c9783f",
+      "archive_size_bytes": 583625,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-vfi",
+      "name": "ComfyUI VFI",
+      "git_url": "https://github.com/GACLove/ComfyUI-VFI",
+      "folder_name": "ComfyUI-VFI",
+      "node_types": [
+        "RIFEInterpolation"
+      ],
+      "aliases": [
+        "ComfyUI-VFI",
+        "ComfyUI VFI"
+      ],
+      "repository": "https://github.com/GACLove/ComfyUI-VFI",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-VFI-main.zip",
+      "archive_sha256": "5d095e2b723f6b38f165c26d4b3b3c33a1cfef105fbc10899a56064dbeec47a3",
+      "archive_size_bytes": 295835,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ]
+    },
+    {
+      "id": "comfyui-video-director",
+      "name": "ComfyUI Video Director",
+      "git_url": "https://github.com/Thefrizzy1/ComfyUI-MiniMaxH3-Director",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-minimaxh3-director.zip",
+      "archive_sha256": "3b078b5552a98ee4d519433e23e4ec7b54ce5162f6a9679ba5d277058ead7656",
+      "archive_size_bytes": 255157,
+      "folder_name": "ComfyUI-MiniMaxH3-Director",
+      "node_types": [
+        "VideoModelLoader",
+        "MiniMaxH3Director"
+      ],
+      "aliases": [
+        "comfyui-video-director",
+        "comfyui-minimaxh3-director-generalized"
+      ],
+      "repository": "https://github.com/Thefrizzy1/ComfyUI-MiniMaxH3-Director",
+      "commit_sha": null,
+      "catalog_sources": [
+        "workflow:comfybox-director-relight-wananimate2.2"
+      ]
+    },
+    {
       "id": "comfyui-videohelpersuite",
       "name": "ComfyUI Video Helper Suite",
       "git_url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite",
@@ -540,6 +811,116 @@
       "catalog_sources": [
         "_/deps.json"
       ]
+    },
+    {
+      "id": "comfyui_comfyroll_customnodes",
+      "name": "Comfyui Comfyroll Customnodes",
+      "git_url": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
+      "folder_name": "ComfyUI_Comfyroll_CustomNodes",
+      "node_types": [
+        "ComfyUI_Comfyroll_CustomNodes"
+      ],
+      "aliases": [
+        "ComfyUI_Comfyroll_CustomNodes"
+      ],
+      "repository": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui_controlaltai_nodes",
+      "name": "Comfyui Controlaltai Nodes",
+      "git_url": "https://github.com/gseth/ControlAltAI-Nodes",
+      "folder_name": "ControlAltAI-Nodes",
+      "node_types": [
+        "comfyui_controlaltai_nodes"
+      ],
+      "aliases": [
+        "comfyui_controlaltai_nodes"
+      ],
+      "repository": "https://github.com/gseth/ControlAltAI-Nodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui_controlnet_aux",
+      "name": "Comfyui Controlnet Aux",
+      "git_url": "https://github.com/Fannovel16/comfyui_controlnet_aux",
+      "folder_name": "comfyui_controlnet_aux",
+      "node_types": [
+        "comfyui_controlnet_aux"
+      ],
+      "aliases": [
+        "comfyui_controlnet_aux"
+      ],
+      "repository": "https://github.com/Fannovel16/comfyui_controlnet_aux",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui_essentials",
+      "name": "Comfyui Essentials",
+      "git_url": "https://github.com/cubiq/ComfyUI_essentials",
+      "folder_name": "ComfyUI_essentials",
+      "node_types": [
+        "ImageResize+",
+        "comfyui_essentials"
+      ],
+      "aliases": [
+        "comfyui_essentials"
+      ],
+      "repository": "https://github.com/cubiq/ComfyUI_essentials",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI_essentials-main.zip",
+      "archive_sha256": "cd211d561da97643a6072afd371fd0b5dec00e4b8f268171c22d41b575037aa9f",
+      "archive_size_bytes": 70273
+    },
+    {
+      "id": "comfyui_faceanalysis",
+      "name": "Comfyui Faceanalysis",
+      "git_url": "https://github.com/cubiq/ComfyUI_FaceAnalysis",
+      "folder_name": "ComfyUI_FaceAnalysis",
+      "node_types": [
+        "comfyui_faceanalysis"
+      ],
+      "aliases": [
+        "comfyui_faceanalysis"
+      ],
+      "repository": "https://github.com/cubiq/ComfyUI_FaceAnalysis",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ]
+    },
+    {
+      "id": "comfyui_layerstyle",
+      "name": "Comfyui Layerstyle",
+      "git_url": "https://github.com/chflame163/ComfyUI_LayerStyle",
+      "folder_name": "ComfyUI_LayerStyle",
+      "node_types": [
+        "LayerUtility: ImageScaleByAspectRatio V2",
+        "comfyui_layerstyle"
+      ],
+      "aliases": [
+        "comfyui_layerstyle"
+      ],
+      "repository": "https://github.com/chflame163/ComfyUI_LayerStyle",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/deps.json"
+      ],
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI_LayerStyle-main.zip",
+      "archive_sha256": "1207cec8bbf8ba0832371092069e71f5124d2e128b981f322b4e836ae5029164",
+      "archive_size_bytes": 47948318
     },
     {
       "id": "controlaltai-nodes",
@@ -591,6 +972,62 @@
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
+      ]
+    },
+    {
+      "id": "minimax-h3-motion-director",
+      "name": "MiniMax H3 Motion Director",
+      "git_url": "https://github.com/j955229/ComfyUI-MiniMax-H3-Motion-Director",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-minimax-h3-motion-director.zip",
+      "archive_sha256": "d8cee614cdb8517b1f65ddc0973c2aaed26f81aa4098d5c3f60ece5b5d4f8c52",
+      "archive_size_bytes": 23148563,
+      "folder_name": "ComfyUI-MiniMax-H3-Motion-Director",
+      "node_types": [
+        "MiniMaxH3MotionDirector"
+      ],
+      "aliases": [
+        "minimax-h3-motion-director",
+        "comfyui-minimax-h3-motion-director"
+      ],
+      "repository": "https://github.com/j955229/ComfyUI-MiniMax-H3-Motion-Director",
+      "commit_sha": null,
+      "catalog_sources": [
+        "workflow:loratech-director-minimaxh3"
+      ]
+    },
+    {
+      "id": "outputlists-combiner",
+      "name": "ComfyUI Output Lists Combiner",
+      "git_url": "https://github.com/geroldmeisinger/ComfyUI-outputlists-combiner",
+      "folder_name": "ComfyUI-outputlists-combiner",
+      "node_types": [
+        "StringOutputList",
+        "StringConcatenate",
+        "StringFormat"
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ]
+    },
+    {
+      "id": "plaguekind-nodes",
+      "name": "ComfyUI PlagueKind Nodes",
+      "git_url": "https://github.com/PlagueKind/ComfyUI-PlagueKind-Nodes",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-plaguekind-nodes.zip",
+      "archive_sha256": "a406e97eb814b9db0c1b95a9c5d42317a9ca4fd8e81a0b0fe22f03b9532f2464",
+      "archive_size_bytes": 174403,
+      "folder_name": "ComfyUI-PlagueKind-Nodes",
+      "node_types": [
+        "H3SLAAttention"
+      ],
+      "aliases": [
+        "plaguekind-nodes",
+        "comfyui-plaguekind-nodes"
+      ],
+      "repository": "https://github.com/PlagueKind/ComfyUI-PlagueKind-Nodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "workflow:loratech-director-minimaxh3"
       ]
     },
     {
@@ -655,21 +1092,21 @@
       ]
     },
     {
-      "id": "cg-use-everywhere",
-      "name": "Use Everywhere",
-      "git_url": "https://github.com/chrisgoringe/cg-use-everywhere",
-      "folder_name": "cg-use-everywhere",
+      "id": "comfyui-text-translation",
+      "name": "ComfyUI Text Translation",
+      "git_url": "https://github.com/TFL-TFL/ComfyUI_Text_Translation",
+      "folder_name": "ComfyUI_Text_Translation",
       "node_types": [
-        "Anything Everywhere"
+        "Text"
       ],
       "aliases": [
-        "cg-use-everywhere"
+        "TFL-TFL/ComfyUI_Text_Translation",
+        "ComfyUI_Text_Translation"
       ],
-      "repository": "https://github.com/chrisgoringe/cg-use-everywhere",
+      "repository": "https://github.com/TFL-TFL/ComfyUI_Text_Translation",
       "commit_sha": null,
       "catalog_sources": [
-        "_/bui.toml",
-        "_/deps.json"
+        "workflow node metadata"
       ]
     },
     {
@@ -690,76 +1127,6 @@
       ]
     },
     {
-      "id": "plaguekind-nodes",
-      "name": "ComfyUI PlagueKind Nodes",
-      "git_url": "https://github.com/PlagueKind/ComfyUI-PlagueKind-Nodes",
-      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-plaguekind-nodes.zip",
-      "archive_sha256": "a406e97eb814b9db0c1b95a9c5d42317a9ca4fd8e81a0b0fe22f03b9532f2464",
-      "archive_size_bytes": 174403,
-      "folder_name": "ComfyUI-PlagueKind-Nodes",
-      "node_types": ["H3SLAAttention"],
-      "aliases": ["plaguekind-nodes", "comfyui-plaguekind-nodes"],
-      "repository": "https://github.com/PlagueKind/ComfyUI-PlagueKind-Nodes",
-      "commit_sha": null,
-      "catalog_sources": ["workflow:loratech-director-minimaxh3"]
-    },
-    {
-      "id": "minimax-h3-motion-director",
-      "name": "MiniMax H3 Motion Director",
-      "git_url": "https://github.com/j955229/ComfyUI-MiniMax-H3-Motion-Director",
-      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-minimax-h3-motion-director.zip",
-      "archive_sha256": "d8cee614cdb8517b1f65ddc0973c2aaed26f81aa4098d5c3f60ece5b5d4f8c52",
-      "archive_size_bytes": 23148563,
-      "folder_name": "ComfyUI-MiniMax-H3-Motion-Director",
-      "node_types": ["MiniMaxH3MotionDirector"],
-      "aliases": ["minimax-h3-motion-director", "comfyui-minimax-h3-motion-director"],
-      "repository": "https://github.com/j955229/ComfyUI-MiniMax-H3-Motion-Director",
-      "commit_sha": null,
-      "catalog_sources": ["workflow:loratech-director-minimaxh3"]
-    },
-    {
-      "id": "comfyui-sol-attn",
-      "name": "ComfyUI Sol Attention",
-      "git_url": "https://github.com/Saganaki22/ComfyUI-sol-attn",
-      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfybox-comfyui-sol-attn.zip",
-      "archive_sha256": "ac6a4b7f0c1df01c0365717c885704f785fe6e75a622744de31213318bae8a33",
-      "archive_size_bytes": 65457,
-      "folder_name": "ComfyUI-sol-attn",
-      "node_types": ["MiniMaxH3MemoryEfficientSolAttentionPatch"],
-      "aliases": ["comfyui-sol-attn", "sol-attn"],
-      "repository": "https://github.com/Saganaki22/ComfyUI-sol-attn",
-      "commit_sha": null,
-      "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"]
-    },
-    {
-      "id": "comfyui-minimax-h3-director",
-      "name": "ComfyUI MiniMax H3 Director",
-      "git_url": "https://github.com/AIMixer/ComfyUI_MiniMaxH3_Director",
-      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfybox-comfyui_director-minimaxh3.zip",
-      "archive_sha256": "ad21006fc831b7712450e3c66be3da0ab813ae9bffa9b0028ca6578098604a47",
-      "archive_size_bytes": 710073,
-      "folder_name": "ComfyUI_MiniMaxH3_Director",
-      "node_types": ["MiniMaxH3Director"],
-      "aliases": ["comfyui-minimax-h3-director", "minimax-h3-director"],
-      "repository": "https://github.com/AIMixer/ComfyUI_MiniMaxH3_Director",
-      "commit_sha": null,
-      "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"]
-    },
-    {
-      "id": "comfyui-video-director",
-      "name": "ComfyUI Video Director",
-      "git_url": "https://github.com/Thefrizzy1/ComfyUI-MiniMaxH3-Director",
-      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-minimaxh3-director.zip",
-      "archive_sha256": "3b078b5552a98ee4d519433e23e4ec7b54ce5162f6a9679ba5d277058ead7656",
-      "archive_size_bytes": 255157,
-      "folder_name": "ComfyUI-MiniMaxH3-Director",
-      "node_types": ["VideoModelLoader", "MiniMaxH3Director"],
-      "aliases": ["comfyui-video-director", "comfyui-minimaxh3-director-generalized"],
-      "repository": "https://github.com/Thefrizzy1/ComfyUI-MiniMaxH3-Director",
-      "commit_sha": null,
-      "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"]
-    },
-    {
       "id": "was-ns",
       "name": "Was Ns",
       "git_url": "https://github.com/ltdrdata/was-node-suite-comfyui",
@@ -774,6 +1141,27 @@
       "commit_sha": null,
       "catalog_sources": [
         "_/deps.json"
+      ]
+    },
+    {
+      "id": "whatdreamscost-comfyui",
+      "name": "WhatDreamsCost ComfyUI",
+      "git_url": "https://github.com/WhatDreamsCost/WhatDreamsCost-ComfyUI",
+      "folder_name": "WhatDreamsCost-ComfyUI",
+      "node_types": [
+        "LoadAudioUI"
+      ],
+      "aliases": [
+        "WhatDreamsCost-ComfyUI",
+        "WhatDreamsCost ComfyUI"
+      ],
+      "repository": "https://github.com/WhatDreamsCost/WhatDreamsCost-ComfyUI",
+      "commit_sha": null,
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/WhatDreamsCost-ComfyUI-main.zip",
+      "archive_sha256": "11ea35a12a496df398267156e8b1ebc41263863ee07ff9677360312f73cf9b20",
+      "archive_size_bytes": 258528,
+      "catalog_sources": [
+        "user-provided workflow dependencies"
       ]
     }
   ]

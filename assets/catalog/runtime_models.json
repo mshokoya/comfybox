@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 6,
+  "artifact_count": 8,
   "artifacts": [
     {
       "id": "dw_ll_ucoco_384_bs5_torchscript",
@@ -32,6 +32,34 @@
       "sha256": null,
       "gated": false,
       "description": "Runtime model; PT file; hosted on Hugging Face."
+    },
+    {
+      "id": "gimm-vfi.r.arb-lpips.fp32",
+      "name": "GIMM-VFI R Arbitrary LPIPS FP32",
+      "type": "runtime_models",
+      "relative_path": "models/interpolation/gimm-vfi/gimmvfi_r_arb_lpips_fp32.safetensors",
+      "loader": "DownloadAndLoadGIMMVFIModel",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "gimmvfi_r_arb_lpips_fp32.safetensors",
+          "url": "https://huggingface.co/Kijai/GIMM-VFI_safetensors/resolve/main/gimmvfi_r_arb_lpips_fp32.safetensors",
+          "size": "79.20 MB",
+          "size_bytes": 79204556,
+          "sha256": "897b892e7ee481f2e5c09e59661b645abbd6c9aba9c0c01346bbe31aa569e277",
+          "description": "GIMM-VFI RAFT interpolation checkpoint; the node may additionally fetch its RAFT flow estimator.",
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ],
+      "url": "https://huggingface.co/Kijai/GIMM-VFI_safetensors/resolve/main/gimmvfi_r_arb_lpips_fp32.safetensors",
+      "group": "Workflow runtime",
+      "size_bytes": 79204556,
+      "sha256": "897b892e7ee481f2e5c09e59661b645abbd6c9aba9c0c01346bbe31aa569e277",
+      "gated": false,
+      "description": "GIMM-VFI RAFT interpolation checkpoint; the node may additionally fetch its RAFT flow estimator."
     },
     {
       "id": "qwen2_5_vl_7b_instruct_abliterated_mmproj_q8_0",
@@ -115,6 +143,34 @@
       "description": "Runtime model; GGUF Q5_K_M quantization; abliterated variant; GGUF file; hosted on Hugging Face."
     },
     {
+      "id": "rife.flownet",
+      "name": "RIFE FlowNet",
+      "type": "runtime_models",
+      "relative_path": "models/rife/flownet.pkl",
+      "loader": "RIFEInterpolation",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "flownet.pkl",
+          "url": "https://huggingface.co/Sean-Bradley/ComfyUI/resolve/main/models/sonic/RIFE/flownet.pkl",
+          "size": "12.19 MB",
+          "size_bytes": 12186817,
+          "sha256": "fe854fc8996547c953f732aaa3b78cae76cc0a12833ae856ea0749c4c570d7d8",
+          "description": "RIFE interpolation FlowNet checkpoint used by ComfyUI-VFI.",
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ],
+      "url": "https://huggingface.co/Sean-Bradley/ComfyUI/resolve/main/models/sonic/RIFE/flownet.pkl",
+      "group": "Workflow runtime",
+      "size_bytes": 12186817,
+      "sha256": "fe854fc8996547c953f732aaa3b78cae76cc0a12833ae856ea0749c4c570d7d8",
+      "gated": false,
+      "description": "RIFE interpolation FlowNet checkpoint used by ComfyUI-VFI."
+    },
+    {
       "id": "seedvr2_ema_3b_fp16",
       "type": "runtime_models",
       "relative_path": "runtime_models/seedvr2_ema_3b_fp16.safetensors",
@@ -141,6 +197,32 @@
       "description": "Runtime model; FP16 precision; SafeTensors file; hosted on Hugging Face."
     },
     {
+      "id": "ultralytics.face-yolov8m",
+      "name": "Ultralytics Face YOLOv8m Detector",
+      "type": "runtime_models",
+      "relative_path": "models/ultralytics/bbox/face_yolov8m.pt",
+      "loader": "MiniMaxH3MotionDirector",
+      "compatibility": "optional-face-refinement",
+      "sources": [
+        {
+          "title": "face_yolov8m.pt",
+          "url": "https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/detection/bbox/face_yolov8m.pt",
+          "size": "52.0 MB",
+          "size_bytes": 51996128,
+          "description": "Optional Ultralytics face detector used when Motion Director face refinement is enabled."
+        }
+      ],
+      "catalog_sources": [
+        "workflow:loratech-director-minimaxh3"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/detection/bbox/face_yolov8m.pt",
+      "size_bytes": 51996128,
+      "sha256": "e3893a92c5c1907136b6cc75404094db767c1e0cfefe1b43e87dad72af2e4c9f",
+      "gated": false,
+      "description": "Optional Ultralytics face detector used when Motion Director face refinement is enabled."
+    },
+    {
       "id": "yolox_l_torchscript",
       "type": "runtime_models",
       "relative_path": "runtime_models/yolox_l.torchscript.pt",
@@ -165,30 +247,6 @@
       "sha256": null,
       "gated": false,
       "description": "Runtime model; PT file; hosted on Hugging Face."
-    },
-    {
-      "id": "ultralytics.face-yolov8m",
-      "name": "Ultralytics Face YOLOv8m Detector",
-      "type": "runtime_models",
-      "relative_path": "models/ultralytics/bbox/face_yolov8m.pt",
-      "loader": "MiniMaxH3MotionDirector",
-      "compatibility": "optional-face-refinement",
-      "sources": [
-        {
-          "title": "face_yolov8m.pt",
-          "url": "https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/detection/bbox/face_yolov8m.pt",
-          "size": "52.0 MB",
-          "size_bytes": 51996128,
-          "description": "Optional Ultralytics face detector used when Motion Director face refinement is enabled."
-        }
-      ],
-      "catalog_sources": ["workflow:loratech-director-minimaxh3"],
-      "declared_type": "runtime-model",
-      "url": "https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/detection/bbox/face_yolov8m.pt",
-      "size_bytes": 51996128,
-      "sha256": "e3893a92c5c1907136b6cc75404094db767c1e0cfefe1b43e87dad72af2e4c9f",
-      "gated": false,
-      "description": "Optional Ultralytics face detector used when Motion Director face refinement is enabled."
     }
   ]
 }

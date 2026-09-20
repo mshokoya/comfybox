@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 14,
+  "artifact_count": 16,
   "artifacts": [
     {
       "id": "ae",
@@ -74,6 +74,39 @@
       "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
     },
     {
+      "id": "flux2.small-decoder.decoder-only",
+      "name": "FLUX.2 - Small Decoder Only",
+      "type": "vae",
+      "relative_path": "models/vae/small_decoder.safetensors",
+      "group": "FLUX.2",
+      "tags": [
+        "image",
+        "vae",
+        "decoder-only",
+        "small-decoder",
+        "flux2"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/small_decoder.safetensors",
+          "sha256": "ad783347747561d974f347f1b7377ebca15330621ace6a2e3f8dfaa83f5c211f",
+          "size_bytes": 111801980,
+          "enabled": true,
+          "title": "FLUX.2 - Small Decoder Only",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/small_decoder.safetensors",
+      "size_bytes": 111801980,
+      "sha256": "ad783347747561d974f347f1b7377ebca15330621ace6a2e3f8dfaa83f5c211f",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
       "id": "flux2.vae",
       "legacy_ids": [
         "flux2_vae"
@@ -111,39 +144,6 @@
       "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
       "gated": false,
       "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
-    },
-    {
-      "id": "flux2.small-decoder.decoder-only",
-      "name": "FLUX.2 - Small Decoder Only",
-      "type": "vae",
-      "relative_path": "models/vae/small_decoder.safetensors",
-      "group": "FLUX.2",
-      "tags": [
-        "image",
-        "vae",
-        "decoder-only",
-        "small-decoder",
-        "flux2"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/small_decoder.safetensors",
-          "sha256": "ad783347747561d974f347f1b7377ebca15330621ace6a2e3f8dfaa83f5c211f",
-          "size_bytes": 111801980,
-          "enabled": true,
-          "title": "FLUX.2 - Small Decoder Only",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/small_decoder.safetensors",
-      "size_bytes": 111801980,
-      "sha256": "ad783347747561d974f347f1b7377ebca15330621ace6a2e3f8dfaa83f5c211f",
-      "gated": false,
-      "description": "Catalog download source"
     },
     {
       "id": "flux_ultra_vae",
@@ -217,6 +217,62 @@
       "sha256": "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48",
       "gated": false,
       "description": "VAE weights; FP32 precision; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.image-vae.t1.step1597",
+      "name": "MiniMax H3 T1 Image VAE Step 1597",
+      "type": "vae",
+      "relative_path": "models/vae/minimax_h3_t1_image_vae_step1597.safetensors",
+      "loader": "VAELoader",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "minimax_h3_t1_image_vae_step1597.safetensors",
+          "url": "https://huggingface.co/Mamad8/MiniMax-H3-Image-VAE/resolve/main/minimax_h3_t1_image_vae_step1597.safetensors",
+          "size": "5.21 GB",
+          "size_bytes": 5207808784,
+          "sha256": "6c3d0bfa055986a803a566a862fcde283a1e63db62829e5ef4a2a5aebf50bb86",
+          "description": "Experimental single-frame MiniMax H3 image VAE used by the one-frame workflow.",
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ],
+      "url": "https://huggingface.co/Mamad8/MiniMax-H3-Image-VAE/resolve/main/minimax_h3_t1_image_vae_step1597.safetensors",
+      "group": "MiniMax H3",
+      "size_bytes": 5207808784,
+      "sha256": "6c3d0bfa055986a803a566a862fcde283a1e63db62829e5ef4a2a5aebf50bb86",
+      "gated": false,
+      "description": "Experimental single-frame MiniMax H3 image VAE used by the one-frame workflow."
+    },
+    {
+      "id": "minimax.h3.tae.h3",
+      "name": "MiniMax H3 Tiny Autoencoder Preview",
+      "type": "vae",
+      "relative_path": "models/vae_approx/taeh3.safetensors",
+      "loader": "ModelPreviewOverrideKJ",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "taeh3.safetensors",
+          "url": "https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors",
+          "size": "9.79 MB",
+          "size_bytes": 9791388,
+          "sha256": "f0f60fa072089997f817402098c2fd90777cb2660dd79cf5df42fc1e3e08e527",
+          "description": "Tiny MiniMax H3 preview autoencoder used by KJNodes ModelPreviewOverride.",
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ],
+      "url": "https://huggingface.co/Kijai/MiniMax-H3-TAE/resolve/main/vae_approx/taeh3.safetensors",
+      "group": "MiniMax H3",
+      "size_bytes": 9791388,
+      "sha256": "f0f60fa072089997f817402098c2fd90777cb2660dd79cf5df42fc1e3e08e527",
+      "gated": false,
+      "description": "Tiny MiniMax H3 preview autoencoder used by KJNodes ModelPreviewOverride."
     },
     {
       "id": "minimax.h3.video-vae.fp16",
@@ -396,38 +452,6 @@
       "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
     },
     {
-      "id": "zimage.ae",
-      "name": "Z-Image Autoencoder",
-      "type": "vae",
-      "relative_path": "models/vae/ae.safetensors",
-      "group": "Z-Image",
-      "tags": [
-        "image",
-        "vae",
-        "autoencoder",
-        "z-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors",
-          "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
-          "size_bytes": 335304388,
-          "enabled": true,
-          "title": "Z-Image Autoencoder",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors",
-      "size_bytes": 335304388,
-      "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
-      "gated": false,
-      "description": "Catalog download source"
-    },
-    {
       "id": "z_image",
       "type": "vae",
       "relative_path": "models/vae/z-image.safetensors",
@@ -467,6 +491,38 @@
       "sha256": null,
       "gated": false,
       "description": "VAE weights; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "zimage.ae",
+      "name": "Z-Image Autoencoder",
+      "type": "vae",
+      "relative_path": "models/vae/ae.safetensors",
+      "group": "Z-Image",
+      "tags": [
+        "image",
+        "vae",
+        "autoencoder",
+        "z-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors",
+          "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+          "size_bytes": 335304388,
+          "enabled": true,
+          "title": "Z-Image Autoencoder",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/vae/ae.safetensors",
+      "size_bytes": 335304388,
+      "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+      "gated": false,
+      "description": "Catalog download source"
     },
     {
       "id": "zimagebase_ae",

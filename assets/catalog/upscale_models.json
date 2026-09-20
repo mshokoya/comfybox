@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 4,
+  "artifact_count": 5,
   "artifacts": [
     {
       "id": "4xnmkdsuperscale_4xnmkdsuperscale",
@@ -58,6 +58,34 @@
       "sha256": null,
       "gated": false,
       "description": "Upscale model weights; PTH file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.latent-upscaler.3d-conv-v1.fp16",
+      "name": "MiniMax H3 Latent Upscaler 3D Conv v1 FP16",
+      "type": "upscale_models",
+      "relative_path": "models/latent_upscale_models/minimax_h3_latent_upscaler_3d_conv_v1_fp16.safetensors",
+      "loader": "MinimaxH3LatentUpscaler3D",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "minimax_h3_latent_upscaler_3d_conv_v1_fp16.safetensors",
+          "url": "https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_conv_v1/minimax_h3_latent_upscaler_3d_conv_v1_fp16.safetensors",
+          "size": "690.59 MB",
+          "size_bytes": 690592672,
+          "sha256": "043e5a48e161610ef6c3ea974645220354d06fa618abca15f76d084812eb55c2",
+          "description": "3D convolutional FP16 latent upscaler used by the ultra-speed MiniMax workflow.",
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ],
+      "url": "https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_conv_v1/minimax_h3_latent_upscaler_3d_conv_v1_fp16.safetensors",
+      "group": "MiniMax H3",
+      "size_bytes": 690592672,
+      "sha256": "043e5a48e161610ef6c3ea974645220354d06fa618abca15f76d084812eb55c2",
+      "gated": false,
+      "description": "3D convolutional FP16 latent upscaler used by the ultra-speed MiniMax workflow."
     },
     {
       "id": "upscale.clear-reality-soft.4x",

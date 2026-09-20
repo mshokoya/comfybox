@@ -5,41 +5,35 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 4,
+  "artifact_count": 5,
   "artifacts": [
     {
-      "id": "sdxl.base.1.0.0.9vae",
-      "name": "Stable Diffusion XL Base 1.0 - 0.9 VAE",
+      "id": "sam3.1.multiplex.fp16",
+      "name": "SAM 3.1 Multiplex FP16",
       "type": "checkpoints",
-      "relative_path": "models/checkpoints/sd_xl_base_1.0_0.9vae.safetensors",
-      "group": "Stable Diffusion",
-      "tags": [
-        "image",
-        "checkpoint",
-        "base",
-        "sdxl",
-        "1.0",
-        "0.9-vae"
-      ],
+      "relative_path": "models/checkpoints/sam3.1_multiplex_fp16.safetensors",
+      "loader": "CheckpointLoaderSimple",
+      "compatibility": "comfyui-native",
       "sources": [
         {
-          "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0_0.9vae.safetensors",
-          "sha256": "e6bb9ea85bbf7bf6478a7c6d18b71246f22e95d41bcdd80ed40aa212c33cfeff",
-          "size_bytes": 6938078334,
-          "enabled": true,
-          "title": "Stable Diffusion XL Base 1.0 - 0.9 VAE",
-          "description": "Catalog download source",
-          "size": null
+          "title": "sam3.1_multiplex_fp16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/sam3.1/resolve/main/checkpoints/sam3.1_multiplex_fp16.safetensors",
+          "size": "1.75 GB",
+          "size_bytes": 1745546848,
+          "sha256": "9ba99c92703c2e8b4f47de2d34a539bb8e18923049e238b780d70dbe6368eb03",
+          "description": "SAM 3.1 multiplex segmentation checkpoint used for long-video subject tracking.",
+          "enabled": true
         }
       ],
       "catalog_sources": [
-        "_/bui.toml"
+        "user-provided workflow dependencies"
       ],
-      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0_0.9vae.safetensors",
-      "size_bytes": 6938078334,
-      "sha256": "e6bb9ea85bbf7bf6478a7c6d18b71246f22e95d41bcdd80ed40aa212c33cfeff",
+      "url": "https://huggingface.co/Comfy-Org/sam3.1/resolve/main/checkpoints/sam3.1_multiplex_fp16.safetensors",
+      "group": "Workflow runtime",
+      "size_bytes": 1745546848,
+      "sha256": "9ba99c92703c2e8b4f47de2d34a539bb8e18923049e238b780d70dbe6368eb03",
       "gated": false,
-      "description": "Catalog download source"
+      "description": "SAM 3.1 multiplex segmentation checkpoint used for long-video subject tracking."
     },
     {
       "id": "sdxl.base.1.0",
@@ -75,26 +69,26 @@
       "description": "Catalog download source"
     },
     {
-      "id": "sdxl.refiner.1.0.0.9vae",
-      "name": "Stable Diffusion XL Refiner 1.0 - 0.9 VAE",
+      "id": "sdxl.base.1.0.0.9vae",
+      "name": "Stable Diffusion XL Base 1.0 - 0.9 VAE",
       "type": "checkpoints",
-      "relative_path": "models/checkpoints/sd_xl_refiner_1.0_0.9vae.safetensors",
+      "relative_path": "models/checkpoints/sd_xl_base_1.0_0.9vae.safetensors",
       "group": "Stable Diffusion",
       "tags": [
         "image",
         "checkpoint",
-        "refiner",
+        "base",
         "sdxl",
         "1.0",
         "0.9-vae"
       ],
       "sources": [
         {
-          "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0_0.9vae.safetensors",
-          "sha256": "8d0ce6c016004cbdacd50f937dad381d8c396628d621a7f97191470532780164",
-          "size_bytes": 6075981930,
+          "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0_0.9vae.safetensors",
+          "sha256": "e6bb9ea85bbf7bf6478a7c6d18b71246f22e95d41bcdd80ed40aa212c33cfeff",
+          "size_bytes": 6938078334,
           "enabled": true,
-          "title": "Stable Diffusion XL Refiner 1.0 - 0.9 VAE",
+          "title": "Stable Diffusion XL Base 1.0 - 0.9 VAE",
           "description": "Catalog download source",
           "size": null
         }
@@ -102,9 +96,9 @@
       "catalog_sources": [
         "_/bui.toml"
       ],
-      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0_0.9vae.safetensors",
-      "size_bytes": 6075981930,
-      "sha256": "8d0ce6c016004cbdacd50f937dad381d8c396628d621a7f97191470532780164",
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0_0.9vae.safetensors",
+      "size_bytes": 6938078334,
+      "sha256": "e6bb9ea85bbf7bf6478a7c6d18b71246f22e95d41bcdd80ed40aa212c33cfeff",
       "gated": false,
       "description": "Catalog download source"
     },
@@ -138,6 +132,40 @@
       "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors",
       "size_bytes": 6075981930,
       "sha256": "7440042bbdc8a24813002c09b6b69b64dc90fded4472613437b7f55f9b7d9c5f",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "sdxl.refiner.1.0.0.9vae",
+      "name": "Stable Diffusion XL Refiner 1.0 - 0.9 VAE",
+      "type": "checkpoints",
+      "relative_path": "models/checkpoints/sd_xl_refiner_1.0_0.9vae.safetensors",
+      "group": "Stable Diffusion",
+      "tags": [
+        "image",
+        "checkpoint",
+        "refiner",
+        "sdxl",
+        "1.0",
+        "0.9-vae"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0_0.9vae.safetensors",
+          "sha256": "8d0ce6c016004cbdacd50f937dad381d8c396628d621a7f97191470532780164",
+          "size_bytes": 6075981930,
+          "enabled": true,
+          "title": "Stable Diffusion XL Refiner 1.0 - 0.9 VAE",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0_0.9vae.safetensors",
+      "size_bytes": 6075981930,
+      "sha256": "8d0ce6c016004cbdacd50f937dad381d8c396628d621a7f97191470532780164",
       "gated": false,
       "description": "Catalog download source"
     }

@@ -1,0 +1,1378 @@
+{
+  "id": "c5beec59-2b88-4f3f-ba35-7640a58a9ba6",
+  "revision": 0,
+  "last_node_id": 254,
+  "last_link_id": 293,
+  "nodes": [
+    {
+      "id": 195,
+      "type": "CLIPLoader",
+      "pos": [
+        -1028.8429174871721,
+        422.8640301817211
+      ],
+      "size": [
+        495.8871826591876,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            259
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.76",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "minimax",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "type": "minimax",
+        "device": "default"
+      }
+    },
+    {
+      "id": 196,
+      "type": "VAELoader",
+      "pos": [
+        -1028.8429174871721,
+        602.1684644049741
+      ],
+      "size": [
+        495.8871826591876,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            260,
+            270
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.76",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "minimax_h3_video_vae_fp16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+      }
+    },
+    {
+      "id": 213,
+      "type": "VAELoader",
+      "pos": [
+        -1028.8429174871721,
+        733.4728986282271
+      ],
+      "size": [
+        495.8871826591876,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            267
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.76",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "minimax_h3_audio_vae_fp32.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+      }
+    },
+    {
+      "id": 237,
+      "type": "PixaromaLongestSide",
+      "pos": [
+        -488.39858807381347,
+        620.0598908999315
+      ],
+      "size": [
+        466.34611386654007,
+        144
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 286
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            280
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            281
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            282
+          ]
+        }
+      ],
+      "title": "3. Longest Side (Select the max size you want)",
+      "properties": {
+        "cnr_id": "ComfyUI-Pixaroma",
+        "ver": "94e61b592e3efaee9299ed74d1acc1f6a9b9324c",
+        "Node name for S&R": "PixaromaLongestSide",
+        "longestSideState": {
+          "size": 1536,
+          "sizes": [
+            864,
+            1024,
+            1216,
+            1344,
+            1536
+          ],
+          "ratio": "16:9",
+          "ratios": [
+            "keep",
+            "1:1",
+            "16:9",
+            "9:16",
+            "2:3"
+          ],
+          "step": 32,
+          "anchor": "center",
+          "allow_upscale": true,
+          "resample": "auto"
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {},
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 241,
+      "type": "Power Lora Loader (rgthree)",
+      "pos": [
+        -1015.9451343917939,
+        843.036036353162
+      ],
+      "size": [
+        478.96146053723544,
+        166
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "model",
+          "type": "MODEL",
+          "link": 284
+        },
+        {
+          "dir": 3,
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "name": "MODEL",
+          "shape": 3,
+          "type": "MODEL",
+          "links": []
+        },
+        {
+          "dir": 4,
+          "name": "CLIP",
+          "shape": 3,
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "738105af5fb14e96fbecaf406dc356e284797e8c",
+        "Show Strengths": "Single Strength",
+        "Match": ""
+      },
+      "widgets_values": [
+        {},
+        {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        {
+          "on": true,
+          "lora": "h3-realism-people-t2v-i2v-r2v.safetensors",
+          "strength": 0.75,
+          "strengthTwo": null
+        },
+        {
+          "on": true,
+          "lora": "minimax_h3_fl2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {},
+        ""
+      ],
+      "widgets_values_named": {
+        "divider": {},
+        "PowerLoraLoaderHeaderWidget": {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        "lora_1": {
+          "on": true,
+          "lora": "h3-realism-people-t2v-i2v-r2v.safetensors",
+          "strength": 0.75,
+          "strengthTwo": null
+        },
+        "lora_2": {
+          "on": true,
+          "lora": "minimax_h3_fl2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        "➕ Add Lora": ""
+      }
+    },
+    {
+      "id": 242,
+      "type": "LoadImage",
+      "pos": [
+        -1024.254573535454,
+        1056.804563504141
+      ],
+      "size": [
+        490.4611361183531,
+        527.4307054376131
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            286
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.34.0",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pasted/image (26).png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "pasted/image (26).png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 222,
+      "type": "MiniMaxH3ImageToVideo",
+      "pos": [
+        33.11302594972467,
+        290.13686008231775
+      ],
+      "size": [
+        290.40571263903155,
+        339.1817653772689
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 259
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 260
+        },
+        {
+          "name": "first_frame",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 280
+        },
+        {
+          "name": "last_frame",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 289
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 281
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 282
+        },
+        {
+          "name": "length",
+          "type": "INT",
+          "widget": {
+            "name": "length"
+          },
+          "link": 278
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            262,
+            263
+          ]
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            275
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.1",
+        "Node name for S&R": "MiniMaxH3ImageToVideo"
+      },
+      "widgets_values": [
+        "",
+        1344,
+        768,
+        73
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "width": 1344,
+        "height": 768,
+        "length": 73
+      },
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 224,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        60.52483198649641,
+        1343.2063160450382
+      ],
+      "size": [
+        293.6561244220478,
+        26
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 263
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            261
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.1",
+        "Node name for S&R": "ConditioningZeroOut"
+      },
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 226,
+      "type": "VAEDecode",
+      "pos": [
+        46.22302014122402,
+        1219.9370206319247
+      ],
+      "size": [
+        293.6561244220478,
+        46
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 268
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 270
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            290
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.1",
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 227,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        55.75756137140554,
+        1304.346653817229
+      ],
+      "size": [
+        293.6561244220478,
+        46
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 269
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 267
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            291
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.1",
+        "Node name for S&R": "VAEDecodeAudio"
+      },
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 250,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        384.35938368345273,
+        308.60454210029684
+      ],
+      "size": [
+        513.9670753609553,
+        625.8564798905373
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 290
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 291
+        },
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "330bce6c3c0d47ebdedcc0348d9ab355707b7523",
+        "Node name for S&R": "VHS_VideoCombine",
+        "aux_id": "Kosinkadink/ComfyUI-VideoHelperSuite"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "Minimax/Video",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "Video_00001-audio.mp4",
+            "subfolder": "Minimax",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 24,
+            "workflow": "Video_00001.png",
+            "fullpath": "E:\\ComfyuiNunchaku\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Minimax\\Video_00001-audio.mp4"
+          }
+        }
+      },
+      "widgets_values_named": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "Minimax/Video",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "Video_00001-audio.mp4",
+            "subfolder": "Minimax",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 24,
+            "workflow": "Video_00001.png",
+            "fullpath": "E:\\ComfyuiNunchaku\\ComfyUI-Easy-Install\\ComfyUI-Easy-Install\\ComfyUI\\output\\Minimax\\Video_00001-audio.mp4"
+          }
+        }
+      }
+    },
+    {
+      "id": 247,
+      "type": "Label (rgthree)",
+      "pos": [
+        -1769.044030968236,
+        288.43012824523873
+      ],
+      "size": [
+        696.8359375,
+        40
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "When you Don't Use 1 Click installation",
+      "properties": {
+        "fontSize": 40,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "gray",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 251,
+      "type": "MarkdownNote",
+      "pos": [
+        612.7264274398601,
+        -47.41319181291908
+      ],
+      "size": [
+        316.16507189700815,
+        148.1890928648395
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Links",
+      "properties": {},
+      "widgets_values": [
+        "\nYouTube : [AISEEK YOUTUBE](https://youtube.com/@aiseek1)\n\nPatreon : [AISEEK Patreon](https://patreon.com/aiseek1)\n\nInstagram : [AISEEK Instagram](https://youtube.com/aiseek1)\n\nFollow me on social media to get more free workflows and tutorials.\n"
+      ],
+      "widgets_values_named": {
+        "text": "\nYouTube : [AISEEK YOUTUBE](https://youtube.com/@aiseek1)\n\nPatreon : [AISEEK Patreon](https://patreon.com/aiseek1)\n\nInstagram : [AISEEK Instagram](https://youtube.com/aiseek1)\n\nFollow me on social media to get more free workflows and tutorials.\n"
+      },
+      "color": "#38b21f",
+      "bgcolor": "#273923"
+    },
+    {
+      "id": 252,
+      "type": "Note",
+      "pos": [
+        119.44187205839656,
+        -47.42078749083373
+      ],
+      "size": [
+        477.17174164551625,
+        147.73793298536293
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        " █████╗ ██╗███████╗███████╗███████╗███████╗██╗  ██╗\n██╔══██╗██║██╔════╝██╔════╝██╔════╝██╔════╝██║ ██╔╝\n███████║██║███████╗█████╗  █████╗  █████╗  █████╔╝\n██╔══██║██║╚════██║██╔══╝  ██╔══╝  ██╔══╝  ██╔═██╗\n██║  ██║██║███████║███████╗███████╗███████╗██║  ██╗\n╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝\n\n                 A   I   S   E   E   K\n"
+      ],
+      "widgets_values_named": {
+        "text": " █████╗ ██╗███████╗███████╗███████╗███████╗██╗  ██╗\n██╔══██╗██║██╔════╝██╔════╝██╔════╝██╔════╝██║ ██╔╝\n███████║██║███████╗█████╗  █████╗  █████╗  █████╔╝\n██╔══██║██║╚════██║██╔══╝  ██╔══╝  ██╔══╝  ██╔═██╗\n██║  ██║██║███████║███████╗███████╗███████╗██║  ██╗\n╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝\n\n                 A   I   S   E   E   K\n"
+      },
+      "color": "#cf2a2a",
+      "bgcolor": "#3e2525"
+    },
+    {
+      "id": 248,
+      "type": "Label (rgthree)",
+      "pos": [
+        -1674.4605701519247,
+        204.27063065755166
+      ],
+      "size": [
+        476.923828125,
+        60
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Download models",
+      "properties": {
+        "fontSize": 60,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "gray",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 253,
+      "type": "Label (rgthree)",
+      "pos": [
+        -1460.4661273137067,
+        -83.60810758091797
+      ],
+      "size": [
+        1549.7999267578125,
+        180
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Minimax H3 Workflow",
+      "properties": {
+        "fontSize": 150,
+        "fontFamily": "Neue Haas Grotesk Display Pro BLACK",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "",
+        "padding": 15,
+        "borderRadius": 20,
+        "angle": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 239,
+      "type": "PixaromaPrompt",
+      "pos": [
+        -489.9040596299417,
+        816.2702882619731
+      ],
+      "size": [
+        463.5805010009606,
+        781.1042429972306
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "text",
+          "name": "text_in",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            289
+          ]
+        }
+      ],
+      "title": "4. Add a prompt",
+      "properties": {
+        "cnr_id": "ComfyUI-Pixaroma",
+        "ver": "f9c6df78d613ea11ca28b641a50160e251cc00e6",
+        "Node name for S&R": "PixaromaPrompt",
+        "promptState": {
+          "text": "15-second cinematic single continuous handheld shot. One uninterrupted take from start to finish. No cuts, no transitions, no camera resets.\n\nThe <Picture 0> is exactly the first frame.\n\nScene:\nA fictional original young East Asian woman in her early twenties sits at the counter of a cozy daytime sushi bistro. She is not based on any real person or existing character. She has sleek black hair in a high tight ponytail with two long loose strands framing her face, soft natural makeup, muted rose lips, and a chunky polished silver collar necklace. She wears a vivid green sheer mesh long-sleeve top falling slightly off one bare shoulder over a matching green inner top. No visible brands or logos.\n\nThe sushi bistro has a long polished dark-wood counter with a woven rattan runner, warm cream walls, blank decorative scrolls with no readable writing, softly glowing cabinets, and a blurred open kitchen with sushi chefs moving naturally in the background. A red orchid sits nearby. A large window fills the restaurant with bright midday daylight, with lush green trees visible outside.\n\nIn front of her is a ceramic plate with assorted sushi, a small soy sauce dish, pink pickled ginger, a napkin, and wooden chopsticks.\n\nComposition:\nKeep the woman in the RIGHT THIRD of the frame for the entire shot. Never center her.\n\nShoot from slightly below her eye level, across the countertop. The long counter and blurred kitchen extend through the left two-thirds of the frame.\n\nThe foreground sushi plate and woven counter runner remain slightly out of focus along the bottom edge.\n\nMaintain a constant 10–12 degree Dutch angle throughout the entire video. Never level the horizon.\n\nCamera movement:\nPlayful natural handheld cinematography. The camera operator appears to be resting their elbows near the counter, creating subtle breathing sway, tiny micro-jitters and gentle imperfect movement.\n\nThroughout the shot, slowly and slightly slide the camera closer along the counter toward her face.\n\nNever become perfectly static.\n\nSoft window light occasionally creates a subtle natural lens flare.\n\nAction and emotion timeline:\n\n0–1 seconds:\nThe action starts immediately on the very first frame.\n\nShe already has a whole shrimp nigiri held with her chopsticks: pale pink butterflied shrimp over a small rice pillow.\n\nShe quickly lifts it and puts the entire shrimp nigiri into her mouth in one bite.\n\nNo hesitation and no slow buildup.\n\n1–4 seconds:\nThe sour flavor hits her INSTANTLY with exaggerated comic intensity.\n\nHer eyes squeeze tightly shut.\n\nHer lips pucker dramatically around her full cheeks.\n\nHer entire face contracts from the sourness.\n\nHer shoulders shudder.\n\nShe quickly shakes her head side to side, making her ponytail and loose hair strands whip naturally.\n\nHer chopsticks slip from her hand and clatter onto the ceramic plate.\n\nShe lightly pounds one fist against the counter once or twice while continuing to chew.\n\nThe reaction must be immediate, expressive and physically readable.\n\n4–8 seconds:\nThe sour shock turns into genuine disgust.\n\nHer expression suddenly becomes flatter and deeply repulsed.\n\nShe chews slower and slower.\n\nHer nose wrinkles.\n\nShe slightly gags.\n\nHer tongue pushes the food toward one cheek as if she cannot tolerate the taste.\n\nShe grabs the napkin and brings it toward her mouth, clearly preparing to spit the food out.\n\nHer eyes show disappointment and betrayal.\n\n8–11 seconds:\nWith the napkin touching or hovering directly in front of her lips, she suddenly freezes.\n\nHer eyebrows jump upward.\n\nHer eyes open wide.\n\nSomething about the flavor unexpectedly changes.\n\nShe slowly lowers the napkin about an inch.\n\nShe chews once.\n\nPause.\n\nShe chews a second time.\n\nHer expression changes from disgust to confusion, then suspicious curiosity.\n\nKeep this transformation visible in her eyes, eyebrows and mouth.\n\n11–15 seconds:\nHer expression gradually explodes into pure delight.\n\nHer eyes close softly in pleasure.\n\nA huge genuine smile spreads across her face while she continues chewing.\n\nHer shoulders relax completely.\n\nShe leans and melts backward slightly on the stool.\n\nShe lightly kicks her feet beneath the counter from happiness.\n\nShe makes a subtle pleased humming expression without speaking.\n\nStill smiling, she reaches forward again with her chopsticks toward another shrimp nigiri on the plate, clearly wanting another bite.\n\nEnd the shot while she happily reaches for the next piece.\n\nPerformance:\nPrioritize expressive facial acting and physically readable emotion changes.\n\nThe emotional progression must be extremely clear:\ninstant sour shock → disgust → about to spit it out → sudden surprise → suspicious curiosity → intense pleasure.\n\nNatural blinking, eye movement, cheek movement, jaw chewing, breathing, shoulder movement, hand gestures and ponytail physics.\n\nDo not let her facial identity change during the shot.\n\nVisual style:\nCinematic Japanese indie slice-of-life feeling.\n35mm film texture.\nShallow depth of field.\nSoft natural skin texture.\nWarm daylight mixed with a subtle teal-and-warm film color cast.\nFine soft grain.\nNatural highlight rolloff.\nCozy intimate restaurant atmosphere.\nRealistic human motion and realistic food interaction.\n\nImportant constraints:\nOne continuous 15-second shot.\nNo cuts.\nNo scene changes.\nNo time jumps.\nNo slow motion.\nNo freeze-frame effect.\nDo not center the woman.\nMaintain the Dutch angle.\nNo dialogue.\nNo captions.\nNo subtitles.\nNo readable text.\nBlank scrolls and blank menus only.\nNo logos.\nNo brands.\nNo recognizable characters.\nNo mascot figurines.\nNo copyrighted characters.\nNo real people.\n",
+          "order": "mine",
+          "sep": ", ",
+          "accent": null,
+          "showExpanded": false,
+          "lastRun": "15-second cinematic single continuous handheld shot. One uninterrupted take from start to finish. No cuts, no transitions, no camera resets.\n\nThe <Picture 0> is exactly the first frame.\n\nScene:\nA fictional original young East Asian woman in her early twenties sits at the counter of a cozy daytime sushi bistro. She is not based on any real person or existing character. She has sleek black hair in a high tight ponytail with two long loose strands framing her face, soft natural makeup, muted rose lips, and a chunky polished silver collar necklace. She wears a vivid green sheer mesh long-sleeve top falling slightly off one bare shoulder over a matching green inner top. No visible brands or logos.\n\nThe sushi bistro has a long polished dark-wood counter with a woven rattan runner, warm cream walls, blank decorative scrolls with no readable writing, softly glowing cabinets, and a blurred open kitchen with sushi chefs moving naturally in the background. A red orchid sits nearby. A large window fills the restaurant with bright midday daylight, with lush green trees visible outside.\n\nIn front of her is a ceramic plate with assorted sushi, a small soy sauce dish, pink pickled ginger, a napkin, and wooden chopsticks.\n\nComposition:\nKeep the woman in the RIGHT THIRD of the frame for the entire shot. Never center her.\n\nShoot from slightly below her eye level, across the countertop. The long counter and blurred kitchen extend through the left two-thirds of the frame.\n\nThe foreground sushi plate and woven counter runner remain slightly out of focus along the bottom edge.\n\nMaintain a constant 10–12 degree Dutch angle throughout the entire video. Never level the horizon.\n\nCamera movement:\nPlayful natural handheld cinematography. The camera operator appears to be resting their elbows near the counter, creating subtle breathing sway, tiny micro-jitters and gentle imperfect movement.\n\nThroughout the shot, slowly and slightly slide the camera closer along the counter toward her face.\n\nNever become perfectly static.\n\nSoft window light occasionally creates a subtle natural lens flare.\n\nAction and emotion timeline:\n\n0–1 seconds:\nThe action starts immediately on the very first frame.\n\nShe already has a whole shrimp nigiri held with her chopsticks: pale pink butterflied shrimp over a small rice pillow.\n\nShe quickly lifts it and puts the entire shrimp nigiri into her mouth in one bite.\n\nNo hesitation and no slow buildup.\n\n1–4 seconds:\nThe sour flavor hits her INSTANTLY with exaggerated comic intensity.\n\nHer eyes squeeze tightly shut.\n\nHer lips pucker dramatically around her full cheeks.\n\nHer entire face contracts from the sourness.\n\nHer shoulders shudder.\n\nShe quickly shakes her head side to side, making her ponytail and loose hair strands whip naturally.\n\nHer chopsticks slip from her hand and clatter onto the ceramic plate.\n\nShe lightly pounds one fist against the counter once or twice while continuing to chew.\n\nThe reaction must be immediate, expressive and physically readable.\n\n4–8 seconds:\nThe sour shock turns into genuine disgust.\n\nHer expression suddenly becomes flatter and deeply repulsed.\n\nShe chews slower and slower.\n\nHer nose wrinkles.\n\nShe slightly gags.\n\nHer tongue pushes the food toward one cheek as if she cannot tolerate the taste.\n\nShe grabs the napkin and brings it toward her mouth, clearly preparing to spit the food out.\n\nHer eyes show disappointment and betrayal.\n\n8–11 seconds:\nWith the napkin touching or hovering directly in front of her lips, she suddenly freezes.\n\nHer eyebrows jump upward.\n\nHer eyes open wide.\n\nSomething about the flavor unexpectedly changes.\n\nShe slowly lowers the napkin about an inch.\n\nShe chews once.\n\nPause.\n\nShe chews a second time.\n\nHer expression changes from disgust to confusion, then suspicious curiosity.\n\nKeep this transformation visible in her eyes, eyebrows and mouth.\n\n11–15 seconds:\nHer expression gradually explodes into pure delight.\n\nHer eyes close softly in pleasure.\n\nA huge genuine smile spreads across her face while she continues chewing.\n\nHer shoulders relax completely.\n\nShe leans and melts backward slightly on the stool.\n\nShe lightly kicks her feet beneath the counter from happiness.\n\nShe makes a subtle pleased humming expression without speaking.\n\nStill smiling, she reaches forward again with her chopsticks toward another shrimp nigiri on the plate, clearly wanting another bite.\n\nEnd the shot while she happily reaches for the next piece.\n\nPerformance:\nPrioritize expressive facial acting and physically readable emotion changes.\n\nThe emotional progression must be extremely clear:\ninstant sour shock → disgust → about to spit it out → sudden surprise → suspicious curiosity → intense pleasure.\n\nNatural blinking, eye movement, cheek movement, jaw chewing, breathing, shoulder movement, hand gestures and ponytail physics.\n\nDo not let her facial identity change during the shot.\n\nVisual style:\nCinematic Japanese indie slice-of-life feeling.\n35mm film texture.\nShallow depth of field.\nSoft natural skin texture.\nWarm daylight mixed with a subtle teal-and-warm film color cast.\nFine soft grain.\nNatural highlight rolloff.\nCozy intimate restaurant atmosphere.\nRealistic human motion and realistic food interaction.\n\nImportant constraints:\nOne continuous 15-second shot.\nNo cuts.\nNo scene changes.\nNo time jumps.\nNo slow motion.\nNo freeze-frame effect.\nDo not center the woman.\nMaintain the Dutch angle.\nNo dialogue.\nNo captions.\nNo subtitles.\nNo readable text.\nBlank scrolls and blank menus only.\nNo logos.\nNo brands.\nNo recognizable characters.\nNo mascot figurines.\nNo copyrighted characters.\nNo real people.\n"
+        }
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "pix_prompt_ui": ""
+      },
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 238,
+      "type": "PixaromaDuration",
+      "pos": [
+        -490.5655292624919,
+        484.6167641529808
+      ],
+      "size": [
+        466.34611386654007,
+        88
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "frames",
+          "type": "INT",
+          "links": [
+            278
+          ]
+        },
+        {
+          "name": "seconds",
+          "type": "FLOAT",
+          "links": []
+        }
+      ],
+      "title": "2. Set Duration",
+      "properties": {
+        "cnr_id": "ComfyUI-Pixaroma",
+        "ver": "c6efed39bfc2e566fc5542044d728cca7d2e1a62",
+        "Node name for S&R": "PixaromaDuration",
+        "durationState": {
+          "seconds": 15,
+          "fps": 24,
+          "step": 17,
+          "plus": 5,
+          "minFrames": 5,
+          "mode": "recipe",
+          "formula": "",
+          "pick": "chips",
+          "values": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            10,
+            12,
+            15
+          ],
+          "min": 1,
+          "max": 10,
+          "stepSec": 0.5,
+          "recipeName": "MiniMax H3"
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {},
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 194,
+      "type": "UNETLoader",
+      "pos": [
+        -1028.8429174871721,
+        267.5595959584679
+      ],
+      "size": [
+        495.8871826591876,
+        82
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            284,
+            292
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.76",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 225,
+      "type": "KSampler",
+      "pos": [
+        23.578484719543106,
+        689.59981687791
+      ],
+      "size": [
+        293.6561244220478,
+        474
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 293
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 262
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 261
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 275
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            268,
+            269
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.1",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        411312472810430,
+        "fixed",
+        40,
+        1,
+        "res_multistep",
+        "simple",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 411312472810430,
+        "control_after_generate": "fixed",
+        "steps": 40,
+        "cfg": 1,
+        "sampler_name": "res_multistep",
+        "scheduler": "simple",
+        "denoise": 1
+      },
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 254,
+      "type": "Power Lora Loader (rgthree)",
+      "pos": [
+        -457.4744848981437,
+        250.02446380018125
+      ],
+      "size": [
+        340.519921875,
+        166
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "model",
+          "type": "MODEL",
+          "link": 292
+        },
+        {
+          "dir": 3,
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "name": "MODEL",
+          "shape": 3,
+          "type": "MODEL",
+          "links": [
+            293
+          ]
+        },
+        {
+          "dir": 4,
+          "name": "CLIP",
+          "shape": 3,
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "738105af5fb14e96fbecaf406dc356e284797e8c",
+        "Show Strengths": "Single Strength",
+        "Match": ""
+      },
+      "widgets_values": [
+        {},
+        {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        {
+          "on": true,
+          "lora": "h3-realism-people-t2v-i2v-r2v.safetensors",
+          "strength": 0.75,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "minimax_h3_fl2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {},
+        ""
+      ],
+      "widgets_values_named": {
+        "divider": {},
+        "PowerLoraLoaderHeaderWidget": {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        "lora_1": {
+          "on": true,
+          "lora": "h3-realism-people-t2v-i2v-r2v.safetensors",
+          "strength": 0.75,
+          "strengthTwo": null
+        },
+        "lora_2": {
+          "on": false,
+          "lora": "minimax_h3_fl2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        "➕ Add Lora": ""
+      }
+    },
+    {
+      "id": 249,
+      "type": "MarkdownNote",
+      "pos": [
+        -1738.2864667485962,
+        375.5459295231088
+      ],
+      "size": [
+        640.5135248948332,
+        422.72970447313105
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Links",
+      "properties": {},
+      "widgets_values": [
+        "# MiniMax h3 Models And Paths\n------------------------------------------------\n\n# Model Links:\n\n------------------------------------------------\n\n## Load Diffusion Model\n\n\n- [Download minimax_h3_fl2va_pruned_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors)\n\n- [Download minimax_h3_ref2va_pruned_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors)\n\n- [Read Licence](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/LICENSE)\n\n- [More About Licence](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/QA-about-License.md)\n\n**Load Clip model**\n\n- [Download qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n**vae**\n\n- [Download minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n\n- [Download minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n**lora**\n\n- [8 Step Turbo lora](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n- [Realisim Lora](https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors)\n\n"
+      ],
+      "widgets_values_named": {
+        "text": "# MiniMax h3 Models And Paths\n------------------------------------------------\n\n# Model Links:\n\n------------------------------------------------\n\n## Load Diffusion Model\n\n\n- [Download minimax_h3_fl2va_pruned_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors)\n\n- [Download minimax_h3_ref2va_pruned_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors)\n\n- [Read Licence](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/LICENSE)\n\n- [More About Licence](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/QA-about-License.md)\n\n**Load Clip model**\n\n- [Download qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors)\n\n**vae**\n\n- [Download minimax_h3_video_vae_fp16.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors)\n\n- [Download minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors)\n\n**lora**\n\n- [8 Step Turbo lora](https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/main/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors)\n- [Realisim Lora](https://huggingface.co/fal/MiniMax-H3-Realism-People-LoRA/resolve/main/h3-realism-people-t2v-i2v-r2v.safetensors)\n\n"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    }
+  ],
+  "links": [
+    [
+      259,
+      195,
+      0,
+      222,
+      0,
+      "CLIP"
+    ],
+    [
+      260,
+      196,
+      0,
+      222,
+      1,
+      "VAE"
+    ],
+    [
+      261,
+      224,
+      0,
+      225,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      262,
+      222,
+      0,
+      225,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      263,
+      222,
+      0,
+      224,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      267,
+      213,
+      0,
+      227,
+      1,
+      "VAE"
+    ],
+    [
+      268,
+      225,
+      0,
+      226,
+      0,
+      "LATENT"
+    ],
+    [
+      269,
+      225,
+      0,
+      227,
+      0,
+      "LATENT"
+    ],
+    [
+      270,
+      196,
+      0,
+      226,
+      1,
+      "VAE"
+    ],
+    [
+      275,
+      222,
+      1,
+      225,
+      3,
+      "LATENT"
+    ],
+    [
+      278,
+      238,
+      0,
+      222,
+      7,
+      "INT"
+    ],
+    [
+      280,
+      237,
+      0,
+      222,
+      2,
+      "IMAGE"
+    ],
+    [
+      281,
+      237,
+      1,
+      222,
+      5,
+      "INT"
+    ],
+    [
+      282,
+      237,
+      2,
+      222,
+      6,
+      "INT"
+    ],
+    [
+      284,
+      194,
+      0,
+      241,
+      0,
+      "MODEL"
+    ],
+    [
+      286,
+      242,
+      0,
+      237,
+      0,
+      "IMAGE"
+    ],
+    [
+      289,
+      239,
+      0,
+      222,
+      4,
+      "STRING"
+    ],
+    [
+      290,
+      226,
+      0,
+      250,
+      0,
+      "IMAGE"
+    ],
+    [
+      291,
+      227,
+      0,
+      250,
+      1,
+      "AUDIO"
+    ],
+    [
+      292,
+      194,
+      0,
+      254,
+      0,
+      "MODEL"
+    ],
+    [
+      293,
+      254,
+      0,
+      225,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Minimax H3",
+      "bounding": [
+        -1055.639994675555,
+        134.5094207801559,
+        1987.8917002750209,
+        1495.1465240066489
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6303940863128665,
+      "offset": [
+        2669.5880991101544,
+        411.34048119252896
+      ]
+    },
+    "frontendVersion": "1.49.6",
+    "node_versions": {
+      "ComfyUI-GGUF": "8098c7149fa4ff14991eb3347a5585051ceeafbe",
+      "comfy-core": "v0.3.10-37-gd055325",
+      "rgthree-comfy": "5d771b8b56a343c24a26e8cea1f0c87c3d58102f"
+    },
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "workflowRendererVersion": "LG"
+  },
+  "version": 0.4
+}

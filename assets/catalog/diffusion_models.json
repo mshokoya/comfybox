@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 70,
+  "artifact_count": 72,
   "artifacts": [
     {
       "id": "firered.image-edit.1.0.bf16",
@@ -725,6 +725,39 @@
       "description": "Diffusion model weights; BF16 precision; SafeTensors file; hosted on Hugging Face."
     },
     {
+      "id": "minimax.h3.fastvideo-vsa-datafree.1300step.4step.int8-convrot",
+      "name": "MiniMax H3 FastVideo VSA Datafree 1300-Step 4-Step INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "fastvideo",
+        "vsa",
+        "4step",
+        "int8",
+        "convrot",
+        "minimax"
+      ],
+      "sources": [
+        {
+          "title": "MiniMax H3 FastVideo VSA Datafree 4-Step INT8 ConvRot",
+          "url": "https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
+          "size": "22.9 GB",
+          "size_bytes": 22898594920,
+          "description": "Experimental MiniMax H3 FastVideo VSA 4-step INT8 ConvRot diffusion model."
+        }
+      ],
+      "catalog_sources": [
+        "workflow:loratech-director-minimaxh3"
+      ],
+      "url": "https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
+      "size_bytes": 22898594920,
+      "sha256": "7221ae65d78780354d51e5048d29728d9f1f8fb9baf50b1dd3df85f5101413d3",
+      "gated": false,
+      "description": "Experimental MiniMax H3 FastVideo VSA 4-step INT8 ConvRot diffusion model."
+    },
+    {
       "id": "minimax.h3.fl2va.bf16",
       "name": "MiniMax H3 - FL2VA - BF16",
       "type": "diffusion_models",
@@ -1054,6 +1087,95 @@
       "description": "Catalog download source"
     },
     {
+      "id": "minimax.h3.ref2va.pruned.nvfp4-convrot-int8",
+      "name": "MiniMax H3 Ref2VA Pruned NVFP4 ConvRot INT8",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "ref2va",
+        "pruned",
+        "nvfp4",
+        "convrot",
+        "int8",
+        "minimax"
+      ],
+      "sources": [
+        {
+          "title": "MiniMax H3 Ref2VA Pruned NVFP4 ConvRot INT8",
+          "url": "https://huggingface.co/rockerBOO/minimax-h3-nvfp4-convrot/resolve/main/minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
+          "size": "20.1 GB",
+          "size_bytes": 20070947267,
+          "description": "ComfyUI-compatible mixed NVFP4 and INT8 ConvRot MiniMax H3 Ref2VA diffusion model."
+        }
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-refiner-and-director-minimaxh3"
+      ],
+      "url": "https://huggingface.co/rockerBOO/minimax-h3-nvfp4-convrot/resolve/main/minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
+      "size_bytes": 20070947267,
+      "sha256": "9593074fc37e898a9dd08ed7762a675837719a8d97ba3afde904a94474eadf8b",
+      "gated": false,
+      "description": "ComfyUI-compatible mixed NVFP4 and INT8 ConvRot MiniMax H3 Ref2VA diffusion model."
+    },
+    {
+      "id": "minimax.h3.ref2va.xueluo.int8-convrot",
+      "name": "MiniMax H3 Ref2VA XUELUO INT8 ConvRot",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/minimax_h3_ref2va_XUELUO_int8_convrot.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "minimax_h3_ref2va_XUELUO_int8_convrot.safetensors",
+          "url": "https://huggingface.co/WarmBloodAban/Minimax_h3_ref2va_XUELUO_int8_convrot/resolve/main/minimax_h3_ref2va_XUELUO_int8_convrot.safetensors",
+          "size": "34.04 GB",
+          "size_bytes": 34038894694,
+          "sha256": "1209bb3daff5c38c3c35524d17a96149de3703555a8491dca01d9b3bdc1778c0",
+          "description": "XUELUO Ref2VA INT8 ConvRot diffusion model for the sound-reference workflow.",
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ],
+      "url": "https://huggingface.co/WarmBloodAban/Minimax_h3_ref2va_XUELUO_int8_convrot/resolve/main/minimax_h3_ref2va_XUELUO_int8_convrot.safetensors",
+      "group": "MiniMax H3",
+      "size_bytes": 34038894694,
+      "sha256": "1209bb3daff5c38c3c35524d17a96149de3703555a8491dca01d9b3bdc1778c0",
+      "gated": false,
+      "description": "XUELUO Ref2VA INT8 ConvRot diffusion model for the sound-reference workflow."
+    },
+    {
+      "id": "minimax.h3.singularity.ref2va.v1.3.int8",
+      "name": "MiniMax H3 Singularity Ref2VA v1.3 INT8",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors",
+          "url": "https://huggingface.co/WarmBloodAban/Minimax-h3_Singularity/resolve/main/Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors",
+          "size": "34.00 GB",
+          "size_bytes": 34004507622,
+          "sha256": "551915097b8727537a82f3a2c5acec965165ec84e780b3e9a5f28ce867fddf08",
+          "description": "Full MiniMax H3 Singularity Ref2VA v1.3 INT8 diffusion checkpoint.",
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "user-provided workflow dependencies"
+      ],
+      "url": "https://huggingface.co/WarmBloodAban/Minimax-h3_Singularity/resolve/main/Minimax-h3_Singularity_ref2va_v1.3_int8.safetensors",
+      "group": "MiniMax H3",
+      "size_bytes": 34004507622,
+      "sha256": "551915097b8727537a82f3a2c5acec965165ec84e780b3e9a5f28ce867fddf08",
+      "gated": false,
+      "description": "Full MiniMax H3 Singularity Ref2VA v1.3 INT8 diffusion checkpoint."
+    },
+    {
       "id": "pid_qwenimage_1024_to_4096_4step_bf16",
       "type": "diffusion_models",
       "relative_path": "models/diffusion_models/nvidia_pid/pid_qwenimage_1024_to_4096_4step_bf16.safetensors",
@@ -1078,294 +1200,6 @@
       "sha256": null,
       "gated": false,
       "description": "Diffusion model weights; BF16 precision; 4-step variant; SafeTensors file; hosted on Hugging Face."
-    },
-    {
-      "id": "qwen.image.bf16",
-      "name": "Qwen Image - BF16",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/qwen_image_bf16.safetensors",
-      "group": "Qwen Image",
-      "tags": [
-        "image",
-        "bf16",
-        "qwen-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors",
-          "sha256": "d08fb5d68026c0d87325f9a7b3ad6454061113a2bc73cc883114dae172937ae7",
-          "size_bytes": 40861031488,
-          "enabled": true,
-          "title": "Qwen Image - BF16",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors",
-      "size_bytes": 40861031488,
-      "sha256": "d08fb5d68026c0d87325f9a7b3ad6454061113a2bc73cc883114dae172937ae7",
-      "gated": false,
-      "description": "Catalog download source"
-    },
-    {
-      "id": "qwen.image.fp8-e4m3fn",
-      "name": "Qwen Image - FP8 E4M3FN",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/qwen_image_fp8_e4m3fn.safetensors",
-      "group": "Qwen Image",
-      "tags": [
-        "image",
-        "fp8",
-        "e4m3fn",
-        "qwen-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_e4m3fn.safetensors",
-          "sha256": "98763a127701eb6fb59096f7742cb3aa7d64ed510b9f4e882d8351f8176e3ce3",
-          "size_bytes": 20430635136,
-          "enabled": true,
-          "title": "Qwen Image - FP8 E4M3FN",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_e4m3fn.safetensors",
-      "size_bytes": 20430635136,
-      "sha256": "98763a127701eb6fb59096f7742cb3aa7d64ed510b9f4e882d8351f8176e3ce3",
-      "gated": false,
-      "description": "Catalog download source"
-    },
-    {
-      "id": "qwen.image.fp8-hq",
-      "name": "Qwen Image - FP8 HQ",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/qwen_image_fp8_hq.safetensors",
-      "group": "Qwen Image",
-      "tags": [
-        "image",
-        "fp8",
-        "hq",
-        "qwen-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_hq.safetensors",
-          "sha256": "d6027c88c850c25f56752d9d0ab79910c5d04e9e8515d00301c5c9301210ce4c",
-          "size_bytes": 22741809576,
-          "enabled": true,
-          "title": "Qwen Image - FP8 HQ",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_hq.safetensors",
-      "size_bytes": 22741809576,
-      "sha256": "d6027c88c850c25f56752d9d0ab79910c5d04e9e8515d00301c5c9301210ce4c",
-      "gated": false,
-      "description": "Catalog download source"
-    },
-    {
-      "id": "qwen.image.fp8mixed",
-      "name": "Qwen Image - FP8 Mixed",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/qwen_image_fp8mixed.safetensors",
-      "group": "Qwen Image",
-      "tags": [
-        "image",
-        "fp8",
-        "mixed",
-        "qwen-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8mixed.safetensors",
-          "sha256": "0ee8375df948e428b5cee97b62f7311ab11a6085eb5b1918f66bfab047fedc18",
-          "size_bytes": 20533672381,
-          "enabled": true,
-          "title": "Qwen Image - FP8 Mixed",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8mixed.safetensors",
-      "size_bytes": 20533672381,
-      "sha256": "0ee8375df948e428b5cee97b62f7311ab11a6085eb5b1918f66bfab047fedc18",
-      "gated": false,
-      "description": "Catalog download source"
-    },
-    {
-      "id": "qwen.image.nvfp4",
-      "name": "Qwen Image - NVFP4",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/qwen_image_nvfp4.safetensors",
-      "group": "Qwen Image",
-      "tags": [
-        "image",
-        "nvfp4",
-        "qwen-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_nvfp4.safetensors",
-          "sha256": "54df91fa379a6487aa7869b678d5c1fa9e4b30db1019d0ab8dbce629daa8a5a8",
-          "size_bytes": 19769139136,
-          "enabled": true,
-          "title": "Qwen Image - NVFP4",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_nvfp4.safetensors",
-      "size_bytes": 19769139136,
-      "sha256": "54df91fa379a6487aa7869b678d5c1fa9e4b30db1019d0ab8dbce629daa8a5a8",
-      "gated": false,
-      "description": "Catalog download source"
-    },
-    {
-      "id": "qwen.image.2512.bf16",
-      "name": "Qwen Image 2512 - BF16",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/qwen_image_2512_bf16.safetensors",
-      "group": "Qwen Image",
-      "tags": [
-        "image",
-        "bf16",
-        "2512",
-        "qwen-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_bf16.safetensors",
-          "sha256": "cbf55390fff27dbc785046d7007b04e0c5dd7421e7ef128f2831eacb53a8e075",
-          "size_bytes": 40861031488,
-          "enabled": true,
-          "title": "Qwen Image 2512 - BF16",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_bf16.safetensors",
-      "size_bytes": 40861031488,
-      "sha256": "cbf55390fff27dbc785046d7007b04e0c5dd7421e7ef128f2831eacb53a8e075",
-      "gated": false,
-      "description": "Catalog download source"
-    },
-    {
-      "id": "qwen.image.2512.fp8-e4m3fn",
-      "name": "Qwen Image 2512 - FP8 E4M3FN",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors",
-      "group": "Qwen Image",
-      "tags": [
-        "image",
-        "fp8",
-        "e4m3fn",
-        "2512",
-        "qwen-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors",
-          "sha256": "5dc80554d5d83390046a2f4a94ece06afb7700bf7b0aaf8bde9769793875876b",
-          "size_bytes": 20430679144,
-          "enabled": true,
-          "title": "Qwen Image 2512 - FP8 E4M3FN",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors",
-      "size_bytes": 20430679144,
-      "sha256": "5dc80554d5d83390046a2f4a94ece06afb7700bf7b0aaf8bde9769793875876b",
-      "gated": false,
-      "description": "Catalog download source"
-    },
-    {
-      "id": "qwen.edit.bf16",
-      "name": "Qwen Image Edit - BF16",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/qwen_image_edit_bf16.safetensors",
-      "group": "Qwen Image Edit",
-      "tags": [
-        "image",
-        "edit",
-        "bf16",
-        "qwen-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_bf16.safetensors",
-          "sha256": "f133f246ba14ba2a24e1a9df64fe4da35281e684b467c992059429bfb6187625",
-          "size_bytes": 40861031488,
-          "enabled": true,
-          "title": "Qwen Image Edit - BF16",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_bf16.safetensors",
-      "size_bytes": 40861031488,
-      "sha256": "f133f246ba14ba2a24e1a9df64fe4da35281e684b467c992059429bfb6187625",
-      "gated": false,
-      "description": "Catalog download source"
-    },
-    {
-      "id": "qwen.edit.fp8-e4m3fn",
-      "name": "Qwen Image Edit - FP8 - E4M3FN",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors",
-      "group": "Qwen Image Edit",
-      "tags": [
-        "image",
-        "edit",
-        "fp8",
-        "e4m3fn",
-        "qwen-image"
-      ],
-      "sources": [
-        {
-          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors",
-          "sha256": "393c6743d1de2e9031b5197027b36116f2096958ccc0223526d34e1860266021",
-          "size_bytes": 20430635136,
-          "enabled": true,
-          "title": "Qwen Image Edit - FP8 - E4M3FN",
-          "description": "Catalog download source",
-          "size": null
-        }
-      ],
-      "catalog_sources": [
-        "_/bui.toml"
-      ],
-      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors",
-      "size_bytes": 20430635136,
-      "sha256": "393c6743d1de2e9031b5197027b36116f2096958ccc0223526d34e1860266021",
-      "gated": false,
-      "description": "Catalog download source"
     },
     {
       "id": "qwen.edit.2509.bf16",
@@ -1651,6 +1485,294 @@
       "sha256": "11b5af5ac601821d73930c84846c9a158e67177356daf927ce1c8d10f3963829",
       "gated": false,
       "description": "Diffusion model weights; INT8 ConvRot quantization; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "qwen.edit.bf16",
+      "name": "Qwen Image Edit - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_bf16.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "bf16",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_bf16.safetensors",
+          "sha256": "f133f246ba14ba2a24e1a9df64fe4da35281e684b467c992059429bfb6187625",
+          "size_bytes": 40861031488,
+          "enabled": true,
+          "title": "Qwen Image Edit - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_bf16.safetensors",
+      "size_bytes": 40861031488,
+      "sha256": "f133f246ba14ba2a24e1a9df64fe4da35281e684b467c992059429bfb6187625",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.edit.fp8-e4m3fn",
+      "name": "Qwen Image Edit - FP8 - E4M3FN",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors",
+      "group": "Qwen Image Edit",
+      "tags": [
+        "image",
+        "edit",
+        "fp8",
+        "e4m3fn",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors",
+          "sha256": "393c6743d1de2e9031b5197027b36116f2096958ccc0223526d34e1860266021",
+          "size_bytes": 20430635136,
+          "enabled": true,
+          "title": "Qwen Image Edit - FP8 - E4M3FN",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_fp8_e4m3fn.safetensors",
+      "size_bytes": 20430635136,
+      "sha256": "393c6743d1de2e9031b5197027b36116f2096958ccc0223526d34e1860266021",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.2512.bf16",
+      "name": "Qwen Image 2512 - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_2512_bf16.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "bf16",
+        "2512",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_bf16.safetensors",
+          "sha256": "cbf55390fff27dbc785046d7007b04e0c5dd7421e7ef128f2831eacb53a8e075",
+          "size_bytes": 40861031488,
+          "enabled": true,
+          "title": "Qwen Image 2512 - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_bf16.safetensors",
+      "size_bytes": 40861031488,
+      "sha256": "cbf55390fff27dbc785046d7007b04e0c5dd7421e7ef128f2831eacb53a8e075",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.2512.fp8-e4m3fn",
+      "name": "Qwen Image 2512 - FP8 E4M3FN",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "fp8",
+        "e4m3fn",
+        "2512",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors",
+          "sha256": "5dc80554d5d83390046a2f4a94ece06afb7700bf7b0aaf8bde9769793875876b",
+          "size_bytes": 20430679144,
+          "enabled": true,
+          "title": "Qwen Image 2512 - FP8 E4M3FN",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors",
+      "size_bytes": 20430679144,
+      "sha256": "5dc80554d5d83390046a2f4a94ece06afb7700bf7b0aaf8bde9769793875876b",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.bf16",
+      "name": "Qwen Image - BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_bf16.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "bf16",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors",
+          "sha256": "d08fb5d68026c0d87325f9a7b3ad6454061113a2bc73cc883114dae172937ae7",
+          "size_bytes": 40861031488,
+          "enabled": true,
+          "title": "Qwen Image - BF16",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_bf16.safetensors",
+      "size_bytes": 40861031488,
+      "sha256": "d08fb5d68026c0d87325f9a7b3ad6454061113a2bc73cc883114dae172937ae7",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.fp8-e4m3fn",
+      "name": "Qwen Image - FP8 E4M3FN",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_fp8_e4m3fn.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "fp8",
+        "e4m3fn",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_e4m3fn.safetensors",
+          "sha256": "98763a127701eb6fb59096f7742cb3aa7d64ed510b9f4e882d8351f8176e3ce3",
+          "size_bytes": 20430635136,
+          "enabled": true,
+          "title": "Qwen Image - FP8 E4M3FN",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_e4m3fn.safetensors",
+      "size_bytes": 20430635136,
+      "sha256": "98763a127701eb6fb59096f7742cb3aa7d64ed510b9f4e882d8351f8176e3ce3",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.fp8-hq",
+      "name": "Qwen Image - FP8 HQ",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_fp8_hq.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "fp8",
+        "hq",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_hq.safetensors",
+          "sha256": "d6027c88c850c25f56752d9d0ab79910c5d04e9e8515d00301c5c9301210ce4c",
+          "size_bytes": 22741809576,
+          "enabled": true,
+          "title": "Qwen Image - FP8 HQ",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8_hq.safetensors",
+      "size_bytes": 22741809576,
+      "sha256": "d6027c88c850c25f56752d9d0ab79910c5d04e9e8515d00301c5c9301210ce4c",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.fp8mixed",
+      "name": "Qwen Image - FP8 Mixed",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_fp8mixed.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "fp8",
+        "mixed",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8mixed.safetensors",
+          "sha256": "0ee8375df948e428b5cee97b62f7311ab11a6085eb5b1918f66bfab047fedc18",
+          "size_bytes": 20533672381,
+          "enabled": true,
+          "title": "Qwen Image - FP8 Mixed",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_fp8mixed.safetensors",
+      "size_bytes": 20533672381,
+      "sha256": "0ee8375df948e428b5cee97b62f7311ab11a6085eb5b1918f66bfab047fedc18",
+      "gated": false,
+      "description": "Catalog download source"
+    },
+    {
+      "id": "qwen.image.nvfp4",
+      "name": "Qwen Image - NVFP4",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/qwen_image_nvfp4.safetensors",
+      "group": "Qwen Image",
+      "tags": [
+        "image",
+        "nvfp4",
+        "qwen-image"
+      ],
+      "sources": [
+        {
+          "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_nvfp4.safetensors",
+          "sha256": "54df91fa379a6487aa7869b678d5c1fa9e4b30db1019d0ab8dbce629daa8a5a8",
+          "size_bytes": 19769139136,
+          "enabled": true,
+          "title": "Qwen Image - NVFP4",
+          "description": "Catalog download source",
+          "size": null
+        }
+      ],
+      "catalog_sources": [
+        "_/bui.toml"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_nvfp4.safetensors",
+      "size_bytes": 19769139136,
+      "sha256": "54df91fa379a6487aa7869b678d5c1fa9e4b30db1019d0ab8dbce629daa8a5a8",
+      "gated": false,
+      "description": "Catalog download source"
     },
     {
       "id": "qwen_image_bf16",
@@ -1966,6 +2088,103 @@
       "description": "Diffusion model weights; GGUF file; hosted on Hugging Face."
     },
     {
+      "id": "wan2.2.animate.14b.bf16",
+      "name": "Wan 2.2 Animate 14B BF16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.2_animate_14B_bf16.safetensors",
+      "group": "Wan 2.2",
+      "tags": [
+        "video",
+        "animate",
+        "14b",
+        "bf16",
+        "wan2.2"
+      ],
+      "sources": [
+        {
+          "title": "Wan 2.2 Animate 14B BF16",
+          "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_animate_14B_bf16.safetensors",
+          "size": "34.5 GB",
+          "size_bytes": 34549787368,
+          "description": "ComfyUI-native Wan 2.2 Animate 14B BF16 diffusion model."
+        }
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-director-relight-wananimate2.2"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_animate_14B_bf16.safetensors",
+      "size_bytes": 34549787368,
+      "sha256": "7d37cb0120488dec2a061135aa3018426925318a60838c3de935c829abc88667",
+      "gated": false,
+      "description": "ComfyUI-native Wan 2.2 Animate 14B BF16 diffusion model."
+    },
+    {
+      "id": "wan2.2.t2v.a14b.high-noise.q6-k",
+      "name": "Wan 2.2 T2V A14B High Noise Q6_K",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
+      "group": "Wan 2.2",
+      "tags": [
+        "video",
+        "t2v",
+        "a14b",
+        "high-noise",
+        "gguf",
+        "q6-k",
+        "wan2.2"
+      ],
+      "sources": [
+        {
+          "title": "Wan 2.2 T2V A14B High Noise Q6_K GGUF",
+          "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/HighNoise/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
+          "size": "12.0 GB",
+          "size_bytes": 12002013696,
+          "description": "High-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."
+        }
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-director-instareal-wan2.2"
+      ],
+      "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/HighNoise/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
+      "size_bytes": 12002013696,
+      "sha256": "504340d1d4eb9c754a824861234cedb5519155c125aa8dbb4c170716d899cd3b",
+      "gated": false,
+      "description": "High-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."
+    },
+    {
+      "id": "wan2.2.t2v.a14b.low-noise.q6-k",
+      "name": "Wan 2.2 T2V A14B Low Noise Q6_K",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
+      "group": "Wan 2.2",
+      "tags": [
+        "video",
+        "t2v",
+        "a14b",
+        "low-noise",
+        "gguf",
+        "q6-k",
+        "wan2.2"
+      ],
+      "sources": [
+        {
+          "title": "Wan 2.2 T2V A14B Low Noise Q6_K GGUF",
+          "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/LowNoise/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
+          "size": "12.0 GB",
+          "size_bytes": 12002013696,
+          "description": "Low-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."
+        }
+      ],
+      "catalog_sources": [
+        "workflow:comfybox-director-instareal-wan2.2"
+      ],
+      "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/LowNoise/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
+      "size_bytes": 12002013696,
+      "sha256": "db35061810049f77f571198d6a7bab422dec94fe0bf016b145b5cfc03eaaf661",
+      "gated": false,
+      "description": "Low-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."
+    },
+    {
       "id": "wan2_1_infinitetalk_multi_q8",
       "type": "diffusion_models",
       "relative_path": "models/diffusion_models/wan/Wan2_1-InfiniteTalk_Multi_Q8.gguf",
@@ -2218,105 +2437,6 @@
       "sha256": "a553c889dbcb910de4c98293237573219a37007c1074a3f04576646a088bd5c8",
       "gated": false,
       "description": "Catalog download source"
-    },
-    {
-      "id": "minimax.h3.fastvideo-vsa-datafree.1300step.4step.int8-convrot",
-      "name": "MiniMax H3 FastVideo VSA Datafree 1300-Step 4-Step INT8 ConvRot",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
-      "group": "Minimax",
-      "tags": ["video", "fastvideo", "vsa", "4step", "int8", "convrot", "minimax"],
-      "sources": [
-        {
-          "title": "MiniMax H3 FastVideo VSA Datafree 4-Step INT8 ConvRot",
-          "url": "https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
-          "size": "22.9 GB",
-          "size_bytes": 22898594920,
-          "description": "Experimental MiniMax H3 FastVideo VSA 4-step INT8 ConvRot diffusion model."
-        }
-      ],
-      "catalog_sources": ["workflow:loratech-director-minimaxh3"],
-      "url": "https://huggingface.co/Kijai/MiniMax-H3-experimental/resolve/main/minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
-      "size_bytes": 22898594920,
-      "sha256": "7221ae65d78780354d51e5048d29728d9f1f8fb9baf50b1dd3df85f5101413d3",
-      "gated": false,
-      "description": "Experimental MiniMax H3 FastVideo VSA 4-step INT8 ConvRot diffusion model."
-    },
-    {
-      "id": "minimax.h3.ref2va.pruned.nvfp4-convrot-int8",
-      "name": "MiniMax H3 Ref2VA Pruned NVFP4 ConvRot INT8",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
-      "group": "Minimax",
-      "tags": ["video", "ref2va", "pruned", "nvfp4", "convrot", "int8", "minimax"],
-      "sources": [
-        {
-          "title": "MiniMax H3 Ref2VA Pruned NVFP4 ConvRot INT8",
-          "url": "https://huggingface.co/rockerBOO/minimax-h3-nvfp4-convrot/resolve/main/minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
-          "size": "20.1 GB",
-          "size_bytes": 20070947267,
-          "description": "ComfyUI-compatible mixed NVFP4 and INT8 ConvRot MiniMax H3 Ref2VA diffusion model."
-        }
-      ],
-      "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"],
-      "url": "https://huggingface.co/rockerBOO/minimax-h3-nvfp4-convrot/resolve/main/minimax_h3_ref2va_pruned_nvfp4_convrot_int8.safetensors",
-      "size_bytes": 20070947267,
-      "sha256": "9593074fc37e898a9dd08ed7762a675837719a8d97ba3afde904a94474eadf8b",
-      "gated": false,
-      "description": "ComfyUI-compatible mixed NVFP4 and INT8 ConvRot MiniMax H3 Ref2VA diffusion model."
-    },
-    {
-      "id": "wan2.2.animate.14b.bf16",
-      "name": "Wan 2.2 Animate 14B BF16",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/wan2.2_animate_14B_bf16.safetensors",
-      "group": "Wan 2.2",
-      "tags": ["video", "animate", "14b", "bf16", "wan2.2"],
-      "sources": [
-        {
-          "title": "Wan 2.2 Animate 14B BF16",
-          "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_animate_14B_bf16.safetensors",
-          "size": "34.5 GB",
-          "size_bytes": 34549787368,
-          "description": "ComfyUI-native Wan 2.2 Animate 14B BF16 diffusion model."
-        }
-      ],
-      "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"],
-      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_animate_14B_bf16.safetensors",
-      "size_bytes": 34549787368,
-      "sha256": "7d37cb0120488dec2a061135aa3018426925318a60838c3de935c829abc88667",
-      "gated": false,
-      "description": "ComfyUI-native Wan 2.2 Animate 14B BF16 diffusion model."
-    },
-    {
-      "id": "wan2.2.t2v.a14b.high-noise.q6-k",
-      "name": "Wan 2.2 T2V A14B High Noise Q6_K",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
-      "group": "Wan 2.2",
-      "tags": ["video", "t2v", "a14b", "high-noise", "gguf", "q6-k", "wan2.2"],
-      "sources": [{"title":"Wan 2.2 T2V A14B High Noise Q6_K GGUF","url":"https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/HighNoise/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf","size":"12.0 GB","size_bytes":12002013696,"description":"High-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."}],
-      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"],
-      "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/HighNoise/Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
-      "size_bytes": 12002013696,
-      "sha256": "504340d1d4eb9c754a824861234cedb5519155c125aa8dbb4c170716d899cd3b",
-      "gated": false,
-      "description": "High-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."
-    },
-    {
-      "id": "wan2.2.t2v.a14b.low-noise.q6-k",
-      "name": "Wan 2.2 T2V A14B Low Noise Q6_K",
-      "type": "diffusion_models",
-      "relative_path": "models/diffusion_models/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
-      "group": "Wan 2.2",
-      "tags": ["video", "t2v", "a14b", "low-noise", "gguf", "q6-k", "wan2.2"],
-      "sources": [{"title":"Wan 2.2 T2V A14B Low Noise Q6_K GGUF","url":"https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/LowNoise/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf","size":"12.0 GB","size_bytes":12002013696,"description":"Low-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."}],
-      "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"],
-      "url": "https://huggingface.co/QuantStack/Wan2.2-T2V-A14B-GGUF/resolve/main/LowNoise/Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
-      "size_bytes": 12002013696,
-      "sha256": "db35061810049f77f571198d6a7bab422dec94fe0bf016b145b5cfc03eaaf661",
-      "gated": false,
-      "description": "Low-noise Q6_K GGUF branch for Wan 2.2 T2V A14B."
     }
   ]
 }
