@@ -1,8 +1,8 @@
 {
   "id": "a5a050b4-6fff-44b2-b568-0678e4b57f14",
   "revision": 0,
-  "last_node_id": 50,
-  "last_link_id": 30,
+  "last_node_id": 51,
+  "last_link_id": 32,
   "nodes": [
     {
       "id": 1,
@@ -154,7 +154,7 @@
         {
           "name": "samples",
           "type": "LATENT",
-          "link": 24
+          "link": 31
         },
         {
           "name": "vae",
@@ -196,7 +196,7 @@
         {
           "name": "samples",
           "type": "LATENT",
-          "link": 24
+          "link": 32
         },
         {
           "name": "vae",
@@ -963,6 +963,46 @@
         "BEST-QUALITY 30-MIN H3 CHARACTER SWAP\n\n1. Work shot-by-shot, never as one 30-minute H3 render. Target 5\u201315 s shots; 8 s is a good default.\n2. Keep H3 at native 24 FPS and use GapFiller only AFTER H3. This preserves every H3-generated frame and creates exact target-timestamp frames for 60 FPS.\n3. Feed the original shot to <Video 1>; feed 3 consistent character references to <Picture 1-3>.\n4. Keep ORIGINAL AUDIO from VHS_LoadVideo and mux it after interpolation.\n5. Do not feed interpolated 60 FPS frames back into H3.\n6. BF16 master settings are intentional for maximum fidelity and require high VRAM/system memory.\n7. Keep the same references and identity description for every shot to reduce identity drift."
       ],
       "title": "READ ME \u2014 LONG VIDEO PIPELINE"
+    },
+    {
+      "id": 51,
+      "type": "easy cleanGpuUsed",
+      "pos": [
+        353,
+        497
+      ],
+      "size": [
+        260,
+        80
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "anything",
+          "name": "anything",
+          "type": "*",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "*",
+          "links": [
+            31,
+            32
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "Node name for S&R": "easy cleanGpuUsed"
+      },
+      "widgets_values": [],
+      "title": "Unload model + text encoder before VAE decode"
     }
   ],
   "links": [
@@ -1090,9 +1130,9 @@
       24,
       6,
       0,
-      4,
+      51,
       0,
-      "LATENT"
+      "*"
     ],
     [
       26,
@@ -1133,6 +1173,22 @@
       13,
       11,
       "INT"
+    ],
+    [
+      31,
+      51,
+      0,
+      4,
+      0,
+      "*"
+    ],
+    [
+      32,
+      51,
+      0,
+      5,
+      0,
+      "*"
     ]
   ],
   "groups": [],

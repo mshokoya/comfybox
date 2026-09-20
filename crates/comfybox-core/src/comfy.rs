@@ -282,6 +282,10 @@ impl ComfyManager {
         let stderr = stdout.try_clone()?;
         let mut child = Command::new(&python)
             .current_dir(&instance.root)
+            // stdout/stderr are redirected to the managed log file. Without
+            // unbuffered mode Python can hold recent ComfyUI messages for a
+            // long time, making the dashboard tail appear stale.
+            .arg("-u")
             .arg("main.py")
             .arg("--listen")
             .arg(opts.host)

@@ -1,8 +1,8 @@
 {
   "id": "1b3fa08b-9c7c-4fa8-9603-7f9d841a5e5d",
   "revision": 0,
-  "last_node_id": 61,
-  "last_link_id": 35,
+  "last_node_id": 63,
+  "last_link_id": 37,
   "nodes": [
     {
       "id": 1,
@@ -107,7 +107,7 @@
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 26
+          "link": 37
         }
       ],
       "outputs": [
@@ -154,7 +154,7 @@
         {
           "name": "samples",
           "type": "LATENT",
-          "link": 24
+          "link": 36
         },
         {
           "name": "vae",
@@ -932,9 +932,87 @@
       "outputs": [],
       "properties": {},
       "widgets_values": [
-        "BEST-QUALITY 30-MIN H3 CHARACTER SWAP\n\n1. Work shot-by-shot, never as one 30-minute H3 render. Target 5–15 s shots; this workflow uses a valid 192-frame (8 s) H3 length.\n2. Upload a 24 FPS source shot with the native LoadVideo node. GapFiller runs only AFTER H3 and creates exact target-timestamp frames for 60 FPS.\n3. Feed the original shot and its soundtrack to <Video 1>; feed 3 sharp, consistent, naturally lit character references to <Picture 1-3>.\n4. Keep ORIGINAL AUDIO from GetVideoComponents and mux it after interpolation; generated audio is intentionally not decoded.\n5. Do not feed interpolated 60 FPS frames back into H3.\n6. BF16 master weights, 1344x768 native output, and maximum reference-image sizing are intentional for maximum identity and texture fidelity. They require high VRAM/system memory.\n7. Keep the same references, prompt, and seed strategy for every shot to reduce identity drift.\n8. The fal/MiniMax-H3-Realism-People-LoRA is applied to both the guider and scheduler paths. Keep the trigger word r34l1sm at the start of the prompt. Strength 1.0 is the model author's intended setting; use 0.6-0.8 only for a lighter effect.\n9. The official H3 sampling baseline is res_multistep + simple scheduler, 20 steps, denoise 1.0."
+        "BEST-QUALITY 30-MIN H3 CHARACTER SWAP\n\n1. Work shot-by-shot, never as one 30-minute H3 render. Target 5–15 s shots; this workflow uses a valid 192-frame (8 s) H3 length.\n2. Upload a 24 FPS source shot with the native LoadVideo node. GapFiller runs only AFTER H3 and creates exact target-timestamp frames for 60 FPS.\n3. Feed the original shot and its soundtrack to <Video 1>; feed 3 sharp, consistent, naturally lit character references to <Picture 1-3>.\n4. Keep ORIGINAL AUDIO from GetVideoComponents and mux it after interpolation; generated audio is intentionally not decoded.\n5. Do not feed interpolated 60 FPS frames back into H3.\n6. BF16 master weights, 1344x768 native output, and maximum reference-image sizing are intentional for maximum identity and texture fidelity. They require high VRAM/system memory.\n7. Keep the same references, prompt, and seed strategy for every shot to reduce identity drift.\n8. The fal/MiniMax-H3-Realism-People-LoRA is applied to both the guider and scheduler paths. Keep the trigger word r34l1sm at the start of the prompt. Strength 1.0 is the model author's intended setting; use 0.6-0.8 only for a lighter effect.\n9. The official H3 sampling baseline is res_multistep + simple scheduler, 20 steps, denoise 1.0.\n10. The first Clean VRAM Used node runs after sampling and before VAEDecode. It unloads the H3 model and text encoder before the memory-intensive video decode.\n11. The second Clean VRAM Used node runs immediately after VAEDecode. It unloads the video VAE before GapFiller interpolation and final video processing. Do not bypass or reorder either cleanup node."
       ],
       "title": "READ ME — LONG VIDEO PIPELINE + REALISM LORA"
+    },
+    {
+      "id": 62,
+      "type": "easy cleanGpuUsed",
+      "pos": [
+        455,
+        480
+      ],
+      "size": [
+        230,
+        80
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "anything",
+          "name": "anything",
+          "type": "*",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "*",
+          "links": [
+            36
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "Node name for S&R": "easy cleanGpuUsed"
+      },
+      "widgets_values": [],
+      "title": "Unload H3 + text encoder before VAE decode"
+    },
+    {
+      "id": 63,
+      "type": "easy cleanGpuUsed",
+      "pos": [
+        700,
+        480
+      ],
+      "size": [
+        230,
+        80
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "anything",
+          "name": "anything",
+          "type": "*",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "*",
+          "links": [
+            37
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "Node name for S&R": "easy cleanGpuUsed"
+      },
+      "widgets_values": [],
+      "title": "Unload video VAE before interpolation"
     },
     {
       "id": 60,
@@ -1104,17 +1182,17 @@
       24,
       6,
       0,
-      4,
+      62,
       0,
-      "LATENT"
+      "*"
     ],
     [
       26,
       4,
       0,
-      3,
+      63,
       0,
-      "IMAGE"
+      "*"
     ],
     [
       27,
@@ -1187,6 +1265,22 @@
       4,
       1,
       "VAE"
+    ],
+    [
+      36,
+      62,
+      0,
+      4,
+      0,
+      "*"
+    ],
+    [
+      37,
+      63,
+      0,
+      3,
+      0,
+      "*"
     ]
   ],
   "groups": [],

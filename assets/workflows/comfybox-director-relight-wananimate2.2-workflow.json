@@ -1,8 +1,8 @@
 {
   "id": "9f5c8b68-7fca-418e-84a4-38120538f74d",
   "revision": 0,
-  "last_node_id": 30,
-  "last_link_id": 20,
+  "last_node_id": 31,
+  "last_link_id": 21,
   "nodes": [
     {
       "id": 1,
@@ -22,7 +22,7 @@
         {
           "name": "video",
           "type": "VIDEO",
-          "link": 1
+          "link": 21
         }
       ],
       "outputs": [
@@ -484,6 +484,45 @@
         "Wan Animate + Video Director + official relighting LoRA\n\nWhat this workflow does:\n1. Uses Video Director with model_type = wan22_animate.\n2. Patches the Wan Animate checkpoint with the official relight LoRA at 1.0.\n3. Also patches the model with the light2xv / step-distill LoRA at 1.0, because the Director profile expects the matching LoRA stack.\n4. CLIP Vision is connected so I2V / replacement style workflows have the extra conditioning available.\n\nImportant:\n- Use this for character replacement / animation.\n- The official Wan Animate page says not to use LoRAs trained on normal Wan2.2 with Wan Animate.\n- This workflow therefore uses the Wan Animate-specific relighting LoRA, not Instareal.\n\nTimeline notes:\n- timeline_json starts as {}. Open the Video Director timeline UI and add your clips / media there.\n- If you use source-video replacement mode, set that up from the Director timeline / clip media, not from external LoadVideo nodes here.\n"
       ],
       "title": "README — Wan Animate + Director"
+    },
+    {
+      "id": 31,
+      "type": "easy cleanGpuUsed",
+      "pos": [
+        930,
+        305
+      ],
+      "size": [
+        260,
+        80
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "anything",
+          "name": "anything",
+          "type": "*",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "*",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "Node name for S&R": "easy cleanGpuUsed"
+      },
+      "widgets_values": [],
+      "title": "Unload generation models before saving video"
     }
   ],
   "links": [
@@ -491,9 +530,9 @@
       1,
       21,
       0,
-      1,
+      31,
       0,
-      "VIDEO"
+      "*"
     ],
     [
       10,
@@ -550,6 +589,14 @@
       21,
       0,
       "VIDEO_MODELS"
+    ],
+    [
+      21,
+      31,
+      0,
+      1,
+      0,
+      "*"
     ]
   ],
   "groups": [],

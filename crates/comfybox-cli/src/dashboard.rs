@@ -315,6 +315,8 @@ pub fn run(
         if app.queue.tick(app.cfg.max_concurrent_downloads) {
             needs_draw = true;
         }
+        // Only read the ComfyUI log while the Logs tab is active. When the
+        // user returns, tailing resumes from the saved offset and catches up.
         if Section::ALL[app.section] == Section::Logs
             && let Some(path) = app.state.comfy_log.as_deref()
             && app.queue.tail_comfyui_log(Path::new(path))
@@ -1813,26 +1815,28 @@ impl Dashboard<'_> {
     }
 
     fn render_logs(&self, frame: &mut Frame<'_>, area: Rect) {
-        let visible = area.height.saturating_sub(2) as usize;
-        let lines = self
+        let mut lines = self
             .queue
             .logs()
-            .rev()
-            .take(visible)
-            .collect::<Vec<_>>()
-            .into_iter()
-            .rev()
             .map(|line| Line::from(line.to_owned()))
             .collect::<Vec<_>>();
-        frame.render_widget(
-            Paragraph::new(lines).wrap(Wrap { trim: false }).block(
-                Block::default()
-                    .title(" Application log · progress events filtered ")
-                    .borders(Borders::ALL)
-                    .border_style(Style::default().fg(PANEL)),
-            ),
-            area,
-        );
+        if let Some(partial) = self.queue.partial_comfyui_log() {
+            lines.push(Line::from(format!("[COMFYUI] {partial}")));
+        }
+        let block = Block::default()
+            .title(" Live application + ComfyUI log · newest at bottom ")
+            .borders(Borders::ALL)
+            .border_style(Style::default().fg(PANEL));
+        let paragraph = Paragraph::new(lines)
+            .wrap(Wrap { trim: false })
+            .block(block);
+        // Count rendered rows after wrapping. Taking the last N logical lines
+        // can still hide the newest entries when earlier entries wrap.
+        let rendered_rows = paragraph.line_count(area.width);
+        let scroll = rendered_rows
+            .saturating_sub(area.height as usize)
+            .min(u16::MAX as usize) as u16;
+        frame.render_widget(paragraph.scroll((scroll, 0)), area);
     }
 
     fn render_settings(&self, frame: &mut Frame<'_>, area: Rect) {

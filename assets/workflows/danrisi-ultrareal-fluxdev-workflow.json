@@ -1,8 +1,8 @@
 {
   "id": "3a4a9295-86bf-4cdf-a146-a8b0dae6392f",
   "revision": 0,
-  "last_node_id": 773,
-  "last_link_id": 3823,
+  "last_node_id": 774,
+  "last_link_id": 3824,
   "nodes": [
     {
       "id": 29,
@@ -22,7 +22,7 @@
         {
           "name": "samples",
           "type": "LATENT",
-          "link": 1742
+          "link": 3824
         },
         {
           "name": "vae",
@@ -1820,6 +1820,45 @@
       ],
       "color": "#c09430",
       "bgcolor": "rgba(24,24,27,.9)"
+    },
+    {
+      "id": 774,
+      "type": "easy cleanGpuUsed",
+      "pos": [
+        1571,
+        307
+      ],
+      "size": [
+        260,
+        80
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "anything",
+          "name": "anything",
+          "type": "*",
+          "link": 1742
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "*",
+          "links": [
+            3824
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "Node name for S&R": "easy cleanGpuUsed"
+      },
+      "widgets_values": [],
+      "title": "Unload model + text encoder before VAE decode"
     }
   ],
   "links": [
@@ -2499,9 +2538,9 @@
       1742,
       292,
       0,
-      29,
+      774,
       0,
-      "LATENT"
+      "*"
     ],
     [
       1746,
@@ -2854,6 +2893,14 @@
       679,
       0,
       "IMAGE"
+    ],
+    [
+      3824,
+      774,
+      0,
+      29,
+      0,
+      "*"
     ]
   ],
   "groups": [

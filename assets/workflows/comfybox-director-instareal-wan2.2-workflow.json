@@ -1,8 +1,8 @@
 {
   "id": "8f3d6fe1-953c-4b20-ae0d-7e8f1f7d2fd4",
   "revision": 0,
-  "last_node_id": 30,
-  "last_link_id": 20,
+  "last_node_id": 31,
+  "last_link_id": 21,
   "nodes": [
     {
       "id": 1,
@@ -22,7 +22,7 @@
         {
           "name": "video",
           "type": "VIDEO",
-          "link": 1
+          "link": 21
         }
       ],
       "outputs": [
@@ -601,6 +601,45 @@
         "Wan 2.2 A14B + Video Director + Instareal\n\nWhat this workflow does:\n1. Uses Video Director with model_type = wan22.\n2. Patches BOTH Wan branches with their required step-distill LoRAs at 1.0.\n3. Then applies Instareal to BOTH branches at 1.0.\n4. CLIP Vision is connected so the same workflow can handle T2V, I2V, and FFLF timeline clips.\n\nPrompting / strengths:\n- Trigger word: Instareal\n- Recommended strength is 0.8 to 1.2, with 1.0 as the starting point. This workflow uses 1.0 by default.\n- Keep Instareal in global_style or clip prompts whenever you want the realism effect.\n\nLoader note:\n- Both Q6_K model branches use UnetLoaderGGUF from ComfyUI-GGUF.\n- ComfyBox downloads the verified InstaGirl v2.5 high-noise and low-noise files under the filenames selected by this workflow.\n\nTimeline notes:\n- timeline_json starts as {}. Open the Video Director timeline UI and add your T2V, I2V, or FFLF clips there.\n"
       ],
       "title": "README — Wan22 + Instareal + Director"
+    },
+    {
+      "id": 31,
+      "type": "easy cleanGpuUsed",
+      "pos": [
+        1075,
+        320
+      ],
+      "size": [
+        260,
+        80
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "anything",
+          "name": "anything",
+          "type": "*",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "*",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "Node name for S&R": "easy cleanGpuUsed"
+      },
+      "widgets_values": [],
+      "title": "Unload generation models before saving video"
     }
   ],
   "links": [
@@ -608,9 +647,9 @@
       1,
       21,
       0,
-      1,
+      31,
       0,
-      "VIDEO"
+      "*"
     ],
     [
       10,
@@ -691,6 +730,14 @@
       21,
       0,
       "VIDEO_MODELS"
+    ],
+    [
+      21,
+      31,
+      0,
+      1,
+      0,
+      "*"
     ]
   ],
   "groups": [],

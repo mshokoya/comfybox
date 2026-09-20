@@ -2,7 +2,7 @@
   "id": "79e9753c-d7eb-464f-b072-38c26f869748",
   "revision": 0,
   "last_node_id": 54,
-  "last_link_id": 117,
+  "last_link_id": 116,
   "nodes": [
     {
       "id": 2,
@@ -292,7 +292,7 @@
           "label": "video",
           "name": "video",
           "type": "VIDEO",
-          "link": 9
+          "link": 116
         },
         {
           "label": "filename_prefix",
@@ -1245,6 +1245,45 @@
           }
         }
       }
+    },
+    {
+      "id": 54,
+      "type": "easy cleanGpuUsed",
+      "pos": [
+        1163,
+        415
+      ],
+      "size": [
+        260,
+        80
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "anything",
+          "name": "anything",
+          "type": "*",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "*",
+          "links": [
+            116
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "Node name for S&R": "easy cleanGpuUsed"
+      },
+      "widgets_values": [],
+      "title": "Unload generation models before saving video"
     }
   ],
   "links": [
@@ -1252,9 +1291,9 @@
       9,
       6,
       0,
-      7,
+      54,
       0,
-      "VIDEO"
+      "*"
     ],
     [
       73,
@@ -1359,6 +1398,14 @@
       53,
       0,
       "IMAGE"
+    ],
+    [
+      116,
+      54,
+      0,
+      7,
+      0,
+      "*"
     ]
   ],
   "groups": [

@@ -1,8 +1,8 @@
 {
   "id": "a3c19f25-330b-4f87-8c45-0df43f9fda01",
   "revision": 0,
-  "last_node_id": 30,
-  "last_link_id": 16,
+  "last_node_id": 31,
+  "last_link_id": 17,
   "nodes": [
     {
       "id": 1,
@@ -22,7 +22,7 @@
         {
           "name": "video",
           "type": "VIDEO",
-          "link": 1
+          "link": 17
         }
       ],
       "outputs": [
@@ -440,6 +440,45 @@
         "H3 + Video Director + MiniMax H3 Realism People LoRA\n\nWhat this workflow does:\n1. Uses Video Director for multi-clip timelines.\n2. Patches BOTH H3 checkpoints with h3-realism-people-t2v-i2v-r2v.safetensors at 1.0.\n3. Keeps H3 audio via minimax_h3_audio_vae_fp32.safetensors.\n\nModel notes:\n- Trigger word: r34l1sm\n- Suggested LoRA strength: 1.0 (lighter touch: 0.6–0.8)\n- FL2VA file: minimax_h3_fl2va_pruned_int8_convrot.safetensors\n- Ref2VA file: minimax_h3_ref2va_pruned_int8_convrot.safetensors\n- Text encoder type must be minimax.\n\nTimeline notes:\n- timeline_json starts as {}. Open the Video Director timeline editor in ComfyUI and add your clips, prompts, references, or source media there.\n- Keep r34l1sm in your global style or clip prompts whenever you want the realism LoRA effect.\n"
       ],
       "title": "README — H3 Director + Realism"
+    },
+    {
+      "id": 31,
+      "type": "easy cleanGpuUsed",
+      "pos": [
+        525,
+        290
+      ],
+      "size": [
+        260,
+        80
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "anything",
+          "name": "anything",
+          "type": "*",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "label": "output",
+          "name": "output",
+          "type": "*",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "Node name for S&R": "easy cleanGpuUsed"
+      },
+      "widgets_values": [],
+      "title": "Unload generation models before saving video"
     }
   ],
   "links": [
@@ -447,9 +486,9 @@
       1,
       20,
       0,
-      1,
+      31,
       0,
-      "VIDEO"
+      "*"
     ],
     [
       10,
@@ -506,6 +545,14 @@
       20,
       5,
       "VAE"
+    ],
+    [
+      17,
+      31,
+      0,
+      1,
+      0,
+      "*"
     ]
   ],
   "groups": [],

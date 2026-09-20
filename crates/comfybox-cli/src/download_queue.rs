@@ -932,6 +932,10 @@ impl DownloadQueue {
         self.logs.iter().map(String::as_str)
     }
 
+    pub fn partial_comfyui_log(&self) -> Option<&str> {
+        (!self.server_log_partial.is_empty()).then_some(self.server_log_partial.as_str())
+    }
+
     pub fn len(&self) -> usize {
         self.jobs.len()
             + self.custom_nodes.len()
@@ -1773,7 +1777,32 @@ fn timestamp() -> String {
 
 #[cfg(test)]
 mod tests {
-    use super::{JobStatus, restored_status};
+    use super::{DownloadQueue, JobStatus, restored_status};
+    use std::{
+        collections::VecDeque,
+        fs,
+        io::Write,
+        path::{Path, PathBuf},
+    };
+    use tokio::sync::mpsc;
+
+    fn empty_queue(state_path: PathBuf) -> DownloadQueue {
+        let (sender, receiver) = mpsc::unbounded_channel();
+        DownloadQueue {
+            jobs: Vec::new(),
+            python_deps: None,
+            system_deps: None,
+            custom_nodes: Vec::new(),
+            logs: VecDeque::new(),
+            sender,
+            receiver,
+            state_path,
+            log_file: None,
+            server_log_path: None,
+            server_log_offset: 0,
+            server_log_partial: String::new(),
+        }
+    }
 
     #[test]
     fn queued_jobs_are_pending_but_do_not_occupy_download_slots() {
@@ -1800,5 +1829,29 @@ mod tests {
     fn queued_jobs_remain_queued_after_restart() {
         assert_eq!(restored_status(JobStatus::Queued), JobStatus::Queued);
         assert_eq!(restored_status(JobStatus::Downloading), JobStatus::Paused);
+    }
+
+    #[test]
+    fn comfyui_tail_keeps_latest_complete_and_partial_output() {
+        let dir = std::env::temp_dir().join(format!("comfybox-log-test-{}", uuid::Uuid::new_v4()));
+        fs::create_dir_all(&dir).unwrap();
+        let log_path = dir.join("comfyui.log");
+        fs::write(&log_path, "startup\nloading").unwrap();
+        let mut queue = empty_queue(dir.join("queue.json"));
+
+        assert!(queue.tail_comfyui_log(Path::new(&log_path)));
+        assert_eq!(queue.logs().last(), Some("[COMFYUI] startup"));
+        assert_eq!(queue.partial_comfyui_log(), Some("loading"));
+
+        let mut file = fs::OpenOptions::new().append(true).open(&log_path).unwrap();
+        file.write_all(b" complete\nlatest\n").unwrap();
+        file.flush().unwrap();
+
+        assert!(queue.tail_comfyui_log(Path::new(&log_path)));
+        assert_eq!(queue.logs().last(), Some("[COMFYUI] latest"));
+        assert_eq!(queue.partial_comfyui_log(), None);
+
+        drop(queue);
+        fs::remove_dir_all(dir).unwrap();
     }
 }

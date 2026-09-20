@@ -11,10 +11,7 @@
         "minimax.h3.video-vae.fp16",
         "minimax.h3.audio-vae.fp32"
       ],
-      "custom_node_ids": [
-        "comfyui-gapfiller",
-        "comfyui-videohelpersuite"
-      ],
+      "custom_node_ids": ["comfyui-gapfiller","comfyui-videohelpersuite","comfyui-easy-use"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -31,10 +28,7 @@
         "zimage.qwen3.4b",
         "z_image"
       ],
-      "custom_node_ids": [
-        "controlaltai-nodes",
-        "res4lyf"
-      ],
+      "custom_node_ids": ["controlaltai-nodes","res4lyf","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -55,15 +49,7 @@
         "4xnmkdsuperscale_4xnmkdsuperscale",
         "ae"
       ],
-      "custom_node_ids": [
-        "cg-use-everywhere",
-        "comfyui-gguf",
-        "comfyui-impact-pack",
-        "comfyui_controlaltai_nodes",
-        "comfyui_essentials",
-        "controlaltai-nodes",
-        "rgthree-comfy"
-      ],
+      "custom_node_ids": ["cg-use-everywhere","comfyui-gguf","comfyui-impact-pack","comfyui_controlaltai_nodes","comfyui_essentials","controlaltai-nodes","rgthree-comfy","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -79,10 +65,7 @@
         "zimage.qwen3.4b",
         "z_image"
       ],
-      "custom_node_ids": [
-        "controlaltai-nodes",
-        "res4lyf"
-      ],
+      "custom_node_ids": ["controlaltai-nodes","res4lyf","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -113,7 +96,7 @@
         "qwen.image.encoder.2.5vl7b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": [],
+      "custom_node_ids": ["comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -130,9 +113,7 @@
         "krea2.qwen3vl4b.bf16",
         "wan2_1_vae_fp32"
       ],
-      "custom_node_ids": [
-        "res4lyf"
-      ],
+      "custom_node_ids": ["res4lyf","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -149,9 +130,7 @@
         "krea2.qwen3vl4b.bf16",
         "wan2_1_vae_fp32"
       ],
-      "custom_node_ids": [
-        "res4lyf"
-      ],
+      "custom_node_ids": ["res4lyf","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -187,9 +166,7 @@
         "krea2.qwen3vl4b.bf16",
         "wan2_1_vae_fp32"
       ],
-      "custom_node_ids": [
-        "res4lyf"
-      ],
+      "custom_node_ids": ["res4lyf","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -208,18 +185,7 @@
         "qwen2_5_vl_7b_instruct_abliterated_mmproj_q8_0",
         "seedvr2_ema_3b_fp16"
       ],
-      "custom_node_ids": [
-        "comfyui-aspect-ratio-crop-node",
-        "comfyui-custom-scripts",
-        "comfyui-gguf",
-        "comfyui-imageautotone",
-        "comfyui-inspire-pack",
-        "comfyui-levelpixel-advanced",
-        "comfyui-magickwand",
-        "rgthree-comfy",
-        "seedvr2_videoupscaler",
-        "was-ns"
-      ],
+      "custom_node_ids": ["comfyui-aspect-ratio-crop-node","comfyui-custom-scripts","comfyui-gguf","comfyui-imageautotone","comfyui-inspire-pack","comfyui-levelpixel-advanced","comfyui-magickwand","rgthree-comfy","seedvr2_videoupscaler","was-ns","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -282,11 +248,7 @@
         "zimage.qwen3.4b",
         "flux_ultra_vae"
       ],
-      "custom_node_ids": [
-        "comfyui-aspect-ratio-crop-node",
-        "comfyui-custom-scripts",
-        "res4lyf"
-      ],
+      "custom_node_ids": ["comfyui-aspect-ratio-crop-node","comfyui-custom-scripts","res4lyf","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -302,13 +264,7 @@
         "zimage.qwen3.4b",
         "flux_ultra_vae"
       ],
-      "custom_node_ids": [
-        "comfyui-aspect-ratio-crop-node",
-        "comfyui-custom-scripts",
-        "comfyui_controlnet_aux",
-        "controlaltai-nodes",
-        "res4lyf"
-      ],
+      "custom_node_ids": ["comfyui-aspect-ratio-crop-node","comfyui-custom-scripts","comfyui_controlnet_aux","controlaltai-nodes","res4lyf","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -324,11 +280,7 @@
         "qwen.image.encoder.2.5vl7b",
         "qwen.image.vae"
       ],
-      "custom_node_ids": [
-        "comfy-image-saver",
-        "res4lyf",
-        "rgthree-comfy"
-      ],
+      "custom_node_ids": ["comfy-image-saver","res4lyf","rgthree-comfy","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -343,10 +295,7 @@
         "qwen.image.encoder.2.5vl7b",
         "qwen.image.vae"
       ],
-      "custom_node_ids": [
-        "comfy-image-saver",
-        "res4lyf"
-      ],
+      "custom_node_ids": ["comfy-image-saver","res4lyf","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -366,11 +315,7 @@
         "umt5_xxl_fp8_e4m3fn_scaled",
         "wan_2_1_vae"
       ],
-      "custom_node_ids": [
-        "comfy-image-saver",
-        "comfyui-gguf",
-        "comfyui-kjnodes"
-      ],
+      "custom_node_ids": ["comfy-image-saver","comfyui-gguf","comfyui-kjnodes","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -390,11 +335,7 @@
         "umt5_xxl_fp8_e4m3fn_scaled",
         "wan_2_1_vae"
       ],
-      "custom_node_ids": [
-        "comfy-image-saver",
-        "comfyui-gguf",
-        "comfyui-kjnodes"
-      ],
+      "custom_node_ids": ["comfy-image-saver","comfyui-gguf","comfyui-kjnodes","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -414,11 +355,7 @@
         "qwen.image.vae",
         "wan_2_1_vae"
       ],
-      "custom_node_ids": [
-        "comfyui-workflow-encrypt",
-        "deno-custom-nodes",
-        "rgthree-comfy"
-      ],
+      "custom_node_ids": ["comfyui-workflow-encrypt","deno-custom-nodes","rgthree-comfy","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -436,11 +373,7 @@
         "qwen.image.encoder.2.5vl7b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": [
-        "comfyui_faceanalysis",
-        "rgthree-comfy",
-        "vnccs-utils"
-      ],
+      "custom_node_ids": ["comfyui_faceanalysis","rgthree-comfy","vnccs-utils","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -506,9 +439,7 @@
         "krea2.qwen3vl4b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -570,6 +501,7 @@
         "comfyui-workflow-encrypt",
         "comfyui_comfyroll_customnodes",
         "comfyui_controlnet_aux",
+        "comfyui-easy-use",
         "comfyui_layerstyle",
         "masquerade-nodes-comfyui"
       ],
@@ -591,9 +523,7 @@
         "qwen.image.encoder.2.5vl7b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
@@ -694,13 +624,7 @@
         "flux2.vae",
         "flux2.klein.multiple-angles"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy",
-        "comfyui-kjnodes",
-        "comfyui-easy-use",
-        "comfyui-face-analysis",
-        "outputlists-combiner"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -740,13 +664,7 @@
         "bfs.krea2.head-swap.v1.1",
         "krea2.amateur.v2"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy",
-        "comfyui-kjnodes",
-        "comfyui-krea2edit",
-        "comfyui-pixaroma",
-        "comfyui-comfyroll"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-krea2edit","comfyui-pixaroma","comfyui-comfyroll","comfyui-easy-use"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -761,9 +679,7 @@
         "krea2.qwen3vl4b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-easy-use"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -779,14 +695,7 @@
         "qwen.image.vae",
         "krea2.identity-edit.v1.2"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy",
-        "comfyui-kjnodes",
-        "comfyui-easy-use",
-        "comfyui-face-analysis",
-        "outputlists-combiner",
-        "comfyui-krea2edit"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner","comfyui-krea2edit"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -840,13 +749,7 @@
         "qwen.edit.2509.multiple-angles",
         "qwen.edit.next-scene-v2"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy",
-        "comfyui-kjnodes",
-        "comfyui-easy-use",
-        "comfyui-face-analysis",
-        "outputlists-combiner"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -864,13 +767,7 @@
         "qwen.edit.2509.multiple-angles",
         "qwen.edit.next-scene-v2"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy",
-        "comfyui-kjnodes",
-        "comfyui-easy-use",
-        "comfyui-face-analysis",
-        "outputlists-combiner"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -888,13 +785,7 @@
         "qwen.edit.2509.multiple-angles",
         "qwen.edit.next-scene-v2"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy",
-        "comfyui-kjnodes",
-        "comfyui-easy-use",
-        "comfyui-face-analysis",
-        "outputlists-combiner"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -912,13 +803,7 @@
         "qwen.edit.2511.multiple-angles",
         "qwen.edit.next-scene-v2"
       ],
-      "custom_node_ids": [
-        "rgthree-comfy",
-        "comfyui-kjnodes",
-        "comfyui-easy-use",
-        "comfyui-face-analysis",
-        "outputlists-combiner"
-      ],
+      "custom_node_ids": ["rgthree-comfy","comfyui-kjnodes","comfyui-easy-use","comfyui-face-analysis","outputlists-combiner"],
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
@@ -989,12 +874,7 @@
         "minimax.h3.ref2va.pruned.nvfp4-convrot-int8",
         "minimax.h3.ref2v.turbo.8step.v1.0.768p.bf16"
       ],
-      "custom_node_ids": [
-        "comfyui-kjnodes",
-        "comfyui-videohelpersuite",
-        "comfyui-sol-attn",
-        "comfyui-minimax-h3-director"
-      ],
+      "custom_node_ids": ["comfyui-kjnodes","comfyui-videohelpersuite","comfyui-sol-attn","comfyui-minimax-h3-director","comfyui-easy-use"],
       "catalog_sources": ["workflow:comfybox-refiner-and-director-minimaxh3"]
     },
     {
@@ -1009,7 +889,7 @@
         "wan_2_1_vae",
         "clip-vision.h"
       ],
-      "custom_node_ids": ["comfyui-video-director"],
+      "custom_node_ids": ["comfyui-video-director","comfyui-easy-use"],
       "catalog_sources": ["workflow:comfybox-director-relight-wananimate2.2"]
     },
     {
@@ -1024,7 +904,7 @@
         "minimax.h3.video-vae.fp16",
         "minimax.h3.audio-vae.fp32"
       ],
-      "custom_node_ids": ["comfyui-video-director"],
+      "custom_node_ids": ["comfyui-video-director","comfyui-easy-use"],
       "catalog_sources": ["workflow:comfybox-director-realism-people-minimaxh3"]
     },
     {
@@ -1042,7 +922,7 @@
         "wan_2_1_vae",
         "clip-vision.h"
       ],
-      "custom_node_ids": ["comfyui-video-director", "comfyui-gguf"],
+      "custom_node_ids": ["comfyui-video-director","comfyui-gguf","comfyui-easy-use"],
       "catalog_sources": ["workflow:comfybox-director-instareal-wan2.2"]
     },
     {
@@ -1057,7 +937,7 @@
         "minimax.h3.realism-people.t2v-i2v-r2v",
         "gapfiller_v1"
       ],
-      "custom_node_ids": ["comfyui-gapfiller"],
+      "custom_node_ids": ["comfyui-gapfiller", "comfyui-easy-use", "comfyui-kjnodes"],
       "catalog_sources": ["workflow:comfybox-character-swap-realism-lora-24to60-minimaxh3"]
     },
     {
@@ -1071,7 +951,7 @@
         "minimax.h3.audio-vae.fp32",
         "gapfiller_v1"
       ],
-      "custom_node_ids": ["comfyui-gapfiller", "comfyui-videohelpersuite"],
+      "custom_node_ids": ["comfyui-gapfiller","comfyui-videohelpersuite","comfyui-easy-use"],
       "catalog_sources": ["workflow:comfybox-character-swap-base-24to60-minimaxh3"]
     },
     {
@@ -1086,10 +966,7 @@
         "qwen.image.encoder.2.5vl7b.fp8",
         "qwen.image.vae"
       ],
-      "custom_node_ids": [
-        "comfyui-qwenmultiangle",
-        "rgthree-comfy"
-      ],
+      "custom_node_ids": ["comfyui-qwenmultiangle","rgthree-comfy","comfyui-easy-use"],
       "catalog_sources": [
         "_/deps.json"
       ]
