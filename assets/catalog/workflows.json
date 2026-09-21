@@ -822,6 +822,7 @@
         "minimax.h3.video-vae.int8-convrot",
         "minimax.h3.audio-vae.fp32",
         "minimax.h3.ref2v.turbo.4step.v0.1.bf16",
+        "minimax.h3.realism-people.t2v-i2v-r2v",
         "minimax.h3.latent-upscaler.3d-conv-v1.fp16"
       ],
       "custom_node_ids": [
@@ -829,9 +830,7 @@
         "comfyui-minimax-h3-audio-t8",
         "comfyui-kjnodes",
         "comfyui-text-translation",
-        "comfyui-videohelpersuite",
-        "comfyui-sol-attn",
-        "comfyui-easy-use"
+        "comfyui-workflow-encrypt"
       ],
       "catalog_sources": [
         "_/untitled-folder",

@@ -1,5 +1,5 @@
 {
-	"last_link_id":480,
+	"last_link_id":481,
 	"nodes":[
 		{
 			"outputs":[
@@ -43,10 +43,10 @@
 				"previousName":"Audio_VAE",
 				"ue_properties":{
 					"widget_ue_connectable":{
-						
+
 					},
 					"input_ue_unconnectable":{
-						
+
 					},
 					"version":"7.8"
 				},
@@ -123,12 +123,8 @@
 				"cnr_id":"comfy-core",
 				"ver":"0.30.1",
 				"ue_properties":{
-					"widget_ue_connectable":{
-						
-					},
-					"input_ue_unconnectable":{
-						
-					},
+					"widget_ue_connectable":{},
+					"input_ue_unconnectable":{},
 					"version":"7.8"
 				},
 				"widget_ue_connectable":{
@@ -6836,6 +6832,83 @@
 				{
 					"name":"MODEL",
 					"links":[
+						479
+					],
+					"label":"MODEL",
+					"type":"MODEL",
+					"localized_name":"MODEL"
+				}
+			],
+			"color":"#2a363b",
+			"widgets_values":[
+				"h3-realism-people-t2v-i2v-r2v.safetensors",
+				0.7
+			],
+			"inputs":[
+				{
+					"name":"model",
+					"link":481,
+					"label":"model",
+					"type":"MODEL",
+					"localized_name":"model"
+				},
+				{
+					"widget":{
+						"name":"lora_name"
+					},
+					"name":"lora_name",
+					"label":"lora_name",
+					"type":"COMBO",
+					"localized_name":"lora_name"
+				},
+				{
+					"widget":{
+						"name":"strength_model"
+					},
+					"name":"strength_model",
+					"label":"strength_model",
+					"type":"FLOAT",
+					"localized_name":"strength_model"
+				}
+			],
+			"flags":{
+				"collapsed":false,
+				"disabled":false
+			},
+			"type":"LoraLoaderModelOnly",
+			"title":"Realism People LoRA",
+			"mode":0,
+			"bgcolor":"#3f5159",
+			"size":[
+				432.6033020019531,
+				82
+			],
+			"pos":[
+				4787.9599609375,
+				893.7109375
+			],
+			"id":334,
+			"properties":{
+				"cnr_id":"comfy-core",
+				"ver":"0.32.0",
+				"ue_properties":{
+					"widget_ue_connectable":{},
+					"input_ue_unconnectable":{},
+					"version":"7.8"
+				},
+				"widget_ue_connectable":{
+					"lora_name":true,
+					"strength_model":true
+				},
+				"Node name for S&R":"LoraLoaderModelOnly"
+			},
+			"order":96
+		},
+		{
+			"outputs":[
+				{
+					"name":"MODEL",
+					"links":[
 						323,
 						473
 					],
@@ -7310,7 +7383,7 @@
 				{
 					"name":"model",
 					"links":[
-						479
+						481
 					],
 					"label":"model",
 					"type":"MODEL",
@@ -7335,7 +7408,7 @@
 				"disabled":false
 			},
 			"type":"MiniMaxH3MemoryEfficientSageAttentionPatch",
-			"mode":0,
+			"mode":4,
 			"bgcolor":"#355",
 			"size":[
 				357.1148376464844,
@@ -7626,7 +7699,7 @@
 			],
 			"color":"#232",
 			"widgets_values":[
-				6,
+				8,
 				12,
 				3,
 				"dual_clock_euler",
@@ -7908,7 +7981,7 @@
 				"loop_count":0,
 				"pix_fmt":"yuv420p",
 				"save_metadata":true,
-				"crf":19,
+				"crf":15,
 				"trim_to_audio":false,
 				"videopreview":{
 					"paused":false,
@@ -9140,9 +9213,17 @@
 		],
 		[
 			479,
-			58,
+			334,
 			0,
 			53,
+			0,
+			"MODEL"
+		],
+		[
+			481,
+			58,
+			0,
+			334,
 			0,
 			"MODEL"
 		]
@@ -9152,6 +9233,6 @@
 		
 	},
 	"version":0.4,
-	"last_node_id":333,
+	"last_node_id":334,
 	"revision":0
 }
