@@ -339,7 +339,7 @@ If you're logged in as root on AutoDL, you don't need sudo:
 ```bash
 curl -fL --retry 5 --retry-delay 3 \
   -o /tmp/comfybox \
-  "https://github.com/mshokoya/comfybox/releases/download/x86_64-unknown-linux-gnu/comfybox" \
+  "https://ghfast.top/https://github.com/mshokoya/comfybox/releases/download/x86_64-unknown-linux-gnu/comfybox" \
   && chmod +x /tmp/comfybox \
   && install -m 0755 /tmp/comfybox /usr/local/bin/comfybox \
   && rm -f /tmp/comfybox

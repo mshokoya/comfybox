@@ -825,8 +825,7 @@
 			],
 			"id":26,
 			"properties":{
-				"cnr_id":"comfyui-workflow-encrypt",
-				"ver":"1.0.0",
+				"cnr_id":"comfyui-videohelpersuite",
 				"ue_properties":{
 					"widget_ue_connectable":{
 						
@@ -1205,8 +1204,7 @@
 			],
 			"id":25,
 			"properties":{
-				"cnr_id":"comfyui-workflow-encrypt",
-				"ver":"1.0.0",
+				"cnr_id":"comfyui-videohelpersuite",
 				"ue_properties":{
 					"widget_ue_connectable":{
 						
@@ -6219,8 +6217,7 @@
 			],
 			"id":27,
 			"properties":{
-				"cnr_id":"comfyui-workflow-encrypt",
-				"ver":"1.0.0",
+				"cnr_id":"comfyui-videohelpersuite",
 				"ue_properties":{
 					"widget_ue_connectable":{
 						
@@ -6486,8 +6483,7 @@
 			],
 			"id":214,
 			"properties":{
-				"cnr_id":"comfyui-workflow-encrypt",
-				"ver":"1.0.0",
+				"cnr_id":"comfyui-videohelpersuite",
 				"ue_properties":{
 					"widget_ue_connectable":{
 						
@@ -7351,8 +7347,7 @@
 			],
 			"id":58,
 			"properties":{
-				"cnr_id":"comfyui-workflow-encrypt",
-				"ver":"1.0.0",
+				"cnr_id":"comfyui-sol-attn",
 				"ue_properties":{
 					"widget_ue_connectable":{
 						
@@ -7412,8 +7407,7 @@
 			],
 			"id":283,
 			"properties":{
-				"cnr_id":"comfyui-workflow-encrypt",
-				"ver":"1.0.0",
+				"cnr_id":"comfyui-easy-use",
 				"ue_properties":{
 					"widget_ue_connectable":{
 						
@@ -8051,8 +8045,7 @@
 			],
 			"id":264,
 			"properties":{
-				"cnr_id":"comfyui-workflow-encrypt",
-				"ver":"1.0.0",
+				"cnr_id":"comfyui-videohelpersuite",
 				"ue_properties":{
 					"widget_ue_connectable":{
 						

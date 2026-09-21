@@ -829,7 +829,9 @@
         "comfyui-minimax-h3-audio-t8",
         "comfyui-kjnodes",
         "comfyui-text-translation",
-        "comfyui-workflow-encrypt"
+        "comfyui-videohelpersuite",
+        "comfyui-sol-attn",
+        "comfyui-easy-use"
       ],
       "catalog_sources": [
         "_/untitled-folder",
