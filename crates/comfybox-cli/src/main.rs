@@ -1727,8 +1727,8 @@ mod builtin_catalog_tests {
         let catalog = load_catalog(&[]).unwrap();
         assert_eq!(catalog.artifacts.len(), 240);
         assert_eq!(catalog.packages.len(), 20);
-        assert_eq!(catalog.workflows.len(), 62);
-        assert_eq!(catalog.custom_nodes.len(), 62);
+        assert_eq!(catalog.workflows.len(), 63);
+        assert_eq!(catalog.custom_nodes.len(), 63);
         assert_eq!(catalog.system_dependencies.len(), 2);
         assert!(catalog.python_dependencies.is_some());
         assert!(

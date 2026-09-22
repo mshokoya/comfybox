@@ -1163,6 +1163,28 @@
       "catalog_sources": [
         "user-provided workflow dependencies"
       ]
+    },
+    {
+      "id": "comfyui-easy-media",
+      "name": "ComfyUI Easy Media",
+      "git_url": "https://github.com/yolain/ComfyUI-Easy-Media",
+      "folder_name": "ComfyUI-Easy-Media",
+      "node_types": [
+        "easy modelLoaderPack",
+        "easy multitrackProject",
+        "easy multiTrackEditor",
+        "easy multitrackProjectVideoCombine",
+        "easy saveVideo"
+      ],
+      "aliases": [
+        "comfyui-easy-media"
+      ],
+      "repository": "https://github.com/yolain/ComfyUI-Easy-Media",
+      "commit_sha": null,
+      "catalog_sources": [
+        "prompt_master-motion-context-v2-minimaxh3-workflow.json",
+        "https://github.com/yolain/ComfyUI-Easy-Media"
+      ]
     }
   ]
 }

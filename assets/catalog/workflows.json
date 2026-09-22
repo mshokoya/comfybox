@@ -1419,6 +1419,29 @@
       "catalog_sources": [
         "_/deps.json"
       ]
+    },
+    {
+      "id": "prompt_master-motion-context-v2-minimaxh3-workflow",
+      "name": "Prompt Master — Motion Context v2 MiniMax H3",
+      "file": "prompt_master-motion-context-v2-minimaxh3-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.bf16",
+        "minimax.h3.qwen3vl32b.bf16",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.realism-people.t2v-i2v-r2v",
+        "minimax.h3.tae.h3",
+        "minimax.h3.latent-upscaler.3d-conv-v1.fp16"
+      ],
+      "custom_node_ids": [
+        "comfyui-easy-media",
+        "comfyui-kjnodes",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/untitled-folder-0/prompt_master-motion_context-v2-minimaxh3.json",
+        "quality-first refactor"
+      ]
     }
   ]
 }
