@@ -1867,6 +1867,14 @@ impl Dashboard<'_> {
             ]),
             Line::from(vec![label("Active now"), Span::raw(active.to_string())]),
             Line::from(vec![
+                label("ComfyUI VRAM reserve"),
+                Span::styled(
+                    format!("{:.0} GiB", self.cfg.comfy_reserve_vram_gb),
+                    Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+                ),
+                Span::raw("  ,/. change (next server start)"),
+            ]),
+            Line::from(vec![
                 label("Hugging Face"),
                 Span::styled(
                     if self
@@ -2337,6 +2345,14 @@ impl Dashboard<'_> {
                     self.cfg.download_parallelism.saturating_sub(1).max(1);
                 self.queue
                     .update_chunk_parallelism(self.cfg.download_parallelism);
+                let _ = self.cfg.save();
+            }
+            KeyCode::Char('.') if Section::ALL[self.section] == Section::Settings => {
+                self.cfg.comfy_reserve_vram_gb = (self.cfg.comfy_reserve_vram_gb + 1.0).min(64.0);
+                let _ = self.cfg.save();
+            }
+            KeyCode::Char(',') if Section::ALL[self.section] == Section::Settings => {
+                self.cfg.comfy_reserve_vram_gb = (self.cfg.comfy_reserve_vram_gb - 1.0).max(0.0);
                 let _ = self.cfg.save();
             }
             KeyCode::Enter if Section::ALL[self.section] == Section::Downloads => {

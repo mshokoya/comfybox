@@ -6,7 +6,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppConfig {
     pub comfy_path: Option<PathBuf>,
     pub hf_endpoint: Option<String>,
@@ -18,6 +18,9 @@ pub struct AppConfig {
     pub chunk_size_bytes: u64,
     #[serde(default = "default_concurrent_downloads")]
     pub max_concurrent_downloads: usize,
+    /// GiB of VRAM ComfyUI should leave available for transient CUDA/VAE work.
+    #[serde(default = "default_comfy_reserve_vram_gb")]
+    pub comfy_reserve_vram_gb: f32,
 }
 
 fn default_parallelism() -> usize {
@@ -29,8 +32,25 @@ fn default_chunk_size() -> u64 {
 fn default_concurrent_downloads() -> usize {
     2
 }
+fn default_comfy_reserve_vram_gb() -> f32 {
+    4.0
+}
 fn default_pypi_index_url() -> String {
     "https://pypi.org/simple".to_owned()
+}
+
+impl Default for AppConfig {
+    fn default() -> Self {
+        Self {
+            comfy_path: None,
+            hf_endpoint: None,
+            pypi_index_url: default_pypi_index_url(),
+            download_parallelism: default_parallelism(),
+            chunk_size_bytes: default_chunk_size(),
+            max_concurrent_downloads: default_concurrent_downloads(),
+            comfy_reserve_vram_gb: default_comfy_reserve_vram_gb(),
+        }
+    }
 }
 
 impl AppConfig {
@@ -60,6 +80,7 @@ impl AppConfig {
                 download_parallelism: default_parallelism(),
                 chunk_size_bytes: default_chunk_size(),
                 max_concurrent_downloads: default_concurrent_downloads(),
+                comfy_reserve_vram_gb: default_comfy_reserve_vram_gb(),
                 pypi_index_url: default_pypi_index_url(),
                 ..Default::default()
             });
@@ -96,4 +117,23 @@ pub fn atomic_write_json<T: Serialize>(path: &Path, value: &T) -> Result<()> {
     fs::write(&tmp, serde_json::to_vec_pretty(value)?)?;
     fs::rename(&tmp, path)?;
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn defaults_reserve_four_gib_for_comfyui() {
+        assert_eq!(AppConfig::default().comfy_reserve_vram_gb, 4.0);
+    }
+
+    #[test]
+    fn legacy_config_without_reserve_gets_safe_default() {
+        let config: AppConfig = serde_json::from_str(
+            r#"{"comfy_path":null,"hf_endpoint":null,"pypi_index_url":"https://pypi.org/simple","download_parallelism":4,"chunk_size_bytes":16777216,"max_concurrent_downloads":2}"#,
+        )
+        .unwrap();
+        assert_eq!(config.comfy_reserve_vram_gb, 4.0);
+    }
 }

@@ -175,6 +175,10 @@ enum ConfigCommand {
     SetComfyPath {
         path: PathBuf,
     },
+    SetReserveVram {
+        /// VRAM in GiB kept free for CUDA workspaces and VAE decoding.
+        gib: f32,
+    },
     SetHfToken {
         #[arg(long, conflicts_with = "stdin")]
         from_env: bool,
@@ -277,7 +281,16 @@ async fn run(cmd: CommandTop, cfg: &mut AppConfig, cat: &Catalog) -> Result<()> 
                 );
             }
             let mut s = ManagedState::load()?;
-            let pid = ComfyManager::start(&i, StartOptions { host: &host, port }, &mut s).await?;
+            let pid = ComfyManager::start(
+                &i,
+                StartOptions {
+                    host: &host,
+                    port,
+                    reserve_vram_gb: cfg.comfy_reserve_vram_gb,
+                },
+                &mut s,
+            )
+            .await?;
             println!(
                 "{} PID {pid}; http://{host}:{port}",
                 style("✓ ComfyUI started").green()
@@ -1088,6 +1101,13 @@ fn config_cmd(cmd: ConfigCommand, cfg: &mut AppConfig) -> Result<()> {
             cfg.comfy_path = Some(fs::canonicalize(path)?);
             cfg.save()?;
         }
+        ConfigCommand::SetReserveVram { gib } => {
+            if !(0.0..=64.0).contains(&gib) {
+                bail!("VRAM reserve must be between 0 and 64 GiB")
+            }
+            cfg.comfy_reserve_vram_gb = gib;
+            cfg.save()?;
+        }
         ConfigCommand::SetHfToken { from_env, stdin } => {
             save_hf_token(from_env, stdin)?;
         }
@@ -1327,6 +1347,7 @@ async fn execute_dashboard_action(
                     StartOptions {
                         host: "127.0.0.1",
                         port: 8188,
+                        reserve_vram_gb: cfg.comfy_reserve_vram_gb,
                     },
                     &mut state,
                 )

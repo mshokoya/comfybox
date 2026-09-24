@@ -20,6 +20,7 @@ pub struct ComfyInstance {
 pub struct StartOptions<'a> {
     pub host: &'a str,
     pub port: u16,
+    pub reserve_vram_gb: f32,
 }
 
 pub struct ComfyManager;
@@ -291,6 +292,11 @@ impl ComfyManager {
             .arg(opts.host)
             .arg("--port")
             .arg(opts.port.to_string())
+            // Allocation headroom for attention workspaces, model transitions,
+            // and memory-intensive video VAE decoding. This does not alter the
+            // model, precision, sampling parameters, or generated output.
+            .arg("--reserve-vram")
+            .arg(opts.reserve_vram_gb.max(0.0).to_string())
             .arg("--enable-manager")
             .stdout(Stdio::from(stdout))
             .stderr(Stdio::from(stderr))
