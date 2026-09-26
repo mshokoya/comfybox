@@ -1746,10 +1746,10 @@ mod builtin_catalog_tests {
     #[test]
     fn split_json_catalogs_are_complete_and_bundled() {
         let catalog = load_catalog(&[]).unwrap();
-        assert_eq!(catalog.artifacts.len(), 240);
+        assert_eq!(catalog.artifacts.len(), 245);
         assert_eq!(catalog.packages.len(), 20);
-        assert_eq!(catalog.workflows.len(), 63);
-        assert_eq!(catalog.custom_nodes.len(), 63);
+        assert_eq!(catalog.workflows.len(), 68);
+        assert_eq!(catalog.custom_nodes.len(), 70);
         assert_eq!(catalog.system_dependencies.len(), 2);
         assert!(catalog.python_dependencies.is_some());
         assert!(

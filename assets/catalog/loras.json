@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 111,
+  "artifact_count": 113,
   "artifacts": [
     {
       "id": "1girl_qwen_v3",
@@ -1949,6 +1949,46 @@
       "description": "Rank-32 realism LoRA for MiniMax H3 text-to-video, image-to-video, and reference-to-video generation. Trigger word: r34l1sm."
     },
     {
+      "id": "minimax.h3.better-human-motion.v1.500",
+      "name": "MiniMax H3 Better Human Motion v1 500 LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/better_motion_h3_lora_v1_500.safetensors",
+      "group": "Minimax",
+      "tags": [
+        "video",
+        "lora",
+        "human-motion",
+        "realism",
+        "temporal-consistency",
+        "t2v",
+        "i2v",
+        "minimax",
+        "h3"
+      ],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "MiniMax H3 Better Human Motion v1 500 LoRA",
+          "url": "https://huggingface.co/vpakarinen/better-human-motion-h3-lora/resolve/main/better_motion_h3_lora_v1_500.safetensors",
+          "size": "310 MB",
+          "size_bytes": 310168816,
+          "sha256": "285f9ed3fbb735c3625fca0d22166c7450ad7acb552a869fcbbd8e86e79d1f4c",
+          "description": "MiniMax H3 LoRA for more realistic human movement and improved temporal consistency. Recommended strength: 0.4-0.8.",
+          "enabled": true
+        }
+      ],
+      "catalog_sources": [
+        "workflow:prompt-master-motion-context-infinate-v2-minimaxh3-realism-motion",
+        "https://huggingface.co/vpakarinen/better-human-motion-h3-lora"
+      ],
+      "url": "https://huggingface.co/vpakarinen/better-human-motion-h3-lora/resolve/main/better_motion_h3_lora_v1_500.safetensors",
+      "size_bytes": 310168816,
+      "sha256": "285f9ed3fbb735c3625fca0d22166c7450ad7acb552a869fcbbd8e86e79d1f4c",
+      "gated": false,
+      "description": "MiniMax H3 LoRA for more realistic human movement and improved temporal consistency. Recommended strength: 0.4-0.8."
+    },
+    {
       "id": "minimax.h3.ref2v.turbo.4step.v0.1.bf16",
       "name": "MiniMax H3 Ref2V Turbo 4-Step v0.1 BF16 LoRA",
       "type": "loras",
@@ -3839,6 +3879,36 @@
       "sha256": null,
       "gated": false,
       "description": "LoRA weights; rank 32; SafeTensors file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.authentic-cinematic-texture.tutu1018",
+      "name": "TuTu1018 MiniMax H3 Authentic Cinematic Texture LoRA",
+      "type": "loras",
+      "relative_path": "models/loras/电影镜头_000019000.safetensors",
+      "group": "MiniMax H3",
+      "tags": ["video", "lora", "cinematic", "realistic-film-texture", "minimax-h3", "tutu1018"],
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "MiniMax H3",
+      "trigger_words": ["DY"],
+      "recommended_strength": 0.7,
+      "high_motion_strength": 0.5,
+      "sources": [
+        {
+          "title": "MiniMax H3 Authentic Cinematic Texture LoRA",
+          "url": "https://huggingface.co/Alex995647/loras-minimax-h3/resolve/main/minimax-h3-authentic-cinematic-texture/Minimax%20H3%E7%9C%9F%E5%AE%9E%E7%94%B5%E5%BD%B1%E8%B4%A8%E6%84%9F.safetensors",
+          "size": "309.97 MB",
+          "size_bytes": 309965208,
+          "sha256": "51dda79218ea126cbb2e08f3a6d9cc595e2224f4977d7618061954043a8bafcf",
+          "enabled": true,
+          "description": "TuTu1018 cinematic texture LoRA; trigger DY; strength 0.70, or 0.50 for high motion."
+        }
+      ],
+      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"],
+      "url": "https://huggingface.co/Alex995647/loras-minimax-h3/resolve/main/minimax-h3-authentic-cinematic-texture/Minimax%20H3%E7%9C%9F%E5%AE%9E%E7%94%B5%E5%BD%B1%E8%B4%A8%E6%84%9F.safetensors",
+      "size_bytes": 309965208,
+      "sha256": "51dda79218ea126cbb2e08f3a6d9cc595e2224f4977d7618061954043a8bafcf",
+      "gated": false,
+      "description": "Cinematic realism LoRA by TuTu1018. Trigger word: DY. Recommended 0.70; high motion 0.50."
     }
   ]
 }

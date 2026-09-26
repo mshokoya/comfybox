@@ -350,3 +350,25 @@ Then you can run:
 ```bash
     comfybox
 ```
+
+<br/>
+
+## Download & install SageAttention (original) c++ 17:
+
+```bash
+CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=12.0 EXT_PARALLEL=1 MAX_JOBS=2 NVCC_APPEND_FLAGS="--threads 2" /autodl-fs/data/ComfyUI/.venv/bin/python -m pip install --no-build-isolation --no-cache-dir --force-reinstall "git+https://github.com/thu-ml/SageAttention.git"
+```
+
+Download & install SageAttention (ghfast proxy) c++ 17:
+
+```bash
+CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=12.0 EXT_PARALLEL=1 MAX_JOBS=2 NVCC_APPEND_FLAGS="--threads 2" /autodl-fs/data/ComfyUI/.venv/bin/python -m pip install --no-build-isolation --no-cache-dir --force-reinstall "git+https://ghfast.top/https://github.com/thu-ml/SageAttention.git"
+```
+
+Download & install SageAttention (ghfast proxy) c++ 20:
+
+```bash
+CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=12.0 EXT_PARALLEL=1 MAX_JOBS=2 CXX_APPEND_FLAGS="-std=c++20" NVCC_APPEND_FLAGS="-std=c++20 --threads 2" /autodl-fs/data/ComfyUI/.venv/bin/python -m pip install --no-build-isolation --no-cache-dir --force-reinstall "git+https://ghfast.top/https://github.com/thu-ml/SageAttention.git"
+```
+
+

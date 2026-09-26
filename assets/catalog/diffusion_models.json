@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 72,
+  "artifact_count": 74,
   "artifacts": [
     {
       "id": "firered.image-edit.1.0.bf16",
@@ -2437,6 +2437,54 @@
       "sha256": "a553c889dbcb910de4c98293237573219a37007c1074a3f04576646a088bd5c8",
       "gated": false,
       "description": "Catalog download source"
+    },
+    {
+      "id": "minimax.h3.fl2va.int8-convrot.cottonbyte-alias",
+      "name": "MiniMax H3 FL2VA INT8 ConvRot (Cottonbyte filename)",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/MiniMax-H3-FL2VA-int8-convrot.safetensors",
+      "group": "MiniMax H3",
+      "tags": ["video", "int8", "convrot", "fl2va", "workflow-alias"],
+      "sources": [
+        {
+          "title": "MiniMax H3 FL2VA Pruned INT8 ConvRot",
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+          "size_bytes": 20970379616,
+          "sha256": "e889202c41dafb67b10d67b97f0d8541508036a6090af23425a5c2615d03c47a",
+          "enabled": true,
+          "description": "Same model bytes saved under the exact filename used by the Cottonbyte/TuTu1018 workflow."
+        }
+      ],
+      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+      "size_bytes": 20970379616,
+      "sha256": "e889202c41dafb67b10d67b97f0d8541508036a6090af23425a5c2615d03c47a",
+      "gated": false,
+      "description": "Filename-compatible alias for the source workflow."
+    },
+    {
+      "id": "minimax.h3.ref2va.int8-convrot.cottonbyte-alias",
+      "name": "MiniMax H3 Ref2VA INT8 ConvRot (Cottonbyte filename)",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/MiniMax-H3-Ref2VA-int8-convrot.safetensors",
+      "group": "MiniMax H3",
+      "tags": ["video", "int8", "convrot", "ref2va", "workflow-alias"],
+      "sources": [
+        {
+          "title": "MiniMax H3 Ref2VA Pruned INT8 ConvRot",
+          "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+          "size_bytes": 20970379616,
+          "sha256": "9255f52b6677845ad238f20dfaafa94727053694127ab7f255c048f0f9365779",
+          "enabled": true,
+          "description": "Same model bytes saved under the exact filename used by the Cottonbyte/TuTu1018 workflow."
+        }
+      ],
+      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"],
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+      "size_bytes": 20970379616,
+      "sha256": "9255f52b6677845ad238f20dfaafa94727053694127ab7f255c048f0f9365779",
+      "gated": false,
+      "description": "Filename-compatible alias for the source workflow."
     }
   ]
 }

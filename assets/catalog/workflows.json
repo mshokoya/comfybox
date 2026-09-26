@@ -1434,13 +1434,148 @@
         "minimax.h3.latent-upscaler.3d-conv-v1.fp16"
       ],
       "custom_node_ids": [
-        "comfyui-easy-media",
+        "comfybox-easy-media",
         "comfyui-kjnodes",
         "comfyui-easy-use"
       ],
       "catalog_sources": [
         "_/untitled-folder-0/prompt_master-motion_context-v2-minimaxh3.json",
         "quality-first refactor"
+      ]
+    },
+    {
+      "id": "prompt-master-motion-context-infinate-v2-minimaxh3-original-workflow",
+      "name": "Prompt Master — Motion Context Infinite v2 MiniMax H3 (Original)",
+      "file": "prompt-master-motion-context-infinate-v2-minimaxh3-original-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.singularity.ref2va.v1.3.int8",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.ref2v.turbo.4step.v0.1.bf16",
+        "minimax.h3.tae.h3"
+      ],
+      "custom_node_ids": [
+        "comfyui-easy-media",
+        "comfyui-kjnodes"
+      ],
+      "catalog_sources": [
+        "_/prompt_master-motion_context_infinate_v2-minimaxh3.json",
+        "user-requested original"
+      ]
+    },
+    {
+      "id": "prompt-master-motion-context-infinate-v2-minimaxh3-realism-motion-workflow",
+      "name": "Prompt Master — Motion Context Infinite v2 MiniMax H3 (Realism + Better Human Motion)",
+      "file": "prompt-master-motion-context-infinate-v2-minimaxh3-realism-motion-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.singularity.ref2va.v1.3.int8",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.int8-convrot",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.ref2v.turbo.4step.v0.1.bf16",
+        "minimax.h3.realism-people.t2v-i2v-r2v",
+        "minimax.h3.better-human-motion.v1.500",
+        "minimax.h3.tae.h3"
+      ],
+      "custom_node_ids": [
+        "comfyui-easy-media",
+        "comfyui-kjnodes"
+      ],
+      "catalog_sources": [
+        "_/prompt_master-motion_context_infinate_v2-minimaxh3.json",
+        "user-requested realism and better-human-motion variant"
+      ]
+    },
+    {
+      "id": "cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-original-workflow",
+      "name": "cottonbyte_ai__tutu1018 — Realistic Film Texture MiniMax H3 (Original)",
+      "file": "cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-original-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.fl2va.int8-convrot.cottonbyte-alias",
+        "minimax.h3.ref2va.int8-convrot.cottonbyte-alias",
+        "minimax.h3.qwen3vl32b.int8-convrot",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.fl2v.turbo.8step.v1.0.bf16",
+        "minimax.h3.authentic-cinematic-texture.tutu1018",
+        "minimax.h3.latent-upscaler.3d.bf16.cottonbyte"
+      ],
+      "custom_node_ids": [
+        "comfyui-easy-use",
+        "comfyui-kjnodes",
+        "comfyui-minimax-h3-blockcache-t8",
+        "comfyui-h3-latent-upscale-jingchen573",
+        "comfyui-minimax-h3-latent-upscaler",
+        "comfyui-custom-scripts",
+        "rgthree-comfy",
+        "comfyui-ycnodes-minimax-h3",
+        "comfyui-pixaroma",
+        "comfyui_layerstyle",
+        "comfyui-videohelpersuite"
+      ],
+      "catalog_sources": [
+        "_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json",
+        "user-requested original with non-functional trigger reminder note"
+      ]
+    },
+    {
+      "id": "cbd-cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-director-workflow",
+      "name": "cbd-cottonbyte_ai__tutu1018 — Realistic Film Texture MiniMax H3 Director",
+      "file": "cbd-cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-director-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.authentic-cinematic-texture.tutu1018",
+        "minimax.h3.latent-upscaler.3d-conv-v1.fp16",
+        "minimax.h3.tae.h3"
+      ],
+      "custom_node_ids": [
+        "comfyui-obvpm-timeline",
+        "comfyui-obvpm",
+        "comfyui-kjnodes",
+        "comfyui-minimax-h3-latent-upscaler",
+        "comfyui-minimax-h3-turbo",
+        "comfyui-spectrum-minimax-h3",
+        "rgthree-comfy"
+      ],
+      "catalog_sources": [
+        "_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json",
+        "https://github.com/chanon/comfyui-obvpm-timeline",
+        "user-requested cbd director variant"
+      ]
+    },
+    {
+      "id": "cbf-cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-full-workflow",
+      "name": "cbf-cottonbyte_ai__tutu1018 — Realistic Film Texture MiniMax H3 Full",
+      "file": "cbf-cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-full-workflow.json",
+      "artifact_ids": [
+        "minimax.h3.ref2va.pruned.int8-convrot",
+        "minimax.h3.qwen3vl32b.nvfp4-awq",
+        "minimax.h3.video-vae.fp16",
+        "minimax.h3.audio-vae.fp32",
+        "minimax.h3.authentic-cinematic-texture.tutu1018",
+        "minimax.h3.realism-people.t2v-i2v-r2v",
+        "minimax.h3.better-human-motion.v1.500",
+        "minimax.h3.latent-upscaler.3d-conv-v1.fp16",
+        "minimax.h3.tae.h3"
+      ],
+      "custom_node_ids": [
+        "comfyui-obvpm-timeline",
+        "comfyui-obvpm",
+        "comfyui-kjnodes",
+        "comfyui-minimax-h3-latent-upscaler",
+        "comfyui-minimax-h3-turbo",
+        "comfyui-spectrum-minimax-h3",
+        "rgthree-comfy"
+      ],
+      "catalog_sources": [
+        "_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json",
+        "https://github.com/chanon/comfyui-obvpm-timeline",
+        "https://huggingface.co/vpakarinen/better-human-motion-h3-lora",
+        "user-requested cbf full variant"
       ]
     }
   ]

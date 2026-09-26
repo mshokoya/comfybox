@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 5,
+  "artifact_count": 6,
   "artifacts": [
     {
       "id": "4xnmkdsuperscale_4xnmkdsuperscale",
@@ -159,6 +159,33 @@
       "sha256": "a4cd3a25b00e0be949d4302fc774eb4d7f2ed5f47cdb51551e2d75fa6562e51e",
       "gated": false,
       "description": "Upscale model weights; PTH file; hosted on Hugging Face."
+    },
+    {
+      "id": "minimax.h3.latent-upscaler.3d.bf16.cottonbyte",
+      "name": "MiniMax H3 Latent Upscaler 3D BF16 (Cottonbyte filename)",
+      "type": "upscale_models",
+      "relative_path": "models/latent_upscale_models/minimax_h3_latent_upscaler_3d_bf16.safetensors",
+      "group": "MiniMax H3",
+      "tags": ["video", "latent-upscaler", "3d", "bf16", "minimax-h3"],
+      "loader": "MinimaxH3LatentUpscaler3D",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "MiniMax H3 Latent Upscaler 3D Conv v1 BF16",
+          "url": "https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_conv_v1/minimax_h3_latent_upscaler_3d_conv_v1_bf16.safetensors",
+          "size": "690.59 MB",
+          "size_bytes": 690592992,
+          "sha256": "4f57821f5837f32f7142b67d815606dbd7550f194e5c769f7d6c3f83b146a5e6",
+          "enabled": true,
+          "description": "Current BF16 upscaler saved under the legacy filename expected by the source workflow."
+        }
+      ],
+      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"],
+      "url": "https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler/resolve/main/minimax_h3_latent_upscaler_3d_conv_v1/minimax_h3_latent_upscaler_3d_conv_v1_bf16.safetensors",
+      "size_bytes": 690592992,
+      "sha256": "4f57821f5837f32f7142b67d815606dbd7550f194e5c769f7d6c3f83b146a5e6",
+      "gated": false,
+      "description": "BF16 latent upscaler required by the Cottonbyte/TuTu1018 workflow."
     }
   ]
 }
