@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 74,
+  "artifact_count": 77,
   "artifacts": [
     {
       "id": "firered.image-edit.1.0.bf16",
@@ -146,7 +146,7 @@
       "compatibility": "workflow-referenced",
       "sources": [
         {
-          "title": "FLUX.2 Klein 9B INT8 ConvRot — ComfyUI Native",
+          "title": "FLUX.2 Klein 9B INT8 ConvRot \u2014 ComfyUI Native",
           "url": "https://huggingface.co/obsxrver/ComfyUI-Native-INT8_ConvRot/resolve/main/diffusion_models/flux-2-klein-9b_int8_convrot.safetensors",
           "size": "9.44 GB",
           "description": "ComfyUI-native diffusion model weights using INT8 ConvRot quantization; hosted by obsxrver on Hugging Face.",
@@ -2444,7 +2444,13 @@
       "type": "diffusion_models",
       "relative_path": "models/diffusion_models/MiniMax-H3-FL2VA-int8-convrot.safetensors",
       "group": "MiniMax H3",
-      "tags": ["video", "int8", "convrot", "fl2va", "workflow-alias"],
+      "tags": [
+        "video",
+        "int8",
+        "convrot",
+        "fl2va",
+        "workflow-alias"
+      ],
       "sources": [
         {
           "title": "MiniMax H3 FL2VA Pruned INT8 ConvRot",
@@ -2455,7 +2461,9 @@
           "description": "Same model bytes saved under the exact filename used by the Cottonbyte/TuTu1018 workflow."
         }
       ],
-      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"],
+      "catalog_sources": [
+        "_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"
+      ],
       "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
       "size_bytes": 20970379616,
       "sha256": "e889202c41dafb67b10d67b97f0d8541508036a6090af23425a5c2615d03c47a",
@@ -2468,7 +2476,13 @@
       "type": "diffusion_models",
       "relative_path": "models/diffusion_models/MiniMax-H3-Ref2VA-int8-convrot.safetensors",
       "group": "MiniMax H3",
-      "tags": ["video", "int8", "convrot", "ref2va", "workflow-alias"],
+      "tags": [
+        "video",
+        "int8",
+        "convrot",
+        "ref2va",
+        "workflow-alias"
+      ],
       "sources": [
         {
           "title": "MiniMax H3 Ref2VA Pruned INT8 ConvRot",
@@ -2479,12 +2493,89 @@
           "description": "Same model bytes saved under the exact filename used by the Cottonbyte/TuTu1018 workflow."
         }
       ],
-      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"],
+      "catalog_sources": [
+        "_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"
+      ],
       "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
       "size_bytes": 20970379616,
       "sha256": "9255f52b6677845ad238f20dfaafa94727053694127ab7f255c048f0f9365779",
       "gated": false,
       "description": "Filename-compatible alias for the source workflow."
+    },
+    {
+      "id": "wan2.1.i2v.14b.480p.fp8",
+      "name": "Wan 2.1 I2V 14B 480P FP8",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/WanVideo/wan2.1_i2v_480p_14B_fp8_e4m3fn.safetensors",
+      "loader": "WanVideoModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2.1_i2v_480p_14B_fp8_e4m3fn.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_i2v_480p_14B_fp8_e4m3fn.safetensors",
+          "size": "15.3 GB",
+          "size_bytes": 16397245448,
+          "description": "Wan 2.1 Image-to-Video 14B 480P FP8 (e4m3fn) diffusion model weights; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_i2v_480p_14B_fp8_e4m3fn.safetensors",
+      "size_bytes": 16397245448,
+      "sha256": "0ca75338e7a47ca7cacddb7e626647e65829c497387f718ecb6ea0bae456944a",
+      "gated": false,
+      "description": "Wan 2.1 Image-to-Video 14B 480P FP8 (e4m3fn) diffusion model weights; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2_1_infinitetalk_multi_fp8_scaled",
+      "name": "Wan2_1-InfiniteTalk-Multi_fp8_e4m3fn_scaled_KJ",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/WanVideo/InfiniteTalk/Wan2_1-InfiniteTalk-Multi_fp8_e4m3fn_scaled_KJ.safetensors",
+      "loader": "MultiTalkModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Wan2_1-InfiniteTalk-Multi_fp8_e4m3fn_scaled_KJ.safetensors",
+          "url": "https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/InfiniteTalk/Wan2_1-InfiniteTalk-Multi_fp8_e4m3fn_scaled_KJ.safetensors",
+          "size": "2.5 GB",
+          "size_bytes": 2712729090,
+          "description": "InfiniteTalk Multi-speaker FP8 scaled model for Wan 2.1; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
+      ],
+      "url": "https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/InfiniteTalk/Wan2_1-InfiniteTalk-Multi_fp8_e4m3fn_scaled_KJ.safetensors",
+      "size_bytes": 2712729090,
+      "sha256": "4ded4f02f2bf312e7a68f2d75cd0c680a177aef6917c9960a1eddc34f70de26d",
+      "gated": false,
+      "description": "InfiniteTalk Multi-speaker FP8 scaled model for Wan 2.1; hosted on Hugging Face."
+    },
+    {
+      "id": "melbandroformer.fp16",
+      "name": "MelBandRoformer_fp16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/MelBandRoformer/MelBandRoformer_fp16.safetensors",
+      "loader": "MelBandRoFormerModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "MelBandRoformer_fp16.safetensors",
+          "url": "https://huggingface.co/Kijai/MelBandRoFormer_comfy/resolve/main/MelBandRoformer_fp16.safetensors",
+          "size": "435.3 MB",
+          "size_bytes": 456479072,
+          "description": "MelBand RoFormer vocal separator FP16 model weights; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
+      ],
+      "url": "https://huggingface.co/Kijai/MelBandRoFormer_comfy/resolve/main/MelBandRoformer_fp16.safetensors",
+      "size_bytes": 456479072,
+      "sha256": "6119aef379a6c7264e0b37db65ae1e6488b8ca4a00baf56d6d244737b8488226",
+      "gated": false,
+      "description": "MelBand RoFormer vocal separator FP16 model weights; hosted on Hugging Face."
     }
   ]
 }

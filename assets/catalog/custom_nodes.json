@@ -374,7 +374,9 @@
         "ImageResizeKJv2",
         "PathchSageAttentionKJ",
         "ModelPreviewOverrideKJ",
-        "MiniMaxH3MemoryEfficientSageAttentionPatch"
+        "MiniMaxH3MemoryEfficientSageAttentionPatch",
+        "INTConstant",
+        "GetImageSizeAndCount"
       ],
       "aliases": [
         "comfyui-kjnodes"
@@ -384,7 +386,10 @@
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
-      ]
+      ],
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-KJNodes-main.zip",
+      "archive_size_bytes": 1125973,
+      "archive_sha256": "2070a13dc08fc5519723ac639ccd952f7bbf1d6f6fefcf4b650e2c4f7d7ef827"
     },
     {
       "id": "comfyui-krea2edit",
@@ -796,7 +801,10 @@
       ],
       "catalog_sources": [
         "_/bui.toml"
-      ]
+      ],
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-VideoHelperSuite-main.zip",
+      "archive_size_bytes": 112076,
+      "archive_sha256": "5b0e7feae886258ba3557c0c23ebcf1b6af5c5d70fddff9054f37d2a63d2ee42"
     },
     {
       "id": "comfyui-workflow-encrypt",
@@ -1076,7 +1084,10 @@
       "catalog_sources": [
         "_/bui.toml",
         "_/deps.json"
-      ]
+      ],
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/rgthree-rgthree-comfy.zip",
+      "archive_size_bytes": 4081115,
+      "archive_sha256": "880e4ec9cf0855b680b4e01ac1b6055c7dfbb9c06c24d00c229636c328647048"
     },
     {
       "id": "seedvr2_videoupscaler",
@@ -1180,10 +1191,15 @@
         "LoadImagesCompose (obvpm)",
         "AudioOptionalGate (obvpm)"
       ],
-      "aliases": ["comfyui-obvpm", "OBVPM"],
+      "aliases": [
+        "comfyui-obvpm",
+        "OBVPM"
+      ],
       "repository": "https://github.com/chanon/comfyui-obvpm",
       "commit_sha": null,
-      "catalog_sources": ["https://github.com/chanon/comfyui-obvpm-timeline"]
+      "catalog_sources": [
+        "https://github.com/chanon/comfyui-obvpm-timeline"
+      ]
     },
     {
       "id": "comfyui-obvpm-timeline",
@@ -1203,54 +1219,83 @@
         "H3VramHeadroom",
         "CleanVRAM (obvpm)"
       ],
-      "aliases": ["comfyui-obvpm-timeline", "OBVPM Timeline"],
+      "aliases": [
+        "comfyui-obvpm-timeline",
+        "OBVPM Timeline"
+      ],
       "repository": "https://github.com/chanon/comfyui-obvpm-timeline",
       "commit_sha": null,
-      "catalog_sources": ["user-requested director workflow"]
+      "catalog_sources": [
+        "user-requested director workflow"
+      ]
     },
     {
       "id": "comfyui-minimax-h3-turbo",
       "name": "ComfyUI MiniMax H3 Turbo",
       "git_url": "https://github.com/Larryvrh/ComfyUI-MiniMax-H3-Turbo",
       "folder_name": "ComfyUI-MiniMax-H3-Turbo",
-      "node_types": ["MiniMax H3 Turbo LoRA Loader"],
-      "aliases": ["ComfyUI-MiniMax-H3-Turbo"],
+      "node_types": [
+        "MiniMax H3 Turbo LoRA Loader"
+      ],
+      "aliases": [
+        "ComfyUI-MiniMax-H3-Turbo"
+      ],
       "repository": "https://github.com/Larryvrh/ComfyUI-MiniMax-H3-Turbo",
       "commit_sha": null,
-      "catalog_sources": ["https://github.com/chanon/comfyui-obvpm-timeline"]
+      "catalog_sources": [
+        "https://github.com/chanon/comfyui-obvpm-timeline"
+      ]
     },
     {
       "id": "comfyui-minimax-h3-blockcache-t8",
       "name": "ComfyUI MiniMax H3 Block Cache T8",
       "git_url": "https://github.com/T8mars/comfyui-minimax-h3-blockcache-T8",
       "folder_name": "comfyui-minimax-h3-blockcache-T8",
-      "node_types": ["MiniMaxH3BlockCacheT8"],
-      "aliases": ["comfyui-minimax-h3-blockcache-T8"],
+      "node_types": [
+        "MiniMaxH3BlockCacheT8"
+      ],
+      "aliases": [
+        "comfyui-minimax-h3-blockcache-T8"
+      ],
       "repository": "https://github.com/T8mars/comfyui-minimax-h3-blockcache-T8",
       "commit_sha": null,
-      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"]
+      "catalog_sources": [
+        "_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"
+      ]
     },
     {
       "id": "comfyui-ycnodes-minimax-h3",
       "name": "ComfyUI YCNodes MiniMax H3",
       "git_url": "https://github.com/yichengup/ComfyUI-YCNodes-MiniMax-H3",
       "folder_name": "ComfyUI-YCNodes-MiniMax-H3",
-      "node_types": ["H3SigmaRefiner"],
-      "aliases": ["YCNodes-MiniMax-H3"],
+      "node_types": [
+        "H3SigmaRefiner"
+      ],
+      "aliases": [
+        "YCNodes-MiniMax-H3"
+      ],
       "repository": "https://github.com/yichengup/ComfyUI-YCNodes-MiniMax-H3",
       "commit_sha": null,
-      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"]
+      "catalog_sources": [
+        "_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"
+      ]
     },
     {
       "id": "comfyui-h3-latent-upscale-jingchen573",
       "name": "ComfyUI H3 Latent Upscale Jingchen573",
       "git_url": "https://github.com/wjc573/ComfyUI-H3LatentUpscale-jingchen573",
       "folder_name": "ComfyUI-H3LatentUpscale-jingchen573",
-      "node_types": ["H3LatentUpscaleByJingchen573"],
-      "aliases": ["ComfyUI-H3LatentUpscale-jingchen573"],
+      "node_types": [
+        "H3LatentUpscaleByJingchen573"
+      ],
+      "aliases": [
+        "ComfyUI-H3LatentUpscale-jingchen573"
+      ],
       "repository": "https://github.com/wjc573/ComfyUI-H3LatentUpscale-jingchen573",
       "commit_sha": "1b8d93c63760543f3e955ccbb9679a59a4cee7a7",
-      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"]
+      "catalog_sources": [
+        "_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"
+      ]
     },
     {
       "id": "comfyui-easy-media",
@@ -1298,6 +1343,62 @@
       "catalog_sources": [
         "prompt_master-motion-context-v2-minimaxh3-workflow.json",
         "https://huggingface.co/msho19/comfybox/blob/main/comfybox-easy-media.zip"
+      ]
+    },
+    {
+      "id": "comfyui-wanvideowrapper",
+      "name": "ComfyUI WanVideo Wrapper",
+      "git_url": "https://github.com/kijai/ComfyUI-WanVideoWrapper",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-WanVideoWrapper-main.zip",
+      "archive_sha256": "b0db94cb3038badc1207e7f3f0bbcdcd18f6d5e16c433ca2f2d734b6180304c9",
+      "archive_size_bytes": 19146661,
+      "folder_name": "ComfyUI-WanVideoWrapper",
+      "node_types": [
+        "WanVideoModelLoader",
+        "WanVideoVAELoader",
+        "WanVideoSampler",
+        "WanVideoTextEncodeCached",
+        "WanVideoLoraSelect",
+        "WanVideoPassImagesFromSamples",
+        "WanVideoBlockSwap",
+        "WanVideoClipVisionEncode",
+        "WanVideoTorchCompileSettings",
+        "WanVideoImageToVideoMultiTalk",
+        "MultiTalkModelLoader",
+        "MultiTalkWav2VecEmbeds",
+        "DownloadAndLoadWav2VecModel",
+        "Wav2VecModelLoader"
+      ],
+      "aliases": [
+        "comfyui-wanvideowrapper",
+        "ComfyUI-WanVideoWrapper"
+      ],
+      "repository": "https://github.com/kijai/ComfyUI-WanVideoWrapper",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
+      ]
+    },
+    {
+      "id": "comfyui-melbandroformer",
+      "name": "ComfyUI MelBand RoFormer",
+      "git_url": "https://github.com/kijai/ComfyUI-MelBandRoFormer",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-MelBandRoFormer-main.zip",
+      "archive_sha256": "6bee23618f5d33808a2675b62f5daf08d706fbf24d18f5a010484af7e11e49bf",
+      "archive_size_bytes": 12842,
+      "folder_name": "ComfyUI-MelBandRoFormer",
+      "node_types": [
+        "MelBandRoFormerModelLoader",
+        "MelBandRoFormerSampler"
+      ],
+      "aliases": [
+        "comfyui-melbandroformer",
+        "ComfyUI-MelBandRoFormer"
+      ],
+      "repository": "https://github.com/kijai/ComfyUI-MelBandRoFormer",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
       ]
     }
   ]

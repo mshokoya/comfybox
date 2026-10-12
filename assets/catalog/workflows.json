@@ -65,7 +65,7 @@
     },
     {
       "id": "comfybox-character-swap-base-24to60-minimaxh3-workflow",
-      "name": "ComfyBox — Character Swap Base 24-to-60 MiniMax H3",
+      "name": "ComfyBox \u2014 Character Swap Base 24-to-60 MiniMax H3",
       "file": "comfybox-character-swap-base-24to60-minimaxh3-workflow.json",
       "artifact_ids": [
         "minimax.h3.ref2va.bf16",
@@ -85,7 +85,7 @@
     },
     {
       "id": "comfybox-character-swap-bf16-24to60-minimaxh3-workflow",
-      "name": "ComfyBox — MiniMax H3 Character Swap BF16 24-to-60",
+      "name": "ComfyBox \u2014 MiniMax H3 Character Swap BF16 24-to-60",
       "file": "comfybox-character-swap-bf16-24to60-minimaxh3-workflow.json",
       "artifact_ids": [
         "minimax.h3.ref2va.bf16",
@@ -105,7 +105,7 @@
     },
     {
       "id": "comfybox-character-swap-realism-lora-24to60-minimaxh3-workflow",
-      "name": "ComfyBox — Character Swap Realism LoRA 24-to-60 MiniMax H3",
+      "name": "ComfyBox \u2014 Character Swap Realism LoRA 24-to-60 MiniMax H3",
       "file": "comfybox-character-swap-realism-lora-24to60-minimaxh3-workflow.json",
       "artifact_ids": [
         "minimax.h3.ref2va.bf16",
@@ -126,7 +126,7 @@
     },
     {
       "id": "comfybox-director-instareal-wan2.2-workflow",
-      "name": "ComfyBox — Director InstaReal Wan 2.2",
+      "name": "ComfyBox \u2014 Director InstaReal Wan 2.2",
       "file": "comfybox-director-instareal-wan2.2-workflow.json",
       "artifact_ids": [
         "wan2.2.t2v.a14b.high-noise.q6-k",
@@ -150,7 +150,7 @@
     },
     {
       "id": "comfybox-director-realism-people-minimaxh3-workflow",
-      "name": "ComfyBox — Director Realism People MiniMax H3",
+      "name": "ComfyBox \u2014 Director Realism People MiniMax H3",
       "file": "comfybox-director-realism-people-minimaxh3-workflow.json",
       "artifact_ids": [
         "minimax.h3.fl2va.pruned.int8-convrot",
@@ -170,7 +170,7 @@
     },
     {
       "id": "comfybox-director-relight-wananimate2.2-workflow",
-      "name": "ComfyBox — Director Relight Wan Animate 2.2",
+      "name": "ComfyBox \u2014 Director Relight Wan Animate 2.2",
       "file": "comfybox-director-relight-wananimate2.2-workflow.json",
       "artifact_ids": [
         "wan2.2.animate.14b.bf16",
@@ -190,7 +190,7 @@
     },
     {
       "id": "comfybox-refiner-and-director-minimaxh3-workflow",
-      "name": "ComfyBox — Refiner and Director MiniMax H3",
+      "name": "ComfyBox \u2014 Refiner and Director MiniMax H3",
       "file": "comfybox-refiner-and-director-minimaxh3-workflow.json",
       "artifact_ids": [
         "minimax.h3.qwen3vl32b.nvfp4-awq",
@@ -736,7 +736,7 @@
     },
     {
       "id": "loratech-director-minimaxh3-workflow",
-      "name": "LoraTech — Director MiniMax H3",
+      "name": "LoraTech \u2014 Director MiniMax H3",
       "file": "loratech-director-minimaxh3-workflow.json",
       "artifact_ids": [
         "minimax.h3.audio-vae.fp32",
@@ -887,7 +887,7 @@
     },
     {
       "id": "the3minutenode-auto-caption-dataset-workflow",
-      "name": "The3MinuteNode — Florence 2 Auto Caption Dataset",
+      "name": "The3MinuteNode \u2014 Florence 2 Auto Caption Dataset",
       "file": "the3minutenode-auto-caption-dataset-workflow.json",
       "artifact_ids": [],
       "custom_node_ids": [
@@ -901,7 +901,7 @@
     },
     {
       "id": "the3minutenode-basicangles-dataset-qwenedit2509-workflow",
-      "name": "The3MinuteNode — Qwen Edit 2509 / 8 Basic Angles Dataset",
+      "name": "The3MinuteNode \u2014 Qwen Edit 2509 / 8 Basic Angles Dataset",
       "file": "the3minutenode-basicangles-dataset-qwenedit2509-workflow.json",
       "artifact_ids": [
         "qwen.edit.2509.fp8mixed",
@@ -925,7 +925,7 @@
     },
     {
       "id": "the3minutenode-bodyangles-dataset-flux2klein9b-workflow",
-      "name": "The3MinuteNode — FLUX.2 Klein 9B / 64 Body Angles Dataset",
+      "name": "The3MinuteNode \u2014 FLUX.2 Klein 9B / 64 Body Angles Dataset",
       "file": "the3minutenode-bodyangles-dataset-flux2klein9b-workflow.json",
       "artifact_ids": [
         "flux2.klein.9b",
@@ -947,7 +947,7 @@
     },
     {
       "id": "the3minutenode-bodyangles-dataset-qwenedit2511-workflow",
-      "name": "The3MinuteNode — Qwen Edit 2511 / 64 Body Angles Dataset",
+      "name": "The3MinuteNode \u2014 Qwen Edit 2511 / 64 Body Angles Dataset",
       "file": "the3minutenode-bodyangles-dataset-qwenedit2511-workflow.json",
       "artifact_ids": [
         "qwen.edit.2511.int8-convrot",
@@ -1061,7 +1061,7 @@
     },
     {
       "id": "the3minutenode-face-dataset-qwenedit2509-workflow",
-      "name": "The3MinuteNode — Qwen Edit 2509 / 20 Face Dataset",
+      "name": "The3MinuteNode \u2014 Qwen Edit 2509 / 20 Face Dataset",
       "file": "the3minutenode-face-dataset-qwenedit2509-workflow.json",
       "artifact_ids": [
         "qwen.edit.2509.fp8mixed",
@@ -1085,7 +1085,7 @@
     },
     {
       "id": "the3minutenode-face-swap-flux2-klein-face-workflow",
-      "name": "The3MinuteNode — FLUX.2 Klein Face Swap",
+      "name": "The3MinuteNode \u2014 FLUX.2 Klein Face Swap",
       "file": "the3minutenode-face-swap-flux2-klein-face-workflow.json",
       "artifact_ids": [
         "flux2.klein.9b.int8-convrot",
@@ -1152,7 +1152,7 @@
     },
     {
       "id": "the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow",
-      "name": "The3MinuteNode — Face Swap / Krea 2 vs Qwen 2511 vs FLUX.2 Klein",
+      "name": "The3MinuteNode \u2014 Face Swap / Krea 2 vs Qwen 2511 vs FLUX.2 Klein",
       "file": "the3minutenode-face-swap-krea2-qwen2511-flux2klein-workflow.json",
       "artifact_ids": [
         "krea2.turbo.fp8.face-swap",
@@ -1190,7 +1190,7 @@
     },
     {
       "id": "the3minutenode-face-swap-krea2-workflow",
-      "name": "The3MinuteNode — Krea 2 Face Swap",
+      "name": "The3MinuteNode \u2014 Krea 2 Face Swap",
       "file": "the3minutenode-face-swap-krea2-workflow.json",
       "artifact_ids": [
         "krea2.turbo.fp8.face-swap",
@@ -1214,7 +1214,7 @@
     },
     {
       "id": "the3minutenode-face-swap-qwenedit2511-workflow",
-      "name": "The3MinuteNode — Qwen Image Edit 2511 Face Swap",
+      "name": "The3MinuteNode \u2014 Qwen Image Edit 2511 Face Swap",
       "file": "the3minutenode-face-swap-qwenedit2511-workflow.json",
       "artifact_ids": [
         "qwen.edit.2511.int8-convrot",
@@ -1244,7 +1244,7 @@
     },
     {
       "id": "the3minutenode-generate-krea2-workflow",
-      "name": "The3MinuteNode — Krea 2 Generate",
+      "name": "The3MinuteNode \u2014 Krea 2 Generate",
       "file": "the3minutenode-generate-krea2-workflow.json",
       "artifact_ids": [
         "krea2.turbo.int8-convrot",
@@ -1262,7 +1262,7 @@
     },
     {
       "id": "the3minutenode-lifestyle-dataset-krea2-workflow",
-      "name": "The3MinuteNode — Krea 2 Lifestyle Dataset",
+      "name": "The3MinuteNode \u2014 Krea 2 Lifestyle Dataset",
       "file": "the3minutenode-lifestyle-dataset-krea2-workflow.json",
       "artifact_ids": [
         "krea2.turbo.int8-convrot",
@@ -1285,7 +1285,7 @@
     },
     {
       "id": "the3minutenode-lifestyle-dataset-qwenedit2509-workflow",
-      "name": "The3MinuteNode — Qwen Edit 2509 / 12 Lifestyle Dataset",
+      "name": "The3MinuteNode \u2014 Qwen Edit 2509 / 12 Lifestyle Dataset",
       "file": "the3minutenode-lifestyle-dataset-qwenedit2509-workflow.json",
       "artifact_ids": [
         "qwen.edit.2509.fp8mixed",
@@ -1353,7 +1353,7 @@
     },
     {
       "id": "the3minutenode-post-production-dataset-workflow",
-      "name": "The3MinuteNode — Post Production Dataset",
+      "name": "The3MinuteNode \u2014 Post Production Dataset",
       "file": "the3minutenode-post-production-dataset-workflow.json",
       "artifact_ids": [
         "krea2.turbo.int8-convrot",
@@ -1385,7 +1385,7 @@
     },
     {
       "id": "the3minutenode-refrence-minimaxh3-workflow",
-      "name": "The3MinuteNode — MiniMax H3 Reference-to-Video",
+      "name": "The3MinuteNode \u2014 MiniMax H3 Reference-to-Video",
       "file": "the3minutenode-refrence-minimaxh3-workflow.json",
       "artifact_ids": [
         "minimax.h3.ref2va.bf16",
@@ -1422,7 +1422,7 @@
     },
     {
       "id": "prompt_master-motion-context-v2-minimaxh3-workflow",
-      "name": "Prompt Master — Motion Context v2 MiniMax H3",
+      "name": "Prompt Master \u2014 Motion Context v2 MiniMax H3",
       "file": "prompt_master-motion-context-v2-minimaxh3-workflow.json",
       "artifact_ids": [
         "minimax.h3.ref2va.bf16",
@@ -1445,7 +1445,7 @@
     },
     {
       "id": "prompt-master-motion-context-infinate-v2-minimaxh3-original-workflow",
-      "name": "Prompt Master — Motion Context Infinite v2 MiniMax H3 (Original)",
+      "name": "Prompt Master \u2014 Motion Context Infinite v2 MiniMax H3 (Original)",
       "file": "prompt-master-motion-context-infinate-v2-minimaxh3-original-workflow.json",
       "artifact_ids": [
         "minimax.h3.singularity.ref2va.v1.3.int8",
@@ -1466,7 +1466,7 @@
     },
     {
       "id": "prompt-master-motion-context-infinate-v2-minimaxh3-realism-motion-workflow",
-      "name": "Prompt Master — Motion Context Infinite v2 MiniMax H3 (Realism + Better Human Motion)",
+      "name": "Prompt Master \u2014 Motion Context Infinite v2 MiniMax H3 (Realism + Better Human Motion)",
       "file": "prompt-master-motion-context-infinate-v2-minimaxh3-realism-motion-workflow.json",
       "artifact_ids": [
         "minimax.h3.singularity.ref2va.v1.3.int8",
@@ -1489,7 +1489,7 @@
     },
     {
       "id": "cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-original-workflow",
-      "name": "cottonbyte_ai__tutu1018 — Realistic Film Texture MiniMax H3 (Original)",
+      "name": "cottonbyte_ai__tutu1018 \u2014 Realistic Film Texture MiniMax H3 (Original)",
       "file": "cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-original-workflow.json",
       "artifact_ids": [
         "minimax.h3.fl2va.int8-convrot.cottonbyte-alias",
@@ -1521,7 +1521,7 @@
     },
     {
       "id": "cbd-cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-director-workflow",
-      "name": "cbd-cottonbyte_ai__tutu1018 — Realistic Film Texture MiniMax H3 Director",
+      "name": "cbd-cottonbyte_ai__tutu1018 \u2014 Realistic Film Texture MiniMax H3 Director",
       "file": "cbd-cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-director-workflow.json",
       "artifact_ids": [
         "minimax.h3.ref2va.pruned.int8-convrot",
@@ -1549,7 +1549,7 @@
     },
     {
       "id": "cbf-cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-full-workflow",
-      "name": "cbf-cottonbyte_ai__tutu1018 — Realistic Film Texture MiniMax H3 Full",
+      "name": "cbf-cottonbyte_ai__tutu1018 \u2014 Realistic Film Texture MiniMax H3 Full",
       "file": "cbf-cottonbyte-ai-tutu1018-realistic-film-texture-minimaxh3-full-workflow.json",
       "artifact_ids": [
         "minimax.h3.ref2va.pruned.int8-convrot",
@@ -1576,6 +1576,31 @@
         "https://github.com/chanon/comfyui-obvpm-timeline",
         "https://huggingface.co/vpakarinen/better-human-motion-h3-lora",
         "user-requested cbf full variant"
+      ]
+    },
+    {
+      "id": "MDMZ-wanvideo_I2V_InfiniteTalk-workflow",
+      "name": "MDMZ WanVideo I2V InfiniteTalk Workflow",
+      "file": "MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json",
+      "artifact_ids": [
+        "wan2.1.i2v.14b.480p.fp8",
+        "wan2_1_infinitetalk_multi_fp8_scaled",
+        "wan2_1_vae_bf16",
+        "umt5_xxl_enc_bf16",
+        "clip-vision.h",
+        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
+        "melbandroformer.fp16",
+        "wav2vec2_chinese_base_fp16"
+      ],
+      "custom_node_ids": [
+        "comfyui-wanvideowrapper",
+        "comfyui-melbandroformer",
+        "rgthree-comfy",
+        "comfyui-videohelpersuite",
+        "comfyui-kjnodes"
+      ],
+      "catalog_sources": [
+        "_/MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
       ]
     }
   ]
