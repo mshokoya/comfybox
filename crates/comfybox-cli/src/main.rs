@@ -16,7 +16,7 @@ use comfybox_core::{
 };
 use console::style;
 use indicatif::{ProgressBar, ProgressStyle};
-use inquire::{Confirm, Password, PasswordDisplayMode, Select, Text};
+use inquire::{Confirm, CustomType, Password, PasswordDisplayMode, Select, Text};
 use serde_json::Value;
 use std::{
     collections::BTreeSet,
@@ -89,6 +89,16 @@ enum CommandTop {
         command: CatalogCommand,
     },
     TempClean,
+    Swap {
+        #[arg(long)]
+        on: bool,
+        #[arg(long)]
+        off: bool,
+        #[arg(long)]
+        size: Option<u32>,
+        #[arg(long)]
+        dir: Option<PathBuf>,
+    },
 }
 
 #[derive(Subcommand, Debug)]
@@ -280,6 +290,8 @@ async fn run(cmd: CommandTop, cfg: &mut AppConfig, cat: &Catalog) -> Result<()> 
                     "Python dependencies are not installed or requirements.txt changed; run `comfybox python-deps`"
                 );
             }
+            let vram_args = prompt_vram_args()?;
+            let (env_vars, extra_args) = collect_comfy_launch_options(cfg);
             let mut s = ManagedState::load()?;
             let pid = ComfyManager::start(
                 &i,
@@ -287,6 +299,9 @@ async fn run(cmd: CommandTop, cfg: &mut AppConfig, cat: &Catalog) -> Result<()> 
                     host: &host,
                     port,
                     reserve_vram_gb: cfg.comfy_reserve_vram_gb,
+                    vram_args,
+                    env_vars,
+                    extra_args,
                 },
                 &mut s,
             )
@@ -338,6 +353,44 @@ async fn run(cmd: CommandTop, cfg: &mut AppConfig, cat: &Catalog) -> Result<()> 
             Ok(())
         }
         CommandTop::TempClean => temp_clean(cfg),
+        CommandTop::Swap { on, off, size, dir } => {
+            if off {
+                if let Some(path) = &cfg.swap_file_path {
+                    println!("{}", style(format!("Deactivating swap at {}...", path.display())).yellow());
+                    comfybox_core::swap::disable_swap_file(path)?;
+                    println!("{}", style("✓ Swap deactivated (swapoff)").yellow().bold());
+                } else {
+                    println!("No swap file configured in comfybox.");
+                }
+                return Ok(());
+            }
+            if on {
+                let target_dir = dir.unwrap_or_else(|| {
+                    if Path::new("/root/autodl-tmp").is_dir() {
+                        PathBuf::from("/root/autodl-tmp")
+                    } else if Path::new("/autodl-fs").is_dir() {
+                        PathBuf::from("/autodl-fs")
+                    } else {
+                        PathBuf::from(".")
+                    }
+                });
+                let swap_folder = target_dir.join("comfybox-swap");
+                fs::create_dir_all(&swap_folder)?;
+                let swap_file = swap_folder.join("swapfile");
+                let size_gb = size.or(cfg.swap_size_gb).unwrap_or(32);
+                println!(
+                    "{}",
+                    style(format!("Enabling {size_gb} GB swap at {}...", swap_file.display())).cyan()
+                );
+                comfybox_core::swap::enable_swap_file(&swap_file, size_gb)?;
+                cfg.swap_file_path = Some(swap_file);
+                cfg.swap_size_gb = Some(size_gb);
+                cfg.save()?;
+                println!("{}", style("✓ NVMe swap successfully enabled and activated!").green().bold());
+                return Ok(());
+            }
+            toggle_swap(cfg)
+        }
     }
 }
 
@@ -1342,12 +1395,17 @@ async fn execute_dashboard_action(
                 ComfyManager::stop(&instance, &mut state)?;
                 println!("{}", style("✓ ComfyUI stopped").green());
             } else {
+                let vram_args = prompt_vram_args()?;
+                let (env_vars, extra_args) = collect_comfy_launch_options(cfg);
                 let pid = ComfyManager::start(
                     &instance,
                     StartOptions {
                         host: "127.0.0.1",
                         port: 8188,
                         reserve_vram_gb: cfg.comfy_reserve_vram_gb,
+                        vram_args,
+                        env_vars,
+                        extra_args,
                     },
                     &mut state,
                 )
@@ -1359,6 +1417,10 @@ async fn execute_dashboard_action(
             }
             Ok(())
         }
+        dashboard::DashboardAction::ToggleSwap => toggle_swap(cfg),
+        dashboard::DashboardAction::InstallTcmalloc => install_tcmalloc(),
+        dashboard::DashboardAction::InstallSageAttention => install_sage_attention(cfg).await,
+        dashboard::DashboardAction::InstallFlashAttention => install_flash_attention(cfg).await,
         dashboard::DashboardAction::InstallArtifact(selection) => {
             let instance = configured_instance(cfg)?;
             let artifact = cat
@@ -1725,6 +1787,349 @@ fn uuid_like() -> String {
     )
 }
 
+fn prompt_vram_args() -> Result<Vec<String>> {
+    if !std::io::stdin().is_terminal() {
+        return Ok(vec!["--normalvram".to_string()]);
+    }
+    let options = vec![
+        "--lowvram --reserve-vram 1.5",
+        "--normalvram",
+        "--highvram",
+    ];
+    let choice = Select::new("Choose ComfyUI VRAM mode:", options)
+        .with_help_message("Select memory management strategy for GPU models")
+        .prompt()?;
+    match choice {
+        "--lowvram --reserve-vram 1.5" => Ok(vec![
+            "--lowvram".to_string(),
+            "--reserve-vram".to_string(),
+            "1.5".to_string(),
+        ]),
+        "--normalvram" => Ok(vec!["--normalvram".to_string()]),
+        "--highvram" => Ok(vec!["--highvram".to_string()]),
+        other => Ok(other.split_whitespace().map(String::from).collect()),
+    }
+}
+
+fn collect_comfy_launch_options(cfg: &AppConfig) -> (Vec<(String, String)>, Vec<String>) {
+    let mut env_vars = Vec::new();
+    let mut extra_args = Vec::new();
+
+    if cfg.pytorch_expandable_segments {
+        env_vars.push((
+            "PYTORCH_CUDA_ALLOC_CONF".to_string(),
+            "expandable_segments:True".to_string(),
+        ));
+    }
+
+    if cfg.preload_tcmalloc {
+        if let Some(tcmalloc_path) = comfybox_core::optimizations::find_tcmalloc_library() {
+            env_vars.push((
+                "LD_PRELOAD".to_string(),
+                tcmalloc_path.to_string_lossy().into_owned(),
+            ));
+        }
+    }
+
+    if let Some(arg) = cfg.attention_backend.cli_arg() {
+        extra_args.push(arg.to_string());
+    }
+
+    (env_vars, extra_args)
+}
+
+fn toggle_swap(cfg: &mut AppConfig) -> Result<()> {
+    let current_swap = cfg.swap_file_path.as_deref();
+    let is_active = current_swap
+        .map(comfybox_core::swap::is_swap_active)
+        .unwrap_or(false);
+
+    if is_active {
+        let path = current_swap.unwrap();
+        println!(
+            "{}",
+            style(format!("Deactivating swap at {}...", path.display())).yellow()
+        );
+        comfybox_core::swap::disable_swap_file(path)?;
+        println!("{}", style("✓ Swap deactivated (swapoff)").yellow().bold());
+        if Confirm::new("Delete swap file from disk to free up space?")
+            .with_default(false)
+            .prompt()?
+        {
+            comfybox_core::swap::remove_swap_file(path)?;
+            cfg.swap_file_path = None;
+            let _ = cfg.save();
+            println!("{}", style("✓ Swap file removed from disk").green());
+        }
+        return Ok(());
+    }
+
+    if let Some(existing_path) = current_swap {
+        if existing_path.is_file() {
+            let choice = Select::new(
+                &format!("Found existing swap file at {}:", existing_path.display()),
+                vec![
+                    "Re-enable existing swap file",
+                    "Delete existing swap file and create new",
+                    "Delete existing swap file to free disk space",
+                ],
+            )
+            .prompt()?;
+
+            match choice {
+                "Re-enable existing swap file" => {
+                    let size_gb = cfg.swap_size_gb.unwrap_or(32);
+                    println!(
+                        "{}",
+                        style(format!("Re-enabling swap at {}...", existing_path.display())).cyan()
+                    );
+                    comfybox_core::swap::enable_swap_file(existing_path, size_gb)?;
+                    println!("{}", style("✓ NVMe swap active").green().bold());
+                    return Ok(());
+                }
+                "Delete existing swap file to free disk space" => {
+                    comfybox_core::swap::remove_swap_file(existing_path)?;
+                    cfg.swap_file_path = None;
+                    cfg.save()?;
+                    println!(
+                        "{}",
+                        style("✓ Swap file deleted and disk space reclaimed").green().bold()
+                    );
+                    return Ok(());
+                }
+                _ => {
+                    comfybox_core::swap::remove_swap_file(existing_path)?;
+                    cfg.swap_file_path = None;
+                    cfg.save()?;
+                    println!("{}", style("✓ Old swap file removed").green());
+                }
+            }
+        }
+    }
+
+    let initial_dir = if Path::new("/root/autodl-tmp").is_dir() {
+        PathBuf::from("/root/autodl-tmp")
+    } else if Path::new("/autodl-fs").is_dir() {
+        PathBuf::from("/autodl-fs")
+    } else if let Some(comfy_root) = &cfg.comfy_path {
+        comfy_root
+            .parent()
+            .map(|p| p.to_path_buf())
+            .unwrap_or_else(|| PathBuf::from("."))
+    } else {
+        std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."))
+    };
+
+    println!(
+        "{}",
+        style("Select parent directory where the swap folder should be created:")
+            .cyan()
+            .bold()
+    );
+    let chosen_dir = browse_directory(initial_dir)?;
+    let swap_folder = chosen_dir.join("comfybox-swap");
+    fs::create_dir_all(&swap_folder)
+        .with_context(|| format!("create swap directory at {}", swap_folder.display()))?;
+    let swap_file = swap_folder.join("swapfile");
+
+    let default_size = cfg.swap_size_gb.unwrap_or(32);
+    let size_gb = CustomType::<u32>::new("Enter swap size in GB:")
+        .with_default(default_size)
+        .with_help_message("Recommended: 32 GB for AutoDL NVMe")
+        .prompt()?;
+
+    // Pre-check free disk space before allocating
+    let free_bytes = storage::storage_candidates().ok().and_then(|candidates| {
+        candidates
+            .into_iter()
+            .find(|c| swap_folder.starts_with(&c.mount_point))
+            .map(|c| c.available_bytes)
+    });
+    if let Some(available) = free_bytes {
+        let requested_bytes = (size_gb as u64) * 1024 * 1024 * 1024;
+        if requested_bytes > available {
+            bail!(
+                "insufficient disk space: requested {size_gb} GB swap, but only {:.1} GB available in {}",
+                available as f64 / 1_073_741_824.0,
+                chosen_dir.display()
+            );
+        }
+    }
+
+    println!(
+        "{}",
+        style(format!(
+            "Allocating and enabling {size_gb} GB swap at {} (may take a moment)...",
+            swap_file.display()
+        ))
+        .cyan()
+    );
+    comfybox_core::swap::enable_swap_file(&swap_file, size_gb)?;
+    cfg.swap_file_path = Some(swap_file);
+    cfg.swap_size_gb = Some(size_gb);
+    cfg.save()?;
+
+    println!(
+        "{}",
+        style("✓ NVMe swap successfully enabled and activated!").green().bold()
+    );
+    Ok(())
+}
+
+fn is_root_user() -> bool {
+    std::process::Command::new("id")
+        .arg("-u")
+        .output()
+        .ok()
+        .and_then(|out| String::from_utf8(out.stdout).ok())
+        .map(|out| out.trim() == "0")
+        .unwrap_or(false)
+}
+
+fn install_tcmalloc() -> Result<()> {
+    println!(
+        "{}",
+        style("Installing Google TCMalloc (libtcmalloc-minimal4)...").cyan().bold()
+    );
+    let is_root = is_root_user();
+    let has_sudo = std::process::Command::new("which")
+        .arg("sudo")
+        .stdout(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
+        .status()
+        .map(|s| s.success())
+        .unwrap_or(false);
+
+    let mut update_cmd = if !is_root && has_sudo {
+        let mut c = std::process::Command::new("sudo");
+        c.args(["apt-get", "update"]);
+        c
+    } else {
+        let mut c = std::process::Command::new("apt-get");
+        c.arg("update");
+        c
+    };
+    let _ = update_cmd.status();
+
+    let mut install_cmd = if !is_root && has_sudo {
+        let mut c = std::process::Command::new("sudo");
+        c.args(["apt-get", "install", "-y", "libtcmalloc-minimal4"]);
+        c
+    } else {
+        let mut c = std::process::Command::new("apt-get");
+        c.args(["install", "-y", "libtcmalloc-minimal4"]);
+        c
+    };
+    let status = install_cmd
+        .status()
+        .context("execute apt-get install libtcmalloc-minimal4")?;
+    if !status.success() {
+        bail!("Failed to install libtcmalloc-minimal4 via apt-get");
+    }
+    println!(
+        "{}",
+        style("✓ Google TCMalloc (libtcmalloc-minimal4) installed successfully!").green().bold()
+    );
+    Ok(())
+}
+
+fn find_comfy_python(instance: &comfybox_core::ComfyInstance) -> PathBuf {
+    instance
+        .python
+        .clone()
+        .or_else(|| {
+            let candidates = if cfg!(windows) {
+                vec![
+                    instance.root.join(".venv/Scripts/python.exe"),
+                    instance.root.join("venv/Scripts/python.exe"),
+                ]
+            } else {
+                vec![
+                    instance.root.join(".venv/bin/python"),
+                    instance.root.join("venv/bin/python"),
+                ]
+            };
+            candidates.into_iter().find(|p| p.is_file())
+        })
+        .unwrap_or_else(|| PathBuf::from(if cfg!(windows) { "python" } else { "python3" }))
+}
+
+async fn install_sage_attention(cfg: &AppConfig) -> Result<()> {
+    let instance = configured_instance(cfg)?;
+    let python = find_comfy_python(&instance);
+    println!("{}", style("Installing SageAttention...").cyan().bold());
+
+    println!("Attempting pip install sageattention...");
+    let mut pip_cmd = Command::new(&python);
+    pip_cmd.args(["-m", "pip", "install", "sageattention"]);
+    if !cfg.pypi_index_url.is_empty() && cfg.pypi_index_url != PYPI_OFFICIAL {
+        pip_cmd.args(["--index-url", &cfg.pypi_index_url]);
+    }
+    let status = pip_cmd.status().await?;
+    if status.success() {
+        println!(
+            "{}",
+            style("✓ SageAttention installed successfully via pip wheel").green().bold()
+        );
+        return Ok(());
+    }
+
+    println!("Compiling SageAttention from git repository (NVCC compilation)...");
+    let git_url = if cfg.pypi_index_url.contains("aliyun") || cfg.pypi_index_url.contains("tsinghua") {
+        "git+https://ghfast.top/https://github.com/thu-ml/SageAttention.git"
+    } else {
+        "git+https://github.com/thu-ml/SageAttention.git"
+    };
+
+    let mut build_cmd = Command::new(&python);
+    let cuda_home = std::env::var("CUDA_HOME").unwrap_or_else(|_| "/usr/local/cuda".into());
+    build_cmd
+        .env("CUDA_HOME", cuda_home)
+        .env("TORCH_CUDA_ARCH_LIST", "12.0")
+        .env("EXT_PARALLEL", "1")
+        .env("MAX_JOBS", "2")
+        .env("NVCC_APPEND_FLAGS", "--threads 2")
+        .args([
+            "-m",
+            "pip",
+            "install",
+            "--no-build-isolation",
+            "--no-cache-dir",
+            "--force-reinstall",
+            git_url,
+        ]);
+    let build_status = build_cmd.status().await?;
+    if !build_status.success() {
+        bail!("Failed to compile SageAttention from git repository");
+    }
+    println!(
+        "{}",
+        style("✓ SageAttention compiled and installed successfully!").green().bold()
+    );
+    Ok(())
+}
+
+async fn install_flash_attention(cfg: &AppConfig) -> Result<()> {
+    let instance = configured_instance(cfg)?;
+    let python = find_comfy_python(&instance);
+    println!("{}", style("Installing FlashAttention (flash-attn)...").cyan().bold());
+
+    let mut cmd = Command::new(&python);
+    cmd.args(["-m", "pip", "install", "flash-attn", "--no-build-isolation"]);
+    if !cfg.pypi_index_url.is_empty() && cfg.pypi_index_url != PYPI_OFFICIAL {
+        cmd.args(["--index-url", &cfg.pypi_index_url]);
+    }
+    let status = cmd.status().await?;
+    if !status.success() {
+        bail!("Failed to install flash-attn via pip");
+    }
+    println!(
+        "{}",
+        style("✓ FlashAttention installed successfully!").green().bold()
+    );
+    Ok(())
+}
+
 #[cfg(test)]
 mod builtin_catalog_tests {
     use super::*;
@@ -1746,10 +2151,10 @@ mod builtin_catalog_tests {
     #[test]
     fn split_json_catalogs_are_complete_and_bundled() {
         let catalog = load_catalog(&[]).unwrap();
-        assert_eq!(catalog.artifacts.len(), 251);
+        assert_eq!(catalog.artifacts.len(), 258);
         assert_eq!(catalog.packages.len(), 20);
-        assert_eq!(catalog.workflows.len(), 69);
-        assert_eq!(catalog.custom_nodes.len(), 72);
+        assert_eq!(catalog.workflows.len(), 72);
+        assert_eq!(catalog.custom_nodes.len(), 74);
         assert_eq!(catalog.system_dependencies.len(), 2);
         assert!(catalog.python_dependencies.is_some());
         assert!(
@@ -1765,5 +2170,34 @@ mod builtin_catalog_tests {
                 workflow.id
             );
         }
+    }
+
+    #[test]
+    fn collect_comfy_launch_options_defaults() {
+        let cfg = AppConfig::default();
+        let (env_vars, extra_args) = collect_comfy_launch_options(&cfg);
+        assert!(env_vars.is_empty());
+        assert!(extra_args.is_empty());
+    }
+
+    #[test]
+    fn collect_comfy_launch_options_with_optimizations() {
+        let mut cfg = AppConfig::default();
+        cfg.pytorch_expandable_segments = true;
+        cfg.attention_backend = comfybox_core::AttentionBackend::SageAttention;
+
+        let (env_vars, extra_args) = collect_comfy_launch_options(&cfg);
+        assert_eq!(
+            env_vars,
+            vec![(
+                "PYTORCH_CUDA_ALLOC_CONF".to_string(),
+                "expandable_segments:True".to_string()
+            )]
+        );
+        assert_eq!(extra_args, vec!["--use-sage-attention".to_string()]);
+
+        cfg.attention_backend = comfybox_core::AttentionBackend::FlashAttention;
+        let (_, extra_args_flash) = collect_comfy_launch_options(&cfg);
+        assert_eq!(extra_args_flash, vec!["--use-flash-attention".to_string()]);
     }
 }

@@ -16,11 +16,14 @@ pub struct ComfyInstance {
     pub python: Option<PathBuf>,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Default)]
 pub struct StartOptions<'a> {
     pub host: &'a str,
     pub port: u16,
     pub reserve_vram_gb: f32,
+    pub vram_args: Vec<String>,
+    pub env_vars: Vec<(String, String)>,
+    pub extra_args: Vec<String>,
 }
 
 pub struct ComfyManager;
@@ -281,7 +284,8 @@ impl ComfyManager {
             .append(true)
             .open(&log_path)?;
         let stderr = stdout.try_clone()?;
-        let mut child = Command::new(&python)
+        let mut child_cmd = Command::new(&python);
+        child_cmd
             .current_dir(&instance.root)
             // stdout/stderr are redirected to the managed log file. Without
             // unbuffered mode Python can hold recent ComfyUI messages for a
@@ -292,12 +296,30 @@ impl ComfyManager {
             .arg(opts.host)
             .arg("--port")
             .arg(opts.port.to_string())
+            .arg("--enable-manager");
+
+        if opts.vram_args.is_empty() {
             // Allocation headroom for attention workspaces, model transitions,
             // and memory-intensive video VAE decoding. This does not alter the
             // model, precision, sampling parameters, or generated output.
-            .arg("--reserve-vram")
-            .arg(opts.reserve_vram_gb.max(0.0).to_string())
-            .arg("--enable-manager")
+            child_cmd
+                .arg("--reserve-vram")
+                .arg(opts.reserve_vram_gb.max(0.0).to_string());
+        } else {
+            for arg in &opts.vram_args {
+                child_cmd.arg(arg);
+            }
+        }
+
+        for arg in &opts.extra_args {
+            child_cmd.arg(arg);
+        }
+
+        for (key, val) in &opts.env_vars {
+            child_cmd.env(key, val);
+        }
+
+        let mut child = child_cmd
             .stdout(Stdio::from(stdout))
             .stderr(Stdio::from(stderr))
             .spawn()?;

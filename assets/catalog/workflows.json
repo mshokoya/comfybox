@@ -1602,6 +1602,73 @@
       "catalog_sources": [
         "_/MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
       ]
+    },
+    {
+      "id": "comfybox-MDMZ-wanvideo_I2V_InfiniteTalk-workflow",
+      "name": "comfybox - MDMZ WanVideo I2V InfiniteTalk Workflow",
+      "file": "comfybox-MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json",
+      "artifact_ids": [
+        "wan2.1.i2v.14b.480p.bf16",
+        "wan2_1_infinitetalk_multi_fp16",
+        "wan2_1_vae_bf16",
+        "umt5_xxl_enc_bf16",
+        "clip-vision.h",
+        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
+        "melbandroformer.fp16",
+        "wav2vec2_chinese_base_fp16"
+      ],
+      "custom_node_ids": [
+        "comfyui-wanvideowrapper",
+        "comfyui-melbandroformer",
+        "rgthree-comfy",
+        "comfyui-videohelpersuite",
+        "comfyui-kjnodes"
+      ],
+      "catalog_sources": [
+        "_/comfybox-MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
+      ]
+    },
+    {
+      "id": "Rvage-wan21Infinitetalk_v21N2-workflow",
+      "name": "Rvage Wan 2.1 InfiniteTalk v2.1 N2 Workflow",
+      "file": "Rvage-wan21Infinitetalk_v21N2-workflow.json",
+      "artifact_ids": [
+        "wan2.1.i2v.14b.720p.fp8.scaled",
+        "nsfw_wan_umt5_xxl_bf16_fixed",
+        "wan2_1_vae_bf16",
+        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
+        "wan2.1_infiniteTalk_single_fp16",
+        "audio_encoder.wav2vec2_chinese_base_fp16"
+      ],
+      "custom_node_ids": [
+        "comfyui-eclipse",
+        "comfyui-smartmodelloader",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ]
+    },
+    {
+      "id": "comfybox-Rvage-wan21Infinitetalk_v21N2-workflow",
+      "name": "comfybox - Rvage Wan 2.1 InfiniteTalk v2.1 N2 Workflow",
+      "file": "comfybox-Rvage-wan21Infinitetalk_v21N2-workflow.json",
+      "artifact_ids": [
+        "wan2.1.i2v.14b.720p.bf16",
+        "nsfw_wan_umt5_xxl_bf16_fixed",
+        "wan2_1_vae_bf16",
+        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
+        "wan2.1_infiniteTalk_single_fp16",
+        "audio_encoder.wav2vec2_chinese_base_fp16"
+      ],
+      "custom_node_ids": [
+        "comfyui-eclipse",
+        "comfyui-smartmodelloader",
+        "comfyui-easy-use"
+      ],
+      "catalog_sources": [
+        "_/comfybox-Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ]
     }
   ]
 }

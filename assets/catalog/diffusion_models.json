@@ -2576,6 +2576,106 @@
       "sha256": "6119aef379a6c7264e0b37db65ae1e6488b8ca4a00baf56d6d244737b8488226",
       "gated": false,
       "description": "MelBand RoFormer vocal separator FP16 model weights; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2.1.i2v.14b.480p.bf16",
+      "name": "wan2.1_i2v_480p_14B_bf16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/WanVideo/wan2.1_i2v_480p_14B_bf16.safetensors",
+      "loader": "WanVideoModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2.1_i2v_480p_14B_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_i2v_480p_14B_bf16.safetensors",
+          "size": "30.5 GB",
+          "size_bytes": 32789894024,
+          "description": "Wan 2.1 Image-to-Video 14B 480P BF16 diffusion model weights; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/comfybox-MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_i2v_480p_14B_bf16.safetensors",
+      "size_bytes": 32789894024,
+      "sha256": "c058a4ac5363c35d1ab4dd3bdec788c23b267fa42a0d7c68aba599f2f74600c9",
+      "gated": false,
+      "description": "Wan 2.1 Image-to-Video 14B 480P BF16 diffusion model weights; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2_1_infinitetalk_multi_fp16",
+      "name": "Wan2_1-InfiniteTalk-Multi_fp16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/WanVideo/InfiniteTalk/Wan2_1-InfiniteTalk-Multi_fp16.safetensors",
+      "loader": "MultiTalkModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Wan2_1-InfiniteTalk-Multi_fp16.safetensors",
+          "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/InfiniteTalk/Wan2_1-InfiniteTalk-Multi_fp16.safetensors",
+          "size": "4.8 GB",
+          "size_bytes": 5124439112,
+          "description": "InfiniteTalk Multi-speaker FP16 model for Wan 2.1; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/comfybox-MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
+      ],
+      "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/InfiniteTalk/Wan2_1-InfiniteTalk-Multi_fp16.safetensors",
+      "size_bytes": 5124439112,
+      "sha256": "4c2486cdfb6ff9a9f27408e98e11e20619136933b20411e0c365b1e84075d195",
+      "gated": false,
+      "description": "InfiniteTalk Multi-speaker FP16 model for Wan 2.1; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2.1.i2v.14b.720p.fp8.scaled",
+      "name": "Wan2_1-I2V-14B-720p_fp8_e4m3fn_scaled_KJ",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan/Wan2_1-I2V-14B-720p_fp8_e4m3fn_scaled_KJ.safetensors",
+      "loader": "Smart Model Loader [Eclipse]",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Wan2_1-I2V-14B-720p_fp8_e4m3fn_scaled_KJ.safetensors",
+          "url": "https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_1-I2V-14B-720p_fp8_e4m3fn_scaled_KJ.safetensors",
+          "size": "15.5 GB",
+          "size_bytes": 16643349018,
+          "description": "Wan 2.1 Image-to-Video 14B 720P FP8 scaled diffusion model weights; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ],
+      "url": "https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_1-I2V-14B-720p_fp8_e4m3fn_scaled_KJ.safetensors",
+      "size_bytes": 16643349018,
+      "sha256": "3cb562e176874cce0b7a059dbd90a400e4dca3ba24de925acd4704ff70a20f57",
+      "gated": false,
+      "description": "Wan 2.1 Image-to-Video 14B 720P FP8 scaled diffusion model weights; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2.1.i2v.14b.720p.bf16",
+      "name": "wan2.1_i2v_720p_14B_bf16",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan/wan2.1_i2v_720p_14B_bf16.safetensors",
+      "loader": "Smart Model Loader [Eclipse]",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2.1_i2v_720p_14B_bf16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_i2v_720p_14B_bf16.safetensors",
+          "size": "30.5 GB",
+          "size_bytes": 32789894024,
+          "description": "Wan 2.1 Image-to-Video 14B 720P BF16 diffusion model weights; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/comfybox-Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_i2v_720p_14B_bf16.safetensors",
+      "size_bytes": 32789894024,
+      "sha256": "8ef7ea5bf9eea636b9b3ebd84c40671b4a18ae2704cb4c8595cb5b25c1d8e8b9",
+      "gated": false,
+      "description": "Wan 2.1 Image-to-Video 14B 720P BF16 diffusion model weights; hosted on Hugging Face."
     }
   ]
 }

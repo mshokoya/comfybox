@@ -272,6 +272,56 @@
       "sha256": "000813e441020f18cff844c969d2d5d4adc2a5ce46b2db1f23950b05d88805b4",
       "gated": false,
       "description": "Wav2Vec2 Chinese Base FP16 safetensors weights; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2.1_infiniteTalk_single_fp16",
+      "name": "wan2.1_infiniteTalk_single_fp16.safetensors",
+      "type": "runtime_models",
+      "relative_path": "models/model_patches/wan2.1_infiniteTalk_single_fp16.safetensors",
+      "loader": "ModelPatchLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2.1_infiniteTalk_single_fp16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/model_patches/wan2.1_infiniteTalk_single_fp16.safetensors",
+          "size": "4.8 GB",
+          "size_bytes": 5125258232,
+          "description": "InfiniteTalk Single FP16 model patch weights for Wan 2.1; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/model_patches/wan2.1_infiniteTalk_single_fp16.safetensors",
+      "size_bytes": 5125258232,
+      "sha256": "bf212c5c647eaf1c019b2158d2edf4a360d97e38b746c4bac994fee485e09fc3",
+      "gated": false,
+      "description": "InfiniteTalk Single FP16 model patch weights for Wan 2.1; hosted on Hugging Face."
+    },
+    {
+      "id": "audio_encoder.wav2vec2_chinese_base_fp16",
+      "name": "wav2vec2-chinese-base_fp16.safetensors",
+      "type": "runtime_models",
+      "relative_path": "models/audio_encoders/wav2vec2-chinese-base_fp16.safetensors",
+      "loader": "AudioEncoderLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wav2vec2-chinese-base_fp16.safetensors",
+          "url": "https://huggingface.co/Kijai/wav2vec2_safetensors/resolve/main/wav2vec2-chinese-base_fp16.safetensors",
+          "size": "181.3 MB",
+          "size_bytes": 190115368,
+          "description": "Wav2Vec2 Chinese Base FP16 safetensors weights for AudioEncoderLoader; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ],
+      "url": "https://huggingface.co/Kijai/wav2vec2_safetensors/resolve/main/wav2vec2-chinese-base_fp16.safetensors",
+      "size_bytes": 190115368,
+      "sha256": "000813e441020f18cff844c969d2d5d4adc2a5ce46b2db1f23950b05d88805b4",
+      "gated": false,
+      "description": "Wav2Vec2 Chinese Base FP16 safetensors weights for AudioEncoderLoader; hosted on Hugging Face."
     }
   ]
 }

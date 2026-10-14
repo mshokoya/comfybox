@@ -53,6 +53,10 @@ pub enum DashboardAction {
     ConfigureHfEndpoint,
     SetHfToken,
     ToggleServer,
+    ToggleSwap,
+    InstallTcmalloc,
+    InstallSageAttention,
+    InstallFlashAttention,
     InstallPackage(InstallSelection),
     InstallArtifact(InstallSelection),
     InstallCustomNode(String),
@@ -253,6 +257,12 @@ struct SystemSnapshot {
     has_token: bool,
     dependency_status: Vec<(String, bool)>,
     python_dependencies_ready: bool,
+    swap_active: bool,
+    swap_path: Option<PathBuf>,
+    swap_size_info: Option<String>,
+    tcmalloc_path: Option<PathBuf>,
+    sage_attention_installed: bool,
+    flash_attention_installed: bool,
 }
 
 pub fn run(
@@ -2044,6 +2054,88 @@ impl Dashboard<'_> {
                 Span::raw(self.state.comfy_log.as_deref().unwrap_or("not created")),
             ]),
         ];
+
+        lines.push(Line::from(""));
+        lines.push(Line::from(Span::styled(
+            "System Optimizations (Linux / AutoDL)",
+            Style::default().fg(ACCENT).add_modifier(Modifier::BOLD),
+        )));
+
+        // 1. Swap
+        let swap_active = self.system.swap_active;
+        let mut swap_spans = vec![
+            label("NVMe Swap"),
+            state_span(if swap_active { "ACTIVE" } else { "DISABLED" }, swap_active),
+        ];
+        if let Some(path) = &self.system.swap_path {
+            let info = self.system.swap_size_info.as_deref().unwrap_or("");
+            swap_spans.push(Span::styled(
+                format!("  {} {info}", path.display()),
+                Style::default().fg(MUTED),
+            ));
+        }
+        swap_spans.push(Span::styled("  [w toggle on/off]", Style::default().fg(ACCENT)));
+        lines.push(Line::from(swap_spans));
+
+        // 2. CUDA Allocator
+        let cuda_active = self.cfg.pytorch_expandable_segments;
+        lines.push(Line::from(vec![
+            label("CUDA Allocator"),
+            state_span(if cuda_active { "ON" } else { "OFF" }, cuda_active),
+            Span::styled("  PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True", Style::default().fg(MUTED)),
+            Span::styled("  [e toggle]", Style::default().fg(ACCENT)),
+        ]));
+
+        // 3. TCMalloc
+        let tcmalloc_installed = self.system.tcmalloc_path.is_some();
+        let tcmalloc_active = self.cfg.preload_tcmalloc && tcmalloc_installed;
+        let mut tcmalloc_spans = vec![
+            label("Google TCMalloc"),
+            if tcmalloc_installed {
+                state_span(if tcmalloc_active { "ON (preloaded)" } else { "OFF" }, tcmalloc_active)
+            } else {
+                Span::styled("not installed", Style::default().fg(YELLOW))
+            },
+        ];
+        if let Some(path) = &self.system.tcmalloc_path {
+            tcmalloc_spans.push(Span::styled(format!("  {}", path.display()), Style::default().fg(MUTED)));
+            tcmalloc_spans.push(Span::styled("  [m toggle]", Style::default().fg(ACCENT)));
+        } else {
+            tcmalloc_spans.push(Span::styled("  [m install libtcmalloc-minimal4]", Style::default().fg(ACCENT)));
+        }
+        lines.push(Line::from(tcmalloc_spans));
+
+        // 4. Attention Backend
+        let attention_backend = self.cfg.attention_backend;
+        lines.push(Line::from(vec![
+            label("Attention Backend"),
+            Span::styled(
+                attention_backend.label(),
+                Style::default()
+                    .fg(if attention_backend != comfybox_core::AttentionBackend::Off { GREEN } else { MUTED })
+                    .add_modifier(Modifier::BOLD),
+            ),
+            Span::styled("  [a switch: Off / SageAttention / FlashAttention]", Style::default().fg(ACCENT)),
+        ]));
+
+        lines.push(Line::from(vec![
+            label("  SageAttention"),
+            state_span(
+                if self.system.sage_attention_installed { "installed" } else { "not installed" },
+                self.system.sage_attention_installed,
+            ),
+            Span::styled("  [g download / install]", Style::default().fg(ACCENT)),
+        ]));
+
+        lines.push(Line::from(vec![
+            label("  FlashAttention"),
+            state_span(
+                if self.system.flash_attention_installed { "installed" } else { "not installed" },
+                self.system.flash_attention_installed,
+            ),
+            Span::styled("  [f download / install]", Style::default().fg(ACCENT)),
+        ]));
+
         if !self.catalog.system_dependencies.is_empty() {
             lines.push(Line::from(""));
             lines.push(Line::from(Span::styled(
@@ -2138,7 +2230,7 @@ impl Dashboard<'_> {
                 Section::CustomNodes => "[←/→ tabs] [↑/↓ select] [Enter install]",
                 Section::Downloads => "[←/→ tabs] [↑/↓ select] [Enter watch]",
                 Section::Settings => "[←/→ tabs] [−/+ files] [[/] chunks] [h HF] [y PyPI]",
-                Section::System => "[←/→ tabs] [Enter install system deps]",
+                Section::System => "[←/→ tabs] [w swap] [e CUDA] [m TCMalloc] [a attention] [g Sage] [f Flash] [Enter sys deps]",
                 _ => "[←/→ tabs]",
             }
         };
@@ -2278,6 +2370,34 @@ impl Dashboard<'_> {
                 ) =>
             {
                 return Some(DashboardAction::SetHfToken);
+            }
+            KeyCode::Char('w') if Section::ALL[self.section] == Section::System => {
+                return Some(DashboardAction::ToggleSwap);
+            }
+            KeyCode::Char('e') if Section::ALL[self.section] == Section::System => {
+                self.cfg.pytorch_expandable_segments = !self.cfg.pytorch_expandable_segments;
+                let _ = self.cfg.save();
+            }
+            KeyCode::Char('m') if Section::ALL[self.section] == Section::System => {
+                if self.system.tcmalloc_path.is_some() {
+                    self.cfg.preload_tcmalloc = !self.cfg.preload_tcmalloc;
+                    let _ = self.cfg.save();
+                } else {
+                    return Some(DashboardAction::InstallTcmalloc);
+                }
+            }
+            KeyCode::Char('M') if Section::ALL[self.section] == Section::System => {
+                return Some(DashboardAction::InstallTcmalloc);
+            }
+            KeyCode::Char('a') if Section::ALL[self.section] == Section::System => {
+                self.cfg.attention_backend = self.cfg.attention_backend.next();
+                let _ = self.cfg.save();
+            }
+            KeyCode::Char('g') if Section::ALL[self.section] == Section::System => {
+                return Some(DashboardAction::InstallSageAttention);
+            }
+            KeyCode::Char('f') if Section::ALL[self.section] == Section::System => {
+                return Some(DashboardAction::InstallFlashAttention);
             }
             KeyCode::Char('y') if Section::ALL[self.section] == Section::Settings => {
                 return Some(DashboardAction::ConfigurePypi);
@@ -3177,9 +3297,32 @@ fn collect_system_snapshot(cfg: &AppConfig, catalog: &Catalog) -> SystemSnapshot
         .as_deref()
         .filter(|path| ComfyManager::is_comfy_root(path));
     let credential = hf_credential();
+    let python = root.and_then(find_python);
+    let swap_active = cfg
+        .swap_file_path
+        .as_deref()
+        .map(comfybox_core::swap::is_swap_active)
+        .unwrap_or(false);
+    let swap_size_info = cfg
+        .swap_file_path
+        .as_deref()
+        .and_then(comfybox_core::swap::find_active_swap_by_path)
+        .map(|s| {
+            format!(
+                "{:.1} GiB used / {:.1} GiB total",
+                s.used_kib as f64 / 1_048_576.0,
+                s.total_kib as f64 / 1_048_576.0
+            )
+        });
+    let tcmalloc_path = comfybox_core::optimizations::find_tcmalloc_library();
+    let sage_attention_installed =
+        comfybox_core::optimizations::is_sage_attention_installed(python.as_deref(), root);
+    let flash_attention_installed =
+        comfybox_core::optimizations::is_flash_attention_installed(python.as_deref(), root);
+
     SystemSnapshot {
         git: command_available("git"),
-        python: root.and_then(find_python),
+        python,
         disk: root.and_then(disk_free_for),
         token_status: credential
             .as_ref()
@@ -3198,6 +3341,12 @@ fn collect_system_snapshot(cfg: &AppConfig, catalog: &Catalog) -> SystemSnapshot
                 )
             })
             .collect(),
+        swap_active,
+        swap_path: cfg.swap_file_path.clone(),
+        swap_size_info,
+        tcmalloc_path,
+        sage_attention_installed,
+        flash_attention_installed,
     }
 }
 

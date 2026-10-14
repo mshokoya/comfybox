@@ -1,0 +1,8324 @@
+{
+  "id": "1754f7d7-fb50-47d4-be17-4e9dac0237f6",
+  "revision": 1,
+  "last_node_id": 122,
+  "last_link_id": 161,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "IO Checkpoint Loader [Eclipse]",
+      "pos": [
+        931,
+        1211
+      ],
+      "size": [
+        225,
+        414
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "shape": 7,
+          "type": "PIPE",
+          "link": 1
+        },
+        {
+          "name": "model",
+          "shape": 7,
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "shape": 7,
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "audio_vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "latent",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "steps",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "name": "cfg",
+          "shape": 7,
+          "type": "FLOAT",
+          "link": null
+        },
+        {
+          "name": "sampler_name",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "scheduler",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "flux_guidance",
+          "shape": 7,
+          "type": "FLOAT",
+          "link": null
+        },
+        {
+          "name": "clip_skip",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "name": "width",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "name": "height",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "name": "batch_size",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "name": "model_name",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "vae_name",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "lora_names",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "seed",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "name": "denoise",
+          "shape": 7,
+          "type": "FLOAT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE",
+          "links": null
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            4
+          ]
+        },
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "links": null
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "links": [
+            83
+          ]
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": [
+            84
+          ]
+        },
+        {
+          "name": "sampler_name",
+          "type": "*",
+          "links": [
+            85
+          ]
+        },
+        {
+          "name": "scheduler",
+          "type": "*",
+          "links": [
+            86
+          ]
+        },
+        {
+          "name": "flux_guidance",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "clip_skip",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "model_name",
+          "type": "STRING",
+          "links": [
+            80
+          ]
+        },
+        {
+          "name": "vae_name",
+          "type": "STRING",
+          "links": [
+            81
+          ]
+        },
+        {
+          "name": "lora_names",
+          "type": "STRING",
+          "links": [
+            82
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            87
+          ]
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "b59ef5d1218e546ba830e68319802d309b5516f3",
+        "Node name for S&R": "IO Checkpoint Loader [Eclipse]"
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 3,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1241
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 43,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null
+        }
+      ],
+      "title": "Set_MODEL_LS",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "MODEL_LS"
+      },
+      "widgets_values": [
+        "MODEL_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 4,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1271
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 44,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "title": "Set_CLIP_LS",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "CLIP_LS"
+      },
+      "widgets_values": [
+        "CLIP_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 5,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1301
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 45,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null
+        }
+      ],
+      "title": "Set_VAE_LS",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "VAE_LS"
+      },
+      "widgets_values": [
+        "VAE_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 15,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        941,
+        2001
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "MODEL_PATCH",
+          "type": "MODEL_PATCH",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL_PATCH",
+          "type": "MODEL_PATCH",
+          "links": null
+        }
+      ],
+      "title": "Set_MODEL_PATCH_LS",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "MODEL_PATCH_LS"
+      },
+      "widgets_values": [
+        "MODEL_PATCH_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 17,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        931,
+        2091
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "title": "Get_AUDIO_LS",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "AUDIO_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 121,
+      "type": "AudioEncoderEncode",
+      "pos": [
+        931,
+        2121
+      ],
+      "size": [
+        286,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio_encoder",
+          "type": "AUDIO_ENCODER",
+          "link": 6
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO_ENCODER_OUTPUT",
+          "type": "AUDIO_ENCODER_OUTPUT",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.57",
+        "Node name for S&R": "AudioEncoderEncode",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 18,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1045,
+        2091
+      ],
+      "size": [
+        358,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 54,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "AUDIO_ENCODER_OUTPUT",
+          "type": "AUDIO_ENCODER_OUTPUT",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO_ENCODER_OUTPUT",
+          "type": "AUDIO_ENCODER_OUTPUT",
+          "links": null
+        }
+      ],
+      "title": "Set_AUDIO_ENC_OUT_LS",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "AUDIO_ENC_OUT_LS"
+      },
+      "widgets_values": [
+        "AUDIO_ENC_OUT_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 25,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        1621,
+        1271
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            37
+          ]
+        }
+      ],
+      "title": "Get_context_lenght_ls",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "context_lenght_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 117,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        4020,
+        2031
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "title": "Get_path_ls",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "path_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 86,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        4311,
+        1211
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            28,
+            57
+          ]
+        }
+      ],
+      "title": "Get_AUDIO_LS",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "AUDIO_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 108,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        4311,
+        1241
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            29,
+            58
+          ]
+        }
+      ],
+      "title": "Get_frame_rate_ls",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "frame_rate_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 116,
+      "type": "Add Filename Prefix [Eclipse]",
+      "pos": [
+        3990,
+        1991
+      ],
+      "size": [
+        279,
+        140
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "path_opt",
+          "shape": 7,
+          "type": "STRING",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            59
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "9dacf553d57f3a5ae3e4dc361691280639da7a8c",
+        "Node name for S&R": "Add Filename Prefix [Eclipse]"
+      },
+      "widgets_values": [
+        "video",
+        "disable",
+        "%Y-%m-%d_%H-%M-%S"
+      ],
+      "color": "#2a3c5a",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 80,
+      "type": "easy forLoopStart",
+      "pos": [
+        2731,
+        1861
+      ],
+      "size": [
+        225,
+        122
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 80,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "initial_value1",
+          "shape": 7,
+          "type": "*",
+          "link": 17
+        },
+        {
+          "name": "total",
+          "type": "INT",
+          "widget": {
+            "name": "total"
+          },
+          "link": 18
+        },
+        {
+          "name": "initial_value2",
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "flow",
+          "shape": 5,
+          "type": "FLOW_CONTROL",
+          "links": [
+            16
+          ]
+        },
+        {
+          "name": "index",
+          "type": "INT",
+          "links": [
+            30,
+            78
+          ]
+        },
+        {
+          "name": "value1",
+          "type": "*",
+          "links": [
+            15
+          ]
+        },
+        {
+          "name": "value2",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "1.3.3",
+        "Node name for S&R": "easy forLoopStart"
+      },
+      "widgets_values": [
+        1
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 29,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1621,
+        1331
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "title": "Set_AUDIO_LS",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "AUDIO_LS"
+      },
+      "widgets_values": [
+        "AUDIO_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 27,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        1621,
+        1301
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            38
+          ]
+        }
+      ],
+      "title": "Get_overlap_ls",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "overlap_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 23,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        1621,
+        1241
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            36
+          ]
+        }
+      ],
+      "title": "Get_frame_rate_ls",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "frame_rate_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 71,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        3051,
+        1241
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "title": "Get_frame_rate_ls",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "frame_rate_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 33,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        1641,
+        1521
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "title": "Get_CLIP_LS",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "CLIP_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 41,
+      "type": "CLIP Text Encode [Eclipse]",
+      "pos": [
+        1611,
+        1851
+      ],
+      "size": [
+        225,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 9
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            11,
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "9dacf553d57f3a5ae3e4dc361691280639da7a8c",
+        "Node name for S&R": "CLIP Text Encode [Eclipse]"
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 34,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1641,
+        1551
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 61,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": null
+        }
+      ],
+      "title": "Set_pos_cond_ls",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "pos_cond_ls"
+      },
+      "widgets_values": [
+        "pos_cond_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 35,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        1641,
+        1591
+      ],
+      "size": [
+        225,
+        26
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 60,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.57",
+        "Node name for S&R": "ConditioningZeroOut",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 36,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1641,
+        1621
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 71,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": null
+        }
+      ],
+      "title": "Set_neg_cond_ls",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "neg_cond_ls"
+      },
+      "widgets_values": [
+        "neg_cond_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 39,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        1351,
+        1791
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            42
+          ]
+        }
+      ],
+      "title": "Get_IMAGE_BATCH",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "IMAGE_BATCH"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 42,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1351,
+        1861
+      ],
+      "size": [
+        291,
+        70
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 55,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "WAN_LIPSYNC_PLAN",
+          "type": "WAN_LIPSYNC_PLAN",
+          "link": 39
+        }
+      ],
+      "outputs": [
+        {
+          "name": "WAN_LIPSYNC_PLAN",
+          "type": "WAN_LIPSYNC_PLAN",
+          "links": null
+        }
+      ],
+      "title": "Set_WAN_LIPSYNC_PLAN",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "WAN_LIPSYNC_PLAN"
+      },
+      "widgets_values": [
+        "WAN_LIPSYNC_PLAN"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 43,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1351,
+        1891
+      ],
+      "size": [
+        225,
+        70
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 56,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "link": 40
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Set_loop_count_ls",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "loop_count_ls"
+      },
+      "widgets_values": [
+        "loop_count_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 45,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1351,
+        1921
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 57,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "link": 43
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Set_base_keep_frames",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "base_keep_frames"
+      },
+      "widgets_values": [
+        "base_keep_frames"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 48,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        2441,
+        1201
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 70,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "link": 33
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "Set_IMAGE_BATCH",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "IMAGE_BATCH"
+      },
+      "widgets_values": [
+        "IMAGE_BATCH"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 70,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        3051,
+        1211
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "title": "Get_AUDIO_LS",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "AUDIO_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 75,
+      "type": "ImageFromBatch",
+      "pos": [
+        2761,
+        1371
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 76,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 46
+        },
+        {
+          "name": "length",
+          "type": "INT",
+          "widget": {
+            "name": "length"
+          },
+          "link": 44
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "ImageFromBatch"
+      },
+      "widgets_values": [
+        0,
+        81
+      ],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 74,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        2761,
+        1341
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            44
+          ]
+        }
+      ],
+      "title": "Get_base_keep_frames",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "base_keep_frames"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 113,
+      "type": "ImageFromBatch",
+      "pos": [
+        4021,
+        1351
+      ],
+      "size": [
+        225,
+        90
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 73,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 61
+        },
+        {
+          "name": "batch_index",
+          "type": "INT",
+          "widget": {
+            "name": "batch_index"
+          },
+          "link": 65
+        },
+        {
+          "name": "length",
+          "type": "INT",
+          "widget": {
+            "name": "length"
+          },
+          "link": 63
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "ImageFromBatch",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        0,
+        4096
+      ],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 109,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        4021,
+        1281
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            23,
+            62
+          ]
+        }
+      ],
+      "title": "Get_value1",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "value1"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 114,
+      "type": "ImageBatch",
+      "pos": [
+        4021,
+        1381
+      ],
+      "size": [
+        225,
+        54
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 75,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 23
+        },
+        {
+          "name": "image2",
+          "type": "IMAGE",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            27
+          ]
+        }
+      ],
+      "title": "Batch Images",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "ImageBatch",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 118,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        4020,
+        2061
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOW_CONTROL",
+          "type": "FLOW_CONTROL",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "title": "Get_flow",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "flow"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 115,
+      "type": "easy forLoopEnd",
+      "pos": [
+        3991,
+        1861
+      ],
+      "size": [
+        225,
+        66
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 79,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "flow",
+          "shape": 5,
+          "type": "FLOW_CONTROL",
+          "link": 25
+        },
+        {
+          "name": "initial_value1",
+          "shape": 7,
+          "type": "*",
+          "link": 26
+        },
+        {
+          "name": "initial_value2",
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "value1",
+          "type": "*",
+          "links": [
+            56
+          ]
+        },
+        {
+          "name": "value2",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "1.3.3",
+        "Node name for S&R": "easy forLoopEnd"
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 77,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        2761,
+        1441
+      ],
+      "size": [
+        225,
+        70
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 83,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Set_loop_index",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "loop_index"
+      },
+      "widgets_values": [
+        "loop_index"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 78,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        2761,
+        1471
+      ],
+      "size": [
+        241,
+        70
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 82,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "FLOW_CONTROL",
+          "type": "FLOW_CONTROL",
+          "link": 16
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOW_CONTROL",
+          "type": "FLOW_CONTROL",
+          "links": null
+        }
+      ],
+      "title": "Set_flow",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "flow"
+      },
+      "widgets_values": [
+        "flow"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 79,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        2761,
+        1501
+      ],
+      "size": [
+        225,
+        70
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 85,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Set_value1",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "value1"
+      },
+      "widgets_values": [
+        "value1"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 52,
+      "type": "Preview Video [Eclipse]",
+      "pos": [
+        3021,
+        1171
+      ],
+      "size": [
+        449,
+        959
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 78,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 19
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 20
+        },
+        {
+          "name": "fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fps"
+          },
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "9dacf553d57f3a5ae3e4dc361691280639da7a8c",
+        "Node name for S&R": "Preview Video [Eclipse]"
+      },
+      "widgets_values": [
+        16,
+        "http://127.0.0.1:8188/api/view?filename=EclipseVideo_temp_khiri_00001_41137025_.mp4&subfolder=&type=temp&t=1788441137682"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 1,
+      "type": "Smart Model Loader [Eclipse]",
+      "pos": [
+        901,
+        1171
+      ],
+      "size": [
+        389,
+        586
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "b59ef5d1218e546ba830e68319802d309b5516f3",
+        "Node name for S&R": "Smart Model Loader [Eclipse]"
+      },
+      "widgets_values": [
+        [
+          "clip",
+          "vae",
+          "memory_cleanup",
+          "lora",
+          "sampler",
+          "seed"
+        ],
+        "None",
+        "None",
+        "",
+        "UNet Model",
+        "None",
+        "wan/wan2.1_i2v_720p_14B_bf16.safetensors",
+        "None",
+        "None",
+        "None",
+        "None",
+        "default",
+        "bfloat16",
+        0,
+        "flash-attention2",
+        "enabled",
+        "auto",
+        30,
+        "enable",
+        "default",
+        "default",
+        false,
+        10,
+        false,
+        "None",
+        "eps",
+        3,
+        0.5,
+        1024,
+        1024,
+        50,
+        false,
+        120,
+        0.002,
+        "External",
+        "1",
+        "nsfw_wan_umt5-xxl_bf16_fixed.safetensors",
+        "None",
+        "None",
+        "None",
+        "wan",
+        true,
+        -2,
+        "External",
+        "Wan2_1_VAE_bf16.safetensors",
+        "1024x1024 (1:1 XL/SD3/Flux/HiDream)",
+        1024,
+        1024,
+        "1",
+        true,
+        "wan/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors",
+        1,
+        false,
+        "None",
+        1,
+        false,
+        "None",
+        1,
+        "euler",
+        "normal",
+        4,
+        1,
+        1,
+        3.5,
+        1,
+        "External",
+        "None",
+        "off",
+        "{}",
+        "",
+        "[]",
+        "diffusion_models",
+        "default",
+        2173967019060126,
+        null,
+        null,
+        null
+      ],
+      "color": "#8131d0",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 14,
+      "type": "ModelPatchLoader",
+      "pos": [
+        901,
+        1951
+      ],
+      "size": [
+        389,
+        69
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 15,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL_PATCH",
+          "type": "MODEL_PATCH",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.67",
+        "Node name for S&R": "ModelPatchLoader",
+        "models": [
+          {
+            "name": "wan2.1_infiniteTalk_multi_fp16.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/model_patches/wan2.1_infiniteTalk_multi_fp16.safetensors",
+            "directory": "model_patches"
+          }
+        ],
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        "wan2.1_infiniteTalk_single_fp16.safetensors"
+      ],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 16,
+      "type": "AudioEncoderLoader",
+      "pos": [
+        901,
+        2061
+      ],
+      "size": [
+        389,
+        69
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 16,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO_ENCODER",
+          "type": "AUDIO_ENCODER",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.57",
+        "Node name for S&R": "AudioEncoderLoader",
+        "models": [
+          {
+            "name": "wav2vec2-chinese-base_fp16.safetensors",
+            "url": "https://huggingface.co/Kijai/wav2vec2_safetensors/resolve/main/wav2vec2-chinese-base_fp16.safetensors",
+            "directory": "audio_encoders"
+          }
+        ],
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        "wav2vec2-chinese-base_fp16.safetensors"
+      ],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 76,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        2761,
+        1411
+      ],
+      "size": [
+        225,
+        62
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 17,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            18,
+            79
+          ]
+        }
+      ],
+      "title": "Get_loop_count_ls",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "loop_count_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 20,
+      "type": "Load Audio [Eclipse]",
+      "pos": [
+        1611,
+        1171
+      ],
+      "size": [
+        239,
+        266
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 18,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            14,
+            35
+          ]
+        },
+        {
+          "name": "duration",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "9dacf553d57f3a5ae3e4dc361691280639da7a8c",
+        "Node name for S&R": "Load Audio [Eclipse]"
+      },
+      "widgets_values": [
+        "Ooh Baby.mp3",
+        14,
+        25,
+        "",
+        ""
+      ],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 44,
+      "type": "Note",
+      "pos": [
+        1611,
+        1891
+      ],
+      "size": [
+        240,
+        199
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 19,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Enter one comma-separated switch time for every image in manual_transition_times. for example, 6.0, 13.0, 19.0 for four images. the base sampling (image1) starts at 0, the 2nd image starts at 6 in this example. Times are relative to the loaded audio clip. Disable silence alignment for exact frame positions; enable it to search for nearby encoded-audio activity gaps. Leave the field blank for automatic equal spacing. One reference image ignores transition times. InfiniteTalk keeps length 81; each decoded extension is cropped by trim_image and the planner's keep_frames before it is appended to the authoritative batch."
+      ],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 40,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        1351,
+        1821
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 20,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO_ENCODER_OUTPUT",
+          "type": "AUDIO_ENCODER_OUTPUT",
+          "links": [
+            45
+          ]
+        }
+      ],
+      "title": "Get_AUDIO_ENC_OUT_LS",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "AUDIO_ENC_OUT_LS"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 49,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        1911,
+        1211
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 21,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            31
+          ]
+        }
+      ],
+      "title": "Get_width_ls",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "width_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 50,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        1911,
+        1241
+      ],
+      "size": [
+        225,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 22,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            32
+          ]
+        }
+      ],
+      "title": "Get_height_ls",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "height_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 46,
+      "type": "Load Batch From Folder (Step Advanced) [Eclipse]",
+      "pos": [
+        1881,
+        1171
+      ],
+      "size": [
+        349,
+        536
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "custom_width",
+          "type": "INT",
+          "widget": {
+            "name": "custom_width"
+          },
+          "link": 31
+        },
+        {
+          "name": "custom_height",
+          "type": "INT",
+          "widget": {
+            "name": "custom_height"
+          },
+          "link": 32
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": [
+            34
+          ]
+        },
+        {
+          "name": "masks",
+          "shape": 6,
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "files",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Load Batch From Folder (Step)",
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "5d283c9c2eaacb79a81d0893cf748d479d7f2d14",
+        "Node name for S&R": "Load Batch From Folder (Step Advanced) [Eclipse]"
+      },
+      "widgets_values": [
+        "/mnt/data/AI/batch_path/4Face_Swap",
+        null,
+        false,
+        "name",
+        "ascending",
+        0,
+        150,
+        0,
+        "fixed",
+        "custom",
+        "custom",
+        1024,
+        512,
+        512,
+        "original",
+        "crop",
+        "center",
+        "#000000",
+        "lanczos",
+        16,
+        "gpu"
+      ],
+      "color": "#2a3c5a",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 38,
+      "type": "WAN LipSync Timeline Planner [Eclipse]",
+      "pos": [
+        1321,
+        1751
+      ],
+      "size": [
+        281,
+        380
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 35
+        },
+        {
+          "name": "image_batch",
+          "type": "IMAGE",
+          "link": 42
+        },
+        {
+          "name": "audio_encoder_output",
+          "shape": 7,
+          "type": "AUDIO_ENCODER_OUTPUT",
+          "link": 45
+        },
+        {
+          "name": "fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fps"
+          },
+          "link": 36
+        },
+        {
+          "name": "context_length",
+          "type": "INT",
+          "widget": {
+            "name": "context_length"
+          },
+          "link": 37
+        },
+        {
+          "name": "overlap_frames",
+          "type": "INT",
+          "widget": {
+            "name": "overlap_frames"
+          },
+          "link": 38
+        }
+      ],
+      "outputs": [
+        {
+          "name": "plan",
+          "type": "WAN_LIPSYNC_PLAN",
+          "links": [
+            39
+          ]
+        },
+        {
+          "name": "task_count",
+          "type": "INT",
+          "links": [
+            40
+          ]
+        },
+        {
+          "name": "total_frames",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "base_keep_frames",
+          "type": "INT",
+          "links": [
+            43
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": [
+            41
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "ad3e4dc0013ba0d9686b5404b91c9d61dadb4f06",
+        "Node name for S&R": "WAN LipSync Timeline Planner [Eclipse]"
+      },
+      "widgets_values": [
+        25,
+        81,
+        9,
+        "6.5, 13, 19.2",
+        false,
+        "activity_resume",
+        1.5,
+        0.5,
+        0.2
+      ],
+      "color": "#95541e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 122,
+      "type": "Show Text [Eclipse]",
+      "pos": [
+        1611,
+        2132
+      ],
+      "size": [
+        239,
+        358
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 58,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 41
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "WAN LipSync Plan Report",
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "ad3e4dc0013ba0d9686b5404b91c9d61dadb4f06",
+        "Node name for S&R": "Show Text [Eclipse]"
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 120,
+      "type": "Preview Video [Eclipse]",
+      "pos": [
+        3491,
+        1131
+      ],
+      "size": [
+        479,
+        1009
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 77,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 27
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 28
+        },
+        {
+          "name": "fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fps"
+          },
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "title": "Loop Preview",
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "9dacf553d57f3a5ae3e4dc361691280639da7a8c",
+        "Node name for S&R": "Preview Video [Eclipse]"
+      },
+      "widgets_values": [
+        16,
+        ""
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 119,
+      "type": "MarkdownNote",
+      "pos": [
+        261,
+        1131
+      ],
+      "size": [
+        599,
+        880
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 23,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## Model Links (for Local Users)\n\n**diffusion_models**\n\n- [Wan2_1-I2V-14B-480p_fp8_e4m3fn_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_1-I2V-14B-480p_fp8_e4m3fn_scaled_KJ.safetensors)\n\n**text_encoders**\n\n- [umt5_xxl_fp8_e4m3fn_scaled.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors)\n\n**model_patches**\n\n- [wan2.1_infiniteTalk_single_fp16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/model_patches/wan2.1_infiniteTalk_single_fp16.safetensors)\n- [wan2.1_infiniteTalk_multi_fp16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/model_patches/wan2.1_infiniteTalk_multi_fp16.safetensors)\n\n**audio_encoders**\n\n- [wav2vec2-chinese-base_fp16.safetensors](https://huggingface.co/Kijai/wav2vec2_safetensors/resolve/main/wav2vec2-chinese-base_fp16.safetensors)\n\n**vae**\n\n- [Wan2_1_VAE_bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan2_1_VAE_bf16.safetensors)\n\n**loras**\n\n- [lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors)\n\n\n## Model Storage Location\n\n```\n\ud83d\udcc2 ComfyUI/\n\u251c\u2500\u2500 \ud83d\udcc2 models/\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 diffusion_models/\n\u2502   \u2502   \u2514\u2500\u2500\u2500 Wan2_1-I2V-14B-480p_fp8_e4m3fn_scaled_KJ.safetensors\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 text_encoders/\n\u2502   \u2502   \u2514\u2500\u2500\u2500 umt5_xxl_fp8_e4m3fn_scaled.safetensors\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 model_patches/\n\u2502   \u2502   \u251c\u2500\u2500\u2500 wan2.1_infiniteTalk_single_fp16.safetensors\n\u2502   \u2502   \u2514\u2500\u2500\u2500 wan2.1_infiniteTalk_multi_fp16.safetensors\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 audio_encoders/\n\u2502   \u2502   \u2514\u2500\u2500\u2500 wav2vec2-chinese-base_fp16.safetensors\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 vae/\n\u2502   \u2502   \u2514\u2500\u2500\u2500 Wan2_1_VAE_bf16.safetensors\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 loras/\n\u2502   \u2502   \u2514\u2500\u2500\u2500 lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors\n```\n\n## Report Issue\n\nNote: Please update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and prepare required models. Desktop/Cloud will be updated after the stable release; nightly-supported models may not be included yet, please wait for the next stable release.\n\n- Cannot run / runtime errors: [ComfyUI/issues](https://github.com/Comfy-Org/ComfyUI/issues)\n- UI / frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n- Workflow issues: [workflow_templates/issues](https://github.com/Comfy-Org/workflow_templates/issues)\n"
+      ],
+      "color": "#222",
+      "bgcolor": "#000",
+      "shape": "default"
+    },
+    {
+      "id": 32,
+      "type": "String Multiline [Eclipse]",
+      "pos": [
+        1611,
+        1481
+      ],
+      "size": [
+        240,
+        330
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_string",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            10,
+            93
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "9dacf553d57f3a5ae3e4dc361691280639da7a8c",
+        "Node name for S&R": "String Multiline [Eclipse]"
+      },
+      "widgets_values": [
+        "A character sings while swaying gently, moving her head and shoulders with subtle, seductive grace, looking at the camera."
+      ],
+      "color": "#007d52",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 47,
+      "type": "Image Selector [Eclipse]",
+      "pos": [
+        2241,
+        1171
+      ],
+      "size": [
+        459,
+        959
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 59,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            33
+          ]
+        },
+        {
+          "name": "indices",
+          "type": "LIST",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "b59ef5d1218e546ba830e68319802d309b5516f3",
+        "Node name for S&R": "Image Selector [Eclipse]",
+        "display_mode": "4_images_per_row"
+      },
+      "widgets_values": [
+        1734323228,
+        ""
+      ],
+      "color": "#95541e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 51,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        2731,
+        1171
+      ],
+      "size": [
+        279,
+        639
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 72,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 53
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 54
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 52
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 55
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 51
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            47
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 81,
+      "type": "VAEDecode",
+      "pos": [
+        2761,
+        1531
+      ],
+      "size": [
+        225,
+        54
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 74,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 47
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 50
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            46
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "VAEDecode",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 73,
+      "type": "Get First Image [Eclipse]",
+      "pos": [
+        2761,
+        1301
+      ],
+      "size": [
+        225,
+        54
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 48
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            49
+          ]
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "b59ef5d1218e546ba830e68319802d309b5516f3",
+        "Node name for S&R": "Get First Image [Eclipse]"
+      },
+      "widgets_values": [],
+      "color": "#95541e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 72,
+      "type": "GetNode [Eclipse]",
+      "pos": [
+        2761,
+        1271
+      ],
+      "size": [
+        253,
+        64
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 25,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            48
+          ]
+        }
+      ],
+      "title": "Get_IMAGE_BATCH",
+      "properties": {
+        "Node name for S&R": "GetNode [Eclipse]"
+      },
+      "widgets_values": [
+        "IMAGE_BATCH"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 53,
+      "type": "0909a6f0-4eff-4f45-9bc6-fdb1d923457e",
+      "pos": [
+        2761,
+        1211
+      ],
+      "size": [
+        225,
+        186
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 62,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "start_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 49
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            50
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            51
+          ]
+        },
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            52
+          ]
+        },
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            53
+          ]
+        },
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            54
+          ]
+        },
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            55
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "previewExposures": []
+      },
+      "widgets_values": [
+        1
+      ],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 85,
+      "type": "Save Video Data [Eclipse]",
+      "pos": [
+        4281,
+        1171
+      ],
+      "size": [
+        449,
+        959
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 81,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 56
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 57
+        },
+        {
+          "name": "pipe_opt",
+          "shape": 7,
+          "type": "PIPE",
+          "link": 100
+        },
+        {
+          "name": "fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fps"
+          },
+          "link": 58
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": 59
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "116c15d045bfc049ae4d56296007cd00265c490b",
+        "Node name for S&R": "Save Video Data [Eclipse]"
+      },
+      "widgets_values": [
+        "embed_workflow,save_gen_data,trim",
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        24,
+        "video/ComfyUI_Eclipse",
+        "mp4",
+        "h264",
+        19,
+        "veryfast",
+        "shortest",
+        50,
+        8,
+        "ncc",
+        false
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default",
+      "widgets_values_named": {
+        "features": "embed_workflow,save_gen_data,trim",
+        "embed_workflow": true,
+        "save_generation_data": true,
+        "remove_prompts": false,
+        "save_workflow_as_json": false,
+        "add_loras_to_prompt": false,
+        "enable_trim": true,
+        "fps": 24,
+        "filename_prefix": "video/ComfyUI_Eclipse",
+        "format": "mp4",
+        "codec": "h264",
+        "crf": 19,
+        "preset": "veryfast",
+        "trim_mode": "shortest",
+        "loop_search_pct": 50,
+        "loop_blend_frames": 8,
+        "loop_metric": "ncc",
+        "loop_trim_start": false
+      }
+    },
+    {
+      "id": 112,
+      "type": "VAEDecode",
+      "pos": [
+        4021,
+        1321
+      ],
+      "size": [
+        225,
+        54
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 69,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 60
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 70
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            61
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "VAEDecode",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 84,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        3991,
+        1171
+      ],
+      "size": [
+        279,
+        639
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 68
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 69
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 66
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 67
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 64
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            60
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1",
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 87,
+      "type": "b3f4e90f-8c3d-49f0-9ac3-24578e16ce5e",
+      "pos": [
+        4021,
+        1221
+      ],
+      "size": [
+        225,
+        226
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "previous_frames",
+          "type": "IMAGE",
+          "link": 62
+        }
+      ],
+      "outputs": [
+        {
+          "name": "keep_frames",
+          "type": "INT",
+          "links": [
+            63
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            64
+          ]
+        },
+        {
+          "name": "trim_image",
+          "type": "INT",
+          "links": [
+            65
+          ]
+        },
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            66
+          ]
+        },
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            67
+          ]
+        },
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            68
+          ]
+        },
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            69
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            70
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "previewExposures": []
+      },
+      "widgets_values": [
+        1
+      ],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 19,
+      "type": "Smart Folder [Eclipse]",
+      "pos": [
+        1321,
+        1171
+      ],
+      "size": [
+        280,
+        450
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 26,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE",
+          "links": [
+            71
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "9dacf553d57f3a5ae3e4dc361691280639da7a8c",
+        "Node name for S&R": "Smart Folder [Eclipse]"
+      },
+      "widgets_values": [
+        [
+          "video",
+          "date_time"
+        ],
+        "Video Mode",
+        "images",
+        "video",
+        true,
+        "%Y-%m-%d",
+        "postfix",
+        false,
+        "batch_{}",
+        1,
+        "fixed",
+        false,
+        "832x1216 (2:3 XL/SD3/Flux/HiDream)",
+        832,
+        1216,
+        "SD3 / Flux / Wan / HunyuanVideo",
+        "720x1280 (HD)",
+        480,
+        832,
+        25,
+        0,
+        81,
+        2,
+        9,
+        0,
+        0,
+        "fixed",
+        1,
+        1,
+        false,
+        0,
+        "",
+        "",
+        ""
+      ],
+      "color": "#2a3c5a",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 21,
+      "type": "Pipe Out Smart Folder [Eclipse]",
+      "pos": [
+        1351,
+        1211
+      ],
+      "size": [
+        225,
+        274
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE",
+          "link": 71
+        }
+      ],
+      "outputs": [
+        {
+          "name": "path",
+          "type": "STRING",
+          "links": [
+            72
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            75
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            76
+          ]
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "frame_rate",
+          "type": "FLOAT",
+          "links": [
+            77
+          ]
+        },
+        {
+          "name": "frame_load_cap",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "context_length",
+          "type": "INT",
+          "links": [
+            73
+          ]
+        },
+        {
+          "name": "overlap",
+          "type": "INT",
+          "links": [
+            74
+          ]
+        },
+        {
+          "name": "skip_first_frames",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "select_every_nth",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "loop_count",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "9dacf553d57f3a5ae3e4dc361691280639da7a8c",
+        "Node name for S&R": "Pipe Out Smart Folder [Eclipse]"
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 22,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1351,
+        1241
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 63,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 72
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Set_path_ls",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "path_ls"
+      },
+      "widgets_values": [
+        "path_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 30,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1351,
+        1361
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 67,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "link": 73
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Set_context_lenght_ls",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "context_lenght_ls"
+      },
+      "widgets_values": [
+        "context_lenght_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 31,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1351,
+        1391
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 68,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "link": 74
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Set_overlap_ls",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "overlap_ls"
+      },
+      "widgets_values": [
+        "overlap_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 24,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1351,
+        1271
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 64,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "link": 75
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Set_width_ls",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "width_ls"
+      },
+      "widgets_values": [
+        "width_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 26,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1351,
+        1301
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 65,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "link": 76
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Set_height_ls",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "height_ls"
+      },
+      "widgets_values": [
+        "height_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 28,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1351,
+        1331
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 66,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "link": 77
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "title": "Set_frame_rate_ls",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "frame_rate_ls"
+      },
+      "widgets_values": [
+        "frame_rate_ls"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 82,
+      "type": "Show Any [Eclipse]",
+      "pos": [
+        2731,
+        1911
+      ],
+      "size": [
+        279,
+        89
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 84,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 78
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "shape": 6,
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Loop done (Starts at 0)",
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "98495055377478ecd57451165f8c257e385bf472",
+        "Node name for S&R": "Show Any [Eclipse]"
+      },
+      "widgets_values": [],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 83,
+      "type": "Show Any [Eclipse]",
+      "pos": [
+        2731,
+        2041
+      ],
+      "size": [
+        280,
+        90
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 79
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "shape": 6,
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Calculated Loops",
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "98495055377478ecd57451165f8c257e385bf472",
+        "Node name for S&R": "Show Any [Eclipse]"
+      },
+      "widgets_values": [],
+      "color": "#4e4e4e",
+      "bgcolor": "#3a3a3a",
+      "shape": "default"
+    },
+    {
+      "id": 11,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1491
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 50,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 80
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Set_model_name",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "model_name"
+      },
+      "widgets_values": [
+        "model_name"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 12,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1521
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 51,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 81
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Set_vae_name",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "vae_name"
+      },
+      "widgets_values": [
+        "vae_name"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 13,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1551
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 52,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 82
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Set_lora_names",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "lora_names"
+      },
+      "widgets_values": [
+        "lora_names"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 6,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1341
+      ],
+      "size": [
+        210,
+        70
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 46,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "link": 83
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Set_steps",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "steps"
+      },
+      "widgets_values": [
+        "steps"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 7,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1371
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 47,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "link": 84
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "title": "Set_cfg",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "cfg"
+      },
+      "widgets_values": [
+        "cfg"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 8,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1401
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 48,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "link": 85
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Set_sampler_name",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "sampler_name"
+      },
+      "widgets_values": [
+        "sampler_name"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 9,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1431
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 49,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "link": 86
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Set_scheduler",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "scheduler"
+      },
+      "widgets_values": [
+        "scheduler"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 10,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        931,
+        1461
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 53,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "link": 87
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Set_seed",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "seed"
+      },
+      "widgets_values": [
+        "seed"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 111,
+      "type": "Generation Data [Eclipse]",
+      "pos": [
+        4311,
+        1311
+      ],
+      "size": [
+        225,
+        314
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "shape": 7,
+          "type": "PIPE",
+          "link": null
+        },
+        {
+          "name": "steps",
+          "shape": 7,
+          "type": "INT",
+          "link": 88
+        },
+        {
+          "name": "cfg",
+          "shape": 7,
+          "type": "FLOAT",
+          "link": 89
+        },
+        {
+          "name": "sampler_name",
+          "shape": 7,
+          "type": "STRING",
+          "link": 90
+        },
+        {
+          "name": "scheduler",
+          "shape": 7,
+          "type": "STRING",
+          "link": 91
+        },
+        {
+          "name": "denoise",
+          "shape": 7,
+          "type": "FLOAT",
+          "link": null
+        },
+        {
+          "name": "clip_skip",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "name": "seed",
+          "shape": 7,
+          "type": "INT",
+          "link": 92
+        },
+        {
+          "name": "width",
+          "shape": 7,
+          "type": "INT",
+          "link": 98
+        },
+        {
+          "name": "height",
+          "shape": 7,
+          "type": "INT",
+          "link": 99
+        },
+        {
+          "name": "text_pos",
+          "shape": 7,
+          "type": "STRING",
+          "link": 94
+        },
+        {
+          "name": "text_neg",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "model_name",
+          "shape": 7,
+          "type": "STRING",
+          "link": 95
+        },
+        {
+          "name": "vae_name",
+          "shape": 7,
+          "type": "STRING",
+          "link": 96
+        },
+        {
+          "name": "lora_names",
+          "shape": 7,
+          "type": "STRING",
+          "link": 97
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE",
+          "links": [
+            100
+          ]
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "sampler_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "scheduler",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "clip_skip",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "text_pos",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "text_neg",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "model_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "vae_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "lora_names",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Eclipse",
+        "ver": "98495055377478ecd57451165f8c257e385bf472",
+        "Node name for S&R": "Generation Data [Eclipse]"
+      },
+      "widgets_values": [],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 110,
+      "type": "GetAllActiveNode",
+      "pos": [
+        4311,
+        1281
+      ],
+      "size": [
+        265,
+        598
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 27,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "steps",
+          "type": "INT",
+          "links": [
+            88
+          ]
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": [
+            89
+          ]
+        },
+        {
+          "name": "sampler_name",
+          "type": "*",
+          "links": [
+            90
+          ]
+        },
+        {
+          "name": "scheduler",
+          "type": "*",
+          "links": [
+            91
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            92
+          ]
+        },
+        {
+          "name": "width_ls",
+          "type": "INT",
+          "links": [
+            98
+          ]
+        },
+        {
+          "name": "height_ls",
+          "type": "INT",
+          "links": [
+            99
+          ]
+        },
+        {
+          "name": "pos_prompt",
+          "type": "STRING",
+          "links": [
+            94
+          ]
+        },
+        {
+          "name": "model_name",
+          "type": "STRING",
+          "links": [
+            95
+          ]
+        },
+        {
+          "name": "vae_name",
+          "type": "STRING",
+          "links": [
+            96
+          ]
+        },
+        {
+          "name": "lora_names",
+          "type": "STRING",
+          "links": [
+            97
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "showNav": true,
+        "varCount": 11
+      },
+      "widgets_values": [
+        "*",
+        "11",
+        "steps",
+        "cfg",
+        "sampler_name",
+        "scheduler",
+        "seed",
+        "width_ls",
+        "height_ls",
+        "pos_prompt",
+        "model_name",
+        "vae_name",
+        "lora_names"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    },
+    {
+      "id": 37,
+      "type": "SetNode [Eclipse]",
+      "pos": [
+        1641,
+        1651
+      ],
+      "size": [
+        210,
+        34
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 93
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Set_pos_prompt",
+      "properties": {
+        "Node name for S&R": "SetNode [Eclipse]",
+        "previousName": "pos_prompt"
+      },
+      "widgets_values": [
+        "pos_prompt"
+      ],
+      "color": "#000000",
+      "bgcolor": "#000000",
+      "shape": "default"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "PIPE"
+    ],
+    [
+      2,
+      2,
+      1,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      2,
+      2,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      4,
+      2,
+      3,
+      5,
+      0,
+      "VAE"
+    ],
+    [
+      5,
+      14,
+      0,
+      15,
+      0,
+      "MODEL_PATCH"
+    ],
+    [
+      6,
+      16,
+      0,
+      121,
+      0,
+      "AUDIO_ENCODER"
+    ],
+    [
+      7,
+      17,
+      0,
+      121,
+      1,
+      "AUDIO"
+    ],
+    [
+      8,
+      121,
+      0,
+      18,
+      0,
+      "AUDIO_ENCODER_OUTPUT"
+    ],
+    [
+      9,
+      33,
+      0,
+      41,
+      0,
+      "CLIP"
+    ],
+    [
+      10,
+      32,
+      0,
+      41,
+      1,
+      "STRING"
+    ],
+    [
+      11,
+      41,
+      0,
+      35,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      41,
+      0,
+      34,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      35,
+      0,
+      36,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      14,
+      20,
+      0,
+      29,
+      0,
+      "AUDIO"
+    ],
+    [
+      15,
+      80,
+      2,
+      79,
+      0,
+      "*"
+    ],
+    [
+      16,
+      80,
+      0,
+      78,
+      0,
+      "FLOW_CONTROL"
+    ],
+    [
+      17,
+      52,
+      0,
+      80,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      76,
+      0,
+      80,
+      1,
+      "*"
+    ],
+    [
+      19,
+      75,
+      0,
+      52,
+      0,
+      "IMAGE"
+    ],
+    [
+      20,
+      70,
+      0,
+      52,
+      1,
+      "AUDIO"
+    ],
+    [
+      21,
+      71,
+      0,
+      52,
+      2,
+      "FLOAT"
+    ],
+    [
+      22,
+      117,
+      0,
+      116,
+      0,
+      "STRING"
+    ],
+    [
+      23,
+      109,
+      0,
+      114,
+      0,
+      "*"
+    ],
+    [
+      24,
+      113,
+      0,
+      114,
+      1,
+      "IMAGE"
+    ],
+    [
+      25,
+      118,
+      0,
+      115,
+      0,
+      "FLOW_CONTROL"
+    ],
+    [
+      26,
+      120,
+      0,
+      115,
+      1,
+      "IMAGE"
+    ],
+    [
+      27,
+      114,
+      0,
+      120,
+      0,
+      "IMAGE"
+    ],
+    [
+      28,
+      86,
+      0,
+      120,
+      1,
+      "AUDIO"
+    ],
+    [
+      29,
+      108,
+      0,
+      120,
+      2,
+      "FLOAT"
+    ],
+    [
+      30,
+      80,
+      1,
+      77,
+      0,
+      "INT"
+    ],
+    [
+      31,
+      49,
+      0,
+      46,
+      0,
+      "INT"
+    ],
+    [
+      32,
+      50,
+      0,
+      46,
+      1,
+      "INT"
+    ],
+    [
+      33,
+      47,
+      0,
+      48,
+      0,
+      "IMAGE"
+    ],
+    [
+      34,
+      46,
+      0,
+      47,
+      0,
+      "IMAGE"
+    ],
+    [
+      35,
+      20,
+      0,
+      38,
+      0,
+      "AUDIO"
+    ],
+    [
+      36,
+      23,
+      0,
+      38,
+      3,
+      "FLOAT"
+    ],
+    [
+      37,
+      25,
+      0,
+      38,
+      4,
+      "INT"
+    ],
+    [
+      38,
+      27,
+      0,
+      38,
+      5,
+      "INT"
+    ],
+    [
+      39,
+      38,
+      0,
+      42,
+      0,
+      "WAN_LIPSYNC_PLAN"
+    ],
+    [
+      40,
+      38,
+      1,
+      43,
+      0,
+      "INT"
+    ],
+    [
+      41,
+      38,
+      4,
+      122,
+      0,
+      "STRING"
+    ],
+    [
+      42,
+      39,
+      0,
+      38,
+      1,
+      "IMAGE"
+    ],
+    [
+      43,
+      38,
+      3,
+      45,
+      0,
+      "INT"
+    ],
+    [
+      44,
+      74,
+      0,
+      75,
+      1,
+      "INT"
+    ],
+    [
+      45,
+      40,
+      0,
+      38,
+      2,
+      "AUDIO_ENCODER_OUTPUT"
+    ],
+    [
+      46,
+      81,
+      0,
+      75,
+      0,
+      "IMAGE"
+    ],
+    [
+      47,
+      51,
+      0,
+      81,
+      0,
+      "LATENT"
+    ],
+    [
+      48,
+      72,
+      0,
+      73,
+      0,
+      "IMAGE"
+    ],
+    [
+      49,
+      73,
+      0,
+      53,
+      0,
+      "IMAGE"
+    ],
+    [
+      50,
+      53,
+      0,
+      81,
+      1,
+      "VAE"
+    ],
+    [
+      51,
+      53,
+      1,
+      51,
+      4,
+      "LATENT"
+    ],
+    [
+      52,
+      53,
+      2,
+      51,
+      2,
+      "SAMPLER"
+    ],
+    [
+      53,
+      53,
+      3,
+      51,
+      0,
+      "NOISE"
+    ],
+    [
+      54,
+      53,
+      4,
+      51,
+      1,
+      "GUIDER"
+    ],
+    [
+      55,
+      53,
+      5,
+      51,
+      3,
+      "SIGMAS"
+    ],
+    [
+      56,
+      115,
+      0,
+      85,
+      0,
+      "IMAGE"
+    ],
+    [
+      57,
+      86,
+      0,
+      85,
+      1,
+      "AUDIO"
+    ],
+    [
+      58,
+      108,
+      0,
+      85,
+      3,
+      "FLOAT"
+    ],
+    [
+      59,
+      116,
+      0,
+      85,
+      4,
+      "STRING"
+    ],
+    [
+      60,
+      84,
+      0,
+      112,
+      0,
+      "LATENT"
+    ],
+    [
+      61,
+      112,
+      0,
+      113,
+      0,
+      "IMAGE"
+    ],
+    [
+      62,
+      109,
+      0,
+      87,
+      0,
+      "*"
+    ],
+    [
+      63,
+      87,
+      0,
+      113,
+      2,
+      "INT"
+    ],
+    [
+      64,
+      87,
+      1,
+      84,
+      4,
+      "LATENT"
+    ],
+    [
+      65,
+      87,
+      2,
+      113,
+      1,
+      "INT"
+    ],
+    [
+      66,
+      87,
+      3,
+      84,
+      2,
+      "SAMPLER"
+    ],
+    [
+      67,
+      87,
+      4,
+      84,
+      3,
+      "SIGMAS"
+    ],
+    [
+      68,
+      87,
+      5,
+      84,
+      0,
+      "NOISE"
+    ],
+    [
+      69,
+      87,
+      6,
+      84,
+      1,
+      "GUIDER"
+    ],
+    [
+      70,
+      87,
+      7,
+      112,
+      1,
+      "VAE"
+    ],
+    [
+      71,
+      19,
+      0,
+      21,
+      0,
+      "PIPE"
+    ],
+    [
+      72,
+      21,
+      0,
+      22,
+      0,
+      "STRING"
+    ],
+    [
+      73,
+      21,
+      7,
+      30,
+      0,
+      "INT"
+    ],
+    [
+      74,
+      21,
+      8,
+      31,
+      0,
+      "INT"
+    ],
+    [
+      75,
+      21,
+      1,
+      24,
+      0,
+      "INT"
+    ],
+    [
+      76,
+      21,
+      2,
+      26,
+      0,
+      "INT"
+    ],
+    [
+      77,
+      21,
+      5,
+      28,
+      0,
+      "FLOAT"
+    ],
+    [
+      78,
+      80,
+      1,
+      82,
+      0,
+      "INT"
+    ],
+    [
+      79,
+      76,
+      0,
+      83,
+      0,
+      "*"
+    ],
+    [
+      80,
+      2,
+      15,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      81,
+      2,
+      16,
+      12,
+      0,
+      "STRING"
+    ],
+    [
+      82,
+      2,
+      17,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      83,
+      2,
+      6,
+      6,
+      0,
+      "INT"
+    ],
+    [
+      84,
+      2,
+      7,
+      7,
+      0,
+      "FLOAT"
+    ],
+    [
+      85,
+      2,
+      8,
+      8,
+      0,
+      "*"
+    ],
+    [
+      86,
+      2,
+      9,
+      9,
+      0,
+      "*"
+    ],
+    [
+      87,
+      2,
+      18,
+      10,
+      0,
+      "INT"
+    ],
+    [
+      88,
+      110,
+      0,
+      111,
+      1,
+      "INT"
+    ],
+    [
+      89,
+      110,
+      1,
+      111,
+      2,
+      "FLOAT"
+    ],
+    [
+      90,
+      110,
+      2,
+      111,
+      3,
+      "STRING"
+    ],
+    [
+      91,
+      110,
+      3,
+      111,
+      4,
+      "STRING"
+    ],
+    [
+      92,
+      110,
+      4,
+      111,
+      7,
+      "INT"
+    ],
+    [
+      93,
+      32,
+      0,
+      37,
+      0,
+      "STRING"
+    ],
+    [
+      94,
+      110,
+      7,
+      111,
+      10,
+      "STRING"
+    ],
+    [
+      95,
+      110,
+      8,
+      111,
+      12,
+      "STRING"
+    ],
+    [
+      96,
+      110,
+      9,
+      111,
+      13,
+      "STRING"
+    ],
+    [
+      97,
+      110,
+      10,
+      111,
+      14,
+      "STRING"
+    ],
+    [
+      98,
+      110,
+      5,
+      111,
+      8,
+      "INT"
+    ],
+    [
+      99,
+      110,
+      6,
+      111,
+      9,
+      "INT"
+    ],
+    [
+      100,
+      111,
+      0,
+      85,
+      2,
+      "PIPE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Model Loader (LipSync)",
+      "bounding": [
+        891,
+        1101,
+        408,
+        1038
+      ],
+      "color": "#505050",
+      "flags": {}
+    },
+    {
+      "id": 314,
+      "title": "Video Settings",
+      "bounding": [
+        1311,
+        1101,
+        548,
+        1038
+      ],
+      "color": "#505050",
+      "flags": {}
+    },
+    {
+      "id": 315,
+      "title": "Base Sampling",
+      "bounding": [
+        2721,
+        1101,
+        758,
+        1038
+      ],
+      "color": "#505050",
+      "flags": {}
+    },
+    {
+      "id": 316,
+      "title": "Video Extend (Loop)",
+      "bounding": [
+        3981,
+        1101,
+        758,
+        1038
+      ],
+      "color": "#505050",
+      "flags": {}
+    },
+    {
+      "id": 317,
+      "title": "Load Image(s)",
+      "bounding": [
+        1871,
+        1101,
+        838,
+        1038
+      ],
+      "color": "#505050",
+      "flags": {}
+    }
+  ],
+  "definitions": {
+    "subgraphs": [
+      {
+        "id": "0909a6f0-4eff-4f45-9bc6-fdb1d923457e",
+        "version": 1,
+        "state": {
+          "lastGroupId": 317,
+          "lastNodeId": 122,
+          "lastLinkId": 161,
+          "lastRerouteId": 0
+        },
+        "revision": 1,
+        "config": {},
+        "name": "Basic Sampler",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            2227.5,
+            -70.5,
+            128,
+            88
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            3295.5,
+            -110.5,
+            128,
+            168
+          ]
+        },
+        "inputs": [
+          {
+            "id": "e204652e-4b27-4081-9d9e-e989a221bcbc",
+            "name": "start_image",
+            "type": "IMAGE",
+            "linkIds": [
+              115
+            ],
+            "localized_name": "start_image",
+            "shape": 7,
+            "pos": [
+              2331.5,
+              -46.5
+            ]
+          },
+          {
+            "id": "a0b9bdb7-50e8-48ad-a709-e5ceb60c208b",
+            "name": "audio_scale",
+            "type": "FLOAT",
+            "linkIds": [
+              122
+            ],
+            "pos": [
+              2331.5,
+              -26.5
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "id": "8638af44-53d5-4514-9fea-5ad716b64257",
+            "name": "VAE",
+            "type": "VAE",
+            "linkIds": [
+              116
+            ],
+            "pos": [
+              3319.5,
+              -86.5
+            ]
+          },
+          {
+            "id": "801a70b1-e544-4cf9-80d8-2da5e6a62441",
+            "name": "latent",
+            "type": "LATENT",
+            "linkIds": [
+              117
+            ],
+            "localized_name": "latent",
+            "pos": [
+              3319.5,
+              -66.5
+            ]
+          },
+          {
+            "id": "70cb4d7c-5c58-4a33-80c2-8a18d5c23b55",
+            "name": "SAMPLER",
+            "type": "SAMPLER",
+            "linkIds": [
+              118
+            ],
+            "localized_name": "SAMPLER",
+            "pos": [
+              3319.5,
+              -46.5
+            ]
+          },
+          {
+            "id": "f6dac6e1-f581-4e8b-bbfe-f758d34cac7e",
+            "name": "NOISE",
+            "type": "NOISE",
+            "linkIds": [
+              119
+            ],
+            "localized_name": "NOISE",
+            "pos": [
+              3319.5,
+              -26.5
+            ]
+          },
+          {
+            "id": "ea9f6616-51ed-48e2-b2a1-0d94a2cf4cf0",
+            "name": "GUIDER",
+            "type": "GUIDER",
+            "linkIds": [
+              120
+            ],
+            "localized_name": "GUIDER",
+            "pos": [
+              3319.5,
+              -6.5
+            ]
+          },
+          {
+            "id": "f2f1598f-1f68-44bc-a447-43e07045888d",
+            "name": "SIGMAS",
+            "type": "SIGMAS",
+            "linkIds": [
+              121
+            ],
+            "localized_name": "SIGMAS",
+            "pos": [
+              3319.5,
+              13.5
+            ]
+          }
+        ],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 54,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              -280
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 0,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "MODEL",
+                "type": "MODEL",
+                "links": [
+                  101
+                ]
+              }
+            ],
+            "title": "Get_MODEL_LS",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "MODEL_LS"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 57,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              -250
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 1,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "MODEL_PATCH",
+                "type": "MODEL_PATCH",
+                "links": [
+                  102
+                ]
+              }
+            ],
+            "title": "Get_MODEL_PATCH_LS",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "MODEL_PATCH_LS"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 58,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              -220
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 2,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "CONDITIONING",
+                "type": "CONDITIONING",
+                "links": [
+                  103
+                ]
+              }
+            ],
+            "title": "Get_pos_cond_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "pos_cond_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 59,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              -190
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 3,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "CONDITIONING",
+                "type": "CONDITIONING",
+                "links": [
+                  104
+                ]
+              }
+            ],
+            "title": "Get_neg_cond_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "neg_cond_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 60,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              -160
+            ],
+            "size": [
+              225,
+              63
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 4,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "VAE",
+                "type": "VAE",
+                "links": [
+                  105,
+                  116
+                ]
+              }
+            ],
+            "title": "Get_VAE_LS",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "VAE_LS"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 55,
+            "type": "WanInfiniteTalkToVideo",
+            "pos": [
+              2666,
+              -280
+            ],
+            "size": [
+              279,
+              338
+            ],
+            "flags": {
+              "collapsed": false
+            },
+            "order": 13,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "MODEL",
+                "link": 101
+              },
+              {
+                "localized_name": "model_patch",
+                "name": "model_patch",
+                "type": "MODEL_PATCH",
+                "link": 102
+              },
+              {
+                "localized_name": "positive",
+                "name": "positive",
+                "type": "CONDITIONING",
+                "link": 103
+              },
+              {
+                "localized_name": "negative",
+                "name": "negative",
+                "type": "CONDITIONING",
+                "link": 104
+              },
+              {
+                "localized_name": "vae",
+                "name": "vae",
+                "type": "VAE",
+                "link": 105
+              },
+              {
+                "localized_name": "audio_encoder_output_1",
+                "name": "audio_encoder_output_1",
+                "type": "AUDIO_ENCODER_OUTPUT",
+                "link": 106
+              },
+              {
+                "localized_name": "clip_vision_output",
+                "name": "clip_vision_output",
+                "shape": 7,
+                "type": "CLIP_VISION_OUTPUT",
+                "link": null
+              },
+              {
+                "localized_name": "start_image",
+                "name": "start_image",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 115
+              },
+              {
+                "localized_name": "previous_frames",
+                "name": "previous_frames",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": null
+              },
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "widget": {
+                  "name": "width"
+                },
+                "link": 107
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "widget": {
+                  "name": "height"
+                },
+                "link": 108
+              },
+              {
+                "localized_name": "length",
+                "name": "length",
+                "type": "INT",
+                "widget": {
+                  "name": "length"
+                },
+                "link": 109
+              },
+              {
+                "localized_name": "motion_frame_count",
+                "name": "motion_frame_count",
+                "type": "INT",
+                "widget": {
+                  "name": "motion_frame_count"
+                },
+                "link": 110
+              },
+              {
+                "localized_name": "audio_scale",
+                "name": "audio_scale",
+                "type": "FLOAT",
+                "widget": {
+                  "name": "audio_scale"
+                },
+                "link": 122
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "MODEL",
+                "links": [
+                  111,
+                  114
+                ]
+              },
+              {
+                "localized_name": "positive",
+                "name": "positive",
+                "type": "CONDITIONING",
+                "links": [
+                  112
+                ]
+              },
+              {
+                "localized_name": "negative",
+                "name": "negative",
+                "type": "CONDITIONING",
+                "links": [
+                  113
+                ]
+              },
+              {
+                "localized_name": "latent",
+                "name": "latent",
+                "type": "LATENT",
+                "links": [
+                  117
+                ]
+              },
+              {
+                "localized_name": "trim_image",
+                "name": "trim_image",
+                "type": "INT",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.5.1",
+              "Node name for S&R": "WanInfiniteTalkToVideo",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              "single_speaker",
+              832,
+              480,
+              81,
+              9,
+              1
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 61,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              -130
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 5,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "AUDIO_ENCODER_OUTPUT",
+                "type": "AUDIO_ENCODER_OUTPUT",
+                "links": [
+                  106
+                ]
+              }
+            ],
+            "title": "Get_AUDIO_ENC_OUT_LS",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "AUDIO_ENC_OUT_LS"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 63,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              -70
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 6,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  107
+                ]
+              }
+            ],
+            "title": "Get_width_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "width_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 64,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              -40
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 7,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  108
+                ]
+              }
+            ],
+            "title": "Get_height_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "height_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 65,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              -10
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 8,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  109
+                ]
+              }
+            ],
+            "title": "Get_context_lenght_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "context_lenght_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 66,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              2416,
+              20
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 9,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  110
+                ]
+              }
+            ],
+            "title": "Get_overlap_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "overlap_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 67,
+            "type": "KSamplerSelect",
+            "pos": [
+              2966,
+              40
+            ],
+            "size": [
+              270,
+              62
+            ],
+            "flags": {},
+            "order": 11,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "sampler_name",
+                "name": "sampler_name",
+                "type": "COMBO",
+                "widget": {
+                  "name": "sampler_name"
+                },
+                "link": 125
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "SAMPLER",
+                "name": "SAMPLER",
+                "type": "SAMPLER",
+                "links": [
+                  118
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.3.67",
+              "Node name for S&R": "KSamplerSelect",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              "euler"
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 62,
+            "type": "RandomNoise",
+            "pos": [
+              2966,
+              -100
+            ],
+            "size": [
+              270,
+              82
+            ],
+            "flags": {},
+            "order": 12,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "noise_seed",
+                "name": "noise_seed",
+                "type": "INT",
+                "widget": {
+                  "name": "noise_seed"
+                },
+                "link": 127
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "NOISE",
+                "name": "NOISE",
+                "type": "NOISE",
+                "links": [
+                  119
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.3.67",
+              "Node name for S&R": "RandomNoise",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              264423375967408,
+              "fixed"
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 56,
+            "type": "CFGGuider",
+            "pos": [
+              2966,
+              -280
+            ],
+            "size": [
+              270,
+              102
+            ],
+            "flags": {
+              "collapsed": false
+            },
+            "order": 14,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "MODEL",
+                "link": 111
+              },
+              {
+                "localized_name": "positive",
+                "name": "positive",
+                "type": "CONDITIONING",
+                "link": 112
+              },
+              {
+                "localized_name": "negative",
+                "name": "negative",
+                "type": "CONDITIONING",
+                "link": 113
+              },
+              {
+                "localized_name": "cfg",
+                "name": "cfg",
+                "type": "FLOAT",
+                "widget": {
+                  "name": "cfg"
+                },
+                "link": 123
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "GUIDER",
+                "name": "GUIDER",
+                "type": "GUIDER",
+                "links": [
+                  120
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.3.67",
+              "Node name for S&R": "CFGGuider",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              1
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 69,
+            "type": "BasicScheduler",
+            "pos": [
+              2966,
+              140
+            ],
+            "size": [
+              270,
+              118
+            ],
+            "flags": {},
+            "order": 15,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "MODEL",
+                "link": 114
+              },
+              {
+                "localized_name": "scheduler",
+                "name": "scheduler",
+                "type": "COMBO",
+                "widget": {
+                  "name": "scheduler"
+                },
+                "link": 126
+              },
+              {
+                "localized_name": "steps",
+                "name": "steps",
+                "type": "INT",
+                "widget": {
+                  "name": "steps"
+                },
+                "link": 124
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "SIGMAS",
+                "name": "SIGMAS",
+                "type": "SIGMAS",
+                "links": [
+                  121
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.3.57",
+              "Node name for S&R": "BasicScheduler",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              "normal",
+              4,
+              1
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 68,
+            "type": "GetAllActiveNode",
+            "pos": [
+              2421,
+              71
+            ],
+            "size": [
+              229,
+              282
+            ],
+            "flags": {},
+            "order": 10,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "steps",
+                "type": "INT",
+                "links": [
+                  124
+                ]
+              },
+              {
+                "name": "cfg",
+                "type": "FLOAT",
+                "links": [
+                  123
+                ]
+              },
+              {
+                "name": "sampler_name",
+                "type": "*",
+                "links": [
+                  125
+                ]
+              },
+              {
+                "name": "scheduler",
+                "type": "*",
+                "links": [
+                  126
+                ]
+              },
+              {
+                "name": "seed",
+                "type": "INT",
+                "links": [
+                  127
+                ]
+              }
+            ],
+            "properties": {
+              "showOutputText": true,
+              "showNav": true,
+              "varCount": 5
+            },
+            "widgets_values": [
+              "*",
+              "5",
+              "steps",
+              "cfg",
+              "sampler_name",
+              "scheduler",
+              "seed"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          }
+        ],
+        "groups": [],
+        "links": [
+          {
+            "id": 101,
+            "origin_id": 54,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 0,
+            "type": "MODEL"
+          },
+          {
+            "id": 102,
+            "origin_id": 57,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 1,
+            "type": "MODEL_PATCH"
+          },
+          {
+            "id": 103,
+            "origin_id": 58,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 2,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 104,
+            "origin_id": 59,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 3,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 105,
+            "origin_id": 60,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 4,
+            "type": "VAE"
+          },
+          {
+            "id": 106,
+            "origin_id": 61,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 5,
+            "type": "AUDIO_ENCODER_OUTPUT"
+          },
+          {
+            "id": 107,
+            "origin_id": 63,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 9,
+            "type": "INT"
+          },
+          {
+            "id": 108,
+            "origin_id": 64,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 10,
+            "type": "INT"
+          },
+          {
+            "id": 109,
+            "origin_id": 65,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 11,
+            "type": "INT"
+          },
+          {
+            "id": 110,
+            "origin_id": 66,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 12,
+            "type": "INT"
+          },
+          {
+            "id": 111,
+            "origin_id": 55,
+            "origin_slot": 0,
+            "target_id": 56,
+            "target_slot": 0,
+            "type": "MODEL"
+          },
+          {
+            "id": 112,
+            "origin_id": 55,
+            "origin_slot": 1,
+            "target_id": 56,
+            "target_slot": 1,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 113,
+            "origin_id": 55,
+            "origin_slot": 2,
+            "target_id": 56,
+            "target_slot": 2,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 114,
+            "origin_id": 55,
+            "origin_slot": 0,
+            "target_id": 69,
+            "target_slot": 0,
+            "type": "MODEL"
+          },
+          {
+            "id": 115,
+            "origin_id": -10,
+            "origin_slot": 0,
+            "target_id": 55,
+            "target_slot": 7,
+            "type": "IMAGE"
+          },
+          {
+            "id": 116,
+            "origin_id": 60,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 0,
+            "type": "VAE"
+          },
+          {
+            "id": 117,
+            "origin_id": 55,
+            "origin_slot": 3,
+            "target_id": -20,
+            "target_slot": 1,
+            "type": "LATENT"
+          },
+          {
+            "id": 118,
+            "origin_id": 67,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 2,
+            "type": "SAMPLER"
+          },
+          {
+            "id": 119,
+            "origin_id": 62,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 3,
+            "type": "NOISE"
+          },
+          {
+            "id": 120,
+            "origin_id": 56,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "GUIDER"
+          },
+          {
+            "id": 121,
+            "origin_id": 69,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 5,
+            "type": "SIGMAS"
+          },
+          {
+            "id": 122,
+            "origin_id": -10,
+            "origin_slot": 1,
+            "target_id": 55,
+            "target_slot": 13,
+            "type": "FLOAT"
+          },
+          {
+            "id": 123,
+            "origin_id": 68,
+            "origin_slot": 1,
+            "target_id": 56,
+            "target_slot": 3,
+            "type": "FLOAT"
+          },
+          {
+            "id": 124,
+            "origin_id": 68,
+            "origin_slot": 0,
+            "target_id": 69,
+            "target_slot": 2,
+            "type": "INT"
+          },
+          {
+            "id": 125,
+            "origin_id": 68,
+            "origin_slot": 2,
+            "target_id": 67,
+            "target_slot": 0,
+            "type": "COMBO"
+          },
+          {
+            "id": 126,
+            "origin_id": 68,
+            "origin_slot": 3,
+            "target_id": 69,
+            "target_slot": 1,
+            "type": "COMBO"
+          },
+          {
+            "id": 127,
+            "origin_id": 68,
+            "origin_slot": 4,
+            "target_id": 62,
+            "target_slot": 0,
+            "type": "INT"
+          }
+        ],
+        "extra": {}
+      },
+      {
+        "id": "b3f4e90f-8c3d-49f0-9ac3-24578e16ce5e",
+        "version": 1,
+        "state": {
+          "lastGroupId": 317,
+          "lastNodeId": 122,
+          "lastLinkId": 161,
+          "lastRerouteId": 0
+        },
+        "revision": 1,
+        "config": {},
+        "name": "Extend Sampler",
+        "inputNode": {
+          "id": -10,
+          "bounding": [
+            4084.28515625,
+            237,
+            141.71484375,
+            88
+          ]
+        },
+        "outputNode": {
+          "id": -20,
+          "bounding": [
+            5526.5,
+            177,
+            128,
+            208
+          ]
+        },
+        "inputs": [
+          {
+            "id": "9595724f-92c7-4449-92ef-1b15f7414543",
+            "name": "previous_frames",
+            "type": "IMAGE",
+            "linkIds": [
+              147
+            ],
+            "localized_name": "previous_frames",
+            "pos": [
+              4202,
+              261
+            ]
+          },
+          {
+            "id": "bcc9bf8e-fe30-4127-9028-eb8104d88104",
+            "name": "audio_scale",
+            "type": "FLOAT",
+            "linkIds": [
+              156
+            ],
+            "pos": [
+              4202,
+              281
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "id": "9c169e4b-ad25-42fb-bfc5-863a398f9afb",
+            "name": "keep_frames",
+            "type": "INT",
+            "linkIds": [
+              148
+            ],
+            "localized_name": "keep_frames",
+            "pos": [
+              5550.5,
+              201
+            ]
+          },
+          {
+            "id": "f883213e-ca83-4c42-89fc-2f21a7ef48a9",
+            "name": "latent",
+            "type": "LATENT",
+            "linkIds": [
+              149
+            ],
+            "localized_name": "latent",
+            "pos": [
+              5550.5,
+              221
+            ]
+          },
+          {
+            "id": "120da8c0-333c-41aa-b7cb-09546caedf71",
+            "name": "trim_image",
+            "type": "INT",
+            "linkIds": [
+              150
+            ],
+            "localized_name": "trim_image",
+            "pos": [
+              5550.5,
+              241
+            ]
+          },
+          {
+            "id": "3da42bfd-d426-4a53-ace3-b92dd3f54e32",
+            "name": "SAMPLER",
+            "type": "SAMPLER",
+            "linkIds": [
+              151
+            ],
+            "localized_name": "SAMPLER",
+            "pos": [
+              5550.5,
+              261
+            ]
+          },
+          {
+            "id": "62ea5b51-da38-46cb-8623-933fb891ad31",
+            "name": "SIGMAS",
+            "type": "SIGMAS",
+            "linkIds": [
+              152
+            ],
+            "localized_name": "SIGMAS",
+            "pos": [
+              5550.5,
+              281
+            ]
+          },
+          {
+            "id": "61005c53-eff2-43a2-8885-fca56c26740a",
+            "name": "NOISE",
+            "type": "NOISE",
+            "linkIds": [
+              153
+            ],
+            "localized_name": "NOISE",
+            "pos": [
+              5550.5,
+              301
+            ]
+          },
+          {
+            "id": "29fdf359-d7de-4b3c-bfe0-baa5d026a1c8",
+            "name": "GUIDER",
+            "type": "GUIDER",
+            "linkIds": [
+              154
+            ],
+            "localized_name": "GUIDER",
+            "pos": [
+              5550.5,
+              321
+            ]
+          },
+          {
+            "id": "88b71e9e-cb25-474b-96f0-6592c7225ab5",
+            "name": "VAE",
+            "type": "VAE",
+            "linkIds": [
+              155
+            ],
+            "pos": [
+              5550.5,
+              341
+            ]
+          }
+        ],
+        "widgets": [],
+        "nodes": [
+          {
+            "id": 88,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4281,
+              -69
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 0,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "AUDIO_ENCODER_OUTPUT",
+                "type": "AUDIO_ENCODER_OUTPUT",
+                "links": [
+                  136
+                ]
+              }
+            ],
+            "title": "Get_AUDIO_ENC_OUT_LS",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "AUDIO_ENC_OUT_LS"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 91,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4281,
+              -19
+            ],
+            "size": [
+              225,
+              62
+            ],
+            "flags": {
+              "collapsed": false
+            },
+            "order": 1,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "WAN_LIPSYNC_PLAN",
+                "type": "WAN_LIPSYNC_PLAN",
+                "links": [
+                  128
+                ]
+              }
+            ],
+            "title": "Get_WAN_LIPSYNC_PLAN",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "WAN_LIPSYNC_PLAN"
+            ],
+            "color": "#95541e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 93,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4281,
+              91
+            ],
+            "size": [
+              229,
+              62
+            ],
+            "flags": {
+              "collapsed": false
+            },
+            "order": 2,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  129
+                ]
+              }
+            ],
+            "title": "Get_IMAGE_BATCH",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "IMAGE_BATCH"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 94,
+            "type": "WAN LipSync Plan Step [Eclipse]",
+            "pos": [
+              4551,
+              91
+            ],
+            "size": [
+              270,
+              130
+            ],
+            "flags": {},
+            "order": 18,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "plan",
+                "name": "plan",
+                "type": "WAN_LIPSYNC_PLAN",
+                "link": 128
+              },
+              {
+                "localized_name": "image_batch",
+                "name": "image_batch",
+                "type": "IMAGE",
+                "link": 129
+              },
+              {
+                "localized_name": "previous_frames",
+                "name": "previous_frames",
+                "type": "IMAGE",
+                "link": 147
+              },
+              {
+                "localized_name": "loop_index",
+                "name": "loop_index",
+                "type": "INT",
+                "widget": {
+                  "name": "loop_index"
+                },
+                "link": 130
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "start_image",
+                "name": "start_image",
+                "type": "IMAGE",
+                "links": [
+                  137
+                ]
+              },
+              {
+                "localized_name": "previous_frames",
+                "name": "previous_frames",
+                "type": "IMAGE",
+                "links": [
+                  138
+                ]
+              },
+              {
+                "localized_name": "keep_frames",
+                "name": "keep_frames",
+                "type": "INT",
+                "links": [
+                  148
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "ComfyUI_Eclipse",
+              "ver": "ad3e4dc0013ba0d9686b5404b91c9d61dadb4f06",
+              "Node name for S&R": "WAN LipSync Plan Step [Eclipse]"
+            },
+            "widgets_values": [
+              0,
+              "linear"
+            ],
+            "color": "#95541e",
+            "bgcolor": "#3a3a3a",
+            "shape": "default"
+          },
+          {
+            "id": 95,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4281,
+              201
+            ],
+            "size": [
+              229,
+              62
+            ],
+            "flags": {
+              "collapsed": false
+            },
+            "order": 3,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  130
+                ]
+              }
+            ],
+            "title": "Get_loop_index",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "loop_index"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 89,
+            "type": "WanInfiniteTalkToVideo",
+            "pos": [
+              4851,
+              -69
+            ],
+            "size": [
+              279,
+              338
+            ],
+            "flags": {
+              "collapsed": false
+            },
+            "order": 16,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "MODEL",
+                "link": 131
+              },
+              {
+                "localized_name": "model_patch",
+                "name": "model_patch",
+                "type": "MODEL_PATCH",
+                "link": 132
+              },
+              {
+                "localized_name": "positive",
+                "name": "positive",
+                "type": "CONDITIONING",
+                "link": 133
+              },
+              {
+                "localized_name": "negative",
+                "name": "negative",
+                "type": "CONDITIONING",
+                "link": 134
+              },
+              {
+                "localized_name": "vae",
+                "name": "vae",
+                "type": "VAE",
+                "link": 135
+              },
+              {
+                "localized_name": "audio_encoder_output_1",
+                "name": "audio_encoder_output_1",
+                "type": "AUDIO_ENCODER_OUTPUT",
+                "link": 136
+              },
+              {
+                "localized_name": "clip_vision_output",
+                "name": "clip_vision_output",
+                "shape": 7,
+                "type": "CLIP_VISION_OUTPUT",
+                "link": null
+              },
+              {
+                "localized_name": "start_image",
+                "name": "start_image",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 137
+              },
+              {
+                "localized_name": "previous_frames",
+                "name": "previous_frames",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": 138
+              },
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "widget": {
+                  "name": "width"
+                },
+                "link": 139
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "widget": {
+                  "name": "height"
+                },
+                "link": 140
+              },
+              {
+                "localized_name": "length",
+                "name": "length",
+                "type": "INT",
+                "widget": {
+                  "name": "length"
+                },
+                "link": 141
+              },
+              {
+                "localized_name": "motion_frame_count",
+                "name": "motion_frame_count",
+                "type": "INT",
+                "widget": {
+                  "name": "motion_frame_count"
+                },
+                "link": 142
+              },
+              {
+                "localized_name": "audio_scale",
+                "name": "audio_scale",
+                "type": "FLOAT",
+                "widget": {
+                  "name": "audio_scale"
+                },
+                "link": 156
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "MODEL",
+                "links": [
+                  143,
+                  144
+                ]
+              },
+              {
+                "localized_name": "positive",
+                "name": "positive",
+                "type": "CONDITIONING",
+                "links": [
+                  145
+                ]
+              },
+              {
+                "localized_name": "negative",
+                "name": "negative",
+                "type": "CONDITIONING",
+                "links": [
+                  146
+                ]
+              },
+              {
+                "localized_name": "latent",
+                "name": "latent",
+                "type": "LATENT",
+                "links": [
+                  149
+                ]
+              },
+              {
+                "localized_name": "trim_image",
+                "name": "trim_image",
+                "type": "INT",
+                "links": [
+                  150
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.5.1",
+              "Node name for S&R": "WanInfiniteTalkToVideo",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              "single_speaker",
+              832,
+              480,
+              81,
+              9,
+              1
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 100,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4551,
+              351
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 4,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "MODEL_PATCH",
+                "type": "MODEL_PATCH",
+                "links": [
+                  132
+                ]
+              }
+            ],
+            "title": "Get_MODEL_PATCH_LS",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "MODEL_PATCH_LS"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 98,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4551,
+              321
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 5,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "MODEL",
+                "type": "MODEL",
+                "links": [
+                  131
+                ]
+              }
+            ],
+            "title": "Get_MODEL_LS",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "MODEL_LS"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 101,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4551,
+              381
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 6,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "CONDITIONING",
+                "type": "CONDITIONING",
+                "links": [
+                  133
+                ]
+              }
+            ],
+            "title": "Get_pos_cond_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "pos_cond_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 102,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4551,
+              411
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 7,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "CONDITIONING",
+                "type": "CONDITIONING",
+                "links": [
+                  134
+                ]
+              }
+            ],
+            "title": "Get_neg_cond_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "neg_cond_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 96,
+            "type": "KSamplerSelect",
+            "pos": [
+              5161,
+              211
+            ],
+            "size": [
+              270,
+              62
+            ],
+            "flags": {},
+            "order": 14,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "sampler_name",
+                "name": "sampler_name",
+                "type": "COMBO",
+                "widget": {
+                  "name": "sampler_name"
+                },
+                "link": 159
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "SAMPLER",
+                "name": "SAMPLER",
+                "type": "SAMPLER",
+                "links": [
+                  151
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.3.67",
+              "Node name for S&R": "KSamplerSelect",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              "euler"
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 99,
+            "type": "BasicScheduler",
+            "pos": [
+              5161,
+              321
+            ],
+            "size": [
+              270,
+              118
+            ],
+            "flags": {},
+            "order": 19,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "MODEL",
+                "link": 143
+              },
+              {
+                "localized_name": "scheduler",
+                "name": "scheduler",
+                "type": "COMBO",
+                "widget": {
+                  "name": "scheduler"
+                },
+                "link": 160
+              },
+              {
+                "localized_name": "steps",
+                "name": "steps",
+                "type": "INT",
+                "widget": {
+                  "name": "steps"
+                },
+                "link": 157
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "SIGMAS",
+                "name": "SIGMAS",
+                "type": "SIGMAS",
+                "links": [
+                  152
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.3.57",
+              "Node name for S&R": "BasicScheduler",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              "normal",
+              4,
+              1
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 92,
+            "type": "RandomNoise",
+            "pos": [
+              5161,
+              81
+            ],
+            "size": [
+              270,
+              82
+            ],
+            "flags": {},
+            "order": 15,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "noise_seed",
+                "name": "noise_seed",
+                "type": "INT",
+                "widget": {
+                  "name": "noise_seed"
+                },
+                "link": 161
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "NOISE",
+                "name": "NOISE",
+                "type": "NOISE",
+                "links": [
+                  153
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.3.67",
+              "Node name for S&R": "RandomNoise",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              967091162875519,
+              "fixed"
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 90,
+            "type": "CFGGuider",
+            "pos": [
+              5161,
+              -69
+            ],
+            "size": [
+              270,
+              102
+            ],
+            "flags": {},
+            "order": 17,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "MODEL",
+                "link": 144
+              },
+              {
+                "localized_name": "positive",
+                "name": "positive",
+                "type": "CONDITIONING",
+                "link": 145
+              },
+              {
+                "localized_name": "negative",
+                "name": "negative",
+                "type": "CONDITIONING",
+                "link": 146
+              },
+              {
+                "localized_name": "cfg",
+                "name": "cfg",
+                "type": "FLOAT",
+                "widget": {
+                  "name": "cfg"
+                },
+                "link": 158
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "GUIDER",
+                "name": "GUIDER",
+                "type": "GUIDER",
+                "links": [
+                  154
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.3.67",
+              "Node name for S&R": "CFGGuider",
+              "enableTabs": false,
+              "tabWidth": 65,
+              "tabXOffset": 10,
+              "hasSecondTab": false,
+              "secondTabText": "Send Back",
+              "secondTabOffset": 80,
+              "secondTabWidth": 65
+            },
+            "widgets_values": [
+              1
+            ],
+            "color": "#4e4e4e",
+            "bgcolor": "#3a3a3a"
+          },
+          {
+            "id": 103,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4551,
+              441
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 8,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "VAE",
+                "type": "VAE",
+                "links": [
+                  135,
+                  155
+                ]
+              }
+            ],
+            "title": "Get_VAE_LS",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "VAE_LS"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 104,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4551,
+              491
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 9,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  139
+                ]
+              }
+            ],
+            "title": "Get_width_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "width_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 105,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4551,
+              521
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 10,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  140
+                ]
+              }
+            ],
+            "title": "Get_height_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "height_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 106,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4551,
+              551
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 11,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  141
+                ]
+              }
+            ],
+            "title": "Get_context_lenght_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "context_lenght_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 107,
+            "type": "GetNode [Eclipse]",
+            "pos": [
+              4551,
+              581
+            ],
+            "size": [
+              210,
+              34
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 12,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  142
+                ]
+              }
+            ],
+            "title": "Get_overlap_ls",
+            "properties": {
+              "Node name for S&R": "GetNode [Eclipse]"
+            },
+            "widgets_values": [
+              "overlap_ls"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          },
+          {
+            "id": 97,
+            "type": "GetAllActiveNode",
+            "pos": [
+              4281,
+              321
+            ],
+            "size": [
+              229,
+              282
+            ],
+            "flags": {},
+            "order": 13,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "steps",
+                "type": "INT",
+                "links": [
+                  157
+                ]
+              },
+              {
+                "name": "cfg",
+                "type": "FLOAT",
+                "links": [
+                  158
+                ]
+              },
+              {
+                "name": "sampler_name",
+                "type": "*",
+                "links": [
+                  159
+                ]
+              },
+              {
+                "name": "scheduler",
+                "type": "*",
+                "links": [
+                  160
+                ]
+              },
+              {
+                "name": "seed",
+                "type": "INT",
+                "links": [
+                  161
+                ]
+              }
+            ],
+            "properties": {
+              "showOutputText": true,
+              "showNav": true,
+              "varCount": 5
+            },
+            "widgets_values": [
+              "*",
+              "5",
+              "steps",
+              "cfg",
+              "sampler_name",
+              "scheduler",
+              "seed"
+            ],
+            "color": "#000000",
+            "bgcolor": "#000000"
+          }
+        ],
+        "groups": [],
+        "links": [
+          {
+            "id": 128,
+            "origin_id": 91,
+            "origin_slot": 0,
+            "target_id": 94,
+            "target_slot": 0,
+            "type": "WAN_LIPSYNC_PLAN"
+          },
+          {
+            "id": 129,
+            "origin_id": 93,
+            "origin_slot": 0,
+            "target_id": 94,
+            "target_slot": 1,
+            "type": "IMAGE"
+          },
+          {
+            "id": 130,
+            "origin_id": 95,
+            "origin_slot": 0,
+            "target_id": 94,
+            "target_slot": 3,
+            "type": "INT"
+          },
+          {
+            "id": 131,
+            "origin_id": 98,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 0,
+            "type": "MODEL"
+          },
+          {
+            "id": 132,
+            "origin_id": 100,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 1,
+            "type": "MODEL_PATCH"
+          },
+          {
+            "id": 133,
+            "origin_id": 101,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 2,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 134,
+            "origin_id": 102,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 3,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 135,
+            "origin_id": 103,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 4,
+            "type": "VAE"
+          },
+          {
+            "id": 136,
+            "origin_id": 88,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 5,
+            "type": "AUDIO_ENCODER_OUTPUT"
+          },
+          {
+            "id": 137,
+            "origin_id": 94,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 7,
+            "type": "IMAGE"
+          },
+          {
+            "id": 138,
+            "origin_id": 94,
+            "origin_slot": 1,
+            "target_id": 89,
+            "target_slot": 8,
+            "type": "IMAGE"
+          },
+          {
+            "id": 139,
+            "origin_id": 104,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 9,
+            "type": "INT"
+          },
+          {
+            "id": 140,
+            "origin_id": 105,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 10,
+            "type": "INT"
+          },
+          {
+            "id": 141,
+            "origin_id": 106,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 11,
+            "type": "INT"
+          },
+          {
+            "id": 142,
+            "origin_id": 107,
+            "origin_slot": 0,
+            "target_id": 89,
+            "target_slot": 12,
+            "type": "INT"
+          },
+          {
+            "id": 143,
+            "origin_id": 89,
+            "origin_slot": 0,
+            "target_id": 99,
+            "target_slot": 0,
+            "type": "MODEL"
+          },
+          {
+            "id": 144,
+            "origin_id": 89,
+            "origin_slot": 0,
+            "target_id": 90,
+            "target_slot": 0,
+            "type": "MODEL"
+          },
+          {
+            "id": 145,
+            "origin_id": 89,
+            "origin_slot": 1,
+            "target_id": 90,
+            "target_slot": 1,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 146,
+            "origin_id": 89,
+            "origin_slot": 2,
+            "target_id": 90,
+            "target_slot": 2,
+            "type": "CONDITIONING"
+          },
+          {
+            "id": 147,
+            "origin_id": -10,
+            "origin_slot": 0,
+            "target_id": 94,
+            "target_slot": 2,
+            "type": "*"
+          },
+          {
+            "id": 148,
+            "origin_id": 94,
+            "origin_slot": 2,
+            "target_id": -20,
+            "target_slot": 0,
+            "type": "INT"
+          },
+          {
+            "id": 149,
+            "origin_id": 89,
+            "origin_slot": 3,
+            "target_id": -20,
+            "target_slot": 1,
+            "type": "LATENT"
+          },
+          {
+            "id": 150,
+            "origin_id": 89,
+            "origin_slot": 4,
+            "target_id": -20,
+            "target_slot": 2,
+            "type": "INT"
+          },
+          {
+            "id": 151,
+            "origin_id": 96,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 3,
+            "type": "SAMPLER"
+          },
+          {
+            "id": 152,
+            "origin_id": 99,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "SIGMAS"
+          },
+          {
+            "id": 153,
+            "origin_id": 92,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 5,
+            "type": "NOISE"
+          },
+          {
+            "id": 154,
+            "origin_id": 90,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 6,
+            "type": "GUIDER"
+          },
+          {
+            "id": 155,
+            "origin_id": 103,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 7,
+            "type": "VAE"
+          },
+          {
+            "id": 156,
+            "origin_id": -10,
+            "origin_slot": 1,
+            "target_id": 89,
+            "target_slot": 13,
+            "type": "FLOAT"
+          },
+          {
+            "id": 157,
+            "origin_id": 97,
+            "origin_slot": 0,
+            "target_id": 99,
+            "target_slot": 2,
+            "type": "INT"
+          },
+          {
+            "id": 158,
+            "origin_id": 97,
+            "origin_slot": 1,
+            "target_id": 90,
+            "target_slot": 3,
+            "type": "FLOAT"
+          },
+          {
+            "id": 159,
+            "origin_id": 97,
+            "origin_slot": 2,
+            "target_id": 96,
+            "target_slot": 0,
+            "type": "COMBO"
+          },
+          {
+            "id": 160,
+            "origin_id": 97,
+            "origin_slot": 3,
+            "target_id": 99,
+            "target_slot": 1,
+            "type": "COMBO"
+          },
+          {
+            "id": 161,
+            "origin_id": 97,
+            "origin_slot": 4,
+            "target_id": 92,
+            "target_slot": 0,
+            "type": "INT"
+          }
+        ],
+        "extra": {}
+      }
+    ]
+  },
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.48.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "ds": {
+      "scale": 0.7040000000000061,
+      "offset": [
+        -778.8732143206477,
+        -705.2290021912742
+      ]
+    },
+    "title": "comfybox - Rvage Wan 2.1 InfiniteTalk v2.1 N2 Workflow"
+  },
+  "version": 0.4
+}

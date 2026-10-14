@@ -1400,6 +1400,69 @@
       "catalog_sources": [
         "_/MDMZ-wanvideo_I2V_InfiniteTalk-workflow.json"
       ]
+    },
+    {
+      "id": "comfyui-eclipse",
+      "name": "ComfyUI Eclipse",
+      "git_url": "https://github.com/r-vage/ComfyUI_Eclipse",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI_Eclipse-main.zip",
+      "archive_sha256": "c7f4f855bc8435e91aded669faf99068d99afa836d17c3f6f7552604d0232370",
+      "archive_size_bytes": 83323011,
+      "folder_name": "ComfyUI_Eclipse",
+      "node_types": [
+        "Add Filename Prefix [Eclipse]",
+        "Generation Data [Eclipse]",
+        "Get First Image [Eclipse]",
+        "GetAllActiveNode",
+        "GetNode [Eclipse]",
+        "Image Selector [Eclipse]",
+        "Load Audio [Eclipse]",
+        "Load Batch From Folder (Step Advanced) [Eclipse]",
+        "Pipe Out Smart Folder [Eclipse]",
+        "Preview Video [Eclipse]",
+        "Save Video Data [Eclipse]",
+        "SetNode [Eclipse]",
+        "Show Any [Eclipse]",
+        "Show Text [Eclipse]",
+        "Smart Folder [Eclipse]",
+        "String Multiline [Eclipse]",
+        "WAN LipSync Plan Step [Eclipse]",
+        "WAN LipSync Timeline Planner [Eclipse]"
+      ],
+      "aliases": [
+        "comfyui-eclipse",
+        "ComfyUI_Eclipse",
+        "ComfyUI-Eclipse"
+      ],
+      "repository": "https://github.com/r-vage/ComfyUI_Eclipse",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ]
+    },
+    {
+      "id": "comfyui-smartmodelloader",
+      "name": "ComfyUI Smart Model Loader",
+      "git_url": "https://github.com/r-vage/ComfyUI_SmartModelLoader",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI_SmartModelLoader-main.zip",
+      "archive_sha256": "78edbc7c5280ff561d8f95c5dc62c2f60d719282fe19906a1b39d3a16e72b86c",
+      "archive_size_bytes": 2824305,
+      "folder_name": "ComfyUI_SmartModelLoader",
+      "node_types": [
+        "Smart Model Loader [Eclipse]",
+        "IO Checkpoint Loader [Eclipse]",
+        "CLIP Text Encode [Eclipse]"
+      ],
+      "aliases": [
+        "comfyui-smartmodelloader",
+        "ComfyUI_SmartModelLoader",
+        "ComfyUI-SmartModelLoader"
+      ],
+      "repository": "https://github.com/r-vage/ComfyUI_SmartModelLoader",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ]
     }
   ]
 }

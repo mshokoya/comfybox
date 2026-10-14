@@ -788,6 +788,31 @@
       "sha256": "4fa971faf306cad919033d5bbe192e571dc08452f800cbf2ec3c73977c01b2cc",
       "gated": false,
       "description": "UMT5-XXL text encoder BF16 weights; hosted on Hugging Face."
+    },
+    {
+      "id": "nsfw_wan_umt5_xxl_bf16_fixed",
+      "name": "nsfw_wan_umt5-xxl_bf16_fixed.safetensors",
+      "type": "text_encoders",
+      "relative_path": "models/text_encoders/nsfw_wan_umt5-xxl_bf16_fixed.safetensors",
+      "loader": "Smart Model Loader [Eclipse]",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "nsfw_wan_umt5-xxl_bf16_fixed.safetensors",
+          "url": "https://huggingface.co/zootkitty/nsfw_wan_umt5-xxl_bf16_fixed/resolve/main/nsfw_wan_umt5-xxl_bf16_fixed.safetensors",
+          "size": "10.6 GB",
+          "size_bytes": 11366399625,
+          "description": "NSFW Wan UMT5-XXL BF16 fixed text encoder weights; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ],
+      "url": "https://huggingface.co/zootkitty/nsfw_wan_umt5-xxl_bf16_fixed/resolve/main/nsfw_wan_umt5-xxl_bf16_fixed.safetensors",
+      "size_bytes": 11366399625,
+      "sha256": "1bd0fc7ff19e775130726b32901f22f0993a08b37e397383556b4b45a206b203",
+      "gated": false,
+      "description": "NSFW Wan UMT5-XXL BF16 fixed text encoder weights; hosted on Hugging Face."
     }
   ]
 }

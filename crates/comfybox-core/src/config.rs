@@ -6,6 +6,43 @@ use std::{
     path::{Path, PathBuf},
 };
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "snake_case")]
+pub enum AttentionBackend {
+    #[default]
+    Off,
+    SageAttention,
+    FlashAttention,
+}
+
+impl AttentionBackend {
+    pub const ALL: [Self; 3] = [Self::Off, Self::SageAttention, Self::FlashAttention];
+
+    pub fn label(self) -> &'static str {
+        match self {
+            Self::Off => "Off",
+            Self::SageAttention => "SageAttention",
+            Self::FlashAttention => "FlashAttention",
+        }
+    }
+
+    pub fn cli_arg(self) -> Option<&'static str> {
+        match self {
+            Self::Off => None,
+            Self::SageAttention => Some("--use-sage-attention"),
+            Self::FlashAttention => Some("--use-flash-attention"),
+        }
+    }
+
+    pub fn next(self) -> Self {
+        match self {
+            Self::Off => Self::SageAttention,
+            Self::SageAttention => Self::FlashAttention,
+            Self::FlashAttention => Self::Off,
+        }
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppConfig {
     pub comfy_path: Option<PathBuf>,
@@ -21,6 +58,16 @@ pub struct AppConfig {
     /// GiB of VRAM ComfyUI should leave available for transient CUDA/VAE work.
     #[serde(default = "default_comfy_reserve_vram_gb")]
     pub comfy_reserve_vram_gb: f32,
+    #[serde(default)]
+    pub swap_file_path: Option<PathBuf>,
+    #[serde(default)]
+    pub swap_size_gb: Option<u32>,
+    #[serde(default)]
+    pub pytorch_expandable_segments: bool,
+    #[serde(default)]
+    pub preload_tcmalloc: bool,
+    #[serde(default)]
+    pub attention_backend: AttentionBackend,
 }
 
 fn default_parallelism() -> usize {
@@ -49,6 +96,11 @@ impl Default for AppConfig {
             chunk_size_bytes: default_chunk_size(),
             max_concurrent_downloads: default_concurrent_downloads(),
             comfy_reserve_vram_gb: default_comfy_reserve_vram_gb(),
+            swap_file_path: None,
+            swap_size_gb: None,
+            pytorch_expandable_segments: false,
+            preload_tcmalloc: false,
+            attention_backend: AttentionBackend::Off,
         }
     }
 }
@@ -135,5 +187,16 @@ mod tests {
         )
         .unwrap();
         assert_eq!(config.comfy_reserve_vram_gb, 4.0);
+        assert!(!config.pytorch_expandable_segments);
+        assert!(!config.preload_tcmalloc);
+        assert_eq!(config.attention_backend, AttentionBackend::Off);
+        assert!(config.swap_file_path.is_none());
+    }
+
+    #[test]
+    fn attention_backend_cycling() {
+        assert_eq!(AttentionBackend::Off.next(), AttentionBackend::SageAttention);
+        assert_eq!(AttentionBackend::SageAttention.next(), AttentionBackend::FlashAttention);
+        assert_eq!(AttentionBackend::FlashAttention.next(), AttentionBackend::Off);
     }
 }
