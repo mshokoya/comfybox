@@ -1787,9 +1787,26 @@ fn uuid_like() -> String {
     )
 }
 
+fn parse_vram_choice(choice: &str) -> Vec<String> {
+    match choice.trim() {
+        "--lowvram --reserve-vram 1.5" => vec![
+            "--lowvram".to_string(),
+            "--reserve-vram".to_string(),
+            "1.5".to_string(),
+        ],
+        "--normalvram" => Vec::new(),
+        "--highvram" => vec!["--highvram".to_string()],
+        other => other
+            .split_whitespace()
+            .filter(|arg| *arg != "--normalvram")
+            .map(String::from)
+            .collect(),
+    }
+}
+
 fn prompt_vram_args() -> Result<Vec<String>> {
     if !std::io::stdin().is_terminal() {
-        return Ok(vec!["--normalvram".to_string()]);
+        return Ok(Vec::new());
     }
     let options = vec![
         "--lowvram --reserve-vram 1.5",
@@ -1799,16 +1816,7 @@ fn prompt_vram_args() -> Result<Vec<String>> {
     let choice = Select::new("Choose ComfyUI VRAM mode:", options)
         .with_help_message("Select memory management strategy for GPU models")
         .prompt()?;
-    match choice {
-        "--lowvram --reserve-vram 1.5" => Ok(vec![
-            "--lowvram".to_string(),
-            "--reserve-vram".to_string(),
-            "1.5".to_string(),
-        ]),
-        "--normalvram" => Ok(vec!["--normalvram".to_string()]),
-        "--highvram" => Ok(vec!["--highvram".to_string()]),
-        other => Ok(other.split_whitespace().map(String::from).collect()),
-    }
+    Ok(parse_vram_choice(choice))
 }
 
 fn collect_comfy_launch_options(cfg: &AppConfig) -> (Vec<(String, String)>, Vec<String>) {
@@ -2151,7 +2159,7 @@ mod builtin_catalog_tests {
     #[test]
     fn split_json_catalogs_are_complete_and_bundled() {
         let catalog = load_catalog(&[]).unwrap();
-        assert_eq!(catalog.artifacts.len(), 269);
+        assert_eq!(catalog.artifacts.len(), 288);
         assert_eq!(catalog.packages.len(), 20);
         assert_eq!(catalog.workflows.len(), 78);
         assert_eq!(catalog.custom_nodes.len(), 89);
@@ -2199,5 +2207,30 @@ mod builtin_catalog_tests {
         cfg.attention_backend = comfybox_core::AttentionBackend::FlashAttention;
         let (_, extra_args_flash) = collect_comfy_launch_options(&cfg);
         assert_eq!(extra_args_flash, vec!["--use-flash-attention".to_string()]);
+    }
+
+    #[test]
+    fn parse_vram_choice_normalvram_is_empty() {
+        assert!(super::parse_vram_choice("--normalvram").is_empty());
+        assert_eq!(
+            super::parse_vram_choice("--normalvram --reserve-vram 2.0"),
+            vec!["--reserve-vram".to_string(), "2.0".to_string()]
+        );
+    }
+
+    #[test]
+    fn parse_vram_choice_presets() {
+        assert_eq!(
+            super::parse_vram_choice("--lowvram --reserve-vram 1.5"),
+            vec![
+                "--lowvram".to_string(),
+                "--reserve-vram".to_string(),
+                "1.5".to_string()
+            ]
+        );
+        assert_eq!(
+            super::parse_vram_choice("--highvram"),
+            vec!["--highvram".to_string()]
+        );
     }
 }

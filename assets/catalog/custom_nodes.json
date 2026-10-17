@@ -1804,20 +1804,23 @@
     },
     {
       "id": "seedvc-comfyui",
-      "name": "SeedVC ComfyUI",
-      "git_url": "https://github.com/AIFSH/SeedVC-ComfyUI",
-      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/SeedVC-ComfyUI-main.zip",
-      "archive_sha256": "29fcea6e853b8a90ae773380e4ad153a00b66ee32e3279e492e9133d02c55e03",
-      "archive_size_bytes": 115352,
-      "folder_name": "SeedVC-ComfyUI",
+      "name": "ComfyUI Seed-VC",
+      "git_url": "https://github.com/billwuhao/ComfyUI_Seed-VC",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI_Seed-VC-main.zip",
+      "archive_sha256": "c1dc1a3daa9d19830865dab2288074feffb511911345ff1d8e5eacc019a0f83d",
+      "archive_size_bytes": 240496,
+      "folder_name": "ComfyUI_Seed-VC",
       "node_types": [
         "SeedVCRun"
       ],
       "aliases": [
         "seedvc-comfyui",
+        "ComfyUI_Seed-VC",
+        "seed-vc-mw",
+        "billwuhao/ComfyUI_Seed-VC",
         "SeedVC-ComfyUI"
       ],
-      "repository": "https://github.com/AIFSH/SeedVC-ComfyUI",
+      "repository": "https://github.com/billwuhao/ComfyUI_Seed-VC",
       "commit_sha": null,
       "catalog_sources": [
         "_/T8star - SeedVc+V2+TTS\u8bed\u97f3\u53ca\u5531\u6b4c\u514b\u9686.json"

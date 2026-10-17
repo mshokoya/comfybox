@@ -287,33 +287,7 @@ impl ComfyManager {
         let mut child_cmd = Command::new(&python);
         child_cmd
             .current_dir(&instance.root)
-            // stdout/stderr are redirected to the managed log file. Without
-            // unbuffered mode Python can hold recent ComfyUI messages for a
-            // long time, making the dashboard tail appear stale.
-            .arg("-u")
-            .arg("main.py")
-            .arg("--listen")
-            .arg(opts.host)
-            .arg("--port")
-            .arg(opts.port.to_string())
-            .arg("--enable-manager");
-
-        if opts.vram_args.is_empty() {
-            // Allocation headroom for attention workspaces, model transitions,
-            // and memory-intensive video VAE decoding. This does not alter the
-            // model, precision, sampling parameters, or generated output.
-            child_cmd
-                .arg("--reserve-vram")
-                .arg(opts.reserve_vram_gb.max(0.0).to_string());
-        } else {
-            for arg in &opts.vram_args {
-                child_cmd.arg(arg);
-            }
-        }
-
-        for arg in &opts.extra_args {
-            child_cmd.arg(arg);
-        }
+            .args(build_comfy_args(&opts));
 
         for (key, val) in &opts.env_vars {
             child_cmd.env(key, val);
@@ -496,9 +470,86 @@ pub fn configured_instance(cfg: &AppConfig) -> Result<ComfyInstance> {
     })
 }
 
+pub(crate) fn build_comfy_args(opts: &StartOptions<'_>) -> Vec<String> {
+    let mut args = vec![
+        // stdout/stderr are redirected to the managed log file. Without
+        // unbuffered mode Python can hold recent ComfyUI messages for a
+        // long time, making the dashboard tail appear stale.
+        "-u".to_string(),
+        "main.py".to_string(),
+        "--listen".to_string(),
+        opts.host.to_string(),
+        "--port".to_string(),
+        opts.port.to_string(),
+        "--enable-manager".to_string(),
+    ];
+
+    let effective_vram_args: Vec<String> = opts
+        .vram_args
+        .iter()
+        .filter(|arg| arg.as_str() != "--normalvram")
+        .cloned()
+        .collect();
+
+    if effective_vram_args.is_empty() {
+        // Allocation headroom for attention workspaces, model transitions,
+        // and memory-intensive video VAE decoding. This does not alter the
+        // model, precision, sampling parameters, or generated output.
+        args.push("--reserve-vram".to_string());
+        args.push(opts.reserve_vram_gb.max(0.0).to_string());
+    } else {
+        args.extend(effective_vram_args);
+    }
+
+    args.extend(opts.extra_args.iter().cloned());
+    args
+}
+
 #[cfg(test)]
 mod process_tests {
-    use super::{command_uses_comfy_python, paths_refer_to_same_location};
+    use super::{build_comfy_args, command_uses_comfy_python, paths_refer_to_same_location, StartOptions};
+
+    #[test]
+    fn normal_vram_and_empty_vram_args_default_to_reserve_vram() {
+        let opts_empty = StartOptions {
+            host: "127.0.0.1",
+            port: 8188,
+            reserve_vram_gb: 4.0,
+            vram_args: Vec::new(),
+            env_vars: Vec::new(),
+            extra_args: Vec::new(),
+        };
+        let args_empty = build_comfy_args(&opts_empty);
+        assert!(args_empty.contains(&"--reserve-vram".to_string()));
+        assert!(!args_empty.contains(&"--normalvram".to_string()));
+
+        let opts_normal = StartOptions {
+            host: "127.0.0.1",
+            port: 8188,
+            reserve_vram_gb: 4.0,
+            vram_args: vec!["--normalvram".to_string()],
+            env_vars: Vec::new(),
+            extra_args: Vec::new(),
+        };
+        let args_normal = build_comfy_args(&opts_normal);
+        assert!(args_normal.contains(&"--reserve-vram".to_string()));
+        assert!(!args_normal.contains(&"--normalvram".to_string()));
+    }
+
+    #[test]
+    fn specific_vram_args_are_passed_and_strip_normalvram() {
+        let opts = StartOptions {
+            host: "127.0.0.1",
+            port: 8188,
+            reserve_vram_gb: 4.0,
+            vram_args: vec!["--highvram".to_string()],
+            env_vars: Vec::new(),
+            extra_args: Vec::new(),
+        };
+        let args = build_comfy_args(&opts);
+        assert!(args.contains(&"--highvram".to_string()));
+        assert!(!args.contains(&"--reserve-vram".to_string()));
+    }
 
     #[test]
     fn identical_paths_match_without_canonicalization() {

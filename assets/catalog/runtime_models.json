@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 15,
+  "artifact_count": 34,
   "artifacts": [
     {
       "id": "dw_ll_ucoco_384_bs5_torchscript",
@@ -433,6 +433,507 @@
       "sha256": "b86f5be7b752fc655c27387a75712f733315a30f976e5875491599615399e773",
       "gated": false,
       "description": "Wav2Vec2 Chinese Base FP32 audio encoder weights; hosted on Hugging Face."
+    },
+    {
+      "id": "seedvc.dit.whisper-small-wavenet",
+      "name": "Seed-VC DiT Whisper-Small WaveNet BigVGAN Pruned",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/Seed-VC/DiT_seed_v2_uvit_whisper_small_wavenet_bigvgan_pruned.pth",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "DiT_seed_v2_uvit_whisper_small_wavenet_bigvgan_pruned.pth",
+          "url": "https://huggingface.co/Plachta/Seed-VC/resolve/main/DiT_seed_v2_uvit_whisper_small_wavenet_bigvgan_pruned.pth",
+          "size": "440.3 MB",
+          "size_bytes": 440312082,
+          "sha256": "680c9675aaa6479b002c26c9312758224082d486d546b88130c5e0d95c48ed71",
+          "description": "Seed-VC base DiT speech voice conversion checkpoint."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/Plachta/Seed-VC/resolve/main/DiT_seed_v2_uvit_whisper_small_wavenet_bigvgan_pruned.pth",
+      "size_bytes": 440312082,
+      "sha256": "680c9675aaa6479b002c26c9312758224082d486d546b88130c5e0d95c48ed71",
+      "gated": false,
+      "description": "Seed-VC base DiT speech voice conversion checkpoint."
+    },
+    {
+      "id": "seedvc.dit.f0-44k",
+      "name": "Seed-VC DiT Whisper-Base F0 44k BigVGAN Pruned FT EMA",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/Seed-VC/DiT_seed_v2_uvit_whisper_base_f0_44k_bigvgan_pruned_ft_ema.pth",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "DiT_seed_v2_uvit_whisper_base_f0_44k_bigvgan_pruned_ft_ema.pth",
+          "url": "https://huggingface.co/Plachta/Seed-VC/resolve/main/DiT_seed_v2_uvit_whisper_base_f0_44k_bigvgan_pruned_ft_ema.pth",
+          "size": "820.9 MB",
+          "size_bytes": 820864573,
+          "sha256": "91750ae74370b5005d109547ad02a2163bfb2b003a9f3662cfa48cbfde3e2ca2",
+          "description": "Seed-VC F0-conditioned singing voice conversion checkpoint."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/Plachta/Seed-VC/resolve/main/DiT_seed_v2_uvit_whisper_base_f0_44k_bigvgan_pruned_ft_ema.pth",
+      "size_bytes": 820864573,
+      "sha256": "91750ae74370b5005d109547ad02a2163bfb2b003a9f3662cfa48cbfde3e2ca2",
+      "gated": false,
+      "description": "Seed-VC F0-conditioned singing voice conversion checkpoint."
+    },
+    {
+      "id": "seedvc.campplus",
+      "name": "CAMPPlus Chinese Common Speaker Embedding Model",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/Seed-VC/campplus_cn_common.bin",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "campplus_cn_common.bin",
+          "url": "https://huggingface.co/funasr/campplus/resolve/main/campplus_cn_common.bin",
+          "size": "28.0 MB",
+          "size_bytes": 28036335,
+          "sha256": "fae89499a06668c61ada6ca22ecc952b1e4d1661cc237d76c78756e60efb7263",
+          "description": "CAMPPlus speaker embedding model used for speaker verification and timbre prompt conditioning."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/funasr/campplus/resolve/main/campplus_cn_common.bin",
+      "size_bytes": 28036335,
+      "sha256": "fae89499a06668c61ada6ca22ecc952b1e4d1661cc237d76c78756e60efb7263",
+      "gated": false,
+      "description": "CAMPPlus speaker embedding model used for speaker verification and timbre prompt conditioning."
+    },
+    {
+      "id": "seedvc.rmvpe",
+      "name": "RMVPE Pitch Extraction Model",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/Seed-VC/rmvpe.pt",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "rmvpe.pt",
+          "url": "https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/rmvpe.pt",
+          "size": "181.2 MB",
+          "size_bytes": 181184272,
+          "sha256": "6e438c1b7a544cc3d1d5bae39e2e60cad32e658e1738b2ebe28b84d177f52ef5",
+          "description": "RMVPE robust pitch extraction model for singing voice conversion."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/rmvpe.pt",
+      "size_bytes": 181184272,
+      "sha256": "6e438c1b7a544cc3d1d5bae39e2e60cad32e658e1738b2ebe28b84d177f52ef5",
+      "gated": false,
+      "description": "RMVPE robust pitch extraction model for singing voice conversion."
+    },
+    {
+      "id": "seedvc.bigvgan.22k.config",
+      "name": "BigVGAN v2 22kHz 80-band Config",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/bigvgan_v2_22khz_80band_256x/config.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "config.json",
+          "url": "https://huggingface.co/nvidia/bigvgan_v2_22khz_80band_256x/resolve/main/config.json",
+          "size": "1.4 KB",
+          "size_bytes": 1405,
+          "description": "BigVGAN v2 22kHz 80-band vocoder hyperparameter config."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/nvidia/bigvgan_v2_22khz_80band_256x/resolve/main/config.json",
+      "size_bytes": 1405,
+      "sha256": null,
+      "gated": false,
+      "description": "BigVGAN v2 22kHz 80-band vocoder hyperparameter config."
+    },
+    {
+      "id": "seedvc.bigvgan.22k.generator",
+      "name": "BigVGAN v2 22kHz 80-band Generator",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/bigvgan_v2_22khz_80band_256x/bigvgan_generator.pt",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "bigvgan_generator.pt",
+          "url": "https://huggingface.co/nvidia/bigvgan_v2_22khz_80band_256x/resolve/main/bigvgan_generator.pt",
+          "size": "449.2 MB",
+          "size_bytes": 449228171,
+          "sha256": "58fe74ba1469f60769013edb43d34acd8db4159ad044e6c4386d163895ab9d32",
+          "description": "BigVGAN v2 22kHz 80-band neural vocoder weights."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/nvidia/bigvgan_v2_22khz_80band_256x/resolve/main/bigvgan_generator.pt",
+      "size_bytes": 449228171,
+      "sha256": "58fe74ba1469f60769013edb43d34acd8db4159ad044e6c4386d163895ab9d32",
+      "gated": false,
+      "description": "BigVGAN v2 22kHz 80-band neural vocoder weights."
+    },
+    {
+      "id": "seedvc.bigvgan.44k.config",
+      "name": "BigVGAN v2 44kHz 128-band Config",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/bigvgan_v2_44khz_128band_512x/config.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "config.json",
+          "url": "https://huggingface.co/nvidia/bigvgan_v2_44khz_128band_512x/resolve/main/config.json",
+          "size": "1.4 KB",
+          "size_bytes": 1403,
+          "description": "BigVGAN v2 44kHz 128-band vocoder hyperparameter config."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/nvidia/bigvgan_v2_44khz_128band_512x/resolve/main/config.json",
+      "size_bytes": 1403,
+      "sha256": null,
+      "gated": false,
+      "description": "BigVGAN v2 44kHz 128-band vocoder hyperparameter config."
+    },
+    {
+      "id": "seedvc.bigvgan.44k.generator",
+      "name": "BigVGAN v2 44kHz 128-band Generator",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/bigvgan_v2_44khz_128band_512x/bigvgan_generator.pt",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "bigvgan_generator.pt",
+          "url": "https://huggingface.co/nvidia/bigvgan_v2_44khz_128band_512x/resolve/main/bigvgan_generator.pt",
+          "size": "489.0 MB",
+          "size_bytes": 489041291,
+          "sha256": "57c6fc78cc49e401157b182359a0a17d05a5f65d8c937b134fcab48ae1feb59f",
+          "description": "BigVGAN v2 44kHz 128-band neural vocoder weights."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/nvidia/bigvgan_v2_44khz_128band_512x/resolve/main/bigvgan_generator.pt",
+      "size_bytes": 489041291,
+      "sha256": "57c6fc78cc49e401157b182359a0a17d05a5f65d8c937b134fcab48ae1feb59f",
+      "gated": false,
+      "description": "BigVGAN v2 44kHz 128-band neural vocoder weights."
+    },
+    {
+      "id": "seedvc.whisper-small.config",
+      "name": "Whisper Small Config",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/config.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "config.json",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/config.json",
+          "size": "1.97 KB",
+          "size_bytes": 1967,
+          "description": "OpenAI Whisper Small model config."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/config.json",
+      "size_bytes": 1967,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small model config."
+    },
+    {
+      "id": "seedvc.whisper-small.generation_config",
+      "name": "Whisper Small Generation Config",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/generation_config.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "generation_config.json",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/generation_config.json",
+          "size": "3.87 KB",
+          "size_bytes": 3868,
+          "description": "OpenAI Whisper Small generation config."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/generation_config.json",
+      "size_bytes": 3868,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small generation config."
+    },
+    {
+      "id": "seedvc.whisper-small.preprocessor_config",
+      "name": "Whisper Small Preprocessor Config",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/preprocessor_config.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "preprocessor_config.json",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json",
+          "size": "185 KB",
+          "size_bytes": 184990,
+          "description": "OpenAI Whisper Small audio feature extractor preprocessor config."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json",
+      "size_bytes": 184990,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small audio feature extractor preprocessor config."
+    },
+    {
+      "id": "seedvc.whisper-small.model",
+      "name": "Whisper Small Model Safetensors",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/model.safetensors",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "model.safetensors",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/model.safetensors",
+          "size": "967.0 MB",
+          "size_bytes": 966995080,
+          "sha256": "62dcf690f983526bafef1805b450eeb2f7e2182f4f35c79ccb7fd82ae7d29dc0",
+          "description": "OpenAI Whisper Small content encoder weights in SafeTensors format."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/model.safetensors",
+      "size_bytes": 966995080,
+      "sha256": "62dcf690f983526bafef1805b450eeb2f7e2182f4f35c79ccb7fd82ae7d29dc0",
+      "gated": false,
+      "description": "OpenAI Whisper Small content encoder weights in SafeTensors format."
+    },
+    {
+      "id": "seedvc.whisper-small.tokenizer",
+      "name": "Whisper Small Tokenizer",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/tokenizer.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "tokenizer.json",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/tokenizer.json",
+          "size": "2.48 MB",
+          "size_bytes": 2480466,
+          "description": "OpenAI Whisper Small fast tokenizer definition."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/tokenizer.json",
+      "size_bytes": 2480466,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small fast tokenizer definition."
+    },
+    {
+      "id": "seedvc.whisper-small.tokenizer_config",
+      "name": "Whisper Small Tokenizer Config",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/tokenizer_config.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "tokenizer_config.json",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/tokenizer_config.json",
+          "size": "283 KB",
+          "size_bytes": 282683,
+          "description": "OpenAI Whisper Small tokenizer configuration."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/tokenizer_config.json",
+      "size_bytes": 282683,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small tokenizer configuration."
+    },
+    {
+      "id": "seedvc.whisper-small.vocab",
+      "name": "Whisper Small Vocab",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/vocab.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "vocab.json",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/vocab.json",
+          "size": "836 KB",
+          "size_bytes": 835550,
+          "description": "OpenAI Whisper Small vocabulary mapping."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/vocab.json",
+      "size_bytes": 835550,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small vocabulary mapping."
+    },
+    {
+      "id": "seedvc.whisper-small.merges",
+      "name": "Whisper Small BPE Merges",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/merges.txt",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "merges.txt",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/merges.txt",
+          "size": "494 KB",
+          "size_bytes": 493869,
+          "description": "OpenAI Whisper Small BPE merges file."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/merges.txt",
+      "size_bytes": 493869,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small BPE merges file."
+    },
+    {
+      "id": "seedvc.whisper-small.normalizer",
+      "name": "Whisper Small Normalizer",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/normalizer.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "normalizer.json",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/normalizer.json",
+          "size": "52.7 KB",
+          "size_bytes": 52666,
+          "description": "OpenAI Whisper Small text normalizer spec."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/normalizer.json",
+      "size_bytes": 52666,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small text normalizer spec."
+    },
+    {
+      "id": "seedvc.whisper-small.special_tokens_map",
+      "name": "Whisper Small Special Tokens Map",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/special_tokens_map.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "special_tokens_map.json",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/special_tokens_map.json",
+          "size": "2.19 KB",
+          "size_bytes": 2194,
+          "description": "OpenAI Whisper Small special tokens mapping."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/special_tokens_map.json",
+      "size_bytes": 2194,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small special tokens mapping."
+    },
+    {
+      "id": "seedvc.whisper-small.added_tokens",
+      "name": "Whisper Small Added Tokens",
+      "type": "runtime_models",
+      "relative_path": "models/TTS/whisper-small/added_tokens.json",
+      "loader": "SeedVCRun",
+      "compatibility": "comfyui-native",
+      "sources": [
+        {
+          "title": "added_tokens.json",
+          "url": "https://huggingface.co/openai/whisper-small/resolve/main/added_tokens.json",
+          "size": "34.6 KB",
+          "size_bytes": 34604,
+          "description": "OpenAI Whisper Small added tokens mapping."
+        }
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS语音及唱歌克隆.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/openai/whisper-small/resolve/main/added_tokens.json",
+      "size_bytes": 34604,
+      "sha256": null,
+      "gated": false,
+      "description": "OpenAI Whisper Small added tokens mapping."
     }
   ]
 }
