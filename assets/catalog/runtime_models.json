@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 9,
+  "artifact_count": 15,
   "artifacts": [
     {
       "id": "dw_ll_ucoco_384_bs5_torchscript",
@@ -287,6 +287,13 @@
           "size": "4.8 GB",
           "size_bytes": 5125258232,
           "description": "InfiniteTalk Single FP16 model patch weights for Wan 2.1; hosted on Hugging Face."
+        },
+        {
+          "title": "Wan2_1-InfiniTetalk-Single_fp16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/model_patches/wan2.1_infiniteTalk_single_fp16.safetensors",
+          "size": "5.13 GB",
+          "size_bytes": 5125258232,
+          "description": "InfiniteTalk Single FP16 model patch weights (alternative casing); hosted on Hugging Face."
         }
       ],
       "catalog_sources": [
@@ -322,6 +329,110 @@
       "sha256": "000813e441020f18cff844c969d2d5d4adc2a5ce46b2db1f23950b05d88805b4",
       "gated": false,
       "description": "Wav2Vec2 Chinese Base FP16 safetensors weights for AudioEncoderLoader; hosted on Hugging Face."
+    },
+    {
+      "id": "seedvr2_ema_7b_fp16",
+      "type": "runtime_models",
+      "relative_path": "runtime_models/seedvr2_ema_7b_fp16.safetensors",
+      "loader": "SeedVR2",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "seedvr2_ema_7b_fp16.safetensors",
+          "url": "https://huggingface.co/numz/SeedVR2_comfyUI/resolve/main/seedvr2_ema_7b_fp16.safetensors",
+          "size": "16.48 GB",
+          "description": "SeedVR2 7B EMA FP16 model weights; hosted on Hugging Face.",
+          "size_bytes": 16479334424
+        }
+      ],
+      "catalog_sources": [
+        "_/AInVFX - SeedVR2.json"
+      ],
+      "declared_type": "runtime-model",
+      "name": "seedvr2_ema_7b_fp16.safetensors",
+      "url": "https://huggingface.co/numz/SeedVR2_comfyUI/resolve/main/seedvr2_ema_7b_fp16.safetensors",
+      "size_bytes": 16479334424,
+      "sha256": "7b8241aa957606ab6cfb66edabc96d43234f9819c5392b44d2492d9f0b0bbe4a",
+      "gated": false,
+      "description": "SeedVR2 7B EMA FP16 model weights; hosted on Hugging Face."
+    },
+    {
+      "id": "ema_vae_fp16",
+      "type": "runtime_models",
+      "relative_path": "runtime_models/ema_vae_fp16.safetensors",
+      "loader": "SeedVR2",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "ema_vae_fp16.safetensors",
+          "url": "https://huggingface.co/numz/SeedVR2_comfyUI/resolve/main/ema_vae_fp16.safetensors",
+          "size": "501.3 MB",
+          "description": "SeedVR2 EMA VAE FP16 model weights; hosted on Hugging Face.",
+          "size_bytes": 501324814
+        }
+      ],
+      "catalog_sources": [
+        "_/AInVFX - SeedVR2.json"
+      ],
+      "declared_type": "runtime-model",
+      "name": "ema_vae_fp16.safetensors",
+      "url": "https://huggingface.co/numz/SeedVR2_comfyUI/resolve/main/ema_vae_fp16.safetensors",
+      "size_bytes": 501324814,
+      "sha256": "20678548f420d98d26f11442d3528f8b8c94e57ee046ef93dbb7633da8612ca1",
+      "gated": false,
+      "description": "SeedVR2 EMA VAE FP16 model weights; hosted on Hugging Face."
+    },
+    {
+      "id": "film_net_fp16",
+      "name": "FILM Net FP16 Frame Interpolation Model",
+      "type": "runtime_models",
+      "relative_path": "models/frame_interpolation/film_net_fp16.safetensors",
+      "loader": "FrameInterpolationModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "film_net_fp16.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/frame_interpolation/resolve/main/frame_interpolation/film_net_fp16.safetensors",
+          "size": "68.9 MB",
+          "size_bytes": 68882302,
+          "description": "FILM Net FP16 frame interpolation model; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/RusselX - friendly_InfiniteTalk.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/Comfy-Org/frame_interpolation/resolve/main/frame_interpolation/film_net_fp16.safetensors",
+      "size_bytes": 68882302,
+      "sha256": "f226e51375dc839d4b40e5c3d63da560dd1ea1c962364ec78f5adf2d05db05c0",
+      "gated": false,
+      "description": "FILM Net FP16 frame interpolation model; hosted on Hugging Face."
+    },
+    {
+      "id": "wav2vec2_chinese_base_fp32",
+      "name": "Wav2Vec2 Chinese Base FP32",
+      "type": "runtime_models",
+      "relative_path": "models/audio_encoders/wav2vec2-chinese-base_fp32.safetensors",
+      "loader": "AudioEncoderLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wav2vec2-chinese-base_fp32.safetensors",
+          "url": "https://huggingface.co/Kijai/wav2vec2_safetensors/resolve/main/wav2vec2-chinese-base_fp32.safetensors",
+          "size": "380 MB",
+          "size_bytes": 380204696,
+          "description": "Wav2Vec2 Chinese Base FP32 audio encoder weights; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/RusselX - friendly_InfiniteTalk.json"
+      ],
+      "declared_type": "runtime-model",
+      "url": "https://huggingface.co/Kijai/wav2vec2_safetensors/resolve/main/wav2vec2-chinese-base_fp32.safetensors",
+      "size_bytes": 380204696,
+      "sha256": "b86f5be7b752fc655c27387a75712f733315a30f976e5875491599615399e773",
+      "gated": false,
+      "description": "Wav2Vec2 Chinese Base FP32 audio encoder weights; hosted on Hugging Face."
     }
   ]
 }

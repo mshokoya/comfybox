@@ -59,7 +59,8 @@
       "git_url": "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes",
       "folder_name": "ComfyUI_Comfyroll_CustomNodes",
       "node_types": [
-        "CR Simple Text Watermark"
+        "CR Simple Text Watermark",
+        "CR Prompt Text"
       ],
       "catalog_sources": [
         "_/bui.toml"
@@ -83,7 +84,8 @@
       "git_url": "https://github.com/pythongosssss/ComfyUI-Custom-Scripts",
       "folder_name": "ComfyUI-Custom-Scripts",
       "node_types": [
-        "comfyui-custom-scripts"
+        "comfyui-custom-scripts",
+        "MathExpression|pysssss"
       ],
       "aliases": [
         "comfyui-custom-scripts"
@@ -102,7 +104,14 @@
       "node_types": [
         "easy cleanGpuUsed",
         "easy clearCacheAll",
-        "easy promptLine"
+        "easy promptLine",
+        "easy float",
+        "easy forLoopEnd",
+        "easy forLoopStart",
+        "easy indexAnything",
+        "easy int",
+        "easy seed",
+        "easy showAnything"
       ],
       "aliases": [
         "comfyui-easy-use"
@@ -376,7 +385,13 @@
         "ModelPreviewOverrideKJ",
         "MiniMaxH3MemoryEfficientSageAttentionPatch",
         "INTConstant",
-        "GetImageSizeAndCount"
+        "GetImageSizeAndCount",
+        "DiffusionModelLoaderKJ",
+        "FloatConstant",
+        "ColorMatch",
+        "PreviewAny",
+        "GetImagesFromBatchIndexed",
+        "ImageConcanate"
       ],
       "aliases": [
         "comfyui-kjnodes"
@@ -753,7 +768,9 @@
       "git_url": "https://github.com/GACLove/ComfyUI-VFI",
       "folder_name": "ComfyUI-VFI",
       "node_types": [
-        "RIFEInterpolation"
+        "RIFEInterpolation",
+        "FrameInterpolate",
+        "FrameInterpolationModelLoader"
       ],
       "aliases": [
         "ComfyUI-VFI",
@@ -797,7 +814,9 @@
       "folder_name": "ComfyUI-VideoHelperSuite",
       "node_types": [
         "VHS_LoadVideo",
-        "VHS_VideoCombine"
+        "VHS_VideoCombine",
+        "VHS_LoadImages",
+        "VHS_GetImageCount"
       ],
       "catalog_sources": [
         "_/bui.toml"
@@ -1074,7 +1093,8 @@
         "Bookmark (rgthree)",
         "Image Comparer (rgthree)",
         "Fast Groups Muter (rgthree)",
-        "Fast Groups Bypasser (rgthree)"
+        "Fast Groups Bypasser (rgthree)",
+        "Fast Bypasser (rgthree)"
       ],
       "aliases": [
         "rgthree-comfy"
@@ -1095,16 +1115,28 @@
       "git_url": "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler",
       "folder_name": "ComfyUI-SeedVR2_VideoUpscaler",
       "node_types": [
-        "seedvr2_videoupscaler"
+        "seedvr2_videoupscaler",
+        "SeedVR2",
+        "SeedVR2BlockSwap",
+        "SeedVR2VideoUpscaler",
+        "SeedVR2LoadDiTModel",
+        "SeedVR2LoadVAEModel",
+        "SeedVR2TorchCompileSettings"
       ],
       "aliases": [
-        "seedvr2_videoupscaler"
+        "seedvr2_videoupscaler",
+        "ComfyUI-SeedVR2_VideoUpscaler",
+        "ComfyUI_SeedVR2_VideoUpscaler"
       ],
       "repository": "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler",
       "commit_sha": null,
       "catalog_sources": [
-        "_/deps.json"
-      ]
+        "_/deps.json",
+        "_/AInVFX - SeedVR2.json"
+      ],
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-SeedVR2_VideoUpscaler-main.zip",
+      "archive_sha256": "4f8c5332c0724982fe609824d1dbd928178f00e5172ef2742d27689b542167fd",
+      "archive_size_bytes": 4853533
     },
     {
       "id": "comfyui-text-translation",
@@ -1367,7 +1399,8 @@
         "MultiTalkModelLoader",
         "MultiTalkWav2VecEmbeds",
         "DownloadAndLoadWav2VecModel",
-        "Wav2VecModelLoader"
+        "Wav2VecModelLoader",
+        "WanVideoDecode"
       ],
       "aliases": [
         "comfyui-wanvideowrapper",
@@ -1462,6 +1495,332 @@
       "commit_sha": null,
       "catalog_sources": [
         "_/Rvage-wan21Infinitetalk_v21N2-workflow.json"
+      ]
+    },
+    {
+      "id": "comfyui-cocotools-io",
+      "name": "ComfyUI CoCoTools IO",
+      "git_url": "https://github.com/Conor-Collins/ComfyUI-CoCoTools_IO",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-CoCoTools_IO-master.zip",
+      "archive_sha256": "4c0759ba5095a39f74b34861d588e1e00c8df584b46d650f3f633017a3c88cce",
+      "archive_size_bytes": 784545,
+      "folder_name": "ComfyUI-CoCoTools_IO",
+      "node_types": [
+        "ImageLoader",
+        "LoadExr",
+        "LoadExrSequence",
+        "SaverNode",
+        "LoadExrLayerByName",
+        "CryptomatteLayer",
+        "ColorspaceNode",
+        "ZNormalizeNode"
+      ],
+      "aliases": [
+        "comfyui-cocotools-io",
+        "ComfyUI-CoCoTools_IO",
+        "ComfyUI_CoCoTools_IO",
+        "cocotools_io",
+        "coco_tools"
+      ],
+      "repository": "https://github.com/Conor-Collins/ComfyUI-CoCoTools_IO",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/AInVFX - SeedVR2.json"
+      ]
+    },
+    {
+      "id": "audio-separation-nodes-comfyui",
+      "name": "Audio Separation Nodes for ComfyUI",
+      "git_url": "https://github.com/christian-byrne/audio-separation-nodes-comfyui",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/audio-separation-nodes-comfyui-master.zip",
+      "archive_sha256": "e2d40890c2db84462f7a1ca815b1a6c4b63d520e7b19fef60bbe9b736eae2e7d",
+      "archive_size_bytes": 1222632,
+      "folder_name": "audio-separation-nodes-comfyui",
+      "node_types": [
+        "AudioCrop",
+        "AudioSeparation"
+      ],
+      "aliases": [
+        "audio-separation-nodes-comfyui"
+      ],
+      "repository": "https://github.com/christian-byrne/audio-separation-nodes-comfyui",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/EtherPandaAI - InfiniteTalk_InfiniteLength.json",
+        "_/RunComfy - InfiniteTalk_Audio_Portrait_to_Lip_Synced_Video.json"
+      ]
+    },
+    {
+      "id": "comfy_mtb",
+      "name": "Comfy MTB",
+      "git_url": "https://github.com/melMass/comfy_mtb",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfy_mtb-main.zip",
+      "archive_sha256": "a60fd15f65c3bb293bdf1420998c4e8525b708a4d17497423083ffb5acfd5aff",
+      "archive_size_bytes": 1366826,
+      "folder_name": "comfy_mtb",
+      "node_types": [
+        "Audio Duration (mtb)",
+        "Audio Stack (mtb)"
+      ],
+      "aliases": [
+        "comfy_mtb",
+        "comfy-mtb"
+      ],
+      "repository": "https://github.com/melMass/comfy_mtb",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/EtherPandaAI - InfiniteTalk_InfiniteLength.json",
+        "_/RusselX - friendly_InfiniteTalk.json"
+      ]
+    },
+    {
+      "id": "comfyui-1hewnodes",
+      "name": "ComfyUI 1hewNodes",
+      "git_url": "https://github.com/1hew/ComfyUI-1hewNodes",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-1hewNodes-main.zip",
+      "archive_sha256": "d8e07e9477faa8e97ea20181c6c8505549c55eaa53d2c0b8c28e1e6e66c793e6",
+      "archive_size_bytes": 905002,
+      "folder_name": "ComfyUI-1hewNodes",
+      "node_types": [
+        "1hew_ImageBatchRange"
+      ],
+      "aliases": [
+        "comfyui-1hewnodes",
+        "ComfyUI-1hewNodes"
+      ],
+      "repository": "https://github.com/1hew/ComfyUI-1hewNodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/EtherPandaAI - InfiniteTalk_InfiniteLength.json"
+      ]
+    },
+    {
+      "id": "comfyui-mixlab-nodes",
+      "name": "ComfyUI Mixlab Nodes",
+      "git_url": "https://github.com/shadowcz007/comfyui-mixlab-nodes",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-mixlab-nodes-main.zip",
+      "archive_sha256": "2324637c58bd67bd65b71f272c6deb1109269bbff7eafaa4ad25bd62d9123257",
+      "archive_size_bytes": 79460480,
+      "folder_name": "comfyui-mixlab-nodes",
+      "node_types": [
+        "TextInput_"
+      ],
+      "aliases": [
+        "comfyui-mixlab-nodes"
+      ],
+      "repository": "https://github.com/shadowcz007/comfyui-mixlab-nodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/EtherPandaAI - InfiniteTalk_InfiniteLength.json"
+      ]
+    },
+    {
+      "id": "comfyui-various",
+      "name": "Various ComfyUI Nodes by Type",
+      "git_url": "https://github.com/jamesWalker55/comfyui-various",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-various-main.zip",
+      "archive_sha256": "093cd7c473f5d92d653d16972501697591dbc6b4085cbac90295606beec1a7cf",
+      "archive_size_bytes": 37046,
+      "folder_name": "comfyui-various",
+      "node_types": [
+        "JWInteger"
+      ],
+      "aliases": [
+        "comfyui-various"
+      ],
+      "repository": "https://github.com/jamesWalker55/comfyui-various",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/HUAYUE1111- infiniteTalk251_v10.json"
+      ]
+    },
+    {
+      "id": "comfyui-painterai2v",
+      "name": "ComfyUI PainterAI2V",
+      "git_url": "https://github.com/princepainter/ComfyUI-PainterAI2V",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-PainterAI2V-main.zip",
+      "archive_sha256": "8ee90a29e9f6ae8da67a8a98ed280ebb5f0df74902516f2b617a44b893a8962a",
+      "archive_size_bytes": 25213,
+      "folder_name": "ComfyUI-PainterAI2V",
+      "node_types": [
+        "PainterAI2V"
+      ],
+      "aliases": [
+        "comfyui-painterai2v",
+        "ComfyUI-PainterAI2V"
+      ],
+      "repository": "https://github.com/princepainter/ComfyUI-PainterAI2V",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/HUAYUE1111- infiniteTalk251_v10.json"
+      ]
+    },
+    {
+      "id": "comfyui-painteraudiolength",
+      "name": "ComfyUI PainterAudioLength",
+      "git_url": "https://github.com/princepainter/Comfyui-PainterAudioLength",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/Comfyui-audioLength-main.zip",
+      "archive_sha256": "974246ef918e28b4c6e20856dc59115cb3bccccf711ef3ec0aba4d422493f6b4",
+      "archive_size_bytes": 3101,
+      "folder_name": "Comfyui-audioLength",
+      "node_types": [
+        "PainterAudioCut"
+      ],
+      "aliases": [
+        "comfyui-painteraudiolength",
+        "Comfyui-audioLength",
+        "Comfyui-PainterAudioLength"
+      ],
+      "repository": "https://github.com/princepainter/Comfyui-PainterAudioLength",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/HUAYUE1111- infiniteTalk251_v10.json"
+      ]
+    },
+    {
+      "id": "comfyui-qwen-tts",
+      "name": "ComfyUI Qwen TTS",
+      "git_url": "https://github.com/flybirdxx/ComfyUI-Qwen-TTS",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-Qwen-TTS-main.zip",
+      "archive_sha256": "255a82240215df793818ca3f244f72477adfdfe623356146eda47bc688f740ff",
+      "archive_size_bytes": 1058898,
+      "folder_name": "ComfyUI-Qwen-TTS",
+      "node_types": [
+        "Qwen3TTSModelLoader",
+        "Qwen3TTSVoiceClone"
+      ],
+      "aliases": [
+        "comfyui-qwen-tts",
+        "ComfyUI-Qwen-TTS"
+      ],
+      "repository": "https://github.com/flybirdxx/ComfyUI-Qwen-TTS",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/HUAYUE1111- infiniteTalk251_v10.json"
+      ]
+    },
+    {
+      "id": "crt-nodes",
+      "name": "CRT Nodes",
+      "git_url": "https://github.com/PGCRT/CRT-Nodes",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/CRT-Nodes-main.zip",
+      "archive_sha256": "5fbebc4fbfa8584883ce76d706d757f9adc710401ca544b46e12cd4ed5b86a73",
+      "archive_size_bytes": 4126366,
+      "folder_name": "CRT-Nodes",
+      "node_types": [
+        "FancyTimerNode"
+      ],
+      "aliases": [
+        "crt-nodes",
+        "CRT-Nodes"
+      ],
+      "repository": "https://github.com/PGCRT/CRT-Nodes",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/RusselX - friendly_InfiniteTalk.json"
+      ]
+    },
+    {
+      "id": "comfyui-wananimateplus",
+      "name": "ComfyUI WanAnimatePlus",
+      "git_url": "https://github.com/wuwukaka/ComfyUI-WanAnimatePlus",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-WanAnimatePlus-main.zip",
+      "archive_sha256": "90fa15409ec294ba0b1c06eb05282c19d39f460866548e41e24237cf29ecf6ee",
+      "archive_size_bytes": 51704184,
+      "folder_name": "ComfyUI-WanAnimatePlus",
+      "node_types": [
+        "NormalizeAudioLoudness"
+      ],
+      "aliases": [
+        "comfyui-wananimateplus",
+        "ComfyUI-WanAnimatePlus"
+      ],
+      "repository": "https://github.com/wuwukaka/ComfyUI-WanAnimatePlus",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/RusselX - friendly_InfiniteTalk.json"
+      ]
+    },
+    {
+      "id": "comfyui-sortlist",
+      "name": "ComfyUI SortList / RAMCleanup",
+      "git_url": "https://github.com/huyl3-cpu/comfyui-sortlist",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-sortlist-main.zip",
+      "archive_sha256": "f26c8340bba0c83bbc8255b0d0d9d35587d76914ced0d36d4a9eca99154534b5",
+      "archive_size_bytes": 1076448,
+      "folder_name": "comfyui-sortlist",
+      "node_types": [
+        "RAMCleanup"
+      ],
+      "aliases": [
+        "comfyui-sortlist"
+      ],
+      "repository": "https://github.com/huyl3-cpu/comfyui-sortlist",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/RusselX - friendly_InfiniteTalk.json"
+      ]
+    },
+    {
+      "id": "comfyui-vrgamedevgirl",
+      "name": "ComfyUI VRGameDevGirl",
+      "git_url": "https://github.com/vrgamegirl19/comfyui-vrgamedevgirl",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/comfyui-vrgamedevgirl-Beta2.0.zip",
+      "archive_sha256": "9e9e2b8a235871268758ae42a0051e47d96ceed1ea96b4d382988fb00c2319e6",
+      "archive_size_bytes": 395282491,
+      "folder_name": "comfyui-vrgamedevgirl",
+      "node_types": [
+        "VRGDG_AudioCrop"
+      ],
+      "aliases": [
+        "comfyui-vrgamedevgirl"
+      ],
+      "repository": "https://github.com/vrgamegirl19/comfyui-vrgamedevgirl",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/RusselX - friendly_InfiniteTalk.json"
+      ]
+    },
+    {
+      "id": "comfyui-mxtoolkit",
+      "name": "ComfyUI mxToolkit",
+      "git_url": "https://github.com/Smirnov75/ComfyUI-mxToolkit",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/ComfyUI-mxToolkit-main.zip",
+      "archive_sha256": "00cd24820fbf6cca82bb036cd91491f3baea5cc7cac656b1716395000937e8b2",
+      "archive_size_bytes": 86451,
+      "folder_name": "ComfyUI-mxToolkit",
+      "node_types": [
+        "mxSlider"
+      ],
+      "aliases": [
+        "comfyui-mxtoolkit",
+        "ComfyUI-mxToolkit"
+      ],
+      "repository": "https://github.com/Smirnov75/ComfyUI-mxToolkit",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/RusselX - friendly_InfiniteTalk.json"
+      ]
+    },
+    {
+      "id": "seedvc-comfyui",
+      "name": "SeedVC ComfyUI",
+      "git_url": "https://github.com/AIFSH/SeedVC-ComfyUI",
+      "archive_url": "https://huggingface.co/msho19/comfybox/resolve/main/SeedVC-ComfyUI-main.zip",
+      "archive_sha256": "29fcea6e853b8a90ae773380e4ad153a00b66ee32e3279e492e9133d02c55e03",
+      "archive_size_bytes": 115352,
+      "folder_name": "SeedVC-ComfyUI",
+      "node_types": [
+        "SeedVCRun"
+      ],
+      "aliases": [
+        "seedvc-comfyui",
+        "SeedVC-ComfyUI"
+      ],
+      "repository": "https://github.com/AIFSH/SeedVC-ComfyUI",
+      "commit_sha": null,
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS\u8bed\u97f3\u53ca\u5531\u6b4c\u514b\u9686.json"
       ]
     }
   ]

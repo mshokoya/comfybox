@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 77,
+  "artifact_count": 86,
   "artifacts": [
     {
       "id": "firered.image-edit.1.0.bf16",
@@ -2676,6 +2676,131 @@
       "sha256": "8ef7ea5bf9eea636b9b3ebd84c40671b4a18ae2704cb4c8595cb5b25c1d8e8b9",
       "gated": false,
       "description": "Wan 2.1 Image-to-Video 14B 720P BF16 diffusion model weights; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2.2_i2v_high_noise_14b_fp8_scaled",
+      "name": "Wan 2.2 I2V High Noise 14B FP8 Scaled",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+          "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+          "size": "14.3 GB",
+          "size_bytes": 14294742832,
+          "description": "Wan 2.2 I2V High Noise 14B FP8 scaled diffusion model; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/HUAYUE1111- infiniteTalk251_v10.json"
+      ],
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "size_bytes": 14294742832,
+      "sha256": "6122e79d55e0f235698d11d657f3b196c5273c830da00b2b013c5a048d5e6a42",
+      "gated": false,
+      "description": "Wan 2.2 I2V High Noise 14B FP8 scaled diffusion model; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2.2_i2v_low_noise_14b_fp8_scaled",
+      "name": "Wan 2.2 I2V Low Noise 14B FP8 Scaled",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "loader": "UNETLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+          "url": "https://huggingface.co/f5aiteam/UNET/resolve/72c9cdbcda1414ae9449ace1f5e6e3409d8c6c44/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+          "size": "14.3 GB",
+          "size_bytes": 14294742832,
+          "description": "Wan 2.2 I2V Low Noise 14B FP8 scaled diffusion model; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/HUAYUE1111- infiniteTalk251_v10.json"
+      ],
+      "url": "https://huggingface.co/f5aiteam/UNET/resolve/72c9cdbcda1414ae9449ace1f5e6e3409d8c6c44/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "size_bytes": 14294742832,
+      "sha256": "5471a457b6ac404202a5fbe6c11595a3d5641fc766b00f38763f72303fffc21e",
+      "gated": false,
+      "description": "Wan 2.2 I2V Low Noise 14B FP8 scaled diffusion model; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2.1_i2v_480p_scaled_fp8_e4m3_lightx2v_4step",
+      "name": "Wan 2.1 I2V 480P Scaled FP8 Lightx2v 4Step",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan2.1_i2v_480p_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors",
+      "loader": "DiffusionModelLoaderKJ",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2.1_i2v_480p_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors",
+          "url": "https://huggingface.co/lightx2v/Wan2.1-Distill-Models/resolve/main/wan2.1_i2v_480p_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors",
+          "size": "17.1 GB",
+          "size_bytes": 17135485602,
+          "description": "Wan 2.1 I2V 480P Scaled FP8 E4M3 Lightx2v 4-Step Distilled Model; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/EtherPandaAI - InfiniteTalk_InfiniteLength.json"
+      ],
+      "url": "https://huggingface.co/lightx2v/Wan2.1-Distill-Models/resolve/main/wan2.1_i2v_480p_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors",
+      "size_bytes": 17135485602,
+      "sha256": "53e84eecbe7605270ad09b686c2a15caaaf1924da9c447ee0e0a1463d3392361",
+      "gated": false,
+      "description": "Wan 2.1 I2V 480P Scaled FP8 E4M3 Lightx2v 4-Step Distilled Model; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2.1_i2v_14b_480p_q8_0_gguf",
+      "name": "Wan 2.1 I2V 14B 480P Q8_0 GGUF",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan/wan2.1-i2v-14b-480p-Q8_0.gguf",
+      "loader": "WanVideoModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2.1-i2v-14b-480p-Q8_0.gguf",
+          "url": "https://huggingface.co/city96/Wan2.1-I2V-14B-480P-gguf/resolve/main/wan2.1-i2v-14b-480p-Q8_0.gguf",
+          "size": "18.1 GB",
+          "size_bytes": 18144640384,
+          "description": "Wan 2.1 I2V 14B 480P Q8_0 GGUF quantized model; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/RunComfy - InfiniteTalk_Audio_Portrait_to_Lip_Synced_Video.json"
+      ],
+      "url": "https://huggingface.co/city96/Wan2.1-I2V-14B-480P-gguf/resolve/main/wan2.1-i2v-14b-480p-Q8_0.gguf",
+      "size_bytes": 18144640384,
+      "sha256": "db961e33570a3a7902614ea52b6e77a33d284dfc85743a05e880a02da1164b45",
+      "gated": false,
+      "description": "Wan 2.1 I2V 14B 480P Q8_0 GGUF quantized model; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2_1_infinitetalk_single_q8_gguf",
+      "name": "Wan 2.1 InfiniteTalk Single Q8 GGUF",
+      "type": "diffusion_models",
+      "relative_path": "models/diffusion_models/wan/Wan2_1-InfiniteTalk_Single_Q8.gguf",
+      "loader": "MultiTalkModelLoader",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "Wan2_1-InfiniteTalk_Single_Q8.gguf",
+          "url": "https://huggingface.co/Kijai/WanVideo_comfy_GGUF/resolve/main/InfiniteTalk/Wan2_1-InfiniteTalk_Single_Q8.gguf",
+          "size": "2.65 GB",
+          "size_bytes": 2646330016,
+          "description": "Wan 2.1 InfiniteTalk Single Q8 GGUF model; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/RunComfy - InfiniteTalk_Audio_Portrait_to_Lip_Synced_Video.json"
+      ],
+      "url": "https://huggingface.co/Kijai/WanVideo_comfy_GGUF/resolve/main/InfiniteTalk/Wan2_1-InfiniteTalk_Single_Q8.gguf",
+      "size_bytes": 2646330016,
+      "sha256": "c5e251c56174995d940494ec02fdf9d36da00dffdde6827829801cd171fe8ffd",
+      "gated": false,
+      "description": "Wan 2.1 InfiniteTalk Single Q8 GGUF model; hosted on Hugging Face."
     }
   ]
 }

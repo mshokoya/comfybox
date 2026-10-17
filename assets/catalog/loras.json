@@ -5,7 +5,7 @@
     "_/bui.toml",
     "_/deps.json"
   ],
-  "artifact_count": 113,
+  "artifact_count": 115,
   "artifacts": [
     {
       "id": "1girl_qwen_v3",
@@ -3884,12 +3884,21 @@
       "id": "minimax.h3.authentic-cinematic-texture.tutu1018",
       "name": "TuTu1018 MiniMax H3 Authentic Cinematic Texture LoRA",
       "type": "loras",
-      "relative_path": "models/loras/电影镜头_000019000.safetensors",
+      "relative_path": "models/loras/\u7535\u5f71\u955c\u5934_000019000.safetensors",
       "group": "MiniMax H3",
-      "tags": ["video", "lora", "cinematic", "realistic-film-texture", "minimax-h3", "tutu1018"],
+      "tags": [
+        "video",
+        "lora",
+        "cinematic",
+        "realistic-film-texture",
+        "minimax-h3",
+        "tutu1018"
+      ],
       "loader": "LoraLoaderModelOnly",
       "compatibility": "MiniMax H3",
-      "trigger_words": ["DY"],
+      "trigger_words": [
+        "DY"
+      ],
       "recommended_strength": 0.7,
       "high_motion_strength": 0.5,
       "sources": [
@@ -3903,12 +3912,64 @@
           "description": "TuTu1018 cinematic texture LoRA; trigger DY; strength 0.70, or 0.50 for high motion."
         }
       ],
-      "catalog_sources": ["_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"],
+      "catalog_sources": [
+        "_/cottonbyte_ai__tutu_1018-realistic_film_texture-minimaxh3.json"
+      ],
       "url": "https://huggingface.co/Alex995647/loras-minimax-h3/resolve/main/minimax-h3-authentic-cinematic-texture/Minimax%20H3%E7%9C%9F%E5%AE%9E%E7%94%B5%E5%BD%B1%E8%B4%A8%E6%84%9F.safetensors",
       "size_bytes": 309965208,
       "sha256": "51dda79218ea126cbb2e08f3a6d9cc595e2224f4977d7618061954043a8bafcf",
       "gated": false,
       "description": "Cinematic realism LoRA by TuTu1018. Trigger word: DY. Recommended 0.70; high motion 0.50."
+    },
+    {
+      "id": "lightx2v_i2v_14b_480p_cfg_step_distill_rank128_bf16",
+      "name": "Lightx2v I2V 14B 480P CFG Step Distill Rank128 BF16",
+      "type": "loras",
+      "relative_path": "models/loras/lightx2v_I2V_14B_480p_cfg_step_distill_rank128_bf16.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "lightx2v_I2V_14B_480p_cfg_step_distill_rank128_bf16.safetensors",
+          "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank128_bf16.safetensors",
+          "size": "1.47 GB",
+          "size_bytes": 1466506280,
+          "description": "Lightx2v I2V 14B 480P CFG Step Distill Rank128 BF16 LoRA; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/HUAYUE1111- infiniteTalk251_v10.json"
+      ],
+      "url": "https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank128_bf16.safetensors",
+      "size_bytes": 1466506280,
+      "sha256": "5c324ada09cfa447844f5d9a57240463a515de38270ef40c7513d74be3e64e72",
+      "gated": false,
+      "description": "Lightx2v I2V 14B 480P CFG Step Distill Rank128 BF16 LoRA; hosted on Hugging Face."
+    },
+    {
+      "id": "wan2.2_i2v_a14b_high_noise_lora_rank64_lightx2v_4step_1022",
+      "name": "Wan 2.2 I2V A14B High Noise LoRA Rank64 Lightx2v 4Step 1022",
+      "type": "loras",
+      "relative_path": "models/loras/wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+      "loader": "LoraLoaderModelOnly",
+      "compatibility": "workflow-referenced",
+      "sources": [
+        {
+          "title": "wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+          "url": "https://huggingface.co/SlartyG/wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022/resolve/main/wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+          "size": "635 MB",
+          "size_bytes": 634645944,
+          "description": "Wan 2.2 I2V A14B High Noise LoRA Rank64 Lightx2v 4-Step LoRA; hosted on Hugging Face."
+        }
+      ],
+      "catalog_sources": [
+        "_/HUAYUE1111- infiniteTalk251_v10.json"
+      ],
+      "url": "https://huggingface.co/SlartyG/wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022/resolve/main/wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+      "size_bytes": 634645944,
+      "sha256": "887c3bdeb74e83859c920438e16ca31f39ab18ce189abc5f0e36f8348c5bbb19",
+      "gated": false,
+      "description": "Wan 2.2 I2V A14B High Noise LoRA Rank64 Lightx2v 4-Step LoRA; hosted on Hugging Face."
     }
   ]
 }

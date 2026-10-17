@@ -1669,6 +1669,155 @@
       "catalog_sources": [
         "_/comfybox-Rvage-wan21Infinitetalk_v21N2-workflow.json"
       ]
+    },
+    {
+      "id": "AInVFX-SeedVR2-workflow",
+      "name": "AInVFX SeedVR2 Workflow",
+      "file": "AInVFX-SeedVR2-workflow.json",
+      "artifact_ids": [
+        "seedvr2_ema_7b_fp16",
+        "ema_vae_fp16"
+      ],
+      "custom_node_ids": [
+        "seedvr2_videoupscaler",
+        "comfyui-cocotools-io",
+        "comfyui-videohelpersuite"
+      ],
+      "catalog_sources": [
+        "_/AInVFX - SeedVR2.json"
+      ]
+    },
+    {
+      "id": "EtherPandaAI-InfiniteTalk_InfiniteLength-workflow",
+      "name": "EtherPandaAI InfiniteTalk Infinite Length Workflow",
+      "file": "EtherPandaAI-InfiniteTalk_InfiniteLength-workflow.json",
+      "artifact_ids": [
+        "clip-vision.h",
+        "umt5_xxl_fp8_e4m3fn_scaled",
+        "wan_2_1_vae",
+        "audio_encoder.wav2vec2_chinese_base_fp16",
+        "wan2.1_infiniteTalk_single_fp16",
+        "wan2.1_i2v_480p_scaled_fp8_e4m3_lightx2v_4step"
+      ],
+      "custom_node_ids": [
+        "comfyui-1hewnodes",
+        "comfy_mtb",
+        "audio-separation-nodes-comfyui",
+        "comfyui-mixlab-nodes",
+        "cg-use-everywhere",
+        "comfyui-custom-scripts",
+        "comfyui-easy-use",
+        "comfyui-kjnodes",
+        "comfyui-videohelpersuite",
+        "comfyui_layerstyle",
+        "rgthree-comfy"
+      ],
+      "catalog_sources": [
+        "_/EtherPandaAI - InfiniteTalk_InfiniteLength.json"
+      ]
+    },
+    {
+      "id": "HUAYUE1111-infiniteTalk251_v10-workflow",
+      "name": "HUAYUE1111 InfiniteTalk 2.5.1 v10 Workflow",
+      "file": "HUAYUE1111-infiniteTalk251_v10-workflow.json",
+      "artifact_ids": [
+        "umt5_xxl_fp8_e4m3fn_scaled",
+        "wan_2_1_vae",
+        "audio_encoder.wav2vec2_chinese_base_fp16",
+        "wan2.1_infiniteTalk_single_fp16",
+        "wan2.2_i2v_high_noise_14b_fp8_scaled",
+        "wan2.2_i2v_low_noise_14b_fp8_scaled",
+        "lightx2v_i2v_14b_480p_cfg_step_distill_rank128_bf16",
+        "wan2.2_i2v_a14b_high_noise_lora_rank64_lightx2v_4step_1022"
+      ],
+      "custom_node_ids": [
+        "comfyui-various",
+        "comfyui-painterai2v",
+        "comfyui-painteraudiolength",
+        "comfyui-qwen-tts",
+        "comfyui-comfyroll",
+        "comfyui-custom-scripts",
+        "comfyui-kjnodes",
+        "comfyui-swwan",
+        "comfyui-videohelpersuite",
+        "comfyui_layerstyle"
+      ],
+      "catalog_sources": [
+        "_/HUAYUE1111- infiniteTalk251_v10.json"
+      ]
+    },
+    {
+      "id": "RunComfy-InfiniteTalk_Audio_Portrait_to_Lip_Synced_Video-workflow",
+      "name": "RunComfy InfiniteTalk Audio Portrait to Lip Synced Video Workflow",
+      "file": "RunComfy-InfiniteTalk_Audio_Portrait_to_Lip_Synced_Video-workflow.json",
+      "artifact_ids": [
+        "wan2_1_vae_bf16",
+        "clip-vision.h",
+        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
+        "umt5_xxl_enc_bf16",
+        "wan2.1_i2v_14b_480p_q8_0_gguf",
+        "wan2_1_infinitetalk_single_q8_gguf"
+      ],
+      "custom_node_ids": [
+        "audio-separation-nodes-comfyui",
+        "comfyui-kjnodes",
+        "comfyui-swwan",
+        "comfyui-videohelpersuite",
+        "comfyui-wanvideowrapper",
+        "rgthree-comfy"
+      ],
+      "catalog_sources": [
+        "_/RunComfy - InfiniteTalk_Audio_Portrait_to_Lip_Synced_Video.json"
+      ]
+    },
+    {
+      "id": "RusselX-friendly_InfiniteTalk-workflow",
+      "name": "RusselX Friendly InfiniteTalk Workflow",
+      "file": "RusselX-friendly_InfiniteTalk-workflow.json",
+      "artifact_ids": [
+        "melbandroformer.fp16",
+        "wan2.1.i2v.14b.720p.fp8.scaled",
+        "clip-vision.h",
+        "wan.i2v.lightx2v.14b.480p.cfg-step-distill.rank64.bf16",
+        "umt5_xxl_fp8_e4m3fn_scaled",
+        "wan2.1_infiniteTalk_single_fp16",
+        "wan_2_1_vae",
+        "audio_encoder.wav2vec2_chinese_base_fp16",
+        "wav2vec2_chinese_base_fp32",
+        "film_net_fp16"
+      ],
+      "custom_node_ids": [
+        "comfy_mtb",
+        "crt-nodes",
+        "comfyui-wananimateplus",
+        "comfyui-sortlist",
+        "comfyui-vrgamedevgirl",
+        "comfyui-mxtoolkit",
+        "cg-use-everywhere",
+        "comfyui-custom-scripts",
+        "comfyui-easy-use",
+        "comfyui-kjnodes",
+        "comfyui-melbandroformer",
+        "comfyui-vfi",
+        "comfyui-videohelpersuite",
+        "comfyui_layerstyle",
+        "rgthree-comfy"
+      ],
+      "catalog_sources": [
+        "_/RusselX - friendly_InfiniteTalk.json"
+      ]
+    },
+    {
+      "id": "T8star-SeedVc_V2_TTS-workflow",
+      "name": "T8star Seed-VC V2 TTS Voice & Singing Clone Workflow",
+      "file": "T8star-SeedVc_V2_TTS-workflow.json",
+      "artifact_ids": [],
+      "custom_node_ids": [
+        "seedvc-comfyui"
+      ],
+      "catalog_sources": [
+        "_/T8star - SeedVc+V2+TTS\u8bed\u97f3\u53ca\u5531\u6b4c\u514b\u9686.json"
+      ]
     }
   ]
 }
